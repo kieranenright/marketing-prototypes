@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HelloFresh Cookbook — Featuring Request</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+  --hf-green: #1B8A4A;
+  --hf-lime: #C8F065;
+  --hf-dark: #1A1A1A;
+  --hf-muted: #888;
+  --hf-light: #F6F6F6;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+@page { size: 297mm 167mm; margin: 0; }
+
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  background: #e0e0e0;
+  color: var(--hf-dark);
+}
+
+/* === SLIDE BASE === */
+.slide {
+  width: 297mm;
+  height: 167mm;
+  position: relative;
+  overflow: hidden;
+  page-break-after: always;
+}
+@media screen {
+  .slide {
+    margin: 30px auto;
+    box-shadow: 0 8px 60px rgba(0,0,0,0.15);
+    border-radius: 6px;
+  }
+}
+@media print {
+  body { background: white; }
+  .slide { margin: 0; box-shadow: none; border-radius: 0; }
+}
+
+/* === SLIDE HEADER (shared) === */
+.slide-header {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  padding: 24px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10;
+}
+.slide-header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.slide-header-left img { height: 18px; }
+.slide-header-sep { width: 1px; height: 16px; background: rgba(0,0,0,0.12); }
+.slide-header-feature { font-size: 13px; font-weight: 800; color: var(--hf-green); }
+.slide-header-right { font-size: 8px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase; letter-spacing: 1.5px; }
+
+.slide-header.dark .slide-header-sep { background: rgba(255,255,255,0.15); }
+.slide-header.dark .slide-header-feature { color: var(--hf-lime); }
+.slide-header.dark .slide-header-right { color: rgba(255,255,255,0.35); }
+
+/* page indicator */
+.page-num {
+  position: absolute;
+  bottom: 20px;
+  right: 40px;
+  font-size: 9px;
+  font-weight: 700;
+  color: rgba(0,0,0,0.15);
+}
+.page-num.light { color: rgba(255,255,255,0.2); }
+
+
+/* ==========================================
+   SLIDE 1: THE HOOK
+   ========================================== */
+.slide-1 { background: white; }
+
+.s1-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 40px;
+  padding-top: 20px;
+}
+
+.s1-setup {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  line-height: 1.4;
+  color: var(--hf-dark);
+  margin-bottom: 2px;
+}
+.s1-hook {
+  font-size: 40px;
+  font-weight: 900;
+  letter-spacing: -2px;
+  line-height: 1.05;
+  color: var(--hf-green);
+  margin-bottom: 6px;
+}
+.s1-sub {
+  font-size: 11px;
+  color: var(--hf-muted);
+  line-height: 1.5;
+  max-width: 480px;
+  margin-bottom: 12px;
+}
+
+/* phone flow */
+.s1-flow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0;
+  background: var(--hf-light);
+  border-radius: 16px;
+  padding: 12px 24px 10px;
+  width: 100%;
+}
+.s1-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  flex: 1;
+  max-width: 140px;
+}
+.s1-num {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--hf-green);
+  color: white;
+  font-size: 9px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.s1-phone {
+  width: 100%;
+  max-width: 105px;
+  border-radius: 14px;
+  background: #000;
+  padding: 2px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.14);
+}
+.s1-phone img {
+  width: 100%;
+  display: block;
+  border-radius: 12px;
+}
+.s1-label {
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--hf-dark);
+  text-align: center;
+}
+.s1-sublabel {
+  font-size: 8px;
+  font-weight: 500;
+  color: var(--hf-muted);
+  text-align: center;
+  margin-top: -3px;
+}
+.s1-arrow {
+  padding: 0 3px;
+  padding-top: 30px;
+  color: rgba(0,0,0,0.12);
+  font-size: 20px;
+  font-weight: 300;
+  flex-shrink: 0;
+}
+
+
+/* ==========================================
+   SLIDE 2: THE PROOF
+   ========================================== */
+.slide-2 { background: var(--hf-dark); }
+
+.s2-content {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  padding-top: 72px;
+}
+
+.s2-left {
+  padding: 0 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.s2-section-label {
+  font-size: 8px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--hf-lime);
+  margin-bottom: 16px;
+}
+
+.s2-goals {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.s2-goal {
+  padding: 14px 18px;
+  border-radius: 12px;
+  background: var(--hf-green);
+  border: 1px solid var(--hf-green);
+}
+.s2-goal-title {
+  font-size: 13px;
+  font-weight: 800;
+  color: white;
+  margin-bottom: 3px;
+}
+.s2-goal-desc {
+  font-size: 10px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.5;
+}
+
+.s2-right {
+  padding: 0 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-left: 1px solid rgba(255,255,255,0.06);
+}
+
+.s2-why-title {
+  font-size: 22px;
+  font-weight: 900;
+  color: white;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+.s2-why-title em {
+  font-style: normal;
+  color: var(--hf-lime);
+}
+.s2-why-text {
+  font-size: 12px;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.7;
+}
+.s2-why-text strong {
+  color: rgba(255,255,255,0.85);
+  font-weight: 700;
+}
+
+.s2-a11y {
+  margin-top: 20px;
+  padding: 14px 16px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.s2-a11y-label {
+  font-size: 7px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--hf-lime);
+  margin-bottom: 4px;
+}
+.s2-a11y-text {
+  font-size: 10px;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.5;
+}
+
+
+/* ==========================================
+   SLIDE 3: THE ASK
+   ========================================== */
+.slide-3 { background: white; }
+
+.s3-content {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  padding-top: 72px;
+}
+
+.s3-left {
+  padding: 0 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.s3-label {
+  font-size: 9px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  color: var(--hf-green);
+  margin-bottom: 12px;
+}
+.s3-title {
+  font-size: 38px;
+  font-weight: 900;
+  letter-spacing: -1.5px;
+  line-height: 1.1;
+  color: var(--hf-dark);
+  margin-bottom: 6px;
+}
+.s3-title em {
+  font-style: normal;
+  color: var(--hf-green);
+}
+.s3-desc {
+  font-size: 12px;
+  color: var(--hf-muted);
+  line-height: 1.6;
+  max-width: 420px;
+  margin-bottom: 24px;
+}
+
+.s3-ready {
+  padding: 14px 18px;
+  border-radius: 10px;
+  background: var(--hf-light);
+  border: 1px solid rgba(0,0,0,0.04);
+  margin-bottom: 20px;
+}
+.s3-ready-label {
+  font-size: 7px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--hf-green);
+  margin-bottom: 4px;
+}
+.s3-ready-text {
+  font-size: 10px;
+  color: var(--hf-muted);
+  line-height: 1.5;
+}
+
+.s3-contact {
+  padding: 18px 24px;
+  border-radius: 12px;
+  background: var(--hf-dark);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.s3-contact-text {
+  font-size: 11px;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.5;
+}
+.s3-contact-text strong {
+  color: white;
+  font-weight: 800;
+}
+.s3-contact-sep {
+  width: 1px;
+  height: 36px;
+  background: rgba(255,255,255,0.1);
+}
+.s3-contact-cta {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--hf-lime);
+  white-space: nowrap;
+}
+
+/* Right: feedback */
+.s3-right {
+  padding: 0 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-left: 1px solid rgba(0,0,0,0.06);
+}
+.s3-feedback-label {
+  font-size: 8px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--hf-green);
+  margin-bottom: 16px;
+}
+.s3-quotes {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.s3-quote {
+  padding: 14px 18px;
+  border-radius: 10px;
+  background: var(--hf-light);
+  border: 1px solid rgba(0,0,0,0.04);
+}
+.s3-quote-text {
+  font-size: 12px;
+  font-weight: 600;
+  font-style: italic;
+  color: var(--hf-dark);
+  line-height: 1.4;
+}
+.s3-quote-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+}
+.s3-quote-stars {
+  font-size: 10px;
+  color: #F5A623;
+  letter-spacing: 1px;
+}
+.s3-quote-source {
+  font-size: 8px;
+  font-weight: 700;
+  color: var(--hf-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+@media print {
+  body { background: white; }
+  .slide { margin: 0; box-shadow: none; border-radius: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+</style>
+</head>
+<body>
+
+
+<!-- ==========================================
+     SLIDE 1: THE HOOK
+     ========================================== -->
+<div class="slide slide-1">
+  <div class="slide-header">
+    <div class="slide-header-left">
+      <img src="https://media.hellofresh.com/w_256,q_100,f_auto,c_limit,fl_lossy/hellofresh_website/logo/Hello_Fresh_Lockup.png" alt="HelloFresh">
+      <div class="slide-header-sep"></div>
+      <div class="slide-header-feature">New In-App Feature: Cookbook</div>
+    </div>
+    <div class="slide-header-right">Nomination Request &middot; US &middot; April 2026</div>
+  </div>
+
+  <div class="s1-content">
+    <div class="s1-setup">You watched it. You saved it. You imagined it.</div>
+    <div class="s1-hook">Now cook it.</div>
+    <div class="s1-sub">Millions of people discover recipes on social media every day, but cooking from a video means rewinding, pausing, and replaying with messy hands. The Cookbook allows users to import recipe videos directly from platforms like TikTok and Instagram. The app automatically transforms these videos into clear, step-by-step cooking instructions, complete with a detailed ingredient list and a grocery list you can take shopping.<br><br>Available for free to all HelloFresh app users, even without a meal kit subscription.</div>
+
+    <div class="s1-flow">
+      <div class="s1-step">
+        <div class="s1-num">1</div>
+        <div class="s1-phone">
+          <img src="images/IMG_1134.PNG" alt="Find recipe">
+        </div>
+        <div class="s1-label">Find a recipe</div>
+        <div class="s1-sublabel">TikTok or Instagram</div>
+      </div>
+
+      <div class="s1-arrow">&rsaquo;</div>
+
+      <div class="s1-step">
+        <div class="s1-num">2</div>
+        <div class="s1-phone">
+          <img src="images/Gemini_Generated_Image_c8dve3c8dve3c8dv.png" alt="Share">
+        </div>
+        <div class="s1-label">Tap Share</div>
+        <div class="s1-sublabel">Native share sheet</div>
+      </div>
+
+      <div class="s1-arrow">&rsaquo;</div>
+
+      <div class="s1-step">
+        <div class="s1-num">3</div>
+        <div class="s1-phone">
+          <img src="images/6.1.PNG" alt="Saved">
+        </div>
+        <div class="s1-label">Saved instantly</div>
+        <div class="s1-sublabel">To your cookbook</div>
+      </div>
+
+      <div class="s1-arrow">&rsaquo;</div>
+
+      <div class="s1-step">
+        <div class="s1-num">4</div>
+        <div class="s1-phone">
+          <img src="images/7.PNG" alt="Ingredients">
+        </div>
+        <div class="s1-label">Full recipe</div>
+        <div class="s1-sublabel">Ingredients + grocery list</div>
+      </div>
+
+      <div class="s1-arrow">&rsaquo;</div>
+
+      <div class="s1-step">
+        <div class="s1-num">5</div>
+        <div class="s1-phone">
+          <img src="images/11.PNG" alt="Grocery list">
+        </div>
+        <div class="s1-label">Grocery list</div>
+        <div class="s1-sublabel">Ready to shop</div>
+      </div>
+
+      <div class="s1-arrow">&rsaquo;</div>
+
+      <div class="s1-step">
+        <div class="s1-num">6</div>
+        <div class="s1-phone">
+          <img src="images/8.PNG" alt="Cook">
+        </div>
+        <div class="s1-label">Cook it</div>
+        <div class="s1-sublabel">Step-by-step</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-num">1 / 2</div>
+</div>
+
+
+<!-- ==========================================
+     SLIDE 2: THE PROOF
+     ========================================== -->
+<div class="slide slide-2">
+  <div class="slide-header dark">
+    <div class="slide-header-left">
+      <img src="https://media.hellofresh.com/w_256,q_100,f_auto,c_limit,fl_lossy/hellofresh_website/logo/Hello_Fresh_Lockup.png" alt="HelloFresh" style="filter: brightness(10);">
+      <div class="slide-header-sep"></div>
+      <div class="slide-header-feature">New In-App Feature: Cookbook</div>
+    </div>
+    <div class="slide-header-right">How It's Helping Users</div>
+  </div>
+
+  <div class="s2-content">
+    <div class="s2-left">
+      <div class="s2-section-label">What featuring would help us achieve</div>
+      <div class="s2-goals">
+        <div class="s2-goal">
+          <div class="s2-goal-title">Reach new audiences</div>
+          <div class="s2-goal-desc">The Cookbook is free for all users, even without a subscription. Featuring would introduce it to millions of people who have never used HelloFresh before.</div>
+        </div>
+        <div class="s2-goal">
+          <div class="s2-goal-title">Drive organic engagement</div>
+          <div class="s2-goal-desc">Deepen engagement with existing customers and re-engage former customers with a genuinely useful, free tool.</div>
+        </div>
+        <div class="s2-goal">
+          <div class="s2-goal-title">Establish a daily food companion</div>
+          <div class="s2-goal-desc">Featuring supports our ambition to make the HelloFresh app a daily destination for food inspiration and planning, beyond the weekly meal kit.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="s2-right">
+      <div class="s2-why-title">The problem<br>we're <em>solving.</em></div>
+      <div class="s2-why-text">
+        <strong>Cooking from a video is frustrating.</strong> Meal inspiration is scattered across different social platforms, saved in endless folders, or forgotten altogether. Great ideas rarely make it to the kitchen. People are rewinding, pausing, and replaying with messy hands, scrubbing back to catch an ingredient.
+        <br><br>
+        <strong>The Cookbook bridges that gap.</strong> It allows users to import recipe videos directly from social media platforms such as Instagram and TikTok. The app automatically transforms these videos into clear, step-by-step cooking instructions, complete with a detailed ingredient list and a grocery list they can take shopping. It works through the native share sheet, so there's zero friction.
+        <br><br>
+        <strong>This is part of a bigger shift.</strong> HelloFresh is evolving from a meal-kit service into a daily food companion. Your partner for dinner, whether you're cooking a HelloFresh recipe or something you found on TikTok. The Cookbook is available for free to all HelloFresh app users, even without a subscription.
+      </div>
+
+      <div class="s2-a11y">
+        <div class="s2-a11y-label">Accessibility</div>
+        <div class="s2-a11y-text">We're committed to making HelloFresh's Cookbook work for every home cook, which is why we have improvements on our roadmap to ensure the feature is inclusive and accessible to all.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-num light">2 / 2</div>
+</div>
+
+
+
+</body>
+</html>

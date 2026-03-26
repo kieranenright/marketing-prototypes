@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HelloFresh — Cookbook Custom Product Page</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+  :root {
+    --hf-green: #008A2D;
+    --hf-dark-green: #005E1F;
+    --hf-lime: #91C73E;
+    --hf-light-green: #E8F5E9;
+    --white: #FFFFFF;
+    --off-white: #F8FAF7;
+    --light-gray: #F1F3EE;
+    --mid-gray: #9CA3AF;
+    --warm-gray: #6B7280;
+    --dark: #111827;
+    --coral: #EF6461;
+    --coral-light: #FEF2F2;
+    --amber: #F59E0B;
+    --amber-light: #FFFBEB;
+    --blue: #3B82F6;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--off-white);
+    color: var(--dark);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    padding: 0 48px;
+    height: 64px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  nav .logo { display: flex; align-items: center; gap: 12px; }
+  nav .logo img { height: 36px; border-radius: 8px; }
+  nav .logo span { font-weight: 700; font-size: 15px; color: var(--dark); }
+  nav .tag {
+    font-size: 11px; font-weight: 600; color: var(--hf-green);
+    background: var(--hf-light-green); padding: 4px 10px; border-radius: 20px;
+  }
+  nav .nav-links { display: flex; gap: 6px; }
+  nav .nav-links a {
+    font-size: 13px; font-weight: 500; color: var(--warm-gray);
+    text-decoration: none; padding: 6px 14px; border-radius: 8px;
+    transition: all 0.2s;
+  }
+  nav .nav-links a:hover { background: var(--light-gray); color: var(--dark); }
+
+  /* ─── SECTIONS ─── */
+  section { padding: 100px 48px 60px; max-width: 1400px; margin: 0 auto; }
+  section:first-of-type { padding-top: 120px; }
+
+  .section-label {
+    font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--hf-green); margin-bottom: 12px;
+  }
+  h1 { font-size: 52px; font-weight: 800; line-height: 1.1; margin-bottom: 16px; letter-spacing: -1px; }
+  h2 { font-size: 36px; font-weight: 700; line-height: 1.2; margin-bottom: 12px; letter-spacing: -0.5px; }
+  h3 { font-size: 20px; font-weight: 600; margin-bottom: 8px; }
+  .subtitle { font-size: 18px; color: var(--warm-gray); line-height: 1.6; max-width: 680px; }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 90vh; display: flex; align-items: center;
+    padding-top: 64px;
+  }
+  .hero-content { flex: 1; }
+  .hero-screenshots {
+    flex: 1; display: flex; gap: 16px; justify-content: center;
+    align-items: flex-end; padding-left: 40px;
+  }
+  .hero-screenshots img {
+    height: 420px; border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+    transition: transform 0.3s;
+  }
+  .hero-screenshots img:hover { transform: translateY(-8px); }
+  .hero-screenshots img:nth-child(2) { transform: translateY(-20px); }
+  .hero-screenshots img:nth-child(2):hover { transform: translateY(-28px); }
+
+  .hero .badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--hf-light-green); color: var(--hf-dark-green);
+    font-size: 13px; font-weight: 600; padding: 8px 16px;
+    border-radius: 24px; margin-bottom: 24px;
+  }
+  .hero .badge::before {
+    content: ''; width: 8px; height: 8px; border-radius: 50%;
+    background: var(--hf-green);
+  }
+
+  /* ─── STATS ROW ─── */
+  .stats-row {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    margin: 48px 0;
+  }
+  .stat-card {
+    background: var(--white); border-radius: 16px; padding: 32px;
+    border: 1px solid rgba(0,0,0,0.06);
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+  }
+  .stat-card .number {
+    font-size: 48px; font-weight: 800; line-height: 1;
+    margin-bottom: 8px;
+  }
+  .stat-card .number.green { color: var(--hf-green); }
+  .stat-card .number.coral { color: var(--coral); }
+  .stat-card .number.amber { color: var(--amber); }
+  .stat-card .label { font-size: 14px; color: var(--warm-gray); line-height: 1.5; }
+  .stat-card .source { font-size: 11px; color: var(--mid-gray); margin-top: 8px; }
+
+  /* ─── CURRENT LISTING ─── */
+  .screenshots-strip {
+    display: flex; gap: 20px; overflow-x: auto;
+    padding: 32px 0; scroll-snap-type: x mandatory;
+  }
+  .screenshot-item {
+    flex: 0 0 auto; text-align: center; scroll-snap-align: start;
+  }
+  .screenshot-item img {
+    height: 480px; border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+  }
+  .screenshot-item img:hover { transform: scale(1.03); }
+  .screenshot-item .ss-label {
+    margin-top: 16px; font-size: 14px; font-weight: 600; color: var(--dark);
+  }
+  .screenshot-item .ss-tag {
+    display: inline-block; margin-top: 6px; font-size: 11px; font-weight: 600;
+    padding: 4px 12px; border-radius: 20px;
+  }
+  .ss-tag.subscription { background: var(--coral-light); color: var(--coral); }
+  .ss-tag.product { background: var(--amber-light); color: var(--amber); }
+  .ss-tag.acquisition { background: var(--hf-light-green); color: var(--hf-green); }
+
+  /* ─── THEME BREAKDOWN ─── */
+  .theme-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+    margin: 40px 0;
+  }
+  .theme-card {
+    border-radius: 16px; padding: 32px; border: 2px solid;
+  }
+  .theme-card.sub { border-color: var(--coral); background: var(--coral-light); }
+  .theme-card.prod { border-color: var(--amber); background: var(--amber-light); }
+  .theme-card.acq { border-color: var(--hf-green); background: var(--hf-light-green); }
+  .theme-card.zero { border-color: var(--coral); background: var(--coral-light); }
+  .theme-card h3 .pct { font-size: 14px; font-weight: 500; margin-left: 8px; }
+  .theme-card .mini-screenshots {
+    display: flex; gap: 12px; margin-top: 16px;
+  }
+  .theme-card .mini-screenshots img {
+    height: 180px; border-radius: 10px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  }
+  .theme-card p { font-size: 14px; color: var(--warm-gray); margin-top: 12px; line-height: 1.6; }
+
+  /* ─── CALLOUT BOX ─── */
+  .callout {
+    border-radius: 16px; padding: 24px 32px;
+    margin: 32px 0; display: flex; align-items: flex-start; gap: 16px;
+  }
+  .callout.green { background: var(--hf-light-green); border-left: 4px solid var(--hf-green); }
+  .callout.coral { background: var(--coral-light); border-left: 4px solid var(--coral); }
+  .callout .callout-icon { font-size: 24px; flex-shrink: 0; }
+  .callout p { font-size: 15px; line-height: 1.6; color: var(--dark); }
+  .callout strong { color: var(--hf-dark-green); }
+
+  /* ─── COMPARISON TABLE ─── */
+  .comparison-table {
+    width: 100%; border-collapse: separate; border-spacing: 0;
+    margin: 32px 0; border-radius: 16px; overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+  }
+  .comparison-table th {
+    background: var(--hf-green); color: white; padding: 16px 24px;
+    font-size: 13px; font-weight: 600; text-align: left;
+    letter-spacing: 0.5px;
+  }
+  .comparison-table td {
+    padding: 14px 24px; font-size: 14px; border-bottom: 1px solid var(--light-gray);
+    background: var(--white);
+  }
+  .comparison-table tr:last-child td { border-bottom: none; }
+  .comparison-table tr:nth-child(even) td { background: var(--off-white); }
+  .comparison-table td:first-child { font-weight: 600; color: var(--dark); }
+  .comparison-table td.current { color: var(--warm-gray); }
+  .comparison-table td.proposed { color: var(--hf-dark-green); font-weight: 600; }
+  .comparison-table td.no-change { color: var(--mid-gray); font-style: italic; }
+  .change-badge {
+    display: inline-block; font-size: 10px; font-weight: 700;
+    padding: 2px 8px; border-radius: 10px; margin-left: 8px;
+    vertical-align: middle;
+  }
+  .change-badge.yes { background: var(--hf-light-green); color: var(--hf-green); }
+  .change-badge.no { background: var(--light-gray); color: var(--mid-gray); }
+  .change-badge.gp { background: #EBF5FF; color: var(--blue); }
+
+  /* ─── PROPOSED SCREENSHOTS ─── */
+  .proposed-grid {
+    display: grid; grid-template-columns: repeat(6, 1fr); gap: 20px;
+    margin: 40px 0;
+  }
+  .proposed-item {
+    position: relative; text-align: center;
+  }
+  .proposed-item img {
+    width: 100%; border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .proposed-item img:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 48px rgba(0,138,45,0.2);
+  }
+  .proposed-item .frame-num {
+    position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--hf-green); color: white;
+    font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    z-index: 2;
+  }
+  .proposed-item .frame-caption {
+    margin-top: 14px; font-size: 13px; font-weight: 600; color: var(--dark);
+  }
+  .proposed-item .frame-desc {
+    font-size: 11px; color: var(--warm-gray); margin-top: 4px; line-height: 1.4;
+  }
+  .proposed-item.critical::after {
+    content: 'Visible in search results'; position: absolute; bottom: -28px;
+    left: 50%; transform: translateX(-50%); white-space: nowrap;
+    font-size: 10px; font-weight: 600; color: var(--coral);
+    background: var(--coral-light); padding: 3px 10px; border-radius: 10px;
+  }
+
+  /* ─── FEATURE GRAPHIC ─── */
+  .feature-graphic-showcase {
+    margin: 48px 0; text-align: center;
+  }
+  .feature-graphic-showcase img {
+    width: 100%; max-width: 1024px; border-radius: 16px;
+    box-shadow: 0 12px 48px rgba(0,0,0,0.12);
+    transition: transform 0.3s;
+  }
+  .feature-graphic-showcase img:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+  }
+  .feature-graphic-label {
+    display: inline-flex; align-items: center; gap: 8px;
+    margin-top: 16px; font-size: 13px; font-weight: 600; color: var(--warm-gray);
+  }
+  .feature-graphic-label .gp-badge {
+    font-size: 11px; font-weight: 700; color: var(--blue);
+    background: #EBF5FF; padding: 3px 10px; border-radius: 10px;
+  }
+
+  /* ─── GENERATED BY CREDIT ─── */
+  .generated-credit {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: linear-gradient(135deg, #E8F0FE, #F3E8FD);
+    border: 1px solid rgba(0,0,0,0.06);
+    padding: 8px 16px; border-radius: 24px;
+    font-size: 13px; font-weight: 500; color: var(--dark);
+    margin-top: 8px;
+  }
+  .generated-credit strong { font-weight: 700; }
+
+  /* ─── KEYWORD SECTION ─── */
+  .keyword-primary {
+    background: var(--white); border: 2px solid var(--hf-green);
+    border-radius: 16px; padding: 32px; margin: 32px 0;
+  }
+  .keyword-primary code {
+    display: block; background: var(--off-white); border-radius: 8px;
+    padding: 16px 20px; font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 14px; color: var(--dark); margin: 12px 0 8px;
+    border: 1px solid var(--light-gray);
+  }
+  .keyword-primary .char-count {
+    font-size: 12px; color: var(--hf-green); font-weight: 600;
+  }
+  .keyword-tiers {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+    margin: 24px 0;
+  }
+  .keyword-tier {
+    background: var(--white); border-radius: 12px; padding: 24px;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+  .keyword-tier h4 { font-size: 14px; font-weight: 600; margin-bottom: 12px; }
+  .keyword-tier .kw-list { display: flex; flex-wrap: wrap; gap: 6px; }
+  .keyword-tier .kw {
+    font-size: 12px; padding: 4px 10px; border-radius: 6px;
+    background: var(--light-gray); color: var(--dark); font-weight: 500;
+  }
+
+  /* ─── COPY SECTION ─── */
+  .copy-option {
+    background: var(--white); border-radius: 12px; padding: 20px 24px;
+    margin: 12px 0; border: 1px solid rgba(0,0,0,0.06);
+    display: flex; align-items: flex-start; gap: 16px;
+    transition: border-color 0.2s;
+  }
+  .copy-option:hover { border-color: var(--hf-green); }
+  .copy-option .opt-num {
+    flex-shrink: 0; width: 32px; height: 32px; border-radius: 8px;
+    background: var(--hf-light-green); color: var(--hf-green);
+    font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .copy-option p { font-size: 15px; line-height: 1.6; color: var(--dark); }
+
+  /* ─── SPECS ─── */
+  .specs-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+    margin: 32px 0;
+  }
+  .spec-card {
+    background: var(--white); border-radius: 16px; padding: 32px;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+  .spec-card h3 {
+    color: var(--hf-green); margin-bottom: 20px;
+    padding-bottom: 12px; border-bottom: 2px solid var(--hf-light-green);
+  }
+  .spec-row {
+    display: flex; justify-content: space-between; padding: 8px 0;
+    border-bottom: 1px solid var(--light-gray); font-size: 13px;
+  }
+  .spec-row:last-child { border-bottom: none; }
+  .spec-row .spec-label { color: var(--warm-gray); }
+  .spec-row .spec-value { font-weight: 600; color: var(--dark); text-align: right; }
+  .spec-header {
+    font-size: 12px; font-weight: 700; color: var(--hf-green);
+    text-transform: uppercase; letter-spacing: 1px;
+    padding: 12px 0 4px; margin-top: 8px;
+  }
+
+  /* ─── DELIVERABLES ─── */
+  .deliverables-grid {
+    display: grid; grid-template-columns: 2fr 1fr; gap: 24px;
+    margin: 32px 0;
+  }
+  .deliverable-card {
+    background: var(--white); border-radius: 16px; padding: 32px;
+    border: 2px solid;
+  }
+  .deliverable-card.must { border-color: var(--hf-green); }
+  .deliverable-card.nice { border-color: var(--amber); }
+  .deliverable-card h3 .count {
+    font-size: 14px; font-weight: 500; color: var(--warm-gray);
+  }
+  .del-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 10px 0; border-bottom: 1px solid var(--light-gray);
+    font-size: 14px;
+  }
+  .del-row:last-child { border-bottom: none; }
+  .del-row .del-qty {
+    font-weight: 700; color: var(--hf-green);
+    background: var(--hf-light-green); padding: 2px 10px; border-radius: 6px;
+    font-size: 13px;
+  }
+  .del-row .del-store {
+    font-size: 12px; color: var(--mid-gray); margin-left: 12px;
+  }
+
+  /* ─── TIMELINE ─── */
+  .timeline {
+    display: grid; grid-template-columns: repeat(6, 1fr); gap: 0;
+    margin: 40px 0; position: relative;
+  }
+  .timeline::before {
+    content: ''; position: absolute;
+    top: 24px; left: 8%; right: 8%;
+    height: 3px; background: var(--light-gray); z-index: 0;
+  }
+  .timeline-step { text-align: center; position: relative; z-index: 1; }
+  .timeline-step .step-dot {
+    width: 48px; height: 48px; border-radius: 50%;
+    background: var(--hf-green); color: white;
+    font-size: 18px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 16px;
+    box-shadow: 0 4px 16px rgba(0,138,45,0.3);
+  }
+  .timeline-step h4 { font-size: 14px; font-weight: 600; margin-bottom: 8px; }
+  .timeline-step p { font-size: 12px; color: var(--warm-gray); line-height: 1.5; padding: 0 8px; }
+  .timeline-step .step-week {
+    display: inline-block; margin-top: 12px;
+    font-size: 11px; font-weight: 600; color: var(--hf-green);
+    background: var(--hf-light-green); padding: 4px 12px; border-radius: 20px;
+  }
+
+  /* ─── IMPACT ─── */
+  .impact-section {
+    background: var(--hf-green); border-radius: 24px;
+    padding: 60px 48px; margin: 40px 0; color: white;
+  }
+  .impact-section h2 { color: white; }
+  .impact-stats {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    margin: 40px 0;
+  }
+  .impact-stat {
+    background: rgba(255,255,255,0.12); border-radius: 16px;
+    padding: 32px; text-align: center;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+  .impact-stat .number {
+    font-size: 52px; font-weight: 800; line-height: 1; margin-bottom: 8px;
+  }
+  .impact-stat .label { font-size: 14px; opacity: 0.85; line-height: 1.5; }
+  .impact-stat .source { font-size: 11px; opacity: 0.6; margin-top: 8px; }
+
+  .benchmark-table {
+    width: 100%; margin-top: 32px; border-collapse: separate;
+    border-spacing: 0; border-radius: 12px; overflow: hidden;
+  }
+  .benchmark-table th {
+    background: rgba(255,255,255,0.15); padding: 12px 20px;
+    font-size: 12px; font-weight: 600; text-align: left;
+    letter-spacing: 0.5px; text-transform: uppercase;
+  }
+  .benchmark-table td {
+    padding: 12px 20px; font-size: 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .benchmark-table tr:last-child td { border-bottom: none; }
+  .benchmark-table td:nth-child(2) { font-weight: 600; }
+
+  /* ─── DIVIDER ─── */
+  .divider {
+    height: 1px; background: linear-gradient(90deg, transparent, var(--light-gray), transparent);
+    margin: 20px 0;
+  }
+
+  /* ─── LIGHTBOX ─── */
+  .lightbox {
+    display: none; position: fixed; inset: 0; z-index: 1000;
+    background: rgba(0,0,0,0.85); backdrop-filter: blur(12px);
+    align-items: center; justify-content: center;
+    cursor: zoom-out; padding: 40px;
+  }
+  .lightbox.active { display: flex; }
+  .lightbox img {
+    max-height: 90vh; max-width: 90vw; border-radius: 16px;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.4);
+    animation: lightbox-in 0.25s ease;
+  }
+  @keyframes lightbox-in {
+    from { opacity: 0; transform: scale(0.92); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  .lightbox-close {
+    position: absolute; top: 24px; right: 32px;
+    width: 40px; height: 40px; border-radius: 50%;
+    background: rgba(255,255,255,0.15); border: none;
+    color: white; font-size: 20px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s;
+  }
+  .lightbox-close:hover { background: rgba(255,255,255,0.3); }
+
+  /* Make screenshots clickable */
+  .proposed-item img,
+  .screenshot-item img,
+  .feature-graphic-showcase img,
+  .theme-card .mini-screenshots img { cursor: zoom-in; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 1024px) {
+    section { padding: 80px 24px 40px; }
+    .hero { flex-direction: column; }
+    .hero-screenshots { padding-left: 0; margin-top: 40px; }
+    .stats-row, .keyword-tiers, .specs-grid { grid-template-columns: 1fr; }
+    .theme-grid { grid-template-columns: 1fr; }
+    .proposed-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .timeline { grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .timeline::before { display: none; }
+    .deliverables-grid { grid-template-columns: 1fr; }
+    h1 { font-size: 36px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">
+    <img src="assets/hf_icon.png" alt="HelloFresh">
+    <span>HelloFresh</span>
+    <span class="tag">US Market</span>
+  </div>
+  <div class="nav-links">
+    <a href="#opportunity">Opportunity</a>
+    <a href="#current">Current</a>
+    <a href="#changes">Changes</a>
+    <a href="#proposed">Proposed</a>
+    <a href="#specs">Specs</a>
+    <a href="#impact">Impact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-content">
+    <div class="badge">Custom Product Page Brief</div>
+    <h1>Cookbook<br>Custom Product Page</h1>
+    <p class="subtitle">
+      Users searching for "cookbook", "recipes", or "meal planning" land on our default App Store listing &mdash; which talks about subscription management, not food inspiration. Here's the plan to fix that.
+    </p>
+    <p style="margin-top:24px; font-size:14px; color:var(--mid-gray);">
+      Apple App Store & Google Play &nbsp;|&nbsp; March 2026
+    </p>
+  </div>
+  <div class="hero-screenshots">
+    <img src="assets/ios_1.jpg" alt="Current screenshot 1">
+    <img src="assets/ios_2.jpg" alt="Current screenshot 2">
+    <img src="assets/ios_6.jpg" alt="Current screenshot 6">
+  </div>
+</section>
+
+<!-- OPPORTUNITY -->
+<section id="opportunity">
+  <div class="section-label">The Opportunity</div>
+  <h2>There's a massive gap between what users search for and what they see</h2>
+  <p class="subtitle">
+    Someone searching "digital cookbook" lands on a page about changing box sizes and delivery days. Custom Product Pages let us show them exactly what they're looking for.
+  </p>
+
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="number green">+156%</div>
+      <div class="label">Average conversion uplift<br>for well-optimized CPPs</div>
+      <div class="source">Apple published data</div>
+    </div>
+    <div class="stat-card">
+      <div class="number coral">0%</div>
+      <div class="label">Current overlap between<br>default listing & cookbook content</div>
+      <div class="source">Our listing today</div>
+    </div>
+    <div class="stat-card">
+      <div class="number amber">50%</div>
+      <div class="label">Of current screenshots show<br>subscription management UI</div>
+      <div class="source">3 of 6 screenshots</div>
+    </div>
+  </div>
+
+  <div class="callout green">
+    <div class="callout-icon">&#x2714;</div>
+    <p><strong>Zero cannibalization risk.</strong> The Cookbook CPP targets an entirely different user intent. Someone searching "digital cookbook" has zero interest in box sizes and delivery days. The current listing and the CPP serve completely different audiences.</p>
+  </div>
+</section>
+
+<!-- CURRENT LISTING -->
+<section id="current">
+  <div class="section-label">Current US Listing</div>
+  <h2>What users see today on the App Store</h2>
+  <p class="subtitle">All 6 screenshots from the current HelloFresh iOS listing, exactly as they appear.</p>
+
+  <div class="screenshots-strip">
+    <div class="screenshot-item">
+      <img src="assets/ios_1.jpg" alt="Choose your recipes">
+      <div class="ss-label">1. Choose your recipes</div>
+      <span class="ss-tag product">Product Feature</span>
+    </div>
+    <div class="screenshot-item">
+      <img src="assets/ios_2.jpg" alt="Step-by-step instructions">
+      <div class="ss-label">2. Step-by-step cooking</div>
+      <span class="ss-tag product">Product Feature</span>
+    </div>
+    <div class="screenshot-item">
+      <img src="assets/ios_3.jpg" alt="Change box size">
+      <div class="ss-label">3. Change your box size</div>
+      <span class="ss-tag subscription">Subscription Mgmt</span>
+    </div>
+    <div class="screenshot-item">
+      <img src="assets/ios_4.jpg" alt="Delivery day">
+      <div class="ss-label">4. Choose delivery day</div>
+      <span class="ss-tag subscription">Subscription Mgmt</span>
+    </div>
+    <div class="screenshot-item">
+      <img src="assets/ios_5.jpg" alt="Pause anytime">
+      <div class="ss-label">5. Pause at any time</div>
+      <span class="ss-tag subscription">Subscription Mgmt</span>
+    </div>
+    <div class="screenshot-item">
+      <img src="assets/ios_6.jpg" alt="6 free meals">
+      <div class="ss-label">6. Get 6 FREE MEALS</div>
+      <span class="ss-tag acquisition">Acquisition Offer</span>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <h3 style="margin-top: 32px;">Screenshot Theme Breakdown</h3>
+  <div class="theme-grid">
+    <div class="theme-card sub">
+      <h3 style="color: var(--coral);">Subscription Management <span class="pct" style="color:var(--coral);">3 of 6 &mdash; 50%</span></h3>
+      <div class="mini-screenshots">
+        <img src="assets/ios_3.jpg" alt="Box size">
+        <img src="assets/ios_4.jpg" alt="Delivery day">
+        <img src="assets/ios_5.jpg" alt="Pause">
+      </div>
+      <p>Half the listing addresses subscription anxiety: box sizes, delivery scheduling, and pausing. Important for conversion, but irrelevant for someone searching "digital cookbook".</p>
+    </div>
+    <div class="theme-card prod">
+      <h3 style="color: var(--amber);">Product Features <span class="pct" style="color:var(--amber);">2 of 6 &mdash; 33%</span></h3>
+      <div class="mini-screenshots">
+        <img src="assets/ios_1.jpg" alt="Recipe selection">
+        <img src="assets/ios_2.jpg" alt="Cooking steps">
+      </div>
+      <p>Recipe selection and step-by-step cooking. The closest to cookbook content, but framed as meal-kit cooking steps &mdash; not standalone recipe discovery.</p>
+    </div>
+    <div class="theme-card acq" style="grid-column: 1;">
+      <h3 style="color: var(--hf-green);">Acquisition Offer <span class="pct" style="color:var(--hf-green);">1 of 6 &mdash; 17%</span></h3>
+      <div class="mini-screenshots">
+        <img src="assets/ios_6.jpg" alt="Promo code">
+      </div>
+      <p>"Get 6 FREE MEALS" with promo code HFAPPST. Pure acquisition play — effective for the default listing but could be replaced with a recipe discovery value prop on the CPP.</p>
+    </div>
+    <div class="theme-card zero">
+      <h3 style="color: var(--coral);">Cookbook Content <span class="pct" style="color:var(--coral);">0 of 6 &mdash; 0%</span></h3>
+      <p style="font-size: 22px; font-weight: 700; color: var(--coral); margin-top: 32px; text-align: center;">
+        Zero screenshots.<br>Zero mentions.
+      </p>
+      <p style="text-align: center;">A user searching "digital cookbook" lands on a page about changing box sizes and delivery days. This is the gap the CPP fills.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT CHANGES -->
+<section id="changes">
+  <div class="section-label">What Changes</div>
+  <h2>Current default vs. Cookbook CPP</h2>
+  <p class="subtitle">Everything that will be different when a user lands on the Cookbook Custom Product Page instead of the default listing.</p>
+
+  <table class="comparison-table">
+    <thead>
+      <tr>
+        <th style="width:22%">Element</th>
+        <th style="width:32%">Current Default</th>
+        <th style="width:32%">Cookbook CPP</th>
+        <th style="width:14%">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Screenshots</td>
+        <td class="current">50% subscription management UI</td>
+        <td class="proposed">100% recipe & cookbook focused</td>
+        <td><span class="change-badge yes">CHANGES</span></td>
+      </tr>
+      <tr>
+        <td>Promotional Text</td>
+        <td class="current">Promo code / free meals offer</td>
+        <td class="proposed">"Your personal digital cookbook"</td>
+        <td><span class="change-badge yes">CHANGES</span></td>
+      </tr>
+      <tr>
+        <td>Keywords</td>
+        <td class="current">Broad (meal kit, delivery)</td>
+        <td class="proposed">recipes, cookbook, meal planning</td>
+        <td><span class="change-badge yes">CHANGES</span></td>
+      </tr>
+      <tr>
+        <td>Video</td>
+        <td class="current">None</td>
+        <td class="proposed">Recipe browsing flow (15-30s)</td>
+        <td><span class="change-badge yes">CHANGES</span></td>
+      </tr>
+      <tr>
+        <td>Deep Link (iOS 18+)</td>
+        <td class="current">Opens to home / onboarding</td>
+        <td class="proposed">Opens directly in Cookbook</td>
+        <td><span class="change-badge yes">CHANGES</span></td>
+      </tr>
+      <tr>
+        <td>App Name</td>
+        <td class="current">HelloFresh: Meal Kit Delivery</td>
+        <td class="no-change">No change (Apple restriction)</td>
+        <td><span class="change-badge no">LOCKED</span></td>
+      </tr>
+      <tr>
+        <td>App Icon</td>
+        <td class="current">Standard green wordmark</td>
+        <td class="no-change">No change (Apple restriction)</td>
+        <td><span class="change-badge no">LOCKED</span></td>
+      </tr>
+      <tr>
+        <td>Description</td>
+        <td class="current">Subscription-focused copy</td>
+        <td class="no-change">No change (Apple restriction)</td>
+        <td><span class="change-badge no">LOCKED</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout green">
+    <div class="callout-icon">&#x1F4F1;</div>
+    <p><strong>Google Play goes further.</strong> On Google Play Custom Store Listings, you can <em>also</em> change the app name (e.g. "HelloFresh: Recipes & Cookbook"), the app icon, the short description, and the full 4,000-character description. Much more flexibility than Apple.</p>
+  </div>
+
+  <table class="comparison-table" style="margin-top: 16px;">
+    <thead>
+      <tr>
+        <th style="width:22%">Google Play Extra</th>
+        <th style="width:32%">Current Default</th>
+        <th style="width:32%">Cookbook CSL</th>
+        <th style="width:14%">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>App Name</td>
+        <td class="current">HelloFresh: Meal Kit Delivery</td>
+        <td class="proposed">HelloFresh: Recipes & Cookbook</td>
+        <td><span class="change-badge gp">GP ONLY</span></td>
+      </tr>
+      <tr>
+        <td>App Icon</td>
+        <td class="current">Standard green wordmark</td>
+        <td class="proposed">Cookbook-themed variant</td>
+        <td><span class="change-badge gp">GP ONLY</span></td>
+      </tr>
+      <tr>
+        <td>Full Description</td>
+        <td class="current">4,000 chars on subscription</td>
+        <td class="proposed">4,000 chars on recipe discovery</td>
+        <td><span class="change-badge gp">GP ONLY</span></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- PROPOSED SCREENSHOTS -->
+<section id="proposed">
+  <div class="section-label">Proposed Creative</div>
+  <h2>Cookbook screenshot sequence</h2>
+  <p class="subtitle">All 6 slots dedicated to recipe discovery and the cookbook experience. Hybrid format: food photography backgrounds + app UI.</p>
+  <div class="generated-credit">Generated with <strong>Gemini</strong></div>
+
+  <div class="proposed-grid" style="margin-bottom: 48px;">
+    <div class="proposed-item critical">
+      <div class="frame-num">1</div>
+      <img src="aso-campaign/1.png" alt="Your Digital Cookbook — Save Recipes From Anywhere">
+      <div class="frame-caption">Your Digital Cookbook</div>
+      <div class="frame-desc">Hero shot. Cookbook list with social sources on bold green background with food photography framing.</div>
+    </div>
+    <div class="proposed-item critical">
+      <div class="frame-num">2</div>
+      <img src="aso-campaign/2.png" alt="Save It. Cook It. — From Instagram, TikTok & More">
+      <div class="frame-caption">Save It. Cook It.</div>
+      <div class="frame-desc">Dual device showing social import flow. Instagram/TikTok to Cookbook with confirmation toast.</div>
+    </div>
+    <div class="proposed-item">
+      <div class="frame-num">3</div>
+      <img src="aso-campaign/3.png" alt="All Your Recipes In One Place — Search and filter">
+      <div class="frame-caption">All Your Recipes In One Place</div>
+      <div class="frame-desc">Search & category filters (Quick, Healthy, Pasta, Asian). Full recipe library with source icons.</div>
+    </div>
+    <div class="proposed-item">
+      <div class="frame-num">4</div>
+      <img src="aso-campaign/4.png" alt="Step-by-Step Recipe Instructions">
+      <div class="frame-caption">Step-by-Step Instructions</div>
+      <div class="frame-desc">Recipe detail with saved state, shopping list, and step-by-step cooking guidance.</div>
+    </div>
+    <div class="proposed-item">
+      <div class="frame-num">5</div>
+      <img src="aso-campaign/5.png" alt="From Recipe to Shopping List — Add ingredients in one tap">
+      <div class="frame-caption">From Recipe to Shopping List</div>
+      <div class="frame-desc">Ingredients checklist with Add to Shopping List CTA. Grocery bag visual. Utility value prop.</div>
+    </div>
+    <div class="proposed-item">
+      <div class="frame-num">6</div>
+      <img src="aso-campaign/6.png" alt="New — 100+ Weekly Recipes At Your Fingertips">
+      <div class="frame-caption">100+ Weekly Recipes</div>
+      <div class="frame-desc">Food photography hero with cookbook UI overlay. Volume social proof. HelloFresh branded close.</div>
+    </div>
+  </div>
+
+  <h3 style="margin-top: 8px; margin-bottom: 4px;">Version 2 — Marketing Comms Angles</h3>
+  <p style="color: var(--warm-gray); margin: 0 0 8px; font-size: 15px;">Brings in the headline angles from the broader marketing strategy — <em>"Don't Just Watch It. Cook It."</em>, <em>"Don't Just Imagine It. Cook It."</em>, <em>"Don't Just Save It. Cook It."</em> — threading the campaign comms framework directly into the store listing creative.</p>
+  <div class="generated-credit">Generated with <strong>Gemini</strong></div>
+
+  <div class="proposed-grid" style="margin-bottom: 48px;">
+    <div class="proposed-item critical">
+      <div class="frame-num">1</div>
+      <img src="assets/cpp_1.png" alt="Don't Just Save It. Cook It. — All your saved recipes in one place">
+      <div class="frame-caption">Don't Just Save It. Cook It.</div>
+      <div class="frame-desc">Hero shot. Saved recipes grid with category filters + food photography. Stops the scroll.</div>
+    </div>
+    <div class="proposed-item critical">
+      <div class="frame-num">2</div>
+      <img src="assets/cpp_2.png" alt="Stop Watching, Start Cooking. — Real steps from any recipe video">
+      <div class="frame-caption">Stop Watching, Start Cooking.</div>
+      <div class="frame-desc">TikTok-to-cookbook flow. Shows social video becoming saved recipes.</div>
+    </div>
+    <div class="proposed-item">
+      <div class="frame-num">3</div>
+      <img src="assets/cpp_3.png" alt="Don't Just Imagine It. Cook It. — Your personal cookbook">
+      <div class="frame-caption">Don't Just Imagine It. Cook It.</div>
+      <div class="frame-desc">Recipe detail view with cook time, servings & Start Cooking CTA.</div>
+    </div>
+    <div class="proposed-item">
+      <div class="frame-num">4</div>
+      <img src="assets/cpp_4.png" alt="Every Step. Every Ingredient. — No guesswork. No backup plan.">
+      <div class="frame-caption">Every Step. Every Ingredient.</div>
+      <div class="frame-desc">Ingredients checklist with Add to Shopping List. Utility value prop.</div>
+    </div>
+    <div class="proposed-item">
+      <div class="frame-num">5</div>
+      <img src="assets/cpp_5.png" alt="Don't Just Watch It. Cook It. — Import from TikTok, Instagram & more">
+      <div class="frame-caption">Don't Just Watch It. Cook It.</div>
+      <div class="frame-desc">Social import list UI with TikTok & Instagram sources. Recipe imported confirmation.</div>
+    </div>
+    <div class="proposed-item">
+      <div class="frame-num">6</div>
+      <img src="assets/cpp_6.png" alt="New — 100+ Weekly Recipes At Your Fingertips">
+      <div class="frame-caption">100+ Weekly Recipes</div>
+      <div class="frame-desc">Food photography hero with cookbook UI. Social proof & volume. Builds confidence.</div>
+    </div>
+  </div>
+
+  <div class="callout coral">
+    <div class="callout-icon">&#x26A0;</div>
+    <p><strong>Screenshots 1 & 2 are critical.</strong> They're the only ones visible in search results before a user taps through. Users decide in ~7 seconds. These two must stand alone and clearly communicate "cookbook / recipes".</p>
+  </div>
+
+  <!-- GOOGLE FEATURE GRAPHIC -->
+  <h3 style="margin-top: 48px;">Google Play Feature Graphic</h3>
+  <p style="color: var(--warm-gray); margin: 8px 0 4px; font-size: 15px;">Required for Google Play Custom Store Listing. Appears at the top of the listing page (1024 x 500 px).</p>
+  <div class="generated-credit">Generated with <strong>Gemini</strong></div>
+  <div class="feature-graphic-showcase">
+    <img src="assets/google_feature_graphic.png" alt="Google Play Feature Graphic — Your Digital Cookbook">
+    <div class="feature-graphic-label">
+      <span class="gp-badge">GP ONLY</span>
+      1024 x 500 px &mdash; Feature Graphic
+    </div>
+  </div>
+
+  <h3 style="margin-top: 40px;">Creative Format: Hybrid Recommended</h3>
+  <p style="color: var(--warm-gray); margin: 8px 0 24px; font-size: 15px;">Food photography integrated with actual app UI. Highest converting format for food apps.</p>
+
+  <div class="stats-row" style="grid-template-columns: repeat(3, 1fr);">
+    <div class="stat-card" style="border: 2px solid var(--coral); text-align: left;">
+      <h4 style="color: var(--coral); margin-bottom: 8px;">Lifestyle Photography</h4>
+      <p style="font-size: 13px; color: var(--warm-gray); line-height: 1.6;">Pure food photos, no app UI. Emotional but doesn't show the product. May not comply with Apple's requirement to show actual app UI.</p>
+      <p style="font-size: 12px; font-weight: 700; color: var(--coral); margin-top: 12px;">NOT RECOMMENDED</p>
+    </div>
+    <div class="stat-card" style="border: 2px solid var(--amber); text-align: left;">
+      <h4 style="color: var(--amber); margin-bottom: 8px;">Pure UI Screenshots</h4>
+      <p style="font-size: 13px; color: var(--warm-gray); line-height: 1.6;">Clean device mockups. Shows exact product but feels clinical for food apps. Low emotional engagement, forgettable.</p>
+      <p style="font-size: 12px; font-weight: 700; color: var(--amber); margin-top: 12px;">UNDERPERFORMS</p>
+    </div>
+    <div class="stat-card" style="border: 2px solid var(--hf-green); text-align: left;">
+      <h4 style="color: var(--hf-green); margin-bottom: 8px;">Hybrid (Food + UI)</h4>
+      <p style="font-size: 13px; color: var(--warm-gray); line-height: 1.6;">App UI with food photo backgrounds, text overlays, branded framing. Combines appetite appeal with product credibility.</p>
+      <p style="font-size: 12px; font-weight: 700; color: var(--hf-green); margin-top: 12px;">RECOMMENDED &#x2714;</p>
+    </div>
+  </div>
+</section>
+
+<!-- KEYWORDS -->
+<section id="keywords">
+  <div class="section-label">Keyword Strategy</div>
+  <h2>US market keyword targeting</h2>
+  <p class="subtitle">Apple: 100-character keyword field assigned per CPP. Google: keywords embedded in description text.</p>
+
+  <div class="keyword-primary">
+    <h3>Primary Keyword Set</h3>
+    <code>recipes,cookbook,meal planning,dinner ideas,meal planner,recipe book,digital cookbook,recime</code>
+    <div class="char-count">92 of 100 characters &mdash; ready to paste into App Store Connect</div>
+  </div>
+
+  <div class="keyword-tiers">
+    <div class="keyword-tier">
+      <h4 style="color: var(--hf-green);">Tier 2 &mdash; Rotate In</h4>
+      <div class="kw-list">
+        <span class="kw">healthy recipes</span>
+        <span class="kw">cooking</span>
+        <span class="kw">meal prep</span>
+        <span class="kw">recipe organizer</span>
+        <span class="kw">dinner recipes</span>
+        <span class="kw">easy recipes</span>
+        <span class="kw">quick meals</span>
+      </div>
+    </div>
+    <div class="keyword-tier">
+      <h4 style="color: var(--blue);">Tier 3 &mdash; Long-Tail</h4>
+      <div class="kw-list">
+        <span class="kw">recipe collection</span>
+        <span class="kw">recipe planner</span>
+        <span class="kw">cooking ideas</span>
+        <span class="kw">recipe box</span>
+        <span class="kw">meal ideas</span>
+        <span class="kw">food planner</span>
+        <span class="kw">dinner planner</span>
+      </div>
+    </div>
+    <div class="keyword-tier">
+      <h4 style="color: var(--amber);">Seasonal &mdash; Rotate Quarterly</h4>
+      <div class="kw-list">
+        <span class="kw">christmas recipes</span>
+        <span class="kw">thanksgiving dinner</span>
+        <span class="kw">summer recipes</span>
+        <span class="kw">bbq recipes</span>
+        <span class="kw">holiday cooking</span>
+        <span class="kw">easter baking</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout green">
+    <div class="callout-icon">&#x1F4A1;</div>
+    <p><strong>On misspellings ("cookbok", etc.):</strong> Both stores now auto-correct common typos in search. Don't waste keyword characters on misspellings &mdash; use legitimate long-tail terms instead. Note: "recime" is included as a <strong>competitor brand name</strong>, not a misspelling.</p>
+  </div>
+</section>
+
+<!-- COPY -->
+<section id="copy">
+  <div class="section-label">Copy & Messaging</div>
+  <h2>Promotional text options</h2>
+  <p class="subtitle">Apple allows 170 characters, updatable anytime without review. The core principle: <strong>message match</strong> &mdash; the search term must be reflected in the first thing users see.</p>
+
+  <div style="margin-top: 24px;">
+    <div class="copy-option">
+      <div class="opt-num">1</div>
+      <p>Browse 1000s of recipes, plan your week, and cook with confidence. Your personal digital cookbook &mdash; all in one app.</p>
+    </div>
+    <div class="copy-option">
+      <div class="opt-num">2</div>
+      <p>From inspiration to dinner &mdash; plan meals, save recipes, and simplify your week with your own digital cookbook.</p>
+    </div>
+    <div class="copy-option">
+      <div class="opt-num">3</div>
+      <p>Save your favorite recipes, plan your week, and cook with confidence. Your personal digital cookbook &mdash; all in one app.</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top: 40px;">Google Play &mdash; Additional Copy Fields</h3>
+  <div style="margin-top: 16px;">
+    <div class="copy-option">
+      <div class="opt-num" style="background: #EBF5FF; color: var(--blue);">GP</div>
+      <div>
+        <p style="font-size: 13px; color: var(--warm-gray); margin-bottom: 4px;">App Name (30 chars)</p>
+        <p><strong>HelloFresh: Recipes & Cookbook</strong></p>
+      </div>
+    </div>
+    <div class="copy-option">
+      <div class="opt-num" style="background: #EBF5FF; color: var(--blue);">GP</div>
+      <div>
+        <p style="font-size: 13px; color: var(--warm-gray); margin-bottom: 4px;">Short Description (80 chars)</p>
+        <p><strong>Discover 1000+ chef-crafted recipes. Plan your meals, save favorites & cook step-by-step.</strong></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPECS -->
+<section id="specs">
+  <div class="section-label">Creative Specifications</div>
+  <h2>Asset requirements for the US market</h2>
+
+  <div class="specs-grid">
+    <div class="spec-card">
+      <h3>Apple App Store</h3>
+      <div class="spec-header">Screenshots</div>
+      <div class="spec-row"><span class="spec-label">iPhone 6.9"</span><span class="spec-value">1260 x 2736 px</span></div>
+      <div class="spec-row"><span class="spec-label">iPhone 6.5"</span><span class="spec-value">1242 x 2688 px</span></div>
+      <div class="spec-row"><span class="spec-label">iPad 13"</span><span class="spec-value">2064 x 2752 px</span></div>
+      <div class="spec-row"><span class="spec-label">Count</span><span class="spec-value">6 per device size</span></div>
+      <div class="spec-row"><span class="spec-label">Format</span><span class="spec-value">PNG or JPEG</span></div>
+      <div class="spec-header">App Preview Video</div>
+      <div class="spec-row"><span class="spec-label">Resolution</span><span class="spec-value">886 x 1920 px</span></div>
+      <div class="spec-row"><span class="spec-label">Duration</span><span class="spec-value">15 &ndash; 30 seconds</span></div>
+      <div class="spec-row"><span class="spec-label">Max size</span><span class="spec-value">500 MB</span></div>
+      <div class="spec-row"><span class="spec-label">Codec</span><span class="spec-value">H.264, 30fps</span></div>
+      <div class="spec-row"><span class="spec-label">Audio</span><span class="spec-value">Stereo, 256kbps AAC</span></div>
+    </div>
+    <div class="spec-card">
+      <h3>Google Play</h3>
+      <div class="spec-header">Screenshots</div>
+      <div class="spec-row"><span class="spec-label">Phone</span><span class="spec-value">1080 x 1920 px</span></div>
+      <div class="spec-row"><span class="spec-label">Count</span><span class="spec-value">6 (2&ndash;8 allowed)</span></div>
+      <div class="spec-row"><span class="spec-label">Format</span><span class="spec-value">JPEG or 24-bit PNG</span></div>
+      <div class="spec-row"><span class="spec-label">Max size</span><span class="spec-value">8 MB per image</span></div>
+      <div class="spec-header">Feature Graphic</div>
+      <div class="spec-row"><span class="spec-label">Dimensions</span><span class="spec-value">1024 x 500 px</span></div>
+      <div class="spec-row"><span class="spec-label">Format</span><span class="spec-value">JPEG or 24-bit PNG</span></div>
+      <div class="spec-header">App Icon (optional)</div>
+      <div class="spec-row"><span class="spec-label">Dimensions</span><span class="spec-value">512 x 512 px</span></div>
+      <div class="spec-row"><span class="spec-label">Format</span><span class="spec-value">32-bit PNG</span></div>
+      <div class="spec-row"><span class="spec-label">Note</span><span class="spec-value">Cookbook-themed variant</span></div>
+      <div class="spec-header">Video</div>
+      <div class="spec-row"><span class="spec-label">Format</span><span class="spec-value">YouTube URL (unlisted OK)</span></div>
+      <div class="spec-row"><span class="spec-label">Length</span><span class="spec-value">30s &ndash; 2 min</span></div>
+    </div>
+  </div>
+
+  <!-- DELIVERABLES -->
+  <h3 style="margin-top: 40px;">Deliverables Summary</h3>
+  <div class="deliverables-grid">
+    <div class="deliverable-card must">
+      <h3 style="color: var(--hf-green);">Must-Have <span class="count">&mdash; 25 assets</span></h3>
+      <div class="del-row"><span>Hybrid screenshots &mdash; iPhone 6.9"</span><span><span class="del-qty">6</span><span class="del-store">Apple</span></span></div>
+      <div class="del-row"><span>Hybrid screenshots &mdash; iPhone 6.5"</span><span><span class="del-qty">6</span><span class="del-store">Apple</span></span></div>
+      <div class="del-row"><span>Hybrid screenshots &mdash; iPad 13"</span><span><span class="del-qty">6</span><span class="del-store">Apple</span></span></div>
+      <div class="del-row"><span>Hybrid screenshots &mdash; Phone</span><span><span class="del-qty">6</span><span class="del-store">Google</span></span></div>
+      <div class="del-row"><span>Feature graphic</span><span><span class="del-qty">1</span><span class="del-store">Google</span></span></div>
+      <div style="margin-top: 16px; padding-top: 16px; border-top: 2px solid var(--hf-light-green); display: flex; justify-content: space-between; font-weight: 700; color: var(--hf-green);">
+        <span>Total</span><span>25 assets</span>
+      </div>
+    </div>
+    <div class="deliverable-card nice">
+      <h3 style="color: var(--amber);">Nice-to-Have <span class="count">&mdash; 3 assets</span></h3>
+      <div class="del-row"><span>App preview video</span><span><span class="del-qty" style="background: var(--amber-light); color: var(--amber);">1</span><span class="del-store">Apple</span></span></div>
+      <div class="del-row"><span>Promo video (YouTube)</span><span><span class="del-qty" style="background: var(--amber-light); color: var(--amber);">1</span><span class="del-store">Google</span></span></div>
+      <div class="del-row"><span>Custom app icon</span><span><span class="del-qty" style="background: var(--amber-light); color: var(--amber);">1</span><span class="del-store">Google</span></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section id="timeline">
+  <div class="section-label">Process</div>
+  <h2>Recommended timeline</h2>
+
+  <div class="timeline">
+    <div class="timeline-step">
+      <div class="step-dot">1</div>
+      <h4>Brief App Marketing</h4>
+      <p>Share this brief. Align on keywords, Search Ads budget, measurement.</p>
+      <span class="step-week">Week 1</span>
+    </div>
+    <div class="timeline-step">
+      <div class="step-dot">2</div>
+      <h4>Brief Design Team</h4>
+      <p>Provide specs, screenshot sequence, creative direction.</p>
+      <span class="step-week">Week 1</span>
+    </div>
+    <div class="timeline-step">
+      <div class="step-dot">3</div>
+      <h4>Write Copy</h4>
+      <p>Draft promo text (Apple) + name & description (Google).</p>
+      <span class="step-week">Week 2</span>
+    </div>
+    <div class="timeline-step">
+      <div class="step-dot">4</div>
+      <h4>Produce Assets</h4>
+      <p>Design team creates screenshots + optional video.</p>
+      <span class="step-week">Weeks 2-3</span>
+    </div>
+    <div class="timeline-step">
+      <div class="step-dot">5</div>
+      <h4>Submit for Review</h4>
+      <p>Create CPP/CSL in store consoles. Assign keywords.</p>
+      <span class="step-week">Week 4</span>
+    </div>
+    <div class="timeline-step">
+      <div class="step-dot">6</div>
+      <h4>Launch & Measure</h4>
+      <p>Go live. Connect Search Ads. Track CVR vs default.</p>
+      <span class="step-week">Week 4+</span>
+    </div>
+  </div>
+
+  <div class="callout green" style="margin-top: 40px;">
+    <div class="callout-icon">&#x23F1;</div>
+    <p><strong>Review timeline:</strong> Apple typically reviews CPPs in 24-48 hours. Google is similar. Neither requires a new app binary &mdash; CPPs/CSLs are submitted and managed independently of app updates.</p>
+  </div>
+</section>
+
+<!-- IMPACT -->
+<section id="impact">
+  <div class="impact-section">
+    <div class="section-label" style="color: rgba(255,255,255,0.7);">Expected Impact</div>
+    <h2>What the data says</h2>
+
+    <div class="impact-stats">
+      <div class="impact-stat">
+        <div class="number">+156%</div>
+        <div class="label">Average conversion uplift<br>for well-optimized CPPs</div>
+        <div class="source">Apple published data</div>
+      </div>
+      <div class="impact-stat">
+        <div class="number">20-33%</div>
+        <div class="label">Conversion uplift range<br>from case studies</div>
+        <div class="source">CBS Sports, State of Survival</div>
+      </div>
+      <div class="impact-stat">
+        <div class="number">-14%</div>
+        <div class="label">Cost per install<br>reduction</div>
+        <div class="source">State of Survival case study</div>
+      </div>
+    </div>
+
+    <table class="benchmark-table">
+      <thead>
+        <tr>
+          <th>Benchmark</th>
+          <th>Metric</th>
+          <th>Note</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Default page average</td>
+          <td>~1.6% conversion</td>
+          <td>Baseline across all categories</td>
+        </tr>
+        <tr>
+          <td>Well-optimized CPP</td>
+          <td>~4.1% conversion</td>
+          <td>2.5 percentage points higher</td>
+        </tr>
+        <tr>
+          <td>Food & Drink category</td>
+          <td>Above average baseline</td>
+          <td>Clear utility drives higher intent</td>
+        </tr>
+        <tr>
+          <td>HelloFresh opportunity</td>
+          <td>Zero current overlap</td>
+          <td>Maximum differentiation = maximum uplift</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<section style="padding-bottom: 80px; text-align: center;">
+  <p style="font-size: 13px; color: var(--mid-gray);">
+    HelloFresh &mdash; Cookbook Custom Product Page Brief &nbsp;|&nbsp; US Market &nbsp;|&nbsp; March 2026
+  </p>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightbox-close">&times;</button>
+  <img id="lightbox-img" src="" alt="Enlarged screenshot">
+</div>
+
+<script>
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+
+  document.querySelectorAll('.proposed-item img, .screenshot-item img, .feature-graphic-showcase img, .theme-card .mini-screenshots img').forEach(img => {
+    img.addEventListener('click', () => {
+      lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt;
+      lightbox.classList.add('active');
+    });
+  });
+
+  lightbox.addEventListener('click', () => lightbox.classList.remove('active'));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') lightbox.classList.remove('active');
+  });
+</script>
+
+</body>
+</html>
