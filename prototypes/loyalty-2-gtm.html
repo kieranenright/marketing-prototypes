@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HelloFresh Rewards 2.0 — Go-To-Market Strategy</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+  --rewards-purple: #532E6B;
+  --rewards-deep: #3D1F52;
+  --rewards-light: #7B5A9A;
+  --rewards-lilac: #C4A8E0;
+  --rewards-glow: rgba(196,168,224,0.15);
+  --hf-green: #1A5632;
+  --hf-lime: #91C73E;
+  --hf-lime-soft: #B5D96B;
+  --hf-cream: #F5F1EB;
+  --hf-white: #FFFFFF;
+  --hf-dark: #1A1A1A;
+  --hf-muted: #6B6B6B;
+  --blend-gradient: linear-gradient(135deg, var(--rewards-purple) 0%, var(--hf-green) 100%);
+  --blend-gradient-soft: linear-gradient(135deg, rgba(83,46,107,0.08) 0%, rgba(26,86,50,0.08) 100%);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--hf-cream);
+  color: var(--hf-dark);
+  overflow-x: hidden;
+}
+
+.progress-bar {
+  position: fixed; top: 0; left: 0; height: 4px;
+  background: linear-gradient(90deg, var(--rewards-purple), var(--hf-lime));
+  z-index: 1000; transition: width 0.1s linear;
+}
+
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; height: 56px;
+  background: rgba(245, 241, 235, 0.92);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  z-index: 999; display: flex; align-items: center;
+  justify-content: space-between; padding: 0 40px;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  transform: translateY(-100%); transition: transform 0.3s ease;
+}
+.nav.visible { transform: translateY(0); }
+.nav-logo { font-weight: 900; font-size: 15px; color: var(--rewards-purple); letter-spacing: -0.5px; }
+.nav-links { display: flex; gap: 6px; }
+.nav-links a {
+  text-decoration: none; font-size: 11px; font-weight: 600;
+  color: var(--hf-muted); padding: 6px 14px; border-radius: 20px; transition: all 0.2s;
+}
+.nav-links a:hover, .nav-links a.active { background: var(--rewards-purple); color: white; }
+
+section {
+  min-height: 100vh; display: flex; align-items: center;
+  justify-content: center; padding: 80px 60px; position: relative;
+}
+.section-inner { max-width: 1200px; width: 100%; }
+
+.reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-left { opacity: 0; transform: translateX(-40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal-left.visible { opacity: 1; transform: translateX(0); }
+.reveal-scale { opacity: 0; transform: scale(0.9); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal-scale.visible { opacity: 1; transform: scale(1); }
+.stagger-1 { transition-delay: 0.1s; }
+.stagger-2 { transition-delay: 0.2s; }
+.stagger-3 { transition-delay: 0.3s; }
+.stagger-4 { transition-delay: 0.4s; }
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  background: linear-gradient(160deg, var(--rewards-purple) 0%, var(--rewards-deep) 40%, var(--hf-green) 100%);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; top: -200px; right: -200px;
+  width: 800px; height: 800px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(145,199,62,0.12) 0%, transparent 60%);
+}
+.hero::after {
+  content: ''; position: absolute; bottom: -200px; left: -200px;
+  width: 600px; height: 600px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(196,168,224,0.1) 0%, transparent 60%);
+}
+.hero-content { text-align: center; z-index: 1; max-width: 850px; }
+.hero-badge {
+  display: inline-block; background: rgba(196,168,224,0.15);
+  color: var(--rewards-lilac); padding: 8px 24px; border-radius: 30px;
+  font-size: 12px; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; margin-bottom: 24px;
+  animation: fadeInDown 0.8s ease 0.2s both;
+}
+.hero h1 {
+  font-size: 68px; font-weight: 900; color: white;
+  letter-spacing: -3px; line-height: 0.95; margin-bottom: 20px;
+  animation: fadeInUp 0.8s ease 0.4s both;
+}
+.hero h1 .accent-lime { color: var(--hf-lime); }
+.hero h1 .accent-lilac { color: var(--rewards-lilac); }
+.hero-sub {
+  font-size: 20px; font-weight: 400; color: rgba(255,255,255,0.6);
+  line-height: 1.5; margin-bottom: 32px;
+  animation: fadeInUp 0.8s ease 0.6s both;
+}
+.hero-tags {
+  display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+  animation: fadeInUp 0.8s ease 0.8s both;
+}
+.hero-tag {
+  background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.85);
+  padding: 8px 20px; border-radius: 8px; font-size: 13px; font-weight: 600;
+  border: 1px solid rgba(255,255,255,0.15);
+}
+.scroll-cue {
+  position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  animation: bounce 2s ease infinite 1.5s; z-index: 2;
+}
+.scroll-cue span { font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.35); letter-spacing: 2px; text-transform: uppercase; }
+.scroll-arrow { width: 24px; height: 24px; border-right: 2px solid rgba(255,255,255,0.3); border-bottom: 2px solid rgba(255,255,255,0.3); transform: rotate(45deg); }
+
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes bounce { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(10px); } }
+
+/* SECTION TITLES */
+.section-tag { display: inline-block; font-size: 11px; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; color: var(--rewards-purple); margin-bottom: 12px; }
+.section-title { font-size: 44px; font-weight: 900; letter-spacing: -1.5px; line-height: 1.05; margin-bottom: 8px; }
+.section-desc { font-size: 16px; color: var(--hf-muted); line-height: 1.6; max-width: 700px; margin-bottom: 40px; }
+
+/* EVOLUTION SECTION */
+.evolution-section { background: var(--rewards-purple); color: white; }
+.evolution-section .section-tag { color: var(--rewards-lilac); }
+.evo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 20px; }
+.evo-card { background: rgba(255,255,255,0.08); border-radius: 16px; padding: 28px; border-top: 3px solid var(--hf-lime); transition: all 0.3s ease; }
+.evo-card:hover { background: rgba(255,255,255,0.12); transform: translateY(-4px); }
+.evo-card.purple-border { border-top-color: var(--rewards-lilac); }
+.evo-card.green-border { border-top-color: var(--hf-lime); }
+.evo-card.blend-border { border-top-color: var(--hf-lime-soft); }
+.evo-num { font-size: 36px; font-weight: 900; color: var(--hf-lime); opacity: 0.6; margin-bottom: 8px; }
+.evo-card.purple-border .evo-num { color: var(--rewards-lilac); }
+.evo-card h3 { font-size: 17px; font-weight: 800; margin-bottom: 8px; }
+.evo-card p { font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.6; }
+
+/* PRODUCT SECTION */
+.product-section { background: var(--hf-white); min-height: auto; padding: 100px 60px; }
+.pillar-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 32px; }
+.pillar-card { background: var(--hf-cream); border-radius: 20px; padding: 32px; position: relative; overflow: hidden; transition: all 0.3s ease; }
+.pillar-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(0,0,0,0.08); }
+.pillar-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; }
+.pillar-card:nth-child(1)::before { background: var(--hf-lime); }
+.pillar-card:nth-child(2)::before { background: var(--rewards-purple); }
+.pillar-card:nth-child(3)::before { background: var(--hf-green); }
+.pillar-tag { display: inline-block; padding: 5px 14px; border-radius: 20px; font-size: 11px; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase; color: white; margin-bottom: 14px; }
+.pillar-card:nth-child(1) .pillar-tag { background: var(--hf-lime); color: var(--hf-green); }
+.pillar-card:nth-child(2) .pillar-tag { background: var(--rewards-purple); }
+.pillar-card:nth-child(3) .pillar-tag { background: var(--hf-green); }
+.pillar-card h3 { font-size: 22px; font-weight: 900; letter-spacing: -0.5px; margin-bottom: 10px; }
+.pillar-card p { font-size: 14px; color: var(--hf-muted); line-height: 1.6; }
+.rewards-table { width: 100%; border-collapse: collapse; margin-top: 16px; border-radius: 12px; overflow: hidden; }
+.rewards-table th { background: var(--rewards-purple); color: white; padding: 12px 16px; font-size: 12px; font-weight: 800; text-align: left; letter-spacing: 0.5px; text-transform: uppercase; }
+.rewards-table td { padding: 12px 16px; font-size: 13px; border-bottom: 1px solid rgba(0,0,0,0.04); }
+.rewards-table tr:nth-child(even) { background: rgba(83,46,107,0.03); }
+.rewards-table tr:hover { background: rgba(83,46,107,0.06); }
+
+/* MESSAGING SHIFT */
+.messaging-section { background: var(--hf-dark); color: white; }
+.messaging-section .section-tag { color: var(--rewards-lilac); }
+.shift-table { width: 100%; border-collapse: collapse; margin-top: 24px; }
+.shift-table th { padding: 14px 18px; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; text-align: left; border-bottom: 2px solid rgba(255,255,255,0.1); }
+.shift-table th:nth-child(2) { color: rgba(255,255,255,0.4); }
+.shift-table th:nth-child(3) { color: var(--hf-lime); }
+.shift-table td { padding: 14px 18px; font-size: 14px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.shift-table td:first-child { font-weight: 700; color: rgba(255,255,255,0.5); font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+.shift-table td:nth-child(2) { color: rgba(255,255,255,0.35); }
+.shift-table td:nth-child(3) { color: rgba(255,255,255,0.9); }
+.shift-table tr:hover td { background: rgba(255,255,255,0.03); }
+.key-shift-callout { background: rgba(145,199,62,0.08); border-radius: 16px; padding: 28px; margin-top: 32px; border-left: 4px solid var(--hf-lime); }
+
+/* KEY MESSAGES */
+.messages-section { background: var(--hf-cream); }
+.message-pillars { display: flex; flex-direction: column; gap: 20px; margin-top: 32px; }
+.message-pillar { background: white; border-radius: 16px; padding: 28px 32px; display: flex; gap: 32px; align-items: flex-start; box-shadow: 0 2px 12px rgba(0,0,0,0.04); transition: all 0.3s ease; position: relative; overflow: hidden; }
+.message-pillar:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(0,0,0,0.08); }
+.message-pillar::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; }
+.message-pillar:nth-child(1)::before { background: var(--hf-lime); }
+.message-pillar:nth-child(2)::before { background: var(--rewards-purple); }
+.message-pillar:nth-child(3)::before { background: var(--hf-green); }
+.pillar-content { flex: 1; }
+.pillar-content h3 { font-size: 20px; font-weight: 900; letter-spacing: -0.5px; margin-bottom: 8px; }
+.pillar-content p { font-size: 14px; color: var(--hf-muted); line-height: 1.6; }
+.pillar-examples { flex: 0 0 280px; }
+.pillar-examples h4 { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--rewards-purple); margin-bottom: 10px; }
+.pillar-examples li { font-size: 13px; color: var(--hf-dark); line-height: 1.8; list-style: none; padding-left: 14px; position: relative; }
+.pillar-examples li::before { content: ''; position: absolute; left: 0; top: 8px; width: 6px; height: 6px; border-radius: 50%; }
+.message-pillar:nth-child(1) .pillar-examples li::before { background: var(--hf-lime); }
+.message-pillar:nth-child(2) .pillar-examples li::before { background: var(--rewards-purple); }
+.message-pillar:nth-child(3) .pillar-examples li::before { background: var(--hf-green); }
+.tone-bar { margin-top: 24px; padding: 14px 24px; border-radius: 12px; font-size: 13px; font-weight: 600; color: var(--hf-muted); letter-spacing: 0.5px; background: white; display: inline-block; }
+
+/* CRM SECTION */
+.crm-section { background: var(--rewards-purple); color: white; }
+.crm-section .section-tag { color: var(--rewards-lilac); }
+.flow-stages { display: flex; gap: 0; margin-top: 32px; align-items: stretch; }
+.flow-stage { flex: 1; padding: 28px; position: relative; }
+.flow-stage:not(:last-child)::after { content: ''; position: absolute; right: 0; top: 20%; bottom: 20%; width: 2px; background: rgba(255,255,255,0.1); }
+.flow-stage-label { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 6px; }
+.flow-stage:nth-child(1) .flow-stage-label { color: var(--hf-lime); }
+.flow-stage:nth-child(2) .flow-stage-label { color: var(--rewards-lilac); }
+.flow-stage:nth-child(3) .flow-stage-label { color: var(--hf-lime-soft); }
+.flow-stage h3 { font-size: 20px; font-weight: 900; margin-bottom: 4px; }
+.flow-stage .flow-desc { font-size: 12px; color: rgba(255,255,255,0.5); margin-bottom: 16px; line-height: 1.5; }
+.flow-channels { display: flex; flex-direction: column; gap: 8px; }
+.flow-ch { background: rgba(255,255,255,0.06); border-radius: 10px; padding: 12px 16px; }
+.flow-ch h4 { font-size: 12px; font-weight: 800; margin-bottom: 2px; }
+.flow-ch p { font-size: 11px; color: rgba(255,255,255,0.5); line-height: 1.4; }
+
+/* VARIANT TABLE */
+.variant-section { background: var(--hf-white); min-height: auto; padding: 80px 60px; }
+.variant-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 32px; }
+.variant-card { background: var(--hf-cream); border-radius: 16px; padding: 24px; position: relative; overflow: hidden; transition: all 0.3s ease; }
+.variant-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(0,0,0,0.08); }
+.variant-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; }
+.variant-card:nth-child(1)::before { background: var(--rewards-purple); }
+.variant-card:nth-child(2)::before { background: var(--hf-lime); }
+.variant-card:nth-child(3)::before { background: var(--hf-green); }
+.variant-card:nth-child(4)::before { background: var(--rewards-light); }
+.variant-num { font-size: 48px; font-weight: 900; opacity: 0.06; position: absolute; top: 8px; right: 16px; }
+.variant-card h3 { font-size: 16px; font-weight: 900; margin-bottom: 6px; letter-spacing: -0.3px; }
+.variant-angle { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+.variant-card:nth-child(1) .variant-angle { color: var(--rewards-purple); }
+.variant-card:nth-child(2) .variant-angle { color: var(--hf-lime); }
+.variant-card:nth-child(3) .variant-angle { color: var(--hf-green); }
+.variant-card:nth-child(4) .variant-angle { color: var(--rewards-light); }
+.variant-card p { font-size: 13px; color: var(--hf-muted); line-height: 1.6; }
+
+/* EMAIL SHOWCASE */
+.email-section { background: var(--hf-dark); color: white; min-height: auto; padding: 100px 60px; }
+.email-section .section-tag { color: var(--rewards-lilac); }
+.email-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 24px; }
+.email-card { background: rgba(255,255,255,0.04); border-radius: 16px; overflow: hidden; transition: all 0.4s ease; cursor: pointer; }
+.email-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(145,199,62,0.1); }
+.email-card img { width: 100%; display: block; border-radius: 12px; margin: 8px; width: calc(100% - 16px); }
+.email-card-label { padding: 12px 16px; text-align: center; }
+.email-card-label h4 { font-size: 13px; font-weight: 800; margin-bottom: 2px; }
+.email-card-label p { font-size: 11px; color: rgba(255,255,255,0.4); }
+
+/* INAPP SHOWCASE */
+.inapp-section { background: var(--hf-cream); min-height: auto; padding: 100px 60px; }
+
+/* PUSH/INBOX TABLE */
+.push-section { background: var(--hf-white); min-height: auto; padding: 80px 60px; }
+.push-table { width: 100%; border-collapse: collapse; margin-top: 16px; border-radius: 12px; overflow: hidden; }
+.push-table th { background: var(--rewards-purple); color: white; padding: 12px 16px; font-size: 11px; font-weight: 800; text-align: left; letter-spacing: 0.5px; text-transform: uppercase; }
+.push-table td { padding: 12px 16px; font-size: 13px; border-bottom: 1px solid rgba(0,0,0,0.04); }
+.push-table tr:nth-child(even) { background: rgba(83,46,107,0.03); }
+
+/* WELCOME FLOW */
+.welcome-section { background: var(--rewards-deep); color: white; min-height: auto; padding: 100px 60px; }
+.welcome-section .section-tag { color: var(--rewards-lilac); }
+.welcome-grid { display: grid; grid-template-columns: 1fr 1fr 1.4fr; gap: 24px; margin-top: 32px; align-items: start; }
+.welcome-card { background: rgba(255,255,255,0.06); border-radius: 16px; padding: 24px; border-left: 4px solid var(--hf-lime); }
+.welcome-card h4 { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 10px; }
+.welcome-card:nth-child(1) h4 { color: var(--hf-lime); }
+.welcome-card:nth-child(2) h4 { color: var(--rewards-lilac); }
+.welcome-card .wc-title { font-size: 16px; font-weight: 800; margin-bottom: 6px; }
+.welcome-card .wc-body { font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.6; }
+.welcome-email-wrap { background: rgba(255,255,255,0.06); border-radius: 16px; overflow: hidden; }
+.welcome-email-wrap img { width: 100%; display: block; }
+.welcome-email-details { padding: 20px; }
+.welcome-email-details h4 { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--hf-lime); margin-bottom: 12px; }
+.we-step { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 10px; }
+.we-step-num { width: 24px; height: 24px; border-radius: 50%; background: var(--rewards-purple); color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 900; flex-shrink: 0; }
+.we-step p { font-size: 12px; color: rgba(255,255,255,0.7); line-height: 1.5; }
+
+/* ROLLOUT */
+.rollout-section { background: var(--hf-cream); }
+.market-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 32px; }
+.market-card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.06); transition: all 0.3s ease; }
+.market-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(0,0,0,0.12); }
+.market-header { padding: 28px; color: white; text-align: center; }
+.market-card:nth-child(1) .market-header { background: var(--hf-green); }
+.market-card:nth-child(2) .market-header { background: var(--rewards-purple); }
+.market-card:nth-child(3) .market-header { background: var(--hf-dark); }
+.market-header h3 { font-size: 28px; font-weight: 900; }
+.market-header span { font-size: 12px; font-weight: 600; opacity: 0.7; }
+.market-body { padding: 28px; }
+.market-body p { font-size: 14px; color: var(--hf-muted); line-height: 1.6; margin-bottom: 20px; }
+.market-body h4 { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--rewards-purple); margin-bottom: 10px; }
+.market-body li { font-size: 13px; color: var(--hf-muted); line-height: 1.8; list-style: none; padding-left: 16px; position: relative; }
+.market-body li::before { content: ''; position: absolute; left: 0; top: 8px; width: 6px; height: 6px; border-radius: 50%; background: var(--hf-lime); }
+
+/* METRICS */
+.metrics-section { background: var(--hf-green); color: white; }
+.metrics-section .section-tag { color: var(--hf-lime); }
+.metrics-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 32px; }
+.metric-card { background: rgba(255,255,255,0.08); border-radius: 14px; padding: 22px; transition: all 0.3s ease; border-top: 3px solid var(--hf-lime); }
+.metric-card:hover { background: rgba(255,255,255,0.12); transform: translateY(-4px); }
+.metric-card:nth-child(even) { border-top-color: var(--rewards-lilac); }
+.metric-icon { font-size: 28px; margin-bottom: 10px; }
+.metric-category { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--hf-lime); margin-bottom: 10px; }
+.metric-card:nth-child(even) .metric-category { color: var(--rewards-lilac); }
+.metric-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.metric-list li { font-size: 12px; color: rgba(255,255,255,0.7); line-height: 1.4; padding-left: 14px; position: relative; }
+.metric-list li::before { content: ''; position: absolute; left: 0; top: 6px; width: 5px; height: 5px; border-radius: 50%; background: var(--hf-lime); }
+.metric-card:nth-child(even) .metric-list li::before { background: var(--rewards-lilac); }
+.optimization-callout { margin-top: 28px; background: rgba(255,255,255,0.06); border-radius: 16px; padding: 28px; border-left: 4px solid var(--hf-lime); }
+.optimization-callout h4 { font-size: 14px; font-weight: 800; margin-bottom: 8px; color: var(--hf-lime); }
+.optimization-callout p { font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.7; }
+
+/* FOOTER */
+.footer-section {
+  min-height: 60vh;
+  background: linear-gradient(160deg, var(--rewards-purple) 0%, var(--hf-green) 100%);
+  display: flex; align-items: center; justify-content: center;
+  text-align: center; color: white;
+}
+.footer-inner { max-width: 700px; }
+.footer-inner h2 { font-size: 48px; font-weight: 900; letter-spacing: -2px; line-height: 1.05; margin-bottom: 16px; }
+.footer-inner h2 .accent-lime { color: var(--hf-lime); }
+.footer-details { font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.6; margin-top: 20px; }
+.footer-details strong { color: white; }
+.next-steps { text-align: left; margin-top: 40px; display: flex; flex-direction: column; gap: 12px; }
+.next-step { background: rgba(255,255,255,0.1); border-radius: 12px; padding: 16px 20px; display: flex; align-items: center; gap: 14px; font-size: 14px; font-weight: 500; transition: all 0.2s; }
+.next-step:hover { background: rgba(255,255,255,0.15); transform: translateX(4px); }
+.next-step-num { width: 28px; height: 28px; border-radius: 50%; background: var(--hf-lime); color: var(--hf-green); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 900; flex-shrink: 0; }
+
+/* LIGHTBOX */
+.lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 2000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; cursor: zoom-out; }
+.lightbox.open { opacity: 1; pointer-events: all; }
+.lightbox img { max-height: 90vh; max-width: 90vw; border-radius: 16px; box-shadow: 0 24px 80px rgba(0,0,0,0.5); transform: scale(0.9); transition: transform 0.3s ease; }
+.lightbox.open img { transform: scale(1); }
+.lightbox-close { position: absolute; top: 32px; right: 40px; font-size: 14px; font-weight: 700; color: rgba(255,255,255,0.4); cursor: pointer; letter-spacing: 1px; text-transform: uppercase; transition: color 0.2s; }
+.lightbox-close:hover { color: white; }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- WIP Banner -->
+<div style="position: fixed; top: 0; left: 0; right: 0; z-index: 10000; background: linear-gradient(90deg, #F59E0B, #D97706); color: #1a1a1a; text-align: center; padding: 8px 16px; font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 0.02em;">
+  Work in Progress — This prototype is under active development and may change
+</div>
+
+<nav class="nav" id="mainNav" style="top: 36px;">
+  <div class="nav-logo"><img src="https://media.hellofresh.com/w_256,q_100,f_auto,c_limit,fl_lossy/hellofresh_website/logo/Hello_Fresh_Lockup.png" alt="HelloFresh" style="height: 22px;"></div>
+  <div class="nav-links">
+    <a href="#evolution" data-section="evolution">Why</a>
+    <a href="#product" data-section="product">What's New</a>
+    <a href="#messaging" data-section="messaging">Messaging</a>
+    <a href="#crm" data-section="crm">CRM Campaigns</a>
+    <a href="#emails" data-section="emails">Creative</a>
+    <a href="#rollout" data-section="rollout">Rollout</a>
+    <a href="#metrics" data-section="metrics">Metrics</a>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="hero">
+  <div class="hero-content">
+    <div style="display: inline-flex; align-items: center; gap: 16px; margin-bottom: 24px; animation: fadeInDown 0.8s ease 0.2s both;">
+      <img src="https://media.hellofresh.com/w_256,q_100,f_auto,c_limit,fl_lossy/hellofresh_website/logo/Hello_Fresh_Lockup.png" alt="HelloFresh" style="height: 24px; filter: brightness(0) invert(1);">
+      <div style="width: 1px; height: 20px; background: rgba(255,255,255,0.25);"></div>
+      <span style="font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--rewards-lilac);">Rewards 2.0 &bull; Go-To-Market Strategy</span>
+    </div>
+    <h1>Your loyalty deserves<br><span class="accent-lilac">tasty</span> <span class="accent-lime">perks.</span></h1>
+    <p class="hero-sub">Evolving HelloFresh Rewards with missions, choice, and a whole new way to earn.</p>
+    <div class="hero-tags">
+      <div class="hero-tag">Q2 2026</div>
+      <div class="hero-tag">US Launch</div>
+      <div class="hero-tag">FR &amp; CA Scale</div>
+      <div class="hero-tag">CRM &amp; Communications</div>
+    </div>
+    <div style="font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.45); margin-top: 24px; letter-spacing: 1px; animation: fadeInUp 0.8s ease 1s both;">March 2026 &nbsp;|&nbsp; Product Marketing</div>
+  </div>
+  <div class="scroll-cue">
+    <span>Scroll to explore</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- ===== EVOLUTION ===== -->
+<section class="evolution-section" id="evolution">
+  <div class="section-inner">
+    <div class="section-tag reveal">What's Changing &amp; Why</div>
+    <div class="section-title reveal" style="color: white; font-size: 40px;">HelloFresh Rewards<br>is evolving.</div>
+    <div class="section-desc reveal" style="color: rgba(255,255,255,0.6); max-width: 800px;">The first iteration didn't resonate with US audiences. Customers want more choice, more variety, and more ways to be rewarded.</div>
+
+    <div class="evo-grid reveal">
+      <div class="evo-card purple-border reveal stagger-1">
+        <div class="evo-num">01</div>
+        <h3>V1 Insight</h3>
+        <p>The first iteration of HelloFresh Rewards did not resonate with US audiences. The level-based system lacked the engagement and variety customers were looking for.</p>
+      </div>
+      <div class="evo-card green-border reveal stagger-2">
+        <div class="evo-num">02</div>
+        <h3>User Need</h3>
+        <p>Customers have expressed a desire for more discounts on base products and increased reward variety. They want choice and control over their rewards.</p>
+      </div>
+      <div class="evo-card blend-border reveal stagger-3">
+        <div class="evo-num">03</div>
+        <h3>Business Hypothesis</h3>
+        <p>"Missions" will reward users for completing specific tasks identified as early indicators of retention &mdash; ordering boxes, rating recipes, referring friends.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== BEFORE vs AFTER ===== -->
+<section style="background: var(--hf-dark); color: white; min-height: auto; padding: 100px 60px;" id="before-after">
+  <div class="section-inner">
+    <div class="section-tag reveal" style="color: var(--hf-lime);">Program Evolution</div>
+    <div class="section-title reveal" style="color: white; font-size: 40px;">Exciting changes to the<br>loyalty program structure.</div>
+    <div class="section-desc reveal" style="color: rgba(255,255,255,0.5); max-width: none;">From a linear, level-based system to a flexible points economy with missions and a reward store.</div>
+
+    <div style="display: flex; gap: 0; align-items: stretch; margin-top: 40px;" class="reveal">
+
+      <!-- BEFORE -->
+      <div style="flex: 1; background: rgba(255,255,255,0.04); border-radius: 20px 0 0 20px; padding: 40px; position: relative; border: 1px solid rgba(255,255,255,0.06);">
+        <div style="position: absolute; top: 16px; left: 20px; background: rgba(255,255,255,0.08); padding: 4px 14px; border-radius: 20px; font-size: 10px; font-weight: 800; color: rgba(255,255,255,0.35); letter-spacing: 1.5px; text-transform: uppercase;">Before</div>
+        <div style="text-align: center; margin-top: 16px;">
+          <div style="font-size: 22px; font-weight: 800; color: rgba(255,255,255,0.7); margin-bottom: 20px;">Level-based system<br>with preset rewards</div>
+          <img src="images/loyalty/v1-levels.png" alt="V1 Level-based rewards system" style="max-height: 480px; width: auto; border-radius: 20px; box-shadow: 0 8px 40px rgba(0,0,0,0.4); cursor: pointer;" class="lightbox-trigger">
+          <div style="display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin-top: 20px;">
+            <span style="background: rgba(255,255,255,0.04); padding: 5px 12px; border-radius: 6px; font-size: 11px; color: rgba(255,255,255,0.3); border: 1px solid rgba(255,255,255,0.06);">Preset rewards</span>
+            <span style="background: rgba(255,255,255,0.04); padding: 5px 12px; border-radius: 6px; font-size: 11px; color: rgba(255,255,255,0.3); border: 1px solid rgba(255,255,255,0.06);">No choice</span>
+            <span style="background: rgba(255,255,255,0.04); padding: 5px 12px; border-radius: 6px; font-size: 11px; color: rgba(255,255,255,0.3); border: 1px solid rgba(255,255,255,0.06);">Order-only progression</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ARROW -->
+      <div style="display: flex; align-items: center; justify-content: center; padding: 0 28px; flex-shrink: 0;">
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
+          <div style="width: 64px; height: 64px; border-radius: 50%; background: var(--hf-lime); display: flex; align-items: center; justify-content: center; box-shadow: 0 0 40px rgba(145,199,62,0.3);">
+            <span style="font-size: 30px; color: var(--hf-green);">&rarr;</span>
+          </div>
+          <span style="font-size: 9px; font-weight: 800; color: rgba(255,255,255,0.25); text-transform: uppercase; letter-spacing: 1.5px;">Evolving</span>
+        </div>
+      </div>
+
+      <!-- AFTER -->
+      <div style="flex: 1.4; background: rgba(145,199,62,0.04); border-radius: 0 20px 20px 0; padding: 40px; position: relative; border: 1px solid rgba(145,199,62,0.1);">
+        <div style="position: absolute; top: 16px; left: 20px; background: var(--hf-lime); padding: 4px 14px; border-radius: 20px; font-size: 10px; font-weight: 800; color: var(--hf-green); letter-spacing: 1.5px; text-transform: uppercase;">After</div>
+        <div style="text-align: center; margin-top: 16px;">
+          <div style="font-size: 22px; font-weight: 800; color: white; margin-bottom: 4px;">Points, missions &amp;<br>a reward store</div>
+          <div style="font-size: 15px; color: var(--hf-lime); font-weight: 600; margin-bottom: 24px;">Earn and spend on rewards of your choice</div>
+          <div style="display: flex; gap: 20px; justify-content: center; align-items: flex-start;">
+            <img src="images/loyalty/v2-overview.png" alt="V2 Rewards overview with points and missions" style="max-height: 480px; width: auto; border-radius: 20px; box-shadow: 0 8px 40px rgba(0,0,0,0.4); cursor: pointer;" class="lightbox-trigger">
+            <img src="images/loyalty/v2-rewards.png" alt="V2 Reward store with all rewards" style="max-height: 480px; width: auto; border-radius: 20px; box-shadow: 0 8px 40px rgba(0,0,0,0.4); cursor: pointer;" class="lightbox-trigger">
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin-top: 20px;">
+            <span style="background: rgba(145,199,62,0.1); padding: 5px 12px; border-radius: 6px; font-size: 11px; color: var(--hf-lime); font-weight: 600; border: 1px solid rgba(145,199,62,0.15);">Points system</span>
+            <span style="background: rgba(145,199,62,0.1); padding: 5px 12px; border-radius: 6px; font-size: 11px; color: var(--hf-lime); font-weight: 600; border: 1px solid rgba(145,199,62,0.15);">Missions</span>
+            <span style="background: rgba(145,199,62,0.1); padding: 5px 12px; border-radius: 6px; font-size: 11px; color: var(--hf-lime); font-weight: 600; border: 1px solid rgba(145,199,62,0.15);">Your choice</span>
+            <span style="background: rgba(145,199,62,0.1); padding: 5px 12px; border-radius: 6px; font-size: 11px; color: var(--hf-lime); font-weight: 600; border: 1px solid rgba(145,199,62,0.15);">Transparent</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== WHAT'S NEW ===== -->
+<section class="product-section" id="product">
+  <div class="section-inner">
+    <div class="section-tag reveal">What's New</div>
+    <div class="section-title reveal">Three pillars.<br>One rewards experience.</div>
+    <div class="section-desc reveal" style="max-width: none;">From a passive level-based system to an active, choice-driven loyalty experience.</div>
+
+    <div class="pillar-grid">
+      <div class="pillar-card reveal stagger-1">
+        <div class="pillar-tag">10 pts / $1</div>
+        <h3>Points System</h3>
+        <p>Earn 10 points for every $1 spent on HelloFresh orders. A simple, transparent earning mechanic that rewards every purchase.</p>
+      </div>
+      <div class="pillar-card reveal stagger-2">
+        <div class="pillar-tag">Rate, Refer, Earn</div>
+        <h3>Missions</h3>
+        <p>Go beyond ordering &mdash; earn bonus points by completing missions like rating recipes, referring friends, and other retention-driving actions.</p>
+      </div>
+      <div class="pillar-card reveal stagger-3">
+        <div class="pillar-tag">Your Choice</div>
+        <h3>Reward Store</h3>
+        <p>Choose your own rewards. Redeem points for add-on discounts, free shipping, premium meal discounts, and more.</p>
+      </div>
+    </div>
+
+    <div class="reveal" style="margin-top: 48px;">
+      <h3 style="font-size: 20px; font-weight: 900; margin-bottom: 16px;">Reward Store Options</h3>
+      <table class="rewards-table">
+        <thead><tr><th>Reward</th><th>Points Required</th><th>Category</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Add-ons — Small</strong></td><td>1,000 pts</td><td>Add-ons</td></tr>
+          <tr><td><strong>Add-ons — Large</strong></td><td>2,500 pts</td><td>Add-ons</td></tr>
+          <tr><td><strong>Surcharge — Small</strong></td><td>1,500 pts</td><td>Surcharge</td></tr>
+          <tr><td><strong>Surcharge — Large</strong></td><td>2,500 pts</td><td>Surcharge</td></tr>
+          <tr><td><strong>Box discount — Small</strong></td><td>6,000 pts</td><td>Box Discount</td></tr>
+          <tr><td><strong>Free box — 2P2R</strong></td><td>11,000 pts</td><td>Free Box</td></tr>
+          <tr><td><strong>Free box — 4P2R</strong></td><td>16,000 pts</td><td>Free Box</td></tr>
+          <tr><td><strong>Free shipping</strong></td><td>2,500 pts</td><td>Shipping</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MESSAGING SHIFT ===== -->
+<section class="messaging-section" id="messaging">
+  <div class="section-inner">
+    <div class="section-tag reveal">Communication Strategy</div>
+    <div class="section-title reveal" style="color: white; font-size: 40px;">From passive to active.<br>From levels to choice.</div>
+    <div class="section-desc reveal" style="color: rgba(255,255,255,0.5);">How our messaging is evolving to reflect a fundamentally different rewards experience.</div>
+
+    <table class="shift-table reveal">
+      <thead>
+        <tr><th></th><th>Rewards V1</th><th>Rewards V2</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Core Mechanic</td><td>Order &rarr; Level Up &rarr; Unlock preset rewards</td><td>Earn points (orders + missions) &rarr; Choose rewards</td></tr>
+        <tr><td>Lead Message</td><td>"Free loyalty program"</td><td>"Your loyalty deserves tasty perks"</td></tr>
+        <tr><td>Value Proposition</td><td>Automatic progression through levels</td><td>Agency, choice, and variety</td></tr>
+        <tr><td>Differentiator</td><td>Level system</td><td>Missions + Reward Store</td></tr>
+        <tr><td>CTA Energy</td><td>"Get Started"</td><td>"Start Earning" / "Earn Now"</td></tr>
+        <tr><td>Engagement Model</td><td>Passive (order and wait)</td><td>Active (earn, choose, enjoy)</td></tr>
+        <tr><td>Reward Visibility</td><td>Hidden until level unlocked</td><td>Transparent &mdash; see all rewards upfront</td></tr>
+      </tbody>
+    </table>
+
+    <div class="key-shift-callout reveal">
+      <h4 style="font-size: 16px; font-weight: 800; color: var(--hf-lime); margin-bottom: 8px;">Key Shift</h4>
+      <p style="font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.7;">Moving from a passive "order and level up" model to an active "earn, choose, enjoy" model. Customers now have agency over their rewards journey &mdash; they decide what to earn and how to spend.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== KEY MESSAGES ===== -->
+<section class="messages-section" id="messages">
+  <div class="section-inner">
+    <div class="section-tag reveal">Key Message Pillars</div>
+    <div class="section-title reveal">Three pillars.<br>One voice.</div>
+    <div class="section-desc reveal" style="max-width: none;">Every communication leads with one of these pillars. Together they tell the complete Rewards 2.0 story.</div>
+
+    <div class="message-pillars">
+      <div class="message-pillar reveal stagger-1">
+        <div class="pillar-content">
+          <h3>Your loyalty, your choice</h3>
+          <p>Emphasise customer agency. They choose what to earn and how to spend. No more preset rewards &mdash; the Reward Store puts them in control.</p>
+        </div>
+        <div class="pillar-examples">
+          <h4>Example Copy</h4>
+          <ul>
+            <li>"Choose your own rewards"</li>
+            <li>"Rewards at your fingertips"</li>
+            <li>"Spend points on rewards of your choice"</li>
+          </ul>
+        </div>
+      </div>
+      <div class="message-pillar reveal stagger-2">
+        <div class="pillar-content">
+          <h3>Earn more ways</h3>
+          <p>Missions expand earning beyond just ordering. Rating recipes, referring friends, and completing challenges all contribute to the points balance.</p>
+        </div>
+        <div class="pillar-examples">
+          <h4>Example Copy</h4>
+          <ul>
+            <li>"Complete fun challenges"</li>
+            <li>"Earn points on every order, rating, or referral"</li>
+            <li>"Boost your balance"</li>
+          </ul>
+        </div>
+      </div>
+      <div class="message-pillar reveal stagger-3">
+        <div class="pillar-content">
+          <h3>Tasty perks, free to join</h3>
+          <p>Low barrier, high perceived value. The program is free, easy to join (one click), and delivers tangible benefits from day one.</p>
+        </div>
+        <div class="pillar-examples">
+          <h4>Example Copy</h4>
+          <ul>
+            <li>"Join today for free"</li>
+            <li>"One tap, endless rewards"</li>
+            <li>"Free and easier than ever"</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="tone-bar reveal">Tone: &nbsp;<strong>Warm</strong> &nbsp;/ &nbsp;<strong>Inviting</strong> &nbsp;/ &nbsp;<strong>Action-Oriented</strong> &nbsp;/ &nbsp;<strong>Celebratory</strong></div>
+  </div>
+</section>
+
+<!-- ===== CRM OVERVIEW ===== -->
+<section class="crm-section" id="crm">
+  <div class="section-inner">
+    <div class="section-tag reveal">CRM Launch Campaigns</div>
+    <div class="section-title reveal" style="color: white; font-size: 40px;">Opt-in. Welcome.<br>Activate.</div>
+    <div class="section-desc reveal" style="color: rgba(255,255,255,0.6);">Three stages of the CRM journey. Four variants per opt-in channel to test what resonates with US audiences.</div>
+
+    <div class="flow-stages reveal">
+      <div class="flow-stage">
+        <div class="flow-stage-label">Stage 1</div>
+        <h3>Opt-in</h3>
+        <div class="flow-desc">Drive enrollment into Rewards 2.0. Four messaging variants tested across every channel.</div>
+        <div class="flow-channels">
+          <div class="flow-ch"><h4>Email</h4><p>4 variants</p></div>
+          <div class="flow-ch"><h4>Push</h4><p>4 variants</p></div>
+          <div class="flow-ch"><h4>InApp</h4><p>4 variants</p></div>
+          <div class="flow-ch"><h4>Inbox + Carousel</h4><p>1 each</p></div>
+        </div>
+      </div>
+      <div class="flow-stage">
+        <div class="flow-stage-label">Stage 2</div>
+        <h3>Welcome</h3>
+        <div class="flow-desc">Onboard new members and set expectations. Single variant — "Eat. Earn. Enjoy."</div>
+        <div class="flow-channels">
+          <div class="flow-ch"><h4>Email</h4><p>1 variant</p></div>
+          <div class="flow-ch"><h4>Push</h4><p>1 variant</p></div>
+          <div class="flow-ch"><h4>Inbox</h4><p>1 variant</p></div>
+        </div>
+      </div>
+      <div class="flow-stage">
+        <div class="flow-stage-label">Stage 3</div>
+        <h3>Activation</h3>
+        <div class="flow-desc">Drive first mission completion and first reward redemption. Developed post-launch based on enrollment data.</div>
+        <div class="flow-channels">
+          <div class="flow-ch"><h4>TBD</h4><p>Post-launch optimisation phase</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== VARIANT TESTING ===== -->
+<section class="variant-section">
+  <div class="section-inner">
+    <div class="section-tag reveal">Variant Testing Strategy</div>
+    <div class="section-title reveal">Four angles.<br>One winner.</div>
+    <div class="section-desc reveal" style="max-width: none;">Each opt-in channel tests four distinct messaging angles. Performance determines the winning approach before FR and CA rollout.</div>
+
+    <div class="variant-grid">
+      <div class="variant-card reveal stagger-1">
+        <div class="variant-num">01</div>
+        <div class="variant-angle">Rewards &amp; Perks</div>
+        <h3>Your loyalty deserves tasty perks</h3>
+        <p>Leading with tangible reward value. Box discounts, free shipping, vouchers &mdash; the things customers actually want.</p>
+      </div>
+      <div class="variant-card reveal stagger-2">
+        <div class="variant-num">02</div>
+        <div class="variant-angle">Choice &amp; Control</div>
+        <h3>Earn points to spend on tasty perks</h3>
+        <p>Emphasising agency resonates with US audiences seeking personalisation. You earn, you choose, you enjoy.</p>
+      </div>
+      <div class="variant-card reveal stagger-3">
+        <div class="variant-num">03</div>
+        <div class="variant-angle">Ease &amp; Simplicity</div>
+        <h3>Our free loyalty program is here</h3>
+        <p>Low-friction messaging. "Free", "easy", "one tap" &mdash; reducing opt-in hesitation through simplicity.</p>
+      </div>
+      <div class="variant-card reveal stagger-4">
+        <div class="variant-num">04</div>
+        <div class="variant-angle">Missions &amp; Challenges</div>
+        <h3>Earn points towards tasty perks</h3>
+        <p>Gamification language. "Complete fun challenges" appeals to engagement-motivated users who want to actively participate.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== OPT-IN EMAILS ===== -->
+<section class="email-section" id="emails">
+  <div class="section-inner">
+    <div class="section-tag reveal">Opt-in Emails</div>
+    <div class="section-title reveal" style="color: white; font-size: 40px;">Four variants.<br>Four angles.</div>
+    <div class="section-desc reveal" style="color: rgba(255,255,255,0.5);">Click to enlarge. Each email tests a different messaging approach to drive Rewards 2.0 enrollment.</div>
+
+    <div class="email-grid reveal">
+      <div class="email-card" onclick="openLightbox(this.querySelector('img').src)">
+        <img src="images/loyalty/Screenshot 2026-03-30 at 09.35.19.png" alt="Opt-in Email V1">
+        <div class="email-card-label"><h4>V1: Rewards &amp; Perks</h4><p>"Your loyalty deserves tasty perks"</p></div>
+      </div>
+      <div class="email-card" onclick="openLightbox(this.querySelector('img').src)">
+        <img src="images/loyalty/Screenshot 2026-03-30 at 09.35.38.png" alt="Opt-in Email V2">
+        <div class="email-card-label"><h4>V2: Choice &amp; Control</h4><p>"Earn points to spend on tasty perks"</p></div>
+      </div>
+      <div class="email-card" onclick="openLightbox(this.querySelector('img').src)">
+        <img src="images/loyalty/Screenshot 2026-03-30 at 09.35.50.png" alt="Opt-in Email V3">
+        <div class="email-card-label"><h4>V3: Ease &amp; Simplicity</h4><p>"Our free loyalty program is here"</p></div>
+      </div>
+      <div class="email-card" onclick="openLightbox(this.querySelector('img').src)">
+        <img src="images/loyalty/Screenshot 2026-03-30 at 09.36.09.png" alt="Opt-in Email V4">
+        <div class="email-card-label"><h4>V4: Missions Focus</h4><p>"Earn points towards tasty perks"</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== OPT-IN INAPP ===== -->
+<section class="inapp-section" id="inapp">
+  <div class="section-inner">
+    <div class="section-tag reveal">Opt-in InApp Messages</div>
+    <div class="section-title reveal">Four variants.<br>One in-app experience.</div>
+    <div class="section-desc reveal">All four messaging angles deployed as InApp messages. Click to enlarge.</div>
+
+    <div class="reveal" style="margin-top: 24px; background: white; border-radius: 20px; padding: 8px; box-shadow: 0 4px 24px rgba(0,0,0,0.06); cursor: pointer;" onclick="openLightbox(this.querySelector('img').src)">
+      <img src="images/loyalty/Screenshot 2026-03-30 at 09.32.19.png" alt="All 4 Opt-in InApp variants" style="width: 100%; display: block; border-radius: 16px;">
+    </div>
+    <div style="display: flex; gap: 12px; justify-content: center; margin-top: 16px;" class="reveal">
+      <span style="background: rgba(83,46,107,0.08); padding: 6px 16px; border-radius: 8px; font-size: 12px; font-weight: 700; color: var(--rewards-purple);">V1: Rewards &amp; Perks</span>
+      <span style="background: rgba(145,199,62,0.1); padding: 6px 16px; border-radius: 8px; font-size: 12px; font-weight: 700; color: var(--hf-green);">V2: Choice &amp; Control</span>
+      <span style="background: rgba(83,46,107,0.08); padding: 6px 16px; border-radius: 8px; font-size: 12px; font-weight: 700; color: var(--rewards-purple);">V3: Ease &amp; Simplicity</span>
+      <span style="background: rgba(145,199,62,0.1); padding: 6px 16px; border-radius: 8px; font-size: 12px; font-weight: 700; color: var(--hf-green);">V4: Missions Focus</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PUSH NOTIFICATIONS ===== -->
+<section style="background: var(--hf-dark); color: white; min-height: auto; padding: 100px 60px;">
+  <div class="section-inner">
+    <div class="section-tag reveal" style="color: var(--rewards-lilac);">Opt-in Push Notifications</div>
+    <div class="section-title reveal" style="color: white; font-size: 40px;">Four variants.<br>Lock screen presence.</div>
+    <div class="section-desc reveal" style="color: rgba(255,255,255,0.5);">All four messaging angles as push notifications. Click to enlarge.</div>
+
+    <div class="reveal" style="margin-top: 24px; background: rgba(255,255,255,0.04); border-radius: 20px; padding: 8px; cursor: pointer;" onclick="openLightbox(this.querySelector('img').src)">
+      <img src="images/loyalty/Screenshot 2026-03-30 at 09.32.39.png" alt="All 4 Opt-in Push variants" style="width: 100%; display: block; border-radius: 16px;">
+    </div>
+    <div style="display: flex; gap: 12px; justify-content: center; margin-top: 16px;" class="reveal">
+      <span style="background: rgba(196,168,224,0.1); padding: 6px 16px; border-radius: 8px; font-size: 12px; font-weight: 700; color: var(--rewards-lilac);">V1: VIP Invite</span>
+      <span style="background: rgba(145,199,62,0.1); padding: 6px 16px; border-radius: 8px; font-size: 12px; font-weight: 700; color: var(--hf-lime);">V2: Choose Rewards</span>
+      <span style="background: rgba(196,168,224,0.1); padding: 6px 16px; border-radius: 8px; font-size: 12px; font-weight: 700; color: var(--rewards-lilac);">V3: One Tap</span>
+      <span style="background: rgba(145,199,62,0.1); padding: 6px 16px; border-radius: 8px; font-size: 12px; font-weight: 700; color: var(--hf-lime);">V4: Free Shipping</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== INBOX & CAROUSEL ===== -->
+<section class="push-section">
+  <div class="section-inner">
+    <div class="section-tag reveal">Inbox &amp; Carousel</div>
+    <div class="section-title reveal">Supporting<br>touchpoints.</div>
+    <div class="section-desc reveal" style="max-width: none;">Inbox messages and carousel banners round out the opt-in channel mix. Click to enlarge.</div>
+
+    <div class="reveal" style="margin-top: 24px; background: var(--hf-cream); border-radius: 20px; padding: 8px; cursor: pointer;" onclick="openLightbox(this.querySelector('img').src)">
+      <img src="images/loyalty/Screenshot 2026-03-30 at 09.32.53.png" alt="Opt-in Inbox and Carousel" style="width: 100%; display: block; border-radius: 16px;">
+    </div>
+    <div style="display: flex; gap: 12px; justify-content: center; margin-top: 16px;" class="reveal">
+      <span style="background: rgba(83,46,107,0.08); padding: 6px 16px; border-radius: 8px; font-size: 12px; font-weight: 700; color: var(--rewards-purple);">Opt-in Inbox</span>
+      <span style="background: rgba(145,199,62,0.1); padding: 6px 16px; border-radius: 8px; font-size: 12px; font-weight: 700; color: var(--hf-green);">Opt-in Carousel</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WELCOME FLOW ===== -->
+<section class="welcome-section" id="welcome">
+  <div class="section-inner">
+    <div class="section-tag reveal">Welcome Flow</div>
+    <div class="section-title reveal" style="color: white; font-size: 40px;">Eat. Earn. Enjoy.</div>
+    <div class="section-desc reveal" style="color: rgba(255,255,255,0.5); max-width: none;">Single variant across all channels. Triggered immediately upon opt-in. Sets the tone for the entire Rewards journey.</div>
+
+    <!-- Welcome Push + Inbox screenshot -->
+    <div class="reveal" style="margin-top: 8px; margin-bottom: 40px;">
+      <h3 style="font-size: 18px; font-weight: 800; color: white; margin-bottom: 16px;">Welcome Push &amp; Inbox</h3>
+      <div style="background: rgba(255,255,255,0.04); border-radius: 20px; padding: 8px; cursor: pointer;" onclick="openLightbox(this.querySelector('img').src)">
+        <img src="images/loyalty/Screenshot 2026-03-30 at 09.33.28.png" alt="Welcome Push and Inbox" style="width: 100%; max-width: 700px; display: block; border-radius: 16px;">
+      </div>
+    </div>
+
+    <!-- Welcome Email -->
+    <div class="reveal">
+      <h3 style="font-size: 18px; font-weight: 800; color: white; margin-bottom: 16px;">Welcome Email</h3>
+      <div style="display: flex; gap: 40px; align-items: start;">
+        <div style="flex-shrink: 0; background: rgba(255,255,255,0.04); border-radius: 16px; padding: 6px; cursor: pointer;" onclick="openLightbox(this.querySelector('img').src)">
+          <img src="images/loyalty/Screenshot 2026-03-30 at 09.36.24.png" alt="Welcome Email" style="width: 280px; display: block; border-radius: 12px;">
+        </div>
+        <div style="flex: 1; padding-top: 8px;">
+          <div style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--hf-lime); margin-bottom: 20px;">Key Elements</div>
+          <div style="display: flex; flex-direction: column; gap: 14px;">
+            <div style="display: flex; gap: 12px; align-items: flex-start;">
+              <div style="width: 28px; height: 28px; border-radius: 50%; background: var(--rewards-purple); color: white; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 900; flex-shrink: 0;">1</div>
+              <div><div style="font-size: 13px; font-weight: 800; color: white;">Order meals to earn points</div><div style="font-size: 11px; color: rgba(255,255,255,0.5); margin-top: 2px;">10 points per $1 spent on every HelloFresh order</div></div>
+            </div>
+            <div style="display: flex; gap: 12px; align-items: flex-start;">
+              <div style="width: 28px; height: 28px; border-radius: 50%; background: var(--hf-green); color: white; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 900; flex-shrink: 0;">2</div>
+              <div><div style="font-size: 13px; font-weight: 800; color: white;">Boost points by completing missions</div><div style="font-size: 11px; color: rgba(255,255,255,0.5); margin-top: 2px;">Rate recipes, refer friends, and complete challenges</div></div>
+            </div>
+            <div style="display: flex; gap: 12px; align-items: flex-start;">
+              <div style="width: 28px; height: 28px; border-radius: 50%; background: var(--hf-lime); color: var(--hf-green); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 900; flex-shrink: 0;">3</div>
+              <div><div style="font-size: 13px; font-weight: 800; color: white;">Redeem points in the Rewards Store</div><div style="font-size: 11px; color: rgba(255,255,255,0.5); margin-top: 2px;">Tasty add-ons, free shipping, premium meals, and more</div></div>
+            </div>
+          </div>
+          <div style="margin-top: 20px; padding: 14px; background: rgba(145,199,62,0.08); border-radius: 12px; border-left: 3px solid var(--hf-lime);">
+            <div style="font-size: 11px; font-weight: 700; color: var(--hf-lime); margin-bottom: 4px;">Headline</div>
+            <div style="font-size: 16px; font-weight: 900; color: white;">Eat. Earn. Enjoy.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MARKET ROLLOUT ===== -->
+<section class="rollout-section" id="rollout">
+  <div class="section-inner">
+    <div class="section-tag reveal">Market Rollout</div>
+    <div class="section-title reveal">US first.<br>Then the world.</div>
+    <div class="section-desc reveal" style="max-width: none;">US launch in Q2 2026. Learnings inform the rollout to France and Canada.</div>
+
+    <div class="market-grid">
+      <div class="market-card reveal stagger-1">
+        <div class="market-header">
+          <h3>US</h3>
+          <span>Q2 2026</span>
+        </div>
+        <div class="market-body">
+          <p>Primary launch market. Full CRM campaign deployment with 4-variant opt-in testing. V1 learnings inform the updated messaging approach.</p>
+          <h4>Key Milestones</h4>
+          <ul>
+            <li>Opt-in campaign launch</li>
+            <li>Welcome flow activation</li>
+            <li>Variant winner declared</li>
+            <li>Optimization based on results</li>
+          </ul>
+        </div>
+      </div>
+      <div class="market-card reveal stagger-2">
+        <div class="market-header">
+          <h3>France</h3>
+          <span>Post-US Launch</span>
+        </div>
+        <div class="market-body">
+          <p>Second market rollout. Campaigns adapted based on US launch learnings. Copy localised for French audience and cultural nuances.</p>
+          <h4>Key Milestones</h4>
+          <ul>
+            <li>Localised copy &amp; creative</li>
+            <li>Adapted messaging angles</li>
+            <li>Market-specific reward mix review</li>
+          </ul>
+        </div>
+      </div>
+      <div class="market-card reveal stagger-3">
+        <div class="market-header">
+          <h3>Canada</h3>
+          <span>Post-US Launch</span>
+        </div>
+        <div class="market-body">
+          <p>Third market rollout. Bilingual considerations (EN/FR). Campaign approach refined from US and FR learnings.</p>
+          <h4>Key Milestones</h4>
+          <ul>
+            <li>EN + FR localisation</li>
+            <li>Refined variant selection</li>
+            <li>Optimised channel mix</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== METRICS ===== -->
+<section class="metrics-section" id="metrics">
+  <div class="section-inner">
+    <div class="section-tag reveal">Success Metrics</div>
+    <div class="section-title reveal" style="color: white; font-size: 40px;">Measure what matters.</div>
+    <div class="section-desc reveal" style="color: rgba(255,255,255,0.6);">Clear KPIs across enrollment, activation, retention, and revenue.</div>
+
+    <div class="metrics-grid reveal">
+      <div class="metric-card reveal stagger-1">
+        <div class="metric-icon">&#128203;</div>
+        <div class="metric-category">Enrollment</div>
+        <ul class="metric-list">
+          <li>Opt-in rate (% of eligible users)</li>
+          <li>Variant win rate (which angle converts best)</li>
+          <li>Channel conversion comparison</li>
+        </ul>
+      </div>
+      <div class="metric-card reveal stagger-2">
+        <div class="metric-icon">&#128075;</div>
+        <div class="metric-category">Onboarding</div>
+        <ul class="metric-list">
+          <li>Welcome email open rate</li>
+          <li>Welcome flow click-through</li>
+          <li>Time to first engagement</li>
+        </ul>
+      </div>
+      <div class="metric-card reveal stagger-3">
+        <div class="metric-icon">&#127942;</div>
+        <div class="metric-category">Activation</div>
+        <ul class="metric-list">
+          <li>First mission completion rate</li>
+          <li>First reward redemption rate</li>
+          <li>Points earn rate per user/week</li>
+        </ul>
+      </div>
+      <div class="metric-card reveal stagger-4">
+        <div class="metric-icon">&#128200;</div>
+        <div class="metric-category">Retention &amp; Revenue</div>
+        <ul class="metric-list">
+          <li>30-day retention lift (members vs non)</li>
+          <li>AOV impact for Rewards members</li>
+          <li>Revenue per enrolled user</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="optimization-callout reveal">
+      <h4>Optimization Approach</h4>
+      <p><strong>Week 1&ndash;2:</strong> Monitor opt-in variant performance and declare winning variant. <strong>Week 3&ndash;4:</strong> Scale winning variant, begin welcome flow optimization. <strong>Ongoing:</strong> Monitor mission completion and redemption rates to inform activation campaign development.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<section class="footer-section" id="footer">
+  <div class="footer-inner">
+    <h2>Earn. Choose.<br><span class="accent-lime">Enjoy.</span></h2>
+    <div class="footer-details">
+      <strong>Q2 2026</strong> &nbsp;&bull;&nbsp; US Launch &nbsp;&bull;&nbsp; FR &amp; CA Scale<br>
+      4 opt-in variants &nbsp;&bull;&nbsp; 6 CRM channels &nbsp;&bull;&nbsp; 3 markets
+    </div>
+    <div class="next-steps reveal">
+      <div class="next-step"><div class="next-step-num">1</div>Finalise US launch date and campaign scheduling</div>
+      <div class="next-step"><div class="next-step-num">2</div>QA all CRM campaign variants across channels</div>
+      <div class="next-step"><div class="next-step-num">3</div>Confirm FR and CA rollout timeline and localisation requirements</div>
+      <div class="next-step"><div class="next-step-num">4</div>Establish reporting dashboards for real-time KPI tracking</div>
+      <div class="next-step"><div class="next-step-num">5</div>Plan post-launch activation campaign based on early enrollment data</div>
+    </div>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <div class="lightbox-close" onclick="closeLightbox()">ESC to close</div>
+  <img id="lightboxImg" src="" alt="">
+</div>
+
+<script>
+function updateProgress() {
+  const s = window.scrollY, d = document.documentElement.scrollHeight - window.innerHeight;
+  document.getElementById('progressBar').style.width = (s / d * 100) + '%';
+}
+function updateNav() {
+  const n = document.getElementById('mainNav');
+  n.classList.toggle('visible', window.scrollY > window.innerHeight * 0.5);
+}
+function updateActiveNav() {
+  const ss = document.querySelectorAll('section[id]'), ls = document.querySelectorAll('.nav-links a');
+  let c = '';
+  ss.forEach(s => { if (window.scrollY >= s.offsetTop - 200) c = s.id; });
+  ls.forEach(l => { l.classList.toggle('active', l.dataset.section === c); });
+}
+function revealOnScroll() {
+  document.querySelectorAll('.reveal, .reveal-left, .reveal-scale').forEach(el => {
+    if (el.getBoundingClientRect().top < window.innerHeight * 0.88) el.classList.add('visible');
+  });
+}
+function openLightbox(src) {
+  document.getElementById('lightboxImg').src = src;
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeLightbox();
+});
+window.addEventListener('scroll', () => { updateProgress(); updateNav(); updateActiveNav(); revealOnScroll(); }, { passive: true });
+revealOnScroll();
+</script>
+
+</body>
+</html>
