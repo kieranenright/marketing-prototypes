@@ -1174,6 +1174,21 @@
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') lightbox.classList.remove('active');
   });
+
+  // Autoplay videos when scrolled into view, pause when out
+  document.querySelectorAll('.proposed-item video, .app-preview-video-wrapper video').forEach(video => {
+    video.muted = true;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          video.play();
+        } else {
+          video.pause();
+        }
+      });
+    }, { threshold: 0.4 });
+    observer.observe(video);
+  });
 </script>
 
 <script src="../auth.js"></script>
