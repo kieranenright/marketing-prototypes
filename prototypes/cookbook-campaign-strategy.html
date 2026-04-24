@@ -379,6 +379,137 @@ section {
 .cal-legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: rgba(255,255,255,0.7); }
 .cal-legend-dot { width: 12px; height: 12px; border-radius: 4px; }
 
+/* ORGANIC SOCIAL CALENDAR */
+.osc-section { background: var(--hf-cream); min-height: auto; padding: 80px 40px; }
+.osc-milestones { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; margin-bottom: 16px; }
+.osc-milestone { display: inline-flex; align-items: center; gap: 10px; background: white; padding: 12px 20px; border-radius: 12px; border: 1.5px solid rgba(0,0,0,0.06); box-shadow: 0 2px 8px rgba(0,0,0,0.03); }
+.osc-milestone-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.osc-milestone-text { font-size: 12px; font-weight: 800; color: var(--hf-dark); }
+.osc-milestone-date { font-size: 11px; color: var(--hf-muted); }
+.osc-milestone-arrow { font-size: 18px; color: var(--hf-muted); font-weight: 300; }
+.osc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 32px; }
+.osc-card { background: white; border-radius: 16px; padding: 28px; box-shadow: 0 2px 16px rgba(0,0,0,0.04); position: relative; transition: all 0.3s ease; overflow: hidden; }
+.osc-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(0,0,0,0.08); }
+.osc-card.done { opacity: 1; }
+.osc-card.done::after { content: 'POSTED'; position: absolute; top: 16px; right: 16px; background: var(--hf-green); color: white; padding: 3px 10px; border-radius: 6px; font-size: 9px; font-weight: 800; letter-spacing: 1px; }
+.osc-card.gap::after { content: 'REVIEW WEEK'; position: absolute; top: 16px; right: 16px; background: var(--hf-honey); color: white; padding: 3px 10px; border-radius: 6px; font-size: 9px; font-weight: 800; letter-spacing: 1px; }
+.osc-week { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: var(--hf-green); margin-bottom: 4px; }
+.osc-dates { font-size: 12px; color: var(--hf-muted); margin-bottom: 16px; }
+.osc-video { background: var(--hf-dark-green); color: white; padding: 16px; border-radius: 10px; margin-bottom: 10px; }
+.osc-video-label { font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--hf-lime); margin-bottom: 6px; }
+.osc-video-title { font-size: 15px; font-weight: 800; line-height: 1.3; }
+.osc-video-hook { font-size: 11px; color: var(--hf-lime); font-weight: 700; font-style: italic; margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.1); line-height: 1.4; }
+.osc-video-hook::before { content: '\201C'; }
+.osc-video-hook::after { content: '\201D'; }
+.osc-video-rationale { font-size: 11px; color: rgba(255,255,255,0.5); margin-top: 6px; line-height: 1.4; }
+.osc-static { background: var(--hf-cream); padding: 12px 16px; border-radius: 10px; border: 1.5px dashed rgba(0,0,0,0.1); }
+.osc-static-label { font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--hf-muted); margin-bottom: 4px; }
+.osc-static-text { font-size: 12px; color: var(--hf-muted); font-weight: 600; }
+.osc-batch { display: inline-block; padding: 3px 10px; border-radius: 6px; font-size: 9px; font-weight: 800; letter-spacing: 1px; margin-bottom: 12px; }
+.osc-batch.b1 { background: rgba(200,240,101,0.2); color: var(--hf-dark-green); }
+.osc-batch.b2 { background: rgba(27,138,74,0.12); color: var(--hf-green); }
+.osc-summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 32px; }
+.osc-summary-card { background: white; border-radius: 12px; padding: 20px 24px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.03); }
+.osc-summary-num { font-size: 32px; font-weight: 900; color: var(--hf-green); }
+.osc-summary-label { font-size: 12px; color: var(--hf-muted); font-weight: 600; margin-top: 4px; }
+
+/* ORGANIC SOCIAL — EXPANDABLE PREVIEW */
+.osc-preview-toggle { display: flex; align-items: center; gap: 6px; margin-top: 10px; padding: 8px 12px; border-radius: 8px; background: rgba(27,138,74,0.06); border: none; cursor: pointer; font-family: inherit; font-size: 11px; font-weight: 700; color: var(--hf-green); transition: all 0.2s ease; width: 100%; }
+.osc-preview-toggle:hover { background: rgba(27,138,74,0.12); }
+.osc-preview-toggle .osc-toggle-arrow { display: inline-block; transition: transform 0.3s ease; font-size: 10px; }
+.osc-preview-toggle.open .osc-toggle-arrow { transform: rotate(90deg); }
+.osc-preview-thumbs { display: flex; gap: 4px; margin-left: auto; }
+.osc-preview-thumb { width: 20px; height: 20px; border-radius: 4px; object-fit: cover; opacity: 0.6; }
+.osc-preview-panel { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, opacity 0.3s ease; opacity: 0; margin-top: 0; }
+.osc-preview-panel.open { max-height: 800px; opacity: 1; margin-top: 10px; }
+.osc-preview-carousel { position: relative; border-radius: 10px; overflow: hidden; background: var(--hf-dark); aspect-ratio: 4/5; }
+.osc-preview-carousel img { width: 100%; height: 100%; object-fit: contain; display: none; }
+.osc-preview-carousel img.active { display: block; }
+.osc-carousel-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 28px; height: 28px; border-radius: 50%; background: rgba(255,255,255,0.85); border: none; cursor: pointer; font-size: 14px; font-weight: 700; color: var(--hf-dark); display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 6px rgba(0,0,0,0.15); }
+.osc-carousel-nav:hover { background: white; transform: translateY(-50%) scale(1.1); }
+.osc-carousel-nav.prev { left: 8px; }
+.osc-carousel-nav.next { right: 8px; }
+.osc-carousel-dots { display: flex; justify-content: center; gap: 5px; padding: 8px 0 4px; }
+.osc-carousel-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(0,0,0,0.15); border: none; cursor: pointer; padding: 0; transition: all 0.2s; }
+.osc-carousel-dot.active { background: var(--hf-green); transform: scale(1.3); }
+
+/* CREATOR PLATFORM */
+.creator-section { background: var(--hf-white); min-height: auto; padding: 100px 60px; }
+.creator-split {
+  display: flex; gap: 60px; align-items: center; margin-top: 24px;
+}
+.creator-left { flex: 1; }
+.creator-right { flex: 1; display: flex; justify-content: center; }
+
+.creator-left .section-desc { margin-bottom: 32px; }
+
+/* Flow pipeline */
+.creator-flow {
+  display: flex; align-items: center; gap: 0; margin-bottom: 36px;
+  background: white; border-radius: 14px; padding: 16px 20px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+}
+.creator-flow-step {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; font-weight: 700; color: var(--hf-dark);
+  white-space: nowrap;
+}
+.creator-flow-step .cfs-icon { font-size: 18px; }
+.creator-flow-arrow {
+  font-size: 16px; color: var(--hf-sage); margin: 0 10px;
+  flex-shrink: 0;
+}
+
+/* Creator category cards — compact */
+.creator-categories { display: flex; gap: 14px; margin-bottom: 32px; }
+.creator-cat {
+  flex: 1; background: white; border-radius: 12px; padding: 18px 20px;
+  border-left: 3px solid var(--hf-forest);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  transition: all 0.3s ease;
+}
+.creator-cat:hover { transform: translateY(-3px); box-shadow: 0 6px 24px rgba(0,0,0,0.08); }
+.creator-cat:nth-child(2) { border-left-color: var(--hf-sage); }
+.creator-cat h4 { font-size: 14px; font-weight: 800; letter-spacing: -0.3px; margin-bottom: 2px; }
+.creator-cat span { font-size: 11px; color: var(--hf-muted); font-weight: 500; }
+
+/* Creator roster — handles with profile pics */
+.creator-roster { display: flex; flex-wrap: wrap; gap: 10px; }
+.creator-handle {
+  display: flex; align-items: center; gap: 8px;
+  background: white; color: var(--hf-dark); padding: 6px 16px 6px 6px;
+  border-radius: 28px; font-size: 12px; font-weight: 700;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  transition: all 0.2s ease;
+  border: 1.5px solid rgba(0,0,0,0.06);
+}
+.creator-handle { text-decoration: none; cursor: pointer; }
+.creator-handle:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.1); border-color: var(--hf-lime); }
+.creator-handle .ch-avatar {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--hf-lime); display: flex; align-items: center;
+  justify-content: center; font-size: 11px; font-weight: 800;
+  color: var(--hf-dark-green); flex-shrink: 0; overflow: hidden;
+}
+.creator-handle .ch-avatar img {
+  width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
+}
+
+/* Phone mockup — right column */
+.creator-phone {
+  width: 100%; max-width: 440px; border-radius: 36px; background: #000; padding: 12px;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.18), inset 0 0 0 1px rgba(255,255,255,0.1);
+  position: relative; transition: all 0.4s ease;
+}
+.creator-phone:hover { transform: translateY(-6px); box-shadow: 0 24px 64px rgba(0,0,0,0.22); }
+.creator-phone::before {
+  content: ''; display: block; width: 36px; height: 5px;
+  background: #222; border-radius: 3px; margin: 0 auto 6px;
+}
+.creator-phone img {
+  width: 100%; border-radius: 24px; display: block;
+}
+
 /* FEATURES */
 .features-section { background: var(--hf-cream); }
 .features-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 20px; }
@@ -393,7 +524,7 @@ section {
 .feature-reinforces span { color: var(--hf-green); }
 
 /* VALIDATION ROADMAP */
-.validation-section { background: var(--hf-white); min-height: auto; padding: 80px 60px; border-top: 1px solid rgba(0,0,0,0.06); }
+.validation-section { background: var(--hf-cream); min-height: auto; padding: 80px 60px; border-top: 1px solid rgba(0,0,0,0.06); }
 .vr-container { margin-top: 32px; position: relative; }
 .vr-row { display: grid; grid-template-columns: 80px repeat(3, 1fr); gap: 0; align-items: stretch; }
 .vr-label { writing-mode: vertical-lr; transform: rotate(180deg); font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: 3px; color: var(--hf-green); display: flex; align-items: center; justify-content: center; padding: 12px 0; }
@@ -420,7 +551,7 @@ section {
 .vr-tools strong { color: var(--hf-dark); }
 
 /* VALIDATION DELIVERABLES */
-.val-deliv-section { background: var(--hf-cream); min-height: auto; padding: 80px 60px; }
+.val-deliv-section { background: var(--hf-white); min-height: auto; padding: 80px 60px; }
 .vd-container { margin-top: 32px; }
 .vd-months { display: grid; grid-template-columns: 120px repeat(3, 1fr); gap: 0; margin-bottom: 0; }
 .vd-month-header { display: flex; align-items: center; justify-content: center; }
@@ -493,8 +624,10 @@ section {
     <a href="#campaign" data-section="campaign">Campaign</a>
     <a href="#channels" data-section="channels">Channels</a>
     <a href="#crm" data-section="crm">CRM Lifecycle</a>
-    <a href="#validation" data-section="validation">Validation</a>
     <a href="#calendar" data-section="calendar">Calendar</a>
+    <a href="#organic-social" data-section="organic-social">Organic Social</a>
+    <a href="#creator-platform" data-section="creator-platform">Creator Platform</a>
+    <a href="#validation" data-section="validation">Validation</a>
     <a href="#playbook" data-section="playbook">Playbook</a>
   </div>
 </nav>
@@ -511,7 +644,7 @@ section {
     <p class="hero-sub">A social-first + lifecycle campaign to turn the Efficient Inspired into Cookbook users.</p>
     <div class="hero-tags">
       <div class="hero-tag">April &ndash; June 2026</div>
-      <div class="hero-tag">TikTok + Instagram + Facebook + Pinterest (exploring)</div>
+      <div class="hero-tag">TikTok + Instagram + Facebook</div>
       <div class="hero-tag">Organic + Paid + ASO + CRM</div>
       <div class="hero-tag">Always-On</div>
     </div>
@@ -568,6 +701,7 @@ section {
             </div>
           </div>
         </div>
+
       </div>
       <div style="flex: 0 0 auto; display: flex; align-items: center; justify-content: center;">
         <div class="phone-frame" style="width: 200px; border-radius: 24px; padding: 8px;">
@@ -599,6 +733,7 @@ section {
           <li style="font-size: 14px; color: rgba(255,255,255,0.8); padding-left: 20px; position: relative; line-height: 1.6;"><span style="position: absolute; left: 0; color: var(--hf-lime); font-size: 16px;">&bull;</span>Paid retargets organic engagers toward install</li>
           <li style="font-size: 14px; color: rgba(255,255,255,0.8); padding-left: 20px; position: relative; line-height: 1.6;"><span style="position: absolute; left: 0; color: var(--hf-lime); font-size: 16px;">&bull;</span>ASO captures high-intent app store searches</li>
           <li style="font-size: 14px; color: rgba(255,255,255,0.8); padding-left: 20px; position: relative; line-height: 1.6;"><span style="position: absolute; left: 0; color: var(--hf-lime); font-size: 16px;">&bull;</span>Custom product pages convert browsers</li>
+          <li style="font-size: 14px; color: rgba(255,255,255,0.8); padding-left: 20px; position: relative; line-height: 1.6;"><span style="position: absolute; left: 0; color: var(--hf-lime); font-size: 16px;">&bull;</span>Functionality launches create re-entry moments</li>
         </ul>
       </div>
       <div style="flex: 1; background: rgba(255,255,255,0.08); border-radius: 24px; padding: 48px; border: 1px solid rgba(200,240,101,0.15); position: relative; overflow: hidden;">
@@ -611,7 +746,6 @@ section {
           <li style="font-size: 14px; color: rgba(255,255,255,0.8); padding-left: 20px; position: relative; line-height: 1.6;"><span style="position: absolute; left: 0; color: var(--hf-lime); font-size: 16px;">&bull;</span>Organic content resurfaces Cookbook value</li>
           <li style="font-size: 14px; color: rgba(255,255,255,0.8); padding-left: 20px; position: relative; line-height: 1.6;"><span style="position: absolute; left: 0; color: var(--hf-lime); font-size: 16px;">&bull;</span>Paid re-engages lapsed users with deep links</li>
           <li style="font-size: 14px; color: rgba(255,255,255,0.8); padding-left: 20px; position: relative; line-height: 1.6;"><span style="position: absolute; left: 0; color: var(--hf-lime); font-size: 16px;">&bull;</span>ASO custom product pages highlight save functionality</li>
-          <li style="font-size: 14px; color: rgba(255,255,255,0.8); padding-left: 20px; position: relative; line-height: 1.6;"><span style="position: absolute; left: 0; color: var(--hf-lime); font-size: 16px;">&bull;</span>Functionality launches create re-entry moments</li>
           <li style="font-size: 14px; color: rgba(255,255,255,0.8); padding-left: 20px; position: relative; line-height: 1.6;"><span style="position: absolute; left: 0; color: var(--hf-lime); font-size: 16px;">&bull;</span><strong>CRM lifecycle triggers</strong> nudge at key moments &mdash; post-meal selection, post-pause, post-download</li>
         </ul>
       </div>
@@ -793,154 +927,7 @@ section {
   </div>
 </section>
 
-<!-- ===== FUNCTIONALITY COMMS ===== -->
-<section style="background: var(--hf-white); padding: 80px 60px; min-height: auto; border-top: 1px solid rgba(0,0,0,0.06);">
-  <div class="section-inner">
-    <div class="section-tag reveal">Functionality Communications</div>
-    <div class="section-title reveal" style="font-size: 40px;">New functionality drops.<br>Marketing adapts.</div>
-    <div class="section-desc reveal" style="max-width: none;">When a new functionality goes live, we adapt our always-on marketing to support it. Here&rsquo;s how &ldquo;Other Import Options&rdquo; rolls out across Paid Social and Email.</div>
-
-    <!-- Paid Social -->
-    <div class="reveal" style="margin-top: 48px;">
-      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px; align-items: start;">
-
-        <!-- Instagram Feed Ad -->
-        <div>
-          <div style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: var(--hf-green); margin-bottom: 12px;">Instagram Feed Ad</div>
-          <div style="background: #000; border-radius: 16px; overflow: hidden;">
-            <!-- IG header -->
-            <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 12px;">
-              <div style="display: flex; align-items: center; gap: 8px;">
-                <div style="width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); padding: 2px;">
-                  <div style="width: 100%; height: 100%; border-radius: 50%; background: #000; display: flex; align-items: center; justify-content: center;"><span style="font-size: 7px; font-weight: 900; color: white;">HF</span></div>
-                </div>
-                <div>
-                  <div style="font-size: 12px; font-weight: 700; color: white;">hellofresh</div>
-                  <div style="font-size: 10px; color: rgba(255,255,255,0.5);">Sponsored</div>
-                </div>
-              </div>
-              <div style="color: white; font-size: 16px;">&middot;&middot;&middot;</div>
-            </div>
-            <!-- IG image -->
-            <div style="aspect-ratio: 4/5; overflow: hidden;">
-              <img src="images/grandma-clean.png" alt="Instagram Feed Ad" style="width: 100%; height: 100%; object-fit: cover; display: block;">
-            </div>
-            <!-- IG CTA bar -->
-            <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; background: rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.08);">
-              <div style="font-size: 11px; color: rgba(255,255,255,0.6);">hellofresh.com</div>
-              <div style="background: rgba(255,255,255,0.15); padding: 6px 16px; border-radius: 6px; font-size: 11px; font-weight: 700; color: white;">Install Now</div>
-            </div>
-            <!-- IG action icons -->
-            <div style="display: flex; justify-content: space-between; padding: 10px 12px;">
-              <div style="display: flex; gap: 14px;">
-                <span style="font-size: 20px; color: white;">&#9825;</span>
-                <span style="font-size: 20px; color: white;">&#128172;</span>
-                <span style="font-size: 20px; color: white;">&#9993;</span>
-              </div>
-              <span style="font-size: 20px; color: white;">&#9734;</span>
-            </div>
-            <!-- IG caption -->
-            <div style="padding: 0 12px 14px; font-size: 11px; color: rgba(255,255,255,0.6); line-height: 1.6;">
-              <strong style="color: white;">hellofresh</strong> Grandma&rsquo;s handwritten recipe? Scan it. Save it. Cook it step by step in your Cookbook &mdash; preserved forever, exactly as she made it. <span style="color: rgba(255,255,255,0.3);">...more</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- TikTok In-Feed Ad -->
-        <div>
-          <div style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: var(--hf-green); margin-bottom: 12px;">TikTok In-Feed Ad</div>
-          <div style="background: #000; border-radius: 16px; overflow: hidden; position: relative; aspect-ratio: 9/16;">
-            <img src="images/grandma-clean.png" alt="TikTok In-Feed Ad" style="width: 100%; height: 100%; object-fit: cover; display: block;">
-            <!-- TikTok right sidebar -->
-            <div style="position: absolute; right: 10px; bottom: 120px; display: flex; flex-direction: column; align-items: center; gap: 18px;">
-              <div style="display: flex; flex-direction: column; align-items: center;">
-                <div style="width: 36px; height: 36px; border-radius: 50%; background: var(--hf-green); display: flex; align-items: center; justify-content: center; border: 2px solid white;"><span style="font-size: 8px; font-weight: 900; color: white;">HF</span></div>
-                <div style="width: 16px; height: 16px; border-radius: 50%; background: #fe2c55; display: flex; align-items: center; justify-content: center; margin-top: -6px;"><span style="font-size: 12px; color: white; line-height: 1;">+</span></div>
-              </div>
-              <div style="display: flex; flex-direction: column; align-items: center; gap: 2px;">
-                <span style="font-size: 22px; color: white;">&#9825;</span>
-                <span style="font-size: 10px; color: white; font-weight: 600;">4,201</span>
-              </div>
-              <div style="display: flex; flex-direction: column; align-items: center; gap: 2px;">
-                <span style="font-size: 20px; color: white;">&#128172;</span>
-                <span style="font-size: 10px; color: white; font-weight: 600;">89</span>
-              </div>
-              <div style="display: flex; flex-direction: column; align-items: center; gap: 2px;">
-                <span style="font-size: 20px; color: white;">&#9734;</span>
-                <span style="font-size: 10px; color: white; font-weight: 600;">312</span>
-              </div>
-              <div style="display: flex; flex-direction: column; align-items: center; gap: 2px;">
-                <span style="font-size: 20px; color: white;">&#8618;</span>
-                <span style="font-size: 10px; color: white; font-weight: 600;">Share</span>
-              </div>
-            </div>
-            <!-- TikTok bottom content -->
-            <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.7)); padding: 60px 12px 12px;">
-              <div style="background: var(--hf-lime); border-radius: 4px; padding: 8px 0; text-align: center; margin-bottom: 10px;">
-                <span style="font-size: 12px; font-weight: 800; color: var(--hf-dark);">Install App</span>
-              </div>
-              <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 6px;">
-                <span style="font-size: 13px; font-weight: 700; color: white;">@hellofresh</span>
-                <span style="background: rgba(255,255,255,0.2); padding: 1px 6px; border-radius: 3px; font-size: 9px; font-weight: 600; color: white;">Ad</span>
-              </div>
-              <div style="font-size: 12px; color: rgba(255,255,255,0.9); line-height: 1.5; margin-bottom: 10px;">She made it look easy. You never saved the recipe. Now it&rsquo;s in your Cookbook &#127859;</div>
-              <div style="display: flex; align-items: center; gap: 8px;">
-                <span style="font-size: 10px; color: white;">&#9835;</span>
-                <div style="font-size: 10px; color: rgba(255,255,255,0.6); overflow: hidden; white-space: nowrap;">Original sound &mdash; hellofresh</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Email -->
-        <div>
-          <div style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: var(--hf-green); margin-bottom: 12px;">Email</div>
-          <div style="background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.08);">
-            <!-- Email header bar -->
-            <div style="padding: 14px 18px; border-bottom: 1px solid rgba(0,0,0,0.06);">
-              <div style="font-size: 9px; color: var(--hf-muted);">From: HelloFresh &lt;hello@hellofresh.com&gt;</div>
-              <div style="margin-top: 6px; font-size: 14px; font-weight: 900; color: var(--hf-dark);">Your grandmother&rsquo;s recipes, saved forever.</div>
-              <div style="font-size: 10px; color: var(--hf-muted); margin-top: 2px;">New in Cookbook: scan handwritten recipes</div>
-            </div>
-            <!-- Hero image -->
-            <div style="position: relative; overflow: hidden;">
-              <img src="images/grandma-clean.png" alt="Grandma's cooking" style="width: 100%; display: block;">
-              <div style="position: absolute; top: 12px; left: 12px; background: var(--hf-green); padding: 4px 10px; border-radius: 5px;"><span style="font-size: 8px; font-weight: 900; color: white; letter-spacing: 1px;">NEW IN COOKBOOK</span></div>
-            </div>
-            <!-- Email body -->
-            <div style="padding: 24px 20px;">
-              <div style="font-size: 17px; font-weight: 900; color: var(--hf-dark); text-align: center; line-height: 1.3; margin-bottom: 6px;">Scan handwritten recipes.<br>Cook them step by step.</div>
-              <div style="font-size: 11px; color: var(--hf-muted); line-height: 1.7; text-align: center; margin-bottom: 24px;">That recipe on the index card. The one scribbled in the margins of her notebook. Point your camera, and Cookbook saves it forever.</div>
-              <div style="display: flex; flex-direction: column; gap: 16px; margin-bottom: 24px;">
-                <div style="display: flex; gap: 12px; align-items: flex-start;">
-                  <div style="width: 32px; height: 32px; border-radius: 10px; background: rgba(27,138,74,0.08); display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><span style="font-size: 14px;">&#128247;</span></div>
-                  <div><div style="font-size: 12px; font-weight: 800; color: var(--hf-dark);">Point &amp; scan</div><div style="font-size: 10px; color: var(--hf-muted); line-height: 1.5;">Scan any handwritten recipe &mdash; index cards, notebooks, sticky notes.</div></div>
-                </div>
-                <div style="display: flex; gap: 12px; align-items: flex-start;">
-                  <div style="width: 32px; height: 32px; border-radius: 10px; background: rgba(27,138,74,0.08); display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><span style="font-size: 14px;">&#9998;</span></div>
-                  <div><div style="font-size: 12px; font-weight: 800; color: var(--hf-dark);">Instantly converted</div><div style="font-size: 10px; color: var(--hf-muted); line-height: 1.5;">Extracts ingredients and steps into a clean, structured recipe.</div></div>
-                </div>
-                <div style="display: flex; gap: 12px; align-items: flex-start;">
-                  <div style="width: 32px; height: 32px; border-radius: 10px; background: rgba(27,138,74,0.08); display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><span style="font-size: 14px;">&#127859;</span></div>
-                  <div><div style="font-size: 12px; font-weight: 800; color: var(--hf-dark);">Cook with guidance</div><div style="font-size: 10px; color: var(--hf-muted); line-height: 1.5;">Step-by-step instructions, timers, and tips.</div></div>
-                </div>
-              </div>
-              <div style="text-align: center;"><span style="background: var(--hf-lime); color: var(--hf-dark); padding: 12px 28px; border-radius: 24px; font-size: 12px; font-weight: 800; display: inline-block;">Try it now</span></div>
-              <div style="text-align: center; margin-top: 8px; font-size: 9px; color: var(--hf-muted);">Free for everyone. No subscription required.</div>
-            </div>
-            <!-- Email footer -->
-            <div style="padding: 12px 20px; border-top: 1px solid rgba(0,0,0,0.06); text-align: center;">
-              <div style="font-size: 10px; font-weight: 700; color: var(--hf-dark);">HelloFresh</div>
-              <div style="font-size: 9px; color: var(--hf-muted); margin-top: 3px;">Unsubscribe &nbsp;&bull;&nbsp; Manage preferences &nbsp;&bull;&nbsp; Privacy policy</div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-  </div>
-</section>
+<!-- FUNCTIONALITY COMMS REMOVED — saved in memory/cookbook-functionality-comms-backup.md -->
 
 <!-- ===== CHANNELS ===== -->
 <section class="channels-section" id="channels">
@@ -954,12 +941,11 @@ section {
         <div class="channel-emoji">&#128243;</div>
         <div class="channel-name">Organic Social</div>
         <div class="channel-type">Awareness &amp; Engagement</div>
-        <div class="channel-role">Always-on content across TikTok, Instagram, Facebook &mdash; plus Pinterest exploration in April</div>
+        <div class="channel-role">Always-on content across TikTok, Instagram, Facebook</div>
         <ul class="channel-details">
           <li><strong>TikTok:</strong> 10 videos/month, trending audio</li>
           <li><strong>Instagram:</strong> 8 Reels, 6 Carousels, 20 Stories/month</li>
           <li><strong>Facebook:</strong> 8 posts/month, cross-posted top performers</li>
-          <li><strong>Pinterest:</strong> Exploring in April &mdash; recipe Pins, Cookbook save flow, search-driven discovery</li>
         </ul>
       </div>
 
@@ -970,7 +956,7 @@ section {
         <div class="channel-role">App Store Optimisation &amp; Featurings</div>
         <ul class="channel-details">
           <li>Custom product pages launching April &mdash; "recipe saver", "import recipes", "TikTok recipes"</li>
-          <li>3 featurings across the quarter (Featuring #1, #2, #3)</li>
+          <li>3 featuring submissions across the quarter (#1, #2, #3)</li>
           <li>Keyword optimisation for recipe management terms</li>
           <li>Seasonal featuring submissions (summer cooking, meal prep)</li>
           <li>A/B test screenshots, descriptions, preview videos</li>
@@ -1155,6 +1141,365 @@ section {
   </div>
 </section>
 
+<!-- ===== ORGANIC SOCIAL CALENDAR ===== -->
+<section class="osc-section" id="organic-social">
+  <div class="section-inner">
+    <div class="section-tag reveal">Organic Social</div>
+    <div class="section-title reveal" style="font-size: 40px;">Content calendar.<br>Week by week.</div>
+    <div class="section-desc reveal" style="max-width: none;">10 UGC videos dropping in two batches. One video + one static per week from W18. Here&rsquo;s what goes live and when.</div>
+
+    <div class="reveal" style="margin-bottom: 20px;">
+      <a href="https://docs.google.com/presentation/d/1nSbB2ShhpWh_znKr_FTmXI6s3NqD5FlR2pUPng1f7NQ/edit?slide=id.g336fdf21c61_0_390#slide=id.g336fdf21c61_0_390" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 8px; background: var(--hf-dark-green); color: white; padding: 10px 20px; border-radius: 10px; text-decoration: none; font-size: 12px; font-weight: 700; transition: all 0.2s ease;">
+        <span style="font-size: 16px;">&#9654;</span> View Full Creative Brief
+        <span style="font-size: 10px; color: rgba(255,255,255,0.5);">Google Slides</span>
+      </a>
+    </div>
+
+    <div class="osc-milestones reveal">
+      <div class="osc-milestone">
+        <div class="osc-milestone-dot" style="background: var(--hf-lime);"></div>
+        <div>
+          <div class="osc-milestone-text">Batch 1 Delivered</div>
+          <div class="osc-milestone-date">April 30 &mdash; Concepts 1&ndash;3</div>
+        </div>
+      </div>
+      <div class="osc-milestone-arrow">&rarr;</div>
+      <div class="osc-milestone">
+        <div class="osc-milestone-dot" style="background: var(--hf-green);"></div>
+        <div>
+          <div class="osc-milestone-text">Batch 2 Delivered</div>
+          <div class="osc-milestone-date">May 13&ndash;15 &mdash; Concepts 4&ndash;10</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="osc-grid">
+
+      <!-- W17 — Already posted -->
+      <div class="osc-card done reveal stagger-1">
+        <div class="osc-week">W17</div>
+        <div class="osc-dates">Apr 20&ndash;26</div>
+        <div class="osc-static" style="border-style: solid; border-color: var(--hf-green); background: rgba(27,138,74,0.05);">
+          <div class="osc-static-label" style="color: var(--hf-green);">Static Carousel &mdash; 6 slides</div>
+          <div class="osc-static-text" style="color: var(--hf-dark);">Published April 23</div>
+        </div>
+        <button class="osc-preview-toggle" onclick="toggleOscPreview(this)">
+          <span class="osc-toggle-arrow">&#9654;</span> View carousel
+          <div class="osc-preview-thumbs">
+            <img class="osc-preview-thumb" src="images/organic-social/w17/cookbook-carousel-07-B1-hook.png" alt="">
+            <img class="osc-preview-thumb" src="images/organic-social/w17/cookbook-carousel-08-B2-poster.png" alt="">
+            <img class="osc-preview-thumb" src="images/organic-social/w17/cookbook-carousel-09-B3-reel.png" alt="">
+          </div>
+        </button>
+        <div class="osc-preview-panel">
+          <div class="osc-preview-carousel" data-carousel>
+            <img class="active" src="images/organic-social/w17/cookbook-carousel-07-B1-hook.png" alt="Slide 1 — Hook">
+            <img src="images/organic-social/w17/cookbook-carousel-08-B2-poster.png" alt="Slide 2 — Poster">
+            <img src="images/organic-social/w17/cookbook-carousel-09-B3-reel.png" alt="Slide 3 — Reel">
+            <img src="images/organic-social/w17/cookbook-carousel-10-B4-cookbook.png" alt="Slide 4 — Cookbook">
+            <img src="images/organic-social/w17/cookbook-carousel-11-B5-payoff.png" alt="Slide 5 — Payoff">
+            <img src="images/organic-social/w17/cookbook-carousel-12-B6-cta.png" alt="Slide 6 — CTA">
+            <button class="osc-carousel-nav prev" onclick="navOscCarousel(this, -1)">&lsaquo;</button>
+            <button class="osc-carousel-nav next" onclick="navOscCarousel(this, 1)">&rsaquo;</button>
+          </div>
+          <div class="osc-carousel-dots">
+            <button class="osc-carousel-dot active" onclick="goOscSlide(this, 0)"></button>
+            <button class="osc-carousel-dot" onclick="goOscSlide(this, 1)"></button>
+            <button class="osc-carousel-dot" onclick="goOscSlide(this, 2)"></button>
+            <button class="osc-carousel-dot" onclick="goOscSlide(this, 3)"></button>
+            <button class="osc-carousel-dot" onclick="goOscSlide(this, 4)"></button>
+            <button class="osc-carousel-dot" onclick="goOscSlide(this, 5)"></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- W18 — Batch 1 arrives, first video goes live -->
+      <div class="osc-card reveal stagger-2">
+        <div class="osc-week">W18</div>
+        <div class="osc-dates">Apr 27 &ndash; May 3</div>
+        <div class="osc-batch b1">BATCH 1 &mdash; ARRIVES APR 30</div>
+        <div class="osc-video">
+          <div class="osc-video-label">UGC Video</div>
+          <div class="osc-video-title">C1: 3 Viral Recipes</div>
+          <div class="osc-video-hook">3 viral recipes. Worth it?</div>
+          <div class="osc-video-rationale">Creator tests 3 viral recipes using Cookbook, rates each one. Strong opener &mdash; high curiosity, comparison hook.</div>
+        </div>
+        <div class="osc-static" style="border-style: solid; border-color: var(--hf-green); background: rgba(27,138,74,0.05);">
+          <div class="osc-static-label" style="color: var(--hf-green);">Static Carousel &mdash; 2 slides</div>
+          <div class="osc-static-text" style="color: var(--hf-dark);">Proposed for W18</div>
+        </div>
+        <button class="osc-preview-toggle" onclick="toggleOscPreview(this)">
+          <span class="osc-toggle-arrow">&#9654;</span> View carousel
+          <div class="osc-preview-thumbs">
+            <img class="osc-preview-thumb" src="images/organic-social/w18/image_1776956721221878.png" alt="">
+            <img class="osc-preview-thumb" src="images/organic-social/w18/image_1776956955741042.png" alt="">
+          </div>
+        </button>
+        <div class="osc-preview-panel">
+          <div class="osc-preview-carousel" data-carousel>
+            <img class="active" src="images/organic-social/w18/image_1776956721221878.png" alt="Slide 1">
+            <img src="images/organic-social/w18/image_1776956955741042.png" alt="Slide 2">
+            <button class="osc-carousel-nav prev" onclick="navOscCarousel(this, -1)">&lsaquo;</button>
+            <button class="osc-carousel-nav next" onclick="navOscCarousel(this, 1)">&rsaquo;</button>
+          </div>
+          <div class="osc-carousel-dots">
+            <button class="osc-carousel-dot active" onclick="goOscSlide(this, 0)"></button>
+            <button class="osc-carousel-dot" onclick="goOscSlide(this, 1)"></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- W19 -->
+      <div class="osc-card reveal stagger-3">
+        <div class="osc-week">W19</div>
+        <div class="osc-dates">May 4&ndash;10</div>
+        <div class="osc-batch b1">BATCH 1</div>
+        <div class="osc-video">
+          <div class="osc-video-label">UGC Video</div>
+          <div class="osc-video-title">C2: Saved vs. Made</div>
+          <div class="osc-video-hook">How many recipes have you saved&hellip; and never actually made?</div>
+          <div class="osc-video-rationale">Creator confronts their saved-but-never-cooked folder. Cookbook turns saves into real meals.</div>
+        </div>
+        <div class="osc-static">
+          <div class="osc-static-label">Static</div>
+          <div class="osc-static-text">TBD</div>
+        </div>
+      </div>
+
+      <!-- W20 -->
+      <div class="osc-card reveal stagger-1">
+        <div class="osc-week">W20</div>
+        <div class="osc-dates">May 11&ndash;17</div>
+        <div class="osc-batch b1">BATCH 1</div>
+        <div class="osc-video">
+          <div class="osc-video-label">UGC Video</div>
+          <div class="osc-video-title">C3: No More Excuses</div>
+          <div class="osc-video-hook">I had this recipe saved for&hellip; I don&rsquo;t even know. Weeks?</div>
+          <div class="osc-video-rationale">Creator finally makes a recipe they&rsquo;ve been putting off. Cookbook removes the barriers. Closes out Batch 1.</div>
+        </div>
+        <div class="osc-static">
+          <div class="osc-static-label">Static</div>
+          <div class="osc-static-text">TBD</div>
+        </div>
+      </div>
+
+      <!-- W21 — Batch 2 arrives mid-week -->
+      <div class="osc-card reveal stagger-2">
+        <div class="osc-week">W21</div>
+        <div class="osc-dates">May 18&ndash;24</div>
+        <div class="osc-batch b2">BATCH 2 &mdash; ARRIVES MAY 13&ndash;15</div>
+        <div class="osc-video">
+          <div class="osc-video-label">UGC Video</div>
+          <div class="osc-video-title">C4: How Long Has This Been a Thing?</div>
+          <div class="osc-video-hook">Wait&mdash;what?? Since when does HelloFresh have this??</div>
+          <div class="osc-video-rationale">Creator discovers Cookbook, shocked it exists. Shows it turning any recipe video into steps. Re-energises the series.</div>
+        </div>
+        <div class="osc-static">
+          <div class="osc-static-label">Static</div>
+          <div class="osc-static-text">TBD</div>
+        </div>
+      </div>
+
+      <!-- W22 -->
+      <div class="osc-card reveal stagger-3">
+        <div class="osc-week">W22</div>
+        <div class="osc-dates">May 25&ndash;31</div>
+        <div class="osc-batch b2">BATCH 2</div>
+        <div class="osc-video">
+          <div class="osc-video-label">UGC Video</div>
+          <div class="osc-video-title">C5: Graveyard Scroll</div>
+          <div class="osc-video-hook">How many recipes do I have saved?</div>
+          <div class="osc-video-rationale">Creator scrolls through their massive saved folder, picks one, sends to Cookbook, actually cooks it. High shareability.</div>
+        </div>
+        <div class="osc-static">
+          <div class="osc-static-label">Static</div>
+          <div class="osc-static-text">TBD</div>
+        </div>
+      </div>
+
+      <!-- W23 -->
+      <div class="osc-card reveal stagger-1">
+        <div class="osc-week">W23</div>
+        <div class="osc-dates">Jun 1&ndash;7</div>
+        <div class="osc-batch b2">BATCH 2</div>
+        <div class="osc-video">
+          <div class="osc-video-label">UGC Video</div>
+          <div class="osc-video-title">C6: Transformation Reveal</div>
+          <div class="osc-video-hook">That recipe I&rsquo;ve been afraid to make</div>
+          <div class="osc-video-rationale">Creator tackles a recipe they&rsquo;ve been intimidated by. Cookbook walks them through it. Nails it first try. Strong mid-calendar moment.</div>
+        </div>
+        <div class="osc-static">
+          <div class="osc-static-label">Static</div>
+          <div class="osc-static-text">TBD</div>
+        </div>
+      </div>
+
+      <!-- W24 -->
+      <div class="osc-card reveal stagger-2">
+        <div class="osc-week">W24</div>
+        <div class="osc-dates">Jun 8&ndash;14</div>
+        <div class="osc-batch b2">BATCH 2</div>
+        <div class="osc-video">
+          <div class="osc-video-label">UGC Video</div>
+          <div class="osc-video-title">C7: Restaurant Recreation</div>
+          <div class="osc-video-hook">Restaurant copycat challenge</div>
+          <div class="osc-video-rationale">Creator tries to recreate a favourite restaurant dish at home using Cookbook&rsquo;s step-by-step instructions. Aspirational tone shift.</div>
+        </div>
+        <div class="osc-static">
+          <div class="osc-static-label">Static</div>
+          <div class="osc-static-text">TBD</div>
+        </div>
+      </div>
+
+      <!-- W25 -->
+      <div class="osc-card reveal stagger-3">
+        <div class="osc-week">W25</div>
+        <div class="osc-dates">Jun 15&ndash;21</div>
+        <div class="osc-batch b2">BATCH 2</div>
+        <div class="osc-video">
+          <div class="osc-video-label">UGC Video</div>
+          <div class="osc-video-title">C8: Duet</div>
+          <div class="osc-video-hook">Trying to follow viral recipes like&hellip;</div>
+          <div class="osc-video-rationale">Split screen &mdash; chaotic viral recipe video on one side vs calm Cookbook steps on the other. Native social format.</div>
+        </div>
+        <div class="osc-static">
+          <div class="osc-static-label">Static</div>
+          <div class="osc-static-text">TBD</div>
+        </div>
+      </div>
+
+      <!-- W26 -->
+      <div class="osc-card reveal stagger-1">
+        <div class="osc-week">W26</div>
+        <div class="osc-dates">Jun 22&ndash;28</div>
+        <div class="osc-batch b2">BATCH 2</div>
+        <div class="osc-video">
+          <div class="osc-video-label">UGC Video</div>
+          <div class="osc-video-title">C9: Split Screen</div>
+          <div class="osc-video-hook">Expectation vs. Reality</div>
+          <div class="osc-video-rationale">Left: clean cooking footage. Right: messy reality. Cookbook bridges the gap. Comparison format keeps variety going.</div>
+        </div>
+        <div class="osc-static">
+          <div class="osc-static-label">Static</div>
+          <div class="osc-static-text">TBD</div>
+        </div>
+      </div>
+
+      <!-- W27 -->
+      <div class="osc-card reveal stagger-2">
+        <div class="osc-week">W27</div>
+        <div class="osc-dates">Jun 29 &ndash; Jul 5</div>
+        <div class="osc-batch b2">BATCH 2</div>
+        <div class="osc-video">
+          <div class="osc-video-label">UGC Video</div>
+          <div class="osc-video-title">C10: Family Reaction</div>
+          <div class="osc-video-hook">I&rsquo;ve been terrified to mess up my Grandma&rsquo;s signature dish&hellip; until now</div>
+          <div class="osc-video-rationale">Creator scans grandma&rsquo;s handwritten recipe card, Cookbook turns it into step-by-step. Family member tastes it, emotional reaction. Powerful closer.</div>
+        </div>
+        <div class="osc-static">
+          <div class="osc-static-label">Static</div>
+          <div class="osc-static-text">TBD</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Summary stats -->
+    <div class="osc-summary reveal">
+      <div class="osc-summary-card">
+        <div class="osc-summary-num">10</div>
+        <div class="osc-summary-label">UGC Videos</div>
+      </div>
+      <div class="osc-summary-card">
+        <div class="osc-summary-num">11</div>
+        <div class="osc-summary-label">Weeks of Content</div>
+      </div>
+      <div class="osc-summary-card">
+        <div class="osc-summary-num">~21</div>
+        <div class="osc-summary-label">Total Posts (Video + Static)</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ===== CREATOR PLATFORM ===== -->
+<section class="creator-section" id="creator-platform">
+  <div class="section-inner">
+    <div class="section-tag reveal">Creator Platform</div>
+    <div class="section-title reveal">Trusted voices.<br>Real recipes.</div>
+
+    <div class="creator-split">
+      <!-- Left: story + flow + categories + roster -->
+      <div class="creator-left">
+        <div class="section-desc reveal">
+          The Efficient Inspired already watches food creators for weeknight inspiration.
+          This partnership puts the full recipe &mdash; step-by-step, saveable, cookable &mdash; inside
+          our app. We&rsquo;re not interrupting the content journey. We&rsquo;re completing it.
+        </div>
+
+        <!-- Flow pipeline -->
+        <div class="creator-flow reveal stagger-1">
+          <div class="creator-flow-step"><span class="cfs-icon">&#127909;</span> Creator posts</div>
+          <div class="creator-flow-arrow">&rarr;</div>
+          <div class="creator-flow-step"><span class="cfs-icon">&#128241;</span> Audience opens app</div>
+          <div class="creator-flow-arrow">&rarr;</div>
+          <div class="creator-flow-step"><span class="cfs-icon">&#128278;</span> Saves recipe</div>
+          <div class="creator-flow-arrow">&rarr;</div>
+          <div class="creator-flow-step"><span class="cfs-icon">&#129370;</span> Cooks &amp; returns</div>
+        </div>
+
+        <!-- Compact category cards -->
+        <div class="creator-categories reveal stagger-2">
+          <div class="creator-cat">
+            <h4>The Weeknight Problem-Solver</h4>
+            <span>Micro &amp; mid-tier &middot; Quick, practical, family-tested</span>
+          </div>
+          <div class="creator-cat">
+            <h4>The Cultural Food Storyteller</h4>
+            <span>Micro &amp; mid-tier &middot; Rich, flavourful, story-driven</span>
+          </div>
+        </div>
+
+        <!-- Creator handles with avatars -->
+        <div style="font-size: 10px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--hf-green); margin-bottom: 10px;" class="reveal stagger-3">Target Creators</div>
+        <div class="creator-roster reveal stagger-3">
+          <a class="creator-handle" href="https://www.instagram.com/emily.eggers/" target="_blank" rel="noopener">
+            <div class="ch-avatar"><img src="images/creators/emily-eggers.jpg" alt="" onerror="this.style.display='none';this.parentNode.textContent='EE'"></div>
+            @emily.eggers
+          </a>
+          <a class="creator-handle" href="https://www.instagram.com/carlys_cookbook/" target="_blank" rel="noopener">
+            <div class="ch-avatar"><img src="images/creators/carlys-cookbook.jpg" alt="" onerror="this.style.display='none';this.parentNode.textContent='CC'"></div>
+            @carlys_cookbook
+          </a>
+          <a class="creator-handle" href="https://www.instagram.com/createaplatewithdina/" target="_blank" rel="noopener">
+            <div class="ch-avatar"><img src="images/creators/createaplatewithdina.jpg" alt="" onerror="this.style.display='none';this.parentNode.textContent='CD'"></div>
+            @createaplatewithdina
+          </a>
+          <a class="creator-handle" href="https://www.instagram.com/spoonfulofsi/" target="_blank" rel="noopener">
+            <div class="ch-avatar"><img src="images/creators/spoonfulofsi.jpg" alt="" onerror="this.style.display='none';this.parentNode.textContent='SS'"></div>
+            @spoonfulofsi
+          </a>
+          <a class="creator-handle" href="https://www.instagram.com/_nutritionwithnat/" target="_blank" rel="noopener">
+            <div class="ch-avatar"><img src="images/creators/nutritionwithnat.jpg" alt="" onerror="this.style.display='none';this.parentNode.textContent='NN'"></div>
+            @_nutritionwithnat
+          </a>
+        </div>
+      </div>
+
+      <!-- Right: phone mockup -->
+      <div class="creator-right reveal-right stagger-2">
+        <div class="creator-phone">
+          <img src="images/creator-platform-preview.png" alt="Creator profile page in Cookbook app">
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
 <!-- ===== VALIDATION ROADMAP ===== -->
 <section class="validation-section" id="validation">
   <div class="section-inner">
@@ -1170,7 +1515,6 @@ section {
           <div class="vr-pill">Motivations</div>
           <div class="vr-pill">Value Proposition</div>
           <div class="vr-pill">Channel Fit</div>
-          <div class="vr-pill">Functionality Messaging</div>
           <div class="vr-pill">Content Formats</div>
           <div class="vr-pill">Concept Resonance</div>
           <div class="vr-pill">CRM Trigger Baseline</div>
@@ -1179,14 +1523,12 @@ section {
           <div class="vr-pill">Channel Strategy</div>
           <div class="vr-pill">Format Synergies</div>
           <div class="vr-pill">Audience Insight</div>
-          <div class="vr-pill">Functionality Adoption</div>
           <div class="vr-pill">Conversion Paths</div>
           <div class="vr-pill">CRM Trigger Optimisation</div>
         </div>
         <div class="vr-col" style="padding: 10px 14px;">
           <div class="vr-pill">Paid Social Validation</div>
           <div class="vr-pill">Scale Efficiency</div>
-          <div class="vr-pill">Functionality Launch Framework</div>
           <div class="vr-pill">Playbook Delivery</div>
         </div>
       </div>
@@ -1207,7 +1549,6 @@ section {
         <div class="vr-col" style="padding: 10px 14px;">
           <div class="vr-pill kpi">Concept weighting score</div>
           <div class="vr-pill kpi">Format performance rank</div>
-          <div class="vr-pill kpi">Feature adoption rate</div>
           <div class="vr-pill kpi">Saves + shares</div>
           <div class="vr-pill kpi">Content save rate</div>
         </div>
@@ -1239,22 +1580,13 @@ section {
             <p>3 concepts deployed equally across TikTok, IG, FB. ~10 organic posts. Equal weight per concept. Establish baseline metrics per concept per channel.</p>
           </div>
           <div class="vr-method-card">
-            <h4>Functionality Launch Comms</h4>
-            <div class="vr-method-type">Collections + Influencer Profiles</div>
-            <p>Dedicated launch communications for each functionality release. Test which messaging drives downloads and first saves.</p>
-          </div>
-          <div class="vr-method-card">
             <h4>ASO Foundation</h4>
-            <div class="vr-method-type">Featuring #1 + CPP Launch</div>
-            <p>First featuring live. Launch first custom product pages. A/B test screenshots, keyword research. Capture high-intent search traffic.</p>
+            <div class="vr-method-type">Submit Featuring #1 + CPP Launch</div>
+            <p>Submit first featuring proposal. Launch first custom product pages. A/B test screenshots, keyword research. Capture high-intent search traffic.</p>
           </div>
           <div class="vr-method-card" style="">
             <h4>CRM Lifecycle Launch</h4>
             <div class="vr-method-type" style="">Trigger-Based Push + Email</div>
-          </div>
-          <div class="vr-method-card" style="">
-            <h4>Pinterest Exploration</h4>
-            <div class="vr-method-type" style="">New Channel Test</div>
           </div>
         </div>
         <div class="vr-col">
@@ -1264,22 +1596,12 @@ section {
             <p>Identify winning concept + channel + format combos from April data. Shift organic weighting toward top performers. Build paid social brief from organic learnings.</p>
           </div>
           <div class="vr-method-card">
-            <h4>Functionality Launch Comms</h4>
-            <div class="vr-method-type">Cooking Journal + Import Options Teaser</div>
-            <p>Apply April learnings to functionality messaging. Cooking Journal full launch, Other Import Options teaser to build anticipation.</p>
-          </div>
-          <div class="vr-method-card">
             <h4>ASO Refinement</h4>
-            <div class="vr-method-type">Featuring #2 + CPP Updates + Keywords</div>
-            <p>Apply screenshot A/B results. Updated custom product pages. Featuring #2 live. Optimise keywords based on search performance.</p>
+            <div class="vr-method-type">Submit Featuring #2 + CPP Updates + Keywords</div>
           </div>
           <div class="vr-method-card" style="">
             <h4>CRM Trigger Optimisation</h4>
             <div class="vr-method-type" style="">Performance Analysis</div>
-          </div>
-          <div class="vr-method-card" style="">
-            <h4>Pinterest Decision Gate</h4>
-            <div class="vr-method-type" style="">Scale or Deprioritise</div>
           </div>
         </div>
         <div class="vr-col">
@@ -1292,11 +1614,6 @@ section {
             <h4>Scale Organic Winners</h4>
             <div class="vr-method-type">Top Concepts + Formats</div>
             <p>Only proven concept + channel combos continue at scale. Organic runs winners only. Paid amplifies best-performing creatives.</p>
-          </div>
-          <div class="vr-method-card">
-            <h4>Other Import Options Full Launch</h4>
-            <div class="vr-method-type">Capstone Functionality</div>
-            <p>Biggest functionality release of Q2. Full cross-channel launch using all validated messaging and formats from prior months.</p>
           </div>
           <div class="vr-method-card">
             <h4>Playbook Assembly</h4>
@@ -1372,17 +1689,17 @@ section {
       <div class="vd-category">
         <div class="vd-cat-label aso">ASO</div>
         <div class="vd-cell">
-          <div class="vd-pill forest">Featuring #1</div>
+          <div class="vd-pill forest">Submit Featuring #1</div>
           <div class="vd-pill forest">Custom Product Pages Launch</div>
           <div class="vd-pill forest">Screenshot A/B Tests</div>
         </div>
         <div class="vd-cell">
-          <div class="vd-pill forest">Featuring #2</div>
+          <div class="vd-pill forest">Submit Featuring #2</div>
           <div class="vd-pill forest">Updated Custom Product Pages</div>
           <div class="vd-pill forest">Keyword Optimisation</div>
         </div>
         <div class="vd-cell">
-          <div class="vd-pill forest">Featuring #3</div>
+          <div class="vd-pill forest">Submit Featuring #3</div>
           <div class="vd-pill forest">Updated Custom Product Pages</div>
           <div class="vd-pill forest">ASO Playbook Data</div>
           <div class="vd-pill forest">Conversion Benchmarks</div>
@@ -1405,39 +1722,6 @@ section {
         </div>
       </div>
 
-      <!-- PINTEREST -->
-      <div class="vd-category">
-        <div class="vd-cat-label" style="color: var(--hf-moss);">Pinterest</div>
-        <div class="vd-cell">
-          <div class="vd-pill" style="background: var(--hf-moss); color: white;">Exploration</div>
-        </div>
-        <div class="vd-cell">
-          <div class="vd-pill outline">Dependent on decision from April</div>
-        </div>
-        <div class="vd-cell">
-          <div class="vd-pill outline">Dependent on decision from April</div>
-        </div>
-      </div>
-
-      <!-- FEATURE COMMS -->
-      <div class="vd-category">
-        <div class="vd-cat-label feature">Functionality Comms</div>
-        <div class="vd-cell">
-          <div class="vd-pill purple">Collections Launch</div>
-          <div class="vd-pill purple">Influencer Profiles Launch</div>
-          <div class="vd-pill purple">Functionality Creative (20 posts)</div>
-        </div>
-        <div class="vd-cell">
-          <div class="vd-pill purple">Cooking Journal Launch</div>
-          <div class="vd-pill purple">Other Import Options Teaser</div>
-          <div class="vd-pill purple">Feature Sentiment Report</div>
-        </div>
-        <div class="vd-cell">
-          <div class="vd-pill purple">Other Import Options Full Launch</div>
-          <div class="vd-pill purple">Functionality Launch Template</div>
-          <div class="vd-pill purple">Activation Benchmarks</div>
-        </div>
-      </div>
     </div>
   </div>
 </section>
@@ -1477,11 +1761,6 @@ section {
         <div class="cal-row-label">Organic Social<br><small style="opacity:0.5">TikTok + IG + FB</small></div>
         <div class="cal-cell" style="grid-column: span 13;"><div class="cal-bar always-on" style="width:100%">Always-On &mdash; 3 Concepts (equal weight Apr, data-driven May&ndash;Jun)</div></div>
 
-        <!-- Pinterest Exploration -->
-        <div class="cal-row-label">Pinterest<br><small style="opacity:0.5">Exploring</small></div>
-        <div class="cal-cell" style="grid-column: span 4;"><div class="cal-bar" style="background: rgba(200,240,101,0.12); color: var(--hf-lime); border: 1.5px dashed var(--hf-lime);">April Exploration &mdash; Recipe Pins + Save Flow Test</div></div>
-        <div class="cal-cell" style="grid-column: span 9;"><div class="cal-bar" style="background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.25); border: 1px dashed rgba(255,255,255,0.1); font-size: 9px;">Decision: scale or deprioritise based on April data</div></div>
-
         <!-- Paid Social -->
         <div class="cal-row-label">Paid Social<br><small style="opacity:0.5">Spark + Meta Ads</small></div>
         <div class="cal-cell" style="grid-column: span 9;"><div class="cal-bar" style="background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.25); border: 1px dashed rgba(255,255,255,0.15);">Organic learnings phase &mdash; building paid brief</div></div>
@@ -1493,37 +1772,9 @@ section {
 
         <!-- ASO -->
         <div class="cal-row-label">ASO</div>
-        <div class="cal-cell" style="grid-column: span 4;"><div class="cal-bar aso">Featuring #1 + CPP Launch + A/B Tests</div></div>
-        <div class="cal-cell" style="grid-column: span 5;"><div class="cal-bar aso">Featuring #2 + CPP Updates + Keywords</div></div>
-        <div class="cal-cell" style="grid-column: span 4;"><div class="cal-bar aso">Featuring #3 + CPP Updates + Scale</div></div>
-
-        <!-- Feature Releases separator -->
-        <div class="cal-row-label" style="grid-column: 1 / -1; padding: 12px 0 4px; border-top: 1px dashed rgba(255,255,255,0.15); margin-top: 4px;">
-          <span style="font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: var(--hf-lime); background: rgba(200,240,101,0.1); padding: 4px 12px; border-radius: 4px;">&#9670; Feature Improvement Communications</span>
-        </div>
-
-        <!-- Functionality: Collections (Apr) -->
-        <div class="cal-row-label" style="font-size: 10px;">Collections</div>
-        <div class="cal-cell" style="grid-column: span 2;"><div class="cal-bar feature" style="background: transparent; border: 1.5px solid var(--hf-lime); color: var(--hf-lime);">&#9670; Launch Communication</div></div>
-        <div class="cal-cell" style="grid-column: span 11;"></div>
-
-        <!-- Functionality: Influencer Profiles (Apr) -->
-        <div class="cal-row-label" style="font-size: 10px;">Influencer Profiles</div>
-        <div class="cal-cell" style="grid-column: span 2;"></div>
-        <div class="cal-cell" style="grid-column: span 2;"><div class="cal-bar feature" style="background: transparent; border: 1.5px solid var(--hf-lime); color: var(--hf-lime);">&#9670; Launch Communication</div></div>
-        <div class="cal-cell" style="grid-column: span 9;"></div>
-
-        <!-- Functionality: Cooking Journal (May) -->
-        <div class="cal-row-label" style="font-size: 10px;">Cooking Journal</div>
-        <div class="cal-cell" style="grid-column: span 4;"></div>
-        <div class="cal-cell" style="grid-column: span 2;"><div class="cal-bar feature" style="background: transparent; border: 1.5px solid var(--hf-lime); color: var(--hf-lime);">&#9670; Launch Communication</div></div>
-        <div class="cal-cell" style="grid-column: span 7;"></div>
-
-        <!-- Functionality: Other Import Options (May–Jun) -->
-        <div class="cal-row-label" style="font-size: 10px;">Other Import Options</div>
-        <div class="cal-cell" style="grid-column: span 7;"></div>
-        <div class="cal-cell" style="grid-column: span 2;"><div class="cal-bar feature" style="background: transparent; border: 1.5px dashed var(--hf-lime); color: var(--hf-lime); font-size: 8px;">&#9670; Teaser</div></div>
-        <div class="cal-cell" style="grid-column: span 4;"><div class="cal-bar feature" style="background: transparent; border: 1.5px solid var(--hf-lime); color: var(--hf-lime);">&#9670; Launch Communication</div></div>
+        <div class="cal-cell" style="grid-column: span 4;"><div class="cal-bar aso">Submit Featuring #1 + CPP Launch + A/B Tests</div></div>
+        <div class="cal-cell" style="grid-column: span 5;"><div class="cal-bar aso">Submit Featuring #2 + CPP Updates + Keywords</div></div>
+        <div class="cal-cell" style="grid-column: span 4;"><div class="cal-bar aso">Submit Featuring #3 + CPP Updates + Scale</div></div>
 
         <!-- Measurement -->
         <div class="cal-row-label">Retros &amp; Decisions</div>
@@ -1541,7 +1792,6 @@ section {
       <div class="cal-legend-item"><div class="cal-legend-dot" style="background: var(--hf-honey);"></div> Paid Social</div>
       <div class="cal-legend-item"><div class="cal-legend-dot" style="background: var(--hf-forest);"></div> ASO</div>
       <div class="cal-legend-item"><div class="cal-legend-dot" style="background: var(--hf-sage);"></div> CRM / Lifecycle</div>
-      <div class="cal-legend-item"><div class="cal-legend-dot" style="background: var(--hf-lime);"></div> Feature Campaigns</div>
     </div>
   </div>
 </section>
@@ -1588,45 +1838,13 @@ section {
   </div>
 </section>
 
-<!-- ===== OPEN QUESTIONS ===== -->
-<section style="background: var(--hf-cream); padding: 80px 60px; min-height: auto;">
-  <div class="section-inner">
-    <div class="section-tag reveal">Open Questions</div>
-    <div class="section-title reveal" style="font-size: 40px;">What we need to solve.</div>
-    <div class="section-desc reveal" style="max-width: none;">These are the blockers and risks we need to address to deliver this campaign successfully.</div>
-
-    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 48px;">
-      <div class="reveal stagger-1" style="background: white; border-radius: 20px; padding: 36px; border-left: 4px solid var(--hf-green);">
-        <div style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: var(--hf-green); margin-bottom: 12px;">Organic Social Deployment</div>
-        <h4 style="font-size: 18px; font-weight: 900; margin-bottom: 10px;">How do we deploy the same content across multiple markets and languages?</h4>
-        <p style="font-size: 14px; color: var(--hf-muted); line-height: 1.7;">Organic social channels are currently managed locally per market. We need a unified deployment model that ensures the same content, messaging, and timing is delivered consistently across all markets and languages.</p>
-      </div>
-      <div class="reveal stagger-2" style="background: white; border-radius: 20px; padding: 36px; border-left: 4px solid var(--hf-honey);">
-        <div style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: var(--hf-honey); margin-bottom: 12px;">Creative Capacity</div>
-        <h4 style="font-size: 18px; font-weight: 900; margin-bottom: 10px;">Can we produce enough content for this plan?</h4>
-        <p style="font-size: 14px; color: var(--hf-muted); line-height: 1.7;">The campaign is ambitious. We need to confirm creative resources, production timelines, and whether we need external support to deliver at the volume required.</p>
-      </div>
-      <div class="reveal stagger-3" style="background: white; border-radius: 20px; padding: 36px; border-left: 4px solid var(--hf-forest);">
-        <div style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: var(--hf-forest); margin-bottom: 12px;">Paid Social Resourcing</div>
-        <h4 style="font-size: 18px; font-weight: 900; margin-bottom: 10px;">How do we secure paid social resources?</h4>
-        <p style="font-size: 14px; color: var(--hf-muted); line-height: 1.7;">We need dedicated paid social support to run, optimise, and scale campaigns across Meta and TikTok. Resourcing and ownership needs to be confirmed.</p>
-      </div>
-      <div class="reveal stagger-4" style="background: white; border-radius: 20px; padding: 36px; border-left: 4px solid #7C6BC4;">
-        <div style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: #7C6BC4; margin-bottom: 12px;">Visibility</div>
-        <h4 style="font-size: 18px; font-weight: 900; margin-bottom: 10px;">How do we maintain visibility across all channels?</h4>
-        <p style="font-size: 14px; color: var(--hf-muted); line-height: 1.7;">With activity running across organic, paid, ASO, and CRM simultaneously, we need a reporting framework that gives us real-time visibility into performance across every channel.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ===== FOOTER ===== -->
 <section class="footer-section">
   <div class="footer-inner">
     <h2>Time to take back<br><span>dinnertime.</span></h2>
     <div class="footer-details">
       <strong>April &ndash; June 2026</strong> &nbsp;&bull;&nbsp; ~290 content pieces + CRM lifecycle touchpoints &nbsp;&bull;&nbsp; Social + Paid + ASO + CRM<br>
-      3 concepts &nbsp;&bull;&nbsp; 4 features &nbsp;&bull;&nbsp; 3 push triggers + onboarding email + merch banner<br><br>
+      3 concepts &nbsp;&bull;&nbsp; 3 push triggers + onboarding email + merch banner<br><br>
       Playbook + Data dashboard + Creative asset library &nbsp;&bull;&nbsp; Delivered end of June 2026
     </div>
   </div>
@@ -1729,6 +1947,36 @@ document.addEventListener('keydown', e => {
 
 window.addEventListener('scroll', () => { updateProgress(); updateNav(); updateActiveNav(); revealOnScroll(); updateTimeline(); }, { passive: true });
 revealOnScroll();
+
+/* Organic Social — Expandable Preview */
+function toggleOscPreview(btn) {
+  btn.classList.toggle('open');
+  const panel = btn.nextElementSibling;
+  panel.classList.toggle('open');
+}
+
+function navOscCarousel(navBtn, dir) {
+  event.stopPropagation();
+  const carousel = navBtn.closest('[data-carousel]');
+  const imgs = carousel.querySelectorAll('img');
+  const dots = carousel.parentElement.querySelector('.osc-carousel-dots');
+  let idx = Array.from(imgs).findIndex(i => i.classList.contains('active'));
+  imgs[idx].classList.remove('active');
+  idx = (idx + dir + imgs.length) % imgs.length;
+  imgs[idx].classList.add('active');
+  if (dots) {
+    dots.querySelectorAll('.osc-carousel-dot').forEach((d, i) => d.classList.toggle('active', i === idx));
+  }
+}
+
+function goOscSlide(dotBtn, idx) {
+  const dotsContainer = dotBtn.parentElement;
+  const panel = dotsContainer.parentElement;
+  const carousel = panel.querySelector('[data-carousel]');
+  const imgs = carousel.querySelectorAll('img');
+  imgs.forEach((img, i) => img.classList.toggle('active', i === idx));
+  dotsContainer.querySelectorAll('.osc-carousel-dot').forEach((d, i) => d.classList.toggle('active', i === idx));
+}
 </script>
 
 <script src="../auth.js"></script>
