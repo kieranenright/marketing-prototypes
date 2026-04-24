@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How PMM Uses AI Tools</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+  --hf-green: #1B8A4A;
+  --hf-dark-green: #0B5C30;
+  --hf-lime: #C8F065;
+  --hf-cream: #FFFFFF;
+  --hf-white: #FFFFFF;
+  --hf-dark: #1A1A1A;
+  --hf-muted: #6B6B6B;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #FFFFFF;
+  color: var(--hf-dark);
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+}
+
+/* ── SLIDE CONTAINER ── */
+.slide {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  padding: 40px 56px 32px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Background decoration */
+.slide::before {
+  content: '';
+  position: absolute;
+  top: -300px;
+  right: -300px;
+  width: 900px;
+  height: 900px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(27,138,74,0.04) 0%, transparent 60%);
+  pointer-events: none;
+}
+.slide::after {
+  content: '';
+  position: absolute;
+  bottom: -200px;
+  left: -200px;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(200,240,101,0.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* ── HEADER ── */
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 28px;
+  z-index: 1;
+}
+
+.header-left { max-width: 65%; }
+
+.topic-badge {
+  display: inline-block;
+  background: rgba(27,138,74,0.1);
+  color: var(--hf-green);
+  padding: 6px 18px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.slide-title {
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 900;
+  letter-spacing: -2px;
+  line-height: 1.0;
+  margin-bottom: 8px;
+}
+.slide-title span { color: var(--hf-green); }
+
+.slide-subtitle {
+  font-size: clamp(14px, 1.5vw, 17px);
+  color: var(--hf-muted);
+  font-weight: 400;
+  line-height: 1.5;
+  max-width: 560px;
+}
+
+.header-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  padding-top: 8px;
+}
+.presenter-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--hf-dark);
+}
+.presenter-role {
+  font-size: 12px;
+  color: var(--hf-muted);
+  font-weight: 500;
+}
+
+/* ── MAIN CONTENT ── */
+.content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 36px;
+  z-index: 1;
+  align-items: stretch;
+  flex: 1;
+}
+
+/* ── LEFT: WORKFLOW ── */
+.workflow {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.workflow-step {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 0;
+  position: relative;
+}
+
+.step-track {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.step-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+}
+
+.step-line {
+  width: 2px;
+  flex: 1;
+  min-height: 16px;
+}
+
+.step-1 .step-icon { background: linear-gradient(135deg, #1A1A1A, #333); }
+.step-1 .step-line { background: linear-gradient(to bottom, #333, var(--hf-green)); }
+
+.step-2 .step-icon { background: linear-gradient(135deg, var(--hf-green), var(--hf-dark-green)); }
+.step-2 .step-line { background: linear-gradient(to bottom, var(--hf-green), #4285F4); }
+
+.step-3 .step-icon { background: linear-gradient(135deg, #4285F4, #1A73E8); }
+.step-3 .step-line { background: linear-gradient(to bottom, #4285F4, var(--hf-green)); }
+
+.step-4 .step-icon { background: linear-gradient(135deg, var(--hf-green), var(--hf-dark-green)); }
+.step-4 .step-line { display: none; }
+
+.step-body {
+  padding: 4px 0 20px 16px;
+}
+
+.step-label {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--hf-muted);
+  margin-bottom: 3px;
+}
+
+.step-title {
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  margin-bottom: 4px;
+  line-height: 1.2;
+}
+
+.step-desc {
+  font-size: 12.5px;
+  color: var(--hf-muted);
+  line-height: 1.5;
+}
+
+.step-tool {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 6px;
+  padding: 3px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.tool-claude { background: rgba(27,138,74,0.08); color: var(--hf-green); }
+.tool-gemini { background: rgba(66,133,244,0.08); color: #4285F4; }
+.tool-github { background: rgba(26,26,26,0.06); color: var(--hf-dark); }
+
+/* Step animations removed for static render */
+
+/* ── RIGHT: PROTOTYPE SHOWCASE ── */
+.showcase {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 100%;
+  justify-content: space-between;
+}
+
+.browser-frame {
+  background: var(--hf-white);
+  border-radius: 16px;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.04);
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,0.06);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.browser-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: #FAFAFA;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+.browser-dots {
+  display: flex;
+  gap: 6px;
+}
+.browser-dots span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.browser-dots span:nth-child(1) { background: #FF5F57; }
+.browser-dots span:nth-child(2) { background: #FEBC2E; }
+.browser-dots span:nth-child(3) { background: #28C840; }
+
+.browser-url {
+  flex: 1;
+  background: var(--hf-white);
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 6px;
+  padding: 5px 12px;
+  font-size: 11px;
+  color: var(--hf-muted);
+  font-family: 'Inter', monospace;
+}
+
+.browser-content {
+  flex: 1;
+  background: linear-gradient(160deg, var(--hf-green) 0%, var(--hf-dark-green) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.browser-content::before {
+  content: '';
+  position: absolute;
+  top: -100px;
+  right: -100px;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(200,240,101,0.12) 0%, transparent 60%);
+}
+
+.proto-text {
+  text-align: center;
+  z-index: 1;
+}
+.proto-badge {
+  display: inline-block;
+  background: rgba(200,240,101,0.15);
+  color: var(--hf-lime);
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.proto-title {
+  font-size: 28px;
+  font-weight: 900;
+  color: white;
+  letter-spacing: -1.5px;
+  line-height: 1.0;
+  margin-bottom: 6px;
+}
+.proto-title em {
+  color: var(--hf-lime);
+  font-style: normal;
+}
+.proto-sub {
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+  font-weight: 400;
+}
+
+/* Stats bar */
+.stats-bar {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.stat-card {
+  background: var(--hf-white);
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  border: 1px solid rgba(0,0,0,0.08);
+}
+
+.stat-number {
+  font-size: 26px;
+  font-weight: 900;
+  color: var(--hf-green);
+  letter-spacing: -1px;
+  line-height: 1;
+  margin-bottom: 3px;
+}
+
+.stat-label {
+  font-size: 10px;
+  color: var(--hf-muted);
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  line-height: 1.3;
+}
+
+/* ── FOOTER ── */
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1;
+  padding-top: 16px;
+  flex-shrink: 0;
+}
+
+.footer-left {
+  font-size: 11px;
+  color: var(--hf-muted);
+  font-weight: 500;
+}
+
+.footer-tools {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.tool-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--hf-muted);
+}
+
+.tool-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.dot-claude { background: var(--hf-green); }
+.dot-gemini { background: #4285F4; }
+.dot-github { background: var(--hf-dark); }
+
+/* ── SPEAKER NOTES TOGGLE ── */
+.notes-toggle {
+  display: none;
+}
+.notes-toggle:hover { opacity: 0.8; }
+
+.speaker-notes {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--hf-dark);
+  color: rgba(255,255,255,0.85);
+  padding: 24px 56px;
+  font-size: 14px;
+  line-height: 1.7;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+  z-index: 99;
+  max-height: 35vh;
+  overflow-y: auto;
+}
+.speaker-notes.visible { transform: translateY(0); }
+.speaker-notes h4 {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--hf-lime);
+  margin-bottom: 8px;
+}
+.speaker-notes ul {
+  padding-left: 20px;
+}
+.speaker-notes li {
+  margin-bottom: 4px;
+}
+.speaker-notes strong { color: white; }
+
+/* Animations removed for static render */
+
+/* ── RESPONSIVE (for smaller screens / projectors) ── */
+@media (max-height: 700px) {
+  .slide { padding: 28px 48px 20px; }
+  .header { margin-bottom: 16px; }
+  .slide-title { font-size: 36px; }
+  .step-body { padding: 2px 0 12px 14px; }
+  .step-title { font-size: 14px; }
+  .step-desc { font-size: 11px; }
+  .step-icon { width: 36px; height: 36px; font-size: 16px; }
+  .browser-content { height: 200px; }
+  .proto-title { font-size: 22px; }
+  .stat-card { padding: 12px; }
+  .stat-number { font-size: 22px; }
+}
+
+@media (max-width: 1100px) {
+  .content { grid-template-columns: 1fr; gap: 24px; }
+  .showcase { max-width: 600px; }
+}
+</style>
+</head>
+<body>
+
+<div class="slide">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-left">
+      <div class="topic-badge">Product Marketing</div>
+      <h1 class="slide-title">How PMM Uses <span>AI Tools</span></h1>
+      <p class="slide-subtitle">Turning a campaign idea into an interactive, shareable prototype — using Claude Code for strategy & development, and Gemini for visual asset generation.</p>
+    </div>
+    <div class="header-right">
+      <span class="presenter-name">Kieran Enright</span>
+      <span class="presenter-role">Product Marketing Manager</span>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="content">
+
+    <!-- LEFT: WORKFLOW STEPS -->
+    <div class="workflow">
+
+      <div class="workflow-step step-1">
+        <div class="step-track">
+          <div class="step-icon">💬</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-body">
+          <div class="step-label">Step 1</div>
+          <div class="step-title">Describe the campaign idea</div>
+          <div class="step-desc">Plain English conversation — no formal brief, no templates. Just describe the concept, audience, and goals.</div>
+        </div>
+      </div>
+
+      <div class="workflow-step step-2">
+        <div class="step-track">
+          <div class="step-icon">🧠</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-body">
+          <div class="step-label">Step 2</div>
+          <div class="step-title">AI structures the strategy</div>
+          <div class="step-desc">Claude Code builds out the full messaging framework, channel strategy, timeline, and validation plan — acting as a strategy thought partner.</div>
+          <span class="step-tool tool-claude">Claude Code</span>
+        </div>
+      </div>
+
+      <div class="workflow-step step-3">
+        <div class="step-track">
+          <div class="step-icon">🎨</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-body">
+          <div class="step-label">Step 3</div>
+          <div class="step-title">Generate visual assets</div>
+          <div class="step-desc">Gemini creates campaign mockups — social posts, phone screens, visual concepts — from text-based art direction.</div>
+          <span class="step-tool tool-gemini">Gemini</span>
+        </div>
+      </div>
+
+      <div class="workflow-step step-4">
+        <div class="step-track">
+          <div class="step-icon">🚀</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-body">
+          <div class="step-label">Step 4</div>
+          <div class="step-title">Build & deploy the prototype</div>
+          <div class="step-desc">Claude Code writes the full interactive HTML — scroll animations, carousels, lightboxes — and ships it to a live URL via GitHub Pages.</div>
+          <span class="step-tool tool-claude">Claude Code</span>
+          <span class="step-tool tool-github">GitHub Pages</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT: PROTOTYPE SHOWCASE -->
+    <div class="showcase">
+
+      <div class="browser-frame">
+        <div class="browser-bar">
+          <div class="browser-dots">
+            <span></span><span></span><span></span>
+          </div>
+          <div class="browser-url">kieranenright.github.io/marketing-prototypes/cookbook-campaign-strategy</div>
+        </div>
+        <div class="browser-content">
+          <div class="proto-text">
+            <div class="proto-badge">Q2 2026 Campaign Strategy</div>
+            <div class="proto-title">Don't just save it.<br><em>Cook it.</em></div>
+            <div class="proto-sub">Cookbook — Efficient Inspired Campaign</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stats-bar">
+        <div class="stat-card">
+          <div class="stat-number">0</div>
+          <div class="stat-label">designers<br>required</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">0</div>
+          <div class="stat-label">developers<br>required</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">1</div>
+          <div class="stat-label">marketer +<br>AI tools</div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-left">Brand-Wide Meeting — Q2 2026</div>
+    <div class="footer-tools">
+      <div class="tool-badge"><span class="tool-dot dot-claude"></span> Claude Code</div>
+      <div class="tool-badge"><span class="tool-dot dot-gemini"></span> Gemini</div>
+      <div class="tool-badge"><span class="tool-dot dot-github"></span> GitHub Pages</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- SPEAKER NOTES (press N to toggle) -->
+<!-- notes toggle hidden -->
+<div class="speaker-notes" id="notes">
+  <h4>Speaker Notes</h4>
+  <ul>
+    <li><strong>The problem:</strong> Communicating campaign strategy through static slides and docs doesn't convey the experience. Stakeholders skim decks — they engage with prototypes.</li>
+    <li><strong>The workflow:</strong> I described the Cookbook campaign concept to Claude Code in plain conversation. It structured the full strategy — messaging angles, channel mix, 13-week timeline, validation roadmap — then built the entire interactive prototype as a single HTML file.</li>
+    <li><strong>Gemini's role:</strong> I used Gemini to generate all the visual campaign mockups — social posts, phone screens, creative concepts — using text prompts based on our brand guidelines. No designer needed at the concept stage.</li>
+    <li><strong>The result:</strong> A fully interactive, scroll-driven strategy document with animations, carousels, lightbox viewers, and a colour-coded deployment calendar. Anyone with the link can experience it — no special tools needed.</li>
+    <li><strong>What this means for PMM:</strong> What used to require cross-functional coordination (strategist + designer + developer) can now be prototyped by a single marketer. The cost of iteration is a conversation, not a ticket.</li>
+    <li><strong>Key stat:</strong> The prototype maps out ~290 content pieces across organic, paid, and ASO channels with a full validation timeline.</li>
+  </ul>
+</div>
+
+<script>
+// Speaker notes toggle
+const notesPanel = document.getElementById('notes');
+const notesBtn = document.querySelector('.notes-toggle');
+let notesVisible = false;
+
+function toggleNotes() {
+  notesVisible = !notesVisible;
+  notesPanel.classList.toggle('visible', notesVisible);
+}
+
+notesBtn.addEventListener('click', toggleNotes);
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'n' || e.key === 'N') toggleNotes();
+});
+
+// Animate stat numbers
+function animateStats() {
+  const stats = document.querySelectorAll('.stat-number');
+  stats.forEach((stat) => {
+    const target = parseInt(stat.textContent);
+    const duration = 800;
+    const start = performance.now();
+
+    // For 0 values, flash from a higher number down
+    if (target === 0) {
+      const from = 5;
+      function countDown(now) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        stat.textContent = Math.round(from * (1 - eased));
+        if (progress < 1) requestAnimationFrame(countDown);
+      }
+      requestAnimationFrame(countDown);
+    } else {
+      stat.textContent = '0';
+      function countUp(now) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        stat.textContent = Math.round(target * eased);
+        if (progress < 1) requestAnimationFrame(countUp);
+      }
+      requestAnimationFrame(countUp);
+    }
+  });
+}
+
+// Disabled for static screenshot — stats show final values from HTML
+// setTimeout(animateStats, 1000);
+</script>
+
+</body>
+</html>
