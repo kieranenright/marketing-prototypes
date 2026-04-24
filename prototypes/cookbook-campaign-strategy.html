@@ -402,7 +402,8 @@ section {
 .osc-video-hook::before { content: '\201C'; }
 .osc-video-hook::after { content: '\201D'; }
 .osc-video-rationale { font-size: 11px; color: rgba(255,255,255,0.5); margin-top: 6px; line-height: 1.4; }
-.osc-static { background: var(--hf-cream); padding: 12px 16px; border-radius: 10px; border: 1.5px dashed rgba(0,0,0,0.1); }
+.osc-static { background: var(--hf-cream); padding: 12px 16px; border-radius: 10px; border: 1.5px dashed rgba(0,0,0,0.1); margin-bottom: 8px; }
+.osc-static:last-of-type { margin-bottom: 0; }
 .osc-static-label { font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--hf-muted); margin-bottom: 4px; }
 .osc-static-text { font-size: 12px; color: var(--hf-muted); font-weight: 600; }
 .osc-batch { display: inline-block; padding: 3px 10px; border-radius: 6px; font-size: 9px; font-weight: 800; letter-spacing: 1px; margin-bottom: 12px; }
@@ -497,7 +498,7 @@ section {
 
 /* Phone mockup — right column */
 .creator-phone {
-  width: 100%; max-width: 440px; border-radius: 36px; background: #000; padding: 12px;
+  width: 100%; max-width: 560px; border-radius: 36px; background: #000; padding: 12px;
   box-shadow: 0 16px 48px rgba(0,0,0,0.18), inset 0 0 0 1px rgba(255,255,255,0.1);
   position: relative; transition: all 0.4s ease;
 }
@@ -508,6 +509,44 @@ section {
 }
 .creator-phone img {
   width: 100%; border-radius: 24px; display: block;
+}
+
+/* CREATOR LIVE INTERSTITIAL */
+.creator-live-section {
+  background: linear-gradient(160deg, var(--hf-dark-green) 0%, var(--hf-dark) 100%);
+  color: white; text-align: center; min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  padding: 80px 60px; position: relative; overflow: hidden;
+}
+.creator-live-section::before {
+  content: ''; position: absolute; top: -150px; right: -150px;
+  width: 600px; height: 600px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(200,240,101,0.08) 0%, transparent 60%);
+}
+.creator-live-section .section-tag { color: var(--hf-lime); }
+.creator-live-title {
+  font-size: 52px; font-weight: 900; letter-spacing: -2px;
+  line-height: 1.05; margin-bottom: 8px; color: white;
+}
+.creator-live-title span { color: var(--hf-lime); }
+.creator-live-sub {
+  font-size: 16px; color: rgba(255,255,255,0.5); font-weight: 500;
+  margin-bottom: 48px;
+}
+.creator-live-phone {
+  width: 420px; border-radius: 36px; background: #000; padding: 10px;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.08);
+  margin: 0 auto; position: relative;
+}
+.creator-live-phone::before {
+  content: ''; display: block; width: 36px; height: 5px;
+  background: #222; border-radius: 3px; margin: 0 auto 6px;
+}
+.creator-live-phone .video-crop {
+  width: 100%; border-radius: 26px; overflow: hidden;
+}
+.creator-live-phone video {
+  width: 100%; display: block; border-radius: 26px;
 }
 
 /* FEATURES */
@@ -626,6 +665,7 @@ section {
     <a href="#crm" data-section="crm">CRM Lifecycle</a>
     <a href="#calendar" data-section="calendar">Calendar</a>
     <a href="#organic-social" data-section="organic-social">Organic Social</a>
+    <a href="#aso" data-section="aso">ASO</a>
     <a href="#creator-platform" data-section="creator-platform">Creator Platform</a>
     <a href="#validation" data-section="validation">Validation</a>
     <a href="#playbook" data-section="playbook">Playbook</a>
@@ -1183,6 +1223,10 @@ section {
           <div class="osc-static-label" style="color: var(--hf-green);">Static Carousel &mdash; 6 slides</div>
           <div class="osc-static-text" style="color: var(--hf-dark);">Published April 23</div>
         </div>
+        <div class="osc-static" style="border-style: solid; border-color: var(--hf-green); background: rgba(27,138,74,0.05);">
+          <div class="osc-static-label" style="color: var(--hf-green);">IG Story &mdash; Cookbook Launch</div>
+          <div class="osc-static-text" style="color: var(--hf-dark);">&ldquo;Reels hit different when you cook them.&rdquo;</div>
+        </div>
         <button class="osc-preview-toggle" onclick="toggleOscPreview(this)">
           <span class="osc-toggle-arrow">&#9654;</span> View carousel
           <div class="osc-preview-thumbs">
@@ -1209,6 +1253,17 @@ section {
             <button class="osc-carousel-dot" onclick="goOscSlide(this, 3)"></button>
             <button class="osc-carousel-dot" onclick="goOscSlide(this, 4)"></button>
             <button class="osc-carousel-dot" onclick="goOscSlide(this, 5)"></button>
+          </div>
+        </div>
+        <button class="osc-preview-toggle" onclick="toggleOscPreview(this)">
+          <span class="osc-toggle-arrow">&#9654;</span> View story
+          <div class="osc-preview-thumbs">
+            <img class="osc-preview-thumb" src="images/organic-social/w17/cookbook-story-reels-hit-different.png" alt="">
+          </div>
+        </button>
+        <div class="osc-preview-panel">
+          <div class="osc-preview-carousel" data-carousel>
+            <img class="active" src="images/organic-social/w17/cookbook-story-reels-hit-different.png" alt="IG Story — Reels Hit Different">
           </div>
         </div>
       </div>
@@ -1423,6 +1478,32 @@ section {
   </div>
 </section>
 
+
+<!-- ===== CUSTOM PRODUCT PAGE — LIVE ===== -->
+<section class="creator-live-section" id="aso">
+  <div class="section-inner">
+    <div class="section-tag reveal">App Store Optimisation</div>
+    <div class="creator-live-title reveal stagger-1">Custom Product Page.<br><span>Live now.</span></div>
+    <div class="creator-live-sub reveal stagger-2">A dedicated App Store landing page for Cookbook &mdash; live and capturing high-intent searches today.</div>
+    <div class="reveal stagger-3">
+      <div class="creator-live-phone">
+        <div class="video-crop">
+          <video src="videos/cpp-aso-live.mp4" autoplay muted loop playsinline></video>
+        </div>
+      </div>
+    </div>
+    <div class="reveal stagger-4" style="margin-top: 48px;">
+      <div style="display: inline-flex; align-items: center; gap: 12px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); border-radius: 14px; padding: 18px 28px;">
+        <span style="font-size: 24px;">&#128220;</span>
+        <div style="text-align: left;">
+          <div style="font-size: 13px; font-weight: 700; color: white; margin-bottom: 2px;">First featuring proposal submitted</div>
+          <div style="font-size: 12px; color: rgba(255,255,255,0.5);">Cookbook App Store featuring request &mdash; under review by Apple.</div>
+        </div>
+        <a href="https://kieranenright.github.io/marketing-prototypes/prototypes/cookbook-featuring.html" target="_blank" rel="noopener" style="background: var(--hf-lime); color: var(--hf-dark); padding: 8px 18px; border-radius: 24px; font-size: 12px; font-weight: 800; text-decoration: none; white-space: nowrap; margin-left: 8px; transition: all 0.2s;">View proposal &rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- ===== CREATOR PLATFORM ===== -->
 <section class="creator-section" id="creator-platform">
