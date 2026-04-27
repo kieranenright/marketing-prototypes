@@ -1186,7 +1186,7 @@ section {
   <div class="section-inner">
     <div class="section-tag reveal">Organic Social</div>
     <div class="section-title reveal" style="font-size: 40px;">Content calendar.<br>Week by week.</div>
-    <div class="section-desc reveal" style="max-width: none;">10 UGC videos dropping in two batches. One video + one static per week from W18. Here&rsquo;s what goes live and when.</div>
+    <div class="section-desc reveal" style="max-width: none;">10 UGC videos dropping in two batches. Two videos + two statics per week from W18. Here&rsquo;s what goes live and when.</div>
 
     <div class="reveal" style="margin-bottom: 20px;">
       <a href="https://docs.google.com/presentation/d/1nSbB2ShhpWh_znKr_FTmXI6s3NqD5FlR2pUPng1f7NQ/edit?slide=id.g336fdf21c61_0_390#slide=id.g336fdf21c61_0_390" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 8px; background: var(--hf-dark-green); color: white; padding: 10px 20px; border-radius: 10px; text-decoration: none; font-size: 12px; font-weight: 700; transition: all 0.2s ease;">
@@ -1374,38 +1374,54 @@ section {
         </div>
       </div>
 
-      <!-- W18 — Batch 1 arrives, first video goes live -->
+      <!-- W18 — Batch 1 arrives, doubled cadence starts -->
       <div class="osc-card reveal stagger-2">
         <div class="osc-week">W18</div>
         <div class="osc-dates">Apr 27 &ndash; May 3</div>
         <div class="osc-batch b1">BATCH 1 &mdash; ARRIVES APR 30</div>
         <div class="osc-video">
-          <div class="osc-video-label">UGC Video</div>
+          <div class="osc-video-label">UGC Video 1</div>
           <div class="osc-video-title">C1: 3 Viral Recipes</div>
           <div class="osc-video-hook">3 viral recipes. Worth it?</div>
           <div class="osc-video-rationale">Creator tests 3 viral recipes using Cookbook, rates each one. Strong opener &mdash; high curiosity, comparison hook.</div>
         </div>
-        <div class="osc-static" style="border-style: solid; border-color: var(--hf-green); background: rgba(27,138,74,0.05);">
-          <div class="osc-static-label" style="color: var(--hf-green);">Static Carousel &mdash; 2 slides</div>
-          <div class="osc-static-text" style="color: var(--hf-dark);">Proposed for W18</div>
+        <div class="osc-video">
+          <div class="osc-video-label">UGC Video 2</div>
+          <div class="osc-video-title">C2: Saved vs. Made</div>
+          <div class="osc-video-hook">How many recipes have you saved&hellip; and never actually made?</div>
+          <div class="osc-video-rationale">Creator confronts their saved-but-never-cooked folder. Cookbook turns saves into real meals.</div>
         </div>
-        <button class="osc-preview-toggle" onclick="toggleOscPreview(this)">
-          <span class="osc-toggle-arrow">&#9654;</span> View carousel
-          <div class="osc-preview-thumbs">
-            <img class="osc-preview-thumb" src="images/organic-social/w18/image_1776956721221878.png" alt="">
-            <img class="osc-preview-thumb" src="images/organic-social/w18/image_1776956955741042.png" alt="">
+        <div class="osc-static" style="border-style: solid; border-color: var(--hf-green); background: rgba(27,138,74,0.05);">
+          <div class="osc-static-label" style="color: var(--hf-green);">Statics</div>
+          <button class="osc-preview-toggle" onclick="toggleOscPreview(this)" style="margin-top: 8px;">
+            <span class="osc-toggle-arrow">&#9654;</span> View carousel
+            <div class="osc-preview-thumbs">
+              <img class="osc-preview-thumb" src="images/organic-social/w18/image_1776956721221878.png" alt="">
+              <img class="osc-preview-thumb" src="images/organic-social/w18/image_1776956955741042.png" alt="">
+            </div>
+          </button>
+          <div class="osc-preview-panel">
+            <div class="osc-preview-carousel" data-carousel>
+              <img class="active" src="images/organic-social/w18/image_1776956721221878.png" alt="Slide 1">
+              <img src="images/organic-social/w18/image_1776956955741042.png" alt="Slide 2">
+              <button class="osc-carousel-nav prev" onclick="navOscCarousel(this, -1)">&lsaquo;</button>
+              <button class="osc-carousel-nav next" onclick="navOscCarousel(this, 1)">&rsaquo;</button>
+            </div>
+            <div class="osc-carousel-dots">
+              <button class="osc-carousel-dot active" onclick="goOscSlide(this, 0)"></button>
+              <button class="osc-carousel-dot" onclick="goOscSlide(this, 1)"></button>
+            </div>
           </div>
-        </button>
-        <div class="osc-preview-panel">
-          <div class="osc-preview-carousel" data-carousel>
-            <img class="active" src="images/organic-social/w18/image_1776956721221878.png" alt="Slide 1">
-            <img src="images/organic-social/w18/image_1776956955741042.png" alt="Slide 2">
-            <button class="osc-carousel-nav prev" onclick="navOscCarousel(this, -1)">&lsaquo;</button>
-            <button class="osc-carousel-nav next" onclick="navOscCarousel(this, 1)">&rsaquo;</button>
-          </div>
-          <div class="osc-carousel-dots">
-            <button class="osc-carousel-dot active" onclick="goOscSlide(this, 0)"></button>
-            <button class="osc-carousel-dot" onclick="goOscSlide(this, 1)"></button>
+          <button class="osc-preview-toggle" onclick="toggleOscPreview(this)" style="margin-top: 6px;">
+            <span class="osc-toggle-arrow">&#9654;</span> View meme
+            <div class="osc-preview-thumbs">
+              <img class="osc-preview-thumb" src="images/organic-social/w19/image_1777020848114505.png" alt="">
+            </div>
+          </button>
+          <div class="osc-preview-panel">
+            <div class="osc-preview-carousel" data-carousel>
+              <img class="active" src="images/organic-social/w19/image_1777020848114505.png" alt="Meme static">
+            </div>
           </div>
         </div>
       </div>
@@ -1414,60 +1430,79 @@ section {
       <div class="osc-card reveal stagger-3">
         <div class="osc-week">W19</div>
         <div class="osc-dates">May 4&ndash;10</div>
-        <div class="osc-batch b1">BATCH 1</div>
+        <div class="osc-batch b1">BATCH 1 / BATCH 2</div>
         <div class="osc-video">
-          <div class="osc-video-label">UGC Video</div>
-          <div class="osc-video-title">C2: Saved vs. Made</div>
-          <div class="osc-video-hook">How many recipes have you saved&hellip; and never actually made?</div>
-          <div class="osc-video-rationale">Creator confronts their saved-but-never-cooked folder. Cookbook turns saves into real meals.</div>
-        </div>
-        <div class="osc-static" style="border-style: solid; border-color: var(--hf-green); background: rgba(27,138,74,0.05);">
-          <div class="osc-static-label" style="color: var(--hf-green);">Static &mdash; Meme</div>
-          <div class="osc-static-text" style="color: var(--hf-dark);">Proposed for W19</div>
-        </div>
-        <button class="osc-preview-toggle" onclick="toggleOscPreview(this)">
-          <span class="osc-toggle-arrow">&#9654;</span> View static
-          <div class="osc-preview-thumbs">
-            <img class="osc-preview-thumb" src="images/organic-social/w19/image_1777020848114505.png" alt="">
-          </div>
-        </button>
-        <div class="osc-preview-panel">
-          <div class="osc-preview-carousel" data-carousel>
-            <img class="active" src="images/organic-social/w19/image_1777020848114505.png" alt="W19 Static — Meme: What's on your mind?">
-          </div>
-        </div>
-      </div>
-
-      <!-- W20 -->
-      <div class="osc-card reveal stagger-1">
-        <div class="osc-week">W20</div>
-        <div class="osc-dates">May 11&ndash;17</div>
-        <div class="osc-batch b1">BATCH 1</div>
-        <div class="osc-video">
-          <div class="osc-video-label">UGC Video</div>
+          <div class="osc-video-label">UGC Video 1</div>
           <div class="osc-video-title">C3: No More Excuses</div>
           <div class="osc-video-hook">I had this recipe saved for&hellip; I don&rsquo;t even know. Weeks?</div>
           <div class="osc-video-rationale">Creator finally makes a recipe they&rsquo;ve been putting off. Cookbook removes the barriers. Closes out Batch 1.</div>
         </div>
-        <div class="osc-static">
-          <div class="osc-static-label">Static</div>
-          <div class="osc-static-text">TBD</div>
-        </div>
-      </div>
-
-      <!-- W21 — Batch 2 arrives mid-week -->
-      <div class="osc-card reveal stagger-2">
-        <div class="osc-week">W21</div>
-        <div class="osc-dates">May 18&ndash;24</div>
-        <div class="osc-batch b2">BATCH 2 &mdash; ARRIVES MAY 13&ndash;15</div>
         <div class="osc-video">
-          <div class="osc-video-label">UGC Video</div>
+          <div class="osc-video-label">UGC Video 2</div>
           <div class="osc-video-title">C4: How Long Has This Been a Thing?</div>
           <div class="osc-video-hook">Wait&mdash;what?? Since when does HelloFresh have this??</div>
           <div class="osc-video-rationale">Creator discovers Cookbook, shocked it exists. Shows it turning any recipe video into steps. Re-energises the series.</div>
         </div>
         <div class="osc-static">
-          <div class="osc-static-label">Static</div>
+          <div class="osc-static-label">Static 1</div>
+          <div class="osc-static-text">TBD</div>
+        </div>
+        <div class="osc-static">
+          <div class="osc-static-label">Static 2</div>
+          <div class="osc-static-text">TBD</div>
+        </div>
+      </div>
+
+      <!-- W20 — Batch 2 arrives mid-week -->
+      <div class="osc-card reveal stagger-1">
+        <div class="osc-week">W20</div>
+        <div class="osc-dates">May 11&ndash;17</div>
+        <div class="osc-batch b2">BATCH 2 &mdash; ARRIVES MAY 13&ndash;15</div>
+        <div class="osc-video">
+          <div class="osc-video-label">UGC Video 1</div>
+          <div class="osc-video-title">C5: Graveyard Scroll</div>
+          <div class="osc-video-hook">How many recipes do I have saved?</div>
+          <div class="osc-video-rationale">Creator scrolls through their massive saved folder, picks one, sends to Cookbook, actually cooks it. High shareability.</div>
+        </div>
+        <div class="osc-video">
+          <div class="osc-video-label">UGC Video 2</div>
+          <div class="osc-video-title">C6: Transformation Reveal</div>
+          <div class="osc-video-hook">That recipe I&rsquo;ve been afraid to make</div>
+          <div class="osc-video-rationale">Creator tackles a recipe they&rsquo;ve been intimidated by. Cookbook walks them through it. Nails it first try. Strong mid-calendar moment.</div>
+        </div>
+        <div class="osc-static">
+          <div class="osc-static-label">Static 1</div>
+          <div class="osc-static-text">TBD</div>
+        </div>
+        <div class="osc-static">
+          <div class="osc-static-label">Static 2</div>
+          <div class="osc-static-text">TBD</div>
+        </div>
+      </div>
+
+      <!-- W21 -->
+      <div class="osc-card reveal stagger-2">
+        <div class="osc-week">W21</div>
+        <div class="osc-dates">May 18&ndash;24</div>
+        <div class="osc-batch b2">BATCH 2</div>
+        <div class="osc-video">
+          <div class="osc-video-label">UGC Video 1</div>
+          <div class="osc-video-title">C7: Restaurant Recreation</div>
+          <div class="osc-video-hook">Restaurant copycat challenge</div>
+          <div class="osc-video-rationale">Creator tries to recreate a favourite restaurant dish at home using Cookbook&rsquo;s step-by-step instructions. Aspirational tone shift.</div>
+        </div>
+        <div class="osc-video">
+          <div class="osc-video-label">UGC Video 2</div>
+          <div class="osc-video-title">C8: Duet</div>
+          <div class="osc-video-hook">Trying to follow viral recipes like&hellip;</div>
+          <div class="osc-video-rationale">Split screen &mdash; chaotic viral recipe video on one side vs calm Cookbook steps on the other. Native social format.</div>
+        </div>
+        <div class="osc-static">
+          <div class="osc-static-label">Static 1</div>
+          <div class="osc-static-text">TBD</div>
+        </div>
+        <div class="osc-static">
+          <div class="osc-static-label">Static 2</div>
           <div class="osc-static-text">TBD</div>
         </div>
       </div>
@@ -1478,98 +1513,23 @@ section {
         <div class="osc-dates">May 25&ndash;31</div>
         <div class="osc-batch b2">BATCH 2</div>
         <div class="osc-video">
-          <div class="osc-video-label">UGC Video</div>
-          <div class="osc-video-title">C5: Graveyard Scroll</div>
-          <div class="osc-video-hook">How many recipes do I have saved?</div>
-          <div class="osc-video-rationale">Creator scrolls through their massive saved folder, picks one, sends to Cookbook, actually cooks it. High shareability.</div>
-        </div>
-        <div class="osc-static">
-          <div class="osc-static-label">Static</div>
-          <div class="osc-static-text">TBD</div>
-        </div>
-      </div>
-
-      <!-- W23 -->
-      <div class="osc-card reveal stagger-1">
-        <div class="osc-week">W23</div>
-        <div class="osc-dates">Jun 1&ndash;7</div>
-        <div class="osc-batch b2">BATCH 2</div>
-        <div class="osc-video">
-          <div class="osc-video-label">UGC Video</div>
-          <div class="osc-video-title">C6: Transformation Reveal</div>
-          <div class="osc-video-hook">That recipe I&rsquo;ve been afraid to make</div>
-          <div class="osc-video-rationale">Creator tackles a recipe they&rsquo;ve been intimidated by. Cookbook walks them through it. Nails it first try. Strong mid-calendar moment.</div>
-        </div>
-        <div class="osc-static">
-          <div class="osc-static-label">Static</div>
-          <div class="osc-static-text">TBD</div>
-        </div>
-      </div>
-
-      <!-- W24 -->
-      <div class="osc-card reveal stagger-2">
-        <div class="osc-week">W24</div>
-        <div class="osc-dates">Jun 8&ndash;14</div>
-        <div class="osc-batch b2">BATCH 2</div>
-        <div class="osc-video">
-          <div class="osc-video-label">UGC Video</div>
-          <div class="osc-video-title">C7: Restaurant Recreation</div>
-          <div class="osc-video-hook">Restaurant copycat challenge</div>
-          <div class="osc-video-rationale">Creator tries to recreate a favourite restaurant dish at home using Cookbook&rsquo;s step-by-step instructions. Aspirational tone shift.</div>
-        </div>
-        <div class="osc-static">
-          <div class="osc-static-label">Static</div>
-          <div class="osc-static-text">TBD</div>
-        </div>
-      </div>
-
-      <!-- W25 -->
-      <div class="osc-card reveal stagger-3">
-        <div class="osc-week">W25</div>
-        <div class="osc-dates">Jun 15&ndash;21</div>
-        <div class="osc-batch b2">BATCH 2</div>
-        <div class="osc-video">
-          <div class="osc-video-label">UGC Video</div>
-          <div class="osc-video-title">C8: Duet</div>
-          <div class="osc-video-hook">Trying to follow viral recipes like&hellip;</div>
-          <div class="osc-video-rationale">Split screen &mdash; chaotic viral recipe video on one side vs calm Cookbook steps on the other. Native social format.</div>
-        </div>
-        <div class="osc-static">
-          <div class="osc-static-label">Static</div>
-          <div class="osc-static-text">TBD</div>
-        </div>
-      </div>
-
-      <!-- W26 -->
-      <div class="osc-card reveal stagger-1">
-        <div class="osc-week">W26</div>
-        <div class="osc-dates">Jun 22&ndash;28</div>
-        <div class="osc-batch b2">BATCH 2</div>
-        <div class="osc-video">
-          <div class="osc-video-label">UGC Video</div>
+          <div class="osc-video-label">UGC Video 1</div>
           <div class="osc-video-title">C9: Split Screen</div>
           <div class="osc-video-hook">Expectation vs. Reality</div>
           <div class="osc-video-rationale">Left: clean cooking footage. Right: messy reality. Cookbook bridges the gap. Comparison format keeps variety going.</div>
         </div>
-        <div class="osc-static">
-          <div class="osc-static-label">Static</div>
-          <div class="osc-static-text">TBD</div>
-        </div>
-      </div>
-
-      <!-- W27 -->
-      <div class="osc-card reveal stagger-2">
-        <div class="osc-week">W27</div>
-        <div class="osc-dates">Jun 29 &ndash; Jul 5</div>
-        <div class="osc-batch b2">BATCH 2</div>
         <div class="osc-video">
-          <div class="osc-video-label">UGC Video</div>
+          <div class="osc-video-label">UGC Video 2</div>
           <div class="osc-video-title">C10: Family Reaction</div>
           <div class="osc-video-hook">I&rsquo;ve been terrified to mess up my Grandma&rsquo;s signature dish&hellip; until now</div>
           <div class="osc-video-rationale">Creator scans grandma&rsquo;s handwritten recipe card, Cookbook turns it into step-by-step. Family member tastes it, emotional reaction. Powerful closer.</div>
         </div>
         <div class="osc-static">
-          <div class="osc-static-label">Static</div>
+          <div class="osc-static-label">Static 1</div>
+          <div class="osc-static-text">TBD</div>
+        </div>
+        <div class="osc-static">
+          <div class="osc-static-label">Static 2</div>
           <div class="osc-static-text">TBD</div>
         </div>
       </div>
@@ -1583,7 +1543,7 @@ section {
         <div class="osc-summary-label">Videos &amp; Reels</div>
       </div>
       <div class="osc-summary-card">
-        <div class="osc-summary-num">15</div>
+        <div class="osc-summary-num">10</div>
         <div class="osc-summary-label">Weeks of Content</div>
       </div>
       <div class="osc-summary-card">
@@ -1980,12 +1940,14 @@ section {
 
         <!-- Organic Social -->
         <div class="cal-row-label">Organic Social<br><small style="opacity:0.5">TikTok + IG + FB</small></div>
-        <div class="cal-cell" style="grid-column: span 13;"><div class="cal-bar always-on" style="width:100%">Always-On &mdash; 3 Concepts (equal weight Apr, data-driven May&ndash;Jun)</div></div>
+        <div class="cal-cell" style="grid-column: span 3;"><div class="cal-bar always-on">Pre-launch Reels</div></div>
+        <div class="cal-cell" style="grid-column: span 5;"><div class="cal-bar always-on" style="background: linear-gradient(90deg, var(--hf-green), var(--hf-lime)); color: var(--hf-dark-green); font-weight: 800;">UGC 2&times; Cadence &mdash; 10 Videos + 10 Statics</div></div>
+        <div class="cal-cell" style="grid-column: span 5;"><div class="cal-bar always-on">Scale Winners &mdash; Data-Driven</div></div>
 
         <!-- Paid Social -->
         <div class="cal-row-label">Paid Social<br><small style="opacity:0.5">Spark + Meta Ads</small></div>
-        <div class="cal-cell" style="grid-column: span 9;"><div class="cal-bar" style="background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.25); border: 1px dashed rgba(255,255,255,0.15);">Organic learnings phase &mdash; building paid brief</div></div>
-        <div class="cal-cell" style="grid-column: span 4;"><div class="cal-bar paid">Launch &mdash; Scale Organic Winners</div></div>
+        <div class="cal-cell" style="grid-column: span 7;"><div class="cal-bar" style="background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.25); border: 1px dashed rgba(255,255,255,0.15);">Organic learnings phase &mdash; building paid brief</div></div>
+        <div class="cal-cell" style="grid-column: span 6;"><div class="cal-bar paid">Launch &mdash; Scale Organic Winners</div></div>
 
         <!-- CRM Lifecycle -->
         <div class="cal-row-label">CRM / Lifecycle<br><small style="opacity:0.5">Push + Email</small></div>
