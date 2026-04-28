@@ -1382,26 +1382,18 @@ section {
         <div class="osc-static" style="border-style: solid; border-color: var(--hf-green); background: rgba(27,138,74,0.05);">
           <div class="osc-static-label" style="color: var(--hf-green);">Statics</div>
           <button class="osc-preview-toggle" onclick="toggleOscPreview(this)" style="margin-top: 8px;">
-            <span class="osc-toggle-arrow">&#9654;</span> View carousel
+            <span class="osc-toggle-arrow">&#9654;</span> View static
             <div class="osc-preview-thumbs">
-              <img class="osc-preview-thumb" src="images/organic-social/w18/image_1776956721221878.png" alt="">
-              <img class="osc-preview-thumb" src="images/organic-social/w18/image_1776956955741042.png" alt="">
+              <img class="osc-preview-thumb" src="images/organic-social/w18/w18-static-meme.png" alt="">
             </div>
           </button>
           <div class="osc-preview-panel">
             <div class="osc-preview-carousel" data-carousel>
-              <img class="active" src="images/organic-social/w18/image_1776956721221878.png" alt="Slide 1">
-              <img src="images/organic-social/w18/image_1776956955741042.png" alt="Slide 2">
-              <button class="osc-carousel-nav prev" onclick="navOscCarousel(this, -1)">&lsaquo;</button>
-              <button class="osc-carousel-nav next" onclick="navOscCarousel(this, 1)">&rsaquo;</button>
-            </div>
-            <div class="osc-carousel-dots">
-              <button class="osc-carousel-dot active" onclick="goOscSlide(this, 0)"></button>
-              <button class="osc-carousel-dot" onclick="goOscSlide(this, 1)"></button>
+              <img class="active" src="images/organic-social/w18/w18-static-meme.png" alt="W18 static — Mom's Recipes meme">
             </div>
           </div>
           <button class="osc-preview-toggle" onclick="toggleOscPreview(this)" style="margin-top: 6px;">
-            <span class="osc-toggle-arrow">&#9654;</span> View meme
+            <span class="osc-toggle-arrow">&#9654;</span> View static
             <div class="osc-preview-thumbs">
               <img class="osc-preview-thumb" src="images/organic-social/w19/image_1777020848114505.png" alt="">
             </div>
@@ -1593,12 +1585,17 @@ section {
         </div>
 
         <!-- Creator handles with avatars -->
-        <div style="font-size: 10px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--hf-green); margin-bottom: 10px;" class="reveal stagger-3">Target Creators</div>
+        <div style="font-size: 10px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--hf-green); margin-bottom: 10px;" class="reveal stagger-3">Signed</div>
         <div class="creator-roster reveal stagger-3">
-          <a class="creator-handle" href="https://www.instagram.com/emily.eggers/" target="_blank" rel="noopener">
+          <a class="creator-handle" href="https://www.instagram.com/emily.eggers/" target="_blank" rel="noopener" style="border-color: var(--hf-green); background: rgba(27,138,74,0.05);">
             <div class="ch-avatar"><img src="images/creators/emily-eggers.jpg" alt="" onerror="this.style.display='none';this.parentNode.textContent='EE'"></div>
             @emily.eggers
+            <span style="font-size: 9px; font-weight: 800; color: white; background: var(--hf-green); padding: 2px 6px; border-radius: 4px; margin-left: 4px; letter-spacing: 0.5px;">SIGNED</span>
           </a>
+        </div>
+
+        <div style="font-size: 10px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--hf-muted); margin-bottom: 10px; margin-top: 16px;" class="reveal stagger-3">Pipeline</div>
+        <div class="creator-roster reveal stagger-3">
           <a class="creator-handle" href="https://www.instagram.com/carlys_cookbook/" target="_blank" rel="noopener">
             <div class="ch-avatar"><img src="images/creators/carlys-cookbook.jpg" alt="" onerror="this.style.display='none';this.parentNode.textContent='CC'"></div>
             @carlys_cookbook
@@ -1631,11 +1628,11 @@ section {
 
         <!-- Target milestone -->
         <div class="reveal stagger-5" style="margin-top: 16px;">
-          <div style="display: inline-flex; align-items: center; gap: 10px; background: var(--hf-cream); border-radius: 10px; padding: 12px 18px;">
-            <span style="font-size: 18px;">&#127919;</span>
+          <div style="display: inline-flex; align-items: center; gap: 10px; background: rgba(27,138,74,0.08); border: 1.5px solid var(--hf-green); border-radius: 10px; padding: 12px 18px;">
+            <span style="font-size: 18px;">&#9989;</span>
             <div>
-              <div style="font-size: 12px; font-weight: 800; color: var(--hf-green); letter-spacing: 0.5px;">TARGET: W18 &middot; May 1</div>
-              <div style="font-size: 12px; color: var(--hf-muted);">First creator signed &amp; live in app</div>
+              <div style="font-size: 12px; font-weight: 800; color: var(--hf-green); letter-spacing: 0.5px;">CONFIRMED: W18 &middot; End of week</div>
+              <div style="font-size: 12px; color: var(--hf-dark);">@emily.eggers signed &mdash; live in app by May 3</div>
             </div>
           </div>
         </div>
@@ -1910,11 +1907,37 @@ section {
           <span style="font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: var(--hf-lime); background: rgba(200,240,101,0.1); padding: 4px 12px; border-radius: 4px;">&#9670; Channel Strategy</span>
         </div>
 
-        <!-- Organic Social -->
-        <div class="cal-row-label">Organic Social<br><small style="opacity:0.5">TikTok + IG + FB</small></div>
-        <div class="cal-cell" style="grid-column: span 3;"><div class="cal-bar always-on">Pre-launch Reels</div></div>
-        <div class="cal-cell" style="grid-column: span 5;"><div class="cal-bar always-on" style="background: linear-gradient(90deg, var(--hf-green), var(--hf-lime)); color: var(--hf-dark-green); font-weight: 800;">UGC 2&times; Cadence &mdash; 10 Videos + 10 Statics</div></div>
-        <div class="cal-cell" style="grid-column: span 5;"><div class="cal-bar always-on">Scale Winners &mdash; Data-Driven</div></div>
+        <!-- Organic Social — Videos / Reels -->
+        <div class="cal-row-label">Videos / Reels<br><small style="opacity:0.5">TikTok + IG + FB</small></div>
+        <div class="cal-cell"><div class="cal-bar" style="background: rgba(27,138,74,0.35); color: rgba(255,255,255,0.7); font-size: 8px;">&#10003; Reel &times;2</div></div>
+        <div class="cal-cell" style="grid-column: span 2;"><div class="cal-bar" style="background: rgba(255,255,255,0.03); color: rgba(255,255,255,0.15); border: 1px dashed rgba(255,255,255,0.1); font-size: 8px;">&mdash;</div></div>
+        <div class="cal-cell" style="border-right: 2px solid rgba(255,255,255,0.15);"><div class="cal-bar" style="background: rgba(255,255,255,0.03); color: rgba(255,255,255,0.15); border: 1px dashed rgba(255,255,255,0.1); font-size: 8px;">&mdash;</div></div>
+        <div class="cal-cell"><div class="cal-bar" style="background: linear-gradient(135deg, var(--hf-green), var(--hf-lime)); color: var(--hf-dark-green); font-weight: 800; font-size: 8px;">C1 + C2</div></div>
+        <div class="cal-cell"><div class="cal-bar" style="background: linear-gradient(135deg, var(--hf-green), var(--hf-lime)); color: var(--hf-dark-green); font-weight: 800; font-size: 8px;">C3 + C4</div></div>
+        <div class="cal-cell"><div class="cal-bar" style="background: linear-gradient(135deg, var(--hf-green), var(--hf-lime)); color: var(--hf-dark-green); font-weight: 800; font-size: 8px;">C5 + C6</div></div>
+        <div class="cal-cell"><div class="cal-bar" style="background: linear-gradient(135deg, var(--hf-green), var(--hf-lime)); color: var(--hf-dark-green); font-weight: 800; font-size: 8px;">C7 + C8</div></div>
+        <div class="cal-cell" style="border-right: 2px solid rgba(255,255,255,0.15);"><div class="cal-bar" style="background: linear-gradient(135deg, var(--hf-green), var(--hf-lime)); color: var(--hf-dark-green); font-weight: 800; font-size: 8px;">C9 + C10</div></div>
+        <div class="cal-cell" style="grid-column: span 4;"><div class="cal-bar always-on">Scale Winners</div></div>
+
+        <!-- Organic Social — Statics -->
+        <div class="cal-row-label">Statics<br><small style="opacity:0.5">Carousels + Memes</small></div>
+        <div class="cal-cell"><div class="cal-bar" style="background: rgba(27,138,74,0.35); color: rgba(255,255,255,0.7); font-size: 8px;">&#10003; Carousel</div></div>
+        <div class="cal-cell" style="grid-column: span 2;"><div class="cal-bar" style="background: rgba(255,255,255,0.03); color: rgba(255,255,255,0.15); border: 1px dashed rgba(255,255,255,0.1); font-size: 8px;">&mdash;</div></div>
+        <div class="cal-cell" style="border-right: 2px solid rgba(255,255,255,0.15);"><div class="cal-bar" style="background: rgba(27,138,74,0.35); color: rgba(255,255,255,0.7); font-size: 8px;">&#10003; Carousel + Story</div></div>
+        <div class="cal-cell"><div class="cal-bar" style="background: linear-gradient(135deg, var(--hf-green), var(--hf-lime)); color: var(--hf-dark-green); font-weight: 800; font-size: 8px;">Static &times;2</div></div>
+        <div class="cal-cell"><div class="cal-bar" style="background: linear-gradient(135deg, var(--hf-green), var(--hf-lime)); color: var(--hf-dark-green); font-weight: 800; font-size: 8px;">Static &times;2</div></div>
+        <div class="cal-cell"><div class="cal-bar" style="background: linear-gradient(135deg, var(--hf-green), var(--hf-lime)); color: var(--hf-dark-green); font-weight: 800; font-size: 8px;">Static &times;2</div></div>
+        <div class="cal-cell"><div class="cal-bar" style="background: linear-gradient(135deg, var(--hf-green), var(--hf-lime)); color: var(--hf-dark-green); font-weight: 800; font-size: 8px;">Static &times;2</div></div>
+        <div class="cal-cell" style="border-right: 2px solid rgba(255,255,255,0.15);"><div class="cal-bar" style="background: linear-gradient(135deg, var(--hf-green), var(--hf-lime)); color: var(--hf-dark-green); font-weight: 800; font-size: 8px;">Static &times;2</div></div>
+        <div class="cal-cell" style="grid-column: span 4;"><div class="cal-bar always-on">Scale Winners</div></div>
+
+        <!-- Creator Platform -->
+        <div class="cal-row-label">Creator Platform<br><small style="opacity:0.5">In-App Profiles</small></div>
+        <div class="cal-cell" style="grid-column: span 3;"><div class="cal-bar" style="background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.25); border: 1px dashed rgba(255,255,255,0.15); font-size: 9px;">Outreach &amp; partnership briefs</div></div>
+        <div class="cal-cell" style="border-right: 2px solid rgba(255,255,255,0.15);"><div class="cal-bar" style="background: rgba(27,138,74,0.35); color: rgba(255,255,255,0.7); font-size: 8px;">&#10003; Emily signed</div></div>
+        <div class="cal-cell"><div class="cal-bar" style="background: var(--hf-lime); color: var(--hf-dark-green); font-weight: 800; font-size: 8px;">&#9733; Emily live</div></div>
+        <div class="cal-cell" style="grid-column: span 4; border-right: 2px solid rgba(255,255,255,0.15);"><div class="cal-bar" style="background: var(--hf-green); color: white; font-size: 9px;">Expand creator roster</div></div>
+        <div class="cal-cell" style="grid-column: span 4;"><div class="cal-bar always-on">Scale creator profiles</div></div>
 
         <!-- Paid Social -->
         <div class="cal-row-label">Paid Social<br><small style="opacity:0.5">Spark + Meta Ads</small></div>
@@ -1943,10 +1966,12 @@ section {
     </div>
 
     <div class="cal-legend reveal">
-      <div class="cal-legend-item"><div class="cal-legend-dot" style="background: var(--hf-green);"></div> Always-On Organic</div>
+      <div class="cal-legend-item"><div class="cal-legend-dot" style="background: var(--hf-green);"></div> Organic Social</div>
+      <div class="cal-legend-item"><div class="cal-legend-dot" style="background: var(--hf-lime);"></div> Creator Platform</div>
       <div class="cal-legend-item"><div class="cal-legend-dot" style="background: var(--hf-honey);"></div> Paid Social</div>
       <div class="cal-legend-item"><div class="cal-legend-dot" style="background: var(--hf-forest);"></div> ASO</div>
       <div class="cal-legend-item"><div class="cal-legend-dot" style="background: var(--hf-sage);"></div> CRM / Lifecycle</div>
+      <div class="cal-legend-item"><div class="cal-legend-dot" style="background: rgba(27,138,74,0.35);"></div> Completed</div>
     </div>
   </div>
 </section>
