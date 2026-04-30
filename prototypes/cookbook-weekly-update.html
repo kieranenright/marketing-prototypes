@@ -44,8 +44,8 @@ body {
   .slide {
     width: 90vw;
     max-width: 1600px;
-    height: auto;
-    min-height: 80vh;
+    height: 80vh;
+    min-height: 680px;
     margin: 0 auto;
     box-shadow: 0 8px 60px rgba(0,0,0,0.15);
     border-radius: 6px;
@@ -79,11 +79,11 @@ body {
 /* === MAIN CONTENT === */
 .content {
   height: 100%;
-  padding: 72px 40px 30px;
+  padding: 72px 40px 24px;
   display: grid;
   grid-template-columns: 1fr 1.8fr;
-  grid-template-rows: 1.1fr 1fr;
-  gap: 16px 28px;
+  grid-template-rows: 1.7fr 0.7fr;
+  gap: 14px 28px;
 }
 
 /* === LEFT COLUMN — CREATIVE === */
@@ -93,26 +93,28 @@ body {
 }
 
 .section-label {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 2px;
   color: var(--hf-green);
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
 
 .creative-list {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 7px;
+  flex: 1;
+  overflow-y: auto;
 }
 
 .creative-item {
   display: flex;
   align-items: flex-start;
   gap: 8px;
-  padding: 10px 12px;
+  padding: 8px 12px;
   border-radius: 8px;
   background: var(--hf-light);
   border: 1px solid rgba(0,0,0,0.03);
@@ -169,7 +171,7 @@ body {
 .right-col {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
 }
 
 /* Metrics card */
@@ -261,6 +263,51 @@ body {
   border: 1px solid rgba(27, 138, 74, 0.08);
 }
 
+/* === MEDIA UPLOAD AREA === */
+.media-section {
+  margin-top: 10px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.media-slot {
+  width: 72px;
+  height: 72px;
+  border-radius: 8px;
+  border: 2px dashed rgba(0,0,0,0.12);
+  background: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+.media-slot:hover {
+  border-color: var(--hf-green);
+}
+.media-slot-icon {
+  font-size: 18px;
+  opacity: 0.4;
+}
+.media-slot-label {
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--hf-muted);
+}
+.media-slot.has-content {
+  border: 2px solid var(--hf-green);
+  background: rgba(27, 138, 74, 0.04);
+}
+.media-slot.has-content .media-slot-icon {
+  opacity: 1;
+  color: var(--hf-green);
+}
+
 /* === BOTTOM ROW — OTHER UPDATES === */
 .bottom-section {
   grid-column: 1 / -1;
@@ -268,33 +315,33 @@ body {
 
 .bottom-row {
   display: flex;
-  gap: 12px;
+  gap: 8px;
   align-items: stretch;
 }
 
 .update-card {
   flex: 1;
-  border-radius: 10px;
+  border-radius: 6px;
   background: var(--hf-light);
   border: 1px solid rgba(0,0,0,0.03);
-  padding: 12px 16px;
+  padding: 8px 12px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 3px;
 }
 
 .update-card-header {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
 }
 
 .update-tag {
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 1.5px;
-  padding: 3px 8px;
+  padding: 2px 6px;
   border-radius: 3px;
   color: white;
 }
@@ -304,16 +351,16 @@ body {
 .tag-other { background: var(--hf-muted); }
 
 .update-card-title {
-  font-size: 15px;
+  font-size: 12px;
   font-weight: 700;
   color: var(--hf-dark);
 }
 
 .update-card-body {
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 500;
   color: var(--hf-muted);
-  line-height: 1.6;
+  line-height: 1.4;
 }
 
 </style>
@@ -327,7 +374,7 @@ body {
       <div class="slide-header-sep"></div>
       <div class="slide-header-feature">Cookbook Marketing Update</div>
     </div>
-    <div class="slide-header-right">Week of [DATE] &middot; US</div>
+    <div class="slide-header-right">WX [DATE]</div>
   </div>
 
   <div class="content">
@@ -401,10 +448,28 @@ body {
             <div class="metric-delta delta-up">—</div>
           </div>
         </div>
+        <div class="media-section">
+          <div class="media-slot">
+            <div class="media-slot-icon">&#9654;</div>
+            <div class="media-slot-label">Video</div>
+          </div>
+          <div class="media-slot">
+            <div class="media-slot-icon">&#9654;</div>
+            <div class="media-slot-label">Video</div>
+          </div>
+          <div class="media-slot">
+            <div class="media-slot-icon">&#9647;</div>
+            <div class="media-slot-label">Static</div>
+          </div>
+          <div class="media-slot">
+            <div class="media-slot-icon">&#9647;</div>
+            <div class="media-slot-label">Static</div>
+          </div>
+        </div>
       </div>
 
       <!-- CRM -->
-      <div class="metrics-card">
+      <div class="metrics-card" style="flex: none;">
         <div class="metrics-card-header">
           <div class="metrics-card-title">CRM Performance</div>
           <div class="metrics-card-period">Past 7 days</div>
@@ -454,7 +519,7 @@ body {
 
     <!-- BOTTOM: Other Updates -->
     <div class="bottom-section">
-      <div class="section-label">Discipline Updates</div>
+      <div class="section-label" style="margin-bottom: 5px;">Discipline Updates</div>
       <div class="bottom-row">
         <div class="update-card">
           <div class="update-card-header">
