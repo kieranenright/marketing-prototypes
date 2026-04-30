@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cookbook — Weekly Marketing Update</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+  --hf-green: #1B8A4A;
+  --hf-lime: #C8F065;
+  --hf-dark: #1A1A1A;
+  --hf-muted: #888;
+  --hf-light: #F6F6F6;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+@page { size: 297mm 167mm; margin: 0; }
+
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  background: #e0e0e0;
+  color: var(--hf-dark);
+}
+
+/* === SLIDE BASE === */
+.slide {
+  width: 297mm;
+  height: 167mm;
+  position: relative;
+  overflow: hidden;
+  background: white;
+  page-break-after: always;
+}
+@media screen {
+  .slide {
+    margin: 30px auto;
+    box-shadow: 0 8px 60px rgba(0,0,0,0.15);
+    border-radius: 6px;
+  }
+}
+@media print {
+  body { background: white; }
+  .slide { margin: 0; box-shadow: none; border-radius: 0; }
+}
+
+/* === HEADER === */
+.slide-header {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  padding: 24px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10;
+}
+.slide-header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.slide-header-left img { height: 18px; }
+.slide-header-sep { width: 1px; height: 16px; background: rgba(0,0,0,0.12); }
+.slide-header-feature { font-size: 13px; font-weight: 800; color: var(--hf-green); }
+.slide-header-right { font-size: 8px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase; letter-spacing: 1.5px; }
+
+/* === MAIN CONTENT === */
+.content {
+  height: 100%;
+  padding: 72px 40px 30px;
+  display: grid;
+  grid-template-columns: 1fr 1.8fr;
+  grid-template-rows: 1.1fr 1fr;
+  gap: 16px 28px;
+}
+
+/* === LEFT COLUMN — CREATIVE === */
+.left-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.section-label {
+  font-size: 8px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--hf-green);
+  margin-bottom: 12px;
+}
+
+.creative-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.creative-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: var(--hf-light);
+  border: 1px solid rgba(0,0,0,0.03);
+}
+
+.creative-status {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.status-done { background: var(--hf-green); }
+.status-progress { background: var(--hf-lime); }
+.status-todo { background: transparent; border: 2px solid rgba(0,0,0,0.12); }
+
+.creative-text {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--hf-dark);
+  line-height: 1.4;
+}
+.creative-text span {
+  display: block;
+  font-size: 8px;
+  font-weight: 500;
+  color: var(--hf-muted);
+  margin-top: 1px;
+}
+
+.legend {
+  margin-top: auto;
+  display: flex;
+  gap: 12px;
+  padding-top: 12px;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 7px;
+  font-weight: 600;
+  color: var(--hf-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+}
+
+/* === RIGHT COLUMN — METRICS === */
+.right-col {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Metrics card */
+.metrics-card {
+  border-radius: 12px;
+  background: var(--hf-light);
+  border: 1px solid rgba(0,0,0,0.03);
+  padding: 14px 18px;
+  flex: 1;
+}
+
+.metrics-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.metrics-card-title {
+  font-size: 8px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--hf-green);
+}
+
+.metrics-card-period {
+  font-size: 7px;
+  font-weight: 600;
+  color: var(--hf-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Metrics grid */
+.metrics-grid {
+  display: grid;
+  gap: 6px;
+}
+.metrics-grid.social { grid-template-columns: repeat(4, 1fr); }
+.metrics-grid.crm { grid-template-columns: repeat(5, 1fr); }
+
+.metric {
+  text-align: center;
+  padding: 8px 4px;
+  border-radius: 8px;
+  background: white;
+}
+.metric-value {
+  font-size: 16px;
+  font-weight: 900;
+  color: var(--hf-dark);
+  letter-spacing: -0.5px;
+  line-height: 1;
+  margin-bottom: 3px;
+}
+.metric-value.highlight {
+  color: var(--hf-green);
+}
+.metric-label {
+  font-size: 7px;
+  font-weight: 700;
+  color: var(--hf-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.metric-delta {
+  font-size: 7px;
+  font-weight: 700;
+  margin-top: 2px;
+}
+.delta-up { color: var(--hf-green); }
+.delta-down { color: #D94040; }
+.delta-flat { color: var(--hf-muted); }
+
+/* CRM funnel row */
+.crm-funnel {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.funnel-metric {
+  text-align: center;
+  padding: 8px 4px;
+  border-radius: 8px;
+  background: white;
+  border: 1px solid rgba(27, 138, 74, 0.08);
+}
+
+/* === BOTTOM ROW — OTHER UPDATES === */
+.bottom-section {
+  grid-column: 1 / -1;
+}
+
+.bottom-row {
+  display: flex;
+  gap: 12px;
+  align-items: stretch;
+}
+
+.update-card {
+  flex: 1;
+  border-radius: 10px;
+  background: var(--hf-light);
+  border: 1px solid rgba(0,0,0,0.03);
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.update-card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.update-tag {
+  font-size: 7px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  padding: 2px 6px;
+  border-radius: 3px;
+  color: white;
+}
+.tag-aso { background: #6B5CE7; }
+.tag-paid { background: #E07B3C; }
+.tag-other { background: var(--hf-muted); }
+
+.update-card-title {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--hf-dark);
+}
+
+.update-card-body {
+  font-size: 9px;
+  font-weight: 500;
+  color: var(--hf-muted);
+  line-height: 1.6;
+}
+
+/* === PAGE NUMBER === */
+.page-num {
+  position: absolute;
+  bottom: 20px;
+  right: 40px;
+  font-size: 9px;
+  font-weight: 700;
+  color: rgba(0,0,0,0.15);
+}
+</style>
+</head>
+<body>
+
+<div class="slide">
+  <div class="slide-header">
+    <div class="slide-header-left">
+      <img src="https://media.hellofresh.com/w_256,q_100,f_auto,c_limit,fl_lossy/hellofresh_website/logo/Hello_Fresh_Lockup.png" alt="HelloFresh">
+      <div class="slide-header-sep"></div>
+      <div class="slide-header-feature">Cookbook Marketing Update</div>
+    </div>
+    <div class="slide-header-right">Week of [DATE] &middot; US</div>
+  </div>
+
+  <div class="content">
+    <!-- LEFT: Creative Tasks -->
+    <div class="left-col">
+      <div class="section-label">Creative Tasks</div>
+      <ul class="creative-list">
+        <li class="creative-item">
+          <div class="creative-status status-done"></div>
+          <div class="creative-text">
+            Task description here
+            <span>Completed — notes if needed</span>
+          </div>
+        </li>
+        <li class="creative-item">
+          <div class="creative-status status-progress"></div>
+          <div class="creative-text">
+            Task description here
+            <span>In progress — due date or context</span>
+          </div>
+        </li>
+        <li class="creative-item">
+          <div class="creative-status status-progress"></div>
+          <div class="creative-text">
+            Task description here
+            <span>In progress — due date or context</span>
+          </div>
+        </li>
+        <li class="creative-item">
+          <div class="creative-status status-todo"></div>
+          <div class="creative-text">
+            Task description here
+            <span>Not started — planned for next week</span>
+          </div>
+        </li>
+      </ul>
+      <div class="legend">
+        <div class="legend-item"><div class="legend-dot status-done"></div> Done</div>
+        <div class="legend-item"><div class="legend-dot status-progress"></div> In Progress</div>
+        <div class="legend-item"><div class="legend-dot status-todo"></div> To Do</div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Metrics -->
+    <div class="right-col">
+      <!-- Organic Social -->
+      <div class="metrics-card">
+        <div class="metrics-card-header">
+          <div class="metrics-card-title">Organic Social</div>
+          <div class="metrics-card-period">Past 7 days</div>
+        </div>
+        <div class="metrics-grid social">
+          <div class="metric">
+            <div class="metric-value">—</div>
+            <div class="metric-label">Reach</div>
+            <div class="metric-delta delta-up">—</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">—</div>
+            <div class="metric-label">Views</div>
+            <div class="metric-delta delta-up">—</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">—</div>
+            <div class="metric-label">Interactions</div>
+            <div class="metric-delta delta-up">—</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value highlight">—</div>
+            <div class="metric-label">Eng. Rate</div>
+            <div class="metric-delta delta-up">—</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CRM -->
+      <div class="metrics-card">
+        <div class="metrics-card-header">
+          <div class="metrics-card-title">CRM Performance</div>
+          <div class="metrics-card-period">Past 7 days</div>
+        </div>
+        <div class="metrics-grid crm">
+          <div class="metric">
+            <div class="metric-value">—</div>
+            <div class="metric-label">Sent</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">—</div>
+            <div class="metric-label">Opened</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">—</div>
+            <div class="metric-label">Clicked</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value highlight">—</div>
+            <div class="metric-label">Open Rate</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value highlight">—</div>
+            <div class="metric-label">Click Rate</div>
+          </div>
+        </div>
+        <div class="crm-funnel">
+          <div class="funnel-metric">
+            <div class="metric-value">—</div>
+            <div class="metric-label">Viewed Cookbook</div>
+          </div>
+          <div class="funnel-metric">
+            <div class="metric-value">—</div>
+            <div class="metric-label">Saved Recipe</div>
+          </div>
+          <div class="funnel-metric">
+            <div class="metric-value highlight">—</div>
+            <div class="metric-label">Click→View</div>
+          </div>
+          <div class="funnel-metric">
+            <div class="metric-value highlight">—</div>
+            <div class="metric-label">View→Save</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BOTTOM: Other Updates -->
+    <div class="bottom-section">
+      <div class="section-label">Other Updates</div>
+      <div class="bottom-row">
+        <div class="update-card">
+          <div class="update-card-header">
+            <div class="update-tag tag-aso">ASO</div>
+            <div class="update-card-title">Update title here</div>
+          </div>
+          <div class="update-card-body">Brief description of ASO activity, results, or next steps.</div>
+        </div>
+        <div class="update-card">
+          <div class="update-card-header">
+            <div class="update-tag tag-paid">Paid</div>
+            <div class="update-card-title">Update title here</div>
+          </div>
+          <div class="update-card-body">Brief description of paid activity, spend, results, or next steps.</div>
+        </div>
+        <div class="update-card">
+          <div class="update-card-header">
+            <div class="update-tag tag-other">Other</div>
+            <div class="update-card-title">Update title here</div>
+          </div>
+          <div class="update-card-body">Any other updates — partnerships, experiments, blockers, etc.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-num">01</div>
+</div>
+
+</body>
+</html>
