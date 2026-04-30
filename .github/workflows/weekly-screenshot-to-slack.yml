@@ -1,0 +1,59 @@
+name: Weekly Cookbook Update to Slack
+
+on:
+  schedule:
+    # Every Thursday at 1pm UTC = 3pm CET/CEST
+    - cron: '0 13 * * 4'
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  screenshot-and-post:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Puppeteer dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgbm-dev gconf-service libasound2t64 libatk1.0-0t64 \
+            libcairo2 libcups2t64 libfontconfig1 libgdk-pixbuf-2.0-0 libgtk-3-0t64 \
+            libnspr4 libpango-1.0-0 libxss1 fonts-liberation libnss3 xdg-utils
+
+      - name: Take HD screenshot
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Capture screenshot
+        run: |
+          npm init -y
+          npm install puppeteer
+          node << 'EOF'
+          const puppeteer = require('puppeteer');
+          (async () => {
+            const browser = await puppeteer.launch({
+              headless: true,
+              args: ['--no-sandbox', '--disable-setuid-sandbox']
+            });
+            const page = await browser.newPage();
+            await page.setViewport({ width: 1920, height: 1080, deviceScaleFactor: 2 });
+            await page.goto('https://kieranenright.github.io/marketing-prototypes/prototypes/cookbook-weekly-update.html', {
+              waitUntil: 'networkidle0'
+            });
+            // Wait for fonts to load
+            await page.evaluateHandle('document.fonts.ready');
+            await new Promise(r => setTimeout(r, 1000));
+            // Screenshot the slide element
+            const slide = await page.$('.slide');
+            await slide.screenshot({ path: 'cookbook-update.png', type: 'png' });
+            await browser.close();
+          })();
+          EOF
+
+      - name: Post screenshot to Slack
+        run: |
+          curl -F file=@cookbook-update.png \
+               -F "initial_comment=📊 Cookbook Weekly Marketing Update — $(date +'%B %d, %Y')" \
+               -F channels=$(curl -s -H "Authorization: Bearer ${{ secrets.SLACK_BOT_TOKEN }}" \
+                 "https://slack.com/api/conversations.list?limit=200&types=public_channel,private_channel" \
+                 | jq -r '.channels[] | select(.name=="dau-mktg-task-force") | .id') \
+               -H "Authorization: Bearer ${{ secrets.SLACK_BOT_TOKEN }}" \
+               https://slack.com/api/files.upload
