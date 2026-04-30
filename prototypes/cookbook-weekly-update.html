@@ -34,8 +34,19 @@ body {
   page-break-after: always;
 }
 @media screen {
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 12px;
+  }
   .slide {
-    margin: 30px auto;
+    width: 96vw;
+    max-width: 2200px;
+    height: auto;
+    aspect-ratio: 297 / 167;
+    margin: 0 auto;
     box-shadow: 0 8px 60px rgba(0,0,0,0.15);
     border-radius: 6px;
   }
@@ -289,6 +300,7 @@ body {
 }
 .tag-aso { background: #6B5CE7; }
 .tag-paid { background: #E07B3C; }
+.tag-influencer { background: #E05CA3; }
 .tag-other { background: var(--hf-muted); }
 
 .update-card-title {
@@ -442,7 +454,7 @@ body {
 
     <!-- BOTTOM: Other Updates -->
     <div class="bottom-section">
-      <div class="section-label">Other Updates</div>
+      <div class="section-label">Discipline Updates</div>
       <div class="bottom-row">
         <div class="update-card">
           <div class="update-card-header">
@@ -460,10 +472,17 @@ body {
         </div>
         <div class="update-card">
           <div class="update-card-header">
+            <div class="update-tag tag-influencer">Influencer</div>
+            <div class="update-card-title">Update title here</div>
+          </div>
+          <div class="update-card-body">Creator collabs, briefs in review, content live, or upcoming partnerships.</div>
+        </div>
+        <div class="update-card">
+          <div class="update-card-header">
             <div class="update-tag tag-other">Other</div>
             <div class="update-card-title">Update title here</div>
           </div>
-          <div class="update-card-body">Any other updates — partnerships, experiments, blockers, etc.</div>
+          <div class="update-card-body">Any other updates — experiments, blockers, etc.</div>
         </div>
       </div>
     </div>
