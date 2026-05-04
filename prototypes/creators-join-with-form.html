@@ -198,14 +198,12 @@
       z-index: 1;
     }
 
-    @media (min-width: 1100px) {
-      .hero-container {
-        flex-direction: row;
-        text-align: left;
-        gap: 80px;
-      }
-      .hero-text { order: 0; flex: 1; }
-      .hero-ctas { justify-content: flex-start; }
+    .hero-text {
+      max-width: 700px;
+    }
+
+    .hero-ctas {
+      justify-content: center;
     }
 
     .hero-eyebrow {
@@ -253,12 +251,12 @@
     /* Hero Video */
     .hero-video {
       width: 100%;
-      flex-shrink: 0;
+      max-width: 1100px;
       border-radius: 20px;
       overflow: hidden;
       box-shadow: 0 40px 80px rgba(0,0,0,0.15);
-      animation: fadeInRight 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-      animation-delay: 0.5s;
+      animation: slideUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation-delay: 0.9s;
       opacity: 0;
     }
 
