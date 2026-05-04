@@ -198,7 +198,7 @@
         text-align: left;
         gap: 60px;
       }
-      .hero-text { flex: 0 0 380px; }
+      .hero-text { flex: 0 0 320px; }
       .hero-ctas { justify-content: flex-start; }
       .hero-video { flex: 1; }
     }
@@ -237,12 +237,21 @@
 
     .hero-ctas {
       display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
+      gap: 12px;
+      flex-wrap: nowrap;
       justify-content: center;
       animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
       animation-delay: 0.8s;
       opacity: 0;
+    }
+
+    .hero-ctas .btn {
+      flex: 1;
+      text-align: center;
+      justify-content: center;
+      padding: 14px 20px;
+      font-size: 14px;
+      white-space: nowrap;
     }
 
     /* Hero Video */
