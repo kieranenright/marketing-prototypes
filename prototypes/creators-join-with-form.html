@@ -82,7 +82,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      height: 56px;
+      height: 64px;
     }
 
     .header-logo { display: flex; align-items: center; }
@@ -167,7 +167,7 @@
       min-height: 100vh;
       display: flex;
       align-items: center;
-      padding: 100px 24px 60px;
+      padding: 140px 24px 80px;
       background: var(--color-bg);
       position: relative;
       overflow: hidden;
@@ -196,11 +196,11 @@
       .hero-container {
         flex-direction: row;
         text-align: left;
-        gap: 60px;
+        gap: 140px;
       }
-      .hero-text { flex: 0 0 320px; }
+      .hero-text { flex: 0 0 420px; }
       .hero-ctas { justify-content: flex-start; }
-      .hero-video { flex: 1; }
+      .hero-phones { flex: 1; }
     }
 
     .hero-eyebrow {
@@ -254,21 +254,103 @@
       white-space: nowrap;
     }
 
-    /* Hero Video */
-    .hero-video {
-      width: 100%;
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 24px 60px rgba(0,0,0,0.12);
+    /* Hero Phone Mockups */
+    .hero-phones {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      min-height: 580px;
       animation: fadeInRight 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
       animation-delay: 0.5s;
       opacity: 0;
     }
 
-    .hero-video video {
+    .phone-mockup {
+      position: relative;
+      border-radius: 44px;
+      background: #1a1a1a;
+      padding: 12px;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.25), 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    .phone-mockup::before {
+      content: '';
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 28px;
+      background: #1a1a1a;
+      border-radius: 0 0 16px 16px;
+      z-index: 10;
+    }
+
+    .phone-screen {
+      border-radius: 34px;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .phone-screen video,
+    .phone-screen img {
       width: 100%;
-      height: auto;
+      height: 100%;
+      object-fit: cover;
       display: block;
+    }
+
+    /* Center phone - main */
+    .phone-center {
+      width: 280px;
+      z-index: 3;
+      position: relative;
+    }
+
+    .phone-center .phone-screen {
+      width: 256px;
+      height: 554px;
+    }
+
+    /* Side phones - behind, flat, spread apart */
+    .phone-side {
+      position: absolute;
+      width: 240px;
+      z-index: 1;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .phone-side .phone-screen {
+      width: 216px;
+      height: 468px;
+    }
+
+    .phone-left {
+      left: -60px;
+    }
+
+    .phone-right {
+      right: -60px;
+    }
+
+    @media (max-width: 768px) {
+      .hero-phones {
+        min-height: 420px;
+      }
+      .phone-center { width: 220px; }
+      .phone-center .phone-screen { width: 196px; height: 424px; }
+      .phone-side { width: 180px; }
+      .phone-side .phone-screen { width: 156px; height: 338px; }
+      .phone-left { left: -30px; }
+      .phone-right { right: -30px; }
+    }
+
+    @media (max-width: 480px) {
+      .phone-side { display: none; }
+      .hero-phones { min-height: 360px; }
     }
 
 
@@ -1062,11 +1144,29 @@
         </div>
       </div>
 
-      <div class="hero-video">
-        <video autoplay muted loop playsinline>
-          <source src="../../../../Downloads/NABRAND-42195_HF_US_PDS_DS_YT_Cookbook-Launch_XPOD_Studio_Teaser_30s_16x9_V2.mp4" type="video/mp4">
-          <source src="assets/cookbook-launch-teaser.mp4" type="video/mp4">
-        </video>
+      <div class="hero-phones">
+        <!-- Left background phone -->
+        <div class="phone-mockup phone-side phone-left">
+          <div class="phone-screen">
+            <img src="assets/final_s1.png" alt="Cookbook social feed">
+          </div>
+        </div>
+
+        <!-- Center phone with video -->
+        <div class="phone-mockup phone-center">
+          <div class="phone-screen">
+            <video autoplay muted loop playsinline>
+              <source src="assets/creator-phone-demo.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+
+        <!-- Right background phone -->
+        <div class="phone-mockup phone-side phone-right">
+          <div class="phone-screen">
+            <img src="assets/final_s2.png" alt="Cookbook recipe detail">
+          </div>
+        </div>
       </div>
     </div>
   </section>
