@@ -540,27 +540,38 @@ body {
           <div class="section-title acquire">ASO</div>
           <div class="section-period">Apr 18 – May 4</div>
         </div>
-        <div style="font-size: 11px; font-weight: 600; color: var(--hf-dark); margin-bottom: 8px;">
-          Featuring (US, Apr 18–25) → 46 installs
-        </div>
-        <div class="two-cells">
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px;">
+          <!-- Google In-App Event (tied to featuring) -->
           <div class="cell">
-            <div class="cell-title">In-App Events</div>
+            <div class="cell-title">Google In-App Event</div>
+            <div style="font-size: 9px; font-weight: 600; color: var(--col-acquire); margin-bottom: 4px;">Linked to US Featuring (Apr 18–25)</div>
             <table class="data-table">
-              <thead><tr><th></th><th>Viewers</th><th>Conv.</th></tr></thead>
+              <thead><tr><th>Viewers</th><th>Conv.</th></tr></thead>
               <tbody>
-                <tr><td>Google Play</td><td class="val-neutral">25,172</td><td class="val-neutral">46</td></tr>
-                <tr><td>App Store</td><td class="val-neutral">2,581</td><td class="val-neutral">18</td></tr>
+                <tr><td class="val-neutral">25,172</td><td class="val-blue">46</td></tr>
               </tbody>
             </table>
           </div>
+          <!-- Apple In-App Event (standalone) -->
+          <div class="cell">
+            <div class="cell-title">Apple In-App Event</div>
+            <div style="font-size: 9px; font-weight: 600; color: var(--hf-muted); margin-bottom: 4px;">Standalone (no featuring)</div>
+            <table class="data-table">
+              <thead><tr><th>Viewers</th><th>Conv.</th></tr></thead>
+              <tbody>
+                <tr><td class="val-neutral">2,581</td><td class="val-neutral">18</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- Custom Product Pages (standalone) -->
           <div class="cell">
             <div class="cell-title">Custom Product Pages</div>
+            <div style="font-size: 9px; font-weight: 600; color: var(--hf-muted); margin-bottom: 4px;">Always-on store pages</div>
             <table class="data-table">
               <thead><tr><th></th><th>Visitors</th><th>CVR</th></tr></thead>
               <tbody>
-                <tr><td>Google Play</td><td class="val-neutral">503</td><td class="val-green">7%</td></tr>
-                <tr><td>App Store</td><td class="val-neutral">123</td><td class="val-neutral">1.99%</td></tr>
+                <tr><td>Google</td><td class="val-neutral">503</td><td class="val-green">7%</td></tr>
+                <tr><td>Apple</td><td class="val-neutral">123</td><td class="val-neutral">1.99%</td></tr>
               </tbody>
             </table>
           </div>
@@ -595,9 +606,12 @@ body {
         <div style="font-size: 11px; font-weight: 600; color: var(--hf-dark); margin-bottom: 10px;">
           Push to customers with upcoming paused delivery → Cookbook engagement
         </div>
+
+        <!-- Primary Metrics -->
+        <div style="font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--hf-muted); margin-bottom: 4px; margin-top: 4px;">Primary Metrics</div>
         <table class="data-table">
           <thead>
-            <tr><th>Metric</th><th>Mean Lift</th><th>Confidence Interval</th></tr>
+            <tr><th>Metric</th><th>Mean Lift</th><th>CI</th></tr>
           </thead>
           <tbody>
             <tr>
@@ -605,11 +619,41 @@ body {
               <td class="val-neutral">+1.97%</td>
               <td class="ci">[-7.4%, +12.3%]</td>
             </tr>
+          </tbody>
+        </table>
+
+        <!-- Secondary Metrics -->
+        <div style="font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--hf-muted); margin-bottom: 4px; margin-top: 10px;">Secondary Metrics</div>
+        <table class="data-table">
+          <thead>
+            <tr><th>Metric</th><th>Mean Lift</th><th>CI</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Cookbook Save Rate 7-Day</td>
+              <td class="val-neutral">+1.11%</td>
+              <td class="ci">[-5.7%, +8.4%]</td>
+            </tr>
+            <tr>
+              <td>Cookbook Save Rate 1-Day</td>
+              <td class="val-neutral">+0.68%</td>
+              <td class="ci">[-12.9%, +16.3%]</td>
+            </tr>
             <tr>
               <td>Cookbook Net New Adoption</td>
               <td class="val-neutral">+1.34%</td>
               <td class="ci">[-5.5%, +8.7%]</td>
             </tr>
+          </tbody>
+        </table>
+
+        <!-- Other Metrics -->
+        <div style="font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--hf-muted); margin-bottom: 4px; margin-top: 10px;">Other Metrics</div>
+        <table class="data-table">
+          <thead>
+            <tr><th>Metric</th><th>Mean Lift</th><th>CI</th></tr>
+          </thead>
+          <tbody>
             <tr>
               <td>Cancellation Rate <span class="stat-sig">Sig.</span></td>
               <td class="val-green">-6.60%</td>
