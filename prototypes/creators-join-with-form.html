@@ -1592,22 +1592,22 @@
           <div class="intake-row">
             <div class="intake-group">
               <label class="intake-label" for="firstName">First name</label>
-              <input type="text" id="firstName" class="intake-input" placeholder="Jamie" required>
+              <input type="text" id="firstName" name="firstName" class="intake-input" placeholder="Jamie" required>
             </div>
             <div class="intake-group">
               <label class="intake-label" for="lastName">Last name</label>
-              <input type="text" id="lastName" class="intake-input" placeholder="Oliver" required>
+              <input type="text" id="lastName" name="lastName" class="intake-input" placeholder="Oliver" required>
             </div>
           </div>
 
           <div class="intake-group">
             <label class="intake-label" for="email">Email address</label>
-            <input type="email" id="email" class="intake-input" placeholder="you@email.com" required>
+            <input type="email" id="email" name="email" class="intake-input" placeholder="you@email.com" required>
           </div>
 
           <div class="intake-group">
             <label class="intake-label" for="country">Country / Market</label>
-            <select id="country" class="intake-select" required>
+            <select id="country" name="country" class="intake-select" required>
               <option value="" disabled selected>Select your country</option>
               <option value="US">United States</option>
               <option value="UK">United Kingdom</option>
@@ -1638,7 +1638,7 @@
             <label class="intake-label">Primary platform</label>
             <div class="intake-social-row">
               <div class="intake-social-platform">
-                <select id="platform1" class="intake-select" required>
+                <select id="platform1" name="platform1" class="intake-select" required>
                   <option value="" disabled selected>Platform</option>
                   <option value="instagram">Instagram</option>
                   <option value="tiktok">TikTok</option>
@@ -1648,10 +1648,10 @@
                 </select>
               </div>
               <div class="intake-social-handle">
-                <input type="text" id="handle1" class="intake-input" placeholder="@yourhandle" required>
+                <input type="text" id="handle1" name="handle1" class="intake-input" placeholder="@yourhandle" required>
               </div>
               <div class="intake-social-followers">
-                <select id="followers1" class="intake-select" required>
+                <select id="followers1" name="followers1" class="intake-select" required>
                   <option value="" disabled selected>Followers</option>
                   <option value="1k-10k">1K – 10K</option>
                   <option value="10k-50k">10K – 50K</option>
@@ -1669,7 +1669,7 @@
               <label class="intake-label">Additional platform</label>
               <div class="intake-social-row">
                 <div class="intake-social-platform">
-                  <select id="platform2" class="intake-select">
+                  <select id="platform2" name="platform2" class="intake-select">
                     <option value="" disabled selected>Platform</option>
                     <option value="instagram">Instagram</option>
                     <option value="tiktok">TikTok</option>
@@ -1679,10 +1679,10 @@
                   </select>
                 </div>
                 <div class="intake-social-handle">
-                  <input type="text" id="handle2" class="intake-input" placeholder="@yourhandle">
+                  <input type="text" id="handle2" name="handle2" class="intake-input" placeholder="@yourhandle">
                 </div>
                 <div class="intake-social-followers">
-                  <select id="followers2" class="intake-select">
+                  <select id="followers2" name="followers2" class="intake-select">
                     <option value="" disabled selected>Followers</option>
                     <option value="1k-10k">1K – 10K</option>
                     <option value="10k-50k">10K – 50K</option>
@@ -1702,7 +1702,7 @@
 
           <div class="intake-group" style="margin-top: 20px;">
             <label class="intake-label" for="website">Website or portfolio <span class="intake-optional">(optional)</span></label>
-            <input type="url" id="website" class="intake-input" placeholder="https://yoursite.com">
+            <input type="url" id="website" name="website" class="intake-input" placeholder="https://yoursite.com">
           </div>
 
           <hr class="intake-divider">
@@ -1712,19 +1712,19 @@
 
           <div class="intake-group">
             <label class="intake-label" for="contentDesc">Tell us about your content</label>
-            <textarea id="contentDesc" class="intake-textarea" placeholder="What type of content do you make? How would you describe your presence online? What do your viewers love about your content?" required></textarea>
+            <textarea id="contentDesc" name="contentDesc" class="intake-textarea" placeholder="What type of content do you make? How would you describe your presence online? What do your viewers love about your content?" required></textarea>
             <p class="intake-helper">A few sentences is perfect — your style, your audience, what keeps them coming back.</p>
           </div>
 
           <div class="intake-group">
             <label class="intake-label" for="sampleLink">Link to a recipe video or post</label>
-            <input type="url" id="sampleLink" class="intake-input" placeholder="https://instagram.com/reel/..." required>
+            <input type="url" id="sampleLink" name="sampleLink" class="intake-input" placeholder="https://instagram.com/reel/..." required>
             <p class="intake-helper">Share your best recipe content — a Reel, TikTok, or YouTube video</p>
           </div>
 
           <div class="intake-group">
             <label class="intake-label" for="audienceBenefits">What would you love to offer your audience through Cookbook?</label>
-            <textarea id="audienceBenefits" class="intake-textarea" placeholder="e.g. Easy-to-follow step-by-step recipes, nutritional values, a permanent place to find and save my recipes..." required></textarea>
+            <textarea id="audienceBenefits" name="audienceBenefits" class="intake-textarea" placeholder="e.g. Easy-to-follow step-by-step recipes, nutritional values, a permanent place to find and save my recipes..." required></textarea>
             <p class="intake-helper">What's missing for your audience today? What would make their experience with your content better?</p>
           </div>
 
@@ -1733,7 +1733,7 @@
           <!-- HOW DID YOU HEAR -->
           <div class="intake-group">
             <label class="intake-label" for="referral">How did you hear about Creator Recipes?</label>
-            <select id="referral" class="intake-select" required>
+            <select id="referral" name="referral" class="intake-select" required>
               <option value="" disabled selected>Select one</option>
               <option value="social-hf">HelloFresh social media</option>
               <option value="social-creator">Another creator</option>
@@ -1747,7 +1747,7 @@
 
           <!-- CONSENT -->
           <div class="intake-checkbox-group">
-            <input type="checkbox" id="consent" required>
+            <input type="checkbox" id="consent" name="consent" required>
             <label for="consent">I agree to be contacted by HelloFresh about partnership opportunities. View our <a href="https://www.hellofresh.com/privacy">Privacy Policy</a>.</label>
           </div>
 
@@ -1840,15 +1840,41 @@
   </footer>
 
   <script>
+    // Google Sheets endpoint — replace with your deployed Apps Script URL
+    const GOOGLE_SHEETS_URL = 'https://script.google.com/a/macros/hellofresh.com/s/AKfycbw33993rxv8zgIqWvX8pAXQQQhOaOm6c15Y0SHhh5eA1JhfTlMcjE--2IPl5mSKlPBI/exec';
+
     // Form submission
     document.getElementById('creatorForm').addEventListener('submit', function(e) {
       e.preventDefault();
-      const formData = new FormData(this);
+      const form = this;
+      const submitBtn = form.querySelector('.intake-submit');
+      const formData = new FormData(form);
       const data = Object.fromEntries(formData.entries());
-      console.log('Form submission:', data);
-      this.style.display = 'none';
-      document.getElementById('successState').classList.add('show');
-      document.querySelector('.intake-form-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+      // Add timestamp
+      data.timestamp = new Date().toISOString();
+
+      // Disable button while submitting
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'SUBMITTING...';
+
+      fetch(GOOGLE_SHEETS_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      })
+      .then(() => {
+        form.style.display = 'none';
+        document.getElementById('successState').classList.add('show');
+        document.querySelector('.intake-form-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      })
+      .catch((err) => {
+        console.error('Submission error:', err);
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'SUBMIT INTEREST';
+        alert('Something went wrong. Please try again.');
+      });
     });
 
     // Scroll-triggered animations
