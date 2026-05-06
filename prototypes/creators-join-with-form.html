@@ -1584,7 +1584,8 @@
       </div>
 
       <div class="intake-form-card">
-        <form id="creatorForm">
+        <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+        <form id="creatorForm" action="https://script.google.com/a/macros/hellofresh.com/s/AKfycbw33993rxv8zgIqWvX8pAXQQQhOaOm6c15Y0SHhh5eA1JhfTlMcjE--2IPl5mSKlPBI/exec" method="POST" target="hidden_iframe">
 
           <!-- ABOUT YOU -->
           <div class="intake-section-title">ABOUT YOU</div>
@@ -1840,41 +1841,14 @@
   </footer>
 
   <script>
-    // Google Sheets endpoint — replace with your deployed Apps Script URL
-    const GOOGLE_SHEETS_URL = 'https://script.google.com/a/macros/hellofresh.com/s/AKfycbw33993rxv8zgIqWvX8pAXQQQhOaOm6c15Y0SHhh5eA1JhfTlMcjE--2IPl5mSKlPBI/exec';
-
-    // Form submission
-    document.getElementById('creatorForm').addEventListener('submit', function(e) {
-      e.preventDefault();
+    // Form submission — uses hidden iframe target to bypass CORS
+    document.getElementById('creatorForm').addEventListener('submit', function() {
       const form = this;
-      const submitBtn = form.querySelector('.intake-submit');
-      const formData = new FormData(form);
-      const data = Object.fromEntries(formData.entries());
-
-      // Add timestamp
-      data.timestamp = new Date().toISOString();
-
-      // Disable button while submitting
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'SUBMITTING...';
-
-      fetch(GOOGLE_SHEETS_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'text/plain' },
-        body: JSON.stringify(data)
-      })
-      .then(() => {
+      setTimeout(function() {
         form.style.display = 'none';
         document.getElementById('successState').classList.add('show');
         document.querySelector('.intake-form-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
-      })
-      .catch((err) => {
-        console.error('Submission error:', err);
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'SUBMIT INTEREST';
-        alert('Something went wrong. Please try again.');
-      });
+      }, 100);
     });
 
     // Scroll-triggered animations
