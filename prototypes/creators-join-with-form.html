@@ -160,15 +160,31 @@
     .btn-secondary:hover { background: rgba(6, 122, 70, 0.05); transform: translateY(-2px); }
     .btn-large { padding: 16px 32px; font-size: 17px; }
 
+    /* Sticky Landing Section */
+    .sticky-landing {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 10;
+    }
+
+    .sticky-landing-spacer {
+      height: 100vh;
+    }
+
     /* Hero */
     .hero {
       min-height: auto;
       display: flex;
       align-items: center;
-      padding: 100px 24px 40px;
+      padding: 80px 24px 20px;
       background: var(--color-bg);
       position: relative;
       overflow: hidden;
+      flex: 1;
     }
     .hero::before {
       content: '';
@@ -185,18 +201,19 @@
       flex-direction: column;
       align-items: center;
       text-align: center;
-      gap: 48px;
+      gap: 24px;
       position: relative;
       z-index: 1;
+      height: 100%;
     }
 
     @media (min-width: 1100px) {
       .hero-container {
         flex-direction: row;
         text-align: left;
-        gap: 140px;
+        gap: 80px;
       }
-      .hero-text { flex: 0 0 420px; }
+      .hero-text { flex: 0 0 380px; }
       .hero-ctas { justify-content: flex-start; }
       .hero-phones { flex: 1; }
     }
@@ -259,7 +276,7 @@
       align-items: center;
       justify-content: center;
       position: relative;
-      min-height: 580px;
+      min-height: 400px;
       animation: fadeInRight 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
       animation-delay: 0.5s;
       opacity: 0;
@@ -302,28 +319,28 @@
 
     /* Center phone - main */
     .phone-center {
-      width: 280px;
+      width: 220px;
       z-index: 3;
       position: relative;
     }
 
     .phone-center .phone-screen {
-      width: 256px;
-      height: 554px;
+      width: 200px;
+      height: 430px;
     }
 
     /* Side phones - behind, flat, spread apart */
     .phone-side {
       position: absolute;
-      width: 240px;
+      width: 190px;
       z-index: 1;
       top: 50%;
       transform: translateY(-50%);
     }
 
     .phone-side .phone-screen {
-      width: 216px;
-      height: 468px;
+      width: 170px;
+      height: 365px;
     }
 
     .phone-left {
@@ -336,19 +353,19 @@
 
     @media (max-width: 768px) {
       .hero-phones {
-        min-height: 420px;
+        min-height: 280px;
       }
-      .phone-center { width: 220px; }
-      .phone-center .phone-screen { width: 196px; height: 424px; }
-      .phone-side { width: 180px; }
-      .phone-side .phone-screen { width: 156px; height: 338px; }
-      .phone-left { left: -30px; }
-      .phone-right { right: -30px; }
+      .phone-center { width: 180px; }
+      .phone-center .phone-screen { width: 160px; height: 340px; }
+      .phone-side { width: 140px; }
+      .phone-side .phone-screen { width: 120px; height: 260px; }
+      .phone-left { left: -20px; }
+      .phone-right { right: -20px; }
     }
 
     @media (max-width: 480px) {
       .phone-side { display: none; }
-      .hero-phones { min-height: 360px; }
+      .hero-phones { min-height: 240px; }
     }
 
 
@@ -356,7 +373,8 @@
     .chefs-showcase {
       background: var(--color-surface);
       overflow: hidden;
-      padding: 60px 0;
+      padding: 24px 0 32px;
+      flex-shrink: 0;
     }
 
     .chefs-scroll-container {
@@ -426,7 +444,7 @@
     .chef-name { font-weight: 600; font-size: 15px; margin-bottom: 2px; }
     .chef-specialty { font-size: 13px; color: var(--color-text-secondary); }
 
-    .carousel-cta { text-align: center; margin-top: 40px; padding: 0 24px; }
+    .carousel-cta { text-align: center; margin-top: 24px; padding: 0 24px; }
 
     /* Testimonial */
     .testimonial {
@@ -475,7 +493,7 @@
     .testimonial-author span { font-size: 14px; color: var(--color-text-secondary); }
 
     /* Section base */
-    .section { padding: 80px 24px; }
+    .section { padding: 80px 24px; position: relative; z-index: 20; }
     .section-content { max-width: 1000px; margin: 0 auto; }
     .section-header { text-align: center; margin-bottom: 48px; }
 
@@ -496,6 +514,8 @@
     .why-section {
       background: var(--color-surface);
       padding: 60px 24px;
+      position: relative;
+      z-index: 20;
     }
 
     .why-features {
@@ -569,6 +589,8 @@
     .how-section {
       background: var(--color-bg);
       padding: 80px 24px;
+      position: relative;
+      z-index: 20;
     }
 
     .how-steps {
@@ -1121,6 +1143,8 @@
       background: var(--color-brand-dark);
       color: rgba(255,255,255,0.7);
       padding: 60px 24px 32px;
+      position: relative;
+      z-index: 20;
     }
 
     .footer-content { max-width: 1200px; margin: 0 auto; }
@@ -1290,6 +1314,9 @@
     </nav>
   </header>
 
+  <!-- Sticky Landing Section -->
+  <div class="sticky-landing">
+
   <!-- Hero -->
   <section class="hero">
     <div class="hero-container">
@@ -1318,7 +1345,7 @@
 
   <!-- Chef Carousel -->
   <section class="chefs-showcase">
-    <div class="section-header" style="padding: 0 24px; margin-bottom: 32px;">
+    <div class="section-header" style="padding: 0 24px; margin-bottom: 16px;">
       <div class="section-eyebrow">CREATORS ON THE PLATFORM</div>
       <h2>Their recipes get cooked, not just watched</h2>
     </div>
@@ -1482,9 +1509,13 @@
       <a href="#apply" class="btn btn-primary btn-large">Join the Cookbook Creator Platform</a>
       <button type="button" class="btn btn-secondary btn-large" onclick="toggleWhoSection()">Who can join?</button>
     </div>
+  </section>
+  </div><!-- end sticky-landing -->
+  <div class="sticky-landing-spacer"></div>
 
-    <!-- Testimonial -->
-    <div class="testimonial" style="margin-top: 80px;">
+  <!-- Testimonial -->
+  <section class="testimonial-section" style="background: var(--color-surface); padding: 80px 24px; position: relative; z-index: 20;">
+    <div class="testimonial" style="margin-top: 0;">
       <blockquote>
         "I went from commercial fishing boats to creating recipes that reach millions of home kitchens. HelloFresh lets me focus on what I love — sustainable seafood and making quality cuisine accessible to everyone."
       </blockquote>
