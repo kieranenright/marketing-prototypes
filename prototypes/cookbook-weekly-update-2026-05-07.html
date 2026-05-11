@@ -449,24 +449,20 @@ body {
       <div style="font-size: 14px; font-weight: 700; color: var(--hf-dark); line-height: 1.4; margin-bottom: 10px;">Post-meal selection push test: nudging active subscribers toward Cookbook disrupts their meal-kit flow and increases pause rate. Cookbook engagement is strongest among paused customers (consistent with W19 results). Opportunity: Cooking Assistant for active subs.</div>
       <div style="display: flex; gap: 16px;">
         <div style="text-align: center;">
-          <div style="font-size: 24px; font-weight: 900; color: #D64545;">&#8593; Pause</div>
-          <div style="font-size: 10px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase;">Rate (Sig.)</div>
+          <div style="font-size: 24px; font-weight: 900; color: #D64545;">+2.02%</div>
+          <div style="font-size: 10px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase;">Pause Rate (Sig.)</div>
         </div>
         <div style="text-align: center;">
-          <div style="font-size: 24px; font-weight: 900; color: var(--col-engage);">-1.99%</div>
+          <div style="font-size: 24px; font-weight: 900; color: #D64545;">-6.84%</div>
+          <div style="font-size: 10px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase;">Push Click (Sig.)</div>
+        </div>
+        <div style="text-align: center;">
+          <div style="font-size: 24px; font-weight: 900; color: var(--col-engage);">+0.55%</div>
+          <div style="font-size: 10px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase;">Order Rate (Sig.)</div>
+        </div>
+        <div style="text-align: center;">
+          <div style="font-size: 24px; font-weight: 900; color: var(--hf-muted);">-0.95%</div>
           <div style="font-size: 10px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase;">Deeper Eng. 3+</div>
-        </div>
-        <div style="text-align: center;">
-          <div style="font-size: 24px; font-weight: 900; color: var(--col-engage);">-4.12%</div>
-          <div style="font-size: 10px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase;">Net New Adoption</div>
-        </div>
-        <div style="text-align: center;">
-          <div style="font-size: 24px; font-weight: 900; color: var(--col-engage);">-2.78%</div>
-          <div style="font-size: 10px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase;">Save Rate 1-Day</div>
-        </div>
-        <div style="text-align: center;">
-          <div style="font-size: 24px; font-weight: 900; color: var(--col-engage);">-1.26%</div>
-          <div style="font-size: 10px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase;">Save Rate 7-Day</div>
         </div>
       </div>
     </div>
@@ -602,7 +598,8 @@ body {
           Daily active users post-meal selection · Pause group vs Control · Queried by Rachel Tsao, May 6
         </div>
 
-        <!-- Metrics -->
+        <!-- Primary Metrics -->
+        <div style="font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--hf-muted); margin-bottom: 4px; margin-top: 4px;">Primary Metrics</div>
         <table class="data-table">
           <thead>
             <tr><th>Metric</th><th>Mean Lift</th><th>CI</th></tr>
@@ -610,23 +607,68 @@ body {
           <tbody>
             <tr>
               <td>Cookbook Deeper Engagement 3+</td>
-              <td class="val-neutral">-1.99%</td>
-              <td class="ci">[-10.5%, +7.3%]</td>
+              <td class="val-neutral">-0.95%</td>
+              <td class="ci">[-7.2%, +5.7%]</td>
             </tr>
+          </tbody>
+        </table>
+
+        <!-- Secondary Metrics -->
+        <div style="font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--hf-muted); margin-bottom: 4px; margin-top: 10px;">Secondary Metrics</div>
+        <table class="data-table">
+          <thead>
+            <tr><th>Metric</th><th>Mean Lift</th><th>CI</th></tr>
+          </thead>
+          <tbody>
             <tr>
               <td>Cookbook Net New Adoption</td>
-              <td class="val-neutral">-4.12%</td>
-              <td class="ci">[-10.4%, +2.5%]</td>
+              <td class="val-neutral">-2.49%</td>
+              <td class="ci">[-7.1%, +2.4%]</td>
             </tr>
             <tr>
               <td>Cookbook Save Rate 1-Day</td>
-              <td class="val-neutral">-2.78%</td>
-              <td class="ci">[-14.6%, +10.7%]</td>
+              <td class="val-neutral">-2.13%</td>
+              <td class="ci">[-12.1%, +9.0%]</td>
             </tr>
             <tr>
               <td>Cookbook Save Rate 7-Day</td>
-              <td class="val-neutral">-1.26%</td>
-              <td class="ci">[-7.5%, +5.4%]</td>
+              <td class="val-neutral">-0.90%</td>
+              <td class="ci">[-5.9%, +4.4%]</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Other Metrics -->
+        <div style="font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--hf-muted); margin-bottom: 4px; margin-top: 10px;">Other Metrics</div>
+        <table class="data-table">
+          <thead>
+            <tr><th>Metric</th><th>Mean Lift</th><th>CI</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Push Click Rate <span class="stat-sig" style="background: #D64545;">Sig.</span></td>
+              <td class="val-neutral" style="color: #D64545; font-weight: 800;">-6.84%</td>
+              <td class="ci">[-9.9%, -3.6%]</td>
+            </tr>
+            <tr>
+              <td>Managed Order Rate <span class="stat-sig">Sig.</span></td>
+              <td class="val-green">+0.55%</td>
+              <td class="ci">[+0.17%, +0.93%]</td>
+            </tr>
+            <tr>
+              <td>Pause Rate <span class="stat-sig" style="background: #D64545;">Sig.</span></td>
+              <td class="val-neutral" style="color: #D64545; font-weight: 800;">+2.02%</td>
+              <td class="ci">[+0.2%, +3.9%]</td>
+            </tr>
+            <tr>
+              <td>Unpause Rate</td>
+              <td class="val-neutral">+2.78%</td>
+              <td class="ci">[-1.3%, +7.0%]</td>
+            </tr>
+            <tr>
+              <td>Cancellation Rate</td>
+              <td class="val-neutral">-1.11%</td>
+              <td class="ci">[-6.0%, +4.0%]</td>
             </tr>
           </tbody>
         </table>
