@@ -720,61 +720,93 @@ body {
       <div class="section-card">
         <div class="section-header">
           <div class="section-title engage">Social → Cookbook Attribution</div>
-          <div class="section-period">May 1–10 · US</div>
+          <div class="section-period">W19 vs W20 · US</div>
         </div>
         <div style="font-size: 11px; font-weight: 600; color: var(--hf-dark); margin-bottom: 10px;">
           Instagram link-in-bio clickers → Cookbook engagement (5-day window)
         </div>
 
-        <!-- Funnel visual -->
-        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px; padding: 10px 14px; background: white; border-radius: 8px; border: 1px solid rgba(0,0,0,0.04);">
-          <div style="text-align: center; flex: 1;">
-            <div style="font-size: 22px; font-weight: 900; color: var(--col-engage);">309</div>
-            <div style="font-size: 9px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase;">LiB Clickers</div>
+        <!-- W19 vs W20 Funnel comparison -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px;">
+          <!-- W19 -->
+          <div style="padding: 10px 14px; background: white; border-radius: 8px; border: 1px solid rgba(0,0,0,0.04);">
+            <div style="font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--hf-muted); margin-bottom: 6px;">W19 (Apr 30 – May 6)</div>
+            <div style="display: flex; align-items: center; gap: 6px;">
+              <div style="text-align: center; flex: 1;">
+                <div style="font-size: 18px; font-weight: 900; color: var(--col-engage);">207</div>
+                <div style="font-size: 8px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase;">Clickers</div>
+              </div>
+              <div style="font-size: 14px; color: #ccc;">→</div>
+              <div style="text-align: center; flex: 1;">
+                <div style="font-size: 18px; font-weight: 900; color: var(--col-engage);">9</div>
+                <div style="font-size: 8px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase;">Viewers</div>
+              </div>
+              <div style="font-size: 14px; color: #ccc;">→</div>
+              <div style="text-align: center; flex: 1;">
+                <div style="font-size: 18px; font-weight: 900; color: var(--hf-muted);">0</div>
+                <div style="font-size: 8px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase;">Saves</div>
+              </div>
+            </div>
+            <div style="font-size: 10px; font-weight: 700; color: var(--col-engage); margin-top: 6px; text-align: center;">4.35% click-to-view</div>
           </div>
-          <div style="font-size: 16px; color: #ccc;">→</div>
-          <div style="text-align: center; flex: 1;">
-            <div style="font-size: 22px; font-weight: 900; color: var(--col-engage);">10</div>
-            <div style="font-size: 9px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase;">CB Viewers</div>
-          </div>
-          <div style="font-size: 16px; color: #ccc;">→</div>
-          <div style="text-align: center; flex: 1;">
-            <div style="font-size: 22px; font-weight: 900; color: var(--hf-muted);">0</div>
-            <div style="font-size: 9px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase;">Recipe Saves</div>
+          <!-- W20 -->
+          <div style="padding: 10px 14px; background: white; border-radius: 8px; border: 1px solid rgba(0,0,0,0.04);">
+            <div style="font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--hf-muted); margin-bottom: 6px;">W20 (May 7 – May 13)</div>
+            <div style="display: flex; align-items: center; gap: 6px;">
+              <div style="text-align: center; flex: 1;">
+                <div style="font-size: 18px; font-weight: 900; color: var(--col-engage);">135</div>
+                <div style="font-size: 8px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase;">Clickers</div>
+              </div>
+              <div style="font-size: 14px; color: #ccc;">→</div>
+              <div style="text-align: center; flex: 1;">
+                <div style="font-size: 18px; font-weight: 900; color: var(--col-engage);">2</div>
+                <div style="font-size: 8px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase;">Viewers</div>
+              </div>
+              <div style="font-size: 14px; color: #ccc;">→</div>
+              <div style="text-align: center; flex: 1;">
+                <div style="font-size: 18px; font-weight: 900; color: var(--hf-muted);">0</div>
+                <div style="font-size: 8px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase;">Saves</div>
+              </div>
+            </div>
+            <div style="font-size: 10px; font-weight: 700; color: var(--col-engage); margin-top: 6px; text-align: center;">1.48% click-to-view</div>
           </div>
         </div>
 
-        <!-- Rates -->
+        <!-- WoW change -->
         <table class="data-table">
           <thead>
-            <tr><th>Metric</th><th>Value</th><th>Context</th></tr>
+            <tr><th>Metric</th><th>W19</th><th>W20</th><th>Change</th></tr>
           </thead>
           <tbody>
             <tr>
+              <td>LiB Clickers</td>
+              <td class="val-neutral">207</td>
+              <td class="val-neutral">135</td>
+              <td style="font-weight: 800; text-align: center;">-35%</td>
+            </tr>
+            <tr>
+              <td>Cookbook Viewers</td>
+              <td class="val-neutral">9</td>
+              <td class="val-neutral">2</td>
+              <td style="font-weight: 800; text-align: center;">-78%</td>
+            </tr>
+            <tr>
               <td>Click-to-View Rate</td>
-              <td class="val-green">3.24%</td>
-              <td class="ci">10 of 309 clickers viewed Cookbook</td>
+              <td class="val-neutral">4.35%</td>
+              <td class="val-neutral">1.48%</td>
+              <td style="font-weight: 800; text-align: center;">-66%</td>
             </tr>
             <tr>
-              <td>View-to-Save Rate</td>
-              <td class="val-neutral">0.00%</td>
-              <td class="ci">0 of 10 viewers saved a recipe</td>
-            </tr>
-            <tr>
-              <td>vs Comparison (Apr 20–30)</td>
-              <td class="val-green">+3.7%</td>
-              <td class="ci">309 vs 298 clickers (+11)</td>
-            </tr>
-            <tr>
-              <td>Peak Day</td>
-              <td class="val-neutral">May 7</td>
-              <td class="ci">45 unique clickers (165 sessions)</td>
+              <td>Recipe Savers</td>
+              <td class="val-neutral">0</td>
+              <td class="val-neutral">0</td>
+              <td class="val-neutral" style="text-align: center;">—</td>
             </tr>
           </tbody>
         </table>
 
         <div class="rec-box">
-          <strong>Insight:</strong> 96.8% of link-in-bio clickers never reach Cookbook. The LiB landing page likely doesn't surface Cookbook prominently enough. Among the 10 who did view, none saved — suggesting friction or content-relevance gap. May 7 spike (45 clickers) aligns with "Stop scrolling and start cooking" post going live.
+          <strong>Insight:</strong> LiB clicks dropped 35% WoW and conversion to Cookbook fell from 4.35% to 1.48%. The landing page still doesn't surface Cookbook prominently — and with fewer clicks to begin with, the funnel is thinning at both ends. Zero recipe saves persists across both weeks.
         </div>
       </div>
     </div>
