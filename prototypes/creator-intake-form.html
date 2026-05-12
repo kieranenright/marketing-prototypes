@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HelloFresh Creator Recipes — Partner Interest Form</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+  --hf-green: #1B8A4A;
+  --hf-dark-green: #0B5C30;
+  --hf-lime: #C8F065;
+  --hf-cream: #FAF8F3;
+  --hf-white: #FFFFFF;
+  --hf-dark: #1A1A1A;
+  --hf-muted: #6B6B6B;
+  --hf-border: #E8E4DD;
+  --hf-light-green: #EDF5E4;
+  --hf-error: #D94040;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--hf-cream);
+  color: var(--hf-dark);
+  overflow-x: hidden;
+}
+
+/* NAV */
+.nav {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--hf-white);
+  border-bottom: 1px solid var(--hf-border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 32px; height: 56px;
+}
+.nav-left { display: flex; align-items: center; gap: 32px; }
+.nav-logo {
+  display: flex; align-items: center; gap: 6px;
+  font-weight: 900; font-size: 14px; color: var(--hf-green);
+  letter-spacing: 1.5px; text-transform: uppercase; text-decoration: none;
+}
+.nav-logo svg { width: 24px; height: 24px; }
+
+/* HERO */
+.hero-section {
+  background: var(--hf-light-green);
+  padding: 64px 24px 48px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('images/stock-food-hero.png') center / cover no-repeat;
+  opacity: 0.10;
+}
+.hero-section h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 42px; font-weight: 400; line-height: 1.15;
+  color: var(--hf-dark); margin-bottom: 16px;
+  position: relative;
+}
+.hero-section h1 .green-italic {
+  color: var(--hf-green);
+  font-style: italic;
+}
+.hero-sub {
+  font-size: 15px; color: var(--hf-muted); line-height: 1.6;
+  max-width: 480px; margin: 0 auto 0;
+  position: relative;
+}
+
+/* FORM CONTAINER */
+.form-section {
+  max-width: 640px;
+  margin: -20px auto 60px;
+  padding: 0 24px;
+  position: relative; z-index: 2;
+}
+.form-card {
+  background: var(--hf-white);
+  border-radius: 20px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04);
+  padding: 40px 36px;
+}
+
+/* FORM ELEMENTS */
+.form-group {
+  margin-bottom: 24px;
+}
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.form-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--hf-dark);
+  margin-bottom: 6px;
+  letter-spacing: -0.2px;
+}
+.form-label .optional {
+  font-weight: 500;
+  color: var(--hf-muted);
+  font-size: 11px;
+  margin-left: 4px;
+}
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1.5px solid var(--hf-border);
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--hf-dark);
+  background: var(--hf-white);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+}
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  border-color: var(--hf-green);
+  box-shadow: 0 0 0 3px rgba(27, 138, 74, 0.08);
+}
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: #B0ADA8;
+}
+.form-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' fill='none' stroke='%236B6B6B' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+  cursor: pointer;
+}
+.form-textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* SOCIAL ROW */
+.social-row {
+  display: flex; gap: 10px; align-items: flex-end;
+}
+.social-platform { flex: 0 0 140px; }
+.social-handle { flex: 1; }
+.social-followers { flex: 0 0 150px; }
+
+/* SECTION DIVIDER */
+.form-divider {
+  border: none;
+  border-top: 1px solid var(--hf-border);
+  margin: 32px 0;
+}
+.form-section-title {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--hf-green);
+  margin-bottom: 20px;
+}
+
+/* CHECKBOX */
+.checkbox-group {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 8px;
+}
+.checkbox-group input[type="checkbox"] {
+  width: 18px; height: 18px;
+  accent-color: var(--hf-green);
+  margin-top: 2px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+.checkbox-group label {
+  font-size: 13px;
+  color: var(--hf-muted);
+  line-height: 1.5;
+  cursor: pointer;
+}
+.checkbox-group label a {
+  color: var(--hf-green);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* SUBMIT BUTTON */
+.btn-submit {
+  display: block;
+  width: 100%;
+  background: var(--hf-dark);
+  color: white;
+  padding: 16px 32px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+  margin-top: 32px;
+}
+.btn-submit:hover { background: #333; transform: translateY(-1px); }
+.btn-submit:active { transform: translateY(0); }
+
+/* SUCCESS STATE */
+.form-success {
+  display: none;
+  text-align: center;
+  padding: 60px 24px;
+}
+.form-success.show { display: block; }
+.form-success-icon {
+  width: 64px; height: 64px;
+  background: var(--hf-light-green);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 20px;
+  font-size: 28px;
+}
+.form-success h2 {
+  font-size: 22px; font-weight: 800;
+  margin-bottom: 8px; letter-spacing: -0.5px;
+}
+.form-success p {
+  font-size: 14px; color: var(--hf-muted); line-height: 1.6;
+  max-width: 360px; margin: 0 auto;
+}
+
+/* HELPER TEXT */
+.form-helper {
+  font-size: 11px;
+  color: var(--hf-muted);
+  margin-top: 4px;
+  line-height: 1.4;
+}
+
+/* PERSONA CARDS */
+.persona-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.persona-card {
+  position: relative;
+}
+.persona-card input {
+  display: none;
+}
+.persona-card label {
+  display: block;
+  padding: 20px 20px 20px 24px;
+  border-radius: 14px;
+  border: 1.5px solid var(--hf-border);
+  background: var(--hf-white);
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.persona-card label::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 12px; bottom: 12px;
+  width: 4px;
+  border-radius: 0 4px 4px 0;
+  background: var(--hf-border);
+  transition: background 0.2s;
+}
+.persona-card input:checked + label {
+  border-color: var(--hf-green);
+  background: var(--hf-light-green);
+}
+.persona-card input:checked + label::before {
+  background: var(--hf-green);
+}
+.persona-card label:hover {
+  border-color: var(--hf-green);
+  box-shadow: 0 2px 8px rgba(27, 138, 74, 0.06);
+}
+.persona-title {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--hf-dark);
+  letter-spacing: -0.3px;
+  margin-bottom: 4px;
+}
+.persona-desc {
+  font-size: 12px;
+  color: var(--hf-muted);
+  font-weight: 500;
+}
+
+/* ADD ANOTHER LINK */
+.add-another {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--hf-green);
+  cursor: pointer;
+  margin-top: 10px;
+  border: none;
+  background: none;
+  font-family: inherit;
+  padding: 0;
+}
+.add-another:hover { text-decoration: underline; }
+
+/* EXTRA SOCIAL ROW (hidden by default) */
+.extra-social { display: none; margin-top: 12px; }
+.extra-social.show { display: block; }
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .hero-section h1 { font-size: 30px; }
+  .form-card { padding: 28px 20px; }
+  .form-row { grid-template-columns: 1fr; gap: 16px; }
+  .social-row { flex-direction: column; align-items: stretch; }
+  .social-platform, .social-followers { flex: 1; }
+  .persona-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-left">
+    <a href="#" class="nav-logo">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15v-4H7l5-7v4h4l-5 7z"/></svg>
+      HelloFresh
+    </a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero-section">
+  <h1>Partner with <span class="green-italic">HelloFresh Cookbook</span></h1>
+  <p class="hero-sub">Your scroll-stopping recipes deserve more than a disappearing feed. Tell us about yourself and let's get your content in front of millions of home cooks.</p>
+</section>
+
+<!-- FORM -->
+<section class="form-section">
+  <div class="form-card">
+    <form id="creatorForm">
+
+      <!-- ABOUT YOU -->
+      <div class="form-section-title">About You</div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="firstName">First name</label>
+          <input type="text" id="firstName" class="form-input" placeholder="Jamie" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="lastName">Last name</label>
+          <input type="text" id="lastName" class="form-input" placeholder="Oliver" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="email">Email address</label>
+        <input type="email" id="email" class="form-input" placeholder="you@email.com" required>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="country">Country / Market</label>
+        <select id="country" class="form-select" required>
+          <option value="" disabled selected>Select your country</option>
+          <option value="US">United States</option>
+          <option value="UK">United Kingdom</option>
+          <option value="AU">Australia</option>
+          <option value="NZ">New Zealand</option>
+          <option value="DE">Germany</option>
+          <option value="AT">Austria</option>
+          <option value="CH">Switzerland</option>
+          <option value="NL">Netherlands</option>
+          <option value="BE">Belgium</option>
+          <option value="LU">Luxembourg</option>
+          <option value="FR">France</option>
+          <option value="SE">Sweden</option>
+          <option value="DK">Denmark</option>
+          <option value="NO">Norway</option>
+          <option value="IE">Ireland</option>
+          <option value="CA">Canada</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+
+      <hr class="form-divider">
+
+      <!-- SOCIAL PRESENCE -->
+      <div class="form-section-title">Social Presence</div>
+
+      <div class="form-group">
+        <label class="form-label">Primary platform</label>
+        <div class="social-row">
+          <div class="social-platform">
+            <select id="platform1" class="form-select" required>
+              <option value="" disabled selected>Platform</option>
+              <option value="instagram">Instagram</option>
+              <option value="tiktok">TikTok</option>
+              <option value="youtube">YouTube</option>
+              <option value="facebook">Facebook</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="social-handle">
+            <input type="text" id="handle1" class="form-input" placeholder="@yourhandle" required>
+          </div>
+          <div class="social-followers">
+            <select id="followers1" class="form-select" required>
+              <option value="" disabled selected>Followers</option>
+              <option value="1k-10k">1K – 10K</option>
+              <option value="10k-50k">10K – 50K</option>
+              <option value="50k-100k">50K – 100K</option>
+              <option value="100k-500k">100K – 500K</option>
+              <option value="500k-1m">500K – 1M</option>
+              <option value="1m+">1M+</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div id="extraSocial" class="extra-social">
+        <div class="form-group">
+          <label class="form-label">Additional platform</label>
+          <div class="social-row">
+            <div class="social-platform">
+              <select id="platform2" class="form-select">
+                <option value="" disabled selected>Platform</option>
+                <option value="instagram">Instagram</option>
+                <option value="tiktok">TikTok</option>
+                <option value="youtube">YouTube</option>
+                <option value="facebook">Facebook</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div class="social-handle">
+              <input type="text" id="handle2" class="form-input" placeholder="@yourhandle">
+            </div>
+            <div class="social-followers">
+              <select id="followers2" class="form-select">
+                <option value="" disabled selected>Followers</option>
+                <option value="1k-10k">1K – 10K</option>
+                <option value="10k-50k">10K – 50K</option>
+                <option value="50k-100k">50K – 100K</option>
+                <option value="100k-500k">100K – 500K</option>
+                <option value="500k-1m">500K – 1M</option>
+                <option value="1m+">1M+</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button type="button" class="add-another" onclick="document.getElementById('extraSocial').classList.add('show'); this.style.display='none';">
+        + Add another platform
+      </button>
+
+      <div class="form-group" style="margin-top: 20px;">
+        <label class="form-label" for="website">Website or portfolio<span class="optional"> (optional)</span></label>
+        <input type="url" id="website" class="form-input" placeholder="https://yoursite.com">
+      </div>
+
+      <hr class="form-divider">
+
+      <!-- YOUR CONTENT -->
+      <div class="form-section-title">Your Content</div>
+
+      <div class="form-group">
+        <label class="form-label" for="contentDesc">Tell us about your content</label>
+        <textarea id="contentDesc" class="form-textarea" placeholder="What type of content do you make? How would you describe your presence online? What do your viewers love about your content?" required></textarea>
+        <p class="form-helper">A few sentences is perfect — your style, your audience, what keeps them coming back.</p>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="sampleLink">Link to a recipe video or post</label>
+        <input type="url" id="sampleLink" class="form-input" placeholder="https://instagram.com/reel/..." required>
+        <p class="form-helper">Share your best recipe content — a Reel, TikTok, or YouTube video</p>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="audienceBenefits">What would you love to offer your audience through Cookbook?</label>
+        <textarea id="audienceBenefits" class="form-textarea" placeholder="e.g. Easy-to-follow step-by-step recipes, nutritional values, a permanent place to find and save my recipes..." required></textarea>
+        <p class="form-helper">What's missing for your audience today? What would make their experience with your content better?</p>
+      </div>
+
+      <hr class="form-divider">
+
+      <!-- HOW DID YOU HEAR -->
+      <div class="form-group">
+        <label class="form-label" for="referral">How did you hear about Creator Recipes?</label>
+        <select id="referral" class="form-select" required>
+          <option value="" disabled selected>Select one</option>
+          <option value="social-hf">HelloFresh social media</option>
+          <option value="social-creator">Another creator</option>
+          <option value="email">Email from HelloFresh</option>
+          <option value="talent-agency">My talent agency / manager</option>
+          <option value="search">Google search</option>
+          <option value="word-of-mouth">Word of mouth</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+
+      <!-- CONSENT -->
+      <div class="checkbox-group">
+        <input type="checkbox" id="consent" required>
+        <label for="consent">I agree to be contacted by HelloFresh about partnership opportunities. View our <a href="#">Privacy Policy</a>.</label>
+      </div>
+
+      <!-- SUBMIT -->
+      <button type="submit" class="btn-submit">Submit Interest</button>
+    </form>
+
+    <!-- SUCCESS STATE -->
+    <div class="form-success" id="successState">
+      <div class="form-success-icon">&#127859;</div>
+      <h2>You're on the list!</h2>
+      <p>Thanks for your interest in Creator Recipes. Our partnerships team will review your application and be in touch within 5 business days.</p>
+    </div>
+  </div>
+</section>
+
+<script>
+document.getElementById('creatorForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  // Collect form data (for prototype, just log it)
+  const formData = new FormData(this);
+  const data = Object.fromEntries(formData.entries());
+
+  // All fields collected via FormData
+
+  console.log('Form submission:', data);
+
+  // Show success state
+  this.style.display = 'none';
+  document.getElementById('successState').classList.add('show');
+
+  // Scroll to top of form card
+  document.querySelector('.form-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
+</script>
+
+</body>
+</html>

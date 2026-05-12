@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cookbook — Weekly Marketing Update W19 (v2)</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+  --hf-green: #1B8A4A;
+  --hf-lime: #C8F065;
+  --hf-dark: #1A1A1A;
+  --hf-muted: #888;
+  --hf-light: #F6F6F6;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  background: #e0e0e0;
+  color: var(--hf-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 24px;
+}
+
+.slide {
+  width: 1600px;
+  height: 900px;
+  background: white;
+  border-radius: 6px;
+  box-shadow: 0 8px 60px rgba(0,0,0,0.15);
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  padding: 28px 40px;
+  gap: 20px;
+}
+
+/* === HEADER === */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.header-left img { height: 26px; }
+.header-sep { width: 1px; height: 20px; background: rgba(0,0,0,0.12); }
+.header-feature { font-size: 17px; font-weight: 800; color: var(--hf-green); }
+.header-right { font-size: 12px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase; letter-spacing: 1.5px; }
+
+/* === HERO METRICS === */
+.hero-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+.hero-card {
+  text-align: center;
+  padding: 18px 12px;
+  border-radius: 12px;
+  background: var(--hf-light);
+  border: 1px solid rgba(0,0,0,0.03);
+}
+.hero-value {
+  font-size: 36px;
+  font-weight: 900;
+  color: var(--hf-dark);
+  line-height: 1;
+  letter-spacing: -1px;
+}
+.hero-value.green { color: var(--hf-green); }
+.hero-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--hf-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 6px;
+}
+.hero-sublabel {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--hf-muted);
+  margin-top: 2px;
+}
+.hero-badge {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 4px;
+  background: rgba(27, 138, 74, 0.1);
+  color: var(--hf-green);
+}
+
+/* === DETAIL COLUMNS === */
+.detail-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+  min-height: 0;
+}
+.detail-card {
+  border-radius: 12px;
+  background: var(--hf-light);
+  border: 1px solid rgba(0,0,0,0.03);
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+}
+.detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.detail-title {
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--hf-green);
+}
+.detail-period {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--hf-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.detail-subtitle {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--hf-dark);
+  margin-bottom: 8px;
+}
+
+/* Tables */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.data-table th {
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--hf-muted);
+  text-align: left;
+  padding: 4px 6px;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+.data-table th:not(:first-child) { text-align: center; }
+.data-table td {
+  padding: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--hf-dark);
+  border-bottom: 1px solid rgba(0,0,0,0.03);
+}
+.data-table td:not(:first-child) { text-align: center; }
+.data-table tr:last-child td { border-bottom: none; }
+.val-green { color: var(--hf-green); font-weight: 800; }
+.val-neutral { color: var(--hf-dark); font-weight: 700; }
+.ci { font-size: 11px; font-weight: 500; color: var(--hf-muted); }
+.stat-sig {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 800;
+  padding: 1px 5px;
+  border-radius: 3px;
+  margin-left: 3px;
+  text-transform: uppercase;
+  background: rgba(27, 138, 74, 0.1);
+  color: var(--hf-green);
+}
+
+/* Recommendation box */
+.rec-box {
+  margin-top: auto;
+  padding: 8px 12px;
+  border-radius: 6px;
+  background: rgba(27, 138, 74, 0.04);
+  border: 1px solid rgba(27, 138, 74, 0.1);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--hf-dark);
+  line-height: 1.5;
+}
+.rec-box strong { color: var(--hf-green); }
+
+/* Takeaway box */
+.takeaway-box {
+  margin-top: auto;
+  padding: 8px 12px;
+  border-radius: 6px;
+  background: rgba(107, 92, 231, 0.04);
+  border: 1px solid rgba(107, 92, 231, 0.1);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--hf-dark);
+  line-height: 1.5;
+}
+.takeaway-box strong { color: #6B5CE7; }
+
+/* Social post list */
+.post-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+.post-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: white;
+  border: 1px solid rgba(0,0,0,0.04);
+}
+.post-thumb {
+  width: 36px;
+  height: 36px;
+  border-radius: 4px;
+  object-fit: cover;
+  cursor: pointer;
+}
+.post-info {
+  flex: 1;
+}
+.post-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--hf-dark);
+}
+.post-stats {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--hf-muted);
+}
+.post-views {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--hf-dark);
+}
+
+/* === STATUS BAR === */
+.status-bar {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.status-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  background: var(--hf-light);
+  border: 1px solid rgba(0,0,0,0.03);
+}
+.status-tag {
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  padding: 3px 7px;
+  border-radius: 3px;
+  color: white;
+  flex-shrink: 0;
+}
+.tag-creative { background: #2D9CDB; }
+.tag-influencer { background: #E05CA3; }
+.status-content {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--hf-dark);
+  line-height: 1.4;
+}
+.status-content span {
+  font-weight: 500;
+  color: var(--hf-muted);
+}
+.creator-pills {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+.creator-pill {
+  font-size: 10px;
+  font-weight: 600;
+  background: white;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 12px;
+  padding: 2px 7px;
+}
+.creator-pill.signed {
+  border-color: rgba(27, 138, 74, 0.2);
+  background: rgba(27, 138, 74, 0.04);
+  color: var(--hf-green);
+  font-weight: 700;
+}
+
+/* Lightbox */
+.lightbox-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.85);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.lightbox-overlay.active { display: flex; }
+.lightbox-overlay img,
+.lightbox-overlay video {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 8px;
+  box-shadow: 0 4px 40px rgba(0,0,0,0.5);
+}
+
+</style>
+</head>
+<body>
+
+<div class="slide">
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-left">
+      <img src="https://media.hellofresh.com/w_256,q_100,f_auto,c_limit,fl_lossy/hellofresh_website/logo/Hello_Fresh_Lockup.png" alt="HelloFresh">
+      <div class="header-sep"></div>
+      <div class="header-feature">Cookbook Marketing Update</div>
+    </div>
+    <div class="header-right">W19 — April 30 – May 7</div>
+  </div>
+
+  <!-- HERO METRICS -->
+  <div class="hero-row">
+    <div class="hero-card">
+      <div class="hero-value green">-6.60%</div>
+      <div class="hero-label">Cancellation Rate</div>
+      <div class="hero-sublabel">Post-pausing push test</div>
+      <div class="hero-badge">Stat. significant</div>
+    </div>
+    <div class="hero-card">
+      <div class="hero-value">19.9K</div>
+      <div class="hero-label">Social Views</div>
+      <div class="hero-sublabel">4 posts · 179 interactions</div>
+    </div>
+    <div class="hero-card">
+      <div class="hero-value green">7%</div>
+      <div class="hero-label">CPP Conversion</div>
+      <div class="hero-sublabel">Google Play custom page</div>
+    </div>
+    <div class="hero-card">
+      <div class="hero-value">3/10</div>
+      <div class="hero-label">Videos Delivered</div>
+      <div class="hero-sublabel">Remaining 7 due May 7</div>
+    </div>
+  </div>
+
+  <!-- DETAIL COLUMNS -->
+  <div class="detail-row">
+    <!-- CRM -->
+    <div class="detail-card">
+      <div class="detail-header">
+        <div class="detail-title">CRM</div>
+        <div class="detail-period">Apr 16–30 · 90% CI</div>
+      </div>
+      <div class="detail-subtitle">Post-pausing push → Cookbook engagement</div>
+      <table class="data-table">
+        <thead>
+          <tr><th>Metric</th><th>Lift</th><th>CI</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Deeper Engagement 3+</td>
+            <td class="val-neutral">+1.97%</td>
+            <td class="ci">[-7.4%, +12.3%]</td>
+          </tr>
+          <tr>
+            <td>Net New Adoption</td>
+            <td class="val-neutral">+1.34%</td>
+            <td class="ci">[-5.5%, +8.7%]</td>
+          </tr>
+          <tr>
+            <td>Cancellation Rate <span class="stat-sig">Sig.</span></td>
+            <td class="val-green">-6.60%</td>
+            <td class="ci">[-11.9%, -1.0%]</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="rec-box">
+        <strong>Rec:</strong> Roll out broadly with ~1x/month frequency cap. Low/mid-value paused customers most engaged.
+      </div>
+    </div>
+
+    <!-- ASO -->
+    <div class="detail-card">
+      <div class="detail-header">
+        <div class="detail-title">ASO</div>
+        <div class="detail-period">Apr 18 – May 4</div>
+      </div>
+      <div class="detail-subtitle">Featuring (US, Apr 18–25)</div>
+      <table class="data-table">
+        <thead>
+          <tr><th></th><th>Installs</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Google Play</td><td class="val-neutral">46</td></tr>
+        </tbody>
+      </table>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px;">
+        <div style="background: white; border-radius: 8px; padding: 10px 12px; border: 1px solid rgba(0,0,0,0.04);">
+          <div class="detail-subtitle" style="margin-bottom: 6px;">In-App Events</div>
+          <table class="data-table">
+            <thead>
+              <tr><th></th><th>Viewers</th><th>Conv.</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Google Play</td><td class="val-neutral">25,172</td><td class="val-neutral">46</td></tr>
+              <tr><td>App Store</td><td class="val-neutral">2,581</td><td class="val-neutral">18</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="background: white; border-radius: 8px; padding: 10px 12px; border: 1px solid rgba(0,0,0,0.04);">
+          <div class="detail-subtitle" style="margin-bottom: 6px;">Custom Product Pages</div>
+          <table class="data-table">
+            <thead>
+              <tr><th></th><th>Visitors</th><th>CVR</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Google Play</td><td class="val-neutral">503</td><td class="val-green">7%</td></tr>
+              <tr><td>App Store</td><td class="val-neutral">123</td><td class="val-neutral">1.99%</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="takeaway-box">
+        <strong>Takeaway:</strong> Google Play CPP at 7% is the standout. Featuring = awareness not installs. App Store lags — needs investigation.
+      </div>
+    </div>
+
+    <!-- Organic Social -->
+    <div class="detail-card">
+      <div class="detail-header">
+        <div class="detail-title">Organic Social</div>
+        <div class="detail-period">Past 7 days</div>
+      </div>
+      <div style="display: flex; gap: 12px; margin-bottom: 10px;">
+        <div style="flex: 1; text-align: center; padding: 8px; background: white; border-radius: 6px; border: 1px solid rgba(0,0,0,0.04);">
+          <div style="font-size: 18px; font-weight: 900; color: var(--hf-dark);">19,895</div>
+          <div style="font-size: 10px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase;">Views</div>
+        </div>
+        <div style="flex: 1; text-align: center; padding: 8px; background: white; border-radius: 6px; border: 1px solid rgba(0,0,0,0.04);">
+          <div style="font-size: 18px; font-weight: 900; color: var(--hf-dark);">179</div>
+          <div style="font-size: 10px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase;">Interactions</div>
+        </div>
+        <div style="flex: 1; text-align: center; padding: 8px; background: white; border-radius: 6px; border: 1px solid rgba(0,0,0,0.04);">
+          <div style="font-size: 18px; font-weight: 900; color: var(--hf-green);">0.90%</div>
+          <div style="font-size: 10px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase;">Eng. Rate</div>
+        </div>
+      </div>
+      <ul class="post-list">
+        <li class="post-item">
+          <img class="post-thumb" src="assets/w19/cookbook-static-whats-on-your-mind.png" alt="What's on your mind">
+          <div class="post-info">
+            <div class="post-title">"What's on your mind" · Apr 30</div>
+            <div class="post-stats">IG 3,283 + FB 4,830 · 46 interactions</div>
+          </div>
+          <div class="post-views">8.1K</div>
+        </li>
+        <li class="post-item">
+          <img class="post-thumb" src="assets/w19/cookbook-carousel-07-B1-hook.png" alt="Carousel">
+          <div class="post-info">
+            <div class="post-title">Carousel · Apr 23</div>
+            <div class="post-stats">3,050 reach · 59 interactions · 1 follow</div>
+          </div>
+          <div class="post-views">6.4K</div>
+        </li>
+        <li class="post-item">
+          <img class="post-thumb" src="assets/w19/cookbook-static-moms-recipes.png" alt="Adult vs kid problems">
+          <div class="post-info">
+            <div class="post-title">"Adult vs kid problems" · Apr 28</div>
+            <div class="post-stats">1,998 reach · 39 interactions</div>
+          </div>
+          <div class="post-views">3.4K</div>
+        </li>
+        <li class="post-item">
+          <video class="post-thumb" src="assets/w19/cookbook-ugc-video-c4.mp4" poster="assets/w19/cookbook-ugc-video-c4-thumb.jpg" muted></video>
+          <div class="post-info">
+            <div class="post-title">UGC Video (9:16) · May 2</div>
+            <div class="post-stats">1,474 reach · 35 interactions · 3s avg watch</div>
+          </div>
+          <div class="post-views">2.0K</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- STATUS BAR -->
+  <div class="status-bar">
+    <div class="status-card">
+      <div class="status-tag tag-creative">Creative</div>
+      <div class="status-content">
+        3 video concepts delivered (Apr 30) · <span>7 remaining due May 7</span>
+      </div>
+    </div>
+    <div class="status-card">
+      <div class="status-tag tag-influencer">Influencer</div>
+      <div class="status-content">
+        <div class="creator-pills">
+          <span class="creator-pill signed">@emilyeggers — Live May 5</span>
+          <span class="creator-pill">@carlys_cookbook</span>
+          <span class="creator-pill">@createaplatewithdina</span>
+          <span class="creator-pill">@spoonfulofsi</span>
+          <span class="creator-pill">@_nutritionwithnat</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox-overlay" id="lightbox"></div>
+
+<script>
+const lightbox = document.getElementById('lightbox');
+document.querySelectorAll('.post-thumb').forEach(el => {
+  el.addEventListener('click', () => {
+    let clone;
+    if (el.tagName === 'VIDEO') {
+      clone = document.createElement('video');
+      clone.src = el.src;
+      clone.controls = true;
+      clone.autoplay = true;
+      clone.loop = true;
+    } else {
+      clone = document.createElement('img');
+      clone.src = el.src;
+    }
+    lightbox.innerHTML = '';
+    lightbox.appendChild(clone);
+    lightbox.classList.add('active');
+  });
+});
+lightbox.addEventListener('click', () => {
+  lightbox.classList.remove('active');
+  const vid = lightbox.querySelector('video');
+  if (vid) vid.pause();
+  lightbox.innerHTML = '';
+});
+</script>
+
+</body>
+</html>

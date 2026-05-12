@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cookbook — Weekly Marketing Update W19</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+  --hf-green: #1B8A4A;
+  --hf-lime: #C8F065;
+  --hf-dark: #1A1A1A;
+  --hf-muted: #888;
+  --hf-light: #F6F6F6;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+@page { size: 297mm 167mm; margin: 0; }
+
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  background: #e0e0e0;
+  color: var(--hf-dark);
+}
+
+/* === SLIDE BASE === */
+.slide {
+  width: 297mm;
+  height: 167mm;
+  position: relative;
+  overflow: hidden;
+  background: white;
+  page-break-after: always;
+}
+@media screen {
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 24px;
+  }
+  .slide {
+    width: 1600px;
+    height: 1100px;
+    margin: 0 auto;
+    box-shadow: 0 8px 60px rgba(0,0,0,0.15);
+    border-radius: 6px;
+  }
+}
+@media print {
+  body { background: white; }
+  .slide { margin: 0; box-shadow: none; border-radius: 0; }
+}
+
+/* === HEADER === */
+.slide-header {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  padding: 24px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10;
+}
+.slide-header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.slide-header-left img { height: 28px; }
+.slide-header-sep { width: 1px; height: 22px; background: rgba(0,0,0,0.12); }
+.slide-header-feature { font-size: 18px; font-weight: 800; color: var(--hf-green); }
+.slide-header-right { font-size: 13px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase; letter-spacing: 1.5px; }
+
+/* === MAIN CONTENT === */
+.content {
+  height: 100%;
+  padding: 72px 40px 24px;
+  display: grid;
+  grid-template-columns: 1fr 1.3fr 1.3fr;
+  grid-template-rows: 1fr auto;
+  gap: 14px 24px;
+}
+
+.right-col {
+  grid-row: 1 / -1;
+  grid-column: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.aso-col {
+  grid-row: 1 / -1;
+  grid-column: 3;
+  display: flex;
+  flex-direction: column;
+}
+.aso-col .experiment-card {
+  flex: 1;
+}
+
+/* === LEFT COLUMN — CREATIVE === */
+.left-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.section-label {
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--hf-green);
+  margin-bottom: 8px;
+}
+
+.creative-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.creative-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: var(--hf-light);
+  border: 1px solid rgba(0,0,0,0.03);
+}
+
+.creative-status {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.status-done { background: var(--hf-green); }
+.status-progress { background: var(--hf-lime); }
+.status-todo { background: transparent; border: 2px solid rgba(0,0,0,0.12); }
+
+.creative-text {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--hf-dark);
+  line-height: 1.4;
+}
+.creative-text span {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--hf-muted);
+  margin-top: 2px;
+}
+
+.legend {
+  margin-top: auto;
+  display: flex;
+  gap: 12px;
+  padding-top: 12px;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--hf-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+}
+
+/* === RIGHT COLUMN — METRICS === */
+
+/* Metrics card */
+.metrics-card {
+  border-radius: 12px;
+  background: var(--hf-light);
+  border: 1px solid rgba(0,0,0,0.03);
+  padding: 14px 18px;
+  flex: 1;
+}
+
+.metrics-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.metrics-card-title {
+  font-size: 14px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--hf-green);
+}
+
+.metrics-card-period {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--hf-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Metrics grid */
+.metrics-grid {
+  display: grid;
+  gap: 6px;
+}
+.metrics-grid.social { grid-template-columns: repeat(4, 1fr); }
+.metrics-grid.crm { grid-template-columns: repeat(5, 1fr); }
+
+.metric {
+  text-align: center;
+  padding: 8px 4px;
+  border-radius: 8px;
+  background: white;
+}
+.metric-value {
+  font-size: 26px;
+  font-weight: 900;
+  color: var(--hf-dark);
+  letter-spacing: -0.5px;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.metric-value.highlight {
+  color: var(--hf-green);
+}
+.metric-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--hf-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.metric-delta {
+  font-size: 11px;
+  font-weight: 700;
+  margin-top: 2px;
+}
+.delta-up { color: var(--hf-green); }
+.delta-down { color: #D94040; }
+.delta-flat { color: var(--hf-muted); }
+
+/* CRM funnel row */
+.crm-funnel {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.funnel-metric {
+  text-align: center;
+  padding: 8px 4px;
+  border-radius: 8px;
+  background: white;
+  border: 1px solid rgba(27, 138, 74, 0.08);
+}
+
+/* === EXPERIMENT SCORECARD === */
+.experiment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.experiment-title {
+  font-size: 14px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--hf-green);
+}
+.experiment-period {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--hf-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.experiment-subtitle {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--hf-dark);
+  margin-bottom: 10px;
+}
+
+.experiment-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.experiment-table th {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--hf-muted);
+  text-align: left;
+  padding: 5px 8px;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+.experiment-table th:nth-child(2),
+.experiment-table th:nth-child(3) {
+  text-align: center;
+}
+.experiment-table td {
+  padding: 6px 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--hf-dark);
+  border-bottom: 1px solid rgba(0,0,0,0.03);
+}
+.experiment-table td:nth-child(2),
+.experiment-table td:nth-child(3) {
+  text-align: center;
+}
+.experiment-table tr:last-child td {
+  border-bottom: none;
+}
+.experiment-table .metric-name {
+  font-weight: 600;
+}
+.experiment-table .lift-positive {
+  color: var(--hf-green);
+  font-weight: 800;
+}
+.experiment-table .lift-negative {
+  color: #D94040;
+  font-weight: 800;
+}
+.experiment-table .lift-neutral {
+  color: var(--hf-dark);
+  font-weight: 700;
+}
+.experiment-table .ci {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--hf-muted);
+}
+.experiment-table .stat-sig {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 800;
+  padding: 1px 5px;
+  border-radius: 3px;
+  margin-left: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.sig-green {
+  background: rgba(27, 138, 74, 0.1);
+  color: var(--hf-green);
+}
+.sig-red {
+  background: rgba(217, 64, 64, 0.1);
+  color: #D94040;
+}
+.section-divider {
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--hf-muted);
+  padding: 6px 8px 3px;
+  background: var(--hf-light);
+  border-radius: 4px;
+  margin-top: 2px;
+}
+.experiment-card {
+  border-radius: 12px;
+  background: var(--hf-light);
+  border: 1px solid rgba(0,0,0,0.03);
+  padding: 14px 18px;
+  flex: 1;
+}
+
+/* === CAROUSEL SHOWCASE === */
+.carousel-section {
+  margin-top: 10px;
+}
+.carousel-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--hf-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+.carousel-strip {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+}
+.carousel-strip img,
+.carousel-strip video {
+  height: 160px;
+  width: auto;
+  border-radius: 6px;
+  object-fit: cover;
+  border: 1px solid rgba(0,0,0,0.06);
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+.carousel-strip img:hover,
+.carousel-strip video:hover {
+  transform: scale(1.03);
+}
+
+/* Lightbox */
+.lightbox-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.85);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.lightbox-overlay.active {
+  display: flex;
+}
+.lightbox-overlay img,
+.lightbox-overlay video {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 8px;
+  box-shadow: 0 4px 40px rgba(0,0,0,0.5);
+}
+
+/* === BOTTOM ROW — OTHER UPDATES === */
+.bottom-section {
+  grid-column: 1;
+}
+
+.bottom-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: stretch;
+}
+
+.update-card {
+  flex: 1;
+  border-radius: 8px;
+  background: var(--hf-light);
+  border: 1px solid rgba(0,0,0,0.03);
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.update-card-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.update-tag {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  padding: 3px 7px;
+  border-radius: 3px;
+  color: white;
+}
+.tag-aso { background: #6B5CE7; }
+.tag-paid { background: #E07B3C; }
+.tag-influencer { background: #E05CA3; }
+.tag-crm { background: var(--hf-green); }
+.tag-other { background: var(--hf-muted); }
+
+.update-card-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--hf-dark);
+}
+
+.update-card-body {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--hf-muted);
+  line-height: 1.45;
+}
+
+</style>
+</head>
+<body>
+
+<div class="slide">
+  <div class="slide-header">
+    <div class="slide-header-left">
+      <img src="https://media.hellofresh.com/w_256,q_100,f_auto,c_limit,fl_lossy/hellofresh_website/logo/Hello_Fresh_Lockup.png" alt="HelloFresh">
+      <div class="slide-header-sep"></div>
+      <div class="slide-header-feature">Cookbook Marketing Update</div>
+    </div>
+    <div class="slide-header-right">W19 — April 30 – May 7</div>
+  </div>
+
+  <div class="content">
+    <!-- LEFT: Creative Tasks -->
+    <div class="left-col">
+      <div class="section-label">Creative Tasks</div>
+      <ul class="creative-list">
+        <li class="creative-item">
+          <div class="creative-status status-done"></div>
+          <div class="creative-text">
+            3 Organic Social video concepts delivered
+            <span>Completed — April 30</span>
+          </div>
+        </li>
+        <li class="creative-item">
+          <div class="creative-status status-progress"></div>
+          <div class="creative-text">
+            7 remaining video concepts
+            <span>In progress — due May 7</span>
+          </div>
+        </li>
+      </ul>
+      <div class="legend">
+        <div class="legend-item"><div class="legend-dot status-done"></div> Done</div>
+        <div class="legend-item"><div class="legend-dot status-progress"></div> In Progress</div>
+        <div class="legend-item"><div class="legend-dot status-todo"></div> To Do</div>
+      </div>
+    </div>
+
+    <!-- MIDDLE: ASO + CRM -->
+    <div class="right-col">
+      <!-- ASO -->
+      <div class="experiment-card">
+        <div class="experiment-header">
+          <div class="experiment-title">ASO</div>
+          <div class="experiment-period">April 18 – May 4</div>
+        </div>
+        <div class="experiment-subtitle">Google Play featuring (US, Apr 18–25) → 46 installs · 31.3K unique viewers</div>
+
+        <div class="experiment-subtitle" style="margin-top: 4px;">Custom Product Pages — Live</div>
+        <table class="experiment-table">
+          <thead>
+            <tr>
+              <th>Store</th>
+              <th>Visitors</th>
+              <th>CVR</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="metric-name">Google Play</td>
+              <td class="lift-neutral">503</td>
+              <td class="lift-positive">7%</td>
+            </tr>
+            <tr>
+              <td class="metric-name">App Store</td>
+              <td class="lift-neutral">123</td>
+              <td class="lift-neutral">1.99%</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="experiment-subtitle" style="margin-top: 12px;">In-App Events — Live</div>
+        <table class="experiment-table">
+          <thead>
+            <tr>
+              <th>Store</th>
+              <th>Viewers</th>
+              <th>Conversions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="metric-name">Google Play</td>
+              <td class="lift-neutral">25,172</td>
+              <td class="lift-neutral">46</td>
+            </tr>
+            <tr>
+              <td class="metric-name">App Store</td>
+              <td class="lift-neutral">2,581</td>
+              <td class="lift-neutral">18</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ASO Takeaways -->
+      <div class="experiment-card" style="flex: none; padding: 10px 14px; background: rgba(107, 92, 231, 0.04); border: 1px solid rgba(107, 92, 231, 0.1);">
+        <div style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: #6B5CE7; margin-bottom: 4px;">Key Takeaways</div>
+        <ul style="font-size: 12px; font-weight: 500; color: var(--hf-dark); line-height: 1.5; padding-left: 16px; margin: 0;">
+          <li><strong>Google Play CPP at 7% CVR</strong> — strongest signal; messaging is resonating</li>
+          <li><strong>Featuring = awareness, not installs</strong> — 31.3K viewers but 0.15% conversion</li>
+          <li><strong>In-App Events have reach</strong> — 25K viewers (GP) but low conversion; CTAs may need work</li>
+          <li><strong>App Store lags across all metrics</strong> — discoverability gap to investigate</li>
+        </ul>
+      </div>
+
+      <!-- CRM: Experiment Scorecard -->
+      <div class="experiment-card">
+        <div class="experiment-header">
+          <div class="experiment-title">CRM — Post-Pausing Push Test</div>
+          <div class="experiment-period">April 16 – 30 · 90% CI</div>
+        </div>
+        <div class="experiment-subtitle">Push to customers with upcoming paused delivery → Cookbook engagement</div>
+        <table class="experiment-table">
+          <thead>
+            <tr>
+              <th>Metric</th>
+              <th>Mean Lift</th>
+              <th>Confidence Interval</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="metric-name">Cookbook Deeper Engagement 3+</td>
+              <td class="lift-neutral">+1.97%</td>
+              <td class="ci">[-7.4%, +12.3%]</td>
+            </tr>
+            <tr>
+              <td class="metric-name">Cookbook Net New Adoption</td>
+              <td class="lift-neutral">+1.34%</td>
+              <td class="ci">[-5.5%, +8.7%]</td>
+            </tr>
+            <tr>
+              <td class="metric-name">Cancellation Rate <span class="stat-sig sig-green">Sig.</span></td>
+              <td class="lift-positive">-6.60%</td>
+              <td class="ci">[-11.9%, -1.0%]</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- CRM Takeaways -->
+      <div class="experiment-card" style="flex: none; padding: 10px 14px; background: rgba(27, 138, 74, 0.04); border: 1px solid rgba(27, 138, 74, 0.1);">
+        <div style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--hf-green); margin-bottom: 4px;">Recommendation</div>
+        <ul style="font-size: 12px; font-weight: 500; color: var(--hf-dark); line-height: 1.5; padding-left: 16px; margin: 0;">
+          <li><strong>Roll out broadly</strong> — positive lift across adoption, engagement &amp; cancellations</li>
+          <li><strong>Low/mid-value paused customers</strong> most likely to engage — Cookbook fills a gap for these segments</li>
+          <li><strong>Add ~1x/month frequency cap</strong> to manage push optouts while maintaining impact</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- BOTTOM: Other Updates -->
+    <div class="bottom-section">
+      <div class="section-label" style="margin-bottom: 5px;">Other Updates</div>
+      <div class="bottom-row">
+        <div class="update-card" style="flex: 2;">
+          <div class="update-card-header">
+            <div class="update-tag tag-influencer">Influencer</div>
+            <div class="update-card-title">Creator Platform</div>
+          </div>
+          <div class="update-card-body">
+            <div style="margin-top: 4px;">
+              <div style="font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--hf-green); margin-bottom: 4px;">Signed</div>
+              <div style="display: inline-flex; align-items: center; gap: 5px; background: white; border: 1px solid rgba(27, 138, 74, 0.15); border-radius: 20px; padding: 3px 10px 3px 4px;">
+                <div style="width: 20px; height: 20px; border-radius: 50%; background: var(--hf-green); opacity: 0.2;"></div>
+                <span style="font-size: 12px; font-weight: 700; color: var(--hf-dark);">@emilyeggers</span>
+                <span style="font-size: 9px; font-weight: 800; background: var(--hf-green); color: white; padding: 1px 5px; border-radius: 3px; text-transform: uppercase;">Live May 5</span>
+              </div>
+            </div>
+            <div style="margin-top: 8px;">
+              <div style="font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--hf-muted); margin-bottom: 4px;">Pipeline</div>
+              <div style="display: flex; flex-wrap: wrap; gap: 4px;">
+                <span style="font-size: 11px; font-weight: 600; background: white; border: 1px solid rgba(0,0,0,0.08); border-radius: 14px; padding: 2px 8px;">@carlys_cookbook</span>
+                <span style="font-size: 11px; font-weight: 600; background: white; border: 1px solid rgba(0,0,0,0.08); border-radius: 14px; padding: 2px 8px;">@createaplatewithdina</span>
+                <span style="font-size: 11px; font-weight: 600; background: white; border: 1px solid rgba(0,0,0,0.08); border-radius: 14px; padding: 2px 8px;">@spoonfulofsi</span>
+                <span style="font-size: 11px; font-weight: 600; background: white; border: 1px solid rgba(0,0,0,0.08); border-radius: 14px; padding: 2px 8px;">@_nutritionwithnat</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Organic Social -->
+    <div class="aso-col">
+      <div class="metrics-card" style="flex: 1;">
+        <div class="metrics-card-header">
+          <div class="metrics-card-title">Organic Social</div>
+          <div class="metrics-card-period">Past 7 days</div>
+        </div>
+        <div class="metrics-grid social">
+          <div class="metric">
+            <div class="metric-value">19.9K</div>
+            <div class="metric-label">Views</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">179</div>
+            <div class="metric-label">Interactions</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">4</div>
+            <div class="metric-label">Posts</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value highlight">0.90%</div>
+            <div class="metric-label">Eng. Rate</div>
+          </div>
+        </div>
+        <div class="carousel-section">
+          <div class="carousel-label">Carousel — Posted April 23</div>
+          <div class="carousel-strip">
+            <img src="assets/w19/cookbook-carousel-07-B1-hook.png" alt="Hook slide">
+            <img src="assets/w19/cookbook-carousel-08-B2-poster.png" alt="Poster slide">
+            <img src="assets/w19/cookbook-carousel-09-B3-reel.png" alt="Reel slide">
+            <img src="assets/w19/cookbook-carousel-10-B4-cookbook.png" alt="Cookbook slide">
+            <img src="assets/w19/cookbook-carousel-11-B5-payoff.png" alt="Payoff slide">
+            <img src="assets/w19/cookbook-carousel-12-B6-cta.png" alt="CTA slide">
+          </div>
+          <div style="margin-top: 6px; font-size: 11px; font-weight: 600; color: var(--hf-muted); line-height: 1.5;">
+            6,443 views · 3,050 reach · 59 interactions · 1 follow
+          </div>
+        </div>
+        <div class="carousel-section">
+          <div class="carousel-label">Static — Posted April 28</div>
+          <div class="carousel-strip">
+            <img src="assets/w19/cookbook-static-moms-recipes.png" alt="Mom's recipes deserve a spot in your Cookbook">
+          </div>
+          <div style="margin-top: 6px; font-size: 11px; font-weight: 600; color: var(--hf-muted); line-height: 1.5;">
+            3,357 views · 1,998 reach · 39 interactions
+          </div>
+        </div>
+        <div class="carousel-section">
+          <div class="carousel-label">Static — Posted April 30</div>
+          <div class="carousel-strip">
+            <img src="assets/w19/cookbook-static-whats-on-your-mind.png" alt="What's on your mind meme">
+          </div>
+          <div style="margin-top: 6px; font-size: 11px; font-weight: 600; color: var(--hf-muted); line-height: 1.5;">
+            8,113 views (IG 3,283 + FB 4,830) · 46 interactions
+          </div>
+        </div>
+        <div class="carousel-section">
+          <div class="carousel-label">UGC Video (9:16) — Posted May 2</div>
+          <div class="carousel-strip">
+            <video src="assets/w19/cookbook-ugc-video-c4.mp4" poster="assets/w19/cookbook-ugc-video-c4-thumb.jpg" muted playsinline loop onmouseenter="this.play()" onmouseleave="this.pause()"></video>
+          </div>
+          <div style="margin-top: 6px; font-size: 11px; font-weight: 600; color: var(--hf-muted); line-height: 1.5;">
+            1,982 views · 1,474 reach · 3s avg watch · 35 interactions
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="lightbox-overlay" id="lightbox"></div>
+
+<script>
+const lightbox = document.getElementById('lightbox');
+document.querySelectorAll('.carousel-strip img, .carousel-strip video').forEach(el => {
+  el.addEventListener('click', () => {
+    let clone;
+    if (el.tagName === 'VIDEO') {
+      clone = document.createElement('video');
+      clone.src = el.src;
+      clone.controls = true;
+      clone.autoplay = true;
+      clone.loop = true;
+    } else {
+      clone = document.createElement('img');
+      clone.src = el.src;
+    }
+    lightbox.innerHTML = '';
+    lightbox.appendChild(clone);
+    lightbox.classList.add('active');
+  });
+});
+lightbox.addEventListener('click', () => {
+  lightbox.classList.remove('active');
+  const vid = lightbox.querySelector('video');
+  if (vid) vid.pause();
+  lightbox.innerHTML = '';
+});
+</script>
+
+</body>
+</html>

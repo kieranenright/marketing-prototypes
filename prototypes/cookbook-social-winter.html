@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cookbook — Social Carousel: Winter</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: #e0e0e0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  gap: 60px;
+}
+
+h2.section-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: #999;
+  margin-top: 40px;
+}
+
+/* === SOCIAL CARD === */
+.social-card {
+  width: 1080px;
+  height: 1350px;
+  position: relative;
+  overflow: hidden;
+  transform-origin: top center;
+  transform: scale(0.45);
+  margin-bottom: -740px;
+  box-shadow: 0 12px 80px rgba(0,0,0,0.15);
+  border-radius: 12px;
+}
+
+/* === SLIDE 1 — HERO === */
+.slide-hero {
+  background: #FAF8F3;
+}
+
+.slide-hero .bg-pattern {
+  position: absolute;
+  inset: 0;
+  /* Subtle organic texture */
+  background:
+    radial-gradient(ellipse at 15% 20%, rgba(150, 220, 20, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 85% 75%, rgba(150, 220, 20, 0.04) 0%, transparent 50%);
+}
+
+/* Decorative corner illustrations */
+.corner-illus {
+  position: absolute;
+  z-index: 2;
+  opacity: 0.12;
+}
+.corner-illus.top-right {
+  top: -20px;
+  right: -20px;
+  width: 280px;
+  height: 280px;
+  transform: rotate(15deg);
+}
+.corner-illus.top-left {
+  top: 40px;
+  left: -40px;
+  width: 220px;
+  height: 220px;
+  transform: rotate(-20deg);
+}
+.corner-illus.mid-right {
+  top: 45%;
+  right: -30px;
+  width: 240px;
+  height: 240px;
+  transform: rotate(10deg);
+}
+.corner-illus.bot-left {
+  bottom: 180px;
+  left: -30px;
+  width: 260px;
+  height: 260px;
+  transform: rotate(-15deg);
+}
+
+/* Decorative line-art veggie SVGs */
+.line-art {
+  position: absolute;
+  z-index: 2;
+}
+
+.line-art svg {
+  fill: none;
+  stroke: #067A46;
+  stroke-width: 1.5;
+  opacity: 0.18;
+}
+
+.line-art.top-right-1 { top: 30px; right: 40px; }
+.line-art.top-right-2 { top: 120px; right: -10px; }
+.line-art.top-left-1 { top: 80px; left: 20px; }
+.line-art.mid-left { top: 380px; left: -10px; }
+.line-art.mid-right { top: 460px; right: 20px; }
+.line-art.bot-left { bottom: 280px; left: 30px; }
+.line-art.bot-right { bottom: 320px; right: 50px; }
+
+/* Headline area */
+.headline-area {
+  position: absolute;
+  top: 80px;
+  left: 0;
+  right: 0;
+  z-index: 5;
+  text-align: center;
+  padding: 0 80px;
+}
+
+.headline-main {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 800;
+  font-size: 82px;
+  line-height: 0.95;
+  letter-spacing: -2px;
+  text-transform: uppercase;
+  color: #232323;
+  margin-bottom: 10px;
+}
+
+.headline-accent {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 800;
+  font-size: 82px;
+  line-height: 0.95;
+  letter-spacing: -2px;
+  text-transform: uppercase;
+  color: #067A46;
+}
+
+/* Food photo */
+.food-photo-area {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 660px;
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.food-photo-area img {
+  width: 780px;
+  height: 780px;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 20px 80px rgba(0,0,0,0.12);
+  margin-bottom: -60px;
+}
+
+/* Carousel dots */
+.carousel-dots {
+  position: absolute;
+  bottom: 30px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  z-index: 10;
+}
+.carousel-dots .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(35, 35, 35, 0.2);
+}
+.carousel-dots .dot.active {
+  background: #232323;
+}
+
+/* Cookbook badge */
+.cookbook-badge {
+  position: absolute;
+  top: 30px;
+  left: 40px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.cookbook-badge .icon {
+  width: 44px;
+  height: 44px;
+  background: #067A46;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cookbook-badge .icon svg {
+  width: 24px;
+  height: 24px;
+  fill: white;
+}
+.cookbook-badge .label {
+  font-weight: 800;
+  font-size: 18px;
+  color: #067A46;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* HF logo top right */
+.hf-logo {
+  position: absolute;
+  top: 35px;
+  right: 40px;
+  z-index: 10;
+  height: 36px;
+  opacity: 0.7;
+}
+
+/* === SLIDE 2 — FEATURE EXPLANATION === */
+.slide-feature {
+  background: #067A46;
+}
+
+.slide-feature .content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 100px 100px;
+  text-align: center;
+  z-index: 3;
+}
+
+.slide-feature .step-number {
+  font-weight: 800;
+  font-size: 160px;
+  line-height: 1;
+  color: rgba(255,255,255,0.08);
+  position: absolute;
+  top: 60px;
+  left: 80px;
+}
+
+.slide-feature .feature-icon {
+  width: 160px;
+  height: 160px;
+  margin-bottom: 50px;
+  filter: drop-shadow(0 8px 30px rgba(0,0,0,0.15));
+}
+
+.slide-feature .feature-headline {
+  font-weight: 800;
+  font-size: 64px;
+  line-height: 1;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  letter-spacing: -1px;
+  margin-bottom: 30px;
+}
+
+.slide-feature .feature-body {
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 1.4;
+  color: rgba(255,255,255,0.8);
+  max-width: 700px;
+}
+
+.slide-feature .carousel-dots .dot {
+  background: rgba(255,255,255,0.25);
+}
+.slide-feature .carousel-dots .dot.active {
+  background: #FFFFFF;
+}
+
+/* === SLIDE 3 — CTA === */
+.slide-cta {
+  background: #D2F895;
+}
+
+.slide-cta .content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 100px 100px;
+  text-align: center;
+  z-index: 3;
+}
+
+.slide-cta .cta-headline {
+  font-weight: 800;
+  font-size: 72px;
+  line-height: 0.95;
+  text-transform: uppercase;
+  color: #232323;
+  letter-spacing: -2px;
+  margin-bottom: 40px;
+}
+
+.slide-cta .cta-sub {
+  font-weight: 400;
+  font-size: 30px;
+  color: rgba(35, 35, 35, 0.7);
+  margin-bottom: 60px;
+}
+
+.slide-cta .cta-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: #067A46;
+  color: #FFFFFF;
+  font-weight: 800;
+  font-size: 28px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 24px 60px;
+  border-radius: 60px;
+  text-decoration: none;
+}
+
+.slide-cta .cta-button svg {
+  width: 24px;
+  height: 24px;
+  fill: white;
+}
+
+.slide-cta .app-icons {
+  margin-top: 40px;
+  display: flex;
+  gap: 16px;
+  opacity: 0.5;
+}
+
+.slide-cta .app-icons img {
+  height: 48px;
+}
+
+/* Phone mockup wrapper */
+.phone-mockup {
+  position: absolute;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+}
+
+/* Spec overlay */
+.spec-overlay {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  font-size: 10px;
+  font-weight: 700;
+  color: rgba(0,0,0,0.12);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  z-index: 20;
+}
+
+/* === NOTES BAR === */
+.notes-bar {
+  width: 486px;
+  background: white;
+  border-radius: 12px;
+  padding: 28px 32px;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+  margin-top: -20px;
+}
+.notes-bar h3 {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #999;
+  margin-bottom: 12px;
+}
+.notes-bar ul {
+  list-style: none;
+  font-size: 13px;
+  color: #555;
+  line-height: 1.8;
+}
+.notes-bar ul li::before {
+  content: "→ ";
+  color: #067A46;
+  font-weight: 800;
+}
+.notes-bar .tag {
+  display: inline-block;
+  background: #D2F895;
+  color: #232323;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== SLIDE 1: HERO ==================== -->
+<h2 class="section-label">Slide 1 — Hero</h2>
+<div class="social-card slide-hero">
+  <div class="bg-pattern"></div>
+
+  <!-- Decorative line-art vegetables (matching the reference style) -->
+  <div class="line-art top-right-1">
+    <svg width="180" height="180" viewBox="0 0 180 180">
+      <!-- Broccoli / cauliflower shape -->
+      <circle cx="90" cy="80" r="35" />
+      <circle cx="65" cy="65" r="28" />
+      <circle cx="115" cy="65" r="28" />
+      <circle cx="75" cy="45" r="22" />
+      <circle cx="105" cy="45" r="22" />
+      <line x1="90" y1="115" x2="90" y2="165" stroke-width="3" />
+      <line x1="80" y1="140" x2="65" y2="155" />
+    </svg>
+  </div>
+
+  <div class="line-art top-left-1">
+    <svg width="160" height="160" viewBox="0 0 160 160">
+      <!-- Tomato shape -->
+      <ellipse cx="80" cy="85" rx="50" ry="45" />
+      <path d="M60,42 Q80,20 100,42" />
+      <line x1="80" y1="25" x2="80" y2="42" stroke-width="2" />
+      <path d="M70,38 Q80,28 90,38" />
+    </svg>
+  </div>
+
+  <div class="line-art mid-right">
+    <svg width="200" height="200" viewBox="0 0 200 200">
+      <!-- Bell pepper shape -->
+      <path d="M70,40 Q60,20 80,15 Q100,10 110,30 Q120,15 135,25 Q145,35 130,50" />
+      <path d="M70,40 Q50,70 55,110 Q60,150 100,160 Q140,150 145,110 Q150,70 130,50" />
+      <line x1="100" y1="50" x2="100" y2="130" />
+    </svg>
+  </div>
+
+  <div class="line-art bot-left">
+    <svg width="180" height="180" viewBox="0 0 180 180">
+      <!-- Onion shape -->
+      <ellipse cx="90" cy="100" rx="55" ry="50" />
+      <path d="M55,80 Q90,40 125,80" />
+      <path d="M65,75 Q90,50 115,75" />
+      <line x1="90" y1="30" x2="90" y2="50" stroke-width="2" />
+      <path d="M80,35 Q90,25 100,35" />
+    </svg>
+  </div>
+
+  <div class="line-art bot-right">
+    <svg width="150" height="200" viewBox="0 0 150 200">
+      <!-- Carrot shape -->
+      <path d="M75,30 Q90,20 85,10 M75,30 Q60,18 65,8" />
+      <path d="M55,50 Q75,30 95,50 Q100,90 95,140 Q85,180 75,190 Q65,180 55,140 Q50,90 55,50Z" />
+      <line x1="65" y1="70" x2="85" y2="80" />
+      <line x1="65" y1="100" x2="85" y2="110" />
+      <line x1="68" y1="130" x2="82" y2="138" />
+    </svg>
+  </div>
+
+  <!-- Headline -->
+  <div class="headline-area">
+    <div class="headline-main">
+      NEVER LOSE A<br>
+      DINNER IDEA
+    </div>
+    <div class="headline-accent">
+      SAVE IT FROM<br>
+      SOCIAL IN SECONDS
+    </div>
+  </div>
+
+  <!-- Food photo (circular, like the reference bowl) -->
+  <div class="food-photo-area">
+    <img src="../../Desktop/CREATIVE TOOLKIT/Stock_Food_03.png" alt="Sesame prawn rice bowl" />
+  </div>
+
+  <!-- Carousel dots -->
+  <div class="carousel-dots">
+    <div class="dot active"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+  </div>
+
+  <div class="spec-overlay">1080 x 1350 — Social Carousel</div>
+</div>
+
+<div class="notes-bar">
+  <h3>Slide 1 Notes</h3>
+  <ul>
+    <li>Agrandir Tight Black, ALL CAPS <span class="tag">US Market</span></li>
+    <li>Background: HF Cream (#FAF8F3) per Cookbook brand</li>
+    <li>Green accent: HF Primary Green (#067A46)</li>
+    <li>Line-art vegetables match reference style</li>
+    <li>Stock_Food_03 — swap for any approved food shot</li>
+    <li>Circular crop mirrors reference bowl presentation</li>
+  </ul>
+</div>
+
+
+<!-- ==================== SLIDE 2: FEATURE ==================== -->
+<h2 class="section-label">Slide 2 — Feature Explanation</h2>
+<div class="social-card slide-feature">
+  <div class="step-number">01</div>
+  <div class="content">
+    <img class="feature-icon" src="../../Desktop/CREATIVE TOOLKIT/Illustration_Share_Social_Media.png" alt="Share from social" />
+    <div class="feature-headline">SEE A RECIPE<br>YOU LOVE?</div>
+    <div class="feature-body">Share any cooking video from TikTok or Instagram directly to the HelloFresh app</div>
+  </div>
+
+  <div class="carousel-dots">
+    <div class="dot"></div>
+    <div class="dot active"></div>
+    <div class="dot"></div>
+  </div>
+
+  <div class="spec-overlay" style="color: rgba(255,255,255,0.12);">1080 x 1350 — Social Carousel</div>
+</div>
+
+<div class="notes-bar">
+  <h3>Slide 2 Notes</h3>
+  <ul>
+    <li>HF Primary Green (#067A46) background</li>
+    <li>Illustration_Share_Social_Media from approved toolkit</li>
+    <li>Copy pattern: clear feature explanation</li>
+    <li>Could swap with phone mockup showing share-to-Cookbook flow</li>
+  </ul>
+</div>
+
+
+<!-- ==================== SLIDE 3: CTA ==================== -->
+<h2 class="section-label">Slide 3 — CTA</h2>
+<div class="social-card slide-cta">
+  <div class="content">
+    <div class="cta-headline">
+      VIDEO TO RECIPE<br>
+      IN JUST A<br>
+      FEW TAPS
+    </div>
+    <div class="cta-sub">Free in the HelloFresh app. No subscription needed.</div>
+    <a class="cta-button" href="#">
+      <svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg>
+      Try Cookbook Free
+    </a>
+  </div>
+
+  <div class="carousel-dots">
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot active"></div>
+  </div>
+
+  <div class="spec-overlay">1080 x 1350 — Social Carousel</div>
+</div>
+
+<div class="notes-bar">
+  <h3>Slide 3 Notes</h3>
+  <ul>
+    <li>HF Light Green (#D2F895) background — promo slide</li>
+    <li>"Video to recipe in just a few taps" — proven copy pattern</li>
+    <li>"No subscription needed" — barrier-breaking for prospects</li>
+    <li>CTA button: HF Primary Green pill</li>
+  </ul>
+</div>
+
+</body>
+</html>

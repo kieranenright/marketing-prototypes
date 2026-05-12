@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HelloFresh Creator Platform — Join</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+  --hf-green: #1B8A4A;
+  --hf-dark-green: #0B5C30;
+  --hf-lime: #C8F065;
+  --hf-cream: #FAF8F3;
+  --hf-white: #FFFFFF;
+  --hf-dark: #1A1A1A;
+  --hf-muted: #6B6B6B;
+  --hf-border: #E8E4DD;
+  --hf-light-green: #EDF5E4;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--hf-cream);
+  color: var(--hf-dark);
+  overflow-x: hidden;
+}
+
+/* NAV */
+.nav {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--hf-white);
+  border-bottom: 1px solid var(--hf-border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 32px; height: 56px;
+}
+.nav-left { display: flex; align-items: center; gap: 32px; }
+.nav-logo {
+  display: flex; align-items: center; gap: 6px;
+  font-weight: 900; font-size: 14px; color: var(--hf-green);
+  letter-spacing: 1.5px; text-transform: uppercase; text-decoration: none;
+}
+.nav-logo svg { width: 24px; height: 24px; }
+.nav-links { display: flex; gap: 4px; }
+.nav-links a {
+  text-decoration: none; font-size: 13px; font-weight: 500;
+  color: var(--hf-dark); padding: 8px 12px; border-radius: 6px;
+  transition: background 0.2s;
+}
+.nav-links a:hover { background: var(--hf-cream); }
+.nav-login {
+  font-size: 13px; font-weight: 600; color: var(--hf-dark);
+  background: none; border: 1.5px solid var(--hf-dark);
+  padding: 8px 20px; border-radius: 24px; cursor: pointer;
+  transition: all 0.2s;
+}
+.nav-login:hover { background: var(--hf-dark); color: white; }
+
+/* BREADCRUMB */
+.breadcrumb {
+  padding: 16px 32px;
+  font-size: 12px; color: var(--hf-muted); font-weight: 500;
+}
+.breadcrumb a { color: var(--hf-muted); text-decoration: none; }
+.breadcrumb a:hover { color: var(--hf-dark); }
+.breadcrumb span { margin: 0 6px; }
+
+/* DECORATIVE DOTS */
+.deco-dot {
+  position: absolute; width: 10px; height: 10px; border-radius: 50%;
+  background: var(--hf-green); opacity: 0.35;
+}
+
+/* CONTAINER */
+.container { max-width: 680px; margin: 0 auto; padding: 0 24px; }
+.container-wide { max-width: 840px; margin: 0 auto; padding: 0 24px; }
+
+/* HERO */
+.hero-section {
+  background: var(--hf-light-green);
+  padding: 64px 24px 0;
+  text-align: center;
+  position: relative;
+}
+.hero-section h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 46px; font-weight: 400; line-height: 1.15;
+  color: var(--hf-dark); margin-bottom: 16px;
+}
+.hero-section h1 .green-italic {
+  color: var(--hf-green);
+  font-style: italic;
+  text-decoration: underline;
+  text-decoration-style: wavy;
+  text-underline-offset: 6px;
+  text-decoration-thickness: 2px;
+  text-decoration-color: var(--hf-green);
+}
+.hero-sub {
+  font-size: 15px; color: var(--hf-muted); line-height: 1.6;
+  max-width: 420px; margin: 0 auto 28px;
+}
+.btn-primary {
+  display: inline-block; width: 100%; max-width: 480px;
+  background: var(--hf-dark); color: white;
+  padding: 16px 32px; border-radius: 12px;
+  font-size: 15px; font-weight: 700; text-decoration: none;
+  border: none; cursor: pointer; transition: all 0.2s;
+  font-family: inherit;
+}
+.btn-primary:hover { background: #333; transform: translateY(-1px); }
+
+/* PROFILE CARD */
+.profile-card-wrap {
+  position: relative; z-index: 2;
+  padding: 40px 24px 0;
+  margin-top: -20px;
+}
+.profile-card {
+  max-width: 600px; margin: 0 auto;
+  background: white; border-radius: 20px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.04);
+  overflow: hidden;
+}
+.pc-banner {
+  height: 140px; display: flex; overflow: hidden;
+}
+.pc-banner-img {
+  flex: 1; height: 100%; object-fit: cover;
+}
+.pc-header { padding: 0 28px 20px; position: relative; }
+.pc-avatar {
+  width: 72px; height: 72px; border-radius: 50%;
+  border: 3px solid white;
+  overflow: hidden; margin-top: -36px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+}
+.pc-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.pc-name { font-size: 18px; font-weight: 800; margin-top: 10px; letter-spacing: -0.3px; }
+.pc-title { font-size: 12px; color: var(--hf-muted); margin-top: 2px; }
+.pc-stats { display: flex; gap: 24px; margin-top: 14px; }
+.pc-stat-num { font-size: 18px; font-weight: 900; letter-spacing: -0.5px; }
+.pc-stat-label { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--hf-muted); }
+.pc-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+.pc-tag {
+  background: var(--hf-cream); padding: 5px 12px; border-radius: 20px;
+  font-size: 11px; font-weight: 600; color: var(--hf-dark);
+}
+.pc-bio { font-size: 12px; color: var(--hf-muted); line-height: 1.6; margin-top: 14px; padding-right: 20px; }
+.pc-social { display: flex; gap: 8px; margin-top: 12px; }
+.pc-social-icon {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--hf-cream); display: flex; align-items: center;
+  justify-content: center; font-size: 12px; color: var(--hf-muted);
+}
+.pc-tabs {
+  display: flex; border-bottom: 1px solid var(--hf-border);
+  margin-top: 16px; padding: 0 28px;
+}
+.pc-tab {
+  padding: 12px 16px; font-size: 12px; font-weight: 700;
+  color: var(--hf-muted); position: relative;
+}
+.pc-tab.active { color: var(--hf-dark); }
+.pc-tab.active::after {
+  content: ''; position: absolute; bottom: -1px; left: 16px; right: 16px;
+  height: 2px; background: var(--hf-dark); border-radius: 2px;
+}
+
+/* RECIPE GRID */
+.pc-recipes { padding: 20px 28px 28px; }
+.pc-recipe-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.pc-recipe { cursor: pointer; }
+.pc-recipe-img {
+  width: 100%; aspect-ratio: 1; border-radius: 12px;
+  object-fit: cover; display: block;
+}
+.pc-recipe-img-round {
+  width: 100%; aspect-ratio: 1; border-radius: 50%;
+  object-fit: cover; display: block;
+}
+.pc-recipe-placeholder {
+  width: 100%; aspect-ratio: 1; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 36px;
+}
+.pc-recipe-placeholder.round { border-radius: 50%; }
+.pc-recipe-name { font-size: 10px; font-weight: 700; margin-top: 8px; line-height: 1.3; color: var(--hf-dark); }
+.pc-recipe-meta { font-size: 9px; color: var(--hf-muted); margin-top: 3px; display: flex; gap: 8px; align-items: center; }
+.pc-premium {
+  display: inline-block; background: var(--hf-green); color: white;
+  padding: 2px 6px; border-radius: 4px; font-size: 8px; font-weight: 800;
+  letter-spacing: 0.5px; margin-bottom: 4px;
+}
+
+/* SECTION SHARED */
+.page-section {
+  padding: 80px 24px; position: relative;
+}
+.section-tag {
+  font-size: 11px; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--hf-muted); margin-bottom: 6px;
+}
+.section-heading {
+  font-size: 32px; font-weight: 900; letter-spacing: -1px; line-height: 1.1;
+  margin-bottom: 8px;
+}
+
+/* INCLUDES HEADER */
+.includes-header {
+  text-align: center; padding: 80px 24px 0;
+}
+.includes-header .section-tag { color: var(--hf-green); }
+
+/* FEATURE ROWS */
+.feature-row {
+  padding: 60px 24px;
+  position: relative;
+}
+.feature-row .container-wide {
+  display: flex; gap: 48px; align-items: center;
+}
+.feature-text { flex: 1; }
+.feature-visual { flex: 1; }
+.feature-tag {
+  font-size: 11px; font-weight: 800; letter-spacing: 2.5px;
+  text-transform: uppercase; color: var(--hf-green); margin-bottom: 8px;
+}
+.feature-title {
+  font-size: 26px; font-weight: 900; letter-spacing: -0.8px;
+  line-height: 1.15; margin-bottom: 12px;
+}
+.feature-desc { font-size: 14px; color: var(--hf-muted); line-height: 1.7; }
+
+/* COLLECTIONS LIST */
+.collection-item {
+  display: flex; align-items: center; gap: 14px;
+  padding: 16px 0; border-bottom: 1px solid var(--hf-border);
+}
+.collection-item:last-child { border-bottom: none; }
+.collection-icon { font-size: 24px; flex-shrink: 0; }
+.collection-info { flex: 1; }
+.collection-name { font-size: 14px; font-weight: 700; }
+.collection-meta { font-size: 11px; color: var(--hf-muted); margin-top: 2px; }
+.collection-badge {
+  font-size: 10px; font-weight: 700; padding: 4px 10px; border-radius: 6px;
+  flex-shrink: 0;
+}
+.collection-badge.free { background: var(--hf-light-green); color: var(--hf-green); }
+.collection-badge.paid { background: var(--hf-cream); color: var(--hf-dark); }
+.collection-badge.draft { background: #F0ECE4; color: var(--hf-muted); }
+
+/* STATS GRID */
+.stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.stat-card { padding: 20px; }
+.stat-num { font-size: 28px; font-weight: 900; letter-spacing: -1px; color: var(--hf-dark); }
+.stat-label { font-size: 11px; color: var(--hf-muted); font-weight: 600; margin-top: 2px; }
+
+/* MARKETS GRID */
+.markets-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.market-card {
+  display: flex; align-items: center; gap: 10px;
+  padding: 14px 16px; background: white; border-radius: 12px;
+  border: 1px solid var(--hf-border);
+}
+.market-flag { font-size: 24px; flex-shrink: 0; }
+.market-name { font-size: 13px; font-weight: 700; }
+.market-subs { font-size: 11px; color: var(--hf-muted); }
+.market-soon { font-size: 12px; color: var(--hf-muted); margin-top: 12px; font-weight: 500; }
+
+/* FAQ */
+.faq-section { padding: 80px 24px; }
+.faq-heading {
+  font-family: 'DM Serif Display', serif;
+  font-size: 32px; font-weight: 400; text-align: center;
+  margin-bottom: 36px;
+}
+.faq-list { max-width: 600px; margin: 0 auto; }
+.faq-item {
+  border-bottom: 1px solid var(--hf-border);
+}
+.faq-q {
+  padding: 20px 0; display: flex; align-items: center; gap: 14px;
+  cursor: pointer; transition: color 0.2s;
+}
+.faq-q:hover { color: var(--hf-green); }
+.faq-num {
+  width: 32px; height: 32px; border-radius: 50%;
+  border: 1.5px solid var(--hf-border); display: flex;
+  align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700; color: var(--hf-muted);
+  flex-shrink: 0; transition: all 0.2s;
+}
+.faq-item.open .faq-num { background: var(--hf-green); color: white; border-color: var(--hf-green); }
+.faq-q-text { flex: 1; font-size: 15px; font-weight: 600; }
+.faq-arrow {
+  font-size: 14px; color: var(--hf-muted); transition: transform 0.3s;
+  flex-shrink: 0;
+}
+.faq-item.open .faq-arrow { transform: rotate(180deg); }
+.faq-a {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.4s ease;
+  padding: 0 0 0 46px;
+}
+.faq-item.open .faq-a { max-height: 200px; padding: 0 0 20px 46px; }
+.faq-a p { font-size: 14px; color: var(--hf-muted); line-height: 1.7; }
+
+/* CLOSING CTA */
+.cta-section {
+  padding: 0 24px 80px;
+}
+.cta-card {
+  max-width: 680px; margin: 0 auto;
+  background: var(--hf-light-green); border-radius: 24px;
+  padding: 56px 48px; text-align: center;
+}
+.cta-card h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 32px; font-weight: 400; line-height: 1.2;
+  margin-bottom: 12px;
+}
+.cta-card h2 .green-italic {
+  color: var(--hf-green); font-style: italic;
+  text-decoration: underline; text-decoration-style: wavy;
+  text-underline-offset: 4px; text-decoration-thickness: 2px;
+  text-decoration-color: var(--hf-green);
+}
+.cta-card p {
+  font-size: 14px; color: var(--hf-muted); line-height: 1.6;
+  max-width: 420px; margin: 0 auto 24px;
+}
+.cta-card .btn-primary { max-width: 320px; }
+.cta-social-proof {
+  display: flex; align-items: center; justify-content: center;
+  gap: 10px; margin-top: 20px;
+}
+.cta-avatars { display: flex; }
+.cta-avatars img {
+  width: 28px; height: 28px; border-radius: 50%;
+  border: 2px solid var(--hf-light-green); margin-left: -8px;
+  object-fit: cover;
+}
+.cta-avatars img:first-child { margin-left: 0; }
+.cta-proof-text { font-size: 12px; color: var(--hf-muted); font-weight: 500; }
+
+/* FOOTER */
+.footer {
+  background: var(--hf-cream);
+  border-top: 1px solid var(--hf-border);
+  padding: 48px 32px 24px;
+}
+.footer-grid {
+  max-width: 1100px; margin: 0 auto;
+  display: grid; grid-template-columns: 1.2fr 1fr 1fr 1fr 1fr 1.5fr;
+  gap: 24px;
+}
+.footer-col h4 {
+  font-size: 13px; font-weight: 800; margin-bottom: 12px; color: var(--hf-dark);
+}
+.footer-col a {
+  display: block; font-size: 12px; color: var(--hf-muted);
+  text-decoration: none; padding: 3px 0; transition: color 0.2s;
+}
+.footer-col a:hover { color: var(--hf-green); }
+.footer-payments {
+  display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap;
+}
+.footer-payment {
+  background: white; border: 1px solid var(--hf-border); border-radius: 4px;
+  padding: 4px 8px; font-size: 10px; font-weight: 700; color: var(--hf-muted);
+}
+.footer-app-text { font-size: 11px; color: var(--hf-muted); line-height: 1.5; margin-bottom: 8px; }
+.footer-app-badges { display: flex; gap: 8px; }
+.footer-app-badge {
+  background: var(--hf-dark); color: white; padding: 6px 12px;
+  border-radius: 6px; font-size: 10px; font-weight: 600;
+  display: flex; align-items: center; gap: 4px;
+}
+.footer-bottom {
+  max-width: 1100px; margin: 32px auto 0;
+  padding-top: 20px; border-top: 1px solid var(--hf-border);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.footer-legal { display: flex; gap: 16px; align-items: center; }
+.footer-legal span, .footer-legal a {
+  font-size: 11px; color: var(--hf-muted); text-decoration: none;
+}
+.footer-legal a:hover { color: var(--hf-green); }
+.footer-social { display: flex; gap: 12px; }
+.footer-social a {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--hf-border); display: flex;
+  align-items: center; justify-content: center;
+  font-size: 12px; text-decoration: none; color: var(--hf-muted);
+  transition: all 0.2s;
+}
+.footer-social a:hover { background: var(--hf-green); color: white; }
+
+/* REVEAL ANIMATIONS */
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.stagger-1 { transition-delay: 0.1s; }
+.stagger-2 { transition-delay: 0.2s; }
+.stagger-3 { transition-delay: 0.3s; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-left">
+    <a class="nav-logo" href="#">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 3c1.5 0 3 .5 4 1.5-1-.2-2.5.5-3 2-.5-1.5-2-2.2-3-2 1-1 2.5-1.5 4-1.5h-2z" fill="#1B8A4A"/><path d="M8 11c.5-2 2-3.5 4-3.5s3.5 1.5 4 3.5c.5 2-.5 4.5-4 6.5-3.5-2-4.5-4.5-4-6.5z" fill="#1B8A4A"/></svg>
+      HelloFresh
+    </a>
+    <div class="nav-links">
+      <a href="#">Our Plans</a>
+      <a href="#">About Us &#9662;</a>
+      <a href="#">Our Menus &#9662;</a>
+      <a href="#">Our Meal Kits &#9662;</a>
+      <a href="#">Gift Cards</a>
+      <a href="#">Sustainability &#9662;</a>
+      <a href="#">Partnerships &#9662;</a>
+    </div>
+  </div>
+  <button class="nav-login">Log In</button>
+</nav>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <a href="#">&#127968;</a><span>&#8250;</span>
+  <a href="#">Creators</a><span>&#8250;</span>
+  <span style="color: var(--hf-dark); font-weight: 600;">Join</span>
+</div>
+
+<!-- HERO -->
+<section class="hero-section" id="hero">
+  <div class="container">
+    <h1>Your recipes.<br>Actually <span class="green-italic">cooked.</span></h1>
+    <p class="hero-sub">On social, your best recipe gets 48 hours. On HelloFresh, it lives in a Cookbook &mdash; where 7.5 million subscribers come to decide what's for dinner, not to scroll.</p>
+    <button class="btn-primary" onclick="scrollToSection('cta')">Create My Page</button>
+  </div>
+
+  <!-- PROFILE CARD -->
+  <div class="profile-card-wrap">
+    <div class="profile-card">
+      <!-- Banner -->
+      <div class="pc-banner">
+        <div style="flex:1; background: linear-gradient(135deg, #E8B86D 0%, #D4956B 100%);"></div>
+        <div style="flex:1; background: linear-gradient(135deg, #C1D99B 0%, #8BB85E 100%);"></div>
+        <div style="flex:1; background: linear-gradient(135deg, #E6A57C 0%, #C47D5A 100%);"></div>
+        <div style="flex:1; background: linear-gradient(135deg, #D9C97E 0%, #B8A55C 100%);"></div>
+      </div>
+      <!-- Header -->
+      <div class="pc-header">
+        <div class="pc-avatar">
+          <img src="images/creators/emily-eggers.jpg" alt="Creator avatar">
+        </div>
+        <div class="pc-name">Emily Eggers</div>
+        <div class="pc-title">Creator &middot; HelloFresh UK</div>
+
+        <div class="pc-stats">
+          <div>
+            <div class="pc-stat-num">14.2k</div>
+            <div class="pc-stat-label">Cook Throughs</div>
+          </div>
+          <div>
+            <div class="pc-stat-num">4.8</div>
+            <div class="pc-stat-label">Avg Rating</div>
+          </div>
+          <div>
+            <div class="pc-stat-num">18</div>
+            <div class="pc-stat-label">Recipes</div>
+          </div>
+        </div>
+
+        <div class="pc-tags">
+          <span class="pc-tag">Healthy Family Meals</span>
+          <span class="pc-tag">Under 30 Minutes</span>
+          <span class="pc-tag">Budget-Friendly</span>
+        </div>
+
+        <div class="pc-bio">Weeknight meals that actually work. I create quick, healthy recipes for families who want real food without the fuss &mdash; tested on my own kids first.</div>
+
+        <div class="pc-social">
+          <div class="pc-social-icon">IG</div>
+          <div class="pc-social-icon">&#127760;</div>
+          <div class="pc-social-icon">YT</div>
+        </div>
+      </div>
+
+      <!-- Tabs -->
+      <div class="pc-tabs">
+        <div class="pc-tab active">Recipes</div>
+        <div class="pc-tab">Collections</div>
+        <div class="pc-tab">About</div>
+        <div class="pc-tab">Services</div>
+      </div>
+
+      <!-- Recipes -->
+      <div class="pc-recipes">
+        <div class="pc-recipe-grid">
+          <!-- Row 1 — rectangular -->
+          <div class="pc-recipe">
+            <div class="pc-recipe-placeholder" style="background: linear-gradient(140deg, #D4885C 0%, #C46B3F 50%, #E8C874 100%); border-radius: 12px;">&#127837;</div>
+            <div class="pc-recipe-name">Classic Bolognese Lasagna</div>
+            <div class="pc-recipe-meta"><span>45 min</span><span>&#9733; 4.8</span><span>13.4k</span></div>
+          </div>
+          <div class="pc-recipe">
+            <div class="pc-recipe-placeholder" style="background: linear-gradient(140deg, #E8B86D 0%, #D4956B 50%, #C8A060 100%); border-radius: 12px;">&#129472;</div>
+            <div class="pc-recipe-name">Three Cheese Italian Lasagna</div>
+            <div class="pc-recipe-meta"><span>52 min</span><span>&#9733; 4.6</span><span>9.1k</span></div>
+          </div>
+          <div class="pc-recipe">
+            <div class="pc-recipe-placeholder" style="background: linear-gradient(140deg, #8BB85E 0%, #A3C77E 50%, #6D9B42 100%); border-radius: 12px;">&#129367;</div>
+            <div class="pc-recipe-name">Chicken Southwest-Style Salad</div>
+            <div class="pc-recipe-meta"><span>25 min</span><span>&#9733; 4.5</span><span>7.8k</span></div>
+          </div>
+          <!-- Row 2 — circular -->
+          <div class="pc-recipe">
+            <div class="pc-premium">PREMIUM</div>
+            <div class="pc-recipe-placeholder round" style="background: linear-gradient(140deg, #C49464 0%, #A87E52 50%, #E8C874 100%);">&#127858;</div>
+            <div class="pc-recipe-name">Thai-Style Peanut Chicken Bowl</div>
+            <div class="pc-recipe-meta"><span>32 min</span><span>&#9733; 4.8</span></div>
+          </div>
+          <div class="pc-recipe">
+            <div class="pc-premium">PREMIUM</div>
+            <div class="pc-recipe-placeholder round" style="background: linear-gradient(140deg, #C47D5A 0%, #8B5E3C 50%, #D4A07E 100%);">&#127843;</div>
+            <div class="pc-recipe-name">Chicken Pomegranate Bowl</div>
+            <div class="pc-recipe-meta"><span>38 min</span><span>&#9733; 4.7</span></div>
+          </div>
+          <div class="pc-recipe">
+            <div class="pc-recipe-placeholder round" style="background: linear-gradient(140deg, #D4956B 0%, #E8A57C 50%, #C88060 100%);">&#127835;</div>
+            <div class="pc-recipe-name">Buffalo-Style Chicken Bowl</div>
+            <div class="pc-recipe-meta"><span>30 min</span><span>&#9733; 4.4</span><span>5.2k</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INCLUDES HEADER -->
+<div class="includes-header reveal">
+  <div class="container">
+    <div class="section-tag" style="color: var(--hf-green);">What your Creator Page does</div>
+    <div class="section-heading">From saved to cooked.<br>That's the difference.</div>
+  </div>
+</div>
+
+<!-- FEATURE: CURATE -->
+<div class="feature-row reveal">
+  <div class="container-wide">
+    <div class="feature-text">
+      <div class="feature-tag">Curate</div>
+      <div class="feature-title">Your recipes, organized<br>your way</div>
+      <div class="feature-desc">Group recipes into themed collections &mdash; weeknight dinners, seasonal menus, skill-based series. Your audience follows the collections that matter to them. Free or premium &mdash; you decide what to charge.</div>
+    </div>
+    <div class="feature-visual">
+      <div class="collection-item">
+        <div class="collection-icon">&#128293;</div>
+        <div class="collection-info">
+          <div class="collection-name">Summer Grilling Series</div>
+          <div class="collection-meta">9 recipes &middot; 3.2k saves</div>
+        </div>
+        <div class="collection-badge free">FREE</div>
+      </div>
+      <div class="collection-item">
+        <div class="collection-icon">&#129370;</div>
+        <div class="collection-info">
+          <div class="collection-name">Mediterranean Masterclass</div>
+          <div class="collection-meta">13 recipes &middot; 847 subscribers</div>
+        </div>
+        <div class="collection-badge paid">$4.99/mo</div>
+      </div>
+      <div class="collection-item">
+        <div class="collection-icon">&#10052;&#65039;</div>
+        <div class="collection-info">
+          <div class="collection-name">Winter Comfort Food</div>
+          <div class="collection-meta">4 recipes &middot; Coming Dec 1</div>
+        </div>
+        <div class="collection-badge draft">DRAFT</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURE: SERVE -->
+<div class="feature-row reveal">
+  <div class="container-wide">
+    <div class="feature-visual">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-num">65%</div>
+          <div class="stat-label">Cook-through rate</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">4.7</div>
+          <div class="stat-label">Average rating</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">34%</div>
+          <div class="stat-label">Repeat cook rate</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">&lt;5%</div>
+          <div class="stat-label">Social save-to-cook rate</div>
+        </div>
+      </div>
+    </div>
+    <div class="feature-text">
+      <div class="feature-tag">Serve</div>
+      <div class="feature-title">The metric social<br>can't give you</div>
+      <div class="feature-desc">73% of recipes saved on social are never looked at again. On HelloFresh, 65% are actually cooked. See cook-throughs, ratings, repeat cooks, and revenue &mdash; the feedback loop food creators have never had.</div>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURE: REACH -->
+<div class="feature-row reveal">
+  <div class="container-wide">
+    <div class="feature-text">
+      <div class="feature-tag">Reach</div>
+      <div class="feature-title">One recipe.<br>Every market.</div>
+      <div class="feature-desc">Publish once. We handle the rest &mdash; language, measurements, local ingredient availability. Your recipe works in every HelloFresh market without you lifting a finger. No geo-restrictions. No separate accounts.</div>
+    </div>
+    <div class="feature-visual">
+      <div class="markets-grid">
+        <div class="market-card">
+          <div class="market-flag">&#127482;&#127480;</div>
+          <div>
+            <div class="market-name">United States</div>
+            <div class="market-subs">3.2M subscribers</div>
+          </div>
+        </div>
+        <div class="market-card">
+          <div class="market-flag">&#127468;&#127463;</div>
+          <div>
+            <div class="market-name">United Kingdom</div>
+            <div class="market-subs">1.8M subscribers</div>
+          </div>
+        </div>
+        <div class="market-card">
+          <div class="market-flag">&#127462;&#127482;</div>
+          <div>
+            <div class="market-name">Australia</div>
+            <div class="market-subs">840K subscribers</div>
+          </div>
+        </div>
+        <div class="market-card">
+          <div class="market-flag">&#127475;&#127487;</div>
+          <div>
+            <div class="market-name">New Zealand</div>
+            <div class="market-subs">420K subscribers</div>
+          </div>
+        </div>
+      </div>
+      <div class="market-soon">Nordics, BNL, FR, DACH, IE coming soon</div>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <h2 class="faq-heading reveal">Frequently asked questions</h2>
+  <div class="faq-list">
+    <div class="faq-item reveal stagger-1">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-num">1</span>
+        <span class="faq-q-text">How is this different from posting recipes on social?</span>
+        <span class="faq-arrow">&#9660;</span>
+      </div>
+      <div class="faq-a">
+        <p>On social, your recipe competes with every other post for 24&ndash;48 hours, then disappears into saved folders that 73% of people never reopen. On HelloFresh, your recipe lives in a Cookbook that people return to when they're deciding what to cook. The audience intent is fundamentally different &mdash; they're planning dinner, not scrolling.</p>
+      </div>
+    </div>
+    <div class="faq-item reveal stagger-1">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-num">2</span>
+        <span class="faq-q-text">Do my followers need a HelloFresh subscription?</span>
+        <span class="faq-arrow">&#9660;</span>
+      </div>
+      <div class="faq-a">
+        <p>No. Cookbook is completely free &mdash; anyone can download the HelloFresh app and save your recipes without a subscription. This means your entire audience can use it, not just paying customers. No paywall between your content and the people who want to cook it.</p>
+      </div>
+    </div>
+    <div class="faq-item reveal stagger-2">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-num">3</span>
+        <span class="faq-q-text">I only have rough recipes and phone photos. Can I still join?</span>
+        <span class="faq-arrow">&#9660;</span>
+      </div>
+      <div class="faq-a">
+        <p>Yes. We help you structure recipes into clear steps and ingredient lists. Professional photography isn't required &mdash; authentic phone photos often outperform studio shots. What matters is that your audience engages with your recipes and wants to cook them.</p>
+      </div>
+    </div>
+    <div class="faq-item reveal stagger-2">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-num">4</span>
+        <span class="faq-q-text">What data will I actually see?</span>
+        <span class="faq-arrow">&#9660;</span>
+      </div>
+      <div class="faq-a">
+        <p>Cook-throughs (how many people actually made your recipe), ratings, repeat cooks, save-to-cook conversion, and collection subscriber growth. For the first time, you'll see beyond impressions to real cooking behaviour &mdash; the only metric that matters for food creators.</p>
+      </div>
+    </div>
+    <div class="faq-item reveal stagger-3">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-num">5</span>
+        <span class="faq-q-text">Do I lose ownership of my recipes?</span>
+        <span class="faq-arrow">&#9660;</span>
+      </div>
+      <div class="faq-a">
+        <p>No. Your recipes remain yours. They're attributed to you with your profile, handle, and links back to your social channels. HelloFresh is an additional distribution channel, not a replacement. You can remove any recipe at any time.</p>
+      </div>
+    </div>
+    <div class="faq-item reveal stagger-3">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-num">6</span>
+        <span class="faq-q-text">Who is eligible to join?</span>
+        <span class="faq-arrow">&#9660;</span>
+      </div>
+      <div class="faq-a">
+        <p>Food creators who share original recipes and have an engaged audience. Follower count matters less than engagement &mdash; if your audience saves your recipes (even if they never make them), you're exactly who we built this for. 200 pilot spots. Both established creators and emerging voices welcome.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING CTA -->
+<section class="cta-section" id="cta">
+  <div class="cta-card reveal">
+    <h2>Your followers already love<br>your recipes. Let them <span class="green-italic">cook.</span></h2>
+    <p>Create your Creator Page and put your recipes where people actually make them. 7.5 million subscribers. 200 pilot spots. Free.</p>
+    <button class="btn-primary" style="max-width: 320px;">Create My Page</button>
+    <div class="cta-social-proof">
+      <div class="cta-avatars">
+        <img src="images/creators/carlys-cookbook.jpg" alt="">
+        <img src="images/creators/createaplatewithdina.jpg" alt="">
+        <img src="images/creators/emily-eggers.jpg" alt="">
+        <img src="images/creators/nutritionwithnat.jpg" alt="">
+        <img src="images/creators/spoonfulofsi.jpg" alt="">
+      </div>
+      <span class="cta-proof-text">Join 11 HelloFresh creators already live</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-col">
+      <h4>HelloFresh</h4>
+      <a href="#">Students</a>
+      <a href="#">Blog</a>
+      <a href="#">Recipes</a>
+      <a href="#">Hero Discount</a>
+      <a href="#">Recipe Directory</a>
+      <a href="#">Delivery Options</a>
+    </div>
+    <div class="footer-col">
+      <h4>Our company</h4>
+      <a href="#">HelloFresh Group</a>
+      <a href="#">Sustainability</a>
+      <a href="#">Careers</a>
+      <a href="#">Press</a>
+      <a href="#">Working at HF</a>
+      <a href="#">Recipe Developers</a>
+    </div>
+    <div class="footer-col">
+      <h4>Work with us</h4>
+      <a href="#">All Partnerships</a>
+      <a href="#">Content Publishers</a>
+      <a href="#">Retail Media</a>
+      <a href="#">Corporate Sales</a>
+      <a href="#">Influencer</a>
+    </div>
+    <div class="footer-col">
+      <h4>Help center</h4>
+      <a href="#">Help Center &amp; FAQ</a>
+      <a href="#">Privacy Choices</a>
+    </div>
+    <div class="footer-col">
+      <h4>Payment methods</h4>
+      <div class="footer-payments">
+        <div class="footer-payment">VISA</div>
+        <div class="footer-payment">MC</div>
+        <div class="footer-payment">DISC</div>
+        <div class="footer-payment">AMEX</div>
+        <div class="footer-payment">PayPal</div>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Download our app</h4>
+      <div class="footer-app-text">Manage your deliveries from anywhere, anytime.</div>
+      <div class="footer-app-badges">
+        <div class="footer-app-badge">&#63743; App Store</div>
+        <div class="footer-app-badge">&#9654; Google Play</div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-legal">
+      <span>&copy; HelloFresh 2026</span>
+      <a href="#">Terms and Conditions</a>
+      <a href="#">Privacy</a>
+      <a href="#">Accessibility</a>
+    </div>
+    <div class="footer-social">
+      <a href="#">f</a>
+      <a href="#">&#120143;</a>
+      <a href="#">&#9737;</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleFaq(el) {
+  const item = el.parentElement;
+  const wasOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!wasOpen) item.classList.add('open');
+}
+function scrollToSection(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth' });
+}
+function revealOnScroll() {
+  document.querySelectorAll('.reveal').forEach(el => {
+    if (el.getBoundingClientRect().top < window.innerHeight * 0.88) el.classList.add('visible');
+  });
+}
+window.addEventListener('scroll', revealOnScroll, { passive: true });
+revealOnScroll();
+</script>
+
+<script src="../auth.js"></script>
+</body>
+</html>

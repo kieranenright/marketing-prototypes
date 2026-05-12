@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HelloFresh Cookbook — Referral Program Value Proposition</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+  --hf-green: #1B8A4A;
+  --hf-dark-green: #0B5C30;
+  --hf-lime: #C8F065;
+  --hf-cream: #F5F1EB;
+  --hf-white: #FFFFFF;
+  --hf-dark: #1A1A1A;
+  --hf-muted: #6B6B6B;
+  --hf-grey: #F7F7F8;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--hf-grey);
+  color: var(--hf-dark);
+  overflow-x: hidden;
+}
+
+/* NAV */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; height: 56px;
+  background: rgba(247, 247, 248, 0.92);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  z-index: 999; display: flex; align-items: center;
+  justify-content: space-between; padding: 0 40px;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  transform: translateY(-100%); transition: transform 0.3s ease;
+}
+.nav.visible { transform: translateY(0); }
+.nav-logo { font-weight: 900; font-size: 15px; color: var(--hf-green); letter-spacing: -0.5px; }
+.nav-links { display: flex; gap: 6px; }
+.nav-links a {
+  text-decoration: none; font-size: 11px; font-weight: 600;
+  color: var(--hf-muted); padding: 6px 14px; border-radius: 20px; transition: all 0.2s;
+}
+.nav-links a:hover, .nav-links a.active { background: var(--hf-green); color: white; }
+
+/* SECTIONS */
+section {
+  min-height: 100vh; display: flex; align-items: center;
+  justify-content: center; padding: 100px 60px; position: relative;
+}
+.section-inner { max-width: 1000px; width: 100%; }
+
+.section-label {
+  font-size: 11px; font-weight: 700; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--hf-green); margin-bottom: 24px;
+}
+.section-title {
+  font-size: clamp(36px, 5vw, 56px); font-weight: 900;
+  line-height: 1.08; letter-spacing: -2px; margin-bottom: 28px;
+}
+.section-subtitle {
+  font-size: 18px; line-height: 1.7; color: var(--hf-muted);
+  max-width: 720px;
+}
+
+/* REVEAL */
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.stagger-1 { transition-delay: 0.1s; }
+.stagger-2 { transition-delay: 0.2s; }
+.stagger-3 { transition-delay: 0.3s; }
+.stagger-4 { transition-delay: 0.4s; }
+
+/* HERO */
+.hero {
+  min-height: 100vh; background: var(--hf-dark);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; top: -200px; right: -200px;
+  width: 700px; height: 700px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(200,240,101,0.12) 0%, transparent 60%);
+}
+.hero::after {
+  content: ''; position: absolute; bottom: -150px; left: -150px;
+  width: 500px; height: 500px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(27,138,74,0.1) 0%, transparent 60%);
+}
+.hero-content { text-align: center; z-index: 1; max-width: 800px; }
+.hero-badge {
+  display: inline-block; background: rgba(200,240,101,0.1);
+  color: var(--hf-lime); padding: 8px 20px; border-radius: 30px;
+  font-size: 11px; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; margin-bottom: 40px;
+}
+.hero-title {
+  font-size: clamp(42px, 6vw, 72px); font-weight: 900;
+  line-height: 1.05; letter-spacing: -3px; color: var(--hf-white);
+  margin-bottom: 28px;
+}
+.hero-title span { color: var(--hf-lime); }
+.hero-sub {
+  font-size: 16px; line-height: 1.7; color: rgba(255,255,255,0.55);
+  max-width: 580px; margin: 0 auto 48px;
+}
+.hero-meta {
+  font-size: 11px; color: rgba(255,255,255,0.3);
+  letter-spacing: 1px; text-transform: uppercase;
+}
+
+/* CONTRAST GRID */
+.contrast-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 2px; margin-top: 56px; border-radius: 20px;
+  overflow: hidden; background: rgba(0,0,0,0.06);
+}
+.contrast-col {
+  padding: 48px 40px;
+}
+.contrast-col.social { background: var(--hf-grey); }
+.contrast-col.cookbook { background: var(--hf-white); }
+
+.contrast-label {
+  font-size: 10px; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; margin-bottom: 32px;
+  padding-bottom: 16px; border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+.contrast-col.social .contrast-label { color: var(--hf-muted); }
+.contrast-col.cookbook .contrast-label { color: var(--hf-green); }
+
+.contrast-item { margin-bottom: 28px; }
+.contrast-item:last-child { margin-bottom: 0; }
+.contrast-item h4 {
+  font-size: 15px; font-weight: 700; margin-bottom: 6px;
+}
+.contrast-col.social .contrast-item h4 { color: var(--hf-muted); }
+.contrast-col.cookbook .contrast-item h4 { color: var(--hf-dark); }
+.contrast-item p {
+  font-size: 13px; line-height: 1.6; color: var(--hf-muted);
+}
+
+/* STATS */
+.stats-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 32px; margin-top: 56px;
+}
+.stat-card {
+  background: var(--hf-white); border-radius: 20px;
+  padding: 48px 36px; text-align: center;
+  border: 1px solid rgba(0,0,0,0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.06);
+}
+.stat-number {
+  font-size: 56px; font-weight: 900; letter-spacing: -3px;
+  color: var(--hf-green); margin-bottom: 8px;
+}
+.stat-label {
+  font-size: 14px; font-weight: 700; color: var(--hf-dark);
+  margin-bottom: 12px;
+}
+.stat-desc {
+  font-size: 13px; line-height: 1.6; color: var(--hf-muted);
+}
+
+/* VALUE PROP PILLARS */
+.value-section { background: var(--hf-white); }
+.pillar-grid {
+  display: grid; grid-template-columns: 1fr; gap: 0;
+  margin-top: 56px; border-radius: 20px; overflow: hidden;
+  border: 1px solid rgba(0,0,0,0.06);
+}
+.pillar {
+  padding: 48px; border-bottom: 1px solid rgba(0,0,0,0.06);
+  display: grid; grid-template-columns: 56px 1fr; gap: 24px;
+  align-items: start;
+}
+.pillar:last-child { border-bottom: none; }
+.pillar-num {
+  width: 56px; height: 56px; border-radius: 16px;
+  background: rgba(27,138,74,0.06); display: flex;
+  align-items: center; justify-content: center;
+  font-size: 22px; font-weight: 900; color: var(--hf-green);
+}
+.pillar-title {
+  font-size: 20px; font-weight: 800; margin-bottom: 12px;
+  letter-spacing: -0.5px;
+}
+.pillar-text {
+  font-size: 15px; line-height: 1.7; color: var(--hf-muted);
+}
+.plus-block {
+  margin-top: 40px; padding: 32px 40px;
+  background: rgba(200,240,101,0.12); border-radius: 16px;
+  border: 1px solid rgba(200,240,101,0.3);
+}
+.plus-block h4 {
+  font-size: 16px; font-weight: 800; margin-bottom: 8px;
+  color: var(--hf-dark-green);
+}
+.plus-block p {
+  font-size: 14px; line-height: 1.6; color: var(--hf-muted);
+}
+
+/* EARNINGS MODEL */
+.earnings-section { background: var(--hf-grey); }
+.tier-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 24px; margin-top: 56px;
+}
+.tier-card {
+  background: var(--hf-white); border-radius: 20px;
+  padding: 40px 32px; text-align: center;
+  border: 1px solid rgba(0,0,0,0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+}
+.tier-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.06);
+}
+.tier-card.featured {
+  background: var(--hf-dark);
+  border-color: transparent;
+}
+.tier-card.featured .tier-name,
+.tier-card.featured .tier-value { color: var(--hf-white); }
+.tier-card.featured .tier-value { color: var(--hf-lime); }
+.tier-card.featured .tier-desc { color: rgba(255,255,255,0.5); }
+.tier-card.featured .tier-detail { color: rgba(255,255,255,0.4); border-color: rgba(255,255,255,0.1); }
+
+.tier-badge {
+  position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
+  background: var(--hf-lime); color: var(--hf-dark-green);
+  font-size: 9px; font-weight: 800; letter-spacing: 1.5px;
+  text-transform: uppercase; padding: 4px 14px; border-radius: 20px;
+}
+.tier-name {
+  font-size: 14px; font-weight: 700; color: var(--hf-muted);
+  text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px;
+}
+.tier-value {
+  font-size: 48px; font-weight: 900; letter-spacing: -2px;
+  color: var(--hf-green); margin-bottom: 12px;
+}
+.tier-desc {
+  font-size: 14px; line-height: 1.5; color: var(--hf-muted);
+  margin-bottom: 20px;
+}
+.tier-detail {
+  font-size: 12px; color: var(--hf-muted);
+  padding-top: 16px; border-top: 1px solid rgba(0,0,0,0.06);
+}
+
+/* MESSAGING */
+.messaging-section { background: var(--hf-white); }
+.msg-card {
+  background: var(--hf-grey); border-radius: 20px;
+  padding: 56px; margin-top: 48px;
+  border: 1px solid rgba(0,0,0,0.06);
+}
+.msg-tier {
+  font-size: 10px; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--hf-green); margin-bottom: 12px;
+}
+.msg-headline {
+  font-size: 32px; font-weight: 900; letter-spacing: -1.5px;
+  line-height: 1.15; margin-bottom: 20px;
+}
+.msg-subhead {
+  font-size: 16px; line-height: 1.7; color: var(--hf-muted);
+  margin-bottom: 32px; max-width: 640px;
+}
+.msg-points {
+  list-style: none; margin-bottom: 32px;
+}
+.msg-points li {
+  font-size: 14px; line-height: 1.6; color: var(--hf-dark);
+  padding: 8px 0; padding-left: 20px; position: relative;
+}
+.msg-points li::before {
+  content: ''; position: absolute; left: 0; top: 16px;
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--hf-green);
+}
+
+.alt-headlines {
+  margin-top: 48px;
+}
+.alt-headlines h4 {
+  font-size: 13px; font-weight: 700; letter-spacing: 1px;
+  text-transform: uppercase; color: var(--hf-muted); margin-bottom: 20px;
+}
+.alt-grid {
+  display: grid; gap: 12px;
+}
+.alt-item {
+  display: grid; grid-template-columns: 32px 1fr auto; gap: 16px;
+  align-items: center; padding: 16px 20px;
+  background: var(--hf-white); border-radius: 12px;
+  border: 1px solid rgba(0,0,0,0.04);
+}
+.alt-item.recommended {
+  border-color: var(--hf-green);
+  background: rgba(27,138,74,0.03);
+}
+.alt-num {
+  font-size: 13px; font-weight: 800; color: var(--hf-green);
+  width: 32px; height: 32px; display: flex;
+  align-items: center; justify-content: center;
+  background: rgba(27,138,74,0.08); border-radius: 8px;
+}
+.alt-text { font-size: 14px; font-weight: 600; color: var(--hf-dark); }
+.alt-tag {
+  font-size: 10px; font-weight: 700; letter-spacing: 1px;
+  text-transform: uppercase; color: var(--hf-muted);
+  background: rgba(0,0,0,0.04); padding: 4px 10px; border-radius: 6px;
+}
+.alt-item.recommended .alt-tag {
+  background: rgba(27,138,74,0.1); color: var(--hf-green);
+}
+
+/* ASSET MAPPING */
+.asset-section { background: var(--hf-grey); }
+.asset-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 32px; margin-top: 48px;
+}
+.asset-card {
+  background: var(--hf-white); border-radius: 20px;
+  padding: 48px; border: 1px solid rgba(0,0,0,0.04);
+}
+.asset-type {
+  font-size: 10px; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--hf-green); margin-bottom: 16px;
+}
+.asset-title {
+  font-size: 18px; font-weight: 800; margin-bottom: 16px;
+  letter-spacing: -0.5px;
+}
+.asset-desc {
+  font-size: 14px; line-height: 1.7; color: var(--hf-muted);
+  margin-bottom: 24px;
+}
+.asset-structure {
+  font-size: 12px; line-height: 1.8; color: var(--hf-muted);
+  padding: 16px 20px; background: var(--hf-grey);
+  border-radius: 10px; font-weight: 500;
+}
+
+/* FOOTER */
+.footer {
+  text-align: center; padding: 60px 40px;
+  background: var(--hf-dark); color: rgba(255,255,255,0.3);
+  font-size: 11px; letter-spacing: 1px; text-transform: uppercase;
+}
+.footer span { color: var(--hf-lime); font-weight: 700; }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  section { padding: 80px 24px; }
+  .stats-grid { grid-template-columns: 1fr; }
+  .contrast-grid { grid-template-columns: 1fr; }
+  .tier-grid { grid-template-columns: 1fr; }
+  .asset-grid { grid-template-columns: 1fr; }
+  .pillar { grid-template-columns: 1fr; }
+  .msg-card { padding: 32px 24px; }
+  .nav { padding: 0 20px; }
+  .alt-item { grid-template-columns: 32px 1fr; }
+  .alt-tag { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav-logo">Creator Referral Program</div>
+  <div class="nav-links">
+    <a href="#insight">Insight</a>
+    <a href="#value">Value Prop</a>
+    <a href="#model">Earnings</a>
+    <a href="#messaging">Messaging</a>
+    <a href="#assets">Assets</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge reveal">Referral Program Value Proposition</div>
+    <h1 class="hero-title reveal stagger-1">The only platform where<br><span>more creators means more cooks.</span></h1>
+    <p class="hero-sub reveal stagger-2">Defining the strategic positioning, value proposition, and messaging for the Cookbook Creator Referral Program.</p>
+    <p class="hero-meta reveal stagger-3">Product Marketing | Kieran Enright | May 2026</p>
+  </div>
+</section>
+
+<!-- 01 — THE INSIGHT -->
+<section id="insight">
+  <div class="section-inner">
+    <p class="section-label reveal">01 — The Strategic Insight</p>
+    <h2 class="section-title reveal stagger-1">On social, inviting creators<br>hurts you. Here, it helps.</h2>
+    <p class="section-subtitle reveal stagger-2">Every creator platform has a referral program. Almost none have a genuine reason for creators to use it. We do — because Cookbook's economics are structurally different from social media.</p>
+
+    <div class="contrast-grid reveal stagger-3">
+      <div class="contrast-col social">
+        <div class="contrast-label">Social Media Referrals</div>
+        <div class="contrast-item">
+          <h4>Fixed attention pool</h4>
+          <p>Every new creator dilutes the algorithm's attention. Their gain is your loss.</p>
+        </div>
+        <div class="contrast-item">
+          <h4>One-time bounty</h4>
+          <p>Flat fee on sign-up. No ongoing relationship. No reason to care who you invite.</p>
+        </div>
+        <div class="contrast-item">
+          <h4>Quantity incentive</h4>
+          <p>Spray and pray. Refer anyone — quality doesn't matter because the reward is disconnected from performance.</p>
+        </div>
+        <div class="contrast-item">
+          <h4>Vanity metric triggers</h4>
+          <p>Rewards tied to sign-ups or follower milestones. Not actual content value.</p>
+        </div>
+      </div>
+      <div class="contrast-col cookbook">
+        <div class="contrast-label">Cookbook Referrals</div>
+        <div class="contrast-item">
+          <h4>Growing audience pool</h4>
+          <p>New creators bring new users who browse and cook everyone's recipes — including yours.</p>
+        </div>
+        <div class="contrast-item">
+          <h4>Ongoing commission</h4>
+          <p>Earn a % of your referral's recipe performance for 12 months. Their success is your income.</p>
+        </div>
+        <div class="contrast-item">
+          <h4>Quality incentive</h4>
+          <p>Your earnings are tied to their success — you naturally refer people who'll actually perform.</p>
+        </div>
+        <div class="contrast-item">
+          <h4>Real cooking metrics</h4>
+          <p>Rewards tied to recipes getting cooked. The thing the platform — and users — actually value.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal stagger-4" style="margin-top: 56px; padding: 32px 40px; background: var(--hf-dark); border-radius: 16px; border-left: 4px solid var(--hf-lime);">
+      <p style="font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--hf-lime); margin-bottom: 12px;">The Core Positioning</p>
+      <p style="font-size: 18px; font-weight: 600; line-height: 1.5; color: var(--hf-white);">Cookbook is the only creator platform with positive-sum referral economics. More creators = more recipe diversity = more users attracted = more people cooking everyone's recipes. A rising tide that actually lifts all boats.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 02 — VALUE PROPOSITION -->
+<section class="value-section" id="value">
+  <div class="section-inner">
+    <p class="section-label reveal">02 — The Value Proposition</p>
+    <h2 class="section-title reveal stagger-1">Invite creators you respect.<br>Grow the kitchen for everyone.</h2>
+    <p class="section-subtitle reveal stagger-2">Three genuine reasons a creator would refer — beyond just getting paid to spam their contacts.</p>
+
+    <div class="pillar-grid">
+      <div class="pillar reveal stagger-1">
+        <div class="pillar-num">1</div>
+        <div>
+          <div class="pillar-title">More creators = more cooks for you</div>
+          <div class="pillar-text">Every creator you invite brings their audience to Cookbook. Those users don't just cook their recipes — they browse, discover, and cook yours too. A new seafood creator doesn't steal your audience. They bring seafood lovers onto the platform who then find your pasta recipes. Unlike social media, where attention is zero-sum, Cookbook's discovery is intent-based. More supply creates more demand.</div>
+        </div>
+      </div>
+      <div class="pillar reveal stagger-2">
+        <div class="pillar-num">2</div>
+        <div>
+          <div class="pillar-title">Your taste becomes an asset</div>
+          <div class="pillar-text">Who you invite signals your standards and your community. Become the person who curates the best corner of Cookbook. Featured referrer status, co-creator collections, shared visibility. Your reputation as a tastemaker — not just a content producer — becomes a platform feature.</div>
+        </div>
+      </div>
+      <div class="pillar reveal stagger-3">
+        <div class="pillar-num">3</div>
+        <div>
+          <div class="pillar-title">Earn from the network you build</div>
+          <div class="pillar-text">Ongoing commission tied to your referrals' recipe performance for 12 months. Not a one-time bounty. The better they do, the more you earn — passive income that rewards quality invites over spray-and-pray. Your network is literally a revenue stream.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="plus-block reveal">
+      <h4>Aligned incentives by design.</h4>
+      <p>The commission model naturally filters for quality. You won't refer someone who won't publish good recipes — because your income depends on them succeeding. This means the platform grows with quality, not noise.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 03 — EARNINGS MODEL -->
+<section class="earnings-section" id="model">
+  <div class="section-inner">
+    <p class="section-label reveal">03 — Proposed Earnings Model</p>
+    <h2 class="section-title reveal stagger-1">Rewards that scale<br>with your network.</h2>
+    <p class="section-subtitle reveal stagger-2">Tiered commission structure. The more quality creators you bring, the higher your ongoing rate — plus non-monetary rewards that compound your visibility.</p>
+
+    <div class="tier-grid">
+      <div class="tier-card reveal stagger-1">
+        <div class="tier-name">Starter</div>
+        <div class="tier-value">10%</div>
+        <div class="tier-desc">Commission on referral's recipe earnings for 12 months</div>
+        <div class="tier-detail">1-2 successful referrals</div>
+      </div>
+      <div class="tier-card featured reveal stagger-2">
+        <div class="tier-badge">Target Tier</div>
+        <div class="tier-name">Connector</div>
+        <div class="tier-value">15%</div>
+        <div class="tier-desc">Commission + featured placement in co-creator collections + profile badge</div>
+        <div class="tier-detail">3-5 successful referrals</div>
+      </div>
+      <div class="tier-card reveal stagger-3">
+        <div class="tier-name">Tastemaker</div>
+        <div class="tier-value">20%</div>
+        <div class="tier-desc">Commission + early feature access + exclusive merch + priority support</div>
+        <div class="tier-detail">6+ successful referrals</div>
+      </div>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card reveal stagger-1">
+        <div class="stat-number">12</div>
+        <div class="stat-label">Months of commission</div>
+        <div class="stat-desc">From the date your referral's first recipe goes live. Long enough to compound.</div>
+      </div>
+      <div class="stat-card reveal stagger-2">
+        <div class="stat-number">$0</div>
+        <div class="stat-label">Cap on earnings</div>
+        <div class="stat-desc">No ceiling. If your referral becomes the platform's top performer, you keep earning.</div>
+      </div>
+      <div class="stat-card reveal stagger-3">
+        <div class="stat-number">1</div>
+        <div class="stat-label">Recipe to qualify</div>
+        <div class="stat-desc">A "successful referral" = accepted + published at least one recipe that gets cooked.</div>
+      </div>
+    </div>
+
+    <div class="reveal" style="margin-top: 56px; padding: 32px 40px; background: var(--hf-dark); border-radius: 16px; border-left: 4px solid var(--hf-lime);">
+      <p style="font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--hf-lime); margin-bottom: 12px;">Key Design Decision</p>
+      <p style="font-size: 18px; font-weight: 600; line-height: 1.5; color: var(--hf-white);">Commission is tied to recipe performance (recipes getting cooked), not vanity metrics (downloads, sign-ups). This aligns the referral incentive with the platform's core value prop.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 04 — MESSAGING HIERARCHY -->
+<section class="messaging-section" id="messaging">
+  <div class="section-inner">
+    <p class="section-label reveal">04 — Messaging Hierarchy</p>
+    <h2 class="section-title reveal stagger-1">One story.<br>Multiple angles to test.</h2>
+    <p class="section-subtitle reveal stagger-2">The messaging framework for all referral-program touchpoints: in-app prompts, email, creator dashboard, and DM templates.</p>
+
+    <div class="msg-card reveal">
+      <div class="msg-tier">Primary Headline</div>
+      <div class="msg-headline">The only platform where more creators means more cooks — for everyone.</div>
+      <div class="msg-tier" style="margin-top: 24px;">Subhead</div>
+      <div class="msg-subhead">On social media, inviting other creators means more competition. On Cookbook, every creator you bring grows the audience for everyone — including you. Refer creators you respect. Earn when their recipes get cooked.</div>
+      <div class="msg-tier">Supporting proof points</div>
+      <ul class="msg-points">
+        <li>Non-competitive: users search by recipe intent, not creator algorithm ranking</li>
+        <li>Network effects: more recipe diversity attracts more users to the platform</li>
+        <li>Ongoing commission (not a one-time bounty) for 12 months</li>
+        <li>Quality-aligned: you earn based on their recipe performance, not just sign-up</li>
+        <li>Tiered rewards: the more quality creators you bring, the more you unlock</li>
+      </ul>
+    </div>
+
+    <div class="alt-headlines reveal">
+      <h4>Alternative headlines for testing</h4>
+      <div class="alt-grid">
+        <div class="alt-item recommended">
+          <div class="alt-num">1</div>
+          <div class="alt-text">The only platform where more creators means more cooks — for everyone.</div>
+          <div class="alt-tag">Recommended</div>
+        </div>
+        <div class="alt-item">
+          <div class="alt-num">2</div>
+          <div class="alt-text">Invite creators you admire. Reach the audience they bring.</div>
+          <div class="alt-tag">Selfish Altruism</div>
+        </div>
+        <div class="alt-item">
+          <div class="alt-num">3</div>
+          <div class="alt-text">On social, more creators means less reach. Here, it's the opposite.</div>
+          <div class="alt-tag">Direct Contrast</div>
+        </div>
+        <div class="alt-item">
+          <div class="alt-num">4</div>
+          <div class="alt-text">Your network is your next revenue stream.</div>
+          <div class="alt-tag">Financial Upside</div>
+        </div>
+        <div class="alt-item">
+          <div class="alt-num">5</div>
+          <div class="alt-text">Build the cookbook you'd want to cook from.</div>
+          <div class="alt-tag">Curation / Identity</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 — ASSET MAPPING -->
+<section class="asset-section" id="assets">
+  <div class="section-inner">
+    <p class="section-label reveal">05 — Asset Mapping</p>
+    <h2 class="section-title reveal stagger-1">How this maps<br>to deliverables.</h2>
+    <p class="section-subtitle reveal stagger-2">The referral value proposition above feeds into multiple touchpoints across the creator journey.</p>
+
+    <div class="asset-grid">
+      <div class="asset-card reveal stagger-1">
+        <div class="asset-type">In-App Referral Section</div>
+        <div class="asset-title">Dashboard integration</div>
+        <div class="asset-desc">A dedicated referral tab in the creator dashboard. Shows unique link, current tier, earnings tracker, and referred creator performance.</div>
+        <div class="asset-structure">Referral link &rarr; Tier progress &rarr; Earnings summary &rarr; Referred creator list &rarr; Share CTAs</div>
+      </div>
+      <div class="asset-card reveal stagger-2">
+        <div class="asset-type">Email / Push</div>
+        <div class="asset-title">Referral prompt campaigns</div>
+        <div class="asset-desc">Trigger-based comms when creators hit milestones (first recipe cooked, first earning). Prompt them to refer while momentum is high.</div>
+        <div class="asset-structure">Milestone trigger &rarr; Headline #1 or #3 &rarr; Single proof point &rarr; CTA to share</div>
+      </div>
+      <div class="asset-card reveal stagger-1">
+        <div class="asset-type">DM / Outreach Templates</div>
+        <div class="asset-title">Creator-to-creator scripts</div>
+        <div class="asset-desc">Pre-written DM templates creators can personalise and send to peers. Focus on the non-competitive angle and shared upside.</div>
+        <div class="asset-structure">Personal opener &rarr; "Unlike social..." contrast &rarr; Value prop &rarr; Referral link</div>
+      </div>
+      <div class="asset-card reveal stagger-2">
+        <div class="asset-type">Landing Page Section</div>
+        <div class="asset-title">Referral block on main LP</div>
+        <div class="asset-desc">Replace current "Grow together. Get rewarded." section with revised value prop. Lead with the positive-sum insight, not the dollar amount.</div>
+        <div class="asset-structure">Insight headline &rarr; 3 pillars (condensed) &rarr; Tier preview &rarr; CTA</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<div class="footer">
+  <span>More creators. More recipes. More cooks. Everyone wins.</span>
+  <br><br>Product Marketing | Kieran Enright | May 2026
+</div>
+
+<script>
+// Reveal on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Nav visibility
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 300) {
+    nav.classList.add('visible');
+  } else {
+    nav.classList.remove('visible');
+  }
+
+  // Active nav link
+  const sections = ['insight', 'value', 'model', 'messaging', 'assets'];
+  sections.forEach(id => {
+    const section = document.getElementById(id);
+    const link = document.querySelector(`.nav-links a[href="#${id}"]`);
+    if (section && link) {
+      const rect = section.getBoundingClientRect();
+      if (rect.top <= 200 && rect.bottom >= 200) {
+        document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+        link.classList.add('active');
+      }
+    }
+  });
+});
+</script>
+</body>
+</html>
