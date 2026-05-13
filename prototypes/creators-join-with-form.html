@@ -65,6 +65,7 @@
       top: 0; left: 0; right: 0;
       z-index: 100;
       transition: background 0.3s ease, box-shadow 0.3s ease;
+      font-size: 13px;
     }
 
     .header.scrolled {
@@ -80,11 +81,11 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      height: 64px;
+      height: 44px;
     }
 
     .header-logo { display: flex; align-items: center; }
-    .logo { height: 28px; }
+    .logo { height: 22px; }
 
     .header-nav {
       display: flex;
@@ -142,9 +143,9 @@
     .btn {
       display: inline-flex;
       align-items: center;
-      padding: 10px 20px;
+      padding: 8px 18px;
       border-radius: 980px;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 600;
       text-decoration: none;
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
@@ -177,10 +178,10 @@
 
     /* Hero */
     .hero {
-      min-height: 85vh;
+      min-height: 0;
       display: flex;
       align-items: center;
-      padding: 120px 24px 80px;
+      padding: 64px 24px 40px;
       background: var(--color-bg);
       position: relative;
       overflow: hidden;
@@ -373,7 +374,7 @@
     .chefs-showcase {
       background: var(--color-surface);
       overflow: hidden;
-      padding: 24px 0 32px;
+      padding: 16px 0 20px;
       flex-shrink: 0;
     }
 
@@ -595,9 +596,9 @@
 
     .how-steps {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 32px;
-      max-width: 1100px;
+      max-width: 900px;
       margin: 0 auto;
     }
 
@@ -733,85 +734,6 @@
     .who-pill h3 { font-size: 20px; margin-bottom: 8px; color: white; }
     .who-pill p { color: rgba(255,255,255,0.7); font-size: 15px; line-height: 1.5; text-transform: none; }
 
-    /* Referral */
-    .referral-section {
-      background: var(--color-surface);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .referral-section::before {
-      content: '$2K';
-      position: absolute;
-      top: 50%; left: -5%;
-      transform: translateY(-50%);
-      font-family: 'agrandir-tight-black', var(--font-headline);
-      font-size: 300px;
-      color: var(--color-brand-light);
-      opacity: 0.2;
-      pointer-events: none;
-      line-height: 1;
-      animation: pulse 3s ease-in-out infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 0.2; transform: translateY(-50%) scale(1); }
-      50% { opacity: 0.3; transform: translateY(-50%) scale(1.02); }
-    }
-
-    .referral-inner {
-      max-width: 900px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1.2fr;
-      gap: 60px;
-      align-items: center;
-      position: relative;
-      z-index: 1;
-    }
-
-    @media (max-width: 800px) {
-      .referral-inner { grid-template-columns: 1fr; gap: 32px; }
-      .referral-section::before { font-size: 150px; left: -10%; }
-    }
-
-    .referral-headline h2 { font-size: 36px; margin-bottom: 16px; }
-    .referral-headline p { font-size: 17px; color: var(--color-text-secondary); line-height: 1.5; margin-bottom: 24px; text-transform: none; }
-
-    .referral-tiers { display: flex; flex-direction: column; gap: 16px; }
-
-    .referral-tier {
-      background: var(--color-bg);
-      border-radius: 16px;
-      padding: 20px 24px;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, background 0.3s ease;
-    }
-
-    .referral-tier:hover {
-      transform: translateX(12px) scale(1.02);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-      background: var(--color-surface);
-    }
-
-    .referral-tier-icon {
-      width: 48px; height: 48px;
-      background: var(--color-brand-light);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 24px;
-      flex-shrink: 0;
-      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.3s ease;
-    }
-
-    .referral-tier:hover .referral-tier-icon { transform: scale(1.15) rotate(-10deg); background: var(--color-brand); }
-
-    .referral-tier h4 { font-size: 16px; margin-bottom: 4px; }
-    .referral-tier p { font-size: 14px; color: var(--color-text-secondary); line-height: 1.4; text-transform: none; }
 
     /* FAQ */
     .faq-section { background: var(--color-bg); }
@@ -1345,9 +1267,8 @@
 
   <!-- Chef Carousel -->
   <section class="chefs-showcase">
-    <div class="section-header" style="padding: 0 24px; margin-bottom: 16px;">
-      <div class="section-eyebrow">CREATORS ON THE PLATFORM</div>
-      <h2>Your recipes get cooked, not just watched</h2>
+    <div class="section-header" style="padding: 0 24px; margin-bottom: 12px;">
+      <div class="section-eyebrow" style="margin-bottom: 0;">CREATORS ON THE PLATFORM</div>
     </div>
 
     <div class="chefs-scroll-container">
@@ -1598,13 +1519,6 @@
         <h3>People cook them</h3>
         <p>Your recipes go live in the app where 1M+ users browse, save, and cook in real kitchens.</p>
       </div>
-
-      <div class="how-step">
-        <div class="how-step-number">4</div>
-        <div class="how-step-icon">&#128176;</div>
-        <h3>You earn</h3>
-        <p>Not a flat fee. Not a CPM. You earn when someone actually makes your recipe — real meals, real attribution back to you. Pilot launching in the US first.</p>
-      </div>
     </div>
   </section>
 
@@ -1645,43 +1559,6 @@
     </div>
   </section>
 
-  <!-- Referral Program -->
-  <section class="section referral-section">
-    <div class="referral-inner">
-      <div class="referral-headline">
-        <div class="section-eyebrow">REFERRAL PROGRAM</div>
-        <h2>Grow together. Get rewarded.</h2>
-        <p>The best kitchens are built by chefs who lift each other up. Refer creators you believe in — we'll reward you both.</p>
-        <a href="creators-refer.html" class="btn btn-primary btn-large">Refer a creator</a>
-      </div>
-
-      <div class="referral-tiers">
-        <div class="referral-tier">
-          <div class="referral-tier-icon">&#x1F91D;</div>
-          <div>
-            <h4>Recommend peers</h4>
-            <p>Feature up to 5 favorite creators on your profile. Cross-promote organically.</p>
-          </div>
-        </div>
-
-        <div class="referral-tier">
-          <div class="referral-tier-icon">&#x1F4B0;</div>
-          <div>
-            <h4>$2,000 shared reward</h4>
-            <p>When a creator you refer hits 1,000 app downloads: you get $1,000, they get $1,000. Everyone wins.</p>
-          </div>
-        </div>
-
-        <div class="referral-tier">
-          <div class="referral-tier-icon">&#x1F381;</div>
-          <div>
-            <h4>Monthly creator bonus</h4>
-            <p>Top referring creators get featured placement, exclusive merch drops, and early access to new features.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- FAQ -->
   <section class="section faq-section">
@@ -2056,7 +1933,7 @@
 
     // Scroll-triggered animations
     document.addEventListener('DOMContentLoaded', () => {
-      const sections = document.querySelectorAll('.section-header, .why-card, .who-pill, .referral-tier, .faq-item-accordion');
+      const sections = document.querySelectorAll('.section-header, .why-card, .who-pill, .faq-item-accordion');
       sections.forEach((el, i) => {
         el.classList.add('fade-in');
         if (i % 3 === 1) el.classList.add('delay-1');
