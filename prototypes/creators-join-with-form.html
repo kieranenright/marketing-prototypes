@@ -1554,42 +1554,6 @@
   </section>
 
 
-  <!-- FAQ -->
-  <section class="section faq-section">
-    <div class="section-content">
-      <div class="section-header">
-        <h2>Frequently asked questions</h2>
-      </div>
-
-      <div class="faq-accordion">
-        <details class="faq-item-accordion">
-          <summary>What is the Cookbook Creator Platform?</summary>
-          <p>A permanent home for your recipes inside the HelloFresh app. We convert your existing video content into structured step-by-step recipe cards — searchable, saveable, and accessible to 1M+ users who are actively deciding what to cook. Think of it as the anti-algorithm: your recipes never get buried.</p>
-        </details>
-        <details class="faq-item-accordion">
-          <summary>Do I need to create new content?</summary>
-          <p>No. Zero extra work required. We take your existing video recipes and convert them into structured recipe cards with ingredients, steps, and timings. You keep creating on your platforms — we handle the rest.</p>
-        </details>
-        <details class="faq-item-accordion">
-          <summary>How is this different from social media saves?</summary>
-          <p>Social saves are where recipes go to die. On Cookbook, every save leads to a cook. Users open recipes in active cooking mode — with step-by-step instructions, timers, and ingredient lists. You get visibility into who actually made your food, not just who double-tapped.</p>
-        </details>
-        <details class="faq-item-accordion">
-          <summary>How do I make money?</summary>
-          <p>Monetization is tied to cooking activity — real meals made from your recipes. We're piloting this model in the US with a revenue structure that rewards actual impact, not vanity metrics. Our partnerships team works directly with each creator on terms.</p>
-        </details>
-        <details class="faq-item-accordion">
-          <summary>Does it cost anything?</summary>
-          <p>Free platform access during the pilot phase for selected creators. No hidden fees, no revenue share from your other channels.</p>
-        </details>
-        <details class="faq-item-accordion">
-          <summary>What are the selection criteria?</summary>
-          <p>We value recipe quality and originality over follower counts. If people watch your content and want to cook what you make, you're exactly who we're looking for.</p>
-        </details>
-      </div>
-    </div>
-  </section>
-
   <!-- INTAKE FORM -->
   <section class="section" id="apply" style="background: var(--color-bg); padding: 80px 24px 100px;">
     <div class="section-content" style="max-width: 680px;">
@@ -1615,9 +1579,6 @@
 
         <form id="creatorForm">
 
-          <!-- ABOUT YOU -->
-          <div class="intake-section-title">ABOUT YOU</div>
-
           <div class="intake-row">
             <div class="intake-group">
               <label class="intake-label" for="firstName">First name</label>
@@ -1634,40 +1595,7 @@
             <input type="email" id="email" class="intake-input" placeholder="you@email.com" required>
           </div>
 
-          <div class="intake-group">
-            <label class="intake-label" for="country">Country / Market</label>
-            <select id="country" class="intake-select" required>
-              <option value="" disabled selected>Select your country</option>
-              <option value="US">United States</option>
-              <option value="UK">United Kingdom</option>
-              <option value="AU">Australia</option>
-              <option value="NZ">New Zealand</option>
-              <option value="DE">Germany</option>
-              <option value="AT">Austria</option>
-              <option value="CH">Switzerland</option>
-              <option value="NL">Netherlands</option>
-              <option value="BE">Belgium</option>
-              <option value="LU">Luxembourg</option>
-              <option value="FR">France</option>
-              <option value="SE">Sweden</option>
-              <option value="DK">Denmark</option>
-              <option value="NO">Norway</option>
-              <option value="IE">Ireland</option>
-              <option value="CA">Canada</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
-
-          <div class="intake-group">
-            <label class="intake-label" for="bio">Your bio</label>
-            <textarea id="bio" class="intake-textarea" placeholder="Tell us about yourself in a few sentences. What's your culinary background? What inspires your cooking?" required></textarea>
-            <p class="intake-helper">This will appear on your Creator Page — make it personal!</p>
-          </div>
-
           <hr class="intake-divider">
-
-          <!-- SOCIAL PRESENCE -->
-          <div class="intake-section-title">SOCIAL PRESENCE</div>
 
           <div class="intake-group">
             <label class="intake-label">Primary platform</label>
@@ -1684,17 +1612,6 @@
               </div>
               <div class="intake-social-handle">
                 <input type="text" id="handle1" class="intake-input" placeholder="@yourhandle" required>
-              </div>
-              <div class="intake-social-followers">
-                <select id="followers1" class="intake-select" required>
-                  <option value="" disabled selected>Followers</option>
-                  <option value="1k-10k">1K – 10K</option>
-                  <option value="10k-50k">10K – 50K</option>
-                  <option value="50k-100k">50K – 100K</option>
-                  <option value="100k-500k">100K – 500K</option>
-                  <option value="500k-1m">500K – 1M</option>
-                  <option value="1m+">1M+</option>
-                </select>
               </div>
             </div>
           </div>
@@ -1716,17 +1633,6 @@
                 <div class="intake-social-handle">
                   <input type="text" id="handle2" class="intake-input" placeholder="@yourhandle">
                 </div>
-                <div class="intake-social-followers">
-                  <select id="followers2" class="intake-select">
-                    <option value="" disabled selected>Followers</option>
-                    <option value="1k-10k">1K – 10K</option>
-                    <option value="10k-50k">10K – 50K</option>
-                    <option value="50k-100k">50K – 100K</option>
-                    <option value="100k-500k">100K – 500K</option>
-                    <option value="500k-1m">500K – 1M</option>
-                    <option value="1m+">1M+</option>
-                  </select>
-                </div>
               </div>
             </div>
           </div>
@@ -1734,57 +1640,6 @@
           <button type="button" class="intake-add-another" onclick="document.getElementById('extraSocial').classList.add('show'); this.style.display='none';">
             + Add another platform
           </button>
-
-          <div class="intake-group" style="margin-top: 20px;">
-            <label class="intake-label" for="website">Website or portfolio <span class="intake-optional">(optional)</span></label>
-            <input type="url" id="website" class="intake-input" placeholder="https://yoursite.com">
-          </div>
-
-          <hr class="intake-divider">
-
-          <!-- YOUR CONTENT -->
-          <div class="intake-section-title">YOUR CONTENT</div>
-
-          <div class="intake-group">
-            <label class="intake-label" for="contentDesc">Tell us about your content</label>
-            <textarea id="contentDesc" class="intake-textarea" placeholder="What type of content do you make? How would you describe your presence online? What do your viewers love about your content?" required></textarea>
-            <p class="intake-helper">A few sentences is perfect — your style, your audience, what keeps them coming back.</p>
-          </div>
-
-          <div class="intake-group">
-            <label class="intake-label" for="sampleLink">Link to a recipe video or post</label>
-            <input type="url" id="sampleLink" class="intake-input" placeholder="https://instagram.com/reel/..." required>
-            <p class="intake-helper">Share your best recipe content — a Reel, TikTok, or YouTube video</p>
-          </div>
-
-          <div class="intake-group">
-            <label class="intake-label" for="audienceBenefits">What would you love to offer your audience through Cookbook?</label>
-            <textarea id="audienceBenefits" class="intake-textarea" placeholder="e.g. Easy-to-follow step-by-step recipes, nutritional values, a permanent place to find and save my recipes..." required></textarea>
-            <p class="intake-helper">What's missing for your audience today? What would make their experience with your content better?</p>
-          </div>
-
-          <hr class="intake-divider">
-
-          <!-- HOW DID YOU HEAR -->
-          <div class="intake-group">
-            <label class="intake-label" for="referral">How did you hear about the Cookbook Creator Platform?</label>
-            <select id="referral" class="intake-select" required>
-              <option value="" disabled selected>Select one</option>
-              <option value="social-hf">HelloFresh social media</option>
-              <option value="social-creator">Another creator</option>
-              <option value="email">Email from HelloFresh</option>
-              <option value="talent-agency">My talent agency / manager</option>
-              <option value="search">Google search</option>
-              <option value="word-of-mouth">Word of mouth</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
-
-          <!-- CONSENT -->
-          <div class="intake-checkbox-group">
-            <input type="checkbox" id="consent" required>
-            <label for="consent">I agree to be contacted by HelloFresh about partnership opportunities. View our <a href="https://www.hellofresh.com/privacy">Privacy Policy</a>.</label>
-          </div>
 
           <!-- SUBMIT -->
           <button type="submit" class="intake-submit">SUBMIT INTEREST</button>
@@ -1796,6 +1651,38 @@
           <h2 style="font-size: 28px; margin-bottom: 12px;"><span id="successName"></span>, you're on the list</h2>
           <p style="font-size: 15px; color: var(--color-text-secondary); line-height: 1.6; max-width: 380px; margin: 0 auto;">Thanks for your interest in the Cookbook Creator Platform. Our partnerships team will review your application and be in touch within 5 business days.</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section faq-section">
+    <div class="section-content">
+      <div class="section-header">
+        <h2>Frequently asked questions</h2>
+      </div>
+
+      <div class="faq-accordion">
+        <details class="faq-item-accordion">
+          <summary>What is the Cookbook Creator Platform?</summary>
+          <p>A permanent home for your recipes inside the HelloFresh app. We convert your existing video content into structured step-by-step recipe cards — searchable, saveable, and accessible to 1M+ users who are actively deciding what to cook. Think of it as the anti-algorithm: your recipes never get buried.</p>
+        </details>
+        <details class="faq-item-accordion">
+          <summary>Do I need to create new content?</summary>
+          <p>No. Zero extra work required. We take your existing video recipes and convert them into structured recipe cards with ingredients, steps, and timings. You keep creating on your platforms — we handle the rest.</p>
+        </details>
+        <details class="faq-item-accordion">
+          <summary>How is this different from social media saves?</summary>
+          <p>Social saves are where recipes go to die. On Cookbook, every save leads to a cook. Users open recipes in active cooking mode — with step-by-step instructions, timers, and ingredient lists. You get visibility into who actually made your food, not just who double-tapped.</p>
+        </details>
+        <details class="faq-item-accordion">
+          <summary>Does it cost anything?</summary>
+          <p>Free platform access during the pilot phase for selected creators. No hidden fees, no revenue share from your other channels.</p>
+        </details>
+        <details class="faq-item-accordion">
+          <summary>What are the selection criteria?</summary>
+          <p>We value recipe quality and originality over follower counts. If people watch your content and want to cook what you make, you're exactly who we're looking for.</p>
+        </details>
       </div>
     </div>
   </section>
