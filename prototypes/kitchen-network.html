@@ -1,0 +1,1998 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>HelloCreators Beta — Become a founding creator</title>
+    <style>
+/* =========================================================
+   HelloFresh HelloCreators Beta — Creators Landing
+   ========================================================= */
+
+@font-face {
+  font-family: 'Agrandir';
+  src: url('kitchen-network-assets/fonts/Agrandir-TightBlack.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Agrandir';
+  src: url('kitchen-network-assets/fonts/Agrandir-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+:root {
+  --hf-lime-500: #76B82A;
+  --hf-lime-400: #9FD658;
+  --hf-lime-300: #C6E89A;
+  --hf-lime-200: #DAF0B6;
+  --hf-lime-100: #EAF6D6;
+
+  --cb-green-900: #004D30;
+  --cb-green-800: #006039;
+  --cb-green-700: #006E46;
+  --cb-green-600: #127A52;
+  --cb-green-500: #2E8C66;
+  --cb-green-200: #B8D8C7;
+  --cb-green-100: #DCEAE0;
+  --cb-green-50:  #EEF5F0;
+
+  --cream-100: #FAF6EB;
+  --cream-200: #F4EEDE;
+  --cream-300: #EDE4CC;
+  --cream-400: #E3D6B4;
+  --cream: #F4EEDE;
+
+  --ink-900: #111111;
+  --ink-800: #1F1F1F;
+  --ink-700: #333333;
+  --ink-500: #6B6B6B;
+  --ink-400: #9A9A9A;
+  --ink-300: #CFCFCF;
+  --ink-200: #E7E7E7;
+  --ink-100: #F2F2F2;
+  --white: #FFFFFF;
+
+  --ig-start: #F58529;
+  --ig-mid: #DD2A7B;
+  --ig-end: #8134AF;
+  --tiktok-pink: #FE2C55;
+  --tiktok-cyan: #25F4EE;
+  --youtube-red: #FF0000;
+  --facebook: #1877F2;
+
+  --danger: #D84141;
+  --warning: #F2A93B;
+
+  --font-display: 'Agrandir', 'Archivo', system-ui, sans-serif;
+  --font-body: 'Archivo', 'Agrandir', system-ui, sans-serif;
+  --font-mono: 'Space Grotesk', ui-monospace, Menlo, monospace;
+
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 22px;
+  --radius-xl: 32px;
+  --radius-pill: 999px;
+
+  --shadow-xs: 0 1px 2px rgba(20,20,20,0.06);
+  --shadow-sm: 0 2px 8px rgba(20,20,20,0.06);
+  --shadow-md: 0 8px 24px rgba(20,20,20,0.08);
+  --shadow-lg: 0 18px 40px rgba(20,20,20,0.10);
+  --shadow-cta: 0 4px 0 rgba(0,0,0,0.12);
+
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --dur-fast: 150ms;
+  --dur-base: 220ms;
+  --dur-slow: 420ms;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--cream-200);
+  color: var(--ink-900);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  line-height: 1.5;
+}
+
+img { display: block; max-width: 100%; }
+
+a { color: inherit; text-decoration: none; }
+
+/* ===== Type primitives ===== */
+.display {
+  font-family: var(--font-display);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+.heavy { font-family: var(--font-display); font-weight: 900; letter-spacing: -0.02em; }
+.bold  { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.01em; }
+
+.eyebrow {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cb-green-700);
+}
+
+.hl-green { color: var(--cb-green-700); }
+.hl-lime  { color: var(--hf-lime-500); }
+
+/* ===== Layout ===== */
+.container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+@media (max-width: 720px) {
+  .container { padding: 0 20px; }
+}
+
+/* ===== Buttons ===== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 28px;
+  border: 0;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform var(--dur-fast) var(--ease-out),
+              background var(--dur-fast) var(--ease-out),
+              box-shadow var(--dur-fast) var(--ease-out);
+  white-space: nowrap;
+  letter-spacing: -0.005em;
+}
+.btn:active { transform: scale(0.97); }
+
+.btn-ink { background: var(--ink-900); color: var(--white); }
+.btn-ink:hover { background: var(--ink-700); }
+
+.btn-green { background: var(--cb-green-700); color: var(--white); }
+.btn-green:hover { background: var(--cb-green-800); }
+
+.btn-lime { background: var(--hf-lime-500); color: var(--ink-900); box-shadow: var(--shadow-cta); }
+.btn-lime:hover { background: var(--hf-lime-400); }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--ink-900);
+  box-shadow: inset 0 0 0 2px var(--ink-900);
+}
+.btn-ghost:hover { background: var(--ink-900); color: var(--white); }
+
+.btn-lg { padding: 20px 36px; font-size: 18px; }
+.btn-sm { padding: 10px 18px; font-size: 14px; }
+
+/* ===== Chip ===== */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--font-body);
+}
+
+/* ===== Nav ===== */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--cream-200);
+  transition: background var(--dur-base) var(--ease-out),
+              box-shadow var(--dur-base) var(--ease-out),
+              border-color var(--dur-base) var(--ease-out);
+  border-bottom: 1px solid transparent;
+}
+.nav.scrolled {
+  background: rgba(244, 238, 222, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom-color: rgba(17,17,17,0.08);
+}
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 76px;
+  gap: 24px;
+}
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.nav-logo { height: 26px; }
+.nav-divider {
+  width: 1px;
+  height: 22px;
+  background: var(--ink-300);
+}
+.nav-product {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 17px;
+  letter-spacing: -0.01em;
+}
+.nav-product .kn-dot {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--cb-green-700);
+  margin-right: 8px;
+  vertical-align: 2px;
+}
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+.nav-link {
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink-700);
+  transition: color var(--dur-fast);
+}
+.nav-link:hover { color: var(--ink-900); }
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.nav-counter {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px;
+  background: var(--ink-900);
+  color: var(--white);
+  border-radius: var(--radius-pill);
+  font-size: 13px;
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+.nav-counter .pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--hf-lime-400);
+  box-shadow: 0 0 0 0 rgba(159, 214, 88, 0.7);
+  animation: pulse 1.8s infinite;
+}
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(159, 214, 88, 0.7); }
+  70% { box-shadow: 0 0 0 8px rgba(159, 214, 88, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(159, 214, 88, 0); }
+}
+@media (max-width: 920px) {
+  .nav-links { display: none; }
+  .nav-counter span.long { display: none; }
+}
+@media (max-width: 560px) {
+  .nav-brand .nav-divider, .nav-brand .nav-product { display: none; }
+}
+
+/* ===== HERO ===== */
+.hero {
+  position: relative;
+  padding: 56px 0 80px;
+  overflow: hidden;
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+@media (max-width: 980px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+}
+
+.hero-eyebrow-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 28px;
+}
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: var(--radius-pill);
+  background: var(--cb-green-700);
+  color: var(--white);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.hero-tag .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--hf-lime-400);
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(48px, 7.5vw, 104px);
+  line-height: 0.92;
+  letter-spacing: -0.04em;
+  margin: 0 0 28px;
+  text-wrap: balance;
+}
+.hero-title .line2 {
+  display: block;
+  color: var(--cb-green-700);
+}
+.hero-sub {
+  font-size: 19px;
+  line-height: 1.5;
+  color: var(--ink-700);
+  max-width: 540px;
+  margin: 0 0 36px;
+}
+.hero-cta-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.hero-proof {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 36px;
+  color: var(--ink-700);
+  font-size: 14px;
+}
+.hero-avatars {
+  display: flex;
+}
+.hero-avatars .av {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid var(--cream-200);
+  background-size: cover;
+  background-position: center;
+  margin-left: -10px;
+}
+.hero-avatars .av:first-child { margin-left: 0; }
+
+/* Hero collage */
+.hero-collage {
+  position: relative;
+  height: 620px;
+}
+@media (max-width: 980px) {
+  .hero-collage { height: 520px; max-width: 520px; margin: 0 auto; }
+}
+.collage-bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 60% 40%, var(--cream-300) 0%, transparent 60%);
+}
+.collage-plate {
+  position: absolute;
+  width: 78%;
+  aspect-ratio: 1 / 1;
+  right: -4%;
+  top: 8%;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+.collage-plate img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.collage-phone {
+  position: absolute;
+  width: 44%;
+  aspect-ratio: 9 / 19.5;
+  left: 0;
+  bottom: 0;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  transform: rotate(-6deg);
+  background: var(--ink-900);
+  border: 8px solid var(--ink-900);
+}
+.collage-phone img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 18px;
+}
+.collage-badge {
+  position: absolute;
+  bottom: 60px;
+  right: 4%;
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 16px 20px;
+  box-shadow: var(--shadow-md);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  transform: rotate(4deg);
+  z-index: 2;
+}
+.collage-badge .num {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 32px;
+  line-height: 1;
+  color: var(--cb-green-700);
+  letter-spacing: -0.03em;
+}
+.collage-badge .lbl {
+  font-size: 12px;
+  color: var(--ink-700);
+  line-height: 1.3;
+}
+.collage-social {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border-radius: 18px;
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  z-index: 3;
+}
+.collage-social img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.collage-social.s1 { top: 4%; left: 38%; transform: rotate(-12deg); }
+.collage-social.s2 { top: 26%; left: 4%; transform: rotate(8deg); }
+.collage-social.s3 { bottom: 22%; right: 22%; transform: rotate(-6deg); }
+
+/* ===== Bridge bar: socials -> HF community ===== */
+.platform-bar {
+  border-top: 1px solid rgba(17,17,17,0.08);
+  border-bottom: 1px solid rgba(17,17,17,0.08);
+  padding: 36px 0;
+  background: var(--cream-100);
+}
+.bridge {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 40px;
+}
+@media (max-width: 920px) {
+  .bridge { grid-template-columns: 1fr; gap: 24px; text-align: center; }
+}
+.bridge-side {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.bridge-side.left { align-items: flex-start; }
+.bridge-side.right { align-items: flex-end; text-align: right; }
+@media (max-width: 920px) {
+  .bridge-side.left, .bridge-side.right { align-items: center; text-align: center; }
+}
+
+.bridge-eyebrow {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-500);
+}
+.bridge-icons {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.bridge-icon {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+.bridge-icon:hover { transform: translateY(-2px); }
+.bridge-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 14px;
+  box-shadow: var(--shadow-xs);
+}
+
+.bridge-arrow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--cb-green-700);
+}
+.bridge-arrow svg { display: block; }
+@media (max-width: 920px) {
+  .bridge-arrow { transform: rotate(90deg); }
+}
+
+.bridge-stat {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.bridge-stat-num {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(36px, 4.6vw, 56px);
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--cb-green-700);
+}
+.bridge-stat-lbl {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: -0.005em;
+  color: var(--ink-900);
+  line-height: 1.25;
+  text-align: left;
+}
+.bridge-stat-lbl .sub {
+  display: block;
+  font-weight: 500;
+  font-size: 12px;
+  color: var(--ink-500);
+  letter-spacing: 0;
+  margin-top: 2px;
+}
+.bridge-meta {
+  font-size: 13px;
+  color: var(--ink-500);
+}
+
+/* ===== Founding band (dark green) ===== */
+.founding {
+  background: var(--cb-green-900);
+  color: var(--white);
+  padding: 96px 0 104px;
+  position: relative;
+  overflow: hidden;
+}
+.founding::before {
+  content: "";
+  position: absolute;
+  width: 480px;
+  height: 480px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(118,184,42,0.18) 0%, transparent 70%);
+  top: -200px;
+  right: -100px;
+  pointer-events: none;
+}
+.founding-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 72px;
+  align-items: center;
+  position: relative;
+}
+@media (max-width: 980px) {
+  .founding-grid { grid-template-columns: 1fr; gap: 48px; }
+}
+.founding .eyebrow { color: var(--hf-lime-400); }
+.founding h2 {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(40px, 5.4vw, 72px);
+  line-height: 0.96;
+  letter-spacing: -0.03em;
+  margin: 12px 0 24px;
+  text-wrap: balance;
+}
+.founding h2 .em { color: var(--hf-lime-400); }
+.founding .lede {
+  font-size: 19px;
+  line-height: 1.55;
+  color: rgba(255,255,255,0.82);
+  max-width: 560px;
+  margin-bottom: 36px;
+}
+.founding-perks {
+  display: grid;
+  gap: 18px;
+}
+.founding-perk {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+.founding-perk-icon {
+  flex: 0 0 auto;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--hf-lime-500);
+  color: var(--cb-green-900);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 17px;
+}
+.founding-perk h4 {
+  margin: 0 0 4px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: -0.01em;
+}
+.founding-perk p {
+  margin: 0;
+  color: rgba(255,255,255,0.72);
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+/* Counter card */
+.counter-card {
+  background: var(--white);
+  color: var(--ink-900);
+  border-radius: var(--radius-lg);
+  padding: 36px;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+}
+.counter-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+.counter-eyebrow {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cb-green-700);
+}
+.counter-deadline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--cream-200);
+  padding: 8px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 13px;
+  font-weight: 600;
+}
+.counter-deadline .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--danger);
+}
+.counter-num-row {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.counter-num {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 96px;
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+  color: var(--cb-green-700);
+}
+.counter-of {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 36px;
+  letter-spacing: -0.03em;
+  color: var(--ink-300);
+}
+.counter-label {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: -0.01em;
+  margin-bottom: 24px;
+}
+.counter-bar {
+  height: 12px;
+  border-radius: var(--radius-pill);
+  background: var(--cream-300);
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+.counter-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--cb-green-700) 0%, var(--hf-lime-500) 100%);
+  border-radius: var(--radius-pill);
+  transition: width 1.4s var(--ease-out);
+}
+.counter-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  color: var(--ink-700);
+}
+.counter-meta strong { color: var(--ink-900); font-weight: 700; }
+.counter-recent {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--ink-200);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  color: var(--ink-700);
+}
+.counter-recent .av {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+}
+
+/* ===== Section heads ===== */
+.section { padding: 112px 0; }
+.section-head { max-width: 760px; margin: 0 auto 64px; text-align: center; }
+.section-head .eyebrow { margin-bottom: 14px; }
+.section-head h2 {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(36px, 4.4vw, 60px);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  margin: 0 0 16px;
+  text-wrap: balance;
+}
+.section-head p {
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--ink-700);
+  margin: 0;
+  text-wrap: pretty;
+}
+
+/* ===== How it works ===== */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+@media (max-width: 980px) { .steps { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .steps { grid-template-columns: 1fr; } }
+
+.step {
+  position: relative;
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 32px 28px 28px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.step-num {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 14px;
+  letter-spacing: 0.1em;
+  color: var(--cb-green-700);
+}
+.step-illu {
+  width: 84px;
+  height: 84px;
+  margin: 4px 0 8px;
+}
+.step-illu img { width: 100%; height: 100%; object-fit: contain; }
+.step h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 22px;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+  margin: 0;
+}
+.step p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--ink-700);
+}
+
+/* ===== Benefits ===== */
+.benefits-wrap { background: var(--cream-100); }
+.benefits {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+@media (max-width: 920px) { .benefits { grid-template-columns: 1fr; } }
+.benefit {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 36px 32px;
+  box-shadow: var(--shadow-sm);
+}
+.benefit.featured {
+  background: var(--cb-green-700);
+  color: var(--white);
+}
+.benefit.featured .benefit-eyebrow { color: var(--hf-lime-300); }
+.benefit.featured p { color: rgba(255,255,255,0.82); }
+.benefit-eyebrow {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cb-green-700);
+  margin-bottom: 14px;
+}
+.benefit h3 {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 30px;
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  margin: 0 0 14px;
+  text-wrap: balance;
+}
+.benefit p {
+  margin: 0;
+  color: var(--ink-700);
+  font-size: 15.5px;
+  line-height: 1.55;
+}
+.benefit-stat {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 64px;
+  line-height: 0.92;
+  letter-spacing: -0.04em;
+  color: var(--hf-lime-400);
+  margin-bottom: 6px;
+}
+
+/* ===== Creators ===== */
+.creators-wrap { background: var(--cream-200); }
+.creators {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+}
+@media (max-width: 920px) { .creators { grid-template-columns: 1fr; } }
+
+.creator {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+}
+@media (max-width: 720px) { .creator { grid-template-columns: 1fr; } }
+.creator-photo {
+  background: var(--cream-300);
+  background-size: cover;
+  background-position: center;
+  min-height: 320px;
+}
+.creator-body {
+  padding: 32px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+}
+.creator-name {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 26px;
+  letter-spacing: -0.02em;
+  margin: 0 0 4px;
+}
+.creator-handle {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--ink-500);
+  margin: 0 0 14px;
+}
+.creator-quote {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 19px;
+  line-height: 1.32;
+  letter-spacing: -0.015em;
+  margin: 0;
+  color: var(--ink-900);
+  text-wrap: pretty;
+}
+.creator-quote::before { content: "\201C"; color: var(--cb-green-700); margin-right: 2px; }
+.creator-quote::after { content: "\201D"; color: var(--cb-green-700); }
+.creator-stats {
+  display: flex;
+  gap: 24px;
+  padding-top: 18px;
+  border-top: 1px solid var(--ink-200);
+}
+.creator-stat .n {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 22px;
+  letter-spacing: -0.02em;
+  display: block;
+  color: var(--ink-900);
+}
+.creator-stat .l {
+  font-size: 12px;
+  color: var(--ink-500);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+}
+.creator-socials {
+  display: flex;
+  gap: 8px;
+}
+.creator-socials img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
+
+/* ===== FAQ ===== */
+.faq-wrap { background: var(--cream-100); }
+.faq-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 64px;
+}
+@media (max-width: 920px) { .faq-grid { grid-template-columns: 1fr; gap: 40px; } }
+.faq-side h2 {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(36px, 4.4vw, 56px);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  margin: 12px 0 20px;
+}
+.faq-side p { color: var(--ink-700); font-size: 17px; line-height: 1.55; margin: 0 0 24px; }
+.faq-side a { color: var(--cb-green-700); font-weight: 600; }
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.faq-item {
+  background: var(--white);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: box-shadow var(--dur-base);
+}
+.faq-item.open { box-shadow: var(--shadow-md); }
+.faq-q {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 22px 24px;
+  background: none;
+  border: 0;
+  text-align: left;
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 17px;
+  letter-spacing: -0.01em;
+  color: var(--ink-900);
+  gap: 16px;
+}
+.faq-q .ic {
+  flex: 0 0 28px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--cream-200);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--dur-base) var(--ease-out), background var(--dur-base);
+}
+.faq-item.open .faq-q .ic {
+  background: var(--cb-green-700);
+  color: var(--white);
+  transform: rotate(45deg);
+}
+.faq-a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height var(--dur-slow) var(--ease-out);
+}
+.faq-a-inner {
+  padding: 0 24px 24px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink-700);
+}
+
+/* ===== Form ===== */
+.form-wrap {
+  background: var(--cb-green-900);
+  color: var(--white);
+  position: relative;
+  overflow: hidden;
+  padding: 112px 0;
+}
+.form-wrap::before {
+  content: "";
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(118,184,42,0.12) 0%, transparent 70%);
+  top: -250px;
+  left: -200px;
+  pointer-events: none;
+}
+.form-grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.2fr;
+  gap: 64px;
+  position: relative;
+}
+@media (max-width: 980px) { .form-grid { grid-template-columns: 1fr; gap: 40px; } }
+.form-side .eyebrow { color: var(--hf-lime-400); }
+.form-side h2 {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(40px, 5.4vw, 72px);
+  line-height: 0.96;
+  letter-spacing: -0.03em;
+  margin: 12px 0 24px;
+  text-wrap: balance;
+}
+.form-side .lede {
+  font-size: 18px;
+  line-height: 1.55;
+  color: rgba(255,255,255,0.78);
+  margin: 0 0 28px;
+  max-width: 460px;
+}
+.form-side-stats {
+  display: flex;
+  gap: 32px;
+  margin-top: 12px;
+}
+.form-side-stat .n {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 40px;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: var(--hf-lime-400);
+}
+.form-side-stat .l {
+  font-size: 13px;
+  color: rgba(255,255,255,0.7);
+  margin-top: 4px;
+}
+
+/* ===== Apply card (Google Form link) ===== */
+.apply-card {
+  background: var(--white);
+  color: var(--ink-900);
+  border-radius: var(--radius-lg);
+  padding: 44px 40px;
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+@media (max-width: 560px) { .apply-card { padding: 32px 24px; } }
+.apply-card-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  align-self: flex-start;
+  padding: 8px 14px;
+  border-radius: var(--radius-pill);
+  background: var(--cb-green-50);
+  color: var(--cb-green-700);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+.apply-card-pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--cb-green-700);
+  box-shadow: 0 0 0 0 rgba(0,110,70,0.5);
+  animation: pulse 1.8s infinite;
+}
+.apply-card-h {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 36px;
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  margin: 0 0 14px;
+  text-wrap: balance;
+}
+.apply-card-sub {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--ink-700);
+}
+.apply-card-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 24px;
+  padding: 24px 0;
+  border-top: 1px dashed var(--ink-200);
+  border-bottom: 1px dashed var(--ink-200);
+}
+@media (max-width: 560px) { .apply-card-list { grid-template-columns: 1fr; } }
+.apply-card-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14.5px;
+  color: var(--ink-700);
+}
+.apply-tick {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--cb-green-700);
+  color: var(--white);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.apply-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 20px 28px;
+  border-radius: var(--radius-pill);
+  background: var(--ink-900);
+  color: var(--white);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 17px;
+  text-decoration: none;
+  transition: transform var(--dur-fast), background var(--dur-fast);
+}
+.apply-cta:hover { background: var(--ink-700); }
+.apply-cta:active { transform: scale(0.98); }
+.apply-foot {
+  text-align: center;
+  font-size: 13px;
+  color: var(--ink-500);
+}
+
+/* ===== Footer ===== */
+.footer {
+  background: var(--ink-900);
+  color: rgba(255,255,255,0.7);
+  padding: 56px 0 40px;
+}
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.footer-logo { height: 30px; }
+.footer-product {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 22px;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.footer-product .kn-dot {
+  display: inline-block;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--hf-lime-400);
+}
+.footer-links {
+  display: flex;
+  gap: 28px;
+  font-size: 14px;
+}
+.footer-meta {
+  font-size: 12.5px;
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
+
+    <script type="text/babel">
+      const { useState, useEffect, useRef } = React;
+
+      const ASSET = "kitchen-network-assets";
+
+      // ============================================================
+      // Sticky Nav
+      // ============================================================
+      function Nav({ scrollToForm, claimed, total }) {
+        const [scrolled, setScrolled] = useState(false);
+        useEffect(() => {
+          const onScroll = () => setScrolled(window.scrollY > 24);
+          window.addEventListener("scroll", onScroll, { passive: true });
+          return () => window.removeEventListener("scroll", onScroll);
+        }, []);
+        return (
+          <header className={"nav" + (scrolled ? " scrolled" : "")}>
+            <div className="container nav-inner">
+              <div className="nav-brand">
+                <img className="nav-logo" src={ASSET + "/hellofresh-lockup.png"} alt="HelloFresh" />
+                <div className="nav-divider"></div>
+                <div className="nav-product">
+                  <span className="kn-dot"></span>HelloCreators Beta
+                </div>
+              </div>
+              <nav className="nav-links">
+                <a className="nav-link" href="#founding">The program</a>
+                <a className="nav-link" href="#how">How it works</a>
+                <a className="nav-link" href="#creators">Creators</a>
+                <a className="nav-link" href="#faq">FAQ</a>
+              </nav>
+              <div className="nav-right">
+                <div className="nav-counter" title="Founding spots remaining">
+                  <span className="pulse"></span>
+                  <span>
+                    <strong>{claimed}</strong>/{total}{" "}
+                    <span className="long">founding spots claimed</span>
+                  </span>
+                </div>
+                <button className="btn btn-lime btn-sm" onClick={scrollToForm}>
+                  Claim your spot
+                </button>
+              </div>
+            </div>
+          </header>
+        );
+      }
+
+      // ============================================================
+      // Hero
+      // ============================================================
+      function Hero({ scrollToForm, headline1, headline2, accent, claimed, total }) {
+        return (
+          <section className="hero">
+            <div className="container hero-grid">
+              <div>
+                <div className="hero-eyebrow-row">
+                  <span className="hero-tag">
+                    <span className="dot"></span>HelloCreators Beta
+                  </span>
+                </div>
+
+                <h1 className="hero-title" style={{ marginBottom: 28 }}>
+                  <span style={{ display: "block", color: accent, fontSize: "clamp(72px, 10vw, 160px)", lineHeight: 0.88, letterSpacing: "-0.045em", fontFamily: "var(--font-display)", fontWeight: 900, textTransform: "uppercase" }}>FEED PEOPLE,</span>
+                  <span style={{ display: "block", color: "var(--ink-900)", fontSize: "clamp(32px, 4.2vw, 56px)", letterSpacing: "-0.02em", marginTop: 14, fontFamily: "var(--font-display)", fontWeight: 900, textTransform: "uppercase" }}>NOT THE ALGORITHM.</span>
+                </h1>
+
+                <p className="hero-sub">
+                  Partner with HelloFresh to become one of our founding creators of a platform that turns your recipe videos into step-by-step cards millions of home cooks actually make. Recipes created by home chefs, for home chefs.
+                </p>
+
+                <div className="hero-cta-row">
+                  <button className="btn btn-ink btn-lg" onClick={scrollToForm}>
+                    Claim your founding spot
+                    <span aria-hidden="true">&rarr;</span>
+                  </button>
+                  <a className="btn btn-ghost btn-lg" href="#how">
+                    See how it works
+                  </a>
+                </div>
+
+                <div className="hero-proof">
+                  <div className="hero-avatars">
+                    <div className="av" style={{ background: "#C8A87C", backgroundImage: `url('${ASSET}/food/food-03.png')`, backgroundSize: "cover" }}></div>
+                    <div className="av" style={{ background: "#A86B3F", backgroundImage: `url('${ASSET}/food/food-07.png')`, backgroundSize: "cover" }}></div>
+                    <div className="av" style={{ background: "#8E5A2C", backgroundImage: `url('${ASSET}/food/food-10.png')`, backgroundSize: "cover" }}></div>
+                    <div className="av" style={{ background: "#6B4326", backgroundImage: `url('${ASSET}/food/food-04.png')`, backgroundSize: "cover" }}></div>
+                  </div>
+                  <div>
+                    <strong style={{ color: "#111" }}>{claimed} creators in.</strong>{" "}
+                    {total - claimed} founding spots left.
+                  </div>
+                </div>
+              </div>
+
+              <div className="hero-collage">
+                <div className="collage-bg"></div>
+                <div className="collage-plate">
+                  <img src={ASSET + "/food/food-08.png"} alt="" />
+                </div>
+                <div className="collage-phone">
+                  <img src={ASSET + "/elements/instagram-reel.png"} alt="" />
+                </div>
+                <div className="collage-social s1">
+                  <img src={ASSET + "/social/instagram.png"} alt="Instagram" />
+                </div>
+                <div className="collage-social s2">
+                  <img src={ASSET + "/social/tiktok.png"} alt="TikTok" />
+                </div>
+                <div className="collage-social s3">
+                  <img src={ASSET + "/social/youtube.png"} alt="YouTube" />
+                </div>
+                <div className="collage-badge">
+                  <div className="num">1 Million</div>
+                  <div className="lbl">
+                    recipes saved<br />from creators last month
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        );
+      }
+
+      // ============================================================
+      // Bridge bar
+      // ============================================================
+      function PlatformBar({ subscribers }) {
+        return (
+          <div className="platform-bar">
+            <div className="container bridge">
+              <div className="bridge-side left">
+                <div className="bridge-eyebrow">Connect your audience from</div>
+                <div className="bridge-icons">
+                  <div className="bridge-icon"><img src={ASSET + "/social/instagram.png"} alt="Instagram" /></div>
+                  <div className="bridge-icon"><img src={ASSET + "/social/tiktok.png"} alt="TikTok" /></div>
+                  <div className="bridge-icon"><img src={ASSET + "/social/youtube.png"} alt="YouTube" /></div>
+                  <div className="bridge-icon"><img src={ASSET + "/social/facebook.png"} alt="Facebook" /></div>
+                </div>
+                <div className="bridge-meta">Instagram &middot; TikTok &middot; YouTube &middot; Facebook</div>
+              </div>
+
+              <div className="bridge-arrow" aria-hidden="true">
+                <svg width="56" height="20" viewBox="0 0 56 20" fill="none">
+                  <path d="M0 10 H50 M44 4 L52 10 L44 16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </div>
+
+              <div className="bridge-side right">
+                <div className="bridge-eyebrow">...with the HelloFresh worldwide community</div>
+                <div className="bridge-stat">
+                  <div className="bridge-stat-num">{subscribers}</div>
+                  <div className="bridge-stat-lbl">
+                    subscribers
+                    <span className="sub">in 18 countries, every week</span>
+                  </div>
+                </div>
+                <div className="bridge-meta">The world's #1 meal kit company</div>
+              </div>
+            </div>
+          </div>
+        );
+      }
+
+      // ============================================================
+      // HelloCreators Beta band
+      // ============================================================
+      function Founding({ scrollToForm, claimed, total, daysLeft, deadline }) {
+        const pct = (claimed / total) * 100;
+        const [filled, setFilled] = useState(0);
+        useEffect(() => {
+          const t = setTimeout(() => setFilled(pct), 240);
+          return () => clearTimeout(t);
+        }, []);
+
+        return (
+          <section className="founding" id="founding">
+            <div className="container founding-grid">
+              <div>
+                <div className="eyebrow">HelloCreators Beta</div>
+                <h2>
+                  Become one of our <span className="em">founding 100.</span>
+                </h2>
+                <p className="lede">
+                  We're hand picking the first 100 chefs and creators who'll help us build
+                  HelloCreators from the inside out. A real partnership. Your craft,
+                  our reach, a platform shaped around how creators actually work.
+                </p>
+
+                <div className="founding-perks">
+                  <div className="founding-perk">
+                    <div className="founding-perk-icon">&#9733;</div>
+                    <div>
+                      <h4>A real seat at the table</h4>
+                      <p>Private Slack with our team and first vote on what we build next.</p>
+                    </div>
+                  </div>
+                  <div className="founding-perk">
+                    <div className="founding-perk-icon">&infin;</div>
+                    <div>
+                      <h4>Lifetime founding status</h4>
+                      <p>Founding badge forever and partnership terms locked at the founding rate.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="counter-card">
+                <div className="counter-top">
+                  <div className="counter-eyebrow">Founding spots claimed</div>
+                  <div className="counter-deadline">
+                    <span className="dot"></span>
+                    Closes {deadline} &middot; {daysLeft} days left
+                  </div>
+                </div>
+
+                <div className="counter-num-row">
+                  <div className="counter-num">{claimed}</div>
+                  <div className="counter-of">/ {total}</div>
+                </div>
+                <div className="counter-label">{total - claimed} founding spots remaining</div>
+
+                <div className="counter-bar">
+                  <div className="counter-bar-fill" style={{ width: filled + "%" }}></div>
+                </div>
+
+                <div className="counter-meta">
+                  <span>
+                    <strong>{claimed}</strong> creators in
+                  </span>
+                  <span>Closes {deadline}, 2026</span>
+                </div>
+
+                <div className="counter-recent">
+                  <div
+                    className="av"
+                    style={{ backgroundImage: `url('${ASSET}/food/food-12.png')` }}
+                  ></div>
+                  <div>
+                    <strong style={{ color: "#111" }}>Sierra G.</strong> claimed spot #46 &middot;{" "}
+                    <span style={{ color: "#6B6B6B" }}>2 hours ago</span>
+                  </div>
+                </div>
+
+                <button
+                  className="btn btn-green btn-lg"
+                  style={{ width: "100%", marginTop: 24 }}
+                  onClick={scrollToForm}
+                >
+                  Claim your founding spot
+                  <span aria-hidden="true">&rarr;</span>
+                </button>
+              </div>
+            </div>
+          </section>
+        );
+      }
+
+      // ============================================================
+      // How it works
+      // ============================================================
+      function HowItWorks() {
+        const steps = [
+          {
+            n: "01",
+            illu: ASSET + "/illustrations/link.png",
+            title: "Send us your links",
+            body: "Reel, TikTok, or YouTube. We turn it into a recipe automatically.",
+          },
+          {
+            n: "02",
+            illu: ASSET + "/illustrations/notepad-pencil.png",
+            title: "We set up your profile",
+            body: "A dedicated engineer builds your creator page in under a week.",
+          },
+          {
+            n: "03",
+            illu: ASSET + "/illustrations/save.png",
+            title: "Cooks find your recipes",
+            body: "Your recipes appear in the HelloFresh app for millions of subscribers.",
+          },
+          {
+            n: "04",
+            illu: ASSET + "/illustrations/raffle-gift.png",
+            title: "You help shape the product",
+            body: "See what gets cooked and steer what we build next.",
+          },
+        ];
+
+        return (
+          <section className="section" id="how">
+            <div className="container">
+              <div className="section-head">
+                <div className="eyebrow">How it works</div>
+                <h2>
+                  From video to cookable recipe <span className="hl-green">in under a week.</span>
+                </h2>
+                <p>
+                  Your content reaches 1M+ home cooks who are actively planning dinner, not passively scrolling.
+                </p>
+              </div>
+
+              <div className="steps">
+                {steps.map((s, i) => (
+                  <div className="step" key={i}>
+                    <div className="step-num">STEP {s.n}</div>
+                    <div className="step-illu">
+                      <img src={s.illu} alt="" />
+                    </div>
+                    <h3>{s.title}</h3>
+                    <p>{s.body}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        );
+      }
+
+      // ============================================================
+      // Benefits
+      // ============================================================
+      function Benefits() {
+        return (
+          <section className="section benefits-wrap">
+            <div className="container">
+              <div className="section-head">
+                <div className="eyebrow">What you get</div>
+                <h2>
+                  A platform built <span className="hl-green">for the recipe</span>,
+                  not the algorithm.
+                </h2>
+                <p>
+                  Save rate, cook rate, repeat cook rate. The metrics that matter when
+                  food is the point, not 7 second retention.
+                </p>
+              </div>
+
+              <div className="benefits">
+                <div className="benefit">
+                  <div className="benefit-stat" style={{ color: "var(--cb-green-700)" }}>100</div>
+                  <div className="benefit-eyebrow">Founding cohort</div>
+                  <h3>A partnership, not a contract.</h3>
+                  <p>
+                    The 100 chefs and creators in the founding cohort shape every part of
+                    the platform with us. From tools and workflows to how creators get
+                    discovered. No exclusivity, no follower thresholds, no fine print.
+                  </p>
+                </div>
+
+                <div className="benefit featured">
+                  <div className="benefit-stat">18M</div>
+                  <div className="benefit-eyebrow">Hungry audience</div>
+                  <h3>An audience that's already in the kitchen.</h3>
+                  <p>
+                    Your recipes show up where HelloFresh's subscribers plan dinner.
+                    Tuesday at 5pm, lid off, knife out. The highest intent cooking
+                    audience anywhere, in 18 countries.
+                  </p>
+                </div>
+
+                <div className="benefit">
+                  <div className="benefit-stat" style={{ color: "var(--cb-green-700)" }}>1 wk</div>
+                  <div className="benefit-eyebrow">Onboarding</div>
+                  <h3>An engineer on your side from day one.</h3>
+                  <p>
+                    A dedicated dev pairs with you to import your back catalogue, build
+                    your creator page, and connect your socials.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+        );
+      }
+
+      // ============================================================
+      // Creators
+      // ============================================================
+      function Creators() {
+        const creators = [
+          {
+            name: "Emily Eggers",
+            handle: "@emilyeggers",
+            photo: ASSET + "/emily-eggers.jpg",
+            bio: "NYC private chef. Plant forward, pasta led recipes. ICE trained",
+            quote: "",
+            stats: [
+              { n: "412K", l: "Followers" },
+              { n: "1.2M", l: "Cooks" },
+              { n: "6mo", l: "In beta" },
+            ],
+            socials: ["instagram", "tiktok", "youtube"],
+          },
+          {
+            name: "Sierra Georgitsis",
+            handle: "@spoonfulofsi",
+            photo: ASSET + "/sierra-georgitsis.jpg",
+            bio: "Greek & seasonal. San Diego. Cross platform creator (IG, TikTok, YT, Pinterest)",
+            quote: "",
+            stats: [
+              { n: "435K", l: "Followers" },
+              { n: "890K", l: "Cooks" },
+              { n: "6mo", l: "In beta" },
+            ],
+            socials: ["instagram", "tiktok", "youtube", "facebook"],
+          },
+        ];
+
+        return (
+          <section className="section creators-wrap" id="creators">
+            <div className="container">
+              <div className="section-head">
+                <div className="eyebrow">Partner creators</div>
+                <h2>Creators already on board.</h2>
+                <p>
+                  Beta phase partners who've spent the last few weeks stress testing the
+                  platform.
+                </p>
+              </div>
+
+              <div className="creators">
+                {creators.map((c, i) => (
+                  <article className="creator" key={i}>
+                    <div
+                      className="creator-photo"
+                      style={{ backgroundImage: `url('${c.photo}')` }}
+                      role="img"
+                      aria-label={c.name + " portrait placeholder"}
+                    ></div>
+                    <div className="creator-body">
+                      <div>
+                        <h3 className="creator-name">{c.name}</h3>
+                        <p className="creator-handle">{c.handle} &middot; {c.bio}</p>
+                        {c.quote && <p className="creator-quote">{c.quote}</p>}
+                      </div>
+
+                      <div>
+                        <div className="creator-socials" style={{ marginBottom: 14 }}>
+                          {c.socials.map((s) => (
+                            <img key={s} src={ASSET + "/social/" + s + ".png"} alt={s} />
+                          ))}
+                        </div>
+                        <div className="creator-stats">
+                          {c.stats.map((s, j) => (
+                            <div className="creator-stat" key={j}>
+                              <span className="n">{s.n}</span>
+                              <span className="l">{s.l}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </section>
+        );
+      }
+
+      // ============================================================
+      // FAQ
+      // ============================================================
+      function FAQ() {
+        const items = [
+          {
+            q: "Who is this for?",
+            a: "Established chefs and food creators with 10K+ engaged followers on Instagram, TikTok, YouTube, or Facebook, with an existing catalogue of filmed recipes. We are specifically seeking creators whose content already inspires people to cook.",
+          },
+          {
+            q: "Do I need to give up posting on social?",
+            a: "No. HelloCreators Beta is designed to complement your existing channels, not replace them. You continue posting as normal. We convert your recipes into a cookable format within the HelloFresh app.",
+          },
+          {
+            q: "How much can I actually earn?",
+            a: "We are currently building the partnership model alongside our founding cohort. What we can confirm is that founding creators will have their terms locked in at the best available rate, better than anyone who joins after. You will have direct input into how the model is shaped.",
+          },
+          {
+            q: "What does 'shaping the platform' actually mean?",
+            a: "Regular working sessions with the product team, a private Slack channel with our PMs and engineers, and priority input on the roadmap. You will see features before anyone else and your feedback directly influences what we build. This is a genuine partnership, not a feedback survey.",
+          },
+          {
+            q: "What about the June 1 deadline?",
+            a: "We are capping the founding cohort at 100 creators to ensure each receives dedicated onboarding support. Applications close June 1, 2026, or earlier if all spots are filled. This tier will not reopen.",
+          },
+          {
+            q: "Do you own my recipes?",
+            a: "No. Your recipes, audience, and brand remain entirely yours. We hold a non exclusive licence to display content within the app. You retain full ownership and can withdraw at any time.",
+          },
+          {
+            q: "Which markets are open?",
+            a: "The founding cohort is open to creators in the US, UK, Canada, Australia, and Germany. Additional markets will open later this year. We encourage early applications from other regions and will prioritise you when your market launches.",
+          },
+        ];
+        const [open, setOpen] = useState(0);
+        return (
+          <section className="section faq-wrap" id="faq">
+            <div className="container faq-grid">
+              <div className="faq-side">
+                <div className="eyebrow">Questions</div>
+                <h2>Frequently asked questions.</h2>
+                <p>
+                  For additional enquiries, contact{" "}
+                  <a href="mailto:creators@hellofresh.com">creators@hellofresh.com</a>.
+                  Our creator partnerships team typically responds within one business day.
+                </p>
+              </div>
+
+              <div className="faq-list">
+                {items.map((it, i) => (
+                  <div className={"faq-item" + (open === i ? " open" : "")} key={i}>
+                    <button
+                      className="faq-q"
+                      onClick={() => setOpen(open === i ? -1 : i)}
+                      aria-expanded={open === i}
+                    >
+                      <span>{it.q}</span>
+                      <span className="ic">
+                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                          <path d="M7 1V13M1 7H13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                        </svg>
+                      </span>
+                    </button>
+                    <div
+                      className="faq-a"
+                      style={{ maxHeight: open === i ? 400 : 0 }}
+                    >
+                      <div className="faq-a-inner">{it.a}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        );
+      }
+
+      // ============================================================
+      // Application form (Google Form CTA card)
+      // ============================================================
+      function ApplyForm({ formRef, claimed, total, daysLeft, formUrl }) {
+        return (
+          <section className="form-wrap" id="apply" ref={formRef}>
+            <div className="container form-grid">
+              <div className="form-side">
+                <div className="eyebrow">Apply now</div>
+                <h2>
+                  Claim your <span style={{ color: "var(--hf-lime-400)" }}>founding spot.</span>
+                </h2>
+                <p className="lede">
+                  We'll come back to you within 48 hours, usually faster.
+                </p>
+
+                <div className="form-side-stats">
+                  <div className="form-side-stat">
+                    <div className="n">{claimed}/{total}</div>
+                    <div className="l">Spots claimed</div>
+                  </div>
+                  <div className="form-side-stat">
+                    <div className="n">{daysLeft}d</div>
+                    <div className="l">Until applications close</div>
+                  </div>
+                  <div className="form-side-stat">
+                    <div className="n">48h</div>
+                    <div className="l">Response time</div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="apply-card">
+                <div className="apply-card-top">
+                  <div className="apply-card-eyebrow">
+                    <span className="apply-card-pulse"></span>
+                    Now accepting applications
+                  </div>
+                  <h3 className="apply-card-h">Apply to join</h3>
+                  <p className="apply-card-sub">
+                    Seven quick questions: who you are, where you create, and what you'd
+                    build with us. We read every single one.
+                  </p>
+                </div>
+
+                <ul className="apply-card-list">
+                  <li>
+                    <span className="apply-tick">&#10003;</span>
+                    Name, email &amp; country
+                  </li>
+                  <li>
+                    <span className="apply-tick">&#10003;</span>
+                    Primary platform + handle
+                  </li>
+                  <li>
+                    <span className="apply-tick">&#10003;</span>
+                    Follower range &amp; content niche
+                  </li>
+                  <li>
+                    <span className="apply-tick">&#10003;</span>
+                    Why you want to help build this
+                  </li>
+                </ul>
+
+                <a
+                  className="apply-cta"
+                  href={formUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Apply now
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                    <path
+                      d="M6 3H15V12M15 3L3 15"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </a>
+
+                <div className="apply-foot">
+                  Opens in a new tab &middot; We'll reply within 48 hours
+                </div>
+              </div>
+            </div>
+          </section>
+        );
+      }
+
+      // ============================================================
+      // Footer
+      // ============================================================
+      function Footer() {
+        return (
+          <footer className="footer">
+            <div className="container">
+              <div className="footer-inner">
+                <div className="footer-brand">
+                  <img className="footer-logo" src={ASSET + "/hellofresh-lockup-white.png"} alt="HelloFresh" />
+                  <div className="footer-product">
+                    <span className="kn-dot"></span>HelloCreators Beta
+                  </div>
+                </div>
+                <div className="footer-links">
+                  <a href="#founding">Program</a>
+                  <a href="#how">How it works</a>
+                  <a href="#creators">Creators</a>
+                  <a href="#faq">FAQ</a>
+                  <a href="mailto:creators@hellofresh.com">Contact</a>
+                </div>
+              </div>
+              <div className="footer-meta">
+                &copy; 2026 HelloFresh SE &middot; HelloCreators Beta is an invitation only beta. By
+                applying you agree to our creator terms.
+              </div>
+            </div>
+          </footer>
+        );
+      }
+
+      // ============================================================
+      // App
+      // ============================================================
+      function App() {
+        const formRef = useRef(null);
+
+        const scrollToForm = () => {
+          if (formRef.current) {
+            const y = formRef.current.getBoundingClientRect().top + window.scrollY - 60;
+            window.scrollTo({ top: y, behavior: "smooth" });
+          }
+        };
+
+        const claimed = 47;
+        const total = 100;
+        const daysLeft = 14;
+        const deadline = "June 1";
+        const subscribers = "18M+";
+        const formUrl = "https://forms.gle/your-form-id";
+
+        return (
+          <>
+            <Nav scrollToForm={scrollToForm} claimed={claimed} total={total} />
+            <Hero
+              scrollToForm={scrollToForm}
+              headline1="Stop feeding the algorithm."
+              headline2="Start feeding people."
+              accent="#006E46"
+              claimed={claimed}
+              total={total}
+            />
+            <PlatformBar subscribers={subscribers} />
+            <Founding
+              scrollToForm={scrollToForm}
+              claimed={claimed}
+              total={total}
+              daysLeft={daysLeft}
+              deadline={deadline}
+            />
+            <HowItWorks />
+            <Benefits />
+            <Creators />
+            <FAQ />
+            <ApplyForm
+              formRef={formRef}
+              claimed={claimed}
+              total={total}
+              daysLeft={daysLeft}
+              formUrl={formUrl}
+            />
+            <Footer />
+          </>
+        );
+      }
+
+      ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+    </script>
+  </body>
+</html>
