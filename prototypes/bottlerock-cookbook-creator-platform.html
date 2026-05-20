@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BottleRock x Cookbook & Creator Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f5;
+        }
+
+        .slide {
+            width: 1280px;
+            height: 720px;
+            margin: 0 auto;
+            background: white;
+            position: relative;
+            overflow: hidden;
+            page-break-after: always;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide:last-child {
+            page-break-after: avoid;
+        }
+
+        /* Title Slide */
+        .slide-title {
+            background: linear-gradient(135deg, #067A46 0%, #04522F 100%);
+            color: white;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 80px;
+        }
+
+        .slide-title h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+
+        .slide-title h2 {
+            font-size: 24px;
+            font-weight: 400;
+            opacity: 0.85;
+            margin-bottom: 40px;
+        }
+
+        .slide-title .meta {
+            font-size: 16px;
+            opacity: 0.6;
+        }
+
+        /* Section Divider */
+        .slide-divider {
+            background: #1a1a1a;
+            color: white;
+            justify-content: center;
+            padding: 80px 100px;
+        }
+
+        .slide-divider .section-number {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            opacity: 0.5;
+            margin-bottom: 20px;
+        }
+
+        .slide-divider h2 {
+            font-size: 44px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .slide-divider p {
+            font-size: 20px;
+            opacity: 0.7;
+            margin-top: 20px;
+            max-width: 700px;
+        }
+
+        /* Content Slides */
+        .slide-content {
+            padding: 60px 80px;
+        }
+
+        .slide-content .slide-header {
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #067A46;
+        }
+
+        .slide-content .slide-header h3 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+
+        .slide-content .slide-header .subtitle {
+            font-size: 16px;
+            color: #666;
+            margin-top: 6px;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            flex: 1;
+        }
+
+        .content-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 24px;
+            border-left: 4px solid #067A46;
+        }
+
+        .content-card h4 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #067A46;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .content-card p {
+            font-size: 15px;
+            line-height: 1.5;
+            color: #333;
+        }
+
+        .content-card .tag {
+            display: inline-block;
+            background: #067A46;
+            color: white;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 3px 10px;
+            border-radius: 20px;
+            margin-top: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Single Column Content */
+        .content-single {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .content-row {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        .content-row .icon {
+            width: 48px;
+            height: 48px;
+            min-width: 48px;
+            background: #E8F5EE;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+        }
+
+        .content-row .text h4 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 4px;
+        }
+
+        .content-row .text p {
+            font-size: 14px;
+            line-height: 1.5;
+            color: #555;
+        }
+
+        /* Table Slide */
+        .priority-table {
+            width: 100%;
+            border-collapse: collapse;
+            flex: 1;
+        }
+
+        .priority-table th {
+            text-align: left;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #666;
+            padding: 12px 16px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .priority-table td {
+            padding: 16px;
+            font-size: 14px;
+            border-bottom: 1px solid #eee;
+            vertical-align: top;
+        }
+
+        .priority-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .priority-high {
+            color: #067A46;
+            font-weight: 700;
+        }
+
+        .priority-medium {
+            color: #B8860B;
+            font-weight: 700;
+        }
+
+        .priority-lower {
+            color: #666;
+            font-weight: 700;
+        }
+
+        .effort-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .effort-low {
+            background: #E8F5EE;
+            color: #067A46;
+        }
+
+        .effort-medium {
+            background: #FFF3CD;
+            color: #856404;
+        }
+
+        /* Context Slide */
+        .context-box {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 20px;
+        }
+
+        .context-box h4 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+        }
+
+        .context-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .context-box ul li {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #444;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .context-box ul li:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 8px;
+            height: 8px;
+            background: #067A46;
+            border-radius: 50%;
+        }
+
+        /* Timing callout */
+        .callout {
+            background: #FFF3CD;
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin-top: 20px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .callout .callout-icon {
+            font-size: 20px;
+            min-width: 24px;
+        }
+
+        .callout p {
+            font-size: 14px;
+            line-height: 1.5;
+            color: #664D03;
+        }
+
+        /* Footer */
+        .slide-footer {
+            position: absolute;
+            bottom: 20px;
+            left: 80px;
+            right: 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: #999;
+        }
+
+        .slide-footer .logo {
+            font-weight: 700;
+            color: #067A46;
+        }
+
+        /* Talking points */
+        .talking-point {
+            background: #f0faf5;
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin-top: 12px;
+            font-style: italic;
+            font-size: 14px;
+            color: #333;
+            border-left: 3px solid #96DC14;
+        }
+
+        /* Pitch Slide */
+        .slide-pitch {
+            background: linear-gradient(135deg, #004D30 0%, #002A1A 100%);
+            color: white;
+            padding: 60px 80px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .pitch-content {
+            flex: 1;
+        }
+
+        .pitch-content .pitch-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.6;
+            margin-bottom: 16px;
+        }
+
+        .pitch-content h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .pitch-content .pitch-description {
+            font-size: 16px;
+            opacity: 0.85;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .pitch-stats {
+            display: flex;
+            gap: 30px;
+        }
+
+        .pitch-stat {
+            text-align: center;
+        }
+
+        .pitch-stat .number {
+            font-size: 28px;
+            font-weight: 700;
+            color: #96DC14;
+        }
+
+        .pitch-stat .label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.7;
+            margin-top: 4px;
+        }
+
+        .pitch-qr {
+            width: 260px;
+            min-width: 260px;
+            text-align: center;
+        }
+
+        .pitch-qr .qr-box {
+            width: 220px;
+            height: 220px;
+            background: white;
+            border-radius: 16px;
+            margin: 0 auto 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+
+        .pitch-qr .qr-box img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .pitch-qr .qr-label {
+            font-size: 13px;
+            opacity: 0.7;
+        }
+
+        .pitch-qr .qr-url {
+            font-size: 11px;
+            opacity: 0.5;
+            margin-top: 4px;
+            word-break: break-all;
+        }
+
+        /* Flow diagram */
+        .flow-container {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-top: 24px;
+            flex-wrap: wrap;
+        }
+
+        .flow-step {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 16px 20px;
+            text-align: center;
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .flow-step .step-number {
+            font-size: 11px;
+            font-weight: 700;
+            color: #067A46;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+
+        .flow-step .step-text {
+            font-size: 13px;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        .flow-arrow {
+            font-size: 20px;
+            color: #067A46;
+            font-weight: 700;
+        }
+
+        /* Insight box */
+        .insight-box {
+            background: #E8F5EE;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+            border: 1px solid #c3e6d4;
+        }
+
+        .insight-box h4 {
+            font-size: 14px;
+            font-weight: 700;
+            color: #067A46;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .insight-box p {
+            font-size: 15px;
+            line-height: 1.5;
+            color: #1a1a1a;
+        }
+
+        @media print {
+            .slide {
+                margin: 0;
+                box-shadow: none;
+                height: auto;
+                min-height: 720px;
+                overflow: visible;
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Slide 1: Title -->
+<div class="slide slide-title">
+    <h1>BottleRock x Cookbook & Creator Platform</h1>
+    <h2>Integration Recommendations for the Influencer Campaign</h2>
+    <p class="meta">HelloFresh Marketing | May 2026</p>
+</div>
+
+<!-- Slide 2: Context -->
+<div class="slide slide-content">
+    <div class="slide-header">
+        <h3>Campaign Context</h3>
+        <p class="subtitle">What's already in the BottleRock influencer brief</p>
+    </div>
+    <div class="content-single">
+        <div class="context-box">
+            <h4>Existing Deliverables</h4>
+            <ul>
+                <li>2x Pre-fest IG stories (due 5/20): cooking at home, dancing, festival hype</li>
+                <li>Festival weekend IG stories (min. 3x/day): activation touchpoints, demos, samples</li>
+                <li>Post-fest Reel/TikTok (due 5/28): recap, "can't wait to get back in the kitchen"</li>
+            </ul>
+        </div>
+        <div class="context-box">
+            <h4>Campaign Theme</h4>
+            <ul>
+                <li>Discovery through food and music. Explore the world through flavour.</li>
+                <li>"Nothing Hits Like Home Cooking" as the master campaign</li>
+                <li>All traffic drives to hellofresh.com/pages/live-nation</li>
+            </ul>
+        </div>
+        <div class="callout">
+            <span class="callout-icon">&#9200;</span>
+            <p><strong>Timing:</strong> Pre-fest stories window closes today (5/20). Festival weekend content, post-fest recap (due 5/28), and any on-site activation are all still actionable if we add to the brief this week.</p>
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span class="logo">HelloFresh</span>
+        <span>2 / 10</span>
+    </div>
+</div>
+
+<!-- Slide 3: Divider - Cookbook -->
+<div class="slide slide-divider">
+    <p class="section-number">Section 01</p>
+    <h2>Cookbook Integration</h2>
+    <p>At the festival, people taste and watch food being made in real time. There's no video to save in the moment. Cookbook bridges the gap: find videos of those dishes later, save them, and recreate the experience at home.</p>
+</div>
+
+<!-- Slide 4: The Insight + Content Flow -->
+<div class="slide slide-content">
+    <div class="slide-header">
+        <h3>Cookbook: The Content Narrative</h3>
+        <p class="subtitle">From live festival experience to home recreation via Cookbook</p>
+    </div>
+    <div class="insight-box">
+        <h4>Key Insight</h4>
+        <p>Festival food is experienced in person. There's no video to save at the moment you taste it. The content opportunity is what happens after: finding videos of those dishes online, saving them via Cookbook, and testing whether you can recreate what you ate.</p>
+    </div>
+    <div class="flow-container">
+        <div class="flow-step">
+            <p class="step-number">At the Festival</p>
+            <p class="step-text">Taste an incredible dish at the activation. Film yourself eating it. React.</p>
+        </div>
+        <span class="flow-arrow">&#8594;</span>
+        <div class="flow-step">
+            <p class="step-number">Back Home</p>
+            <p class="step-text">"I need to recreate that." Search for similar cooking videos online.</p>
+        </div>
+        <span class="flow-arrow">&#8594;</span>
+        <div class="flow-step">
+            <p class="step-number">Save to Cookbook</p>
+            <p class="step-text">Find a video that matches. Save it to Cookbook in a few taps.</p>
+        </div>
+        <span class="flow-arrow">&#8594;</span>
+        <div class="flow-step">
+            <p class="step-number">Cook + Compare</p>
+            <p class="step-text">Make the recipe. "Does it taste like what I had at BottleRock?"</p>
+        </div>
+    </div>
+    <div class="callout" style="margin-top: 24px;">
+        <span class="callout-icon">&#127908;</span>
+        <p><strong>Content format:</strong> This naturally becomes a post-fest Reel or TikTok. "I tried to recreate my favourite dish from BottleRock. Here's how it went." Highly shareable, authentic, and demonstrates Cookbook's utility in a real scenario.</p>
+    </div>
+    <div class="slide-footer">
+        <span class="logo">HelloFresh</span>
+        <span>4 / 10</span>
+    </div>
+</div>
+
+<!-- Slide 5: Cookbook Recommended Moments -->
+<div class="slide slide-content">
+    <div class="slide-header">
+        <h3>Cookbook: Recommended Content Moments</h3>
+        <p class="subtitle">Mapped to existing deliverables in the influencer brief</p>
+    </div>
+    <div class="content-grid">
+        <div class="content-card">
+            <h4>Post-Fest "Recreate" Reel</h4>
+            <p>"I tried to make my favourite dish from BottleRock." Film the festival food moment, then show finding a similar video online, saving it to Cookbook, cooking it at home, and tasting to compare. This is the hero piece.</p>
+            <span class="tag">Recap Reel/TikTok</span>
+        </div>
+        <div class="content-card">
+            <h4>Festival "I Need This Recipe" Story</h4>
+            <p>During the weekend, film yourself tasting something amazing and say "I'm going to figure out how to make this at home." Sets up the post-fest payoff. Teases the Cookbook save moment to come.</p>
+            <span class="tag">Weekend Stories</span>
+        </div>
+        <div class="content-card">
+            <h4>"Stacking My Cookbook" Montage</h4>
+            <p>Post-fest story or reel segment: show scrolling through cooking videos, saving multiple dishes that remind you of BottleRock meals. Quick cuts, satisfying save animations. "My Cookbook is full of festival inspiration now."</p>
+            <span class="tag">Post-Fest Content</span>
+        </div>
+        <div class="content-card">
+            <h4>Chef Demo Follow-Up</h4>
+            <p>After watching Curtis Stone, Antoni, or Chef Michelle cook live, go home and find a video of a similar recipe online. Save it. Cook it. "Curtis made this incredible [dish]. I found something close online and saved it. Let's see if mine holds up."</p>
+            <span class="tag">Post-Fest Content</span>
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span class="logo">HelloFresh</span>
+        <span>5 / 10</span>
+    </div>
+</div>
+
+<!-- Slide 6: Cookbook Talking Points -->
+<div class="slide slide-content">
+    <div class="slide-header">
+        <h3>Cookbook: Suggested Talking Points</h3>
+        <p class="subtitle">Natural language for influencers to use</p>
+    </div>
+    <div class="content-single">
+        <div class="content-row">
+            <div class="icon">&#128172;</div>
+            <div class="text">
+                <h4>The Festival Hook</h4>
+                <p>"I ate something incredible at BottleRock and I refuse to let it be a one time thing."</p>
+            </div>
+        </div>
+        <div class="talking-point">"I had this dish at the HelloFresh activation that I can't stop thinking about. So I went looking for videos of something similar, saved it to my Cookbook, and I'm going to try making it tonight. Let's see if it hits the same."</div>
+        <div class="content-row" style="margin-top: 20px;">
+            <div class="icon">&#128172;</div>
+            <div class="text">
+                <h4>The Utility Moment</h4>
+                <p>"Video to recipe in just a few taps."</p>
+            </div>
+        </div>
+        <div class="talking-point">"Found a video that looks exactly like what I ate. Saved it to Cookbook in the HelloFresh app. It pulls out all the steps so I can actually follow along. No more screenshots I'll never look at again."</div>
+        <div class="content-row" style="margin-top: 20px;">
+            <div class="icon">&#128172;</div>
+            <div class="text">
+                <h4>The Payoff</h4>
+                <p>"Verdict: does it taste like BottleRock?"</p>
+            </div>
+        </div>
+        <div class="talking-point">"Okay, I made it. And honestly? It's close. BottleRock was the inspiration, Cookbook was how I actually got it done. You can save any cooking video you find online. Free in the HelloFresh app."</div>
+    </div>
+    <div class="slide-footer">
+        <span class="logo">HelloFresh</span>
+        <span>6 / 10</span>
+    </div>
+</div>
+
+<!-- Slide 7: Divider - Creator Platform -->
+<div class="slide slide-divider">
+    <p class="section-number">Section 02</p>
+    <h2>Creator Platform</h2>
+    <p>BottleRock attracts food-obsessed, socially active people. Some are already creators. Use the festival as a live scouting ground for HelloCreators.</p>
+</div>
+
+<!-- Slide 8: Creator Platform Ideas -->
+<div class="slide slide-content">
+    <div class="slide-header">
+        <h3>Creator Platform: Recruitment Opportunities</h3>
+        <p class="subtitle">On-site scouting + influencer-driven awareness</p>
+    </div>
+    <div class="content-grid">
+        <div class="content-card">
+            <h4>HF Team Scouting On-Site</h4>
+            <p>Equip the HelloFresh team at the festival with a pitch card and QR code. When they spot someone creating food content or engaging deeply with the activation, hand them the card. "You should be one of our creators." Direct, personal, high-conversion.</p>
+            <span class="tag">On-Site Activation</span>
+        </div>
+        <div class="content-card">
+            <h4>Influencer Mentions</h4>
+            <p>Brief influencers to mention the program organically in one story: "I'm here as part of HelloFresh's creator program. If you make food content, you should apply." Include a link sticker. Social proof from someone living the creator life at BottleRock is the strongest pitch.</p>
+            <span class="tag">Weekend Stories</span>
+        </div>
+        <div class="content-card">
+            <h4>"Apply to Be a Creator" Signage</h4>
+            <p>Add a physical sign or card at the activation booth: "Love creating food content? Join 47 founding creators already on the platform." QR code links to application. Passive recruitment that works all weekend without effort.</p>
+            <span class="tag">On-Site Activation</span>
+        </div>
+        <div class="content-card">
+            <h4>Encourage Festival-Goers to Apply</h4>
+            <p>Frame BottleRock as a moment where food-passionate people are already in "creator mode" (filming, sharing, discovering). CTA in stories or signage: "Already filming your food? Make it count. Apply to be a HelloFresh Creator." Meets people where they already are.</p>
+            <span class="tag">Stories + On-Site</span>
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span class="logo">HelloFresh</span>
+        <span>8 / 10</span>
+    </div>
+</div>
+
+<!-- Slide 9: Creator Platform Pitch Card (with QR) -->
+<div class="slide slide-pitch">
+    <div class="pitch-content">
+        <p class="pitch-label">HelloCreators Beta</p>
+        <h2>Your craft, our reach.<br>Join the founding 100.</h2>
+        <p class="pitch-description">Turn your recipe videos into step-by-step cooking cards for 18M+ HelloFresh members across 18 countries. Non-exclusive. You keep full ownership. Founding creators get lifetime status and early-locked rates.</p>
+        <div class="pitch-stats">
+            <div class="pitch-stat">
+                <p class="number">18M+</p>
+                <p class="label">Members</p>
+            </div>
+            <div class="pitch-stat">
+                <p class="number">18</p>
+                <p class="label">Countries</p>
+            </div>
+            <div class="pitch-stat">
+                <p class="number">53</p>
+                <p class="label">Spots Left</p>
+            </div>
+            <div class="pitch-stat">
+                <p class="number">Jun 1</p>
+                <p class="label">Deadline</p>
+            </div>
+        </div>
+    </div>
+    <div class="pitch-qr">
+        <div class="qr-box">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://kieranenright.github.io/marketing-prototypes/prototypes/kitchen-network.html&format=svg" alt="QR Code to HelloCreators application">
+        </div>
+        <p class="qr-label">Scan to apply</p>
+        <p class="qr-url">hellofresh.com/creators</p>
+    </div>
+    <div class="slide-footer" style="color: rgba(255,255,255,0.4);">
+        <span class="logo" style="color: rgba(255,255,255,0.6);">HelloFresh</span>
+        <span>9 / 10</span>
+    </div>
+</div>
+
+<!-- Slide 10: Priority Matrix -->
+<div class="slide slide-content">
+    <div class="slide-header">
+        <h3>Priority Recommendations</h3>
+        <p class="subtitle">Ranked by impact and feasibility within the existing campaign timeline</p>
+    </div>
+    <table class="priority-table">
+        <thead>
+            <tr>
+                <th>Priority</th>
+                <th>Idea</th>
+                <th>Effort</th>
+                <th>Impact</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="priority-high">High</td>
+                <td>HF team scouting with pitch card + QR at festival</td>
+                <td><span class="effort-tag effort-low">Low</span></td>
+                <td>Direct creator recruitment, personal touch, high conversion</td>
+            </tr>
+            <tr>
+                <td class="priority-high">High</td>
+                <td>Post-fest "Recreate the dish" Reel with Cookbook</td>
+                <td><span class="effort-tag effort-low">Low</span></td>
+                <td>Hero content piece. Demonstrates Cookbook utility with a compelling narrative.</td>
+            </tr>
+            <tr>
+                <td class="priority-high">High</td>
+                <td>Influencer mentions Creator Platform in 1 story</td>
+                <td><span class="effort-tag effort-low">Low</span></td>
+                <td>Social proof + reach to followers who see themselves as creators</td>
+            </tr>
+            <tr>
+                <td class="priority-medium">Medium</td>
+                <td>"Apply to be a Creator" signage at booth</td>
+                <td><span class="effort-tag effort-low">Low</span></td>
+                <td>Passive recruitment all weekend. Works without staff effort.</td>
+            </tr>
+            <tr>
+                <td class="priority-medium">Medium</td>
+                <td>"I need this recipe" teaser story during festival</td>
+                <td><span class="effort-tag effort-low">Low</span></td>
+                <td>Sets up the post-fest Cookbook payoff. Builds anticipation.</td>
+            </tr>
+            <tr>
+                <td class="priority-medium">Medium</td>
+                <td>Encourage festival-goers filming food to apply</td>
+                <td><span class="effort-tag effort-low">Low</span></td>
+                <td>Meets aspirational creators in the moment. Low barrier ask.</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="callout" style="margin-top: 16px;">
+        <span class="callout-icon">&#9989;</span>
+        <p><strong>Next step:</strong> Print pitch cards with QR code for the HF team on-site. Add Cookbook "recreate" angle and Creator Platform mention to the influencer brief addendum. All items require minimal additional effort.</p>
+    </div>
+    <div class="slide-footer">
+        <span class="logo">HelloFresh</span>
+        <span>10 / 10</span>
+    </div>
+</div>
+
+</body>
+</html>
