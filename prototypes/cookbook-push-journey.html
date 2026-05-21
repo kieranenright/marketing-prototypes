@@ -1,0 +1,1500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cookbook Push Notification Lifecycle Strategy | HelloFresh</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --brand-green: #067A46;
+  --brand-green-dark: #055933;
+  --brand-lime: #96DC14;
+  --brand-light-green: #D2F895;
+  --bg-cream: #FAF8F3;
+  --bg-elevated: #EFE9DE;
+  --white: #FFFFFF;
+  --text-primary: #1D1D1D;
+  --text-secondary: #6B6B6B;
+  --text-tertiary: #9A9A9A;
+  --border: #E0D9CE;
+  --radius: 16px;
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.05);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg-cream);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+/* ─── TOP BAR ─── */
+.top-bar {
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  padding: 0 40px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.top-bar-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.top-bar-logo { height: 24px; display: block; }
+
+.top-bar-divider { width: 1px; height: 20px; background: var(--border); }
+
+.top-bar-team {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  letter-spacing: -0.01em;
+}
+
+.top-bar-right { display: flex; align-items: center; gap: 8px; }
+
+.top-bar-badge {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--brand-green);
+  background: rgba(6, 122, 70, 0.08);
+  padding: 4px 10px;
+  border-radius: 100px;
+}
+
+.back-link {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.15s;
+}
+.back-link:hover { color: var(--brand-green); }
+
+/* ─── HERO ─── */
+.hero {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 56px 40px 0;
+}
+
+.hero-eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--brand-green);
+  margin-bottom: 16px;
+}
+
+.hero h1 {
+  font-size: 36px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: var(--text-primary);
+  margin-bottom: 14px;
+}
+
+.hero-subtitle {
+  font-size: 16px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  max-width: 620px;
+  margin-bottom: 40px;
+}
+
+.hero-meta {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+.meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.meta-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-tertiary);
+}
+
+.meta-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* ─── SECTION ─── */
+.section {
+  max-width: 900px;
+  margin: 0 auto 32px;
+  padding: 0 40px;
+}
+
+.section-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+
+.section-header {
+  background: var(--bg-elevated);
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+}
+
+.section-label {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.section-count {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.section-body {
+  padding: 24px;
+}
+
+/* ─── SEGMENT OVERVIEW TABLE ─── */
+.segment-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.segment-table th {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-tertiary);
+  text-align: left;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.segment-table td {
+  font-size: 13px;
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(224, 217, 206, 0.5);
+  vertical-align: top;
+}
+
+.segment-table tr:last-child td { border-bottom: none; }
+
+.segment-table .seg-name {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.segment-table .seg-def {
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.segment-table .seg-goal {
+  color: var(--brand-green);
+  font-weight: 500;
+}
+
+/* ─── SEGMENT DETAIL CARDS ─── */
+.segment-detail {
+  margin-bottom: 32px;
+}
+
+.segment-detail:last-child { margin-bottom: 0; }
+
+.segment-title-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.segment-number {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--brand-green);
+  color: var(--white);
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.segment-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.trigger-box {
+  background: #F0FDF4;
+  border: 1px solid #BBF7D0;
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin-bottom: 16px;
+}
+
+.trigger-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--brand-green);
+  margin-bottom: 6px;
+}
+
+.trigger-text {
+  font-size: 13px;
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+.rationale {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 16px;
+  font-style: italic;
+}
+
+.exit-box {
+  background: #FEF9EE;
+  border: 1px solid #FDE68A;
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin-bottom: 20px;
+}
+
+.exit-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #B45309;
+  margin-bottom: 8px;
+}
+
+.exit-list {
+  list-style: none;
+  padding: 0;
+}
+
+.exit-list li {
+  font-size: 13px;
+  color: var(--text-primary);
+  line-height: 1.6;
+  padding-left: 16px;
+  position: relative;
+}
+
+.exit-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #F59E0B;
+}
+
+/* ─── PUSH CARDS ─── */
+.push-sequence {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.push-card {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+}
+
+.push-card:hover {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.push-card-header {
+  background: var(--bg-elevated);
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+}
+
+.push-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.push-timing {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  background: var(--white);
+  padding: 3px 8px;
+  border-radius: 100px;
+  border: 1px solid var(--border);
+}
+
+.push-card-body {
+  padding: 16px;
+  display: flex;
+  gap: 16px;
+}
+
+.push-phone {
+  width: 220px;
+  min-width: 220px;
+  background: #1a1a1a;
+  border-radius: 20px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.push-notch {
+  width: 80px;
+  height: 4px;
+  background: #333;
+  border-radius: 2px;
+  margin: 0 auto 8px;
+}
+
+.push-notification {
+  background: rgba(255,255,255,0.95);
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.push-notif-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.push-notif-icon {
+  width: 16px;
+  height: 16px;
+  background: var(--brand-green);
+  border-radius: 4px;
+}
+
+.push-notif-app {
+  font-size: 10px;
+  font-weight: 600;
+  color: #999;
+  text-transform: uppercase;
+}
+
+.push-notif-time {
+  font-size: 10px;
+  color: #bbb;
+  margin-left: auto;
+}
+
+.push-notif-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 3px;
+}
+
+.push-notif-body {
+  font-size: 12px;
+  color: #555;
+  line-height: 1.4;
+}
+
+.push-meta {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: center;
+}
+
+.push-meta-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-tertiary);
+}
+
+.push-meta-value {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.char-count {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  font-variant-numeric: tabular-nums;
+}
+
+.char-ok { color: var(--brand-green); }
+.char-warn { color: #B45309; }
+
+/* ─── RULES TABLE ─── */
+.rules-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.rules-table th {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-tertiary);
+  text-align: left;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.rules-table td {
+  font-size: 13px;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(224, 217, 206, 0.5);
+  vertical-align: top;
+  line-height: 1.5;
+}
+
+.rules-table tr:last-child td { border-bottom: none; }
+
+.rule-name {
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+/* ─── METRICS TABLE ─── */
+.metrics-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.metrics-table th {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-tertiary);
+  text-align: left;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.metrics-table td {
+  font-size: 13px;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(224, 217, 206, 0.5);
+}
+
+.metrics-table tr:last-child td { border-bottom: none; }
+
+.metric-target {
+  font-weight: 600;
+  color: var(--brand-green);
+}
+
+/* ─── NEXT STEPS ─── */
+.next-steps-list {
+  list-style: none;
+  padding: 0;
+}
+
+.next-steps-list li {
+  font-size: 14px;
+  line-height: 1.6;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(224, 217, 206, 0.5);
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.next-steps-list li:last-child { border-bottom: none; }
+
+.step-number {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--bg-elevated);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* ─── FOOTER ─── */
+.site-footer {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 32px 40px 64px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-left { display: flex; align-items: center; gap: 12px; }
+.footer-logo { height: 18px; opacity: 0.4; }
+.footer-text { font-size: 12px; color: var(--text-tertiary); }
+.footer-updated { font-size: 12px; color: var(--text-tertiary); font-weight: 500; }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 768px) {
+  .top-bar { padding: 0 20px; }
+  .hero { padding: 40px 20px 0; }
+  .hero h1 { font-size: 28px; }
+  .section { padding: 0 20px; }
+  .hero-meta { flex-wrap: wrap; gap: 16px; }
+  .push-card-body { flex-direction: column; }
+  .push-phone { width: 100%; min-width: unset; }
+  .segment-table { display: block; overflow-x: auto; }
+  .site-footer { padding: 24px 20px 48px; flex-direction: column; gap: 8px; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<nav class="top-bar">
+  <div class="top-bar-left">
+    <a href="../index.html" class="back-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Index
+    </a>
+    <div class="top-bar-divider"></div>
+    <span class="top-bar-team">CRM Strategy</span>
+  </div>
+  <div class="top-bar-right">
+    <span class="top-bar-badge">Draft</span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-eyebrow">Cookbook / Push Notifications</div>
+  <h1>Push Notification Lifecycle Strategy</h1>
+  <p class="hero-subtitle">A behavioural lifecycle journey to drive first saves, repeat usage, and Cookbook opens across all app users. Five segments, triggered sequencing, and suppression logic.</p>
+  <div class="hero-meta">
+    <div class="meta-item">
+      <span class="meta-label">Channel</span>
+      <span class="meta-value">Push</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Segments</span>
+      <span class="meta-value">5</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Total Touchpoints</span>
+      <span class="meta-value">16</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Created</span>
+      <span class="meta-value">May 21, 2026</span>
+    </div>
+  </div>
+</header>
+
+<!-- SEGMENT OVERVIEW -->
+<section class="section">
+  <div class="section-card">
+    <div class="section-header">
+      <span class="section-label">Segment Overview</span>
+      <span class="section-count">5 Segments</span>
+    </div>
+    <div class="section-body" style="padding: 0;">
+      <table class="segment-table">
+        <thead>
+          <tr>
+            <th>Segment</th>
+            <th>Definition</th>
+            <th>Goal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="seg-name">Dormant</td>
+            <td class="seg-def">Has app, never opened Cookbook</td>
+            <td class="seg-goal">First open</td>
+          </tr>
+          <tr>
+            <td class="seg-name">Browsers</td>
+            <td class="seg-def">Opened Cookbook, never saved a recipe</td>
+            <td class="seg-goal">First save</td>
+          </tr>
+          <tr>
+            <td class="seg-name">One and Done</td>
+            <td class="seg-def">Saved 1 recipe, no second save within 7 days</td>
+            <td class="seg-goal">Second save</td>
+          </tr>
+          <tr>
+            <td class="seg-name">Lapsed Savers</td>
+            <td class="seg-def">Saved 2+ recipes, no Cookbook open in 14+ days</td>
+            <td class="seg-goal">Re-open</td>
+          </tr>
+          <tr>
+            <td class="seg-name">Building Habit</td>
+            <td class="seg-def">Saved 2+ recipes in the last 14 days</td>
+            <td class="seg-goal">Increase frequency</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- SEGMENT 1: DORMANT -->
+<section class="section">
+  <div class="section-card">
+    <div class="section-header">
+      <span class="section-label">Segment 1: Dormant</span>
+      <span class="section-count">3 Pushes</span>
+    </div>
+    <div class="section-body">
+      <div class="segment-detail">
+        <div class="trigger-box">
+          <div class="trigger-label">Entry Trigger</div>
+          <div class="trigger-text">User has had app installed 3+ days AND has opened app 2+ times AND has never viewed the Cookbook screen.</div>
+        </div>
+        <p class="rationale">They're past initial app exploration but Cookbook hasn't surfaced organically. They're active enough to receive a push without it feeling spammy.</p>
+        <div class="exit-box">
+          <div class="exit-label">Exit Conditions</div>
+          <ul class="exit-list">
+            <li>User opens Cookbook → graduate to Browsers</li>
+            <li>User saves a recipe → graduate to One and Done</li>
+            <li>User uninstalls app → suppress</li>
+            <li>3 pushes sent with no Cookbook open → cool off 30 days, then re-enter</li>
+          </ul>
+        </div>
+
+        <div class="push-sequence">
+          <!-- Push 1 -->
+          <div class="push-card">
+            <div class="push-card-header">
+              <span class="push-label">Push 1: Awareness</span>
+              <span class="push-timing">Day 3 after entry</span>
+            </div>
+            <div class="push-card-body">
+              <div class="push-phone">
+                <div class="push-notch"></div>
+                <div class="push-notification">
+                  <div class="push-notif-header">
+                    <div class="push-notif-icon"></div>
+                    <span class="push-notif-app">HelloFresh</span>
+                    <span class="push-notif-time">now</span>
+                  </div>
+                  <div class="push-notif-title">Turn any video into a recipe</div>
+                  <div class="push-notif-body">See a dish on TikTok or Instagram? Save it as a step-by-step recipe in seconds.</div>
+                </div>
+              </div>
+              <div class="push-meta">
+                <div>
+                  <div class="push-meta-label">Angle</div>
+                  <div class="push-meta-value">What Cookbook does. Simple, clear feature introduction.</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">Character Count</div>
+                  <div class="push-meta-value">
+                    Title: <span class="char-count char-ok">30/30</span> &nbsp;
+                    Body: <span class="char-count char-ok">79/80</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Push 2 -->
+          <div class="push-card">
+            <div class="push-card-header">
+              <span class="push-label">Push 2: Barrier Removal</span>
+              <span class="push-timing">Day 7</span>
+            </div>
+            <div class="push-card-body">
+              <div class="push-phone">
+                <div class="push-notch"></div>
+                <div class="push-notification">
+                  <div class="push-notif-header">
+                    <div class="push-notif-icon"></div>
+                    <span class="push-notif-app">HelloFresh</span>
+                    <span class="push-notif-time">now</span>
+                  </div>
+                  <div class="push-notif-title">Free recipes from your feed</div>
+                  <div class="push-notif-body">No subscription needed. Save cooking videos from social as full recipes, for free.</div>
+                </div>
+              </div>
+              <div class="push-meta">
+                <div>
+                  <div class="push-meta-label">Angle</div>
+                  <div class="push-meta-value">Removes cost/commitment barrier. Emphasises "free" for non-subscribers.</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">Character Count</div>
+                  <div class="push-meta-value">
+                    Title: <span class="char-count char-ok">27/30</span> &nbsp;
+                    Body: <span class="char-count char-ok">80/80</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Push 3 -->
+          <div class="push-card">
+            <div class="push-card-header">
+              <span class="push-label">Push 3: Pain Point</span>
+              <span class="push-timing">Day 12</span>
+            </div>
+            <div class="push-card-body">
+              <div class="push-phone">
+                <div class="push-notch"></div>
+                <div class="push-notification">
+                  <div class="push-notif-header">
+                    <div class="push-notif-icon"></div>
+                    <span class="push-notif-app">HelloFresh</span>
+                    <span class="push-notif-time">now</span>
+                  </div>
+                  <div class="push-notif-title">One app. All your recipes.</div>
+                  <div class="push-notif-body">Stop screenshotting dinner ideas. Save them properly and cook them when you're ready.</div>
+                </div>
+              </div>
+              <div class="push-meta">
+                <div>
+                  <div class="push-meta-label">Angle</div>
+                  <div class="push-meta-value">Calls out the screenshot problem. Positions Cookbook as the better alternative.</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">Character Count</div>
+                  <div class="push-meta-value">
+                    Title: <span class="char-count char-ok">26/30</span> &nbsp;
+                    Body: <span class="char-count char-warn">80/80</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SEGMENT 2: BROWSERS -->
+<section class="section">
+  <div class="section-card">
+    <div class="section-header">
+      <span class="section-label">Segment 2: Browsers</span>
+      <span class="section-count">3 Pushes</span>
+    </div>
+    <div class="section-body">
+      <div class="segment-detail">
+        <div class="trigger-box">
+          <div class="trigger-label">Entry Trigger</div>
+          <div class="trigger-text">User has viewed the Cookbook screen 1+ times AND has zero saved recipes AND last Cookbook view was within the last 14 days.</div>
+        </div>
+        <p class="rationale">They know the feature exists. They looked but something didn't click. Pushes here reduce friction and show the "how."</p>
+        <div class="exit-box">
+          <div class="exit-label">Exit Conditions</div>
+          <ul class="exit-list">
+            <li>User saves a recipe → graduate to One and Done</li>
+            <li>No save after 3 pushes → cool off 21 days, then retry with fresh copy</li>
+            <li>Last app open 30+ days ago → move to general winback, not Cookbook journey</li>
+          </ul>
+        </div>
+
+        <div class="push-sequence">
+          <div class="push-card">
+            <div class="push-card-header">
+              <span class="push-label">Push 1: How-To</span>
+              <span class="push-timing">Day 2 after last view (no save)</span>
+            </div>
+            <div class="push-card-body">
+              <div class="push-phone">
+                <div class="push-notch"></div>
+                <div class="push-notification">
+                  <div class="push-notif-header">
+                    <div class="push-notif-icon"></div>
+                    <span class="push-notif-app">HelloFresh</span>
+                    <span class="push-notif-time">now</span>
+                  </div>
+                  <div class="push-notif-title">Saving a recipe takes 3 taps</div>
+                  <div class="push-notif-body">Paste a link or share from TikTok. We turn it into ingredients + steps instantly.</div>
+                </div>
+              </div>
+              <div class="push-meta">
+                <div>
+                  <div class="push-meta-label">Angle</div>
+                  <div class="push-meta-value">Reduces perceived effort. Makes the action feel trivial.</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">Character Count</div>
+                  <div class="push-meta-value">
+                    Title: <span class="char-count char-ok">30/30</span> &nbsp;
+                    Body: <span class="char-count char-ok">80/80</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="push-card">
+            <div class="push-card-header">
+              <span class="push-label">Push 2: Relatable Moment</span>
+              <span class="push-timing">Day 5</span>
+            </div>
+            <div class="push-card-body">
+              <div class="push-phone">
+                <div class="push-notch"></div>
+                <div class="push-notification">
+                  <div class="push-notif-header">
+                    <div class="push-notif-icon"></div>
+                    <span class="push-notif-app">HelloFresh</span>
+                    <span class="push-notif-time">now</span>
+                  </div>
+                  <div class="push-notif-title">That recipe you scrolled past?</div>
+                  <div class="push-notif-body">Next time, share it to Cookbook. It'll be waiting when you're ready to cook.</div>
+                </div>
+              </div>
+              <div class="push-meta">
+                <div>
+                  <div class="push-meta-label">Angle</div>
+                  <div class="push-meta-value">Taps into the universal moment of losing a good recipe in your feed.</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">Character Count</div>
+                  <div class="push-meta-value">
+                    Title: <span class="char-count char-ok">30/30</span> &nbsp;
+                    Body: <span class="char-count char-ok">74/80</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="push-card">
+            <div class="push-card-header">
+              <span class="push-label">Push 3: Value Prop</span>
+              <span class="push-timing">Day 9</span>
+            </div>
+            <div class="push-card-body">
+              <div class="push-phone">
+                <div class="push-notch"></div>
+                <div class="push-notification">
+                  <div class="push-notif-header">
+                    <div class="push-notif-icon"></div>
+                    <span class="push-notif-app">HelloFresh</span>
+                    <span class="push-notif-time">now</span>
+                  </div>
+                  <div class="push-notif-title">Never lose another dinner idea</div>
+                  <div class="push-notif-body">Every recipe you save stays in one place. Ingredients, steps, all ready to go.</div>
+                </div>
+              </div>
+              <div class="push-meta">
+                <div>
+                  <div class="push-meta-label">Angle</div>
+                  <div class="push-meta-value">Core value proposition. Organisation and readiness.</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">Character Count</div>
+                  <div class="push-meta-value">
+                    Title: <span class="char-count char-ok">30/30</span> &nbsp;
+                    Body: <span class="char-count char-ok">76/80</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SEGMENT 3: ONE AND DONE -->
+<section class="section">
+  <div class="section-card">
+    <div class="section-header">
+      <span class="section-label">Segment 3: One and Done</span>
+      <span class="section-count">3 Pushes</span>
+    </div>
+    <div class="section-body">
+      <div class="segment-detail">
+        <div class="trigger-box">
+          <div class="trigger-label">Entry Trigger</div>
+          <div class="trigger-text">User has exactly 1 saved recipe AND it has been 7+ days since that save AND no new Cookbook activity in that window.</div>
+        </div>
+        <p class="rationale">Gives them natural time to come back organically. If they don't after 7 days, the habit hasn't formed and they need a nudge.</p>
+        <div class="exit-box">
+          <div class="exit-label">Exit Conditions</div>
+          <ul class="exit-list">
+            <li>User saves a second recipe → graduate to Building Habit</li>
+            <li>No second save after 3 pushes → cool off 21 days, re-enter with different angle</li>
+            <li>User opens Cookbook but doesn't save → send Browser-style friction-reducing push</li>
+          </ul>
+        </div>
+
+        <div class="push-sequence">
+          <div class="push-card">
+            <div class="push-card-header">
+              <span class="push-label">Push 1: Encouragement</span>
+              <span class="push-timing">Day 7 after first save</span>
+            </div>
+            <div class="push-card-body">
+              <div class="push-phone">
+                <div class="push-notch"></div>
+                <div class="push-notification">
+                  <div class="push-notif-header">
+                    <div class="push-notif-icon"></div>
+                    <span class="push-notif-app">HelloFresh</span>
+                    <span class="push-notif-time">now</span>
+                  </div>
+                  <div class="push-notif-title">Your first recipe is saved</div>
+                  <div class="push-notif-body">Nice start. Add a few more and you'll have a full collection ready for the week.</div>
+                </div>
+              </div>
+              <div class="push-meta">
+                <div>
+                  <div class="push-meta-label">Angle</div>
+                  <div class="push-meta-value">Acknowledges progress. Paints a picture of what a collection looks like.</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">Character Count</div>
+                  <div class="push-meta-value">
+                    Title: <span class="char-count char-ok">26/30</span> &nbsp;
+                    Body: <span class="char-count char-ok">80/80</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="push-card">
+            <div class="push-card-header">
+              <span class="push-label">Push 2: Prompt</span>
+              <span class="push-timing">Day 11</span>
+            </div>
+            <div class="push-card-body">
+              <div class="push-phone">
+                <div class="push-notch"></div>
+                <div class="push-notification">
+                  <div class="push-notif-header">
+                    <div class="push-notif-icon"></div>
+                    <span class="push-notif-app">HelloFresh</span>
+                    <span class="push-notif-time">now</span>
+                  </div>
+                  <div class="push-notif-title">Spotted something good lately?</div>
+                  <div class="push-notif-body">If you've seen a recipe worth trying, save it now. One tap from any social app.</div>
+                </div>
+              </div>
+              <div class="push-meta">
+                <div>
+                  <div class="push-meta-label">Angle</div>
+                  <div class="push-meta-value">Conversational prompt tied to their browsing behaviour. Low pressure.</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">Character Count</div>
+                  <div class="push-meta-value">
+                    Title: <span class="char-count char-ok">30/30</span> &nbsp;
+                    Body: <span class="char-count char-ok">78/80</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="push-card">
+            <div class="push-card-header">
+              <span class="push-label">Push 3: Collection Framing</span>
+              <span class="push-timing">Day 16</span>
+            </div>
+            <div class="push-card-body">
+              <div class="push-phone">
+                <div class="push-notch"></div>
+                <div class="push-notification">
+                  <div class="push-notif-header">
+                    <div class="push-notif-icon"></div>
+                    <span class="push-notif-app">HelloFresh</span>
+                    <span class="push-notif-time">now</span>
+                  </div>
+                  <div class="push-notif-title">Build your recipe collection</div>
+                  <div class="push-notif-body">The more you save, the easier meal planning gets. Add another one today.</div>
+                </div>
+              </div>
+              <div class="push-meta">
+                <div>
+                  <div class="push-meta-label">Angle</div>
+                  <div class="push-meta-value">Positions saving as building something useful. Links to meal planning benefit.</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">Character Count</div>
+                  <div class="push-meta-value">
+                    Title: <span class="char-count char-ok">28/30</span> &nbsp;
+                    Body: <span class="char-count char-ok">70/80</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SEGMENT 4: LAPSED SAVERS -->
+<section class="section">
+  <div class="section-card">
+    <div class="section-header">
+      <span class="section-label">Segment 4: Lapsed Savers</span>
+      <span class="section-count">3 Pushes</span>
+    </div>
+    <div class="section-body">
+      <div class="segment-detail">
+        <div class="trigger-box">
+          <div class="trigger-label">Entry Trigger</div>
+          <div class="trigger-text">User has 2+ saved recipes AND last Cookbook open was 14+ days ago AND user has opened the app at least once in the last 7 days (still active, just not using Cookbook).</div>
+        </div>
+        <p class="rationale">If they've gone dark on the whole app, this is a broader retention problem. We only nudge people who are reachable and still using HelloFresh.</p>
+        <div class="exit-box">
+          <div class="exit-label">Exit Conditions</div>
+          <ul class="exit-list">
+            <li>User opens Cookbook → graduate back to Building Habit</li>
+            <li>User saves a new recipe → graduate to Building Habit</li>
+            <li>No re-engagement after 3 pushes → cool off 30 days</li>
+            <li>User goes inactive on app entirely → exit to general retention journey</li>
+          </ul>
+        </div>
+
+        <div class="push-sequence">
+          <div class="push-card">
+            <div class="push-card-header">
+              <span class="push-label">Push 1: Personalised Reminder</span>
+              <span class="push-timing">Day 14 of no Cookbook open</span>
+            </div>
+            <div class="push-card-body">
+              <div class="push-phone">
+                <div class="push-notch"></div>
+                <div class="push-notification">
+                  <div class="push-notif-header">
+                    <div class="push-notif-icon"></div>
+                    <span class="push-notif-app">HelloFresh</span>
+                    <span class="push-notif-time">now</span>
+                  </div>
+                  <div class="push-notif-title">Your saved recipes miss you</div>
+                  <div class="push-notif-body">You've got [X] recipes waiting. Open Cookbook and pick one for tonight.</div>
+                </div>
+              </div>
+              <div class="push-meta">
+                <div>
+                  <div class="push-meta-label">Angle</div>
+                  <div class="push-meta-value">Personalised recipe count. Creates a sense of existing investment to return to.</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">Personalisation</div>
+                  <div class="push-meta-value">[X] = saved recipe count variable</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">Character Count</div>
+                  <div class="push-meta-value">
+                    Title: <span class="char-count char-ok">27/30</span> &nbsp;
+                    Body: <span class="char-count char-ok">72/80</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="push-card">
+            <div class="push-card-header">
+              <span class="push-label">Push 2: Meal Planning Hook</span>
+              <span class="push-timing">Day 19</span>
+            </div>
+            <div class="push-card-body">
+              <div class="push-phone">
+                <div class="push-notch"></div>
+                <div class="push-notification">
+                  <div class="push-notif-header">
+                    <div class="push-notif-icon"></div>
+                    <span class="push-notif-app">HelloFresh</span>
+                    <span class="push-notif-time">now</span>
+                  </div>
+                  <div class="push-notif-title">What's for dinner tonight?</div>
+                  <div class="push-notif-body">You've already saved the inspiration. Open Cookbook and pick something good.</div>
+                </div>
+              </div>
+              <div class="push-meta">
+                <div>
+                  <div class="push-meta-label">Angle</div>
+                  <div class="push-meta-value">Ties to the daily dinner decision moment. Reminds them the work is already done.</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">Character Count</div>
+                  <div class="push-meta-value">
+                    Title: <span class="char-count char-ok">27/30</span> &nbsp;
+                    Body: <span class="char-count char-ok">76/80</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="push-card">
+            <div class="push-card-header">
+              <span class="push-label">Push 3: Competitive Angle</span>
+              <span class="push-timing">Day 25</span>
+            </div>
+            <div class="push-card-body">
+              <div class="push-phone">
+                <div class="push-notch"></div>
+                <div class="push-notification">
+                  <div class="push-notif-header">
+                    <div class="push-notif-icon"></div>
+                    <span class="push-notif-app">HelloFresh</span>
+                    <span class="push-notif-time">now</span>
+                  </div>
+                  <div class="push-notif-title">Still saving recipes elsewhere?</div>
+                  <div class="push-notif-body">Screenshots get buried. Your Cookbook keeps everything in one place, ready to cook.</div>
+                </div>
+              </div>
+              <div class="push-meta">
+                <div>
+                  <div class="push-meta-label">Angle</div>
+                  <div class="push-meta-value">Calls out the inferior alternative (screenshots). Reminds them Cookbook is better.</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">Character Count</div>
+                  <div class="push-meta-value">
+                    Title: <span class="char-count char-ok">30/30</span> &nbsp;
+                    Body: <span class="char-count char-ok">80/80</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SEGMENT 5: BUILDING HABIT -->
+<section class="section">
+  <div class="section-card">
+    <div class="section-header">
+      <span class="section-label">Segment 5: Building Habit</span>
+      <span class="section-count">4 Rotating Pushes</span>
+    </div>
+    <div class="section-body">
+      <div class="segment-detail">
+        <div class="trigger-box">
+          <div class="trigger-label">Entry Trigger</div>
+          <div class="trigger-text">User has saved 2+ recipes in the last 14 days OR has opened Cookbook 3+ times in the last 14 days.</div>
+        </div>
+        <p class="rationale">Active users who are forming the habit. Don't sell the feature here. Reinforce the behaviour and introduce advanced use cases. Max 2 pushes per month.</p>
+        <div class="exit-box">
+          <div class="exit-label">Exit Conditions</div>
+          <ul class="exit-list">
+            <li>No Cookbook open in 14 days → move to Lapsed Savers</li>
+            <li>Ongoing activity → stay in segment, rotate through content monthly</li>
+            <li>Cap: max 2 pushes per month for this segment</li>
+          </ul>
+        </div>
+
+        <div class="push-sequence">
+          <div class="push-card">
+            <div class="push-card-header">
+              <span class="push-label">Push A: Cook From Saves</span>
+              <span class="push-timing">Rotating monthly</span>
+            </div>
+            <div class="push-card-body">
+              <div class="push-phone">
+                <div class="push-notch"></div>
+                <div class="push-notification">
+                  <div class="push-notif-header">
+                    <div class="push-notif-icon"></div>
+                    <span class="push-notif-app">HelloFresh</span>
+                    <span class="push-notif-time">now</span>
+                  </div>
+                  <div class="push-notif-title">Time to cook one</div>
+                  <div class="push-notif-body">You've saved [X] recipes. Pick one for this week and make it happen.</div>
+                </div>
+              </div>
+              <div class="push-meta">
+                <div>
+                  <div class="push-meta-label">Angle</div>
+                  <div class="push-meta-value">Moves from saving to cooking. Deepens engagement beyond collection.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="push-card">
+            <div class="push-card-header">
+              <span class="push-label">Push B: Expand Sources</span>
+              <span class="push-timing">Rotating monthly</span>
+            </div>
+            <div class="push-card-body">
+              <div class="push-phone">
+                <div class="push-notch"></div>
+                <div class="push-notification">
+                  <div class="push-notif-header">
+                    <div class="push-notif-icon"></div>
+                    <span class="push-notif-app">HelloFresh</span>
+                    <span class="push-notif-time">now</span>
+                  </div>
+                  <div class="push-notif-title">Save from anywhere</div>
+                  <div class="push-notif-body">Blogs, YouTube, Instagram, TikTok. If it's a recipe, Cookbook can save it.</div>
+                </div>
+              </div>
+              <div class="push-meta">
+                <div>
+                  <div class="push-meta-label">Angle</div>
+                  <div class="push-meta-value">Expands awareness of supported sources. Users may only know one platform works.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="push-card">
+            <div class="push-card-header">
+              <span class="push-label">Push C: Organisation</span>
+              <span class="push-timing">Rotating monthly</span>
+            </div>
+            <div class="push-card-body">
+              <div class="push-phone">
+                <div class="push-notch"></div>
+                <div class="push-notification">
+                  <div class="push-notif-header">
+                    <div class="push-notif-icon"></div>
+                    <span class="push-notif-app">HelloFresh</span>
+                    <span class="push-notif-time">now</span>
+                  </div>
+                  <div class="push-notif-title">Getting organised?</div>
+                  <div class="push-notif-body">Group your saved recipes by cuisine, weeknight vs weekend, or whatever works.</div>
+                </div>
+              </div>
+              <div class="push-meta">
+                <div>
+                  <div class="push-meta-label">Angle</div>
+                  <div class="push-meta-value">Introduces organisation features for power users with growing collections.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="push-card">
+            <div class="push-card-header">
+              <span class="push-label">Push D: Milestone</span>
+              <span class="push-timing">Rotating monthly</span>
+            </div>
+            <div class="push-card-body">
+              <div class="push-phone">
+                <div class="push-notch"></div>
+                <div class="push-notification">
+                  <div class="push-notif-header">
+                    <div class="push-notif-icon"></div>
+                    <span class="push-notif-app">HelloFresh</span>
+                    <span class="push-notif-time">now</span>
+                  </div>
+                  <div class="push-notif-title">[X] recipes and counting</div>
+                  <div class="push-notif-body">Your collection is growing. Keep saving the ones that catch your eye.</div>
+                </div>
+              </div>
+              <div class="push-meta">
+                <div>
+                  <div class="push-meta-label">Angle</div>
+                  <div class="push-meta-value">Celebrates progress. Reinforces the behaviour with a sense of achievement.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GLOBAL RULES -->
+<section class="section">
+  <div class="section-card">
+    <div class="section-header">
+      <span class="section-label">Global Rules</span>
+      <span class="section-count">6 Rules</span>
+    </div>
+    <div class="section-body" style="padding: 0;">
+      <table class="rules-table">
+        <thead>
+          <tr>
+            <th>Rule</th>
+            <th>Logic</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="rule-name">Frequency Cap</td>
+            <td>Max 1 Cookbook push per 5 days (across all segments)</td>
+          </tr>
+          <tr>
+            <td class="rule-name">Send Window</td>
+            <td>11:00 to 13:00 local OR 17:00 to 19:00 local (meal planning windows)</td>
+          </tr>
+          <tr>
+            <td class="rule-name">Suppression</td>
+            <td>Do not send if user received any other push in the last 24 hours</td>
+          </tr>
+          <tr>
+            <td class="rule-name">Graduation Priority</td>
+            <td>If a user qualifies for multiple segments, use the highest engagement segment (furthest down the funnel)</td>
+          </tr>
+          <tr>
+            <td class="rule-name">Opt-out Respect</td>
+            <td>Immediate suppression on push opt-out. No fallback to other channels from this journey.</td>
+          </tr>
+          <tr>
+            <td class="rule-name">Re-entry Cooldown</td>
+            <td>If a user exits and re-enters the same segment, serve fresh copy variants (not repeats)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- MEASUREMENT -->
+<section class="section">
+  <div class="section-card">
+    <div class="section-header">
+      <span class="section-label">Measurement Framework</span>
+      <span class="section-count">6 KPIs</span>
+    </div>
+    <div class="section-body" style="padding: 0;">
+      <table class="metrics-table">
+        <thead>
+          <tr>
+            <th>Metric</th>
+            <th>Segment(s)</th>
+            <th>Target</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>First Cookbook open rate</td>
+            <td>Dormant</td>
+            <td class="metric-target">Baseline + 15%</td>
+          </tr>
+          <tr>
+            <td>First save rate</td>
+            <td>Dormant, Browsers</td>
+            <td class="metric-target">Baseline + 10%</td>
+          </tr>
+          <tr>
+            <td>Second save within 14 days</td>
+            <td>One and Done</td>
+            <td class="metric-target">30%+</td>
+          </tr>
+          <tr>
+            <td>Cookbook re-open rate</td>
+            <td>Lapsed Savers</td>
+            <td class="metric-target">25%+</td>
+          </tr>
+          <tr>
+            <td>Saves per user per month</td>
+            <td>Building Habit</td>
+            <td class="metric-target">+1 incremental</td>
+          </tr>
+          <tr>
+            <td>Push open rate (all)</td>
+            <td>All segments</td>
+            <td class="metric-target">8%+</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- NEXT STEPS -->
+<section class="section">
+  <div class="section-card">
+    <div class="section-header">
+      <span class="section-label">Open Questions / Next Steps</span>
+    </div>
+    <div class="section-body">
+      <ol class="next-steps-list">
+        <li><span class="step-number">1</span><span><strong>Personalisation variables:</strong> Do we have access to recipe count, last saved recipe name, or category in the push platform?</span></li>
+        <li><span class="step-number">2</span><span><strong>Deep linking:</strong> Can pushes open directly into Cookbook (or even a specific saved recipe)?</span></li>
+        <li><span class="step-number">3</span><span><strong>Send time optimisation:</strong> Does the platform support STO, or do we pick fixed windows?</span></li>
+        <li><span class="step-number">4</span><span><strong>Localisation:</strong> US only or multi-market? (Affects tone: ALL CAPS for US vs sentence case for global)</span></li>
+        <li><span class="step-number">5</span><span><strong>A/B testing:</strong> Do we want variant copy for each push so we can test angles from day one?</span></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-left">
+    <img src="https://media.hellofresh.com/w_256,q_100,f_auto,c_limit,fl_lossy/hellofresh_website/logo/Hello_Fresh_Lockup.png" alt="HelloFresh" class="footer-logo">
+    <span class="footer-text">Product Marketing</span>
+  </div>
+  <span class="footer-updated">Created: May 21, 2026</span>
+</footer>
+
+<script src="../auth.js"></script>
+</body>
+</html>
