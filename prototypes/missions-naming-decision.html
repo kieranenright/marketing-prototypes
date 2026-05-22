@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loyalty 2.0 | Naming Decision: Goals</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        :root {
+            --hf-green: #0A6B3A;
+            --hf-green-light: #F0F9F4;
+            --hf-dark: #1A1A1A;
+            --hf-grey: #3D3D3D;
+            --hf-grey-light: #F5F5F5;
+            --hf-border: #E0E0E0;
+            --hf-purple: #2D1B4E;
+            --hf-purple-light: #F5F0FA;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--hf-dark);
+            background: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .page {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 48px 56px;
+            flex: 1;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 40px;
+        }
+
+        .header-left h1 {
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--hf-dark);
+            line-height: 1.2;
+            margin-bottom: 6px;
+        }
+
+        .header-left .subtitle {
+            font-size: 15px;
+            color: var(--hf-grey);
+            font-weight: 400;
+        }
+
+        .header-right {
+            text-align: right;
+        }
+
+        .badge {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            border-radius: 4px;
+            background: var(--hf-green-light);
+            color: var(--hf-green);
+        }
+
+        .header-right .date {
+            font-size: 13px;
+            color: var(--hf-grey);
+            margin-top: 6px;
+        }
+
+        /* Decision banner */
+        .decision-banner {
+            background: var(--hf-green);
+            color: #fff;
+            border-radius: 12px;
+            padding: 28px 36px;
+            margin-bottom: 36px;
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .decision-banner .noun {
+            font-size: 48px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            white-space: nowrap;
+        }
+
+        .decision-banner .noun span {
+            opacity: 0.5;
+            font-weight: 400;
+            font-size: 20px;
+            margin-right: 4px;
+            vertical-align: middle;
+        }
+
+        .decision-banner .context {
+            font-size: 15px;
+            line-height: 1.5;
+            opacity: 0.95;
+        }
+
+        /* Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 36px;
+        }
+
+        .card {
+            background: var(--hf-grey-light);
+            border-radius: 10px;
+            padding: 24px;
+        }
+
+        .card h3 {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            color: var(--hf-green);
+            margin-bottom: 14px;
+        }
+
+        .card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .card li {
+            font-size: 14px;
+            color: var(--hf-grey);
+            padding: 6px 0;
+            padding-left: 16px;
+            position: relative;
+            line-height: 1.5;
+        }
+
+        .card li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 12px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--hf-green);
+        }
+
+        /* Copy examples */
+        .examples {
+            background: var(--hf-grey-light);
+            border-radius: 10px;
+            padding: 24px 28px;
+            margin-bottom: 36px;
+        }
+
+        .examples h3 {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            color: var(--hf-green);
+            margin-bottom: 16px;
+        }
+
+        .example-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .example-item {
+            background: #fff;
+            border-radius: 8px;
+            padding: 16px;
+            border-left: 3px solid var(--hf-green);
+        }
+
+        .example-item .channel {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--hf-grey);
+            margin-bottom: 8px;
+        }
+
+        .example-item .copy {
+            font-size: 14px;
+            color: var(--hf-dark);
+            font-weight: 500;
+            font-style: italic;
+            line-height: 1.4;
+        }
+
+        /* Footer note */
+        .footer-note {
+            display: flex;
+            align-items: flex-start;
+            gap: 24px;
+            padding-top: 24px;
+            border-top: 1px solid var(--hf-border);
+        }
+
+        .footer-note .next-steps {
+            flex: 1;
+        }
+
+        .footer-note h3 {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            color: var(--hf-dark);
+            margin-bottom: 8px;
+        }
+
+        .footer-note p {
+            font-size: 14px;
+            color: var(--hf-grey);
+            line-height: 1.5;
+        }
+
+        .footer-note .sources {
+            font-size: 12px;
+            color: var(--hf-grey);
+            text-align: right;
+            min-width: 200px;
+        }
+
+        .footer-note .sources span {
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .page { padding: 32px 24px; }
+            .grid { grid-template-columns: 1fr; }
+            .example-grid { grid-template-columns: 1fr; }
+            .decision-banner { flex-direction: column; gap: 16px; text-align: center; }
+            .footer-note { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="page">
+
+    <!-- Header -->
+    <div class="header">
+        <div class="header-left">
+            <h1>Naming the earning mechanic</h1>
+            <div class="subtitle">Loyalty 2.0 &middot; Decision summary for Brand</div>
+        </div>
+        <div class="header-right">
+            <div class="badge">Decision Made</div>
+            <div class="date">May 2026</div>
+        </div>
+    </div>
+
+    <!-- Decision -->
+    <div class="decision-banner">
+        <div class="noun"><span>formerly "Missions" &rarr;</span> Goals</div>
+        <div class="context">One noun, all channels, no qualifier. "Goals" replaces the internal working title "Missions" as the term for the things users do to earn points in Rewards.</div>
+    </div>
+
+    <!-- Two-column rationale -->
+    <div class="grid">
+        <div class="card">
+            <h3>Why "Goals" wins</h3>
+            <ul>
+                <li>Highest enticement of all candidates explored. Inherently motivating: users instinctively want to complete them.</li>
+                <li>Native vocabulary for the Efficient Inspired audience. Completionist instincts across gaming (17%), sports (20%), and financial groups (16%).</li>
+                <li>Passes TOV standards: carries the conviction, movement, and directionality our brand voice requires.</li>
+                <li>Translates cleanly across all markets (Ziel, objectif, doel, m&aring;l). No product language collisions.</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h3>Why no qualifier needed</h3>
+            <ul>
+                <li>EIs are life optimizers, not simplifiers. Quick goals feel satisfying, not overstated. They seek small wins throughout high output days.</li>
+                <li>Qualifiers like "easy goals" or "daily goals" dilute conviction and signal the system is apologising for itself.</li>
+                <li>"3 goals done. 1,200 points earned." is more satisfying than any softened alternative.</li>
+                <li>Investment framing over ease framing. Lead with what users put in and what they get back, not how little effort it takes.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Copy examples -->
+    <div class="examples">
+        <h3>How it sounds across channels</h3>
+        <div class="example-grid">
+            <div class="example-item">
+                <div class="channel">Push</div>
+                <div class="copy">"Free shipping. Three quick goals between you and it."</div>
+            </div>
+            <div class="example-item">
+                <div class="channel">Email subject</div>
+                <div class="copy">"Your week has 3 goals. Your rewards have no ceiling."</div>
+            </div>
+            <div class="example-item">
+                <div class="channel">Campaign</div>
+                <div class="copy">"You're already doing it. Now get rewarded for it."</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer-note">
+        <div class="next-steps">
+            <h3>What this means for Brand</h3>
+            <p>Use "Goals" as the single noun in all materials. No dual terminology, no channel splitting. The copy around the noun creates the enticement: lead with the reward value, frame goals as an investment (put a little in, get a lot back), and write with conviction. Content Design and Marketing are aligned.</p>
+        </div>
+        <div class="sources">
+            <span><strong>Based on:</strong></span>
+            <span>BTS Efficient Inspired Study</span>
+            <span>Loyalty Concept Testing</span>
+            <span>HF Global Tone of Voice</span>
+            <span>Content Design naming strategy</span>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
