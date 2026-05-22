@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loyalty 2.0 | Naming Critique: EI & TOV Lens</title>
+    <style>
+        :root {
+            --hf-green: #0A6B3A;
+            --hf-green-light: #F0F9F4;
+            --hf-dark: #1A1A1A;
+            --hf-grey: #3D3D3D;
+            --hf-grey-light: #F5F5F5;
+            --hf-border: #E0E0E0;
+            --hf-amber: #8A4B00;
+            --hf-amber-light: #FFF8F0;
+            --hf-red: #9E2B0E;
+            --hf-red-light: #FEF2F0;
+            --hf-purple: #5B21B6;
+            --hf-purple-light: #F5F3FF;
+            --hf-source-grey: #555555;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: var(--hf-dark);
+            line-height: 1.6;
+            background: #fff;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1A1A1A 0%, #2D2D2D 100%);
+            color: #fff;
+            padding: 80px 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-label {
+            font-size: 13px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 16px;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.85);
+            max-width: 620px;
+            margin: 0 auto;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 4px 12px;
+            border-radius: 100px;
+            margin-top: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .tldr {
+            background: var(--hf-amber-light);
+            border-left: 4px solid var(--hf-amber);
+            padding: 32px;
+            margin: 60px auto;
+            max-width: 800px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .tldr h2 {
+            font-size: 14px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--hf-amber);
+            margin-bottom: 12px;
+        }
+
+        .tldr p {
+            font-size: 16px;
+            color: var(--hf-dark);
+        }
+
+        .tldr strong {
+            color: var(--hf-dark);
+        }
+
+        section {
+            padding: 60px 0;
+            border-bottom: 1px solid var(--hf-border);
+        }
+
+        section:last-of-type {
+            border-bottom: none;
+        }
+
+        .section-number {
+            font-size: 13px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--hf-green);
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        h2 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--hf-dark);
+        }
+
+        h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            margin-top: 32px;
+            color: var(--hf-dark);
+        }
+
+        p {
+            margin-bottom: 16px;
+            color: var(--hf-grey);
+            font-size: 16px;
+        }
+
+        .highlight {
+            background: var(--hf-grey-light);
+            border-radius: 8px;
+            padding: 24px;
+            margin: 24px 0;
+        }
+
+        .highlight p {
+            margin-bottom: 0;
+            font-size: 17px;
+            font-weight: 500;
+            color: var(--hf-dark);
+        }
+
+        .insight-box {
+            background: var(--hf-green-light);
+            border-radius: 8px;
+            padding: 24px;
+            margin: 24px 0;
+        }
+
+        .insight-box p {
+            margin-bottom: 0;
+            color: #1A1A1A;
+            font-weight: 500;
+        }
+
+        .insight-box .insight-label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--hf-green);
+            margin-bottom: 8px;
+        }
+
+        .warning-box {
+            background: var(--hf-amber-light);
+            border-left: 4px solid var(--hf-amber);
+            border-radius: 0 8px 8px 0;
+            padding: 24px;
+            margin: 24px 0;
+        }
+
+        .warning-box p {
+            margin-bottom: 0;
+            color: var(--hf-grey);
+        }
+
+        .critique-box {
+            background: var(--hf-red-light);
+            border-left: 4px solid var(--hf-red);
+            border-radius: 0 8px 8px 0;
+            padding: 24px;
+            margin: 24px 0;
+        }
+
+        .critique-box p {
+            margin-bottom: 8px;
+            color: var(--hf-grey);
+        }
+
+        .critique-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        .critique-box .critique-label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--hf-red);
+            margin-bottom: 8px;
+        }
+
+        .rec-box {
+            background: var(--hf-purple-light);
+            border-left: 4px solid var(--hf-purple);
+            border-radius: 0 8px 8px 0;
+            padding: 24px;
+            margin: 24px 0;
+        }
+
+        .rec-box p {
+            margin-bottom: 8px;
+            color: var(--hf-grey);
+        }
+
+        .rec-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        .rec-box .rec-label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--hf-purple);
+            margin-bottom: 8px;
+        }
+
+        ul, ol {
+            margin: 16px 0;
+            padding-left: 24px;
+            color: var(--hf-grey);
+        }
+
+        li {
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+            font-size: 15px;
+        }
+
+        thead {
+            background: var(--hf-grey-light);
+        }
+
+        th {
+            text-align: left;
+            padding: 12px 16px;
+            font-weight: 600;
+            color: var(--hf-dark);
+            border-bottom: 2px solid var(--hf-border);
+        }
+
+        td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--hf-border);
+            color: var(--hf-grey);
+            vertical-align: top;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 24px 0;
+        }
+
+        .comparison-card {
+            border-radius: 8px;
+            padding: 20px;
+            border: 1px solid var(--hf-border);
+        }
+
+        .comparison-card.do {
+            background: var(--hf-green-light);
+            border-color: var(--hf-green);
+        }
+
+        .comparison-card.dont {
+            background: var(--hf-red-light);
+            border-color: var(--hf-red);
+        }
+
+        .comparison-card .label {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .comparison-card.do .label {
+            color: #085C2E;
+        }
+
+        .comparison-card.dont .label {
+            color: #7A2209;
+        }
+
+        .comparison-card p {
+            margin-bottom: 0;
+            font-size: 15px;
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin: 24px 0;
+        }
+
+        .stat-card {
+            background: var(--hf-grey-light);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .stat-card .stat-number {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--hf-green);
+            margin-bottom: 4px;
+        }
+
+        .stat-card .stat-label {
+            font-size: 13px;
+            color: var(--hf-source-grey);
+        }
+
+        .source {
+            font-size: 13px;
+            color: var(--hf-source-grey);
+            margin-top: 24px;
+            padding-top: 16px;
+            border-top: 1px solid var(--hf-border);
+        }
+
+        .final-cta {
+            background: var(--hf-green-light);
+            text-align: center;
+            padding: 60px 40px;
+            margin-top: 60px;
+        }
+
+        .final-cta h2 {
+            margin-bottom: 16px;
+        }
+
+        .final-cta p {
+            max-width: 580px;
+            margin: 0 auto 12px;
+            font-size: 17px;
+        }
+
+        .badge {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            padding: 3px 10px;
+            border-radius: 4px;
+            vertical-align: middle;
+        }
+
+        .badge-bts {
+            background: #DEEBFF;
+            color: #0747A6;
+        }
+
+        .badge-tov {
+            background: #E8F5EE;
+            color: #085C2E;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 60px 24px;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .container {
+                padding: 0 24px;
+            }
+
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-grid {
+                grid-template-columns: 1fr;
+            }
+
+            table {
+                font-size: 14px;
+            }
+
+            th, td {
+                padding: 10px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hero">
+        <div class="hero-label">Loyalty 2.0 &middot; Marketing Response</div>
+        <h1>Naming the earning mechanic: a Marketing critique</h1>
+        <p>Reviewing Content Design's proposal through the Efficient Inspired audience study and HelloFresh Global Tone of Voice.</p>
+        <div class="hero-tag">Response to Content Design proposal &middot; May 2026</div>
+    </div>
+
+    <div class="tldr">
+        <h2>Position summary</h2>
+        <p>The naming proposal is structurally sound, but it's built on a defensive premise: don't confuse users, don't overpromise, don't add cognitive load. That premise fits a general population. <strong>It underestimates the Efficient Inspired, who are optimisers, achievers, and active participants in systems they find worthwhile.</strong></p>
+        <p style="margin-top: 12px;">Our recommendation: <strong>"Goals" without a permanent qualifier</strong>, backed by copy that meets our TOV standard for conviction and memorability.</p>
+    </div>
+
+    <div class="container">
+
+        <!-- Section 1 -->
+        <section>
+            <div class="section-number">01</div>
+            <h2>The document misreads the Efficient Inspired</h2>
+
+            <p>The proposal characterises our audience as people who want to "reduce decision fatigue" and shouldn't feel like earning points is "another chore." This framing comes from a general population lens. The Behind the Screen study tells us something different.</p>
+
+            <h3>What the EI actually looks like</h3>
+
+            <div class="stat-grid">
+                <div class="stat-card">
+                    <div class="stat-number">70%</div>
+                    <div class="stat-label">actively in a community (vs 47% GenPop)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">44%</div>
+                    <div class="stat-label">bought food after media exposure (vs 33% GenPop)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">2x</div>
+                    <div class="stat-label">more aware of branded meal solutions</div>
+                </div>
+            </div>
+
+            <p>EIs are <strong>life optimisers, not life simplifiers.</strong> They spend the same ~40% on basics as everyone else, then actively re-architect the remaining 60% toward logistics and leisure. They aren't "doing less due to laziness; they do it faster/together to buy back time."</p>
+
+            <p>Key findings from Behind the Screen that challenge the proposal's framing:</p>
+
+            <ul>
+                <li><strong>"Switch On" mindset:</strong> EIs seek active discovery, not passive decompression. They use media to level up, not switch off. They read for self-improvement. They travel for adventure, not retreat.</li>
+                <li><strong>Systems thinkers:</strong> They invest in tools that "optimise the process, elevating daily routine from a chore to a skilled experience." An invisible noun doesn't speak to users who form relationships with quality systems.</li>
+                <li><strong>Completionist instincts:</strong> 17% in gaming communities. 20% in sports teams. 16% in financial growth groups. These are people who respond to progress mechanics and achievement structures.</li>
+                <li><strong>Brand affinity:</strong> They align with premium brands with strong identity (Apple, KitchenAid, Nike). They are 2x more aware of branded solutions. An invisible noun doesn't map to how they form brand relationships.</li>
+            </ul>
+
+            <div class="critique-box">
+                <div class="critique-label">Core mismatch</div>
+                <p>The proposal states: "Users don't opt into programmes because of what the mechanic is called. They opt in because they understand what they get and how little effort it takes."</p>
+                <p><strong>For GenPop, maybe. For EIs, the system itself matters.</strong> They want to know the programme they're participating in has been thoughtfully designed. Effort isn't something to hide from this audience. It's something to make satisfying.</p>
+            </div>
+
+            <div class="source">
+                Source: GCI Efficient Inspired: Behind the Screen (2025) <span class="badge badge-bts">BTS Study</span>
+            </div>
+        </section>
+
+        <!-- Section 2 -->
+        <section>
+            <div class="section-number">02</div>
+            <h2>The "effort mismatch" argument doesn't hold for EIs</h2>
+
+            <p>The proposal's main objection to "Goals" is that it overpromises for low-effort tasks. "Rate your recipes" takes 10 seconds, so calling it a "goal" creates a mismatch between word and reality.</p>
+
+            <p>This objection is built on a GenPop assumption: that users will feel deceived or burdened when a word implies more effort than required. But the BTS reveals the opposite for our audience.</p>
+
+            <div class="insight-box">
+                <div class="insight-label">EI behaviour pattern</div>
+                <p>EIs have a completionist, tick-it-off mindset. They actively seek small wins throughout their high-output day. A quick goal is satisfying, not overstated. It gives a 10-second action a sense of accomplishment that "action" never will.</p>
+            </div>
+
+            <p>The BTS describes EIs as having a "same load, different lens" approach. They pivot from passive chores toward logistics and leisure. They don't avoid tasks. They streamline them into a sense of progress. That's exactly what "Goals" delivers: a framing that turns routine behaviour into progress.</p>
+
+            <h3>The qualifier question</h3>
+
+            <p>The proposal argues "Goals" would need a permanent qualifier ("easy goals," "daily goals") to manage expectations. For EIs, this isn't true:</p>
+
+            <ul>
+                <li>"Complete your weekly goals" maps directly to how they think (community involvement, structured routines, progress tracking)</li>
+                <li>They don't need to be told something is easy. They need to know it's worth doing.</li>
+                <li>The qualifier dilutes conviction. "Easy goals" signals we're apologising for the system. EIs don't need apologies. They need a well-designed system.</li>
+            </ul>
+
+            <div class="comparison-grid">
+                <div class="comparison-card do">
+                    <div class="label">For the EI: satisfying</div>
+                    <p>"3 goals done. 1,200 points earned."</p>
+                </div>
+                <div class="comparison-card dont">
+                    <div class="label">For the EI: deflating</div>
+                    <p>"3 actions completed."</p>
+                </div>
+            </div>
+
+            <div class="source">
+                Source: GCI Efficient Inspired: Behind the Screen, "From Inspiration to Action" section <span class="badge badge-bts">BTS Study</span>
+            </div>
+        </section>
+
+        <!-- Section 3 -->
+        <section>
+            <div class="section-number">03</div>
+            <h2>The copy examples fail the TOV checklist</h2>
+
+            <p>The proposal's strategy is: "The noun provides structure; the surrounding copy provides excitement." If that's the thesis, the copy needs to deliver. Running the examples through our Global Tone of Voice principles:</p>
+
+            <table>
+                <thead>
+                    <tr><th>TOV principle</th><th>Copy example from proposal</th><th>Verdict</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Fresh</strong><br><span style="font-size: 13px; color: #555;">Immediacy, creative tension</span></td>
+                        <td>"Small actions, real rewards"</td>
+                        <td style="color: var(--hf-red);">Generic. Could be any loyalty programme. No creative tension solved.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Vivid</strong><br><span style="font-size: 13px; color: #555;">Sensory, evocative, rhythm</span></td>
+                        <td>"3 actions away"</td>
+                        <td style="color: var(--hf-red);">Functional but flat. "Actions" has no sensory weight or memorability.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Sharp</strong><br><span style="font-size: 13px; color: #555;">Concise, confident</span></td>
+                        <td>"Do more of what you love"</td>
+                        <td style="color: var(--hf-red);">Category cliche. The TOV explicitly warns against these.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Zesty</strong><br><span style="font-size: 13px; color: #555;">Playful, witty</span></td>
+                        <td>"Rate your meals this week"</td>
+                        <td style="color: var(--hf-amber);">Passable as instructional. Zero personality.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Said with conviction</strong><br><span style="font-size: 13px; color: #555;">Declare what we believe</span></td>
+                        <td>Strategy: noun should be invisible</td>
+                        <td style="color: var(--hf-red);">Designing for forgettability is the opposite of conviction.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Talk like a movement</strong><br><span style="font-size: 13px; color: #555;">Collective, rallying</span></td>
+                        <td>"Actions" as a category noun</td>
+                        <td style="color: var(--hf-red);">Not collective. Not energising. Not ownable.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="critique-box">
+                <div class="critique-label">The TOV final-read test</div>
+                <p>"Does it feel ownable to HelloFresh, not generic meal-kit copy?"</p>
+                <p><strong>"Actions" fails this test.</strong> No competitor would use it, but no customer would remember it either. It's the absence of a word rather than the presence of one.</p>
+            </div>
+
+            <p>"Goals" performs better against these same principles. It has directionality (Fresh). It implies forward motion (Vivid). It's said with conviction (you have goals, go achieve them). And it maps to a collective identity ("Your goals this week") in a way that speaks to the 70% of EIs actively involved in communities.</p>
+
+            <div class="source">
+                Source: HelloFresh Global Tone of Voice Guide, January 2026 <span class="badge badge-tov">TOV Guide</span>
+            </div>
+        </section>
+
+        <!-- Section 4 -->
+        <section>
+            <div class="section-number">04</div>
+            <h2>"Food is a piece of the landscape, not the centre"</h2>
+
+            <p>The BTS reveals something important for how we frame the earning mechanic: EIs treat food as "a commodity to be optimised" rather than an emotional attachment. Food is fuel for their high-output lives.</p>
+
+            <p>This has implications for the proposal's copy direction:</p>
+
+            <div class="comparison-grid">
+                <div class="comparison-card dont">
+                    <div class="label">Proposal's approach: passion framing</div>
+                    <p>"Do more of what you love"</p>
+                </div>
+                <div class="comparison-card do">
+                    <div class="label">EI-aligned: investment framing</div>
+                    <p>"Put a little in. Get a lot back."</p>
+                </div>
+            </div>
+
+            <p>EIs don't need the earning mechanic dressed up as passion. They need it framed as a smart system: you do what you were going to do anyway, and the programme compounds that into tangible value. That's how they think about everything in their optimised lives.</p>
+
+            <p>This also supports "Goals" over "Actions." A goal implies an outcome worth reaching. An action is just... movement. EIs don't value movement for its own sake. They value movement that leads somewhere.</p>
+
+            <div class="insight-box">
+                <div class="insight-label">Key BTS finding</div>
+                <p>"From Inspiration to Action" is literally how the study describes EI behaviour: media exposure drives conversion at significantly higher rates than GenPop. These are people who go from seeing something to doing something. "Goals" taps into that natural momentum.</p>
+            </div>
+        </section>
+
+        <!-- Section 5 -->
+        <section>
+            <div class="section-number">05</div>
+            <h2>Recommendations</h2>
+
+            <div class="rec-box">
+                <div class="rec-label">Recommendation 1</div>
+                <p><strong>Reframe the strategic question.</strong></p>
+                <p>The proposal asks: "What's a safe, invisible noun that won't mislead anyone?" It should ask: "What noun speaks the language of our audience's optimiser mindset while staying structurally honest?" The EI doesn't need protecting from branded language. They actively respond to it.</p>
+            </div>
+
+            <div class="rec-box">
+                <div class="rec-label">Recommendation 2</div>
+                <p><strong>Back "Goals" without a permanent qualifier.</strong></p>
+                <p>The objection to "Goals" is built on a GenPop interpretation of effort mismatch. For EIs who seek completionist experiences, manage complex households, and participate in achievement structures (sports leagues, gaming, financial groups), "Goals" is native vocabulary. They don't need "easy" as a crutch. They just want a system worth engaging with.</p>
+            </div>
+
+            <div class="rec-box">
+                <div class="rec-label">Recommendation 3</div>
+                <p><strong>Rewrite the copy examples to pass the TOV checklist.</strong></p>
+                <p>If the strategy is "the copy around the noun does the heavy lifting," then the examples need to demonstrate Fresh, Vivid, Sharp, and Zesty energy. Every example in the current proposal reads as functional UX copy, not brand copy. Here's what TOV-compliant looks like:</p>
+            </div>
+
+            <table>
+                <thead>
+                    <tr><th>Channel</th><th>Current proposal</th><th>TOV-aligned rewrite</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Push</strong></td>
+                        <td>"Rate your meals this week. Free shipping is within reach"</td>
+                        <td>"Free shipping. Three quick goals between you and it."</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Email subject</strong></td>
+                        <td>"Free shipping, discounts on add-ons. 3 actions away"</td>
+                        <td>"Your week has 3 goals. Your rewards have no ceiling."</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Campaign headline</strong></td>
+                        <td>"Small actions, real rewards"</td>
+                        <td>"You're already doing it. Now get rewarded for it."</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Onboarding</strong></td>
+                        <td>"Do more of what you love"</td>
+                        <td>"Order. Rate. Earn. The simplest system going."</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="rec-box">
+                <div class="rec-label">Recommendation 4</div>
+                <p><strong>Lead with the investment framing, not the ease framing.</strong></p>
+                <p>The BTS shows food is "a piece of the landscape" for EIs. They don't need passion language. They need to see the earning mechanic as a smart system: put a little in, get disproportionate value back. That maps to their optimiser identity and investment mindset across all life domains.</p>
+            </div>
+
+            <div class="rec-box">
+                <div class="rec-label">Recommendation 5</div>
+                <p><strong>Use the "movement" angle the TOV demands.</strong></p>
+                <p>"Goals" has inherent directionality. It moves. "Actions" is static. For an audience where 70% are active community participants, "Your goals this week" feels like shared progress. It mirrors the collective, forward-motion energy the TOV asks for with "Talk like a movement."</p>
+            </div>
+        </section>
+
+        <!-- Section 6 -->
+        <section>
+            <div class="section-number">06</div>
+            <h2>Where we agree with the proposal</h2>
+
+            <p>To be clear: the proposal gets several things right, and those foundations hold regardless of noun choice.</p>
+
+            <ul>
+                <li><strong>One noun, everywhere.</strong> The case against splitting terminology across channels is strong. A dual-term approach (one for Marketing, one for UX) creates navigation trust breakdown and support confusion. Agreed.</li>
+                <li><strong>The earning side doesn't need its own brand.</strong> "Missions" with its own identity competing with "Rewards" for mental space would be a mistake. Agreed.</li>
+                <li><strong>The ruled-out terms are correctly ruled out.</strong> Boosts, Sparks, Power-ups, Challenges. All the right rejections for the right reasons. The analysis of product-language collisions (Choices, Options, Ideas) is thorough and correct.</li>
+                <li><strong>Value-first copy structure.</strong> Leading with what users earn (not what they have to do) is right for push notifications, emails, and onboarding. The structure is sound. The noun just needs to carry more weight than "Actions" provides.</li>
+            </ul>
+
+            <div class="insight-box">
+                <div class="insight-label">Bottom line</div>
+                <p>The proposal's architecture is right. Its audience model is wrong. Swap the GenPop caution for EI confidence, back "Goals," and write copy that matches the conviction our TOV demands.</p>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Final CTA -->
+    <div class="final-cta">
+        <h2>Proposed next step</h2>
+        <p>Present "Goals" (without qualifier) alongside "Actions" in the alignment meeting. Demonstrate with TOV-compliant copy across all channels, and let the group assess which noun creates the right relationship between programme identity and audience expectations.</p>
+        <p style="margin-top: 12px; font-size: 14px; color: var(--hf-source-grey);">If the group still prefers "Actions," the copy examples need a complete overhaul to pass TOV. The functional/UX-copy style shown in the current proposal won't work for Marketing materials.</p>
+    </div>
+
+</body>
+</html>
