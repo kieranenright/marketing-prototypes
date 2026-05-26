@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HelloFresh Rewards 2.0 — Phase 2: CRM Delivery Roadmap</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+  --rewards-purple: #532E6B;
+  --rewards-deep: #3D1F52;
+  --rewards-light: #7B5A9A;
+  --rewards-lilac: #C4A8E0;
+  --rewards-glow: rgba(196,168,224,0.15);
+  --hf-green: #1A5632;
+  --hf-lime: #91C73E;
+  --hf-lime-soft: #B5D96B;
+  --hf-cream: #F5F1EB;
+  --hf-white: #FFFFFF;
+  --hf-dark: #1A1A1A;
+  --hf-muted: #6B6B6B;
+  --blend-gradient: linear-gradient(135deg, var(--rewards-purple) 0%, var(--hf-green) 100%);
+  --blend-gradient-soft: linear-gradient(135deg, rgba(83,46,107,0.08) 0%, rgba(26,86,50,0.08) 100%);
+  --wave1: #91C73E;
+  --wave2: #532E6B;
+  --wave3: #1A5632;
+  --wave4: #C4A8E0;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--hf-cream);
+  color: var(--hf-dark);
+  overflow-x: hidden;
+}
+
+.progress-bar {
+  position: fixed; top: 0; left: 0; height: 4px;
+  background: linear-gradient(90deg, var(--rewards-purple), var(--hf-lime));
+  z-index: 1000; transition: width 0.1s linear;
+}
+
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; height: 56px;
+  background: rgba(245, 241, 235, 0.92);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  z-index: 999; display: flex; align-items: center;
+  justify-content: space-between; padding: 0 40px;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  transform: translateY(-100%); transition: transform 0.3s ease;
+}
+.nav.visible { transform: translateY(0); }
+.nav-logo { font-weight: 900; font-size: 15px; color: var(--rewards-purple); letter-spacing: -0.5px; }
+.nav-links { display: flex; gap: 6px; }
+.nav-links a {
+  text-decoration: none; font-size: 11px; font-weight: 600;
+  color: var(--hf-muted); padding: 6px 14px; border-radius: 20px; transition: all 0.2s;
+}
+.nav-links a:hover, .nav-links a.active { background: var(--rewards-purple); color: white; }
+
+section {
+  min-height: 100vh; display: flex; align-items: center;
+  justify-content: center; padding: 80px 60px; position: relative;
+}
+.section-inner { max-width: 1200px; width: 100%; }
+
+.reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-left { opacity: 0; transform: translateX(-40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal-left.visible { opacity: 1; transform: translateX(0); }
+.reveal-scale { opacity: 0; transform: scale(0.9); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal-scale.visible { opacity: 1; transform: scale(1); }
+.stagger-1 { transition-delay: 0.1s; }
+.stagger-2 { transition-delay: 0.2s; }
+.stagger-3 { transition-delay: 0.3s; }
+.stagger-4 { transition-delay: 0.4s; }
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  background: linear-gradient(160deg, var(--rewards-purple) 0%, var(--rewards-deep) 40%, var(--hf-green) 100%);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; top: -200px; right: -200px;
+  width: 800px; height: 800px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(145,199,62,0.12) 0%, transparent 60%);
+}
+.hero::after {
+  content: ''; position: absolute; bottom: -200px; left: -200px;
+  width: 600px; height: 600px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(196,168,224,0.1) 0%, transparent 60%);
+}
+.hero-content { text-align: center; z-index: 1; max-width: 850px; }
+.hero h1 {
+  font-size: 68px; font-weight: 900; color: white;
+  letter-spacing: -3px; line-height: 0.95; margin-bottom: 20px;
+  animation: fadeInUp 0.8s ease 0.4s both;
+}
+.hero h1 .accent-lime { color: var(--hf-lime); }
+.hero h1 .accent-lilac { color: var(--rewards-lilac); }
+.hero-sub {
+  font-size: 20px; font-weight: 400; color: rgba(255,255,255,0.6);
+  line-height: 1.5; margin-bottom: 32px;
+  animation: fadeInUp 0.8s ease 0.6s both;
+}
+.hero-tags {
+  display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+  animation: fadeInUp 0.8s ease 0.8s both;
+}
+.hero-tag {
+  background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.85);
+  padding: 8px 20px; border-radius: 8px; font-size: 13px; font-weight: 600;
+  border: 1px solid rgba(255,255,255,0.15);
+}
+.scroll-cue {
+  position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  animation: bounce 2s ease infinite 1.5s; z-index: 2;
+}
+.scroll-cue span { font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.35); letter-spacing: 2px; text-transform: uppercase; }
+.scroll-arrow { width: 24px; height: 24px; border-right: 2px solid rgba(255,255,255,0.3); border-bottom: 2px solid rgba(255,255,255,0.3); transform: rotate(45deg); }
+
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes bounce { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(10px); } }
+
+/* SECTION TITLES */
+.section-tag { display: inline-block; font-size: 11px; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; color: var(--rewards-purple); margin-bottom: 12px; }
+.section-title { font-size: 44px; font-weight: 900; letter-spacing: -1.5px; line-height: 1.05; margin-bottom: 8px; }
+.section-desc { font-size: 16px; color: var(--hf-muted); line-height: 1.6; max-width: 700px; margin-bottom: 40px; }
+
+/* STRATEGY OVERVIEW */
+.strategy-section { background: var(--hf-white); min-height: auto; padding: 100px 60px; }
+.principle-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 32px; }
+.principle-card { background: var(--hf-cream); border-radius: 20px; padding: 32px; position: relative; overflow: hidden; transition: all 0.3s ease; }
+.principle-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(0,0,0,0.08); }
+.principle-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; }
+.principle-card:nth-child(1)::before { background: var(--hf-lime); }
+.principle-card:nth-child(2)::before { background: var(--rewards-purple); }
+.principle-card:nth-child(3)::before { background: var(--hf-green); }
+.principle-card h3 { font-size: 20px; font-weight: 900; letter-spacing: -0.5px; margin-bottom: 10px; }
+.principle-card p { font-size: 14px; color: var(--hf-muted); line-height: 1.6; }
+.principle-num { font-size: 48px; font-weight: 900; opacity: 0.06; position: absolute; top: 8px; right: 16px; }
+
+/* AUDIENCE SECTION */
+.audience-section { background: var(--hf-dark); color: white; min-height: auto; padding: 100px 60px; }
+.audience-section .section-tag { color: var(--rewards-lilac); }
+.audience-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 32px; }
+.audience-card { background: rgba(255,255,255,0.04); border-radius: 14px; padding: 22px; border-top: 3px solid var(--hf-lime); transition: all 0.3s ease; }
+.audience-card:hover { background: rgba(255,255,255,0.08); transform: translateY(-4px); }
+.audience-card:nth-child(even) { border-top-color: var(--rewards-lilac); }
+.audience-card h4 { font-size: 13px; font-weight: 800; margin-bottom: 8px; color: white; }
+.audience-card p { font-size: 12px; color: rgba(255,255,255,0.6); line-height: 1.5; }
+.audience-stat { font-size: 28px; font-weight: 900; color: var(--hf-lime); margin-bottom: 4px; }
+.audience-card:nth-child(even) .audience-stat { color: var(--rewards-lilac); }
+
+/* TIMELINE */
+.timeline-section { background: var(--hf-dark); color: white; min-height: auto; padding: 100px 60px; }
+.timeline-section .section-tag { color: var(--rewards-lilac); }
+
+/* WAVE SECTIONS */
+.wave-section { min-height: auto; padding: 100px 60px; }
+.wave-header { display: flex; align-items: center; gap: 20px; margin-bottom: 40px; }
+.wave-num { font-size: 72px; font-weight: 900; opacity: 0.08; line-height: 1; }
+.wave-meta h2 { font-size: 36px; font-weight: 900; letter-spacing: -1.5px; line-height: 1.1; }
+.wave-meta p { font-size: 14px; color: var(--hf-muted); margin-top: 4px; }
+
+.campaign-card { background: white; border-radius: 20px; padding: 0; margin-bottom: 32px; overflow: hidden; box-shadow: 0 2px 16px rgba(0,0,0,0.04); transition: all 0.3s ease; }
+.campaign-card:hover { box-shadow: 0 8px 40px rgba(0,0,0,0.08); transform: translateY(-2px); }
+.campaign-header { padding: 28px 32px 20px; border-bottom: 1px solid rgba(0,0,0,0.04); display: flex; justify-content: space-between; align-items: flex-start; }
+.campaign-header-left h3 { font-size: 20px; font-weight: 900; letter-spacing: -0.5px; margin-bottom: 4px; }
+.campaign-header-left .campaign-desc { font-size: 13px; color: var(--hf-muted); line-height: 1.5; max-width: 600px; }
+.campaign-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+.campaign-tag { padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; }
+.tag-push { background: rgba(145,199,62,0.1); color: var(--hf-green); }
+.tag-email { background: rgba(83,46,107,0.08); color: var(--rewards-purple); }
+.tag-embedded { background: rgba(26,86,50,0.08); color: var(--hf-green); }
+.tag-data { background: rgba(0,0,0,0.04); color: var(--hf-muted); font-weight: 600; }
+
+.campaign-body { padding: 24px 32px 28px; }
+.copy-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+.copy-variant { background: var(--hf-cream); border-radius: 14px; padding: 20px; position: relative; }
+.copy-variant::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; border-radius: 14px 14px 0 0; }
+.copy-variant.push-var::before { background: var(--hf-lime); }
+.copy-variant.email-var::before { background: var(--rewards-purple); }
+.copy-variant.embedded-var::before { background: var(--hf-green); }
+.copy-label { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 10px; }
+.copy-label.push-label { color: var(--hf-green); }
+.copy-label.email-label { color: var(--rewards-purple); }
+.copy-label.embedded-label { color: var(--hf-green); }
+.copy-field { margin-bottom: 10px; }
+.copy-field-name { font-size: 10px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px; }
+.copy-field-value { font-size: 14px; font-weight: 600; color: var(--hf-dark); line-height: 1.4; }
+.copy-field-value.body { font-weight: 400; font-size: 13px; }
+.char-count { font-size: 10px; color: rgba(0,0,0,0.25); font-weight: 600; margin-left: 4px; }
+
+/* DARK WAVE SECTIONS */
+.wave-dark { background: #F2F2F2; color: var(--hf-dark); }
+.wave-dark .campaign-card { background: white; border: 1px solid rgba(0,0,0,0.06); }
+.wave-dark .campaign-card:hover { background: white; box-shadow: 0 8px 40px rgba(0,0,0,0.08); }
+.wave-dark .campaign-header { border-bottom-color: rgba(0,0,0,0.06); }
+.wave-dark .campaign-header-left h3 { color: var(--hf-dark); }
+.wave-dark .campaign-header-left .campaign-desc { color: var(--hf-muted); }
+.wave-dark .copy-variant { background: var(--hf-cream); }
+.wave-dark .copy-field-name { color: var(--hf-muted); }
+.wave-dark .copy-field-value { color: var(--hf-dark); }
+.wave-dark .copy-field-value.body { color: var(--hf-dark); font-weight: 400; }
+.wave-dark .wave-meta p { color: var(--hf-muted); }
+
+/* PURPLE WAVE */
+.wave-purple { background: #F6F0FA; color: var(--hf-dark); }
+.wave-purple .campaign-card { background: white; border: 1px solid rgba(83,46,107,0.08); }
+.wave-purple .campaign-card:hover { background: white; box-shadow: 0 8px 40px rgba(83,46,107,0.1); }
+.wave-purple .campaign-header { border-bottom-color: rgba(83,46,107,0.08); }
+.wave-purple .campaign-header-left h3 { color: var(--hf-dark); }
+.wave-purple .campaign-header-left .campaign-desc { color: var(--hf-muted); }
+.wave-purple .copy-variant { background: var(--hf-cream); }
+.wave-purple .copy-field-name { color: var(--hf-muted); }
+.wave-purple .copy-field-value { color: var(--hf-dark); }
+.wave-purple .copy-field-value.body { color: var(--hf-dark); font-weight: 400; }
+.wave-purple .wave-meta p { color: var(--hf-muted); }
+.wave-purple .wave-meta h2 { color: var(--rewards-purple) !important; }
+.wave-purple .section-tag { color: var(--rewards-purple); }
+
+/* GREEN WAVE */
+.wave-green { background: #F0F7F2; color: var(--hf-dark); }
+.wave-green .campaign-card { background: white; border: 1px solid rgba(26,86,50,0.08); }
+.wave-green .campaign-card:hover { background: white; box-shadow: 0 8px 40px rgba(26,86,50,0.1); }
+.wave-green .campaign-header { border-bottom-color: rgba(26,86,50,0.08); }
+.wave-green .campaign-header-left h3 { color: var(--hf-dark); }
+.wave-green .campaign-header-left .campaign-desc { color: var(--hf-muted); }
+.wave-green .copy-variant { background: var(--hf-cream); }
+.wave-green .copy-field-name { color: var(--hf-muted); }
+.wave-green .copy-field-value { color: var(--hf-dark); }
+.wave-green .copy-field-value.body { color: var(--hf-dark); font-weight: 400; }
+.wave-green .wave-meta p { color: var(--hf-muted); }
+.wave-green .wave-meta h2 { color: var(--hf-green) !important; }
+.wave-green .section-tag { color: var(--hf-green); }
+
+/* DATA DEPENDENCIES */
+.data-section { background: var(--hf-cream); min-height: auto; padding: 100px 60px; }
+.data-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 32px; }
+.data-card { background: white; border-radius: 16px; padding: 24px; border-left: 4px solid var(--rewards-purple); transition: all 0.3s ease; }
+.data-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(0,0,0,0.08); }
+.data-card:nth-child(2) { border-left-color: var(--hf-lime); }
+.data-card:nth-child(3) { border-left-color: var(--hf-green); }
+.data-card:nth-child(4) { border-left-color: var(--rewards-light); }
+.data-card h4 { font-size: 14px; font-weight: 800; margin-bottom: 6px; }
+.data-card p { font-size: 13px; color: var(--hf-muted); line-height: 1.5; }
+.data-source { font-size: 11px; font-weight: 700; color: var(--rewards-purple); margin-top: 8px; }
+
+/* FOOTER */
+.footer-section {
+  min-height: 60vh;
+  background: linear-gradient(160deg, var(--rewards-purple) 0%, var(--hf-green) 100%);
+  display: flex; align-items: center; justify-content: center;
+  text-align: center; color: white;
+}
+.footer-inner { max-width: 700px; }
+.footer-inner h2 { font-size: 48px; font-weight: 900; letter-spacing: -2px; line-height: 1.05; margin-bottom: 16px; }
+.footer-inner h2 .accent-lime { color: var(--hf-lime); }
+.footer-details { font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.6; margin-top: 20px; }
+.footer-details strong { color: white; }
+.next-steps { text-align: left; margin-top: 40px; display: flex; flex-direction: column; gap: 12px; }
+.next-step { background: rgba(255,255,255,0.1); border-radius: 12px; padding: 16px 20px; display: flex; align-items: center; gap: 14px; font-size: 14px; font-weight: 500; transition: all 0.2s; }
+.next-step:hover { background: rgba(255,255,255,0.15); transform: translateX(4px); }
+.next-step-num { width: 28px; height: 28px; border-radius: 50%; background: var(--hf-lime); color: var(--hf-green); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 900; flex-shrink: 0; }
+
+/* RECOMMENDATION CALLOUT */
+.rec-callout { background: rgba(145,199,62,0.08); border-radius: 16px; padding: 24px 28px; margin-top: 24px; border-left: 4px solid var(--hf-lime); }
+.rec-callout h4 { font-size: 13px; font-weight: 800; color: var(--hf-green); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+.rec-callout p { font-size: 13px; color: var(--hf-muted); line-height: 1.6; }
+.wave-dark .rec-callout { background: rgba(145,199,62,0.08); }
+.wave-dark .rec-callout h4 { color: var(--hf-green); }
+.wave-dark .rec-callout p { color: var(--hf-muted); }
+.wave-purple .rec-callout { background: rgba(145,199,62,0.08); }
+.wave-purple .rec-callout h4 { color: var(--hf-green); }
+.wave-purple .rec-callout p { color: var(--hf-muted); }
+.wave-green .rec-callout { background: rgba(145,199,62,0.08); }
+.wave-green .rec-callout h4 { color: var(--hf-green); }
+.wave-green .rec-callout p { color: var(--hf-muted); }
+
+/* TOV CALLOUT */
+.tov-callout { background: rgba(83,46,107,0.06); border-radius: 16px; padding: 24px 28px; margin-top: 24px; border-left: 4px solid var(--rewards-purple); }
+.tov-callout h4 { font-size: 13px; font-weight: 800; color: var(--rewards-purple); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+.tov-callout p { font-size: 13px; color: var(--hf-muted); line-height: 1.6; }
+.wave-dark .tov-callout { background: rgba(83,46,107,0.06); border-left-color: var(--rewards-purple); }
+.wave-dark .tov-callout h4 { color: var(--rewards-purple); }
+.wave-dark .tov-callout p { color: var(--hf-muted); }
+.wave-purple .tov-callout { background: rgba(83,46,107,0.06); border-left-color: var(--rewards-purple); }
+.wave-purple .tov-callout h4 { color: var(--rewards-purple); }
+.wave-purple .tov-callout p { color: var(--hf-muted); }
+.wave-green .tov-callout { background: rgba(26,86,50,0.06); border-left-color: var(--hf-green); }
+.wave-green .tov-callout h4 { color: var(--hf-green); }
+.wave-green .tov-callout p { color: var(--hf-muted); }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<nav class="nav" id="mainNav">
+  <div class="nav-logo"><img src="https://media.hellofresh.com/w_256,q_100,f_auto,c_limit,fl_lossy/hellofresh_website/logo/Hello_Fresh_Lockup.png" alt="HelloFresh" style="height: 22px;"></div>
+  <div class="nav-links">
+    <a href="#strategy" data-section="strategy">Strategy</a>
+    <a href="#wave1" data-section="wave1">Wave 1</a>
+    <a href="#wave2" data-section="wave2">Wave 2</a>
+    <a href="#wave3" data-section="wave3">Wave 3</a>
+    <a href="#wave4" data-section="wave4">Wave 4</a>
+    <a href="#data" data-section="data">Data</a>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="hero">
+  <div class="hero-content">
+    <div style="display: inline-flex; align-items: center; gap: 16px; margin-bottom: 24px; animation: fadeInDown 0.8s ease 0.2s both;">
+      <img src="https://media.hellofresh.com/w_256,q_100,f_auto,c_limit,fl_lossy/hellofresh_website/logo/Hello_Fresh_Lockup.png" alt="HelloFresh" style="height: 24px; filter: brightness(0) invert(1);">
+      <div style="width: 1px; height: 20px; background: rgba(255,255,255,0.25);"></div>
+      <span style="font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--rewards-lilac);">Rewards 2.0 &bull; Phase 2: CRM Delivery Roadmap</span>
+    </div>
+    <h1>Points earned.<br><span class="accent-lilac">Perks claimed.</span> <span class="accent-lime">Dinners won.</span></h1>
+    <p class="hero-sub">Push first. Lock screen to reward store. Turning enrolled members into active redeemers, fast.</p>
+    <div class="hero-tags">
+      <div class="hero-tag">4 Waves</div>
+      <div class="hero-tag">10 Weeks</div>
+      <div class="hero-tag">Push First</div>
+      <div class="hero-tag">Points &rarr; Redemption</div>
+    </div>
+    <div style="font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.45); margin-top: 24px; letter-spacing: 1px; animation: fadeInUp 0.8s ease 1s both;">May 2026 &nbsp;|&nbsp; CRM &amp; Lifecycle Marketing</div>
+  </div>
+  <div class="scroll-cue">
+    <span>Scroll to explore</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- ===== STRATEGY OVERVIEW ===== -->
+<section class="strategy-section" id="strategy">
+  <div class="section-inner">
+    <div class="section-tag reveal">Delivery Principles</div>
+    <div class="section-title reveal">Push first.<br>Speed over perfection.</div>
+    <div class="section-desc reveal" style="max-width: none;">Phase 2 shifts from enrollment to activation. The priority: turn passive point earners into active redeemers using the fastest channels first.</div>
+
+    <div class="principle-grid">
+      <div class="principle-card reveal stagger-1">
+        <div class="principle-num">01</div>
+        <h3>Push First</h3>
+        <p>Lock screen before inbox. Minimal creative, maximum speed. Get campaigns live in days, not weeks. Meet the Efficient Inspired where they already are: glancing at their phone between tasks.</p>
+      </div>
+      <div class="principle-card reveal stagger-2">
+        <div class="principle-num">02</div>
+        <h3>Data Gated</h3>
+        <p>Each wave unlocks as Talon.one data pipelines come online. Wave 1 needs only points balance and opt-in status. Wave 2 needs goal progress per customer.</p>
+      </div>
+      <div class="principle-card reveal stagger-3">
+        <div class="principle-num">03</div>
+        <h3>Template Thinking</h3>
+        <p>Design once, populate many. Goal comms, new rewards alerts, and points summaries all use consistent variable structures so templates work the moment data flows.</p>
+      </div>
+    </div>
+
+    <div class="tov-callout reveal" style="margin-top: 32px;">
+      <h4>Tone of Voice Approach</h4>
+      <p>All copy in this roadmap follows the HelloFresh Global TOV: punchy bursts over paragraphs, memorable rhythm, food as the hero, and movement energy. Written for the Efficient Inspired audience: time-poor, autonomy-driven, and looking for the win in every weeknight.</p>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- ===== WAVE 1 ===== -->
+<section class="wave-section" id="wave1" style="background: var(--hf-cream);">
+  <div class="section-inner">
+    <div class="section-tag reveal" style="color: var(--hf-green);">Wave 1 &bull; Weeks 1 to 2</div>
+    <div class="wave-header reveal">
+      <div class="wave-num">01</div>
+      <div class="wave-meta">
+        <h2>Quick Wins: Push First</h2>
+        <p>Lock screen presence. Minimal creative. Maximum signal.</p>
+      </div>
+    </div>
+
+    <!-- Campaign 1: Use Your Points -->
+    <div class="campaign-card reveal">
+      <div class="campaign-header">
+        <div class="campaign-header-left">
+          <h3>Use Your Points</h3>
+          <p class="campaign-desc">The most direct driver of redemption. Turns passive earners into active redeemers. Sent to customers sitting on enough points to claim at least one reward.</p>
+        </div>
+        <div class="campaign-tags">
+          <span class="campaign-tag tag-push">Push</span>
+          <span class="campaign-tag tag-data">Points balance (Talon.one)</span>
+        </div>
+      </div>
+      <div class="campaign-body">
+        <div class="copy-grid">
+          <div class="copy-variant push-var">
+            <div class="copy-label push-label">Push A: Direct Nudge</div>
+            <div class="copy-field">
+              <div class="copy-field-name">Title</div>
+              <div class="copy-field-value">Points ready. Perks waiting. <span class="char-count">27/30</span></div>
+            </div>
+            <div class="copy-field">
+              <div class="copy-field-name">Body</div>
+              <div class="copy-field-value body">{{points_balance}} points in your balance. Free shipping, discounts, add-ons. All yours to claim. <span class="char-count">80/80</span></div>
+            </div>
+          </div>
+          <div class="copy-variant push-var">
+            <div class="copy-label push-label">Push B: Specific Reward</div>
+            <div class="copy-field">
+              <div class="copy-field-name">Title</div>
+              <div class="copy-field-value">You can grab {{reward_name}} <span class="char-count">~27/30</span></div>
+            </div>
+            <div class="copy-field">
+              <div class="copy-field-name">Body</div>
+              <div class="copy-field-value body">{{points_balance}} points = {{reward_name}}. Claim it before your next box lands. You earned it. <span class="char-count">~78/80</span></div>
+            </div>
+          </div>
+          <div class="copy-variant push-var">
+            <div class="copy-label push-label">Push C: Loss Aversion</div>
+            <div class="copy-field">
+              <div class="copy-field-name">Title</div>
+              <div class="copy-field-value">Points sitting unused <span class="char-count">20/30</span></div>
+            </div>
+            <div class="copy-field">
+              <div class="copy-field-name">Body</div>
+              <div class="copy-field-value body">{{points_balance}} points. Real rewards. Discounts, free shipping, tasty extras. Waiting on you. <span class="char-count">~80/80</span></div>
+            </div>
+          </div>
+          <div class="copy-variant push-var">
+            <div class="copy-label push-label">Push D: Celebration</div>
+            <div class="copy-field">
+              <div class="copy-field-name">Title</div>
+              <div class="copy-field-value">You cooked. You earned. <span class="char-count">22/30</span></div>
+            </div>
+            <div class="copy-field">
+              <div class="copy-field-name">Body</div>
+              <div class="copy-field-value body">{{points_balance}} points ready to spend. Pick your perk in the Reward Store. Dinner paid you back. <span class="char-count">~80/80</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="tov-callout">
+          <h4>TOV Note</h4>
+          <p>Burst rhythm: "Points ready. Perks waiting." mirrors "Steam rising. Spices sizzling." from the global TOV. Each variant leads with the tangible outcome, not the mechanic. The EI audience wants to feel that cooking dinner already earned them something.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Campaign 2: General Goal Awareness -->
+    <div class="campaign-card reveal">
+      <div class="campaign-header">
+        <div class="campaign-header-left">
+          <h3>General Goal Awareness</h3>
+          <p class="campaign-desc">Prompts customers to explore available goals. No per-customer data needed. Framed as discovery ("new ways to earn"), not progress tracking.</p>
+        </div>
+        <div class="campaign-tags">
+          <span class="campaign-tag tag-push">Push x4</span>
+          <span class="campaign-tag tag-data">Opted-in status only</span>
+        </div>
+      </div>
+      <div class="campaign-body">
+        <div class="copy-grid">
+          <div class="copy-variant push-var">
+            <div class="copy-label push-label">Push A: Discovery</div>
+            <div class="copy-field">
+              <div class="copy-field-name">Title</div>
+              <div class="copy-field-value">Goals are live <span class="char-count">13/30</span></div>
+            </div>
+            <div class="copy-field">
+              <div class="copy-field-name">Body</div>
+              <div class="copy-field-value body">Rate a recipe. Refer a friend. Order something new. Bonus points for the things you already do. <span class="char-count">80/80</span></div>
+            </div>
+          </div>
+          <div class="copy-variant push-var">
+            <div class="copy-label push-label">Push B: Movement Energy</div>
+            <div class="copy-field">
+              <div class="copy-field-name">Title</div>
+              <div class="copy-field-value">More ways to earn. Your call. <span class="char-count">28/30</span></div>
+            </div>
+            <div class="copy-field">
+              <div class="copy-field-name">Body</div>
+              <div class="copy-field-value body">Goals give you bonus points beyond ordering. Quick tasks, bigger balance, better rewards. <span class="char-count">79/80</span></div>
+            </div>
+          </div>
+          <div class="copy-variant push-var">
+            <div class="copy-label push-label">Push C: FOMO</div>
+            <div class="copy-field">
+              <div class="copy-field-name">Title</div>
+              <div class="copy-field-value">Your goals are waiting <span class="char-count">21/30</span></div>
+            </div>
+            <div class="copy-field">
+              <div class="copy-field-name">Body</div>
+              <div class="copy-field-value body">Members are stacking bonus points through goals. Explore yours and start earning more today. <span class="char-count">80/80</span></div>
+            </div>
+          </div>
+          <div class="copy-variant push-var">
+            <div class="copy-label push-label">Push D: Speed Framing</div>
+            <div class="copy-field">
+              <div class="copy-field-name">Title</div>
+              <div class="copy-field-value">Stack points faster <span class="char-count">18/30</span></div>
+            </div>
+            <div class="copy-field">
+              <div class="copy-field-name">Body</div>
+              <div class="copy-field-value body">Goals unlock bonus points in seconds. One tap, one rating, one referral. Rewards get closer. <span class="char-count">80/80</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Campaign 3: Specific Goals -->
+    <div class="campaign-card reveal">
+      <div class="campaign-header">
+        <div class="campaign-header-left">
+          <h3>Specific Goal Launch Comms</h3>
+          <p class="campaign-desc">Dedicated push for each goal at launch. Order X boxes, order a premium recipe, save to Cookbook, order an add-on. Each one feels achievable in a single session.</p>
+        </div>
+        <div class="campaign-tags">
+          <span class="campaign-tag tag-push">Push x4</span>
+          <span class="campaign-tag tag-data">Manual trigger</span>
+        </div>
+      </div>
+      <div class="campaign-body">
+        <div class="copy-grid">
+          <div class="copy-variant push-var">
+            <div class="copy-label push-label">Goal: Order X Boxes</div>
+            <div class="copy-field">
+              <div class="copy-field-name">Title</div>
+              <div class="copy-field-value">New goal: keep cooking <span class="char-count">22/30</span></div>
+            </div>
+            <div class="copy-field">
+              <div class="copy-field-name">Body</div>
+              <div class="copy-field-value body">Order {{x}} boxes in {{y}} weeks. Earn {{points}} bonus points. Your next delivery already counts. <span class="char-count">~80/80</span></div>
+            </div>
+          </div>
+          <div class="copy-variant push-var">
+            <div class="copy-label push-label">Goal: Premium Recipe</div>
+            <div class="copy-field">
+              <div class="copy-field-name">Title</div>
+              <div class="copy-field-value">Go premium. Get bonus points. <span class="char-count">26/30</span></div>
+            </div>
+            <div class="copy-field">
+              <div class="copy-field-name">Body</div>
+              <div class="copy-field-value body">Add a premium recipe to your next box. Earn {{points}} bonus points. Tasty upgrade, instant reward. <span class="char-count">~80/80</span></div>
+            </div>
+          </div>
+          <div class="copy-variant push-var">
+            <div class="copy-label push-label">Goal: Save to Cookbook</div>
+            <div class="copy-field">
+              <div class="copy-field-name">Title</div>
+              <div class="copy-field-value">Save a recipe. Earn points. <span class="char-count">26/30</span></div>
+            </div>
+            <div class="copy-field">
+              <div class="copy-field-name">Body</div>
+              <div class="copy-field-value body">One tap to your Cookbook. {{points}} bonus points, instantly. Save what you love, get rewarded. <span class="char-count">~79/80</span></div>
+            </div>
+          </div>
+          <div class="copy-variant push-var">
+            <div class="copy-label push-label">Goal: Order an Add-on</div>
+            <div class="copy-field">
+              <div class="copy-field-name">Title</div>
+              <div class="copy-field-value">Add more. Earn more. <span class="char-count">19/30</span></div>
+            </div>
+            <div class="copy-field">
+              <div class="copy-field-name">Body</div>
+              <div class="copy-field-value body">Throw an extra in your next box. Snacks, sides, desserts. {{points}} bonus points just for adding. <span class="char-count">~80/80</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Campaign 4: New Rewards (Push) -->
+    <div class="campaign-card reveal">
+      <div class="campaign-header">
+        <div class="campaign-header-left">
+          <h3>New Rewards Announcement</h3>
+          <p class="campaign-desc">Recurring template for when the Reward Store grows. Each addition is an editorial moment. Keeps the programme feeling alive and the store feeling fresh.</p>
+        </div>
+        <div class="campaign-tags">
+          <span class="campaign-tag tag-push">Push</span>
+          <span class="campaign-tag tag-data">Rewards catalogue (DWH / ad hoc)</span>
+        </div>
+      </div>
+      <div class="campaign-body">
+        <div class="copy-grid">
+          <div class="copy-variant push-var">
+            <div class="copy-label push-label">Push: New Drop</div>
+            <div class="copy-field">
+              <div class="copy-field-name">Title</div>
+              <div class="copy-field-value">New in the Reward Store <span class="char-count">23/30</span></div>
+            </div>
+            <div class="copy-field">
+              <div class="copy-field-name">Body</div>
+              <div class="copy-field-value body">{{reward_name}} just landed. Points ready? Claim yours before everyone else does. <span class="char-count">~74/80</span></div>
+            </div>
+          </div>
+          <div class="copy-variant push-var">
+            <div class="copy-label push-label">Push: Store Growth</div>
+            <div class="copy-field">
+              <div class="copy-field-name">Title</div>
+              <div class="copy-field-value">More perks. More choice. <span class="char-count">23/30</span></div>
+            </div>
+            <div class="copy-field">
+              <div class="copy-field-name">Body</div>
+              <div class="copy-field-value body">The Reward Store just got bigger. New ways to spend your points on things you actually want. <span class="char-count">80/80</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== WAVE 2 ===== -->
+<section class="wave-section wave-purple" id="wave2">
+  <div class="section-inner">
+    <div class="section-tag reveal">Wave 2 &bull; Weeks 3 to 5</div>
+    <div class="wave-header reveal">
+      <div class="wave-num" style="color: rgba(255,255,255,0.06);">02</div>
+      <div class="wave-meta">
+        <h2 style="color: white;">Creative Suite</h2>
+        <p>Richer formats. Email, embedded modules, and goal lifecycle comms.</p>
+      </div>
+    </div>
+
+    <!-- Campaign 1: Goal Suite -->
+    <div class="campaign-card reveal">
+      <div class="campaign-header">
+        <div class="campaign-header-left">
+          <h3>Goal Comms Suite</h3>
+          <p class="campaign-desc">Three connected templates: Activation, Mid-Progress, and Completion. Consistent variable structure (goal name, points value, progress). One creative workstream, three lifecycle moments.</p>
+        </div>
+        <div class="campaign-tags">
+          <span class="campaign-tag tag-push">Push</span>
+          <span class="campaign-tag tag-email">Email</span>
+          <span class="campaign-tag tag-data">Goal data (Talon.one)</span>
+        </div>
+      </div>
+      <div class="campaign-body">
+        <div class="copy-grid">
+          <div class="copy-variant push-var">
+            <div class="copy-label push-label">Push: Goal Activated</div>
+            <div class="copy-field">
+              <div class="copy-field-name">Title</div>
+              <div class="copy-field-value">New goal: {{goal_name}} <span class="char-count">~24/30</span></div>
+            </div>
+            <div class="copy-field">
+              <div class="copy-field-name">Body</div>
+              <div class="copy-field-value body">{{goal_action}} and earn {{points_value}} bonus points. Quick to start. Quicker to finish. Go. <span class="char-count">~78/80</span></div>
+            </div>
+          </div>
+          <div class="copy-variant push-var">
+            <div class="copy-label push-label">Push: Mid-Progress</div>
+            <div class="copy-field">
+              <div class="copy-field-name">Title</div>
+              <div class="copy-field-value">Halfway. Keep going. <span class="char-count">19/30</span></div>
+            </div>
+            <div class="copy-field">
+              <div class="copy-field-name">Body</div>
+              <div class="copy-field-value body">{{progress}} done on "{{goal_name}}". {{points_value}} points getting closer. Don't stop now. <span class="char-count">~76/80</span></div>
+            </div>
+          </div>
+          <div class="copy-variant push-var">
+            <div class="copy-label push-label">Push: Goal Complete</div>
+            <div class="copy-field">
+              <div class="copy-field-name">Title</div>
+              <div class="copy-field-value">Goal crushed. <span class="char-count">12/30</span></div>
+            </div>
+            <div class="copy-field">
+              <div class="copy-field-name">Body</div>
+              <div class="copy-field-value body">"{{goal_name}}" done. {{points_value}} points earned. New balance: {{balance}}. That's dinner paying off. <span class="char-count">~80/80</span></div>
+            </div>
+          </div>
+          <div class="copy-variant email-var">
+            <div class="copy-label email-label">Email: Goal Complete</div>
+            <div class="copy-field">
+              <div class="copy-field-name">Subject Line</div>
+              <div class="copy-field-value">Goal done. {{points_value}} points yours. <span class="char-count">~36/50</span></div>
+            </div>
+            <div class="copy-field">
+              <div class="copy-field-name">Headline</div>
+              <div class="copy-field-value">Nailed it.</div>
+            </div>
+            <div class="copy-field">
+              <div class="copy-field-name">Body</div>
+              <div class="copy-field-value body">You completed "{{goal_name}}" and earned {{points_value}} bonus points. Your balance is now {{balance}}. The Reward Store is stocked and your points are stacking. Time to pick your next perk.</div>
+            </div>
+            <div class="copy-field">
+              <div class="copy-field-name">CTA</div>
+              <div class="copy-field-value">See My Rewards <span class="char-count">14/17</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="tov-callout">
+          <h4>TOV Note</h4>
+          <p>"Goal crushed." and "Nailed it." follow the conviction principle. Short, declarative, celebratory. The EI audience wants accomplishment acknowledged fast, not buried in a paragraph. The mid-progress nudge uses goal gradient ("Don't stop now.") to match their driven personality.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Campaign 2: Monthly Points Summary -->
+    <div class="campaign-card reveal">
+      <div class="campaign-header">
+        <div class="campaign-header-left">
+          <h3>Monthly Points Summary</h3>
+          <p class="campaign-desc">Periodic snapshot of points earned, rewards redeemed, and current standing. Passive re-engagement for customers who are earning but not checking in.</p>
+        </div>
+        <div class="campaign-tags">
+          <span class="campaign-tag tag-email">Email</span>
+          <span class="campaign-tag tag-data">Points balance + history (Talon.one)</span>
+        </div>
+      </div>
+      <div class="campaign-body">
+        <div class="copy-grid">
+          <div class="copy-variant email-var">
+            <div class="copy-label email-label">Email: Monthly Summary</div>
+            <div class="copy-field">
+              <div class="copy-field-name">Subject Line</div>
+              <div class="copy-field-value">Your {{month}} in Rewards. The recap. <span class="char-count">~38/50</span></div>
+            </div>
+            <div class="copy-field">
+              <div class="copy-field-name">Headline</div>
+              <div class="copy-field-value">Cooked. Earned. Here's the proof.</div>
+            </div>
+            <div class="copy-field">
+              <div class="copy-field-name">Body Structure</div>
+              <div class="copy-field-value body">
+                Points earned this month: {{earned_this_month}}<br>
+                Total balance: {{total_balance}}<br>
+                Rewards claimed: {{rewards_redeemed}}<br>
+                Goals completed: {{goals_completed}}<br><br>
+                {{gap_points}} points to {{next_reward}}. Keep cooking. Keep earning.
+              </div>
+            </div>
+            <div class="copy-field">
+              <div class="copy-field-name">CTA</div>
+              <div class="copy-field-value">Visit Reward Store <span class="char-count">17/17</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Campaign 3: Points Balance Module -->
+    <div class="campaign-card reveal">
+      <div class="campaign-header">
+        <div class="campaign-header-left">
+          <h3>Points Balance Module</h3>
+          <p class="campaign-desc">Lightweight, reusable component. Drops into existing emails (delivery notifications, menu reminders, merchandising) without rebuilding. Informational only. No CTA ask.</p>
+        </div>
+        <div class="campaign-tags">
+          <span class="campaign-tag tag-embedded">Embedded</span>
+          <span class="campaign-tag tag-data">Points balance (Talon.one)</span>
+        </div>
+      </div>
+      <div class="campaign-body">
+        <div class="copy-grid">
+          <div class="copy-variant embedded-var">
+            <div class="copy-label embedded-label">Module: Balance Display</div>
+            <div class="copy-field">
+              <div class="copy-field-name">Module Copy</div>
+              <div class="copy-field-value">Your balance: {{points_balance}} points</div>
+            </div>
+            <div class="copy-field">
+              <div class="copy-field-name">Sub Copy</div>
+              <div class="copy-field-value body">{{gap_points}} points to your next reward</div>
+            </div>
+          </div>
+          <div class="copy-variant embedded-var">
+            <div class="copy-label embedded-label">Module: Goal Gradient</div>
+            <div class="copy-field">
+              <div class="copy-field-name">Module Copy</div>
+              <div class="copy-field-value">{{points_balance}} points and climbing</div>
+            </div>
+            <div class="copy-field">
+              <div class="copy-field-name">Sub Copy</div>
+              <div class="copy-field-value body">Nearly there. {{gap_points}} more to {{next_reward}}</div>
+            </div>
+          </div>
+        </div>
+        <div class="rec-callout">
+          <h4>Recommendation</h4>
+          <p>Deploy this in late Wave 1 or early Wave 2. Design once, drop everywhere. Gives passive points visibility across every high-frequency email without needing its own send. Maximum reach, minimal build.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Campaign 4: New Rewards (Email) -->
+    <div class="campaign-card reveal">
+      <div class="campaign-header">
+        <div class="campaign-header-left">
+          <h3>New Rewards Comms (Email)</h3>
+          <p class="campaign-desc">Email version of new reward announcements. Each Reward Store addition becomes an editorial moment. Re-engages members who haven't recently redeemed.</p>
+        </div>
+        <div class="campaign-tags">
+          <span class="campaign-tag tag-email">Email</span>
+          <span class="campaign-tag tag-data">Rewards catalogue (DWH)</span>
+        </div>
+      </div>
+      <div class="campaign-body">
+        <div class="copy-grid">
+          <div class="copy-variant email-var">
+            <div class="copy-label email-label">Email: New Reward Drop</div>
+            <div class="copy-field">
+              <div class="copy-field-name">Subject Line</div>
+              <div class="copy-field-value">New perk just dropped <span class="char-count">20/50</span></div>
+            </div>
+            <div class="copy-field">
+              <div class="copy-field-name">Headline</div>
+              <div class="copy-field-value">Fresh reward. Your points. Go.</div>
+            </div>
+            <div class="copy-field">
+              <div class="copy-field-name">Body</div>
+              <div class="copy-field-value body">{{reward_name}} is now in the Reward Store. With {{points_balance}} points, you're {{status}} to claim it. Don't let someone else grab yours first.</div>
+            </div>
+            <div class="copy-field">
+              <div class="copy-field-name">CTA</div>
+              <div class="copy-field-value">Claim It Now <span class="char-count">12/17</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== WAVE 3 ===== -->
+<section class="wave-section wave-green" id="wave3">
+  <div class="section-inner">
+    <div class="section-tag reveal">Wave 3 &bull; Weeks 4 to 5</div>
+    <div class="wave-header reveal">
+      <div class="wave-num" style="color: rgba(255,255,255,0.06);">03</div>
+      <div class="wave-meta">
+        <h2 style="color: white;">Existing Assets</h2>
+        <p>Deploy what's already built. Data is ready. Highest ease-to-impact ratio in the pipeline.</p>
+      </div>
+    </div>
+
+    <!-- Campaign 1: Reward Expiry -->
+    <div class="campaign-card reveal">
+      <div class="campaign-header">
+        <div class="campaign-header-left">
+          <h3>Reward Expiry Reminder</h3>
+          <p class="campaign-desc">Triggered when a claimed reward approaches expiry. Reduces breakage. Creates natural urgency without new creative. Data available today.</p>
+        </div>
+        <div class="campaign-tags">
+          <span class="campaign-tag tag-push">Push</span>
+          <span class="campaign-tag tag-email">Email</span>
+          <span class="campaign-tag tag-data">Benefits data (ready now)</span>
+        </div>
+      </div>
+      <div class="campaign-body">
+        <div class="copy-grid">
+          <div class="copy-variant push-var">
+            <div class="copy-label push-label">Push: Expiry Warning</div>
+            <div class="copy-field">
+              <div class="copy-field-name">Title</div>
+              <div class="copy-field-value">Use it or lose it <span class="char-count">17/30</span></div>
+            </div>
+            <div class="copy-field">
+              <div class="copy-field-name">Body</div>
+              <div class="copy-field-value body">Your {{reward_name}} expires in {{days}} days. Apply it to your next box. You earned this one. <span class="char-count">~80/80</span></div>
+            </div>
+          </div>
+          <div class="copy-variant email-var">
+            <div class="copy-label email-label">Email: Expiry Warning</div>
+            <div class="copy-field">
+              <div class="copy-field-name">Subject Line</div>
+              <div class="copy-field-value">Your reward expires in {{days}} days <span class="char-count">~36/50</span></div>
+            </div>
+            <div class="copy-field">
+              <div class="copy-field-name">Headline</div>
+              <div class="copy-field-value">Clock's ticking on your perk.</div>
+            </div>
+            <div class="copy-field">
+              <div class="copy-field-name">Body</div>
+              <div class="copy-field-value body">You claimed {{reward_name}} from the Reward Store, but it expires in {{days}} days. Apply it to your next order. You put in the effort. Now enjoy the payoff.</div>
+            </div>
+            <div class="copy-field">
+              <div class="copy-field-name">CTA</div>
+              <div class="copy-field-value">Use My Reward <span class="char-count">13/17</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="rec-callout">
+          <h4>Recommendation</h4>
+          <p>Highest ease-to-impact ratio in the entire pipeline. Data is ready today, the asset exists. Consider moving this to Week 4 if creative bandwidth allows. Run it parallel to Wave 1 pushes.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Campaign 2: Unpause -->
+    <div class="campaign-card reveal">
+      <div class="campaign-header">
+        <div class="campaign-header-left">
+          <h3>Unpause with Points Hook</h3>
+          <p class="campaign-desc">Targets paused loyalty members. Loss aversion framing: points are sitting there, rewards are within reach. Review integration with existing unpause journey before standalone deployment.</p>
+        </div>
+        <div class="campaign-tags">
+          <span class="campaign-tag tag-push">Push</span>
+          <span class="campaign-tag tag-email">Email</span>
+          <span class="campaign-tag tag-data">Opted-in + points balance</span>
+        </div>
+      </div>
+      <div class="campaign-body">
+        <div class="copy-grid">
+          <div class="copy-variant push-var">
+            <div class="copy-label push-label">Push: Unpause Nudge</div>
+            <div class="copy-field">
+              <div class="copy-field-name">Title</div>
+              <div class="copy-field-value">Your points are still here <span class="char-count">24/30</span></div>
+            </div>
+            <div class="copy-field">
+              <div class="copy-field-name">Body</div>
+              <div class="copy-field-value body">{{points_balance}} points. Still yours. Unpause and keep earning towards your next perk. Dinner misses you. <span class="char-count">~80/80</span></div>
+            </div>
+          </div>
+          <div class="copy-variant email-var">
+            <div class="copy-label email-label">Email: Unpause with Rewards</div>
+            <div class="copy-field">
+              <div class="copy-field-name">Subject Line</div>
+              <div class="copy-field-value">{{points_balance}} points, still waiting for you <span class="char-count">~38/50</span></div>
+            </div>
+            <div class="copy-field">
+              <div class="copy-field-name">Headline</div>
+              <div class="copy-field-value">Your points didn't pause.</div>
+            </div>
+            <div class="copy-field">
+              <div class="copy-field-name">Body</div>
+              <div class="copy-field-value body">Your balance: {{points_balance}} points. You're {{gap_points}} points from {{next_reward}}. Unpause your plan and keep stacking towards tasty perks. The Reward Store is waiting.</div>
+            </div>
+            <div class="copy-field">
+              <div class="copy-field-name">CTA</div>
+              <div class="copy-field-value">Unpause My Plan <span class="char-count">14/17</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="tov-callout">
+          <h4>TOV Note</h4>
+          <p>"Your points didn't pause." uses the human, not over polished principle. It's conversational, slightly cheeky, and reframes the situation. "Dinner misses you." in the push brings food back as the emotional anchor.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== WAVE 4 ===== -->
+<section class="wave-section wave-dark" id="wave4">
+  <div class="section-inner">
+    <div class="section-tag reveal" style="color: var(--rewards-purple);">Wave 4 &bull; Weeks 6 to 10+</div>
+    <div class="wave-header reveal">
+      <div class="wave-num" style="color: rgba(255,255,255,0.04);">04</div>
+      <div class="wave-meta">
+        <h2 style="color: white;">Journey Assets</h2>
+        <p>Full lifecycle. The long game. Retention loops and surprise-and-delight moments.</p>
+      </div>
+    </div>
+
+    <!-- Campaign 1: Reward Redemption -->
+    <div class="campaign-card reveal">
+      <div class="campaign-header">
+        <div class="campaign-header-left">
+          <h3>Reward Redemption Confirmation</h3>
+          <p class="campaign-desc">Triggered the moment a customer redeems. Confirms it, shows updated balance, nudges the next reward. Currently absent. The biggest gap vs. industry standard.</p>
+        </div>
+        <div class="campaign-tags">
+          <span class="campaign-tag tag-push">Push</span>
+          <span class="campaign-tag tag-email">Email</span>
+          <span class="campaign-tag tag-data">Redemption event (Talon.one)</span>
+        </div>
+      </div>
+      <div class="campaign-body">
+        <div class="copy-grid">
+          <div class="copy-variant push-var">
+            <div class="copy-label push-label">Push: Redemption Confirmed</div>
+            <div class="copy-field">
+              <div class="copy-field-name">Title</div>
+              <div class="copy-field-value">Perk claimed. Enjoy. <span class="char-count">19/30</span></div>
+            </div>
+            <div class="copy-field">
+              <div class="copy-field-name">Body</div>
+              <div class="copy-field-value body">{{reward_name}} is yours. Balance: {{new_balance}} points. Keep cooking. Next reward is closer than you think. <span class="char-count">~80/80</span></div>
+            </div>
+          </div>
+          <div class="copy-variant email-var">
+            <div class="copy-label email-label">Email: Redemption Celebration</div>
+            <div class="copy-field">
+              <div class="copy-field-name">Subject Line</div>
+              <div class="copy-field-value">{{reward_name}} claimed. That's the good stuff. <span class="char-count">~42/50</span></div>
+            </div>
+            <div class="copy-field">
+              <div class="copy-field-name">Headline</div>
+              <div class="copy-field-value">That's what loyalty tastes like.</div>
+            </div>
+            <div class="copy-field">
+              <div class="copy-field-name">Body</div>
+              <div class="copy-field-value body">You just redeemed {{reward_name}}. Your new balance: {{new_balance}} points. Next perk is only {{gap_points}} points away. Keep ordering. Keep completing goals. The rewards keep coming.</div>
+            </div>
+            <div class="copy-field">
+              <div class="copy-field-name">CTA</div>
+              <div class="copy-field-value">Explore Rewards <span class="char-count">15/17</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="rec-callout">
+          <h4>Priority: Brief Now</h4>
+          <p>This is the highest engagement moment in any loyalty lifecycle. Industry benchmarks flag its absence as the single biggest gap. Brief this alongside the Wave 2 Goal Suite to have it ready the moment redemption events fire from Talon.one.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Campaign 2: Tier Comms -->
+    <div class="campaign-card reveal">
+      <div class="campaign-header">
+        <div class="campaign-header-left">
+          <h3>Tier Progression Suite</h3>
+          <p class="campaign-desc">Three connected emails. Tier Unlock (recognition), Almost-to-Next-Tier (goal gradient), Tier Expiry (urgency within 52-week window). Brief as one creative workstream.</p>
+        </div>
+        <div class="campaign-tags">
+          <span class="campaign-tag tag-email">Email</span>
+          <span class="campaign-tag tag-push">Push</span>
+          <span class="campaign-tag tag-data">Tier status (Talon.one, requires tiers live)</span>
+        </div>
+      </div>
+      <div class="campaign-body">
+        <div class="copy-grid">
+          <div class="copy-variant push-var">
+            <div class="copy-label push-label">Push: Tier Unlock</div>
+            <div class="copy-field">
+              <div class="copy-field-name">Title</div>
+              <div class="copy-field-value">Welcome to {{tier_name}} <span class="char-count">~24/30</span></div>
+            </div>
+            <div class="copy-field">
+              <div class="copy-field-name">Body</div>
+              <div class="copy-field-value body">You earned this. New perks unlocked. Better rewards, bigger wins. See what {{tier_name}} gets you. <span class="char-count">~80/80</span></div>
+            </div>
+          </div>
+          <div class="copy-variant push-var">
+            <div class="copy-label push-label">Push: Almost Next Tier</div>
+            <div class="copy-field">
+              <div class="copy-field-name">Title</div>
+              <div class="copy-field-value">So close to {{next_tier}} <span class="char-count">~22/30</span></div>
+            </div>
+            <div class="copy-field">
+              <div class="copy-field-name">Body</div>
+              <div class="copy-field-value body">{{gap_points}} more points to {{next_tier}}. Better perks, bigger payoff. You're nearly there. Keep going. <span class="char-count">~80/80</span></div>
+            </div>
+          </div>
+          <div class="copy-variant email-var">
+            <div class="copy-label email-label">Email: Tier Unlock</div>
+            <div class="copy-field">
+              <div class="copy-field-name">Subject Line</div>
+              <div class="copy-field-value">You made it to {{tier_name}} <span class="char-count">~28/50</span></div>
+            </div>
+            <div class="copy-field">
+              <div class="copy-field-name">Headline</div>
+              <div class="copy-field-value">Cooked your way here. You earned this.</div>
+            </div>
+            <div class="copy-field">
+              <div class="copy-field-name">Body</div>
+              <div class="copy-field-value body">Your loyalty took you to {{tier_name}}. That means exclusive perks, better rewards, and recognition for the dinners you've made happen. Here's what's new at your tier.</div>
+            </div>
+            <div class="copy-field">
+              <div class="copy-field-name">CTA</div>
+              <div class="copy-field-value">See My Perks <span class="char-count">12/17</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Campaign 3: Anniversary/Birthday -->
+    <div class="campaign-card reveal">
+      <div class="campaign-header">
+        <div class="campaign-header-left">
+          <h3>Anniversary / Birthday Reward</h3>
+          <p class="campaign-desc">Surprise-and-delight. Birthday or programme join date. Industry data: highest open and click rates of any loyalty email type. Low cost, high retention.</p>
+        </div>
+        <div class="campaign-tags">
+          <span class="campaign-tag tag-email">Email</span>
+          <span class="campaign-tag tag-data">DOB / join date</span>
+        </div>
+      </div>
+      <div class="campaign-body">
+        <div class="copy-grid">
+          <div class="copy-variant email-var">
+            <div class="copy-label email-label">Email: Birthday Bonus</div>
+            <div class="copy-field">
+              <div class="copy-field-name">Subject Line</div>
+              <div class="copy-field-value">Birthday treat. On us. <span class="char-count">21/50</span></div>
+            </div>
+            <div class="copy-field">
+              <div class="copy-field-name">Headline</div>
+              <div class="copy-field-value">Your day. Your bonus points.</div>
+            </div>
+            <div class="copy-field">
+              <div class="copy-field-name">Body</div>
+              <div class="copy-field-value body">Happy birthday. We added {{bonus_points}} bonus points to your balance. No strings. No catch. Just a thank you for being part of HelloFresh Rewards. Enjoy tonight's dinner a little extra.</div>
+            </div>
+            <div class="copy-field">
+              <div class="copy-field-name">CTA</div>
+              <div class="copy-field-value">See My Balance <span class="char-count">14/17</span></div>
+            </div>
+          </div>
+          <div class="copy-variant email-var">
+            <div class="copy-label email-label">Email: 1-Year Anniversary</div>
+            <div class="copy-field">
+              <div class="copy-field-name">Subject Line</div>
+              <div class="copy-field-value">365 days of earning. Here's your recap. <span class="char-count">39/50</span></div>
+            </div>
+            <div class="copy-field">
+              <div class="copy-field-name">Headline</div>
+              <div class="copy-field-value">One year. Every dinner counted.</div>
+            </div>
+            <div class="copy-field">
+              <div class="copy-field-name">Body</div>
+              <div class="copy-field-value body">{{total_earned}} points earned. {{goals_count}} goals completed. {{rewards_count}} rewards claimed. That's a year of dinners working for you. Here's {{bonus_points}} bonus points to kick off year two.</div>
+            </div>
+            <div class="copy-field">
+              <div class="copy-field-name">CTA</div>
+              <div class="copy-field-value">Claim My Bonus <span class="char-count">14/17</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Campaign 4: Seasonal Multiplier -->
+    <div class="campaign-card reveal">
+      <div class="campaign-header">
+        <div class="campaign-header-left">
+          <h3>Seasonal Multiplier Comms</h3>
+          <p class="campaign-desc">Double-points or bonus goal mechanics around key seasonal moments. Proven driver of incremental orders in mature loyalty programmes. Requires product decision on multiplier structure.</p>
+        </div>
+        <div class="campaign-tags">
+          <span class="campaign-tag tag-push">Push</span>
+          <span class="campaign-tag tag-email">Email</span>
+          <span class="campaign-tag tag-data">Campaign trigger (product decision)</span>
+        </div>
+      </div>
+      <div class="campaign-body">
+        <div class="copy-grid">
+          <div class="copy-variant push-var">
+            <div class="copy-label push-label">Push: Double Points</div>
+            <div class="copy-field">
+              <div class="copy-field-name">Title</div>
+              <div class="copy-field-value">Double points. This week only. <span class="char-count">29/30</span></div>
+            </div>
+            <div class="copy-field">
+              <div class="copy-field-name">Body</div>
+              <div class="copy-field-value body">20 points per $1 on every order this {{season}}. Cook more. Stack faster. Rewards get real, real quick. <span class="char-count">~80/80</span></div>
+            </div>
+          </div>
+          <div class="copy-variant email-var">
+            <div class="copy-label email-label">Email: Seasonal Multiplier</div>
+            <div class="copy-field">
+              <div class="copy-field-name">Subject Line</div>
+              <div class="copy-field-value">Double points start now <span class="char-count">23/50</span></div>
+            </div>
+            <div class="copy-field">
+              <div class="copy-field-name">Headline</div>
+              <div class="copy-field-value">This {{season}}, every dinner earns twice.</div>
+            </div>
+            <div class="copy-field">
+              <div class="copy-field-name">Body</div>
+              <div class="copy-field-value body">For a limited time, every $1 earns 20 points instead of 10. Same dinners. Double the reward. Order this week and watch your balance climb twice as fast.</div>
+            </div>
+            <div class="copy-field">
+              <div class="copy-field-name">CTA</div>
+              <div class="copy-field-value">Start Earning <span class="char-count">13/17</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Campaign 5: Points Expiry -->
+    <div class="campaign-card reveal">
+      <div class="campaign-header">
+        <div class="campaign-header-left">
+          <h3>Points Expiry Warning</h3>
+          <p class="campaign-desc">Sent 30 days before points expire. Natural 12-month delay built in. Template should be ready before the first cohort approaches the window.</p>
+        </div>
+        <div class="campaign-tags">
+          <span class="campaign-tag tag-push">Push</span>
+          <span class="campaign-tag tag-email">Email</span>
+          <span class="campaign-tag tag-data">Points expiry date (Talon.one)</span>
+        </div>
+      </div>
+      <div class="campaign-body">
+        <div class="copy-grid">
+          <div class="copy-variant push-var">
+            <div class="copy-label push-label">Push: Points Expiry</div>
+            <div class="copy-field">
+              <div class="copy-field-name">Title</div>
+              <div class="copy-field-value">Points expiring soon <span class="char-count">20/30</span></div>
+            </div>
+            <div class="copy-field">
+              <div class="copy-field-name">Body</div>
+              <div class="copy-field-value body">{{expiring_points}} points expire in 30 days. Spend them now. Rewards don't wait. Neither should you. <span class="char-count">~80/80</span></div>
+            </div>
+          </div>
+          <div class="copy-variant email-var">
+            <div class="copy-label email-label">Email: Points Expiry</div>
+            <div class="copy-field">
+              <div class="copy-field-name">Subject Line</div>
+              <div class="copy-field-value">Your points expire in 30 days <span class="char-count">30/50</span></div>
+            </div>
+            <div class="copy-field">
+              <div class="copy-field-name">Headline</div>
+              <div class="copy-field-value">You earned them. Don't lose them.</div>
+            </div>
+            <div class="copy-field">
+              <div class="copy-field-name">Body</div>
+              <div class="copy-field-value body">{{expiring_points}} points expire in 30 days. That's real rewards on the line. Visit the Reward Store and spend them on add-ons, discounts, or free shipping. You put in the dinners. Now collect the payoff.</div>
+            </div>
+            <div class="copy-field">
+              <div class="copy-field-name">CTA</div>
+              <div class="copy-field-value">Redeem Points <span class="char-count">13/17</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== DATA DEPENDENCIES ===== -->
+<section class="data-section" id="data">
+  <div class="section-inner">
+    <div class="section-tag reveal">Data Dependencies</div>
+    <div class="section-title reveal">What we need.<br>Where it comes from.</div>
+    <div class="section-desc reveal" style="max-width: none;">Each wave is gated by data availability from Talon.one and the DWH. Here's what unlocks what.</div>
+
+    <div class="data-grid reveal">
+      <div class="data-card">
+        <h4>Points Balance</h4>
+        <p>Current total per customer. Required for: Use Your Points, Points Balance Module, Reward Redemption, Gap-to-Reward calculations.</p>
+        <div class="data-source">Source: Talon.one &bull; Unlocks: Wave 1+</div>
+      </div>
+      <div class="data-card">
+        <h4>Points Earned Per Action</h4>
+        <p>Breakdown by order and goal type per customer. Required for: Monthly Points Summary, Points Earned email, Loyalty Purchase attribution.</p>
+        <div class="data-source">Source: Talon.one &bull; Unlocks: Wave 2</div>
+      </div>
+      <div class="data-card">
+        <h4>Goal Progress Per Customer</h4>
+        <p>Which goals started, completed, or outstanding per customer. Required for: Goal comms suite (activation, mid-progress, completion).</p>
+        <div class="data-source">Source: Talon.one &bull; Unlocks: Wave 2</div>
+      </div>
+      <div class="data-card">
+        <h4>Goals &amp; Rewards Catalogue</h4>
+        <p>Active goals and available rewards at any point in time. Required for: Goal activation, New Rewards comms, Points Balance Module.</p>
+        <div class="data-source">Source: DWH &bull; Unlocks: Wave 1 (partial), Wave 2 (full)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<section class="footer-section" id="footer">
+  <div class="footer-inner">
+    <h2>Cook. Earn. Choose.<br><span class="accent-lime">Repeat.</span></h2>
+    <div class="footer-details">
+      <strong>Phase 2: CRM Delivery Roadmap</strong><br>
+      4 waves &nbsp;&bull;&nbsp; 10 weeks &nbsp;&bull;&nbsp; Push first &nbsp;&bull;&nbsp; Data gated
+    </div>
+    <div class="next-steps reveal">
+      <div class="next-step"><div class="next-step-num">1</div>Brief Wave 1 push copy and confirm Talon.one points balance pipeline</div>
+      <div class="next-step"><div class="next-step-num">2</div>Design Points Balance Module for embedded deployment across BAU emails</div>
+      <div class="next-step"><div class="next-step-num">3</div>Brief Reward Redemption email now (biggest industry gap, brief alongside Wave 2)</div>
+      <div class="next-step"><div class="next-step-num">4</div>Set data readiness gate: if goal data not flowing by Week 4, swap Wave 2 and 3</div>
+      <div class="next-step"><div class="next-step-num">5</div>Define variant testing success criteria for Wave 1 (CTR, redemption within 48h)</div>
+    </div>
+  </div>
+</section>
+
+<script>
+function updateProgress() {
+  const s = window.scrollY, d = document.documentElement.scrollHeight - window.innerHeight;
+  document.getElementById('progressBar').style.width = (s / d * 100) + '%';
+}
+function updateNav() {
+  const n = document.getElementById('mainNav');
+  n.classList.toggle('visible', window.scrollY > window.innerHeight * 0.5);
+}
+function updateActiveNav() {
+  const ss = document.querySelectorAll('section[id]'), ls = document.querySelectorAll('.nav-links a');
+  let c = '';
+  ss.forEach(s => { if (window.scrollY >= s.offsetTop - 200) c = s.id; });
+  ls.forEach(l => { l.classList.toggle('active', l.dataset.section === c); });
+}
+function revealOnScroll() {
+  document.querySelectorAll('.reveal, .reveal-left, .reveal-scale').forEach(el => {
+    if (el.getBoundingClientRect().top < window.innerHeight * 0.88) el.classList.add('visible');
+  });
+}
+window.addEventListener('scroll', () => { updateProgress(); updateNav(); updateActiveNav(); revealOnScroll(); }, { passive: true });
+revealOnScroll();
+</script>
+
+</body>
+</html>
