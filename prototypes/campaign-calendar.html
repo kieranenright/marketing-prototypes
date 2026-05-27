@@ -1386,16 +1386,6 @@ function logout() {
   document.getElementById('authScreen').style.display = 'flex';
 }
 
-// Check stored session
-(function() {
-  const stored = localStorage.getItem('hf-cal-user');
-  if (stored) {
-    currentUser = stored;
-    canEdit = EDITORS.includes(stored);
-    showApp();
-  }
-})();
-
 // ═══════════════════════════════════════
 // DATA
 // ═══════════════════════════════════════
@@ -1482,6 +1472,16 @@ if (state.initiatives.length === 0) {
 }
 
 if (!state.activeInitiative && state.initiatives.length) state.activeInitiative = state.initiatives[0].id;
+
+// Check stored session (must run after data init)
+(function() {
+  const stored = localStorage.getItem('hf-cal-user');
+  if (stored) {
+    currentUser = stored;
+    canEdit = EDITORS.includes(stored);
+    showApp();
+  }
+})();
 
 function gid() { return Date.now().toString(36) + Math.random().toString(36).substr(2,6); }
 function save() { state._v = CAL_VERSION; localStorage.setItem('hf-pmm-calendar', JSON.stringify(state)); }
