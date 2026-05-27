@@ -1,0 +1,54 @@
+{
+  "initiatives": [
+    {
+      "id": "init-summer",
+      "name": "Summer Campaign",
+      "poc": "Kieran",
+      "objective": "Drive reactivation and trial through seasonal summer messaging",
+      "entries": [
+        { "id": "s1", "date": "2026-06-02", "endDate": "2026-06-04", "text": "Launch email sequence", "channel": "crm", "subchannel": "Email", "owner": "Marina K", "status": "planned", "notes": "Active subs, all markets. 3 day drip." },
+        { "id": "s2", "date": "2026-06-02", "text": "Welcome push", "channel": "crm", "subchannel": "Push", "owner": "Marina K", "status": "planned", "notes": "New joiners W22" },
+        { "id": "s3", "date": "2026-06-03", "text": "Teaser reel", "channel": "organic", "subchannel": "IG", "owner": "Isabela", "status": "planned", "notes": "" },
+        { "id": "s4", "date": "2026-06-02", "endDate": "2026-06-15", "text": "Prospecting (broad)", "channel": "paid", "subchannel": "Meta", "owner": "Domi", "status": "planned", "notes": "3 creatives, broad targeting" },
+        { "id": "s5", "date": "2026-06-02", "endDate": "2026-06-08", "text": "Display retargeting", "channel": "paid", "subchannel": "Display", "owner": "Domi", "status": "planned", "notes": "" },
+        { "id": "s6", "date": "2026-06-05", "text": "A/B test subject lines", "channel": "crm", "subchannel": "Email", "owner": "Kieran", "status": "in-progress", "notes": "Urgency vs benefit framing" },
+        { "id": "s7", "date": "2026-06-05", "text": "TikTok reveal", "channel": "organic", "subchannel": "TikTok", "owner": "Isabela", "status": "planned", "notes": "" },
+        { "id": "s8", "date": "2026-06-05", "text": "Launch post", "channel": "organic", "subchannel": "FB", "owner": "Isabela", "status": "planned", "notes": "" },
+        { "id": "s9", "date": "2026-06-04", "endDate": "2026-06-06", "text": "Creator posts wave 1", "channel": "influencers", "subchannel": "Campaign", "owner": "Isabela", "status": "planned", "notes": "3 creators, IG + TikTok" },
+        { "id": "s10", "date": "2026-06-09", "text": "Reminder push", "channel": "crm", "subchannel": "Push", "owner": "Marina K", "status": "planned", "notes": "" },
+        { "id": "s11", "date": "2026-06-09", "text": "Promo inbox card", "channel": "crm", "subchannel": "Inbox", "owner": "Kieran", "status": "planned", "notes": "" },
+        { "id": "s12", "date": "2026-06-09", "endDate": "2026-06-11", "text": "Search brand terms", "channel": "paid", "subchannel": "Search", "owner": "Domi", "status": "planned", "notes": "" },
+        { "id": "s13", "date": "2026-06-10", "text": "LP goes live", "channel": "web", "subchannel": "Landing page", "owner": "Kieran", "status": "planned", "notes": "Dedicated summer landing page" },
+        { "id": "s14", "date": "2026-06-10", "text": "Carousel post", "channel": "organic", "subchannel": "IG", "owner": "Isabela", "status": "planned", "notes": "5 slides, recipe highlights" },
+        { "id": "s15", "date": "2026-06-08", "endDate": "2026-06-22", "text": "Box flyer", "channel": "print", "subchannel": "Flyer", "owner": "Marina Z", "status": "planned", "notes": "W23+W24 boxes, all markets" },
+        { "id": "s16", "date": "2026-06-12", "text": "Mid-month nudge", "channel": "crm", "subchannel": "Email", "owner": "Marina K", "status": "planned", "notes": "Churning segment" },
+        { "id": "s17", "date": "2026-06-15", "text": "Summer CPP live", "channel": "appstore", "subchannel": "Custom page", "owner": "Marina Z", "status": "in-progress", "notes": "Linked to Meta paid" },
+        { "id": "s18", "date": "2026-06-16", "endDate": "2026-06-30", "text": "Meta creative refresh", "channel": "paid", "subchannel": "Meta", "owner": "Domi", "status": "planned", "notes": "Swap in top performers from W1" },
+        { "id": "s19", "date": "2026-06-16", "text": "Homepage hero banner", "channel": "crm", "subchannel": "In-App", "owner": "Kieran", "status": "planned", "notes": "" },
+        { "id": "s20", "date": "2026-06-16", "text": "SMS blast", "channel": "crm", "subchannel": "SMS", "owner": "Marina K", "status": "planned", "notes": "US only, reactivation" },
+        { "id": "s21", "date": "2026-06-18", "endDate": "2026-06-20", "text": "Creator wave 2", "channel": "influencers", "subchannel": "Campaign", "owner": "Isabela", "status": "planned", "notes": "" },
+        { "id": "s22", "date": "2026-06-17", "text": "UGC repost", "channel": "organic", "subchannel": "IG", "owner": "Isabela", "status": "planned", "notes": "" },
+        { "id": "s23", "date": "2026-06-23", "text": "Final week email", "channel": "crm", "subchannel": "Email", "owner": "Marina K", "status": "planned", "notes": "Last call messaging" },
+        { "id": "s24", "date": "2026-06-01", "endDate": "2026-06-30", "text": "BAU optimisation", "channel": "appstore", "subchannel": "BAU", "owner": "Marina Z", "status": "live", "notes": "Seasonal screenshots" }
+      ]
+    },
+    {
+      "id": "init-loyalty",
+      "name": "Rewards Launch",
+      "poc": "Marina K",
+      "objective": "Launch Rewards 2.0 to active subscribers and drive first engagement",
+      "entries": [
+        { "id": "l1", "date": "2026-06-10", "endDate": "2026-06-12", "text": "Teaser email drip", "channel": "crm", "subchannel": "Email", "owner": "Marina K", "status": "planned", "notes": "Build anticipation" },
+        { "id": "l2", "date": "2026-06-12", "text": "Teaser push", "channel": "crm", "subchannel": "Push", "owner": "Marina K", "status": "planned", "notes": "" },
+        { "id": "l3", "date": "2026-06-16", "text": "Launch day email", "channel": "crm", "subchannel": "Email", "owner": "Marina K", "status": "planned", "notes": "All active subs" },
+        { "id": "l4", "date": "2026-06-16", "text": "Launch push", "channel": "crm", "subchannel": "Push", "owner": "Marina K", "status": "planned", "notes": "" },
+        { "id": "l5", "date": "2026-06-16", "text": "Full-screen in-app modal", "channel": "crm", "subchannel": "In-App", "owner": "Kieran", "status": "planned", "notes": "Takeover on app open" },
+        { "id": "l6", "date": "2026-06-16", "text": "Inbox card", "channel": "crm", "subchannel": "Inbox", "owner": "Kieran", "status": "planned", "notes": "" },
+        { "id": "l7", "date": "2026-06-17", "text": "IG announcement", "channel": "organic", "subchannel": "IG", "owner": "Isabela", "status": "planned", "notes": "" },
+        { "id": "l8", "date": "2026-06-17", "endDate": "2026-06-24", "text": "Meta awareness burst", "channel": "paid", "subchannel": "Meta", "owner": "Domi", "status": "planned", "notes": "" },
+        { "id": "l9", "date": "2026-06-20", "text": "Reminder email (non-engagers)", "channel": "crm", "subchannel": "Email", "owner": "Marina K", "status": "planned", "notes": "" },
+        { "id": "l10", "date": "2026-06-23", "text": "First mission push", "channel": "crm", "subchannel": "Push", "owner": "Marina K", "status": "planned", "notes": "" }
+      ]
+    }
+  ]
+}
