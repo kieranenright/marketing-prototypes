@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Campaign Calendar | Product Marketing</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --brand-green: #067A46;
+  --brand-green-dark: #055933;
+  --brand-lime: #96DC14;
+  --bg-cream: #FAF8F3;
+  --white: #FFFFFF;
+  --text-primary: #1D1D1D;
+  --text-secondary: #6B6B6B;
+  --text-tertiary: #9A9A9A;
+  --border: #E8E4DE;
+  --border-light: #F0EDE8;
+  --radius: 12px;
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.05);
+
+  /* Channel colours */
+  --ch-crm: #4A90D9;
+  --ch-crm-bg: #EBF3FC;
+  --ch-appstore: #9B59B6;
+  --ch-appstore-bg: #F5EEF8;
+  --ch-web: #16A085;
+  --ch-web-bg: #E8F6F3;
+  --ch-paid: #E67E22;
+  --ch-paid-bg: #FDF2E6;
+  --ch-influencers: #E74C3C;
+  --ch-influencers-bg: #FDECEB;
+  --ch-organic: #27AE60;
+  --ch-organic-bg: #E8F8EF;
+  --ch-print: #8E6B3E;
+  --ch-print-bg: #F9F3EB;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg-cream);
+  color: var(--text-primary);
+  min-height: 100vh;
+}
+
+/* Top bar */
+.top-bar {
+  background: white;
+  border-bottom: 1px solid var(--border);
+  padding: 16px 32px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.top-bar-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.top-bar h1 {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.top-bar-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.month-nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.month-nav button {
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--border);
+  background: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+
+.month-nav button:hover {
+  background: var(--brand-green);
+  color: white;
+  border-color: var(--brand-green);
+}
+
+.month-nav .current-month {
+  font-size: 15px;
+  font-weight: 600;
+  min-width: 160px;
+  text-align: center;
+}
+
+.btn {
+  padding: 7px 14px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: all 0.15s;
+  font-family: var(--font-body);
+}
+
+.btn-primary { background: var(--brand-green); color: white; }
+.btn-primary:hover { background: var(--brand-green-dark); }
+.btn-outline { background: white; border: 1px solid var(--border); color: var(--text-primary); }
+.btn-outline:hover { border-color: var(--brand-green); color: var(--brand-green); }
+.btn-sm { padding: 5px 10px; font-size: 11px; }
+.btn-danger { background: #FEE2E2; color: #DC2626; border: none; }
+.btn-danger:hover { background: #FECACA; }
+
+/* Initiative tabs */
+.initiative-bar {
+  background: white;
+  border-bottom: 1px solid var(--border);
+  padding: 10px 32px;
+}
+
+.initiative-bar-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.initiative-tabs {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.initiative-tab {
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  border: 1px solid transparent;
+  transition: all 0.15s;
+  color: var(--text-secondary);
+}
+
+.initiative-tab:hover { background: var(--bg-cream); }
+.initiative-tab.active { background: var(--brand-green); color: white; }
+.initiative-tab.add-tab { color: var(--text-tertiary); border: 1px dashed var(--border); }
+.initiative-tab.add-tab:hover { border-color: var(--brand-green); color: var(--brand-green); }
+
+.initiative-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-left: auto;
+  font-size: 12px;
+}
+
+.meta-field {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.meta-field label {
+  font-weight: 600;
+  color: var(--text-tertiary);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.meta-field input {
+  border: none;
+  border-bottom: 1px solid var(--border);
+  padding: 2px 6px;
+  font-size: 12px;
+  font-family: var(--font-body);
+  background: transparent;
+  width: 120px;
+}
+
+.meta-field input:focus { outline: none; border-color: var(--brand-green); }
+.meta-field input.wide { width: 200px; }
+
+/* Legend */
+.legend-bar {
+  padding: 10px 32px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+}
+
+/* Calendar grid */
+.calendar-wrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 32px 32px;
+}
+
+.calendar {
+  background: white;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+
+.calendar-header {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  background: #F8F6F2;
+  border-bottom: 1px solid var(--border);
+}
+
+.calendar-header div {
+  padding: 10px;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.calendar-body {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.calendar-day {
+  min-height: 140px;
+  border-right: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border-light);
+  padding: 6px;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.calendar-day:nth-child(7n) { border-right: none; }
+.calendar-day:hover { background: #FCFBF9; }
+.calendar-day.other-month { background: #FCFBF9; }
+.calendar-day.other-month .day-number { color: var(--text-tertiary); }
+.calendar-day.today { background: #F0FDF4; }
+.calendar-day.weekend { background: #FAFAF8; }
+
+.day-number {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.today .day-number .day-num {
+  background: var(--brand-green);
+  color: white;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+}
+
+.add-btn {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  border: none;
+  background: transparent;
+  color: var(--text-tertiary);
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: all 0.15s;
+}
+
+.calendar-day:hover .add-btn { opacity: 1; }
+.add-btn:hover { background: var(--brand-green); color: white; }
+
+/* Campaign entries in cells */
+.day-entries {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.entry-chip {
+  font-size: 10px;
+  padding: 3px 6px;
+  border-radius: 4px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  transition: transform 0.1s;
+  overflow: hidden;
+}
+
+.entry-chip:hover { transform: scale(1.02); box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+
+.entry-chip .chip-channel {
+  font-size: 8px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.2px;
+  opacity: 0.7;
+  flex-shrink: 0;
+}
+
+.entry-chip .chip-sub {
+  font-size: 8px;
+  opacity: 0.6;
+  flex-shrink: 0;
+}
+
+.entry-chip .chip-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.entry-chip[data-channel="crm"] { background: var(--ch-crm-bg); color: var(--ch-crm); border-left: 3px solid var(--ch-crm); }
+.entry-chip[data-channel="appstore"] { background: var(--ch-appstore-bg); color: var(--ch-appstore); border-left: 3px solid var(--ch-appstore); }
+.entry-chip[data-channel="web"] { background: var(--ch-web-bg); color: var(--ch-web); border-left: 3px solid var(--ch-web); }
+.entry-chip[data-channel="paid"] { background: var(--ch-paid-bg); color: var(--ch-paid); border-left: 3px solid var(--ch-paid); }
+.entry-chip[data-channel="influencers"] { background: var(--ch-influencers-bg); color: var(--ch-influencers); border-left: 3px solid var(--ch-influencers); }
+.entry-chip[data-channel="organic"] { background: var(--ch-organic-bg); color: var(--ch-organic); border-left: 3px solid var(--ch-organic); }
+.entry-chip[data-channel="print"] { background: var(--ch-print-bg); color: var(--ch-print); border-left: 3px solid var(--ch-print); }
+
+.more-indicator {
+  font-size: 10px;
+  color: var(--text-tertiary);
+  padding: 2px 4px;
+  cursor: pointer;
+  font-weight: 500;
+  text-align: center;
+}
+
+.more-indicator:hover { color: var(--brand-green); }
+
+/* Day detail panel */
+.detail-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.4);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(2px);
+}
+
+.detail-overlay.active { display: flex; }
+
+.detail-panel {
+  background: white;
+  border-radius: 14px;
+  padding: 24px;
+  width: 480px;
+  max-width: 90vw;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+}
+
+.detail-panel h2 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.detail-subtitle {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+}
+
+.detail-group {
+  margin-bottom: 12px;
+}
+
+.detail-group-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  padding: 3px 8px;
+  border-radius: 3px;
+  display: inline-block;
+  margin-bottom: 6px;
+}
+
+.detail-entry {
+  padding: 10px 12px;
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: border 0.15s;
+}
+
+.detail-entry:hover { border-color: var(--brand-green); }
+
+.detail-entry-info h4 { font-size: 13px; font-weight: 600; }
+.detail-entry-info p { font-size: 11px; color: var(--text-secondary); margin-top: 1px; }
+.detail-entry-meta { font-size: 10px; color: var(--text-tertiary); text-align: right; }
+
+.detail-empty {
+  text-align: center;
+  padding: 24px;
+  color: var(--text-tertiary);
+  font-size: 13px;
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.4);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1100;
+  backdrop-filter: blur(2px);
+}
+
+.modal-overlay.active { display: flex; }
+
+.modal {
+  background: white;
+  border-radius: 14px;
+  padding: 24px;
+  width: 420px;
+  max-width: 90vw;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+}
+
+.modal h2 { font-size: 16px; font-weight: 700; margin-bottom: 16px; }
+
+.form-group { margin-bottom: 12px; }
+.form-group label {
+  display: block;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 13px;
+  font-family: var(--font-body);
+  transition: border 0.15s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus { outline: none; border-color: var(--brand-green); }
+.form-group textarea { resize: vertical; min-height: 50px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+/* Filter bar */
+.filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-left: auto;
+}
+
+.filter-bar label {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  font-weight: 500;
+}
+
+.filter-bar select {
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-size: 11px;
+  font-family: var(--font-body);
+  background: white;
+}
+
+/* Export section */
+.export-bar {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 32px 32px;
+}
+
+.export-card {
+  background: white;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.export-card p { font-size: 12px; color: var(--text-secondary); }
+.export-actions { display: flex; gap: 6px; }
+
+@media (max-width: 900px) {
+  .calendar-day { min-height: 100px; }
+  .entry-chip { font-size: 9px; padding: 2px 4px; }
+  .top-bar, .initiative-bar, .calendar-wrapper, .export-bar { padding-left: 16px; padding-right: 16px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Top bar -->
+<div class="top-bar">
+  <div class="top-bar-inner">
+    <h1>Campaign Calendar</h1>
+    <div class="top-bar-controls">
+      <div class="month-nav">
+        <button onclick="changeMonth(-1)">&#8249;</button>
+        <span class="current-month" id="currentMonth"></span>
+        <button onclick="changeMonth(1)">&#8250;</button>
+      </div>
+      <button class="btn btn-outline btn-sm" onclick="goToToday()">Today</button>
+    </div>
+  </div>
+</div>
+
+<!-- Initiative bar -->
+<div class="initiative-bar">
+  <div class="initiative-bar-inner">
+    <div class="initiative-tabs" id="initiativeTabs"></div>
+    <div class="initiative-meta">
+      <div class="meta-field">
+        <label>POC</label>
+        <input type="text" id="metaPoc" placeholder="Owner" onchange="updateMeta()">
+      </div>
+      <div class="meta-field">
+        <label>Objective</label>
+        <input type="text" id="metaObjective" class="wide" placeholder="Main objective" onchange="updateMeta()">
+      </div>
+      <button class="btn btn-outline btn-sm" onclick="editInitiative()">Edit</button>
+      <button class="btn btn-sm btn-danger" onclick="deleteInitiative()">Delete</button>
+    </div>
+  </div>
+</div>
+
+<!-- Legend + filters -->
+<div class="legend-bar">
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:var(--ch-crm)"></div>CRM</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--ch-appstore)"></div>App Store</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--ch-web)"></div>Web</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--ch-paid)"></div>Paid Social</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--ch-influencers)"></div>Influencers</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--ch-organic)"></div>Organic Social</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--ch-print)"></div>Inbox Print</div>
+    <div class="filter-bar">
+      <label>Channel:</label>
+      <select id="filterChannel" onchange="renderCalendar()">
+        <option value="all">All</option>
+        <option value="crm">CRM</option>
+        <option value="appstore">App Store</option>
+        <option value="web">Web</option>
+        <option value="paid">Paid Social</option>
+        <option value="influencers">Influencers</option>
+        <option value="organic">Organic Social</option>
+        <option value="print">Inbox Print</option>
+      </select>
+      <label>Owner:</label>
+      <select id="filterOwner" onchange="renderCalendar()">
+        <option value="all">All</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<!-- Calendar grid -->
+<div class="calendar-wrapper">
+  <div class="calendar">
+    <div class="calendar-header">
+      <div>Mon</div>
+      <div>Tue</div>
+      <div>Wed</div>
+      <div>Thu</div>
+      <div>Fri</div>
+      <div>Sat</div>
+      <div>Sun</div>
+    </div>
+    <div class="calendar-body" id="calendarBody"></div>
+  </div>
+</div>
+
+<!-- Export -->
+<div class="export-bar">
+  <div class="export-card">
+    <p>Export/import JSON to share with teammates. Data merges on import (no duplicates).</p>
+    <div class="export-actions">
+      <button class="btn btn-outline btn-sm" onclick="exportData()">Export JSON</button>
+      <button class="btn btn-outline btn-sm" onclick="document.getElementById('importFile').click()">Import JSON</button>
+      <input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(event)">
+      <button class="btn btn-outline btn-sm" onclick="exportCSV()">Export CSV</button>
+    </div>
+  </div>
+</div>
+
+<!-- Day Detail Panel -->
+<div class="detail-overlay" id="detailOverlay" onclick="if(event.target===this)closeDetail()">
+  <div class="detail-panel">
+    <h2 id="detailTitle"></h2>
+    <p class="detail-subtitle" id="detailSubtitle"></p>
+    <div id="detailContent"></div>
+    <div style="margin-top:14px; text-align:right;">
+      <button class="btn btn-primary btn-sm" id="detailAddBtn">+ Add entry</button>
+    </div>
+  </div>
+</div>
+
+<!-- Entry Modal -->
+<div class="modal-overlay" id="entryModal" onclick="if(event.target===this)closeEntryModal()">
+  <div class="modal">
+    <h2 id="entryModalTitle">Add Entry</h2>
+    <form id="entryForm" onsubmit="saveEntry(event)">
+      <input type="hidden" id="entryId">
+      <input type="hidden" id="entryDate">
+      <div class="form-group">
+        <label>Campaign / Activity</label>
+        <input type="text" id="entryText" placeholder="e.g. Launch email, A/B test, Hero banner" required>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Channel</label>
+          <select id="entryChannel" required onchange="updateSubchannelOptions()">
+            <option value="">Select...</option>
+            <option value="crm">CRM</option>
+            <option value="appstore">App Store</option>
+            <option value="web">Web</option>
+            <option value="paid">Paid Social</option>
+            <option value="influencers">Influencers</option>
+            <option value="organic">Organic Social</option>
+            <option value="print">Inbox Print</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Type</label>
+          <select id="entrySubchannel" required>
+            <option value="">Select channel first</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Owner</label>
+          <input type="text" id="entryOwner" placeholder="Name">
+        </div>
+        <div class="form-group">
+          <label>Status</label>
+          <select id="entryStatus">
+            <option value="planned">Planned</option>
+            <option value="in-progress">In Progress</option>
+            <option value="live">Live</option>
+            <option value="completed">Completed</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Notes (optional)</label>
+        <textarea id="entryNotes" placeholder="Audience, segment, brief link..."></textarea>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-danger btn-sm" id="entryDeleteBtn" style="display:none" onclick="deleteEntry()">Delete</button>
+        <div style="display:flex;gap:6px;margin-left:auto;">
+          <button type="button" class="btn btn-outline btn-sm" onclick="closeEntryModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary btn-sm">Save</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Initiative Modal -->
+<div class="modal-overlay" id="initModal" onclick="if(event.target===this)closeInitModal()">
+  <div class="modal">
+    <h2 id="initModalTitle">New Initiative</h2>
+    <form id="initForm" onsubmit="saveInitiative(event)">
+      <input type="hidden" id="initEditId">
+      <div class="form-group">
+        <label>Initiative Name</label>
+        <input type="text" id="initName" placeholder="e.g. Summer Campaign, Loyalty Launch" required>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>POC (PMM)</label>
+          <input type="text" id="initPoc" placeholder="Owner">
+        </div>
+        <div class="form-group">
+          <label>Main Objective</label>
+          <input type="text" id="initObjective" placeholder="Goal">
+        </div>
+      </div>
+      <div class="modal-actions">
+        <div></div>
+        <div style="display:flex;gap:6px;">
+          <button type="button" class="btn btn-outline btn-sm" onclick="closeInitModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary btn-sm">Save</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+// =====================
+// DATA
+// =====================
+
+const CHANNELS = {
+  crm: { name: 'CRM', subs: ['Email', 'Push', 'Inbox', 'In-App', 'SMS', 'Other'] },
+  appstore: { name: 'App Store', subs: ['BAU', 'Custom page'] },
+  web: { name: 'Web', subs: ['Homepage', 'Landing page', 'Other'] },
+  paid: { name: 'Paid Social', subs: ['Meta', 'Display', 'Search', 'Other'] },
+  influencers: { name: 'Influencers', subs: ['Campaign', 'Other'] },
+  organic: { name: 'Organic Social', subs: ['FB', 'IG', 'TikTok', 'Twitter'] },
+  print: { name: 'Inbox Print', subs: ['Flyer', 'Magazine', 'Newsletter'] }
+};
+
+let state = JSON.parse(localStorage.getItem('hf-campaign-cal-v3') || 'null') || {
+  initiatives: [],
+  activeInitiative: null
+};
+
+let currentDate = new Date(2026, 5, 1); // Start on June 2026 to show examples
+
+// Ensure defaults with sample data
+if (state.initiatives.length === 0) {
+  const sampleEntries = [
+    // CRM entries
+    { id: 'ex1', date: '2026-06-02', text: 'Launch email', channel: 'crm', subchannel: 'Email', owner: 'Sarah', status: 'planned', notes: 'Active subs, all markets' },
+    { id: 'ex2', date: '2026-06-02', text: 'Welcome push', channel: 'crm', subchannel: 'Push', owner: 'Sarah', status: 'planned', notes: 'New joiners W22' },
+    { id: 'ex3', date: '2026-06-05', text: 'A/B test subject lines', channel: 'crm', subchannel: 'Email', owner: 'Kieran', status: 'in-progress', notes: 'Testing urgency vs benefit framing' },
+    { id: 'ex4', date: '2026-06-09', text: 'Reminder push', channel: 'crm', subchannel: 'Push', owner: 'Sarah', status: 'planned', notes: '' },
+    { id: 'ex5', date: '2026-06-09', text: 'Promo inbox card', channel: 'crm', subchannel: 'Inbox', owner: 'Kieran', status: 'planned', notes: '' },
+    { id: 'ex6', date: '2026-06-12', text: 'Mid-month nudge', channel: 'crm', subchannel: 'Email', owner: 'Sarah', status: 'planned', notes: 'Churning segment' },
+    { id: 'ex7', date: '2026-06-16', text: 'Homepage hero banner', channel: 'crm', subchannel: 'In-App', owner: 'Kieran', status: 'planned', notes: '' },
+    { id: 'ex8', date: '2026-06-16', text: 'SMS blast', channel: 'crm', subchannel: 'SMS', owner: 'Sarah', status: 'planned', notes: 'US only, reactivation' },
+    { id: 'ex9', date: '2026-06-23', text: 'Final week email', channel: 'crm', subchannel: 'Email', owner: 'Sarah', status: 'planned', notes: '' },
+    // App Store
+    { id: 'ex10', date: '2026-06-01', text: 'BAU refresh', channel: 'appstore', subchannel: 'BAU', owner: 'Tom', status: 'live', notes: 'Seasonal screenshots' },
+    { id: 'ex11', date: '2026-06-15', text: 'Summer CPP', channel: 'appstore', subchannel: 'Custom page', owner: 'Tom', status: 'in-progress', notes: 'Linked to Meta paid campaign' },
+    // Web
+    { id: 'ex12', date: '2026-06-02', text: 'Hero banner update', channel: 'web', subchannel: 'Homepage', owner: 'Kieran', status: 'planned', notes: '' },
+    { id: 'ex13', date: '2026-06-10', text: 'LP live', channel: 'web', subchannel: 'Landing page', owner: 'Kieran', status: 'planned', notes: 'Dedicated summer landing page' },
+    // Paid Social
+    { id: 'ex14', date: '2026-06-02', text: 'Prospecting launch', channel: 'paid', subchannel: 'Meta', owner: 'Alex', status: 'planned', notes: 'Broad targeting, 3 creatives' },
+    { id: 'ex15', date: '2026-06-02', text: 'Display retargeting', channel: 'paid', subchannel: 'Display', owner: 'Alex', status: 'planned', notes: '' },
+    { id: 'ex16', date: '2026-06-09', text: 'Search brand terms', channel: 'paid', subchannel: 'Search', owner: 'Alex', status: 'planned', notes: '' },
+    { id: 'ex17', date: '2026-06-16', text: 'Meta creative refresh', channel: 'paid', subchannel: 'Meta', owner: 'Alex', status: 'planned', notes: 'Swap in top performer from W1' },
+    // Influencers
+    { id: 'ex18', date: '2026-06-04', text: 'Creator posts live', channel: 'influencers', subchannel: 'Campaign', owner: 'Jess', status: 'planned', notes: '3 creators, IG + TikTok' },
+    { id: 'ex19', date: '2026-06-18', text: 'Creator wave 2', channel: 'influencers', subchannel: 'Campaign', owner: 'Jess', status: 'planned', notes: '' },
+    // Organic Social
+    { id: 'ex20', date: '2026-06-03', text: 'Teaser reel', channel: 'organic', subchannel: 'IG', owner: 'Jess', status: 'planned', notes: '' },
+    { id: 'ex21', date: '2026-06-05', text: 'Launch post', channel: 'organic', subchannel: 'FB', owner: 'Jess', status: 'planned', notes: '' },
+    { id: 'ex22', date: '2026-06-05', text: 'TikTok reveal', channel: 'organic', subchannel: 'TikTok', owner: 'Jess', status: 'planned', notes: 'Hook: "summer just got tastier"' },
+    { id: 'ex23', date: '2026-06-10', text: 'Carousel post', channel: 'organic', subchannel: 'IG', owner: 'Jess', status: 'planned', notes: '5 slides, recipe highlights' },
+    { id: 'ex24', date: '2026-06-17', text: 'UGC repost', channel: 'organic', subchannel: 'IG', owner: 'Jess', status: 'planned', notes: '' },
+    { id: 'ex25', date: '2026-06-20', text: 'Twitter thread', channel: 'organic', subchannel: 'Twitter', owner: 'Jess', status: 'planned', notes: '' },
+    // Print
+    { id: 'ex26', date: '2026-06-08', text: 'Box flyer drop', channel: 'print', subchannel: 'Flyer', owner: 'Tom', status: 'planned', notes: 'W23 boxes, all markets' },
+    { id: 'ex27', date: '2026-06-22', text: 'Newsletter feature', channel: 'print', subchannel: 'Newsletter', owner: 'Tom', status: 'planned', notes: '' },
+  ];
+
+  state.initiatives.push({
+    id: 'init-summer',
+    name: 'Summer Campaign',
+    poc: 'Kieran',
+    objective: 'Drive reactivation and trial through seasonal summer messaging',
+    entries: sampleEntries,
+    updatedAt: new Date().toISOString()
+  });
+
+  state.initiatives.push({
+    id: 'init-loyalty',
+    name: 'Rewards Launch',
+    poc: 'Sarah',
+    objective: 'Launch Rewards 2.0 to active subscribers and drive first engagement',
+    entries: [
+      { id: 'lx1', date: '2026-06-10', text: 'Teaser email', channel: 'crm', subchannel: 'Email', owner: 'Sarah', status: 'planned', notes: 'Build anticipation' },
+      { id: 'lx2', date: '2026-06-12', text: 'Teaser push', channel: 'crm', subchannel: 'Push', owner: 'Sarah', status: 'planned', notes: '' },
+      { id: 'lx3', date: '2026-06-16', text: 'Launch day email', channel: 'crm', subchannel: 'Email', owner: 'Sarah', status: 'planned', notes: 'All active subs' },
+      { id: 'lx4', date: '2026-06-16', text: 'Launch push', channel: 'crm', subchannel: 'Push', owner: 'Sarah', status: 'planned', notes: '' },
+      { id: 'lx5', date: '2026-06-16', text: 'In-app modal', channel: 'crm', subchannel: 'In-App', owner: 'Kieran', status: 'planned', notes: 'Full-screen takeover' },
+      { id: 'lx6', date: '2026-06-16', text: 'Inbox card', channel: 'crm', subchannel: 'Inbox', owner: 'Kieran', status: 'planned', notes: '' },
+      { id: 'lx7', date: '2026-06-17', text: 'IG announcement', channel: 'organic', subchannel: 'IG', owner: 'Jess', status: 'planned', notes: '' },
+      { id: 'lx8', date: '2026-06-17', text: 'Meta awareness', channel: 'paid', subchannel: 'Meta', owner: 'Alex', status: 'planned', notes: '' },
+      { id: 'lx9', date: '2026-06-20', text: 'Reminder email', channel: 'crm', subchannel: 'Email', owner: 'Sarah', status: 'planned', notes: 'Non-engagers from launch' },
+      { id: 'lx10', date: '2026-06-23', text: 'Engagement push', channel: 'crm', subchannel: 'Push', owner: 'Sarah', status: 'planned', notes: 'First mission prompt' },
+    ],
+    updatedAt: new Date().toISOString()
+  });
+
+  state.activeInitiative = 'init-summer';
+  save();
+}
+if (!state.activeInitiative) state.activeInitiative = state.initiatives[0].id;
+
+function gid() { return Date.now().toString(36) + Math.random().toString(36).substr(2, 6); }
+function save() { localStorage.setItem('hf-campaign-cal-v3', JSON.stringify(state)); }
+function getInit() { return state.initiatives.find(i => i.id === state.activeInitiative); }
+
+// =====================
+// RENDER
+// =====================
+
+function render() {
+  renderTabs();
+  renderMeta();
+  renderCalendar();
+  updateOwnerFilter();
+}
+
+function renderTabs() {
+  const el = document.getElementById('initiativeTabs');
+  el.innerHTML = '';
+  state.initiatives.forEach(init => {
+    const tab = document.createElement('div');
+    tab.className = 'initiative-tab' + (init.id === state.activeInitiative ? ' active' : '');
+    tab.textContent = init.name;
+    tab.onclick = () => { state.activeInitiative = init.id; save(); render(); };
+    el.appendChild(tab);
+  });
+  const add = document.createElement('div');
+  add.className = 'initiative-tab add-tab';
+  add.textContent = '+ Add';
+  add.onclick = () => openInitModal();
+  el.appendChild(add);
+}
+
+function renderMeta() {
+  const init = getInit();
+  if (!init) return;
+  document.getElementById('metaPoc').value = init.poc || '';
+  document.getElementById('metaObjective').value = init.objective || '';
+}
+
+function updateOwnerFilter() {
+  const owners = [...new Set(state.initiatives.flatMap(i => (i.entries||[]).map(e => e.owner).filter(Boolean)))];
+  const sel = document.getElementById('filterOwner');
+  const val = sel.value;
+  sel.innerHTML = '<option value="all">All</option>';
+  owners.sort().forEach(o => { sel.innerHTML += `<option value="${o}">${o}</option>`; });
+  sel.value = val || 'all';
+}
+
+function renderCalendar() {
+  const year = currentDate.getFullYear();
+  const month = currentDate.getMonth();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const daysInPrevMonth = new Date(year, month, 0).getDate();
+  const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  document.getElementById('currentMonth').textContent = `${monthNames[month]} ${year}`;
+
+  let startDay = new Date(year, month, 1).getDay() - 1;
+  if (startDay < 0) startDay = 6;
+
+  const totalCells = Math.ceil((startDay + daysInMonth) / 7) * 7;
+  const today = new Date();
+  const body = document.getElementById('calendarBody');
+  body.innerHTML = '';
+
+  const init = getInit();
+  const channelFilter = document.getElementById('filterChannel').value;
+  const ownerFilter = document.getElementById('filterOwner').value;
+
+  for (let i = 0; i < totalCells; i++) {
+    let day, cellMonth, cellYear, isOther = false;
+
+    if (i < startDay) {
+      day = daysInPrevMonth - startDay + i + 1;
+      cellMonth = month - 1; cellYear = year;
+      if (cellMonth < 0) { cellMonth = 11; cellYear--; }
+      isOther = true;
+    } else if (i >= startDay + daysInMonth) {
+      day = i - startDay - daysInMonth + 1;
+      cellMonth = month + 1; cellYear = year;
+      if (cellMonth > 11) { cellMonth = 0; cellYear++; }
+      isOther = true;
+    } else {
+      day = i - startDay + 1;
+      cellMonth = month; cellYear = year;
+    }
+
+    const dateStr = `${cellYear}-${String(cellMonth+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+    const dateObj = new Date(cellYear, cellMonth, day);
+    const isToday = day === today.getDate() && cellMonth === today.getMonth() && cellYear === today.getFullYear();
+    const isWeekend = dateObj.getDay() === 0 || dateObj.getDay() === 6;
+
+    const cell = document.createElement('div');
+    cell.className = 'calendar-day' + (isOther ? ' other-month' : '') + (isToday ? ' today' : '') + (isWeekend && !isOther ? ' weekend' : '');
+
+    // Day number
+    const dayNum = document.createElement('div');
+    dayNum.className = 'day-number';
+    dayNum.innerHTML = `<span class="day-num">${day}</span><button class="add-btn" onclick="event.stopPropagation();openEntryModal('${dateStr}')">+</button>`;
+    cell.appendChild(dayNum);
+
+    // Entries
+    let entries = (init && init.entries || []).filter(e => e.date === dateStr);
+    if (channelFilter !== 'all') entries = entries.filter(e => e.channel === channelFilter);
+    if (ownerFilter !== 'all') entries = entries.filter(e => e.owner === ownerFilter);
+    entries.sort((a,b) => {
+      const order = Object.keys(CHANNELS);
+      return order.indexOf(a.channel) - order.indexOf(b.channel);
+    });
+
+    const entriesDiv = document.createElement('div');
+    entriesDiv.className = 'day-entries';
+
+    const maxVisible = 4;
+    entries.slice(0, maxVisible).forEach(entry => {
+      const chip = document.createElement('div');
+      chip.className = 'entry-chip';
+      chip.setAttribute('data-channel', entry.channel);
+      const chName = CHANNELS[entry.channel] ? CHANNELS[entry.channel].name : entry.channel;
+      chip.innerHTML = `<span class="chip-channel">${chName}</span><span class="chip-sub">${entry.subchannel}</span><span class="chip-text">${entry.text}</span>`;
+      chip.onclick = (ev) => { ev.stopPropagation(); openEditEntry(entry.id); };
+      entriesDiv.appendChild(chip);
+    });
+
+    if (entries.length > maxVisible) {
+      const more = document.createElement('div');
+      more.className = 'more-indicator';
+      more.textContent = `+${entries.length - maxVisible} more`;
+      more.onclick = (ev) => { ev.stopPropagation(); openDetail(dateStr); };
+      entriesDiv.appendChild(more);
+    }
+
+    cell.appendChild(entriesDiv);
+    cell.onclick = () => openDetail(dateStr);
+    body.appendChild(cell);
+  }
+}
+
+// =====================
+// NAVIGATION
+// =====================
+
+function changeMonth(d) { currentDate.setMonth(currentDate.getMonth() + d); renderCalendar(); }
+function goToToday() { currentDate = new Date(); renderCalendar(); }
+
+// =====================
+// DAY DETAIL
+// =====================
+
+function openDetail(dateStr) {
+  const date = new Date(dateStr + 'T00:00:00');
+  document.getElementById('detailTitle').textContent = date.toLocaleDateString('en-GB', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+
+  const init = getInit();
+  let entries = (init && init.entries || []).filter(e => e.date === dateStr);
+  const channelFilter = document.getElementById('filterChannel').value;
+  const ownerFilter = document.getElementById('filterOwner').value;
+  if (channelFilter !== 'all') entries = entries.filter(e => e.channel === channelFilter);
+  if (ownerFilter !== 'all') entries = entries.filter(e => e.owner === ownerFilter);
+
+  document.getElementById('detailSubtitle').textContent = `${entries.length} entr${entries.length !== 1 ? 'ies' : 'y'}`;
+
+  const content = document.getElementById('detailContent');
+  if (entries.length === 0) {
+    content.innerHTML = '<div class="detail-empty">No entries for this day. Click below to add one.</div>';
+  } else {
+    // Group by channel
+    const grouped = {};
+    entries.forEach(e => { if (!grouped[e.channel]) grouped[e.channel] = []; grouped[e.channel].push(e); });
+
+    let html = '';
+    Object.keys(grouped).forEach(ch => {
+      const chData = CHANNELS[ch];
+      html += `<div class="detail-group">`;
+      html += `<div class="detail-group-label" style="background:var(--ch-${ch}-bg);color:var(--ch-${ch})">${chData ? chData.name : ch}</div>`;
+      grouped[ch].forEach(e => {
+        html += `<div class="detail-entry" onclick="closeDetail();openEditEntry('${e.id}')">
+          <div class="detail-entry-info">
+            <h4>${e.subchannel}: ${e.text}</h4>
+            <p>${e.notes || 'No notes'}</p>
+          </div>
+          <div class="detail-entry-meta">
+            <div>${e.owner || ''}</div>
+            <div>${(e.status||'planned').replace('-',' ')}</div>
+          </div>
+        </div>`;
+      });
+      html += `</div>`;
+    });
+    content.innerHTML = html;
+  }
+
+  document.getElementById('detailAddBtn').onclick = () => { closeDetail(); openEntryModal(dateStr); };
+  document.getElementById('detailOverlay').classList.add('active');
+}
+
+function closeDetail() { document.getElementById('detailOverlay').classList.remove('active'); }
+
+// =====================
+// ENTRY MODAL
+// =====================
+
+function updateSubchannelOptions() {
+  const ch = document.getElementById('entryChannel').value;
+  const sel = document.getElementById('entrySubchannel');
+  sel.innerHTML = '';
+  if (ch && CHANNELS[ch]) {
+    CHANNELS[ch].subs.forEach(s => { sel.innerHTML += `<option value="${s}">${s}</option>`; });
+  } else {
+    sel.innerHTML = '<option value="">Select channel first</option>';
+  }
+}
+
+function openEntryModal(dateStr) {
+  document.getElementById('entryModalTitle').textContent = 'Add Entry';
+  document.getElementById('entryForm').reset();
+  document.getElementById('entryId').value = '';
+  document.getElementById('entryDate').value = dateStr;
+  document.getElementById('entryDeleteBtn').style.display = 'none';
+  document.getElementById('entrySubchannel').innerHTML = '<option value="">Select channel first</option>';
+
+  const lastOwner = localStorage.getItem('hf-cal-owner');
+  if (lastOwner) document.getElementById('entryOwner').value = lastOwner;
+
+  document.getElementById('entryModal').classList.add('active');
+  document.getElementById('entryText').focus();
+}
+
+function openEditEntry(id) {
+  const init = getInit();
+  const entry = (init.entries||[]).find(e => e.id === id);
+  if (!entry) return;
+
+  document.getElementById('entryModalTitle').textContent = 'Edit Entry';
+  document.getElementById('entryId').value = entry.id;
+  document.getElementById('entryDate').value = entry.date;
+  document.getElementById('entryText').value = entry.text;
+  document.getElementById('entryChannel').value = entry.channel;
+  updateSubchannelOptions();
+  document.getElementById('entrySubchannel').value = entry.subchannel;
+  document.getElementById('entryOwner').value = entry.owner || '';
+  document.getElementById('entryStatus').value = entry.status || 'planned';
+  document.getElementById('entryNotes').value = entry.notes || '';
+  document.getElementById('entryDeleteBtn').style.display = 'block';
+
+  document.getElementById('entryModal').classList.add('active');
+}
+
+function closeEntryModal() { document.getElementById('entryModal').classList.remove('active'); }
+
+function saveEntry(e) {
+  e.preventDefault();
+  const init = getInit();
+  if (!init) return;
+
+  const id = document.getElementById('entryId').value;
+  const entry = {
+    id: id || gid(),
+    date: document.getElementById('entryDate').value,
+    text: document.getElementById('entryText').value.trim(),
+    channel: document.getElementById('entryChannel').value,
+    subchannel: document.getElementById('entrySubchannel').value,
+    owner: document.getElementById('entryOwner').value.trim(),
+    status: document.getElementById('entryStatus').value,
+    notes: document.getElementById('entryNotes').value.trim()
+  };
+
+  if (entry.owner) localStorage.setItem('hf-cal-owner', entry.owner);
+
+  if (id) {
+    const idx = init.entries.findIndex(e => e.id === id);
+    if (idx !== -1) init.entries[idx] = entry;
+  } else {
+    if (!init.entries) init.entries = [];
+    init.entries.push(entry);
+  }
+
+  init.updatedAt = new Date().toISOString();
+  save();
+  closeEntryModal();
+  render();
+}
+
+function deleteEntry() {
+  const id = document.getElementById('entryId').value;
+  if (!id || !confirm('Remove this entry?')) return;
+  const init = getInit();
+  init.entries = init.entries.filter(e => e.id !== id);
+  init.updatedAt = new Date().toISOString();
+  save(); closeEntryModal(); render();
+}
+
+// =====================
+// INITIATIVE
+// =====================
+
+function openInitModal(editId) {
+  document.getElementById('initEditId').value = editId || '';
+  if (editId) {
+    const init = state.initiatives.find(i => i.id === editId);
+    document.getElementById('initModalTitle').textContent = 'Edit Initiative';
+    document.getElementById('initName').value = init.name;
+    document.getElementById('initPoc').value = init.poc || '';
+    document.getElementById('initObjective').value = init.objective || '';
+  } else {
+    document.getElementById('initModalTitle').textContent = 'New Initiative';
+    document.getElementById('initForm').reset();
+  }
+  document.getElementById('initModal').classList.add('active');
+  document.getElementById('initName').focus();
+}
+
+function closeInitModal() { document.getElementById('initModal').classList.remove('active'); }
+
+function saveInitiative(e) {
+  e.preventDefault();
+  const editId = document.getElementById('initEditId').value;
+  const name = document.getElementById('initName').value.trim();
+  const poc = document.getElementById('initPoc').value.trim();
+  const objective = document.getElementById('initObjective').value.trim();
+
+  if (editId) {
+    const init = state.initiatives.find(i => i.id === editId);
+    init.name = name; init.poc = poc; init.objective = objective;
+    init.updatedAt = new Date().toISOString();
+  } else {
+    const newInit = { id: gid(), name, poc, objective, entries: [], updatedAt: new Date().toISOString() };
+    state.initiatives.push(newInit);
+    state.activeInitiative = newInit.id;
+  }
+  save(); closeInitModal(); render();
+}
+
+function editInitiative() { openInitModal(state.activeInitiative); }
+
+function deleteInitiative() {
+  if (state.initiatives.length <= 1) { alert('Need at least one initiative.'); return; }
+  if (!confirm('Delete this initiative and all entries?')) return;
+  state.initiatives = state.initiatives.filter(i => i.id !== state.activeInitiative);
+  state.activeInitiative = state.initiatives[0].id;
+  save(); render();
+}
+
+function updateMeta() {
+  const init = getInit();
+  if (!init) return;
+  init.poc = document.getElementById('metaPoc').value.trim();
+  init.objective = document.getElementById('metaObjective').value.trim();
+  init.updatedAt = new Date().toISOString();
+  save();
+}
+
+// =====================
+// EXPORT / IMPORT
+// =====================
+
+function exportData() {
+  const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+  a.download = `campaign-calendar-${new Date().toISOString().split('T')[0]}.json`;
+  a.click();
+}
+
+function importData(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    try {
+      const imported = JSON.parse(e.target.result);
+      if (!imported.initiatives) throw new Error();
+      const existingIds = new Set(state.initiatives.map(i => i.id));
+      let added = 0;
+      imported.initiatives.forEach(init => {
+        if (!existingIds.has(init.id)) {
+          state.initiatives.push(init);
+          added++;
+        } else {
+          const existing = state.initiatives.find(i => i.id === init.id);
+          const eIds = new Set((existing.entries||[]).map(e => e.id));
+          (init.entries||[]).forEach(entry => { if (!eIds.has(entry.id)) { existing.entries.push(entry); added++; } });
+        }
+      });
+      save(); render();
+      alert(`Imported. ${added} new item${added!==1?'s':''} added.`);
+    } catch { alert('Invalid file format.'); }
+  };
+  reader.readAsText(file);
+  event.target.value = '';
+}
+
+function exportCSV() {
+  const headers = ['Initiative','Date','Channel','Type','Activity','Owner','Status','Notes'];
+  const rows = [];
+  state.initiatives.forEach(init => {
+    (init.entries||[]).forEach(e => {
+      rows.push([`"${init.name}"`, e.date, CHANNELS[e.channel]?.name||e.channel, e.subchannel, `"${(e.text||'').replace(/"/g,'""')}"`, e.owner||'', e.status||'planned', `"${(e.notes||'').replace(/"/g,'""')}"`]);
+    });
+  });
+  rows.sort((a,b) => a[1].localeCompare(b[1]));
+  const csv = [headers.join(','), ...rows.map(r=>r.join(','))].join('\n');
+  const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
+  a.download = `campaign-calendar-${new Date().toISOString().split('T')[0]}.csv`;
+  a.click();
+}
+
+// =====================
+// KEYBOARD
+// =====================
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { closeEntryModal(); closeInitModal(); closeDetail(); }
+});
+
+// =====================
+// INIT
+// =====================
+
+render();
+</script>
+</body>
+</html>
