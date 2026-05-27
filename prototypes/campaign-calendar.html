@@ -920,6 +920,158 @@ body {
   transform: translateX(-50%) translateY(0);
 }
 
+/* Edit modal */
+.entry-form-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(29,29,29,0.5);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1100;
+  backdrop-filter: blur(3px);
+  animation: fadeIn 0.15s ease;
+}
+.entry-form-overlay.active { display: flex; }
+
+.entry-form-panel {
+  background: white;
+  border-radius: 16px;
+  padding: 28px;
+  width: 480px;
+  max-width: 92vw;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-modal);
+  animation: slideUp 0.2s ease;
+}
+
+.entry-form-panel h2 {
+  font-family: var(--font-headline);
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+
+.form-row {
+  margin-bottom: 14px;
+}
+
+.form-row label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.form-row input,
+.form-row select,
+.form-row textarea {
+  width: 100%;
+  padding: 9px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-family: var(--font-body);
+  transition: border-color 0.15s;
+}
+
+.form-row input:focus,
+.form-row select:focus,
+.form-row textarea:focus {
+  outline: none;
+  border-color: var(--brand-green);
+}
+
+.form-row textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+.form-row-inline {
+  display: flex;
+  gap: 10px;
+}
+
+.form-row-inline .form-row {
+  flex: 1;
+}
+
+.form-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-light);
+}
+
+.btn-danger {
+  background: #DC2626;
+  color: white;
+}
+.btn-danger:hover { background: #B91C1C; transform: translateY(-1px); }
+
+.detail-add-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 14px;
+  padding: 7px 14px;
+  background: var(--brand-green);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: var(--font-body);
+  transition: all 0.15s;
+}
+.detail-add-btn:hover { background: var(--brand-green-dark); transform: translateY(-1px); }
+
+.detail-entry-actions {
+  display: flex;
+  gap: 4px;
+  margin-left: 8px;
+  flex-shrink: 0;
+}
+
+.detail-entry-actions button {
+  padding: 4px 8px;
+  font-size: 10px;
+  font-weight: 600;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: white;
+  cursor: pointer;
+  font-family: var(--font-body);
+  transition: all 0.15s;
+}
+
+.detail-entry-actions button:hover {
+  border-color: var(--brand-green);
+  color: var(--brand-green);
+}
+
+.detail-entry-actions button.del-btn:hover {
+  border-color: #DC2626;
+  color: #DC2626;
+}
+
+.editor-indicator {
+  font-size: 9px;
+  background: var(--brand-green-light);
+  color: var(--brand-green);
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-weight: 600;
+  margin-left: 8px;
+}
+
 /* Loading state */
 .loading-state {
   text-align: center;
@@ -979,8 +1131,9 @@ body {
     <div class="auth-error" id="authError"></div>
     <p class="auth-note">Your email is stored locally to remember your session.</p>
     <div class="auth-editors-info">
-      <strong>Team</strong>
+      <strong>Editors</strong>
       Marina Kramer, Domitille Park, Kieran Enright, Marina Zinakova, Isabela Martin
+      <br><span style="opacity:0.7">These accounts can add, edit, and delete entries.</span>
     </div>
   </div>
 </div>
@@ -1093,6 +1246,76 @@ body {
   </div>
 </div>
 
+<!-- Entry Form Modal -->
+<div class="entry-form-overlay" id="entryFormOverlay" onclick="if(event.target===this)closeEntryForm()">
+  <div class="entry-form-panel">
+    <h2 id="entryFormTitle">Add Entry</h2>
+    <form id="entryForm" onsubmit="saveEntry(event)">
+      <input type="hidden" id="entryFormId">
+      <input type="hidden" id="entryFormInitId">
+      <div class="form-row">
+        <label>Activity name</label>
+        <input type="text" id="entryText" placeholder="e.g. Summer Campaign Email" required>
+      </div>
+      <div class="form-row-inline">
+        <div class="form-row">
+          <label>Channel</label>
+          <select id="entryChannel" onchange="updateSubchannels()" required>
+            <option value="">Select channel</option>
+            <option value="crm">CRM</option>
+            <option value="appstore">App Store</option>
+            <option value="web">Web</option>
+            <option value="paid">Paid Social</option>
+            <option value="influencers">Influencers</option>
+            <option value="organic">Organic Social</option>
+            <option value="print">Inbox Print</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label>Type</label>
+          <select id="entrySubchannel" required>
+            <option value="">Select type</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row-inline">
+        <div class="form-row">
+          <label>Start date</label>
+          <input type="date" id="entryDate" required>
+        </div>
+        <div class="form-row">
+          <label>End date (optional)</label>
+          <input type="date" id="entryEndDate">
+        </div>
+      </div>
+      <div class="form-row-inline">
+        <div class="form-row">
+          <label>Owner</label>
+          <input type="text" id="entryOwner" placeholder="e.g. Kieran">
+        </div>
+        <div class="form-row">
+          <label>Status</label>
+          <select id="entryStatus">
+            <option value="planned">Planned</option>
+            <option value="in-progress">In Progress</option>
+            <option value="live">Live</option>
+            <option value="completed">Completed</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <label>Notes</label>
+        <textarea id="entryNotes" placeholder="Optional notes..."></textarea>
+      </div>
+      <div class="form-actions">
+        <button type="button" class="btn btn-outline" onclick="closeEntryForm()">Cancel</button>
+        <button type="button" class="btn btn-danger" id="entryDeleteBtn" onclick="deleteEntry()" style="display:none">Delete</button>
+        <button type="submit" class="btn btn-primary">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+
 <!-- Keyboard hints -->
 <div class="keyboard-hint" id="keyboardHint">
   <span><kbd>&#8592;</kbd><kbd>&#8594;</kbd> Navigate months</span>
@@ -1110,6 +1333,18 @@ body {
 // ═══════════════════════════════════════
 
 let currentUser = null;
+
+const EDITORS = [
+  'marina.kramer@hellofresh.com',
+  'domitille.park@hellofresh.com',
+  'kieran.enright@hellofresh.com',
+  'marina.zinakova@hellofresh.com',
+  'isabela.martin@hellofresh.com'
+];
+
+function isEditor() {
+  return currentUser && EDITORS.includes(currentUser);
+}
 
 function handleAuth(e) {
   e.preventDefault();
@@ -1136,7 +1371,8 @@ function showApp() {
   const badge = document.getElementById('userBadge');
   const name = currentUser.split('@')[0].split('.').map(n => n.charAt(0).toUpperCase() + n.slice(1)).join(' ');
   const initials = name.split(' ').map(n => n[0]).join('');
-  badge.innerHTML = `<div class="user-badge"><div class="avatar">${initials}</div><span class="editor-badge">${name}</span></div>`;
+  const editorTag = isEditor() ? '<span class="editor-indicator">Editor</span>' : '';
+  badge.innerHTML = `<div class="user-badge"><div class="avatar">${initials}</div><span class="editor-badge">${name}</span>${editorTag}</div>`;
 
   loadData();
 }
@@ -1171,6 +1407,22 @@ async function loadData() {
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const data = await response.json();
     state.initiatives = data.initiatives || [];
+
+    // Merge any localStorage edits on top
+    const stored = localStorage.getItem('hf-cal-edits');
+    if (stored) {
+      try {
+        const edits = JSON.parse(stored);
+        // edits is an object keyed by initiative id, each value is the entries array
+        Object.keys(edits).forEach(initId => {
+          const init = state.initiatives.find(i => i.id === initId);
+          if (init) {
+            init.entries = edits[initId];
+          }
+        });
+      } catch(e) { console.warn('Failed to parse stored edits:', e); }
+    }
+
     state.activeInitiative = state.initiatives.length ? state.initiatives[0].id : null;
     render();
   } catch (err) {
@@ -1183,6 +1435,15 @@ async function loadData() {
       </div>
     `;
   }
+}
+
+function persistEdits() {
+  // Save current entries for all initiatives to localStorage
+  const edits = {};
+  state.initiatives.forEach(init => {
+    edits[init.id] = init.entries || [];
+  });
+  localStorage.setItem('hf-cal-edits', JSON.stringify(edits));
 }
 
 function getInit() {
@@ -1451,7 +1712,10 @@ function goToToday() { currentDate = new Date(); renderCalendar(); }
 // DAY DETAIL
 // ═══════════════════════════════════════
 
+let currentDetailDate = null;
+
 function openDetail(dateStr) {
+  currentDetailDate = dateStr;
   const date = new Date(dateStr+'T00:00:00');
   document.getElementById('detailTitle').textContent = date.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
 
@@ -1471,26 +1735,34 @@ function openDetail(dateStr) {
   document.getElementById('detailSubtitle').textContent = `${dayEntries.length} entr${dayEntries.length!==1?'ies':'y'}`;
 
   const content = document.getElementById('detailContent');
+  let html = '';
+
+  // Add entry button for editors
+  if (isEditor() && state.activeInitiative !== '__all__') {
+    html += `<button class="detail-add-btn" onclick="openEntryForm('${dateStr}')">+ Add entry</button>`;
+  }
+
   if (!dayEntries.length) {
-    content.innerHTML = '<div class="detail-empty">No entries for this day.</div>';
+    html += '<div class="detail-empty">No entries for this day.</div>';
   } else {
     const grouped = {};
     dayEntries.forEach(e => { if(!grouped[e.channel]) grouped[e.channel]=[]; grouped[e.channel].push(e); });
-    let html = '';
     Object.keys(grouped).forEach(ch => {
       html += `<div class="detail-group"><div class="detail-group-label" style="background:var(--ch-${ch}-bg);color:var(--ch-${ch})">${CHANNELS[ch]?.name||ch}</div>`;
       grouped[ch].forEach(e => {
         const spanInfo = (e.endDate && e.endDate !== e.date) ? ` (${formatDate(e.date)} to ${formatDate(e.endDate)})` : '';
         const initLabel = e._initName ? ` <span style="font-size:9px;color:var(--text-tertiary)">[${e._initName}]</span>` : '';
+        const entryInitId = e._initId || state.activeInitiative;
+        const editBtns = isEditor() ? `<div class="detail-entry-actions"><button onclick="openEditForm('${entryInitId}','${e.id}')">Edit</button><button class="del-btn" onclick="confirmDelete('${entryInitId}','${e.id}')">Del</button></div>` : '';
         html += `<div class="detail-entry">
           <div class="detail-entry-info"><h4>${e.subchannel}: ${e.text}${initLabel} <span class="status-badge" data-status="${e.status||'planned'}">${(e.status||'planned').replace('-',' ')}</span></h4><p>${e.notes||'No notes'}${spanInfo}</p></div>
-          <div class="detail-entry-meta"><div>${e.owner||''}</div></div>
+          <div style="display:flex;align-items:center;"><div class="detail-entry-meta"><div>${e.owner||''}</div></div>${editBtns}</div>
         </div>`;
       });
       html += '</div>';
     });
-    content.innerHTML = html;
   }
+  content.innerHTML = html;
 
   document.getElementById('detailOverlay').classList.add('active');
 }
@@ -1539,9 +1811,144 @@ function showToast(msg) {
   setTimeout(() => el.classList.remove('active'), 2500);
 }
 
+// ═══════════════════════════════════════
+// ENTRY CRUD (editors only)
+// ═══════════════════════════════════════
+
+let editingEntryId = null;
+let editingInitId = null;
+
+function openEntryForm(dateStr) {
+  if (!isEditor()) return;
+  editingEntryId = null;
+  editingInitId = state.activeInitiative;
+  document.getElementById('entryFormTitle').textContent = 'Add Entry';
+  document.getElementById('entryFormId').value = '';
+  document.getElementById('entryFormInitId').value = state.activeInitiative;
+  document.getElementById('entryText').value = '';
+  document.getElementById('entryChannel').value = '';
+  document.getElementById('entrySubchannel').innerHTML = '<option value="">Select type</option>';
+  document.getElementById('entryDate').value = dateStr;
+  document.getElementById('entryEndDate').value = '';
+  document.getElementById('entryOwner').value = '';
+  document.getElementById('entryStatus').value = 'planned';
+  document.getElementById('entryNotes').value = '';
+  document.getElementById('entryDeleteBtn').style.display = 'none';
+  document.getElementById('entryFormOverlay').classList.add('active');
+}
+
+function openEditForm(initId, entryId) {
+  if (!isEditor()) return;
+  const init = state.initiatives.find(i => i.id === initId);
+  if (!init) return;
+  const entry = (init.entries || []).find(e => e.id === entryId);
+  if (!entry) return;
+
+  editingEntryId = entryId;
+  editingInitId = initId;
+  document.getElementById('entryFormTitle').textContent = 'Edit Entry';
+  document.getElementById('entryFormId').value = entryId;
+  document.getElementById('entryFormInitId').value = initId;
+  document.getElementById('entryText').value = entry.text || '';
+  document.getElementById('entryChannel').value = entry.channel || '';
+  updateSubchannels();
+  document.getElementById('entrySubchannel').value = entry.subchannel || '';
+  document.getElementById('entryDate').value = entry.date || '';
+  document.getElementById('entryEndDate').value = entry.endDate || '';
+  document.getElementById('entryOwner').value = entry.owner || '';
+  document.getElementById('entryStatus').value = entry.status || 'planned';
+  document.getElementById('entryNotes').value = entry.notes || '';
+  document.getElementById('entryDeleteBtn').style.display = 'inline-block';
+  document.getElementById('entryFormOverlay').classList.add('active');
+}
+
+function closeEntryForm() {
+  document.getElementById('entryFormOverlay').classList.remove('active');
+  editingEntryId = null;
+  editingInitId = null;
+}
+
+function updateSubchannels() {
+  const ch = document.getElementById('entryChannel').value;
+  const sel = document.getElementById('entrySubchannel');
+  sel.innerHTML = '<option value="">Select type</option>';
+  if (ch && CHANNELS[ch]) {
+    CHANNELS[ch].subs.forEach(s => {
+      sel.innerHTML += `<option value="${s}">${s}</option>`;
+    });
+  }
+}
+
+function saveEntry(e) {
+  e.preventDefault();
+  if (!isEditor()) return;
+
+  const initId = document.getElementById('entryFormInitId').value;
+  const init = state.initiatives.find(i => i.id === initId);
+  if (!init) return;
+  if (!init.entries) init.entries = [];
+
+  const entryData = {
+    id: editingEntryId || ('entry-' + Date.now() + '-' + Math.random().toString(36).slice(2,6)),
+    text: document.getElementById('entryText').value.trim(),
+    channel: document.getElementById('entryChannel').value,
+    subchannel: document.getElementById('entrySubchannel').value,
+    date: document.getElementById('entryDate').value,
+    endDate: document.getElementById('entryEndDate').value || null,
+    owner: document.getElementById('entryOwner').value.trim(),
+    status: document.getElementById('entryStatus').value,
+    notes: document.getElementById('entryNotes').value.trim()
+  };
+
+  if (editingEntryId) {
+    // Update existing
+    const idx = init.entries.findIndex(en => en.id === editingEntryId);
+    if (idx !== -1) {
+      init.entries[idx] = entryData;
+    }
+    showToast('Entry updated.');
+  } else {
+    // Add new
+    init.entries.push(entryData);
+    showToast('Entry added.');
+  }
+
+  persistEdits();
+  closeEntryForm();
+  render();
+  if (currentDetailDate) {
+    setTimeout(() => openDetail(currentDetailDate), 50);
+  }
+}
+
+function confirmDelete(initId, entryId) {
+  if (!isEditor()) return;
+  if (!confirm('Delete this entry?')) return;
+  deleteEntryById(initId, entryId);
+}
+
+function deleteEntry() {
+  if (!isEditor() || !editingEntryId || !editingInitId) return;
+  if (!confirm('Delete this entry?')) return;
+  deleteEntryById(editingInitId, editingEntryId);
+  closeEntryForm();
+}
+
+function deleteEntryById(initId, entryId) {
+  const init = state.initiatives.find(i => i.id === initId);
+  if (!init || !init.entries) return;
+  init.entries = init.entries.filter(e => e.id !== entryId);
+  persistEdits();
+  render();
+  showToast('Entry deleted.');
+  if (currentDetailDate) {
+    setTimeout(() => openDetail(currentDetailDate), 50);
+  }
+}
+
 // Keyboard shortcuts
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') { closeDetail(); closeSearch(); }
+  if (e.key === 'Escape') { closeEntryForm(); closeDetail(); closeSearch(); }
 
   // Don't trigger shortcuts when typing in inputs
   if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') return;
