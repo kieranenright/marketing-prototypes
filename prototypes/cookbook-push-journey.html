@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cookbook Push Notification Lifecycle Strategy | HelloFresh</title>
+<title>Cookbook Push Notification Strategy | HelloFresh</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
@@ -34,7 +34,7 @@ body {
   min-height: 100vh;
 }
 
-/* ─── TOP BAR ─── */
+/* TOP BAR */
 .top-bar {
   background: var(--white);
   border-bottom: 1px solid var(--border);
@@ -92,7 +92,7 @@ body {
 }
 .back-link:hover { color: var(--brand-green); }
 
-/* ─── HERO ─── */
+/* HERO */
 .hero {
   max-width: 900px;
   margin: 0 auto;
@@ -151,7 +151,7 @@ body {
   color: var(--text-primary);
 }
 
-/* ─── SECTION ─── */
+/* SECTION */
 .section {
   max-width: 900px;
   margin: 0 auto 32px;
@@ -193,7 +193,7 @@ body {
   padding: 24px;
 }
 
-/* ─── SEGMENT OVERVIEW TABLE ─── */
+/* SEGMENT OVERVIEW TABLE */
 .segment-table {
   width: 100%;
   border-collapse: collapse;
@@ -234,7 +234,7 @@ body {
   font-weight: 500;
 }
 
-/* ─── SEGMENT DETAIL CARDS ─── */
+/* SEGMENT DETAIL CARDS */
 .segment-detail {
   margin-bottom: 32px;
 }
@@ -248,36 +248,18 @@ body {
   margin-bottom: 16px;
 }
 
-.segment-number {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: var(--brand-green);
-  color: var(--white);
-  font-size: 12px;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.segment-name {
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--text-primary);
-}
-
-.trigger-box {
-  background: #F0FDF4;
-  border: 1px solid #BBF7D0;
+/* TRIGGER/EXIT BOXES */
+.trigger-box, .exit-box {
+  background: var(--bg-cream);
+  border: 1px solid var(--border);
   border-radius: 10px;
-  padding: 16px 20px;
-  margin-bottom: 16px;
+  padding: 14px 18px;
+  margin-bottom: 14px;
 }
 
-.trigger-label {
+.trigger-label, .exit-label {
   font-size: 11px;
-  font-weight: 700;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: var(--brand-green);
@@ -286,33 +268,8 @@ body {
 
 .trigger-text {
   font-size: 13px;
-  color: var(--text-primary);
-  line-height: 1.6;
-}
-
-.rationale {
-  font-size: 13px;
   color: var(--text-secondary);
-  line-height: 1.6;
-  margin-bottom: 16px;
-  font-style: italic;
-}
-
-.exit-box {
-  background: #FEF9EE;
-  border: 1px solid #FDE68A;
-  border-radius: 10px;
-  padding: 16px 20px;
-  margin-bottom: 20px;
-}
-
-.exit-label {
-  font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: #B45309;
-  margin-bottom: 8px;
+  line-height: 1.5;
 }
 
 .exit-list {
@@ -322,44 +279,72 @@ body {
 
 .exit-list li {
   font-size: 13px;
-  color: var(--text-primary);
+  color: var(--text-secondary);
   line-height: 1.6;
-  padding-left: 16px;
+  padding-left: 14px;
   position: relative;
 }
 
 .exit-list li::before {
-  content: "";
+  content: '';
   position: absolute;
   left: 0;
-  top: 8px;
-  width: 6px;
-  height: 6px;
+  top: 9px;
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
-  background: #F59E0B;
+  background: var(--border);
 }
 
-/* ─── PUSH CARDS ─── */
+.rationale {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 14px;
+  font-style: italic;
+}
+
+/* EI INSIGHT BOX */
+.ei-insight-box {
+  background: rgba(6, 122, 70, 0.04);
+  border: 1px solid rgba(6, 122, 70, 0.15);
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin-bottom: 14px;
+}
+
+.ei-insight-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--brand-green);
+  margin-bottom: 6px;
+}
+
+.ei-insight-text {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* PUSH CARDS */
 .push-sequence {
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
 }
 
 .push-card {
   border: 1px solid var(--border);
   border-radius: 12px;
   overflow: hidden;
-  transition: box-shadow 0.2s;
-}
-
-.push-card:hover {
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 }
 
 .push-card-header {
-  background: var(--bg-elevated);
-  padding: 10px 16px;
+  background: var(--bg-cream);
+  padding: 10px 18px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -374,29 +359,24 @@ body {
 
 .push-timing {
   font-size: 11px;
-  font-weight: 600;
   color: var(--text-tertiary);
-  background: var(--white);
-  padding: 3px 8px;
-  border-radius: 100px;
-  border: 1px solid var(--border);
+  font-weight: 500;
 }
 
 .push-card-body {
-  padding: 16px;
+  padding: 18px;
   display: flex;
-  gap: 16px;
+  gap: 24px;
+  align-items: flex-start;
 }
 
+/* PHONE MOCKUP */
 .push-phone {
-  width: 220px;
-  min-width: 220px;
   background: #1a1a1a;
-  border-radius: 20px;
-  padding: 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+  border-radius: 16px;
+  padding: 10px 10px 14px;
+  min-width: 240px;
+  flex-shrink: 0;
 }
 
 .push-notch {
@@ -484,7 +464,7 @@ body {
 .char-ok { color: var(--brand-green); }
 .char-warn { color: #B45309; }
 
-/* ─── RULES TABLE ─── */
+/* RULES TABLE */
 .rules-table {
   width: 100%;
   border-collapse: collapse;
@@ -517,7 +497,7 @@ body {
   white-space: nowrap;
 }
 
-/* ─── METRICS TABLE ─── */
+/* METRICS TABLE */
 .metrics-table {
   width: 100%;
   border-collapse: collapse;
@@ -547,7 +527,7 @@ body {
   color: var(--brand-green);
 }
 
-/* ─── NEXT STEPS ─── */
+/* NEXT STEPS */
 .next-steps-list {
   list-style: none;
   padding: 0;
@@ -580,7 +560,56 @@ body {
   margin-top: 1px;
 }
 
-/* ─── FOOTER ─── */
+/* FRAMEWORK BOX */
+.framework-box {
+  background: var(--bg-cream);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 18px 20px;
+  margin-bottom: 14px;
+}
+
+.framework-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.framework-text {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.framework-pillars {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.pillar-item {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 14px;
+}
+
+.pillar-name {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--brand-green);
+  margin-bottom: 4px;
+}
+
+.pillar-desc {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+/* FOOTER */
 .site-footer {
   max-width: 900px;
   margin: 0 auto;
@@ -595,7 +624,7 @@ body {
 .footer-text { font-size: 12px; color: var(--text-tertiary); }
 .footer-updated { font-size: 12px; color: var(--text-tertiary); font-weight: 500; }
 
-/* ─── RESPONSIVE ─── */
+/* RESPONSIVE */
 @media (max-width: 768px) {
   .top-bar { padding: 0 20px; }
   .hero { padding: 40px 20px 0; }
@@ -606,6 +635,7 @@ body {
   .push-phone { width: 100%; min-width: unset; }
   .segment-table { display: block; overflow-x: auto; }
   .site-footer { padding: 24px 20px 48px; flex-direction: column; gap: 8px; }
+  .framework-pillars { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -622,80 +652,133 @@ body {
     <span class="top-bar-team">CRM Strategy</span>
   </div>
   <div class="top-bar-right">
-    <span class="top-bar-badge">Draft</span>
+    <span class="top-bar-badge">v2.0</span>
   </div>
 </nav>
 
 <!-- HERO -->
 <header class="hero">
   <div class="hero-eyebrow">Cookbook / Push Notifications</div>
-  <h1>Push Notification Lifecycle Strategy</h1>
-  <p class="hero-subtitle">A behavioural lifecycle journey to drive first saves, repeat usage, and Cookbook opens across all app users. Five segments, triggered sequencing, and suppression logic. Copy aligned to Global TOV (Fresh, Vivid, Sharp, Zesty) and the Efficient Inspired audience profile.</p>
+  <h1>Event-Triggered Push Strategy</h1>
+  <p class="hero-subtitle">Push notifications triggered by real behavioural moments across the HelloFresh ecosystem. Each use case fires on a specific event with personalised content, grounded in the Efficient Inspired audience profile and Global TOV (Fresh, Vivid, Sharp, Zesty).</p>
   <div class="hero-meta">
     <div class="meta-item">
       <span class="meta-label">Channel</span>
       <span class="meta-value">Push</span>
     </div>
     <div class="meta-item">
-      <span class="meta-label">Segments</span>
-      <span class="meta-value">5</span>
+      <span class="meta-label">Use Cases</span>
+      <span class="meta-value">8</span>
     </div>
     <div class="meta-item">
       <span class="meta-label">Total Touchpoints</span>
-      <span class="meta-value">16</span>
+      <span class="meta-value">18</span>
     </div>
     <div class="meta-item">
       <span class="meta-label">Audience</span>
       <span class="meta-value">Efficient Inspired</span>
     </div>
     <div class="meta-item">
-      <span class="meta-label">Created</span>
-      <span class="meta-value">May 21, 2026</span>
+      <span class="meta-label">Updated</span>
+      <span class="meta-value">May 29, 2026</span>
     </div>
   </div>
 </header>
 
-<!-- SEGMENT OVERVIEW -->
+<!-- STRATEGIC FOUNDATIONS -->
 <section class="section">
   <div class="section-card">
     <div class="section-header">
-      <span class="section-label">Segment Overview</span>
-      <span class="section-count">5 Segments</span>
+      <span class="section-label">Strategic Foundations</span>
+      <span class="section-count">EI Study + Global TOV</span>
+    </div>
+    <div class="section-body">
+      <div class="ei-insight-box">
+        <div class="ei-insight-label">Efficient Inspired: Behind the Screen</div>
+        <div class="ei-insight-text">The EI operates on a "penciled structure": they plan loosely, protect their autonomy to choose in the moment, and use tools to buy back time. 58% choose meals based on available preparation time. Food is both joyful passion and commodity to optimise. They don't want to be told what to do. They want options surfaced at the right moment so they can decide. Push notifications should feel like a smart system working on their behalf, not a brand nudging them.</div>
+      </div>
+      <div class="framework-box">
+        <div class="framework-title">Global Tone of Voice: The Battle for Midweek Dinnertime</div>
+        <div class="framework-text">Copy must be Fresh, Vivid, Sharp, and Zesty. Write in bursts, not paragraphs. Make food the hero. Say it with conviction. No filler.</div>
+        <div class="framework-pillars">
+          <div class="pillar-item">
+            <div class="pillar-name">Fresh</div>
+            <div class="pillar-desc">Energy and immediacy. Makes the everyday feel alive and new. "Tonight." "Your move." "Right now."</div>
+          </div>
+          <div class="pillar-item">
+            <div class="pillar-name">Vivid</div>
+            <div class="pillar-desc">Sensory cues and bold verbs. Words that sizzle and stick. "Calling." "Going viral." "The pan."</div>
+          </div>
+          <div class="pillar-item">
+            <div class="pillar-name">Sharp</div>
+            <div class="pillar-desc">Confident, concise, clutter-free. Fragments over sentences. No filler phrases or punctuation.</div>
+          </div>
+          <div class="pillar-item">
+            <div class="pillar-name">Zesty</div>
+            <div class="pillar-desc">Playful with a bite. Culturally tuned in, witty but warm. "Your rules." "Your call." "No problem."</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- USE CASE OVERVIEW -->
+<section class="section">
+  <div class="section-card">
+    <div class="section-header">
+      <span class="section-label">Use Case Overview</span>
+      <span class="section-count">8 Event Triggers</span>
     </div>
     <div class="section-body" style="padding: 0;">
       <table class="segment-table">
         <thead>
           <tr>
-            <th>Segment</th>
-            <th>Definition</th>
+            <th>Use Case</th>
+            <th>Trigger Event</th>
             <th>Goal</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td class="seg-name">Dormant</td>
-            <td class="seg-def">Has app, never opened Cookbook</td>
-            <td class="seg-goal">First open</td>
+            <td class="seg-name">Removed Meal Reminder</td>
+            <td class="seg-def">User adds meal to box, removes it, saves to Cookbook via in-app nudge</td>
+            <td class="seg-goal">Activate saved recipe</td>
           </tr>
           <tr>
-            <td class="seg-name">Browsers</td>
-            <td class="seg-def">Opened Cookbook, never saved a recipe</td>
-            <td class="seg-goal">First save</td>
+            <td class="seg-name">Meal Planner Gap Fill</td>
+            <td class="seg-def">User has days without a meal kit assigned in their weekly planner</td>
+            <td class="seg-goal">Cook from Cookbook on off-nights</td>
           </tr>
           <tr>
-            <td class="seg-name">One and Done</td>
-            <td class="seg-def">Saved 1 recipe, no second save within 7 days</td>
-            <td class="seg-goal">Second save</td>
+            <td class="seg-name">Skip Week</td>
+            <td class="seg-def">User skips their HelloFresh box for the week</td>
+            <td class="seg-goal">Fill the gap with saved recipes</td>
           </tr>
           <tr>
-            <td class="seg-name">Lapsed Savers</td>
-            <td class="seg-def">Saved 2+ recipes, no Cookbook open in 14+ days</td>
-            <td class="seg-goal">Re-open</td>
+            <td class="seg-name">High-Rated Meal Kit</td>
+            <td class="seg-def">User rates a meal kit 4 or 5 stars after cooking</td>
+            <td class="seg-goal">Save recipe to Cookbook</td>
           </tr>
           <tr>
-            <td class="seg-name">Building Habit</td>
-            <td class="seg-def">Saved 2+ recipes in the last 14 days</td>
-            <td class="seg-goal">Increase frequency</td>
+            <td class="seg-name">Box Delivery Day</td>
+            <td class="seg-def">Weekly box delivery confirmed</td>
+            <td class="seg-goal">Cookbook for the other nights</td>
+          </tr>
+          <tr>
+            <td class="seg-name">Post-Pause / Cancel</td>
+            <td class="seg-def">User pauses subscription or cancels</td>
+            <td class="seg-goal">Retain via free Cookbook</td>
+          </tr>
+          <tr>
+            <td class="seg-name">Trending Recipe</td>
+            <td class="seg-def">Recipe hits threshold saves on the platform</td>
+            <td class="seg-goal">Social proof discovery</td>
+          </tr>
+          <tr>
+            <td class="seg-name">Missing Protein Suggestion</td>
+            <td class="seg-def">Saved recipe uses a protein not in this week's box</td>
+            <td class="seg-goal">One shop trip, one extra dinner</td>
           </tr>
         </tbody>
       </table>
@@ -703,181 +786,38 @@ body {
   </div>
 </section>
 
-<!-- SEGMENT 1: DORMANT -->
+<!-- USE CASE 1: REMOVED MEAL REMINDER -->
 <section class="section">
   <div class="section-card">
     <div class="section-header">
-      <span class="section-label">Segment 1: Dormant</span>
-      <span class="section-count">3 Pushes</span>
+      <span class="section-label">1. Removed Meal Reminder</span>
+      <span class="section-count">2 Variants</span>
     </div>
     <div class="section-body">
       <div class="segment-detail">
         <div class="trigger-box">
-          <div class="trigger-label">Entry Trigger</div>
-          <div class="trigger-text">User has had app installed 3+ days AND has opened app 2+ times AND has never viewed the Cookbook screen.</div>
+          <div class="trigger-label">Trigger Event</div>
+          <div class="trigger-text">User adds a meal to their weekly box, then removes it, then saves it to Cookbook via the in-app nudge. The recipe is now saved. This push reminds them to cook it.</div>
         </div>
-        <p class="rationale">They're past initial app exploration but Cookbook hasn't surfaced organically. They're active enough to receive a push without it feeling spammy.</p>
+        <div class="ei-insight-box">
+          <div class="ei-insight-label">EI Insight</div>
+          <div class="ei-insight-text">Three intent signals: they added it (interest), removed it (chose flexibility over the kit), and saved it (confirmed they want it). The push isn't "don't forget" (patronising). It's a confident nudge that their system is working. The recipe is ready when they are. Autonomy preserved.</div>
+        </div>
         <div class="exit-box">
-          <div class="exit-label">Exit Conditions</div>
+          <div class="exit-label">Suppression</div>
           <ul class="exit-list">
-            <li>User opens Cookbook → graduate to Browsers</li>
-            <li>User saves a recipe → graduate to One and Done</li>
-            <li>User uninstalls app → suppress</li>
-            <li>3 pushes sent with no Cookbook open → cool off 30 days, then re-enter</li>
-          </ul>
-        </div>
-
-        <div class="push-sequence">
-          <!-- Push 1 -->
-          <div class="push-card">
-            <div class="push-card-header">
-              <span class="push-label">Push 1: Rhythm Hook</span>
-              <span class="push-timing">Day 3 after entry | AM window</span>
-            </div>
-            <div class="push-card-body">
-              <div class="push-phone">
-                <div class="push-notch"></div>
-                <div class="push-notification">
-                  <div class="push-notif-header">
-                    <div class="push-notif-icon"></div>
-                    <span class="push-notif-app">HelloFresh</span>
-                    <span class="push-notif-time">now</span>
-                  </div>
-                  <div class="push-notif-title">Scroll it. Save it. Cook it.</div>
-                  <div class="push-notif-body">That dish you just watched? Three taps and it's yours. Ingredients, steps, done.</div>
-                </div>
-              </div>
-              <div class="push-meta">
-                <div>
-                  <div class="push-meta-label">Angle</div>
-                  <div class="push-meta-value">TOV "write in bursts." Three-word rhythm mirrors the EI's scroll-to-action speed. Sends during morning social scroll when discovery happens.</div>
-                </div>
-                <div>
-                  <div class="push-meta-label">TOV Flavour</div>
-                  <div class="push-meta-value">Sharp + Fresh</div>
-                </div>
-                <div>
-                  <div class="push-meta-label">Character Count</div>
-                  <div class="push-meta-value">
-                    Title: <span class="char-count char-ok">28/30</span> &nbsp;
-                    Body: <span class="char-count char-ok">78/80</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Push 2 -->
-          <div class="push-card">
-            <div class="push-card-header">
-              <span class="push-label">Push 2: Feed Reframe</span>
-              <span class="push-timing">Day 7 | AM window</span>
-            </div>
-            <div class="push-card-body">
-              <div class="push-phone">
-                <div class="push-notch"></div>
-                <div class="push-notification">
-                  <div class="push-notif-header">
-                    <div class="push-notif-icon"></div>
-                    <span class="push-notif-app">HelloFresh</span>
-                    <span class="push-notif-time">now</span>
-                  </div>
-                  <div class="push-notif-title">Your feed is full of dinners</div>
-                  <div class="push-notif-body">Stop scrolling past them. Save the ones worth cooking. Free, no sub, no catch.</div>
-                </div>
-              </div>
-              <div class="push-meta">
-                <div>
-                  <div class="push-meta-label">Angle</div>
-                  <div class="push-meta-value">Reframes social feed as an untapped resource. Barrier removal lands at the end, not up front. "Worth cooking" positions the EI as discerning, not desperate.</div>
-                </div>
-                <div>
-                  <div class="push-meta-label">TOV Flavour</div>
-                  <div class="push-meta-value">Vivid + Zesty</div>
-                </div>
-                <div>
-                  <div class="push-meta-label">Character Count</div>
-                  <div class="push-meta-value">
-                    Title: <span class="char-count char-ok">28/30</span> &nbsp;
-                    Body: <span class="char-count char-ok">76/80</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Push 3 -->
-          <div class="push-card">
-            <div class="push-card-header">
-              <span class="push-label">Push 3: Contrast</span>
-              <span class="push-timing">Day 12 | PM window</span>
-            </div>
-            <div class="push-card-body">
-              <div class="push-phone">
-                <div class="push-notch"></div>
-                <div class="push-notification">
-                  <div class="push-notif-header">
-                    <div class="push-notif-icon"></div>
-                    <span class="push-notif-app">HelloFresh</span>
-                    <span class="push-notif-time">now</span>
-                  </div>
-                  <div class="push-notif-title">Screenshots fade. Recipes stay.</div>
-                  <div class="push-notif-body">Every dish you've bookmarked in your head? Put it somewhere you'll actually cook it.</div>
-                </div>
-              </div>
-              <div class="push-meta">
-                <div>
-                  <div class="push-meta-label">Angle</div>
-                  <div class="push-meta-value">Sharp contrast in title (TOV "memorable rhythm"). Body speaks directly to the EI's mental stash of ideas they never act on. PM send catches the "what's for dinner" window.</div>
-                </div>
-                <div>
-                  <div class="push-meta-label">TOV Flavour</div>
-                  <div class="push-meta-value">Sharp</div>
-                </div>
-                <div>
-                  <div class="push-meta-label">Character Count</div>
-                  <div class="push-meta-value">
-                    Title: <span class="char-count char-ok">30/30</span> &nbsp;
-                    Body: <span class="char-count char-ok">80/80</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SEGMENT 2: BROWSERS -->
-<section class="section">
-  <div class="section-card">
-    <div class="section-header">
-      <span class="section-label">Segment 2: Browsers</span>
-      <span class="section-count">3 Pushes</span>
-    </div>
-    <div class="section-body">
-      <div class="segment-detail">
-        <div class="trigger-box">
-          <div class="trigger-label">Entry Trigger</div>
-          <div class="trigger-text">User has viewed the Cookbook screen 1+ times AND has zero saved recipes AND last Cookbook view was within the last 14 days.</div>
-        </div>
-        <p class="rationale">They know the feature exists. They looked but something didn't click. Pushes here reduce friction and show the "how."</p>
-        <div class="exit-box">
-          <div class="exit-label">Exit Conditions</div>
-          <ul class="exit-list">
-            <li>User saves a recipe → graduate to One and Done</li>
-            <li>No save after 3 pushes → cool off 21 days, then retry with fresh copy</li>
-            <li>Last app open 30+ days ago → move to general winback, not Cookbook journey</li>
+            <li>Single shot per removal event. No cadence.</li>
+            <li>Another Cookbook push sent within past 5 days</li>
+            <li>Another push of any type within past 24 hours</li>
+            <li>Deep link: opens the saved recipe directly (not the save flow)</li>
           </ul>
         </div>
 
         <div class="push-sequence">
           <div class="push-card">
             <div class="push-card-header">
-              <span class="push-label">Push 1: Speed Play</span>
-              <span class="push-timing">Day 2 after last view (no save) | AM window</span>
+              <span class="push-label">Same-Day (PM Send)</span>
+              <span class="push-timing">Same day as save | 17:00-19:00</span>
             </div>
             <div class="push-card-body">
               <div class="push-phone">
@@ -888,205 +828,28 @@ body {
                     <span class="push-notif-app">HelloFresh</span>
                     <span class="push-notif-time">now</span>
                   </div>
-                  <div class="push-notif-title">Three taps. Full recipe. Done.</div>
-                  <div class="push-notif-body">Share any cooking video from your feed. We break it down into steps you can actually follow.</div>
+                  <div class="push-notif-title">That {{recipe_name}} though.</div>
+                  <div class="push-notif-body">Already in your Cookbook. All that's missing is the pan.</div>
                 </div>
               </div>
               <div class="push-meta">
                 <div>
                   <div class="push-meta-label">Angle</div>
-                  <div class="push-meta-value">Burst structure mirrors the speed. "Actually follow" speaks to the EI frustration with vague video recipes. Tool as multiplier.</div>
-                </div>
-                <div>
-                  <div class="push-meta-label">TOV Flavour</div>
-                  <div class="push-meta-value">Sharp + Fresh</div>
-                </div>
-                <div>
-                  <div class="push-meta-label">Character Count</div>
-                  <div class="push-meta-value">
-                    Title: <span class="char-count char-ok">30/30</span> &nbsp;
-                    Body: <span class="char-count char-ok">80/80</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="push-card">
-            <div class="push-card-header">
-              <span class="push-label">Push 2: Weeknight Anchor</span>
-              <span class="push-timing">Day 5 | PM window</span>
-            </div>
-            <div class="push-card-body">
-              <div class="push-phone">
-                <div class="push-notch"></div>
-                <div class="push-notification">
-                  <div class="push-notif-header">
-                    <div class="push-notif-icon"></div>
-                    <span class="push-notif-app">HelloFresh</span>
-                    <span class="push-notif-time">now</span>
-                  </div>
-                  <div class="push-notif-title">That dish you double-tapped?</div>
-                  <div class="push-notif-body">Save it. When Wednesday hits and you need dinner sorted, it's there. Ready to cook.</div>
-                </div>
-              </div>
-              <div class="push-meta">
-                <div>
-                  <div class="push-meta-label">Angle</div>
-                  <div class="push-meta-value">"Wednesday" anchors to the EI's midweek pressure point (penciled structure, spontaneous decisions). Social language ("double-tapped") meets dinner reality.</div>
-                </div>
-                <div>
-                  <div class="push-meta-label">TOV Flavour</div>
-                  <div class="push-meta-value">Vivid + Zesty</div>
-                </div>
-                <div>
-                  <div class="push-meta-label">Character Count</div>
-                  <div class="push-meta-value">
-                    Title: <span class="char-count char-ok">30/30</span> &nbsp;
-                    Body: <span class="char-count char-ok">80/80</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="push-card">
-            <div class="push-card-header">
-              <span class="push-label">Push 3: Reclaim</span>
-              <span class="push-timing">Day 9 | PM window</span>
-            </div>
-            <div class="push-card-body">
-              <div class="push-phone">
-                <div class="push-notch"></div>
-                <div class="push-notification">
-                  <div class="push-notif-header">
-                    <div class="push-notif-icon"></div>
-                    <span class="push-notif-app">HelloFresh</span>
-                    <span class="push-notif-time">now</span>
-                  </div>
-                  <div class="push-notif-title">Never lose another dinner idea</div>
-                  <div class="push-notif-body">One place for every recipe you find. Ingredients listed, steps laid out. Your call when to cook.</div>
-                </div>
-              </div>
-              <div class="push-meta">
-                <div>
-                  <div class="push-meta-label">Angle</div>
-                  <div class="push-meta-value">Proven headline kept. Body reframed with parallel structure ("listed... laid out") and autonomy closer ("your call") that speaks to the EI's need for control.</div>
-                </div>
-                <div>
-                  <div class="push-meta-label">TOV Flavour</div>
-                  <div class="push-meta-value">Fresh</div>
-                </div>
-                <div>
-                  <div class="push-meta-label">Character Count</div>
-                  <div class="push-meta-value">
-                    Title: <span class="char-count char-ok">30/30</span> &nbsp;
-                    Body: <span class="char-count char-ok">80/80</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SEGMENT 3: ONE AND DONE -->
-<section class="section">
-  <div class="section-card">
-    <div class="section-header">
-      <span class="section-label">Segment 3: One and Done</span>
-      <span class="section-count">3 Pushes</span>
-    </div>
-    <div class="section-body">
-      <div class="segment-detail">
-        <div class="trigger-box">
-          <div class="trigger-label">Entry Trigger</div>
-          <div class="trigger-text">User has exactly 1 saved recipe AND it has been 7+ days since that save AND no new Cookbook activity in that window.</div>
-        </div>
-        <p class="rationale">Gives them natural time to come back organically. If they don't after 7 days, the habit hasn't formed and they need a nudge.</p>
-        <div class="exit-box">
-          <div class="exit-label">Exit Conditions</div>
-          <ul class="exit-list">
-            <li>User saves a second recipe → graduate to Building Habit</li>
-            <li>No second save after 3 pushes → cool off 21 days, re-enter with different angle</li>
-            <li>User opens Cookbook but doesn't save → send Browser-style friction-reducing push</li>
-          </ul>
-        </div>
-
-        <div class="push-sequence">
-          <div class="push-card">
-            <div class="push-card-header">
-              <span class="push-label">Push 1: Momentum</span>
-              <span class="push-timing">Day 7 after first save | AM window</span>
-            </div>
-            <div class="push-card-body">
-              <div class="push-phone">
-                <div class="push-notch"></div>
-                <div class="push-notification">
-                  <div class="push-notif-header">
-                    <div class="push-notif-icon"></div>
-                    <span class="push-notif-app">HelloFresh</span>
-                    <span class="push-notif-time">now</span>
-                  </div>
-                  <div class="push-notif-title">One down. What's next?</div>
-                  <div class="push-notif-body">A few more saves and you've got a whole week of dinners lined up. Ready when you are.</div>
-                </div>
-              </div>
-              <div class="push-meta">
-                <div>
-                  <div class="push-meta-label">Angle</div>
-                  <div class="push-meta-value">Forward momentum, not congratulation. "What's next?" is how an optimizer thinks. Positions multiple saves as stocking the week (penciled structure).</div>
-                </div>
-                <div>
-                  <div class="push-meta-label">TOV Flavour</div>
-                  <div class="push-meta-value">Sharp + Fresh</div>
-                </div>
-                <div>
-                  <div class="push-meta-label">Character Count</div>
-                  <div class="push-meta-value">
-                    Title: <span class="char-count char-ok">22/30</span> &nbsp;
-                    Body: <span class="char-count char-ok">80/80</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="push-card">
-            <div class="push-card-header">
-              <span class="push-label">Push 2: Loss Aversion</span>
-              <span class="push-timing">Day 11 | AM window</span>
-            </div>
-            <div class="push-card-body">
-              <div class="push-phone">
-                <div class="push-notch"></div>
-                <div class="push-notification">
-                  <div class="push-notif-header">
-                    <div class="push-notif-icon"></div>
-                    <span class="push-notif-app">HelloFresh</span>
-                    <span class="push-notif-time">now</span>
-                  </div>
-                  <div class="push-notif-title">New recipe caught your eye?</div>
-                  <div class="push-notif-body">Save it before it disappears into your feed. Future you has dinner plans to make.</div>
-                </div>
-              </div>
-              <div class="push-meta">
-                <div>
-                  <div class="push-meta-label">Angle</div>
-                  <div class="push-meta-value">"Disappears" triggers loss aversion. "Future you" speaks to the EI's identity as someone who plans ahead effortlessly. Light, not preachy.</div>
+                  <div class="push-meta-value">Casual, confident. "Though" adds Zesty personality. "All that's missing is the pan" is Vivid and sensory. Positions the recipe as ready and waiting, not the user as forgetful.</div>
                 </div>
                 <div>
                   <div class="push-meta-label">TOV Flavour</div>
                   <div class="push-meta-value">Zesty + Vivid</div>
                 </div>
                 <div>
+                  <div class="push-meta-label">Personalisation</div>
+                  <div class="push-meta-value">{{recipe_name}} = name of the removed/saved meal</div>
+                </div>
+                <div>
                   <div class="push-meta-label">Character Count</div>
                   <div class="push-meta-value">
-                    Title: <span class="char-count char-ok">28/30</span> &nbsp;
-                    Body: <span class="char-count char-ok">78/80</span>
+                    Title: <span class="char-count char-ok">~28/30</span> &nbsp;
+                    Body: <span class="char-count char-ok">52/80</span>
                   </div>
                 </div>
               </div>
@@ -1095,8 +858,8 @@ body {
 
           <div class="push-card">
             <div class="push-card-header">
-              <span class="push-label">Push 3: Stocked Week</span>
-              <span class="push-timing">Day 16 | PM window</span>
+              <span class="push-label">Next-Day Fallback (AM Send)</span>
+              <span class="push-timing">Next day if save after 17:00 | 07:30-09:00</span>
             </div>
             <div class="push-card-body">
               <div class="push-phone">
@@ -1107,24 +870,24 @@ body {
                     <span class="push-notif-app">HelloFresh</span>
                     <span class="push-notif-time">now</span>
                   </div>
-                  <div class="push-notif-title">Stock up on dinner ideas</div>
-                  <div class="push-notif-body">More saves means more options when the "what's for dinner" moment hits. Add one now.</div>
+                  <div class="push-notif-title">{{recipe_name}} is yours now</div>
+                  <div class="push-notif-body">Saved yesterday. Cook it whenever the mood hits.</div>
                 </div>
               </div>
               <div class="push-meta">
                 <div>
                   <div class="push-meta-label">Angle</div>
-                  <div class="push-meta-value">"Stock up" connects to the EI's efficiency mindset. Frames multiple saves as optionality for spontaneous decision-making, not rigid meal planning.</div>
+                  <div class="push-meta-value">Fresh ownership framing ("is yours now"). "Whenever the mood hits" respects the EI's penciled structure. No pressure, just surfacing an option during their morning planning window.</div>
                 </div>
                 <div>
                   <div class="push-meta-label">TOV Flavour</div>
-                  <div class="push-meta-value">Fresh</div>
+                  <div class="push-meta-value">Fresh + Sharp</div>
                 </div>
                 <div>
                   <div class="push-meta-label">Character Count</div>
                   <div class="push-meta-value">
-                    Title: <span class="char-count char-ok">26/30</span> &nbsp;
-                    Body: <span class="char-count char-ok">80/80</span>
+                    Title: <span class="char-count char-ok">~28/30</span> &nbsp;
+                    Body: <span class="char-count char-ok">49/80</span>
                   </div>
                 </div>
               </div>
@@ -1136,35 +899,38 @@ body {
   </div>
 </section>
 
-<!-- SEGMENT 4: LAPSED SAVERS -->
+<!-- USE CASE 2: MEAL PLANNER GAP FILL -->
 <section class="section">
   <div class="section-card">
     <div class="section-header">
-      <span class="section-label">Segment 4: Lapsed Savers</span>
-      <span class="section-count">3 Pushes</span>
+      <span class="section-label">2. Meal Planner Gap Fill</span>
+      <span class="section-count">3 Variants</span>
     </div>
     <div class="section-body">
       <div class="segment-detail">
         <div class="trigger-box">
-          <div class="trigger-label">Entry Trigger</div>
-          <div class="trigger-text">User has 2+ saved recipes AND last Cookbook open was 14+ days ago AND user has opened the app at least once in the last 7 days (still active, just not using Cookbook).</div>
+          <div class="trigger-label">Trigger Event</div>
+          <div class="trigger-text">User has their meal planner active for the week. One or more days have no meal kit assigned. User has 1+ saved Cookbook recipes. Fires on the day of the gap, catching the "what's for dinner?" moment.</div>
         </div>
-        <p class="rationale">If they've gone dark on the whole app, this is a broader retention problem. We only nudge people who are reachable and still using HelloFresh.</p>
+        <div class="ei-insight-box">
+          <div class="ei-insight-label">EI Insight</div>
+          <div class="ei-insight-text">This is the "penciled structure" use case. They've deliberately left nights open because they want to decide in the moment. The push respects that by offering their own saved content as the answer, not prescribing it. Cookbook is their spontaneous prep toolkit for real-time optimisation.</div>
+        </div>
         <div class="exit-box">
-          <div class="exit-label">Exit Conditions</div>
+          <div class="exit-label">Suppression</div>
           <ul class="exit-list">
-            <li>User opens Cookbook → graduate back to Building Habit</li>
-            <li>User saves a new recipe → graduate to Building Habit</li>
-            <li>No re-engagement after 3 pushes → cool off 30 days</li>
-            <li>User goes inactive on app entirely → exit to general retention journey</li>
+            <li>Max 2 Cookbook gap-fill pushes per week (even if 4 open days)</li>
+            <li>Skip if user already filled that day's slot with a Cookbook recipe</li>
+            <li>Skip if user has no saved recipes</li>
+            <li>Global rules apply (24h gap, 5-day Cookbook push cooldown)</li>
           </ul>
         </div>
 
         <div class="push-sequence">
           <div class="push-card">
             <div class="push-card-header">
-              <span class="push-label">Push 1: Already Done</span>
-              <span class="push-timing">Day 14 of no Cookbook open | PM window</span>
+              <span class="push-label">Primary: Personalised Recipe</span>
+              <span class="push-timing">Day-of gap | 07:30-09:00 AM</span>
             </div>
             <div class="push-card-body">
               <div class="push-phone">
@@ -1175,14 +941,206 @@ body {
                     <span class="push-notif-app">HelloFresh</span>
                     <span class="push-notif-time">now</span>
                   </div>
-                  <div class="push-notif-title">Dinner's already sorted</div>
-                  <div class="push-notif-body">You've got [X] recipes saved and ready. Pick one, cook it, done.</div>
+                  <div class="push-notif-title">Tonight's wide open.</div>
+                  <div class="push-notif-body">{{recipe_name}} from your Cookbook. {{cook_time}} mins, your call.</div>
                 </div>
               </div>
               <div class="push-meta">
                 <div>
                   <div class="push-meta-label">Angle</div>
-                  <div class="push-meta-value">Confident, not cutesy. Positions the work as already done (EI loves pre-loaded efficiency). Burst ending mirrors the TOV's "write in bursts" principle.</div>
+                  <div class="push-meta-value">"Wide open" frames the gap as freedom, not a problem. Cook time included (58% of EIs choose meals based on prep time). "Your call" closes with autonomy. AM send catches their morning planning window.</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">TOV Flavour</div>
+                  <div class="push-meta-value">Fresh + Sharp</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">Personalisation</div>
+                  <div class="push-meta-value">{{recipe_name}} = most recently saved recipe. {{cook_time}} = recipe prep time in minutes. Priority: most recent > shortest cook time > random.</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">Character Count</div>
+                  <div class="push-meta-value">
+                    Title: <span class="char-count char-ok">21/30</span> &nbsp;
+                    Body: <span class="char-count char-ok">~58/80</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="push-card">
+            <div class="push-card-header">
+              <span class="push-label">Variant B: Autonomy Play</span>
+              <span class="push-timing">Rotation for 2nd send in same week | AM</span>
+            </div>
+            <div class="push-card-body">
+              <div class="push-phone">
+                <div class="push-notch"></div>
+                <div class="push-notification">
+                  <div class="push-notif-header">
+                    <div class="push-notif-icon"></div>
+                    <span class="push-notif-app">HelloFresh</span>
+                    <span class="push-notif-time">now</span>
+                  </div>
+                  <div class="push-notif-title">No kit tonight. No problem.</div>
+                  <div class="push-notif-body">Your Cookbook. Your rules. Pick one and go.</div>
+                </div>
+              </div>
+              <div class="push-meta">
+                <div>
+                  <div class="push-meta-label">Angle</div>
+                  <div class="push-meta-value">Burst rhythm ("No kit. No problem."). Double "Your" reinforces ownership and control. "Pick one and go" is Sharp, action-oriented. Respects the EI who doesn't need hand-holding.</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">TOV Flavour</div>
+                  <div class="push-meta-value">Sharp + Zesty</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">Character Count</div>
+                  <div class="push-meta-value">
+                    Title: <span class="char-count char-ok">27/30</span> &nbsp;
+                    Body: <span class="char-count char-ok">40/80</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="push-card">
+            <div class="push-card-header">
+              <span class="push-label">Variant C: Day Anchor</span>
+              <span class="push-timing">When specific day is known | AM</span>
+            </div>
+            <div class="push-card-body">
+              <div class="push-phone">
+                <div class="push-notch"></div>
+                <div class="push-notification">
+                  <div class="push-notif-header">
+                    <div class="push-notif-icon"></div>
+                    <span class="push-notif-app">HelloFresh</span>
+                    <span class="push-notif-time">now</span>
+                  </div>
+                  <div class="push-notif-title">{{day_of_week}} sorted.</div>
+                  <div class="push-notif-body">{{recipe_name}} is calling. Fresh, fast, already yours.</div>
+                </div>
+              </div>
+              <div class="push-meta">
+                <div>
+                  <div class="push-meta-label">Angle</div>
+                  <div class="push-meta-value">"Sorted" is decisive and satisfying. "Calling" adds Vivid personality. Triple rhythm in body ("Fresh, fast, already yours") mirrors the TOV's "write in bursts" principle. Anchors to the specific day for relevance.</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">TOV Flavour</div>
+                  <div class="push-meta-value">Vivid + Fresh</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">Personalisation</div>
+                  <div class="push-meta-value">{{day_of_week}} = the gap day (e.g. "Thursday"). {{recipe_name}} = suggested saved recipe.</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">Character Count</div>
+                  <div class="push-meta-value">
+                    Title: <span class="char-count char-ok">~18/30</span> &nbsp;
+                    Body: <span class="char-count char-ok">~52/80</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- USE CASE 3: SKIP WEEK -->
+<section class="section">
+  <div class="section-card">
+    <div class="section-header">
+      <span class="section-label">3. Skip Week</span>
+      <span class="section-count">2 Variants</span>
+    </div>
+    <div class="section-body">
+      <div class="segment-detail">
+        <div class="trigger-box">
+          <div class="trigger-label">Trigger Event</div>
+          <div class="trigger-text">User skips their HelloFresh box for the upcoming week. They still need to eat. Cookbook fills the gap without breaking their system.</div>
+        </div>
+        <div class="ei-insight-box">
+          <div class="ei-insight-label">EI Insight</div>
+          <div class="ei-insight-text">They skipped the box but they're still life-optimizers running a household. They don't stop cooking, they stop receiving. Cookbook provides continuity during weeks they'd otherwise disengage from the app entirely. The EI uses tech as infrastructure. Cookbook stays useful even when the subscription pauses.</div>
+        </div>
+        <div class="exit-box">
+          <div class="exit-label">Suppression</div>
+          <ul class="exit-list">
+            <li>One send per skip event</li>
+            <li>Only fires if user has 1+ saved recipes</li>
+            <li>Do not send if user has skipped 3+ consecutive weeks (they may be churning, route to retention)</li>
+          </ul>
+        </div>
+
+        <div class="push-sequence">
+          <div class="push-card">
+            <div class="push-card-header">
+              <span class="push-label">Primary: System Continuity</span>
+              <span class="push-timing">Day 1 of skip week | 07:30-09:00 AM</span>
+            </div>
+            <div class="push-card-body">
+              <div class="push-phone">
+                <div class="push-notch"></div>
+                <div class="push-notification">
+                  <div class="push-notif-header">
+                    <div class="push-notif-icon"></div>
+                    <span class="push-notif-app">HelloFresh</span>
+                    <span class="push-notif-time">now</span>
+                  </div>
+                  <div class="push-notif-title">No box. No problem.</div>
+                  <div class="push-notif-body">Your Cookbook's got you covered. {{saved_count}} recipes ready to go.</div>
+                </div>
+              </div>
+              <div class="push-meta">
+                <div>
+                  <div class="push-meta-label">Angle</div>
+                  <div class="push-meta-value">Sharp burst rhythm ("No box. No problem."). Immediately diffuses any anxiety about the skip. Body names Cookbook directly as the solution with a personalised count for specificity. Confident, reassuring, no sell.</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">TOV Flavour</div>
+                  <div class="push-meta-value">Sharp + Zesty</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">Character Count</div>
+                  <div class="push-meta-value">
+                    Title: <span class="char-count char-ok">19/30</span> &nbsp;
+                    Body: <span class="char-count char-ok">~58/80</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="push-card">
+            <div class="push-card-header">
+              <span class="push-label">Variant: Count Flex</span>
+              <span class="push-timing">A/B rotation | AM</span>
+            </div>
+            <div class="push-card-body">
+              <div class="push-phone">
+                <div class="push-notch"></div>
+                <div class="push-notification">
+                  <div class="push-notif-header">
+                    <div class="push-notif-icon"></div>
+                    <span class="push-notif-app">HelloFresh</span>
+                    <span class="push-notif-time">now</span>
+                  </div>
+                  <div class="push-notif-title">No box. Still got options.</div>
+                  <div class="push-notif-body">{{saved_count}} recipes in your Cookbook. Tonight's on you.</div>
+                </div>
+              </div>
+              <div class="push-meta">
+                <div>
+                  <div class="push-meta-label">Angle</div>
+                  <div class="push-meta-value">Same rhythm but adds personalised count for specificity. "Tonight's on you" is Zesty autonomy language. Frames the skip as empowerment, not loss.</div>
                 </div>
                 <div>
                   <div class="push-meta-label">TOV Flavour</div>
@@ -1190,89 +1148,13 @@ body {
                 </div>
                 <div>
                   <div class="push-meta-label">Personalisation</div>
-                  <div class="push-meta-value">[X] = saved recipe count variable</div>
+                  <div class="push-meta-value">{{saved_count}} = total saved recipes in user's Cookbook</div>
                 </div>
                 <div>
                   <div class="push-meta-label">Character Count</div>
                   <div class="push-meta-value">
-                    Title: <span class="char-count char-ok">24/30</span> &nbsp;
-                    Body: <span class="char-count char-ok">63/80</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="push-card">
-            <div class="push-card-header">
-              <span class="push-label">Push 2: Dinner Decision</span>
-              <span class="push-timing">Day 19 | AM window</span>
-            </div>
-            <div class="push-card-body">
-              <div class="push-phone">
-                <div class="push-notch"></div>
-                <div class="push-notification">
-                  <div class="push-notif-header">
-                    <div class="push-notif-icon"></div>
-                    <span class="push-notif-app">HelloFresh</span>
-                    <span class="push-notif-time">now</span>
-                  </div>
-                  <div class="push-notif-title">What's for dinner tonight?</div>
-                  <div class="push-notif-body">You already did the hard part. The inspiration's saved. Now pick the one calling you.</div>
-                </div>
-              </div>
-              <div class="push-meta">
-                <div>
-                  <div class="push-meta-label">Angle</div>
-                  <div class="push-meta-value">AM send catches the EI's morning "start thinking about tonight" moment (per EI study). "The one calling you" adds personality and Vivid quality. Acknowledges their effort, then prompts action.</div>
-                </div>
-                <div>
-                  <div class="push-meta-label">TOV Flavour</div>
-                  <div class="push-meta-value">Vivid + Zesty</div>
-                </div>
-                <div>
-                  <div class="push-meta-label">Character Count</div>
-                  <div class="push-meta-value">
-                    Title: <span class="char-count char-ok">27/30</span> &nbsp;
-                    Body: <span class="char-count char-ok">80/80</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="push-card">
-            <div class="push-card-header">
-              <span class="push-label">Push 3: Sharp Contrast</span>
-              <span class="push-timing">Day 25 | AM window</span>
-            </div>
-            <div class="push-card-body">
-              <div class="push-phone">
-                <div class="push-notch"></div>
-                <div class="push-notification">
-                  <div class="push-notif-header">
-                    <div class="push-notif-icon"></div>
-                    <span class="push-notif-app">HelloFresh</span>
-                    <span class="push-notif-time">now</span>
-                  </div>
-                  <div class="push-notif-title">Still screenshotting recipes?</div>
-                  <div class="push-notif-body">They're buried by now. Your Cookbook keeps them all in one place, ready when you are.</div>
-                </div>
-              </div>
-              <div class="push-meta">
-                <div>
-                  <div class="push-meta-label">Angle</div>
-                  <div class="push-meta-value">"They're buried by now" is direct and Sharp. Doesn't explain why Cookbook is better, just states the consequence of not using it. Confident, not needy.</div>
-                </div>
-                <div>
-                  <div class="push-meta-label">TOV Flavour</div>
-                  <div class="push-meta-value">Sharp</div>
-                </div>
-                <div>
-                  <div class="push-meta-label">Character Count</div>
-                  <div class="push-meta-value">
-                    Title: <span class="char-count char-ok">29/30</span> &nbsp;
-                    Body: <span class="char-count char-ok">80/80</span>
+                    Title: <span class="char-count char-ok">26/30</span> &nbsp;
+                    Body: <span class="char-count char-ok">~54/80</span>
                   </div>
                 </div>
               </div>
@@ -1284,34 +1166,37 @@ body {
   </div>
 </section>
 
-<!-- SEGMENT 5: BUILDING HABIT -->
+<!-- USE CASE 4: HIGH-RATED MEAL KIT -->
 <section class="section">
   <div class="section-card">
     <div class="section-header">
-      <span class="section-label">Segment 5: Building Habit</span>
-      <span class="section-count">4 Rotating Pushes</span>
+      <span class="section-label">4. High-Rated Meal Kit</span>
+      <span class="section-count">2 Variants</span>
     </div>
     <div class="section-body">
       <div class="segment-detail">
         <div class="trigger-box">
-          <div class="trigger-label">Entry Trigger</div>
-          <div class="trigger-text">User has saved 2+ recipes in the last 14 days OR has opened Cookbook 3+ times in the last 14 days.</div>
+          <div class="trigger-label">Trigger Event</div>
+          <div class="trigger-text">User rates a meal kit 4 or 5 stars after cooking it. They loved it. But next time they want it, they'd need to wait for it to rotate back into the menu. Cookbook lets them own it forever.</div>
         </div>
-        <p class="rationale">Active users who are forming the habit. Don't sell the feature here. Reinforce the behaviour and introduce advanced use cases. Max 2 pushes per month.</p>
+        <div class="ei-insight-box">
+          <div class="ei-insight-label">EI Insight</div>
+          <div class="ei-insight-text">41% of EIs say cooking gives them a sense of accomplishment and pride. They loved this meal. Let them own it outside the kit system. This is about autonomy: cook it again on their terms, no menu rotation, no waiting. The recipe becomes part of their personal system.</div>
+        </div>
         <div class="exit-box">
-          <div class="exit-label">Exit Conditions</div>
+          <div class="exit-label">Suppression</div>
           <ul class="exit-list">
-            <li>No Cookbook open in 14 days → move to Lapsed Savers</li>
-            <li>Ongoing activity → stay in segment, rotate through content monthly</li>
-            <li>Cap: max 2 pushes per month for this segment</li>
+            <li>Only fire if user has NOT already saved this recipe to Cookbook</li>
+            <li>Max 1 per week (even if they rate multiple meals highly)</li>
+            <li>Do not send if user has never opened Cookbook (route to awareness journey instead)</li>
           </ul>
         </div>
 
         <div class="push-sequence">
           <div class="push-card">
             <div class="push-card-header">
-              <span class="push-label">Push A: Cook Tonight</span>
-              <span class="push-timing">Rotating monthly | PM window</span>
+              <span class="push-label">Primary: Ownership</span>
+              <span class="push-timing">2 hours after rating | PM window</span>
             </div>
             <div class="push-card-body">
               <div class="push-phone">
@@ -1322,18 +1207,29 @@ body {
                     <span class="push-notif-app">HelloFresh</span>
                     <span class="push-notif-time">now</span>
                   </div>
-                  <div class="push-notif-title">Pick one. Cook it tonight.</div>
-                  <div class="push-notif-body">[X] recipes saved. That's [X] dinners ready to go. Choose the one that wins tonight.</div>
+                  <div class="push-notif-title">{{recipe_name}} is a keeper.</div>
+                  <div class="push-notif-body">Save it. Cook it again. No kit needed.</div>
                 </div>
               </div>
               <div class="push-meta">
                 <div>
                   <div class="push-meta-label">Angle</div>
-                  <div class="push-meta-value">Commanding, not asking. "Wins tonight" uses competitive language the EI responds to. PM send at the decision point. Shifts behaviour from saving to cooking.</div>
+                  <div class="push-meta-value">"Keeper." is one word that says everything. Sharp, decisive, no waste. Body is a three-beat burst that moves from action to outcome to barrier removal. Confident brevity mirrors the EI's preference for efficient communication.</div>
                 </div>
                 <div>
                   <div class="push-meta-label">TOV Flavour</div>
-                  <div class="push-meta-value">Sharp + Vivid</div>
+                  <div class="push-meta-value">Sharp</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">Personalisation</div>
+                  <div class="push-meta-value">{{recipe_name}} = the meal they just rated</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">Character Count</div>
+                  <div class="push-meta-value">
+                    Title: <span class="char-count char-ok">~25/30</span> &nbsp;
+                    Body: <span class="char-count char-ok">37/80</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1341,8 +1237,8 @@ body {
 
           <div class="push-card">
             <div class="push-card-header">
-              <span class="push-label">Push B: Discovery Expansion</span>
-              <span class="push-timing">Rotating monthly | AM window</span>
+              <span class="push-label">Variant: Celebration</span>
+              <span class="push-timing">A/B rotation | PM</span>
             </div>
             <div class="push-card-body">
               <div class="push-phone">
@@ -1353,18 +1249,99 @@ body {
                     <span class="push-notif-app">HelloFresh</span>
                     <span class="push-notif-time">now</span>
                   </div>
-                  <div class="push-notif-title">Your next dinner is out there</div>
-                  <div class="push-notif-body">TikTok, YouTube, Instagram, blogs. Wherever you spot it, Cookbook captures it.</div>
+                  <div class="push-notif-title">That was a good one.</div>
+                  <div class="push-notif-body">Save {{recipe_name}} to Cookbook. Make it again whenever you want.</div>
                 </div>
               </div>
               <div class="push-meta">
                 <div>
                   <div class="push-meta-label">Angle</div>
-                  <div class="push-meta-value">Leads with the outcome (dinner), not the feature. "Captures" is a stronger verb than "saves." Positions Cookbook as the net that catches their discoveries across all platforms.</div>
+                  <div class="push-meta-value">Understated acknowledgment ("That was a good one"). Doesn't gush. Speaks like a friend, not a brand. "Whenever you want" closes with autonomy. Warmer than the Sharp primary.</div>
                 </div>
                 <div>
                   <div class="push-meta-label">TOV Flavour</div>
-                  <div class="push-meta-value">Fresh + Vivid</div>
+                  <div class="push-meta-value">Zesty + Fresh</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">Character Count</div>
+                  <div class="push-meta-value">
+                    Title: <span class="char-count char-ok">22/30</span> &nbsp;
+                    Body: <span class="char-count char-ok">~62/80</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- USE CASE 5: BOX DELIVERY DAY -->
+<section class="section">
+  <div class="section-card">
+    <div class="section-header">
+      <span class="section-label">5. Box Delivery Day</span>
+      <span class="section-count">2 Variants</span>
+    </div>
+    <div class="section-body">
+      <div class="segment-detail">
+        <div class="trigger-box">
+          <div class="trigger-label">Trigger Event</div>
+          <div class="trigger-text">User's weekly HelloFresh box delivery is confirmed. They're getting 3 or 4 meals, but there are 7 nights in a week. Cookbook is positioned as the companion for the nights the box doesn't cover.</div>
+        </div>
+        <div class="ei-insight-box">
+          <div class="ei-insight-label">EI Insight</div>
+          <div class="ei-insight-text">58% choose meals based on available preparation time. They know the box covers 3 or 4 nights. The other nights are the "real-time optimisation" zone where the EI decides in the moment. Cookbook is part of the same dinner system, not a separate feature. Not competing with the box, completing it.</div>
+        </div>
+        <div class="exit-box">
+          <div class="exit-label">Suppression</div>
+          <ul class="exit-list">
+            <li>Only fire if user has 1+ saved Cookbook recipes</li>
+            <li>Max 1 per delivery cycle (weekly)</li>
+            <li>Do not send on the same day as a delivery confirmation push (space by 24h)</li>
+          </ul>
+        </div>
+
+        <div class="push-sequence">
+          <div class="push-card">
+            <div class="push-card-header">
+              <span class="push-label">Primary: The Other Nights</span>
+              <span class="push-timing">Day after delivery | 07:30-09:00 AM</span>
+            </div>
+            <div class="push-card-body">
+              <div class="push-phone">
+                <div class="push-notch"></div>
+                <div class="push-notification">
+                  <div class="push-notif-header">
+                    <div class="push-notif-icon"></div>
+                    <span class="push-notif-app">HelloFresh</span>
+                    <span class="push-notif-time">now</span>
+                  </div>
+                  <div class="push-notif-title">Box is here. What about the rest?</div>
+                  <div class="push-notif-body">{{box_meals}} nights sorted. Your Cookbook handles the gaps.</div>
+                </div>
+              </div>
+              <div class="push-meta">
+                <div>
+                  <div class="push-meta-label">Angle</div>
+                  <div class="push-meta-value">Direct question in title creates engagement. Body uses contrast: the box handles some, Cookbook handles the rest. "Handles" is an active verb that positions Cookbook as a capable tool, not passive storage.</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">TOV Flavour</div>
+                  <div class="push-meta-value">Fresh + Sharp</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">Personalisation</div>
+                  <div class="push-meta-value">{{box_meals}} = number of meals in their box this week (e.g. "3" or "4")</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">Character Count</div>
+                  <div class="push-meta-value">
+                    Title: <span class="char-count char-ok">30/30</span> &nbsp;
+                    Body: <span class="char-count char-ok">~54/80</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1372,8 +1349,8 @@ body {
 
           <div class="push-card">
             <div class="push-card-header">
-              <span class="push-label">Push C: Structure</span>
-              <span class="push-timing">Rotating monthly | PM window</span>
+              <span class="push-label">Variant: Rhythm</span>
+              <span class="push-timing">A/B rotation | AM</span>
             </div>
             <div class="push-card-body">
               <div class="push-phone">
@@ -1384,27 +1361,180 @@ body {
                     <span class="push-notif-app">HelloFresh</span>
                     <span class="push-notif-time">now</span>
                   </div>
-                  <div class="push-notif-title">Weeknight vs weekend. Sorted.</div>
-                  <div class="push-notif-body">Group your saves however you cook. Quick midweek meals here, weekend projects there.</div>
+                  <div class="push-notif-title">{{box_meals}} nights covered. {{remaining_nights}} to go.</div>
+                  <div class="push-notif-body">Your saved recipes fill the gaps. Quick picks, big flavour.</div>
                 </div>
               </div>
               <div class="push-meta">
                 <div>
                   <div class="push-meta-label">Angle</div>
-                  <div class="push-meta-value">Speaks directly to EI's penciled structure (different modes for different days). Specific and opinionated rather than vague "get organised." Parallelism in body.</div>
+                  <div class="push-meta-value">Personalised number play in title makes it feel specific to their week. "Quick picks, big flavour" is Vivid and delivers sensory punch at the close. Implies speed (EI's time constraint) and quality (their food standards) in four words.</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">TOV Flavour</div>
+                  <div class="push-meta-value">Vivid + Sharp</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">Personalisation</div>
+                  <div class="push-meta-value">{{box_meals}} = meals in their box. {{remaining_nights}} = 7 minus box meals.</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">Character Count</div>
+                  <div class="push-meta-value">
+                    Title: <span class="char-count char-ok">~30/30</span> &nbsp;
+                    Body: <span class="char-count char-ok">56/80</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- USE CASE 6: POST-PAUSE / CANCEL -->
+<section class="section">
+  <div class="section-card">
+    <div class="section-header">
+      <span class="section-label">6. Post-Pause / Cancel</span>
+      <span class="section-count">2 Variants</span>
+    </div>
+    <div class="section-body">
+      <div class="segment-detail">
+        <div class="trigger-box">
+          <div class="trigger-label">Trigger Event</div>
+          <div class="trigger-text">User pauses their subscription or cancels entirely. Cookbook is free and doesn't require a subscription. It's a reason to keep the app installed and a low-pressure re-engagement hook.</div>
+        </div>
+        <div class="ei-insight-box">
+          <div class="ei-insight-label">EI Insight</div>
+          <div class="ei-insight-text">EIs seek "seamless lifestyle enablers" that buy back their time. Even if they pause the subscription, Cookbook is free and frictionless. It keeps them in the ecosystem by staying useful, not by begging them back. The tool continues to serve them regardless of subscription status.</div>
+        </div>
+        <div class="exit-box">
+          <div class="exit-label">Suppression</div>
+          <ul class="exit-list">
+            <li>Single send per pause/cancel event</li>
+            <li>Do not send if user has already uninstalled the app</li>
+            <li>Space 48h after the cancellation confirmation push</li>
+            <li>Do not send alongside any winback/retention messaging (separate tracks)</li>
+          </ul>
+        </div>
+
+        <div class="push-sequence">
+          <div class="push-card">
+            <div class="push-card-header">
+              <span class="push-label">Primary: Continuity</span>
+              <span class="push-timing">48h after pause/cancel | 07:30-09:00 AM</span>
+            </div>
+            <div class="push-card-body">
+              <div class="push-phone">
+                <div class="push-notch"></div>
+                <div class="push-notification">
+                  <div class="push-notif-header">
+                    <div class="push-notif-icon"></div>
+                    <span class="push-notif-app">HelloFresh</span>
+                    <span class="push-notif-time">now</span>
+                  </div>
+                  <div class="push-notif-title">Paused the box. Not the cooking.</div>
+                  <div class="push-notif-body">Your Cookbook is always free. Save from anywhere, cook on your terms.</div>
+                </div>
+              </div>
+              <div class="push-meta">
+                <div>
+                  <div class="push-meta-label">Angle</div>
+                  <div class="push-meta-value">Sharp contrast ("Paused... Not..."). Reframes the pause as partial, not total. "On your terms" speaks to autonomy. "Always free" removes the assumption that pausing the sub means losing features. No desperation, no beg-back.</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">TOV Flavour</div>
+                  <div class="push-meta-value">Sharp + Zesty</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">Character Count</div>
+                  <div class="push-meta-value">
+                    Title: <span class="char-count char-ok">30/30</span> &nbsp;
+                    Body: <span class="char-count char-ok">66/80</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="push-card">
+            <div class="push-card-header">
+              <span class="push-label">Variant: Utility</span>
+              <span class="push-timing">A/B rotation | AM</span>
+            </div>
+            <div class="push-card-body">
+              <div class="push-phone">
+                <div class="push-notch"></div>
+                <div class="push-notification">
+                  <div class="push-notif-header">
+                    <div class="push-notif-icon"></div>
+                    <span class="push-notif-app">HelloFresh</span>
+                    <span class="push-notif-time">now</span>
+                  </div>
+                  <div class="push-notif-title">Cookbook's still yours.</div>
+                  <div class="push-notif-body">Free. No subscription needed. Save recipes, cook anytime.</div>
+                </div>
+              </div>
+              <div class="push-meta">
+                <div>
+                  <div class="push-meta-label">Angle</div>
+                  <div class="push-meta-value">"Still yours" is reassurance without sentimentality. Body opens with the barrier removal ("Free.") as a single-word sentence for maximum impact. Then stacks the value. Clean, no emotional manipulation.</div>
                 </div>
                 <div>
                   <div class="push-meta-label">TOV Flavour</div>
                   <div class="push-meta-value">Sharp + Fresh</div>
                 </div>
+                <div>
+                  <div class="push-meta-label">Character Count</div>
+                  <div class="push-meta-value">
+                    Title: <span class="char-count char-ok">24/30</span> &nbsp;
+                    Body: <span class="char-count char-ok">54/80</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
+<!-- USE CASE 7: TRENDING RECIPE -->
+<section class="section">
+  <div class="section-card">
+    <div class="section-header">
+      <span class="section-label">7. Trending Recipe</span>
+      <span class="section-count">2 Variants</span>
+    </div>
+    <div class="section-body">
+      <div class="segment-detail">
+        <div class="trigger-box">
+          <div class="trigger-label">Trigger Event</div>
+          <div class="trigger-text">A recipe hits a threshold of saves across the platform within a short window (e.g. 500+ saves in 24 hours). Social proof trigger that introduces Cookbook through cultural momentum.</div>
+        </div>
+        <div class="ei-insight-box">
+          <div class="ei-insight-label">EI Insight</div>
+          <div class="ei-insight-text">EIs look for "culinary intel from accessible authorities" and are significantly more likely to try something new when they see social proof. 26% cite inspiration from friends' social posts. They actively seek cultural currency. Trending taps into their desire to be in the know without being a follower.</div>
+        </div>
+        <div class="exit-box">
+          <div class="exit-label">Suppression</div>
+          <ul class="exit-list">
+            <li>Max 1 trending push per month</li>
+            <li>Only send to users who have opened the app in the last 14 days</li>
+            <li>Do not send if user has already saved the trending recipe</li>
+            <li>Threshold must be genuine (not artificially inflated by campaigns)</li>
+          </ul>
+        </div>
+
+        <div class="push-sequence">
           <div class="push-card">
             <div class="push-card-header">
-              <span class="push-label">Push D: Vault</span>
-              <span class="push-timing">Rotating monthly | AM window</span>
+              <span class="push-label">Primary: Social Proof</span>
+              <span class="push-timing">When threshold hit | PM window</span>
             </div>
             <div class="push-card-body">
               <div class="push-phone">
@@ -1415,18 +1545,180 @@ body {
                     <span class="push-notif-app">HelloFresh</span>
                     <span class="push-notif-time">now</span>
                   </div>
-                  <div class="push-notif-title">[X] recipes and counting</div>
-                  <div class="push-notif-body">Your personal recipe vault is growing. Every save is one less "what do I cook?" moment.</div>
+                  <div class="push-notif-title">Everyone's making this right now.</div>
+                  <div class="push-notif-body">{{trending_recipe}}. {{save_count}} saves and counting.</div>
                 </div>
               </div>
               <div class="push-meta">
                 <div>
                   <div class="push-meta-label">Angle</div>
-                  <div class="push-meta-value">"Vault" is more premium and EI-appropriate than "collection." Ties each save back to eliminating the nightly decision fatigue. Celebrates progress through utility, not vanity.</div>
+                  <div class="push-meta-value">"Everyone's making this" triggers curiosity and cultural FOMO without being desperate. Live count adds urgency. The EI wants to be culturally aware and tries things that signal good taste, not trend-following.</div>
                 </div>
                 <div>
                   <div class="push-meta-label">TOV Flavour</div>
-                  <div class="push-meta-value">Zesty</div>
+                  <div class="push-meta-value">Fresh + Zesty</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">Personalisation</div>
+                  <div class="push-meta-value">{{trending_recipe}} = recipe name. {{save_count}} = current save count (rounded to nearest 100).</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">Character Count</div>
+                  <div class="push-meta-value">
+                    Title: <span class="char-count char-ok">30/30</span> &nbsp;
+                    Body: <span class="char-count char-ok">~45/80</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="push-card">
+            <div class="push-card-header">
+              <span class="push-label">Variant: Viral</span>
+              <span class="push-timing">A/B rotation | PM</span>
+            </div>
+            <div class="push-card-body">
+              <div class="push-phone">
+                <div class="push-notch"></div>
+                <div class="push-notification">
+                  <div class="push-notif-header">
+                    <div class="push-notif-icon"></div>
+                    <span class="push-notif-app">HelloFresh</span>
+                    <span class="push-notif-time">now</span>
+                  </div>
+                  <div class="push-notif-title">This one's going viral.</div>
+                  <div class="push-notif-body">{{trending_recipe}} is everywhere. Save it before you forget.</div>
+                </div>
+              </div>
+              <div class="push-meta">
+                <div>
+                  <div class="push-meta-label">Angle</div>
+                  <div class="push-meta-value">"Going viral" speaks directly to the EI's social media cadence. "Before you forget" adds light urgency tied to their reality (they see things and lose them). Cultural language that feels native to their media consumption.</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">TOV Flavour</div>
+                  <div class="push-meta-value">Vivid + Zesty</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">Character Count</div>
+                  <div class="push-meta-value">
+                    Title: <span class="char-count char-ok">24/30</span> &nbsp;
+                    Body: <span class="char-count char-ok">~55/80</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- USE CASE 8: INGREDIENT OVERLAP -->
+<section class="section">
+  <div class="section-card">
+    <div class="section-header">
+      <span class="section-label">8. Missing Protein Suggestion</span>
+      <span class="section-count">2 Variants</span>
+    </div>
+    <div class="section-body">
+      <div class="segment-detail">
+        <div class="trigger-box">
+          <div class="trigger-label">Trigger Event</div>
+          <div class="trigger-text">User's box this week contains certain proteins (e.g. chicken, fish) but they have a saved Cookbook recipe that uses a protein NOT in this week's box (e.g. beef, lamb, prawns). We surface the gap as an opportunity: one ingredient to buy, one extra dinner sorted.</div>
+        </div>
+        <div class="ei-insight-box">
+          <div class="ei-insight-label">EI Insight</div>
+          <div class="ei-insight-text">The EI is already planning their non-kit nights. They know what's in the box. HelloFresh sends exact portions, so there's no "extra" left over. But the EI shops for their off-nights anyway. Surfacing a saved recipe based on what's NOT covered this week gives them a specific, actionable shopping list item. One protein to grab, one dinner sorted. Cookbook becomes a smart companion that reads the gaps in their meal plan.</div>
+        </div>
+        <div class="exit-box">
+          <div class="exit-label">Suppression</div>
+          <ul class="exit-list">
+            <li>Max 1 per delivery cycle</li>
+            <li>Only fire if protein match confidence is high (primary protein in the saved recipe, not a minor ingredient)</li>
+            <li>Do not send if user hasn't opened Cookbook in 30+ days</li>
+            <li>Do not stack with Box Delivery Day push (pick one or the other)</li>
+          </ul>
+        </div>
+
+        <div class="push-sequence">
+          <div class="push-card">
+            <div class="push-card-header">
+              <span class="push-label">Primary: Gap Spotter</span>
+              <span class="push-timing">Day after box confirmed | 07:30-09:00 AM</span>
+            </div>
+            <div class="push-card-body">
+              <div class="push-phone">
+                <div class="push-notch"></div>
+                <div class="push-notification">
+                  <div class="push-notif-header">
+                    <div class="push-notif-icon"></div>
+                    <span class="push-notif-app">HelloFresh</span>
+                    <span class="push-notif-time">now</span>
+                  </div>
+                  <div class="push-notif-title">No {{protein}} this week?</div>
+                  <div class="push-notif-body">Your {{recipe_name}} needs it. One trip, one dinner sorted.</div>
+                </div>
+              </div>
+              <div class="push-meta">
+                <div>
+                  <div class="push-meta-label">Angle</div>
+                  <div class="push-meta-value">Question title creates immediate recognition ("oh yeah, I don't have chicken this week"). Then offers the solution in one sentence. "One trip, one dinner sorted" is peak Sharp: minimum words, maximum efficiency signal. The EI hears a system that understands what's missing and fills it.</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">TOV Flavour</div>
+                  <div class="push-meta-value">Sharp + Fresh</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">Personalisation</div>
+                  <div class="push-meta-value">{{protein}} = the missing protein (e.g. "chicken", "beef"). {{recipe_name}} = saved Cookbook recipe that uses that protein.</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">Character Count</div>
+                  <div class="push-meta-value">
+                    Title: <span class="char-count char-ok">~24/30</span> &nbsp;
+                    Body: <span class="char-count char-ok">~52/80</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="push-card">
+            <div class="push-card-header">
+              <span class="push-label">Variant: Shopping Prompt</span>
+              <span class="push-timing">A/B rotation | AM</span>
+            </div>
+            <div class="push-card-body">
+              <div class="push-phone">
+                <div class="push-notch"></div>
+                <div class="push-notification">
+                  <div class="push-notif-header">
+                    <div class="push-notif-icon"></div>
+                    <span class="push-notif-app">HelloFresh</span>
+                    <span class="push-notif-time">now</span>
+                  </div>
+                  <div class="push-notif-title">Missing {{protein}} from your box?</div>
+                  <div class="push-notif-body">{{recipe_name}} in your Cookbook is waiting. Grab it at the shop.</div>
+                </div>
+              </div>
+              <div class="push-meta">
+                <div>
+                  <div class="push-meta-label">Angle</div>
+                  <div class="push-meta-value">"Missing from your box" is direct and factual. "Grab it at the shop" is actionable and casual. Speaks to the EI's quick small-shop behaviour (per Behind the Screen study). Makes the action feel tiny: one item, already planned, Cookbook does the rest.</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">TOV Flavour</div>
+                  <div class="push-meta-value">Zesty + Sharp</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">Character Count</div>
+                  <div class="push-meta-value">
+                    Title: <span class="char-count char-ok">~30/30</span> &nbsp;
+                    Body: <span class="char-count char-ok">~56/80</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1442,7 +1734,7 @@ body {
   <div class="section-card">
     <div class="section-header">
       <span class="section-label">Global Rules</span>
-      <span class="section-count">7 Rules</span>
+      <span class="section-count">8 Rules</span>
     </div>
     <div class="section-body" style="padding: 0;">
       <table class="rules-table">
@@ -1455,31 +1747,35 @@ body {
         <tbody>
           <tr>
             <td class="rule-name">Frequency Cap</td>
-            <td>Max 1 Cookbook push per 5 days (across all segments)</td>
+            <td>Max 1 Cookbook push per 5 days (across all use cases)</td>
           </tr>
           <tr>
             <td class="rule-name">AM Window</td>
-            <td>07:30 to 09:00 local. For discovery/save-oriented pushes. Targets the EI morning social scroll (per Efficient Inspired study: morning anchor = social media browsing).</td>
+            <td>07:30 to 09:00 local. For planning/discovery angles. Targets the EI morning social scroll (per Behind the Screen: morning anchor = social media browsing, planning mode active).</td>
           </tr>
           <tr>
             <td class="rule-name">PM Window</td>
-            <td>17:00 to 19:00 local. For "cook tonight" and action-oriented pushes. Catches the dinner decision moment when EIs finalise their spontaneous plans.</td>
+            <td>17:00 to 19:00 local. For "cook tonight" and action-oriented pushes. Catches the EI's dinner decision moment when they finalise their spontaneous plans (real-time optimisation zone).</td>
           </tr>
           <tr>
-            <td class="rule-name">Suppression</td>
-            <td>Do not send if user received any other push in the last 24 hours</td>
+            <td class="rule-name">24h Suppression</td>
+            <td>Do not send if user received any other push (from any team) in the last 24 hours</td>
           </tr>
           <tr>
-            <td class="rule-name">Graduation Priority</td>
-            <td>If a user qualifies for multiple segments, use the highest engagement segment (furthest down the funnel)</td>
+            <td class="rule-name">Event Priority</td>
+            <td>If multiple events fire in the same window, prioritise: Removed Meal > Meal Planner Gap > Missing Protein > High-Rated Kit > Skip Week > Box Delivery > Post-Pause > Trending. Most personalised and most time-sensitive wins.</td>
           </tr>
           <tr>
             <td class="rule-name">Opt-out Respect</td>
-            <td>Immediate suppression on push opt-out. No fallback to other channels from this journey.</td>
+            <td>Immediate suppression on push opt-out. No fallback to other channels from this strategy.</td>
           </tr>
           <tr>
-            <td class="rule-name">Re-entry Cooldown</td>
-            <td>If a user exits and re-enters the same segment, serve fresh copy variants (not repeats)</td>
+            <td class="rule-name">Personalisation Fallback</td>
+            <td>If recipe name exceeds ~20 characters in title, move recipe name to body and use generic title variant. Never truncate mid-word.</td>
+          </tr>
+          <tr>
+            <td class="rule-name">Deep Link Standard</td>
+            <td>All pushes deep link to the specific recipe in Cookbook when personalised, or to the Cookbook home when generic. Never link to a save flow if the recipe is already saved.</td>
           </tr>
         </tbody>
       </table>
@@ -1492,47 +1788,57 @@ body {
   <div class="section-card">
     <div class="section-header">
       <span class="section-label">Measurement Framework</span>
-      <span class="section-count">6 KPIs</span>
+      <span class="section-count">8 KPIs</span>
     </div>
     <div class="section-body" style="padding: 0;">
       <table class="metrics-table">
         <thead>
           <tr>
             <th>Metric</th>
-            <th>Segment(s)</th>
+            <th>Use Case(s)</th>
             <th>Target</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>First Cookbook open rate</td>
-            <td>Dormant</td>
-            <td class="metric-target">Baseline + 15%</td>
-          </tr>
-          <tr>
-            <td>First save rate</td>
-            <td>Dormant, Browsers</td>
-            <td class="metric-target">Baseline + 10%</td>
-          </tr>
-          <tr>
-            <td>Second save within 14 days</td>
-            <td>One and Done</td>
-            <td class="metric-target">30%+</td>
-          </tr>
-          <tr>
-            <td>Cookbook re-open rate</td>
-            <td>Lapsed Savers</td>
-            <td class="metric-target">25%+</td>
-          </tr>
-          <tr>
-            <td>Saves per user per month</td>
-            <td>Building Habit</td>
-            <td class="metric-target">+1 incremental</td>
-          </tr>
-          <tr>
             <td>Push open rate (all)</td>
-            <td>All segments</td>
+            <td>All</td>
             <td class="metric-target">8%+</td>
+          </tr>
+          <tr>
+            <td>Recipe cook-through (from push open to cook start)</td>
+            <td>Removed Meal, Meal Planner Gap</td>
+            <td class="metric-target">15%+</td>
+          </tr>
+          <tr>
+            <td>Cookbook open within 24h of push</td>
+            <td>All</td>
+            <td class="metric-target">20%+</td>
+          </tr>
+          <tr>
+            <td>New recipe save (from push)</td>
+            <td>High-Rated Kit, Trending</td>
+            <td class="metric-target">12%+</td>
+          </tr>
+          <tr>
+            <td>Skip-week app retention</td>
+            <td>Skip Week, Post-Pause</td>
+            <td class="metric-target">+10% vs control</td>
+          </tr>
+          <tr>
+            <td>Cookbook sessions on off-nights</td>
+            <td>Meal Planner Gap, Box Delivery</td>
+            <td class="metric-target">+25% vs non-push users</td>
+          </tr>
+          <tr>
+            <td>Missing protein shop conversion</td>
+            <td>Missing Protein Suggestion</td>
+            <td class="metric-target">Cookbook open + recipe view within 24h</td>
+          </tr>
+          <tr>
+            <td>Unsubscribe / opt-out rate</td>
+            <td>All</td>
+            <td class="metric-target">&lt;0.5% per send</td>
           </tr>
         </tbody>
       </table>
@@ -1548,11 +1854,12 @@ body {
     </div>
     <div class="section-body">
       <ol class="next-steps-list">
-        <li><span class="step-number">1</span><span><strong>Personalisation variables:</strong> Do we have access to recipe count, last saved recipe name, or category in the push platform?</span></li>
-        <li><span class="step-number">2</span><span><strong>Deep linking:</strong> Can pushes open directly into Cookbook (or even a specific saved recipe)?</span></li>
-        <li><span class="step-number">3</span><span><strong>Send time optimisation:</strong> Does the platform support STO, or do we pick fixed windows?</span></li>
-        <li><span class="step-number">4</span><span><strong>Localisation:</strong> US only or multi-market? (Affects tone: ALL CAPS for US vs sentence case for global)</span></li>
-        <li><span class="step-number">5</span><span><strong>A/B testing:</strong> Do we want variant copy for each push so we can test angles from day one?</span></li>
+        <li><span class="step-number">1</span><span><strong>Data availability:</strong> Can we access meal planner gap days, box meal count, removed meal events, and recipe ratings from the push platform in real time?</span></li>
+        <li><span class="step-number">2</span><span><strong>Personalisation depth:</strong> Which variables are available? Recipe name, cook time, saved count, ingredient list, box meal count, day of week?</span></li>
+        <li><span class="step-number">3</span><span><strong>Trending threshold:</strong> What save count qualifies as "trending"? Need to define threshold per market (smaller markets need lower bars).</span></li>
+        <li><span class="step-number">4</span><span><strong>Ingredient matching logic:</strong> How confident can we be in matching saved recipe ingredients to box contents? Need data team to scope.</span></li>
+        <li><span class="step-number">5</span><span><strong>Cross-team coordination:</strong> These pushes interact with delivery notifications, retention messaging, and marketing pushes. Need alignment on 24h suppression windows across teams.</span></li>
+        <li><span class="step-number">6</span><span><strong>Localisation:</strong> US only or multi-market? Global TOV applies everywhere but character counts may shift with translation.</span></li>
       </ol>
     </div>
   </div>
@@ -1564,7 +1871,7 @@ body {
     <img src="https://media.hellofresh.com/w_256,q_100,f_auto,c_limit,fl_lossy/hellofresh_website/logo/Hello_Fresh_Lockup.png" alt="HelloFresh" class="footer-logo">
     <span class="footer-text">Product Marketing</span>
   </div>
-  <span class="footer-updated">Created: May 21, 2026</span>
+  <span class="footer-updated">Updated: May 29, 2026</span>
 </footer>
 
 <script src="../auth.js"></script>
