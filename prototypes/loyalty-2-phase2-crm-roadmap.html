@@ -608,42 +608,68 @@ section {
       </div>
     </div>
 
-    <!-- Campaign 4: New Rewards (Push) -->
+    <!-- Campaign 4: Points Earned Confirmation -->
     <div class="campaign-card reveal">
       <div class="campaign-header">
         <div class="campaign-header-left">
-          <h3>New Rewards Announcement</h3>
-          <p class="campaign-desc">Recurring template for when the Reward Store grows. Each addition is an editorial moment. Keeps the programme feeling alive and the store feeling fresh.</p>
+          <h3>Points Earned Confirmation</h3>
+          <p class="campaign-desc">Instant feedback loop. Every time a customer earns points, they see it on the lock screen. Reinforces the earning mechanic and connects the action to the reward. Builds habit through recognition.</p>
         </div>
         <div class="campaign-tags">
           <span class="campaign-tag tag-push">Push</span>
-          <span class="campaign-tag tag-data">Rewards catalogue (DWH / ad hoc)</span>
+          <span class="campaign-tag tag-data">Points earned event (Talon.one)</span>
         </div>
       </div>
       <div class="campaign-body">
         <div class="copy-grid">
           <div class="copy-variant push-var">
-            <div class="copy-label push-label">Push: New Drop</div>
+            <div class="copy-label push-label">Push A: Order Earned</div>
             <div class="copy-field">
               <div class="copy-field-name">Title</div>
-              <div class="copy-field-value">New in the Reward Store <span class="char-count">23/30</span></div>
+              <div class="copy-field-value">Points in. Nice one. <span class="char-count">19/30</span></div>
             </div>
             <div class="copy-field">
               <div class="copy-field-name">Body</div>
-              <div class="copy-field-value body">{{reward_name}} just landed. Points ready? Claim yours before everyone else does. <span class="char-count">~74/80</span></div>
+              <div class="copy-field-value body">You earned {{points_earned}} points from your last order. Balance: {{points_balance}}. Keep cooking. <span class="char-count">~80/80</span></div>
             </div>
           </div>
           <div class="copy-variant push-var">
-            <div class="copy-label push-label">Push: Store Growth</div>
+            <div class="copy-label push-label">Push B: Goal Action Earned</div>
             <div class="copy-field">
               <div class="copy-field-name">Title</div>
-              <div class="copy-field-value">More perks. More choice. <span class="char-count">23/30</span></div>
+              <div class="copy-field-value">+{{points_earned}} points. Earned. <span class="char-count">~24/30</span></div>
             </div>
             <div class="copy-field">
               <div class="copy-field-name">Body</div>
-              <div class="copy-field-value body">The Reward Store just got bigger. New ways to spend your points on things you actually want. <span class="char-count">80/80</span></div>
+              <div class="copy-field-value body">{{action_description}} just earned you {{points_earned}} bonus points. Balance: {{points_balance}}. <span class="char-count">~80/80</span></div>
             </div>
           </div>
+          <div class="copy-variant push-var">
+            <div class="copy-label push-label">Push C: Referral Earned</div>
+            <div class="copy-field">
+              <div class="copy-field-name">Title</div>
+              <div class="copy-field-value">Referral paid off <span class="char-count">16/30</span></div>
+            </div>
+            <div class="copy-field">
+              <div class="copy-field-name">Body</div>
+              <div class="copy-field-value body">Your friend signed up. You earned {{points_earned}} points. Balance: {{points_balance}}. Tasty teamwork. <span class="char-count">~80/80</span></div>
+            </div>
+          </div>
+          <div class="copy-variant push-var">
+            <div class="copy-label push-label">Push D: Recipe Rating Earned</div>
+            <div class="copy-field">
+              <div class="copy-field-name">Title</div>
+              <div class="copy-field-value">Rated. Rewarded. <span class="char-count">16/30</span></div>
+            </div>
+            <div class="copy-field">
+              <div class="copy-field-name">Body</div>
+              <div class="copy-field-value body">You rated a recipe and earned {{points_earned}} points. Quick win. Balance: {{points_balance}}. <span class="char-count">~78/80</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="tov-callout">
+          <h4>TOV Note</h4>
+          <p>"Points in. Nice one." is instant gratification in four words. The EI audience needs immediate confirmation that their actions are paying off. Each variant names the specific action so the earning mechanic never feels abstract. This is the dopamine loop that builds the habit.</p>
         </div>
       </div>
     </div>
@@ -825,20 +851,43 @@ section {
       </div>
     </div>
 
-    <!-- Campaign 4: New Rewards (Email) -->
+    <!-- Campaign 4: New Rewards (Push + Email) -->
     <div class="campaign-card reveal">
       <div class="campaign-header">
         <div class="campaign-header-left">
-          <h3>New Rewards Comms (Email)</h3>
-          <p class="campaign-desc">Email version of new reward announcements. Each Reward Store addition becomes an editorial moment. Re-engages members who haven't recently redeemed.</p>
+          <h3>New Rewards Announcement</h3>
+          <p class="campaign-desc">Recurring template for when the Reward Store grows. Each addition is an editorial moment. Keeps the programme feeling alive and the store feeling fresh. Push for speed, email for depth.</p>
         </div>
         <div class="campaign-tags">
+          <span class="campaign-tag tag-push">Push</span>
           <span class="campaign-tag tag-email">Email</span>
-          <span class="campaign-tag tag-data">Rewards catalogue (DWH)</span>
+          <span class="campaign-tag tag-data">Rewards catalogue (DWH / ad hoc)</span>
         </div>
       </div>
       <div class="campaign-body">
         <div class="copy-grid">
+          <div class="copy-variant push-var">
+            <div class="copy-label push-label">Push: New Drop</div>
+            <div class="copy-field">
+              <div class="copy-field-name">Title</div>
+              <div class="copy-field-value">New in the Reward Store <span class="char-count">23/30</span></div>
+            </div>
+            <div class="copy-field">
+              <div class="copy-field-name">Body</div>
+              <div class="copy-field-value body">{{reward_name}} just landed. Points ready? Claim yours before everyone else does. <span class="char-count">~74/80</span></div>
+            </div>
+          </div>
+          <div class="copy-variant push-var">
+            <div class="copy-label push-label">Push: Store Growth</div>
+            <div class="copy-field">
+              <div class="copy-field-name">Title</div>
+              <div class="copy-field-value">More perks. More choice. <span class="char-count">23/30</span></div>
+            </div>
+            <div class="copy-field">
+              <div class="copy-field-name">Body</div>
+              <div class="copy-field-value body">The Reward Store just got bigger. New ways to spend your points on things you actually want. <span class="char-count">80/80</span></div>
+            </div>
+          </div>
           <div class="copy-variant email-var">
             <div class="copy-label email-label">Email: New Reward Drop</div>
             <div class="copy-field">
@@ -1340,7 +1389,40 @@ section {
       </div>
     </div>
 
-    <!-- Trigger 2: Goal Launch -->
+    <!-- Trigger 2: Points Earned -->
+    <div class="trigger-card priority-high reveal">
+      <div class="trigger-header">
+        <h4>Points Earned Confirmation</h4>
+        <span class="trigger-event-name">rewards_points_earned</span>
+      </div>
+      <div class="trigger-grid">
+        <div class="trigger-field">
+          <div class="trigger-field-label">Logic</div>
+          <div class="trigger-field-value">Customer earns points from any action (order, goal completion, referral, recipe rating, add-on, etc.)</div>
+        </div>
+        <div class="trigger-field">
+          <div class="trigger-field-label">Required Data</div>
+          <div class="trigger-field-value"><code>customer_id</code>, <code>points_earned</code>, <code>points_balance</code>, <code>earning_action</code> (e.g. "order", "referral", "recipe_rating"), <code>action_description</code></div>
+        </div>
+        <div class="trigger-field">
+          <div class="trigger-field-label">Timing</div>
+          <div class="trigger-field-value">Fire immediately upon points credit (real time)</div>
+        </div>
+        <div class="trigger-field">
+          <div class="trigger-field-label">Source</div>
+          <div class="trigger-field-value">Talon.one points credit event</div>
+        </div>
+      </div>
+      <div class="trigger-suppression">
+        <div class="trigger-suppression-label">Suppression</div>
+        <div class="trigger-suppression-value">Cap at max 1 points earned push per day (batch multiple small actions into one notification if needed)</div>
+      </div>
+      <div class="trigger-campaigns">
+        <span class="trigger-campaign-tag">Points Earned Confirmation (Wave 1)</span>
+      </div>
+    </div>
+
+    <!-- Trigger 3: Goal Launch -->
     <div class="trigger-card priority-medium reveal">
       <div class="trigger-header">
         <h4>Goal Launch</h4>
@@ -1486,8 +1568,7 @@ section {
         </div>
       </div>
       <div class="trigger-campaigns">
-        <span class="trigger-campaign-tag">New Rewards Announcement (Wave 1)</span>
-        <span class="trigger-campaign-tag">New Rewards Comms Email (Wave 2)</span>
+        <span class="trigger-campaign-tag">New Rewards Announcement (Wave 2)</span>
       </div>
     </div>
 
