@@ -255,6 +255,36 @@ section {
 .data-card p { font-size: 13px; color: var(--hf-muted); line-height: 1.5; }
 .data-source { font-size: 11px; font-weight: 700; color: var(--rewards-purple); margin-top: 8px; }
 
+/* EVENT TRIGGERS SECTION */
+.triggers-section { background: var(--hf-dark); min-height: auto; padding: 100px 60px; color: white; }
+.triggers-section .section-tag { color: var(--hf-lime); }
+.triggers-section .section-title { color: white; }
+.triggers-section .section-desc { color: rgba(255,255,255,0.6); }
+.trigger-card { background: rgba(255,255,255,0.04); border-radius: 16px; padding: 28px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.06); transition: all 0.3s ease; position: relative; overflow: hidden; }
+.trigger-card:hover { background: rgba(255,255,255,0.07); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
+.trigger-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; }
+.trigger-card.priority-high::before { background: var(--hf-lime); }
+.trigger-card.priority-medium::before { background: var(--rewards-lilac); }
+.trigger-card.priority-low::before { background: rgba(255,255,255,0.2); }
+.trigger-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
+.trigger-header h4 { font-size: 16px; font-weight: 800; color: white; letter-spacing: -0.3px; }
+.trigger-event-name { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 12px; font-weight: 600; background: rgba(145,199,62,0.15); color: var(--hf-lime); padding: 4px 12px; border-radius: 6px; }
+.trigger-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+.trigger-field { background: rgba(255,255,255,0.04); border-radius: 10px; padding: 14px 16px; }
+.trigger-field-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: rgba(255,255,255,0.4); margin-bottom: 4px; }
+.trigger-field-value { font-size: 13px; color: rgba(255,255,255,0.85); line-height: 1.5; }
+.trigger-field-value code { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 11px; background: rgba(145,199,62,0.1); color: var(--hf-lime-soft); padding: 2px 6px; border-radius: 4px; }
+.trigger-suppression { margin-top: 12px; background: rgba(83,46,107,0.15); border-radius: 10px; padding: 12px 16px; border-left: 3px solid var(--rewards-lilac); }
+.trigger-suppression-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--rewards-lilac); margin-bottom: 4px; }
+.trigger-suppression-value { font-size: 12px; color: rgba(255,255,255,0.7); line-height: 1.5; }
+.trigger-campaigns { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 12px; }
+.trigger-campaign-tag { font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 12px; background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.6); }
+.global-rules { background: rgba(145,199,62,0.08); border-radius: 16px; padding: 28px; margin-top: 40px; border: 1px solid rgba(145,199,62,0.2); }
+.global-rules h4 { font-size: 14px; font-weight: 800; color: var(--hf-lime); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+.global-rules ul { list-style: none; padding: 0; }
+.global-rules li { font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.8; padding-left: 20px; position: relative; }
+.global-rules li::before { content: ''; position: absolute; left: 0; top: 10px; width: 8px; height: 8px; border-radius: 50%; background: var(--hf-lime); opacity: 0.6; }
+
 /* FOOTER */
 .footer-section {
   min-height: 60vh;
@@ -314,6 +344,7 @@ section {
     <a href="#wave3" data-section="wave3">Wave 3</a>
     <a href="#wave4" data-section="wave4">Wave 4</a>
     <a href="#data" data-section="data">Data</a>
+    <a href="#triggers" data-section="triggers">Triggers</a>
   </div>
 </nav>
 
@@ -1266,6 +1297,370 @@ section {
         <div class="data-source">Source: DWH &bull; Unlocks: Wave 1 (partial), Wave 2 (full)</div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ===== EVENT TRIGGERS ===== -->
+<section class="triggers-section" id="triggers">
+  <div class="section-inner">
+    <div class="section-tag reveal">Analytics Request</div>
+    <div class="section-title reveal">Event-Based Triggers<br>for Push Campaigns</div>
+    <div class="section-desc reveal" style="max-width: none;">Each push campaign requires a specific event from the analytics pipeline. Below are the trigger specifications to request from the data team, with exact event names, logic, required fields, timing, and suppression rules.</div>
+
+    <!-- Trigger 1: Points Balance Threshold -->
+    <div class="trigger-card priority-high reveal">
+      <div class="trigger-header">
+        <h4>Points Balance Threshold</h4>
+        <span class="trigger-event-name">rewards_points_redeemable</span>
+      </div>
+      <div class="trigger-grid">
+        <div class="trigger-field">
+          <div class="trigger-field-label">Logic</div>
+          <div class="trigger-field-value">Customer's <code>points_balance</code> >= minimum redemption threshold for any active reward in catalogue</div>
+        </div>
+        <div class="trigger-field">
+          <div class="trigger-field-label">Required Data</div>
+          <div class="trigger-field-value"><code>customer_id</code>, <code>points_balance</code>, <code>lowest_reward_cost</code>, <code>reward_name</code> (cheapest claimable)</div>
+        </div>
+        <div class="trigger-field">
+          <div class="trigger-field-label">Frequency</div>
+          <div class="trigger-field-value">Fire once per customer per reward eligibility change (not continuously)</div>
+        </div>
+        <div class="trigger-field">
+          <div class="trigger-field-label">Source</div>
+          <div class="trigger-field-value">Talon.one points balance + Rewards catalogue</div>
+        </div>
+      </div>
+      <div class="trigger-suppression">
+        <div class="trigger-suppression-label">Suppression</div>
+        <div class="trigger-suppression-value">Suppress if customer redeemed in last 7 days</div>
+      </div>
+      <div class="trigger-campaigns">
+        <span class="trigger-campaign-tag">Use Your Points (Wave 1)</span>
+      </div>
+    </div>
+
+    <!-- Trigger 2: Goal Launch -->
+    <div class="trigger-card priority-medium reveal">
+      <div class="trigger-header">
+        <h4>Goal Launch</h4>
+        <span class="trigger-event-name">rewards_goal_launched</span>
+      </div>
+      <div class="trigger-grid">
+        <div class="trigger-field">
+          <div class="trigger-field-label">Logic</div>
+          <div class="trigger-field-value">New goal type becomes active in Talon.one catalogue</div>
+        </div>
+        <div class="trigger-field">
+          <div class="trigger-field-label">Required Data</div>
+          <div class="trigger-field-value"><code>goal_id</code>, <code>goal_name</code>, <code>goal_action</code>, <code>points_value</code>, <code>timeframe</code></div>
+        </div>
+        <div class="trigger-field">
+          <div class="trigger-field-label">Frequency</div>
+          <div class="trigger-field-value">One event per goal launch (batch send to all opted in members)</div>
+        </div>
+        <div class="trigger-field">
+          <div class="trigger-field-label">Source</div>
+          <div class="trigger-field-value">Talon.one goal catalogue / manual trigger</div>
+        </div>
+      </div>
+      <div class="trigger-campaigns">
+        <span class="trigger-campaign-tag">Specific Goal Launch Comms (Wave 1)</span>
+        <span class="trigger-campaign-tag">General Goal Awareness (Wave 1)</span>
+      </div>
+    </div>
+
+    <!-- Trigger 3: Goal Activated -->
+    <div class="trigger-card priority-high reveal">
+      <div class="trigger-header">
+        <h4>Goal Lifecycle: Activation</h4>
+        <span class="trigger-event-name">rewards_goal_activated</span>
+      </div>
+      <div class="trigger-grid">
+        <div class="trigger-field">
+          <div class="trigger-field-label">Logic</div>
+          <div class="trigger-field-value">Customer enrols in or starts a goal</div>
+        </div>
+        <div class="trigger-field">
+          <div class="trigger-field-label">Required Data</div>
+          <div class="trigger-field-value"><code>customer_id</code>, <code>goal_id</code>, <code>goal_name</code>, <code>goal_action</code>, <code>points_value</code></div>
+        </div>
+        <div class="trigger-field">
+          <div class="trigger-field-label">Timing</div>
+          <div class="trigger-field-value">Fire immediately on activation</div>
+        </div>
+        <div class="trigger-field">
+          <div class="trigger-field-label">Source</div>
+          <div class="trigger-field-value">Talon.one goal state change</div>
+        </div>
+      </div>
+      <div class="trigger-campaigns">
+        <span class="trigger-campaign-tag">Goal Comms Suite: Activation (Wave 2)</span>
+      </div>
+    </div>
+
+    <!-- Trigger 4: Goal Mid-Progress -->
+    <div class="trigger-card priority-medium reveal">
+      <div class="trigger-header">
+        <h4>Goal Lifecycle: Mid Progress</h4>
+        <span class="trigger-event-name">rewards_goal_progress</span>
+      </div>
+      <div class="trigger-grid">
+        <div class="trigger-field">
+          <div class="trigger-field-label">Logic</div>
+          <div class="trigger-field-value">Customer reaches >=50% completion of a goal (configurable threshold)</div>
+        </div>
+        <div class="trigger-field">
+          <div class="trigger-field-label">Required Data</div>
+          <div class="trigger-field-value"><code>customer_id</code>, <code>goal_id</code>, <code>goal_name</code>, <code>progress</code> (e.g. "2/4"), <code>points_value</code></div>
+        </div>
+        <div class="trigger-field">
+          <div class="trigger-field-label">Timing</div>
+          <div class="trigger-field-value">Fire once per goal when threshold crossed</div>
+        </div>
+        <div class="trigger-field">
+          <div class="trigger-field-label">Source</div>
+          <div class="trigger-field-value">Talon.one goal progress update</div>
+        </div>
+      </div>
+      <div class="trigger-suppression">
+        <div class="trigger-suppression-label">Suppression</div>
+        <div class="trigger-suppression-value">Do not fire if goal already completed</div>
+      </div>
+      <div class="trigger-campaigns">
+        <span class="trigger-campaign-tag">Goal Comms Suite: Mid-Progress (Wave 2)</span>
+      </div>
+    </div>
+
+    <!-- Trigger 5: Goal Completed -->
+    <div class="trigger-card priority-high reveal">
+      <div class="trigger-header">
+        <h4>Goal Lifecycle: Completion</h4>
+        <span class="trigger-event-name">rewards_goal_completed</span>
+      </div>
+      <div class="trigger-grid">
+        <div class="trigger-field">
+          <div class="trigger-field-label">Logic</div>
+          <div class="trigger-field-value">Customer fulfils all goal criteria</div>
+        </div>
+        <div class="trigger-field">
+          <div class="trigger-field-label">Required Data</div>
+          <div class="trigger-field-value"><code>customer_id</code>, <code>goal_id</code>, <code>goal_name</code>, <code>points_value</code>, <code>new_points_balance</code></div>
+        </div>
+        <div class="trigger-field">
+          <div class="trigger-field-label">Timing</div>
+          <div class="trigger-field-value">Fire immediately on completion</div>
+        </div>
+        <div class="trigger-field">
+          <div class="trigger-field-label">Source</div>
+          <div class="trigger-field-value">Talon.one goal completion event</div>
+        </div>
+      </div>
+      <div class="trigger-campaigns">
+        <span class="trigger-campaign-tag">Goal Comms Suite: Completion (Wave 2)</span>
+      </div>
+    </div>
+
+    <!-- Trigger 6: New Reward Added -->
+    <div class="trigger-card priority-medium reveal">
+      <div class="trigger-header">
+        <h4>New Reward Added to Catalogue</h4>
+        <span class="trigger-event-name">rewards_catalogue_updated</span>
+      </div>
+      <div class="trigger-grid">
+        <div class="trigger-field">
+          <div class="trigger-field-label">Logic</div>
+          <div class="trigger-field-value">New reward SKU added to the Reward Store</div>
+        </div>
+        <div class="trigger-field">
+          <div class="trigger-field-label">Required Data</div>
+          <div class="trigger-field-value"><code>reward_id</code>, <code>reward_name</code>, <code>points_cost</code>, <code>reward_category</code></div>
+        </div>
+        <div class="trigger-field">
+          <div class="trigger-field-label">Frequency</div>
+          <div class="trigger-field-value">One event per catalogue addition (batch send to all opted in members)</div>
+        </div>
+        <div class="trigger-field">
+          <div class="trigger-field-label">Source</div>
+          <div class="trigger-field-value">DWH / manual flag from Rewards team</div>
+        </div>
+      </div>
+      <div class="trigger-campaigns">
+        <span class="trigger-campaign-tag">New Rewards Announcement (Wave 1)</span>
+        <span class="trigger-campaign-tag">New Rewards Comms Email (Wave 2)</span>
+      </div>
+    </div>
+
+    <!-- Trigger 7: Reward Expiry -->
+    <div class="trigger-card priority-high reveal">
+      <div class="trigger-header">
+        <h4>Reward Expiry Approaching</h4>
+        <span class="trigger-event-name">rewards_benefit_expiring</span>
+      </div>
+      <div class="trigger-grid">
+        <div class="trigger-field">
+          <div class="trigger-field-label">Logic</div>
+          <div class="trigger-field-value">Claimed reward has <code>expiry_date</code> within X days (fire at 3 days and 1 day before expiry)</div>
+        </div>
+        <div class="trigger-field">
+          <div class="trigger-field-label">Required Data</div>
+          <div class="trigger-field-value"><code>customer_id</code>, <code>reward_name</code>, <code>expiry_date</code>, <code>days_remaining</code></div>
+        </div>
+        <div class="trigger-field">
+          <div class="trigger-field-label">Timing</div>
+          <div class="trigger-field-value">Fire at 3 days and 1 day before expiry</div>
+        </div>
+        <div class="trigger-field">
+          <div class="trigger-field-label">Source</div>
+          <div class="trigger-field-value">Benefits data (available now)</div>
+        </div>
+      </div>
+      <div class="trigger-suppression">
+        <div class="trigger-suppression-label">Suppression</div>
+        <div class="trigger-suppression-value">Suppress if reward already applied to an order</div>
+      </div>
+      <div class="trigger-campaigns">
+        <span class="trigger-campaign-tag">Reward Expiry Reminder (Wave 3)</span>
+      </div>
+    </div>
+
+    <!-- Trigger 8: Reward Redemption -->
+    <div class="trigger-card priority-high reveal">
+      <div class="trigger-header">
+        <h4>Reward Redemption Confirmed</h4>
+        <span class="trigger-event-name">rewards_redemption_success</span>
+      </div>
+      <div class="trigger-grid">
+        <div class="trigger-field">
+          <div class="trigger-field-label">Logic</div>
+          <div class="trigger-field-value">Customer completes a reward claim/redemption</div>
+        </div>
+        <div class="trigger-field">
+          <div class="trigger-field-label">Required Data</div>
+          <div class="trigger-field-value"><code>customer_id</code>, <code>reward_name</code>, <code>points_spent</code>, <code>new_points_balance</code></div>
+        </div>
+        <div class="trigger-field">
+          <div class="trigger-field-label">Timing</div>
+          <div class="trigger-field-value">Fire immediately (real time). Highest priority event.</div>
+        </div>
+        <div class="trigger-field">
+          <div class="trigger-field-label">Source</div>
+          <div class="trigger-field-value">Talon.one redemption event</div>
+        </div>
+      </div>
+      <div class="trigger-campaigns">
+        <span class="trigger-campaign-tag">Reward Redemption Confirmation (Wave 4)</span>
+      </div>
+    </div>
+
+    <!-- Trigger 9: Paused Member -->
+    <div class="trigger-card priority-medium reveal">
+      <div class="trigger-header">
+        <h4>Paused Member with Active Balance</h4>
+        <span class="trigger-event-name">rewards_paused_with_balance</span>
+      </div>
+      <div class="trigger-grid">
+        <div class="trigger-field">
+          <div class="trigger-field-label">Logic</div>
+          <div class="trigger-field-value">Customer subscription status = <code>paused</code> AND <code>points_balance</code> > 0</div>
+        </div>
+        <div class="trigger-field">
+          <div class="trigger-field-label">Required Data</div>
+          <div class="trigger-field-value"><code>customer_id</code>, <code>points_balance</code>, <code>pause_date</code></div>
+        </div>
+        <div class="trigger-field">
+          <div class="trigger-field-label">Timing</div>
+          <div class="trigger-field-value">Fire once, 3 days after pause (allow natural reactivation window)</div>
+        </div>
+        <div class="trigger-field">
+          <div class="trigger-field-label">Source</div>
+          <div class="trigger-field-value">Subscription status change event joined with loyalty balance</div>
+        </div>
+      </div>
+      <div class="trigger-suppression">
+        <div class="trigger-suppression-label">Suppression</div>
+        <div class="trigger-suppression-value">Suppress if customer already in an existing unpause journey</div>
+      </div>
+      <div class="trigger-campaigns">
+        <span class="trigger-campaign-tag">Unpause with Points Hook (Wave 3)</span>
+      </div>
+    </div>
+
+    <!-- Trigger 10: Tier Unlock -->
+    <div class="trigger-card priority-low reveal">
+      <div class="trigger-header">
+        <h4>Tier Unlock</h4>
+        <span class="trigger-event-name">rewards_tier_upgraded</span>
+      </div>
+      <div class="trigger-grid">
+        <div class="trigger-field">
+          <div class="trigger-field-label">Logic</div>
+          <div class="trigger-field-value">Customer's tier status changes to a higher tier</div>
+        </div>
+        <div class="trigger-field">
+          <div class="trigger-field-label">Required Data</div>
+          <div class="trigger-field-value"><code>customer_id</code>, <code>new_tier_name</code>, <code>new_tier_perks</code> (list)</div>
+        </div>
+        <div class="trigger-field">
+          <div class="trigger-field-label">Timing</div>
+          <div class="trigger-field-value">Fire immediately on tier change</div>
+        </div>
+        <div class="trigger-field">
+          <div class="trigger-field-label">Source</div>
+          <div class="trigger-field-value">Talon.one tier progression event</div>
+        </div>
+      </div>
+      <div class="trigger-campaigns">
+        <span class="trigger-campaign-tag">Tier Progression Suite (Wave 4)</span>
+        <span class="trigger-campaign-tag">Dependency: requires tiers live</span>
+      </div>
+    </div>
+
+    <!-- Trigger 11: Approaching Next Tier -->
+    <div class="trigger-card priority-low reveal">
+      <div class="trigger-header">
+        <h4>Approaching Next Tier</h4>
+        <span class="trigger-event-name">rewards_tier_approaching</span>
+      </div>
+      <div class="trigger-grid">
+        <div class="trigger-field">
+          <div class="trigger-field-label">Logic</div>
+          <div class="trigger-field-value">Customer's points gap to next tier <= defined threshold (e.g. 20% remaining)</div>
+        </div>
+        <div class="trigger-field">
+          <div class="trigger-field-label">Required Data</div>
+          <div class="trigger-field-value"><code>customer_id</code>, <code>current_tier</code>, <code>next_tier_name</code>, <code>gap_points</code></div>
+        </div>
+        <div class="trigger-field">
+          <div class="trigger-field-label">Timing</div>
+          <div class="trigger-field-value">Fire once per tier boundary approach</div>
+        </div>
+        <div class="trigger-field">
+          <div class="trigger-field-label">Source</div>
+          <div class="trigger-field-value">Talon.one tier progress / DWH calculation</div>
+        </div>
+      </div>
+      <div class="trigger-suppression">
+        <div class="trigger-suppression-label">Suppression</div>
+        <div class="trigger-suppression-value">Suppress if already in top tier</div>
+      </div>
+      <div class="trigger-campaigns">
+        <span class="trigger-campaign-tag">Tier Progression Suite (Wave 4)</span>
+        <span class="trigger-campaign-tag">Dependency: requires tiers live</span>
+      </div>
+    </div>
+
+    <!-- Global Suppression Rules -->
+    <div class="global-rules reveal">
+      <h4>Global Suppression Rules</h4>
+      <ul>
+        <li>Customer must be push opted in</li>
+        <li>Do not stack more than 2 Rewards pushes in a single day per customer</li>
+        <li>Suppress all triggers if customer has unsubscribed from the loyalty programme</li>
+        <li>Each event should pass all listed required data fields so CRM can template the push copy with personalisation tokens</li>
+      </ul>
+    </div>
+
   </div>
 </section>
 
