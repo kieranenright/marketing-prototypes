@@ -668,11 +668,11 @@ body {
     </div>
     <div class="meta-item">
       <span class="meta-label">Use Cases</span>
-      <span class="meta-value">8</span>
+      <span class="meta-value">10</span>
     </div>
     <div class="meta-item">
       <span class="meta-label">Total Touchpoints</span>
-      <span class="meta-value">18</span>
+      <span class="meta-value">22</span>
     </div>
     <div class="meta-item">
       <span class="meta-label">Audience</span>
@@ -680,7 +680,7 @@ body {
     </div>
     <div class="meta-item">
       <span class="meta-label">Updated</span>
-      <span class="meta-value">May 29, 2026</span>
+      <span class="meta-value">June 1, 2026</span>
     </div>
   </div>
 </header>
@@ -728,7 +728,7 @@ body {
   <div class="section-card">
     <div class="section-header">
       <span class="section-label">Use Case Overview</span>
-      <span class="section-count">8 Event Triggers</span>
+      <span class="section-count">10 Event Triggers</span>
     </div>
     <div class="section-body" style="padding: 0;">
       <table class="segment-table">
@@ -779,6 +779,16 @@ body {
             <td class="seg-name">Missing Protein Suggestion</td>
             <td class="seg-def">Saved recipe uses a protein not in this week's box</td>
             <td class="seg-goal">One shop trip, one extra dinner</td>
+          </tr>
+          <tr>
+            <td class="seg-name">Planned Night Reinforcement</td>
+            <td class="seg-def">User has a Cookbook recipe assigned to today's planner slot</td>
+            <td class="seg-goal">Reinforce habit loop, drive cook action</td>
+          </tr>
+          <tr>
+            <td class="seg-name">Batch Cooking Detection</td>
+            <td class="seg-def">User assigns 2+ recipes to one day or a recipe with portions &gt;2</td>
+            <td class="seg-goal">Suppress false gap-fill pushes</td>
           </tr>
         </tbody>
       </table>
@@ -1729,12 +1739,246 @@ body {
   </div>
 </section>
 
+<!-- USE CASE 9: PLANNED NIGHT REINFORCEMENT -->
+<section class="section">
+  <div class="section-card">
+    <div class="section-header">
+      <span class="section-label">9. Planned Night Reinforcement</span>
+      <span class="section-count">2 Variants</span>
+    </div>
+    <div class="section-body">
+      <div class="segment-detail">
+        <div class="trigger-box">
+          <div class="trigger-label">Trigger Event</div>
+          <div class="trigger-text">User has a Cookbook recipe assigned to today's planner slot. Unlike Gap Fill (which targets empty nights), this fires when the planner is populated. It reinforces the plan, drives actual cooking action, and contextualises the system: "your planner works, here's what's on it today."</div>
+        </div>
+        <div class="ei-insight-box">
+          <div class="ei-insight-label">EI Insight</div>
+          <div class="ei-insight-text">The EI plans ahead, but plans erode. They select meals based on prep time and mood, then life intervenes. A gentle same-day confirmation closes the loop between "I planned this" and "I cooked this." It turns the planner from a passive list into an active system. This also builds the habit loop: plan → reminder → cook → satisfaction → plan again. Without this reinforcement, the planner is a graveyard of good intentions. The push says: "the system sees your effort, now follow through."</div>
+        </div>
+        <div class="exit-box">
+          <div class="exit-label">Suppression</div>
+          <ul class="exit-list">
+            <li>Max 3 per week (even if all 7 days are planned). Choose the first 3 planned days per cycle to avoid fatigue.</li>
+            <li>Do not send if user has already opened the recipe today (they're already engaged)</li>
+            <li>Do not send on days where a meal kit is also scheduled (kit takes priority, avoid confusion)</li>
+            <li>Standard 5-day frequency cap still applies across all use cases</li>
+          </ul>
+        </div>
+
+        <div class="push-sequence">
+          <div class="push-card">
+            <div class="push-card-header">
+              <span class="push-label">Primary: Plan Confirmation</span>
+              <span class="push-timing">Day of planned recipe | 07:30-09:00 AM</span>
+            </div>
+            <div class="push-card-body">
+              <div class="push-phone">
+                <div class="push-notch"></div>
+                <div class="push-notification">
+                  <div class="push-notif-header">
+                    <div class="push-notif-icon"></div>
+                    <span class="push-notif-app">HelloFresh</span>
+                    <span class="push-notif-time">now</span>
+                  </div>
+                  <div class="push-notif-title">Tonight's sorted.</div>
+                  <div class="push-notif-body">{{recipe_name}} is on your planner. Tap when you're ready to cook.</div>
+                </div>
+              </div>
+              <div class="push-meta">
+                <div>
+                  <div class="push-meta-label">Angle</div>
+                  <div class="push-meta-value">"Tonight's sorted" is the payoff statement. It validates the EI's planning behaviour: you did the work, the system remembers. "Tap when you're ready to cook" is a low-pressure CTA that respects autonomy. No urgency, no guilt. Just a reminder that the plan exists and the next step is theirs to take.</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">TOV Flavour</div>
+                  <div class="push-meta-value">Sharp + Fresh</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">Personalisation</div>
+                  <div class="push-meta-value">{{recipe_name}} = the Cookbook recipe assigned to today's planner slot.</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">Character Count</div>
+                  <div class="push-meta-value">
+                    Title: <span class="char-count char-ok">16/30</span> &nbsp;
+                    Body: <span class="char-count char-ok">~58/80</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="push-card">
+            <div class="push-card-header">
+              <span class="push-label">Variant: Momentum Builder</span>
+              <span class="push-timing">A/B rotation | AM</span>
+            </div>
+            <div class="push-card-body">
+              <div class="push-phone">
+                <div class="push-notch"></div>
+                <div class="push-notification">
+                  <div class="push-notif-header">
+                    <div class="push-notif-icon"></div>
+                    <span class="push-notif-app">HelloFresh</span>
+                    <span class="push-notif-time">now</span>
+                  </div>
+                  <div class="push-notif-title">{{day_of_week}} = {{recipe_name}}</div>
+                  <div class="push-notif-body">Your planner's working. Open the recipe when it's go time.</div>
+                </div>
+              </div>
+              <div class="push-meta">
+                <div>
+                  <div class="push-meta-label">Angle</div>
+                  <div class="push-meta-value">"Wednesday = Chicken Parm" format mirrors how the EI thinks: day = meal, solved. "Your planner's working" reinforces that the system is active and their effort paid off. It's a habit loop signal: you planned, the plan held, now just execute. Builds confidence in Cookbook as a tool, not just a list.</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">TOV Flavour</div>
+                  <div class="push-meta-value">Fresh + Zesty</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">Personalisation</div>
+                  <div class="push-meta-value">{{day_of_week}} = today (e.g. "Wednesday"). {{recipe_name}} = assigned recipe.</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">Character Count</div>
+                  <div class="push-meta-value">
+                    Title: <span class="char-count char-ok">~28/30</span> &nbsp;
+                    Body: <span class="char-count char-ok">~56/80</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- USE CASE 10: BATCH COOKING DETECTION -->
+<section class="section">
+  <div class="section-card">
+    <div class="section-header">
+      <span class="section-label">10. Batch Cooking Detection</span>
+      <span class="section-count">Suppression Logic + 2 Variants</span>
+    </div>
+    <div class="section-body">
+      <div class="segment-detail">
+        <div class="trigger-box">
+          <div class="trigger-label">Trigger Event</div>
+          <div class="trigger-text">User assigns 2+ Cookbook recipes to the same day, OR assigns a recipe with a portion count greater than 2 (indicating batch cooking / meal prep). This is a suppression-first use case: its primary role is to prevent false Gap Fill pushes on Mon-Wed when a user batch-cooked on Sunday. Secondary role: acknowledge the batch behaviour with a positive reinforcement push.</div>
+        </div>
+        <div class="ei-insight-box">
+          <div class="ei-insight-label">EI Insight</div>
+          <div class="ei-insight-text">The EI optimises for time. Batch cooking is peak optimisation behaviour: cook once, eat three times. Current logic treats each planner day independently, so a Sunday batch-cook that covers Monday through Wednesday will generate 3 unwanted Gap Fill pushes ("You've got a gap on Monday!"). This erodes trust in the system. The EI thinks: "I already sorted this. Why is it nagging me?" We need to identify batch days and cascade the coverage forward, suppressing gap triggers for the appropriate number of days.</div>
+        </div>
+        <div class="exit-box" style="border-color: #E8940C; background: rgba(232, 148, 12, 0.04);">
+          <div class="exit-label" style="color: #E8940C;">⚠ Investigation Required</div>
+          <ul class="exit-list">
+            <li><strong>Low priority but high impact if wrong:</strong> False gap pushes after batch-cooking actively damage trust</li>
+            <li><strong>Detection signals to explore:</strong> Portions field > 2, multiple recipes assigned same day, "meal prep" tag/category on saved recipes</li>
+            <li><strong>Coverage cascade:</strong> If a recipe yields 4 portions on Sunday, suppress gap triggers for the next 3 days (or however many the coverage implies)</li>
+            <li><strong>Manual override:</strong> If user still adds recipes to "covered" days, re-enable those days as active planner slots</li>
+          </ul>
+        </div>
+
+        <div class="push-sequence">
+          <div class="push-card">
+            <div class="push-card-header">
+              <span class="push-label">Optional: Batch Acknowledgement</span>
+              <span class="push-timing">Day of batch cook | 17:00-19:00 PM (if cooking that evening)</span>
+            </div>
+            <div class="push-card-body">
+              <div class="push-phone">
+                <div class="push-notch"></div>
+                <div class="push-notification">
+                  <div class="push-notif-header">
+                    <div class="push-notif-icon"></div>
+                    <span class="push-notif-app">HelloFresh</span>
+                    <span class="push-notif-time">now</span>
+                  </div>
+                  <div class="push-notif-title">Big cook tonight.</div>
+                  <div class="push-notif-body">{{recipe_name}} covers you for {{x}} days. Your week just got easier.</div>
+                </div>
+              </div>
+              <div class="push-meta">
+                <div>
+                  <div class="push-meta-label">Angle</div>
+                  <div class="push-meta-value">"Big cook tonight" mirrors their intent. "Covers you for 3 days" is the efficiency payoff, spoken in their language. "Your week just got easier" validates the choice. This push is optional and low-frequency: its purpose is to confirm that the system understands their batch pattern and won't nag them later.</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">TOV Flavour</div>
+                  <div class="push-meta-value">Sharp + Vivid</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">Personalisation</div>
+                  <div class="push-meta-value">{{recipe_name}} = the batch recipe. {{x}} = calculated days of coverage (portions minus 1).</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">Character Count</div>
+                  <div class="push-meta-value">
+                    Title: <span class="char-count char-ok">17/30</span> &nbsp;
+                    Body: <span class="char-count char-ok">~62/80</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="push-card">
+            <div class="push-card-header">
+              <span class="push-label">Variant: Prep Day Recap</span>
+              <span class="push-timing">A/B rotation | PM window</span>
+            </div>
+            <div class="push-card-body">
+              <div class="push-phone">
+                <div class="push-notch"></div>
+                <div class="push-notification">
+                  <div class="push-notif-header">
+                    <div class="push-notif-icon"></div>
+                    <span class="push-notif-app">HelloFresh</span>
+                    <span class="push-notif-time">now</span>
+                  </div>
+                  <div class="push-notif-title">Meal prep mode: on.</div>
+                  <div class="push-notif-body">{{x}} dinners handled in one session. We won't bug you till {{next_day}}.</div>
+                </div>
+              </div>
+              <div class="push-meta">
+                <div>
+                  <div class="push-meta-label">Angle</div>
+                  <div class="push-meta-value">"Meal prep mode: on" labels their behaviour and makes it feel like a feature, not just cooking. "We won't bug you till Thursday" is the trust signal: we know you're covered, we'll stay quiet. This is the anti-nag contract, making the system feel intelligent rather than mechanical.</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">TOV Flavour</div>
+                  <div class="push-meta-value">Zesty + Sharp</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">Personalisation</div>
+                  <div class="push-meta-value">{{x}} = number of dinners covered. {{next_day}} = first day after coverage ends (e.g. "Thursday").</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">Character Count</div>
+                  <div class="push-meta-value">
+                    Title: <span class="char-count char-ok">19/30</span> &nbsp;
+                    Body: <span class="char-count char-ok">~62/80</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- GLOBAL RULES -->
 <section class="section">
   <div class="section-card">
     <div class="section-header">
       <span class="section-label">Global Rules</span>
-      <span class="section-count">8 Rules</span>
+      <span class="section-count">9 Rules</span>
     </div>
     <div class="section-body" style="padding: 0;">
       <table class="rules-table">
@@ -1763,7 +2007,7 @@ body {
           </tr>
           <tr>
             <td class="rule-name">Event Priority</td>
-            <td>If multiple events fire in the same window, prioritise: Removed Meal > Meal Planner Gap > Missing Protein > High-Rated Kit > Skip Week > Box Delivery > Post-Pause > Trending. Most personalised and most time-sensitive wins.</td>
+            <td>If multiple events fire in the same window, prioritise: Removed Meal > Meal Planner Gap > Planned Night > Missing Protein > High-Rated Kit > Skip Week > Box Delivery > Post-Pause > Trending. Batch Detection acts as a suppression layer (overrides Gap Fill triggers for covered days). Most personalised and most time-sensitive wins.</td>
           </tr>
           <tr>
             <td class="rule-name">Opt-out Respect</td>
@@ -1777,6 +2021,10 @@ body {
             <td class="rule-name">Deep Link Standard</td>
             <td>All pushes deep link to the specific recipe in Cookbook when personalised, or to the Cookbook home when generic. Never link to a save flow if the recipe is already saved.</td>
           </tr>
+          <tr>
+            <td class="rule-name">Batch Coverage Override</td>
+            <td>When a batch cook is detected (portions > 2 or 2+ recipes on same day), suppress Gap Fill and Planned Night triggers for the number of subsequent days covered. Re-enable if user manually adds a new recipe to a "covered" day.</td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -1788,7 +2036,7 @@ body {
   <div class="section-card">
     <div class="section-header">
       <span class="section-label">Measurement Framework</span>
-      <span class="section-count">8 KPIs</span>
+      <span class="section-count">10 KPIs</span>
     </div>
     <div class="section-body" style="padding: 0;">
       <table class="metrics-table">
@@ -1831,6 +2079,16 @@ body {
             <td class="metric-target">+25% vs non-push users</td>
           </tr>
           <tr>
+            <td>Planned recipe cook-through (push open to cook start same day)</td>
+            <td>Planned Night Reinforcement</td>
+            <td class="metric-target">20%+</td>
+          </tr>
+          <tr>
+            <td>False gap-fill suppression accuracy</td>
+            <td>Batch Cooking Detection</td>
+            <td class="metric-target">Reduce unwanted gap pushes by 80%+ for batch-cooking users</td>
+          </tr>
+          <tr>
             <td>Missing protein shop conversion</td>
             <td>Missing Protein Suggestion</td>
             <td class="metric-target">Cookbook open + recipe view within 24h</td>
@@ -1860,6 +2118,8 @@ body {
         <li><span class="step-number">4</span><span><strong>Ingredient matching logic:</strong> How confident can we be in matching saved recipe ingredients to box contents? Need data team to scope.</span></li>
         <li><span class="step-number">5</span><span><strong>Cross-team coordination:</strong> These pushes interact with delivery notifications, retention messaging, and marketing pushes. Need alignment on 24h suppression windows across teams.</span></li>
         <li><span class="step-number">6</span><span><strong>Localisation:</strong> US only or multi-market? Global TOV applies everywhere but character counts may shift with translation.</span></li>
+        <li><span class="step-number">7</span><span><strong>Planner slot detection:</strong> Can we query "recipe assigned to today" in real time at push-send time (07:30 AM)? Need to confirm planner data is available to the push platform, not just the app client.</span></li>
+        <li><span class="step-number">8</span><span><strong>Batch cooking signals:</strong> Does the planner expose a portions field per recipe? Can we reliably detect "2+ recipes on same day" vs a user who just moved things around mid-edit? Need data team to define batch detection heuristics and confirm available fields.</span></li>
       </ol>
     </div>
   </div>
@@ -1871,7 +2131,7 @@ body {
     <img src="https://media.hellofresh.com/w_256,q_100,f_auto,c_limit,fl_lossy/hellofresh_website/logo/Hello_Fresh_Lockup.png" alt="HelloFresh" class="footer-logo">
     <span class="footer-text">Product Marketing</span>
   </div>
-  <span class="footer-updated">Updated: May 29, 2026</span>
+  <span class="footer-updated">Updated: June 1, 2026</span>
 </footer>
 
 <script src="../auth.js"></script>
