@@ -284,6 +284,28 @@ body {
 }
 .status-soon .status-dot { background: #EF4444; }
 
+.row-tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 2px 7px;
+  border-radius: 4px;
+  margin-left: 8px;
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
+}
+.row-tag-q2 {
+  background: rgba(6, 122, 70, 0.08);
+  color: var(--brand-green);
+}
+.row-tag-q3 {
+  background: rgba(99, 102, 241, 0.08);
+  color: #6366F1;
+}
+
 /* ─── ARROW BUTTON ─── */
 .row-action {
   display: flex;
@@ -411,7 +433,7 @@ body {
     <a href="prototypes/cookbook-campaign-strategy.html" class="row">
       <div class="row-number">01</div>
       <div class="row-content">
-        <div class="row-title">Marketing Strategy & Validation Roadmap</div>
+        <div class="row-title">Marketing Strategy & Validation Roadmap<span class="row-tag row-tag-q2">Q2</span></div>
         <div class="row-desc">Cookbook campaign strategy with validation gates and timeline</div>
       </div>
       <span class="status status-ready"><span class="status-dot"></span>Ready</span>
@@ -500,6 +522,36 @@ body {
 
 
 
+
+  </div>
+</section>
+
+<!-- Q3 2026 -->
+<section class="section">
+  <div class="section-card">
+    <div class="section-header">
+      <div class="section-header-left">
+        <span class="section-label">Q3 2026</span>
+      </div>
+      <span class="section-count">1 Prototype</span>
+    </div>
+
+    <div class="table-header">
+      <span>#</span>
+      <span>Prototype</span>
+      <span>Status</span>
+      <span></span>
+    </div>
+
+    <a href="prototypes/cookbook-campaign-strategy-q3.html" class="row">
+      <div class="row-number">01</div>
+      <div class="row-content">
+        <div class="row-title">Marketing Strategy & Validation Roadmap<span class="row-tag row-tag-q3">Q3</span></div>
+        <div class="row-desc">Cookbook campaign strategy with validation gates and timeline</div>
+      </div>
+      <span class="status status-draft"><span class="status-dot"></span>Draft</span>
+      <div class="row-action"><div class="row-btn"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div>
+    </a>
 
   </div>
 </section>
@@ -620,7 +672,7 @@ body {
     <img src="https://media.hellofresh.com/w_256,q_100,f_auto,c_limit,fl_lossy/hellofresh_website/logo/Hello_Fresh_Lockup.png" alt="HelloFresh" class="footer-logo">
     <span class="footer-text">Product Marketing</span>
   </div>
-  <span class="footer-updated">Last updated: May 2026</span>
+  <span class="footer-updated">Last updated: June 2026</span>
 </footer>
 
 <script src="auth.js"></script>
