@@ -57,6 +57,9 @@
   --st-live-bg: #ECFDF5;
   --st-completed: #6366F1;
   --st-completed-bg: #EEF2FF;
+
+  --release-color: #D97706;
+  --release-bg: #FFFBEB;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -69,7 +72,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* ─── AUTH SCREEN ─── */
+/* AUTH SCREEN */
 .auth-screen {
   min-height: 100vh;
   display: flex;
@@ -88,16 +91,12 @@ body {
   text-align: center;
 }
 
-.auth-card .auth-logo {
-  height: 28px;
-  margin-bottom: 24px;
-}
-
 .auth-card h1 {
   font-family: var(--font-headline);
   font-size: 22px;
   font-weight: 700;
   margin-bottom: 6px;
+  color: var(--brand-green);
 }
 
 .auth-card p {
@@ -167,7 +166,7 @@ body {
   margin-bottom: 4px;
 }
 
-/* ─── MAIN APP ─── */
+/* MAIN APP */
 .app { display: none; }
 .app.active { display: block; }
 
@@ -184,7 +183,7 @@ body {
 }
 
 .top-bar-inner {
-  max-width: 1440px;
+  max-width: 1600px;
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -196,16 +195,6 @@ body {
   display: flex;
   align-items: center;
   gap: 14px;
-}
-
-.top-bar-logo {
-  height: 22px;
-}
-
-.top-bar-divider {
-  width: 1px;
-  height: 20px;
-  background: var(--border);
 }
 
 .top-bar h1 {
@@ -246,17 +235,17 @@ body {
   font-weight: 700;
 }
 
-.editor-badge {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
 /* Controls bar */
 .controls-bar {
-  max-width: 1440px;
+  max-width: 1600px;
   margin: 0 auto;
   padding: 16px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.controls-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -264,13 +253,60 @@ body {
   gap: 12px;
 }
 
-.month-nav {
+.controls-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.controls-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* View toggle */
+.view-toggle {
+  display: flex;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.view-toggle button {
+  padding: 7px 14px;
+  border: none;
+  background: transparent;
+  font-size: 12px;
+  font-weight: 500;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: all 0.15s;
+  color: var(--text-secondary);
+}
+
+.view-toggle button.active {
+  background: var(--brand-green);
+  color: white;
+}
+
+.view-toggle button:hover:not(.active) {
+  background: var(--brand-green-light);
+  color: var(--brand-green);
+}
+
+/* Navigation */
+.nav-controls {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.month-nav button {
+.nav-controls button {
   width: 34px;
   height: 34px;
   border: 1px solid var(--border);
@@ -285,13 +321,13 @@ body {
   box-shadow: var(--shadow-sm);
 }
 
-.month-nav button:hover {
+.nav-controls button:hover {
   background: var(--brand-green);
   color: white;
   border-color: var(--brand-green);
 }
 
-.month-nav .current-month {
+.nav-controls .nav-label {
   font-family: var(--font-headline);
   font-size: 18px;
   font-weight: 700;
@@ -299,1674 +335,2090 @@ body {
   text-align: center;
 }
 
-.controls-right {
+.btn-today {
+  padding: 7px 14px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-weight: 500;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: all 0.15s;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-today:hover {
+  background: var(--brand-green-light);
+  color: var(--brand-green);
+  border-color: var(--brand-green);
+}
+
+/* Tabs */
+.init-tabs {
   display: flex;
-  align-items: center;
-  gap: 10px;
+  gap: 4px;
   flex-wrap: wrap;
 }
 
+.init-tab {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  border: 2px solid var(--border);
+  background: white;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: var(--font-body);
+}
+
+.init-tab.active {
+  border-color: var(--brand-green);
+  background: var(--brand-green-light);
+  color: var(--brand-green);
+}
+
+.init-tab:hover:not(.active) {
+  border-color: var(--text-tertiary);
+}
+
+/* Search and filters */
 .search-box {
   position: relative;
 }
 
 .search-box input {
-  padding: 7px 12px 7px 30px;
+  padding: 7px 12px 7px 32px;
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   font-size: 12px;
   font-family: var(--font-body);
+  width: 180px;
   background: white;
   box-shadow: var(--shadow-sm);
-  width: 180px;
-  transition: all 0.2s;
+  transition: all 0.15s;
 }
 
 .search-box input:focus {
   outline: none;
   border-color: var(--brand-green);
-  width: 220px;
+  width: 240px;
 }
 
-.search-box .search-icon {
+.search-box::before {
+  content: '\1F50D';
   position: absolute;
   left: 10px;
   top: 50%;
   transform: translateY(-50%);
   font-size: 12px;
-  color: var(--text-tertiary);
-  pointer-events: none;
 }
 
-.search-results {
-  position: absolute;
-  top: calc(100% + 6px);
-  left: 0;
-  right: 0;
-  min-width: 320px;
+.filter-select {
+  padding: 7px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-family: var(--font-body);
+  background: white;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: var(--brand-green);
+}
+
+/* Market pills */
+.market-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  padding: 8px 0;
+  border-top: 1px solid var(--border-light);
+}
+
+.market-row-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-right: 4px;
+}
+
+.market-pill {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 10px;
+  font-weight: 600;
+  border: 1.5px solid var(--border);
+  background: white;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: var(--font-body);
+  user-select: none;
+}
+
+.market-pill.active {
+  background: var(--brand-green);
+  color: white;
+  border-color: var(--brand-green);
+}
+
+.market-pill:hover:not(.active) {
+  border-color: var(--brand-green);
+  color: var(--brand-green);
+}
+
+.market-quick-btn {
+  padding: 4px 8px;
+  border-radius: 10px;
+  font-size: 10px;
+  font-weight: 600;
+  border: 1px dashed var(--text-tertiary);
+  background: transparent;
+  cursor: pointer;
+  color: var(--text-tertiary);
+  font-family: var(--font-body);
+  transition: all 0.15s;
+}
+
+.market-quick-btn:hover {
+  border-color: var(--brand-green);
+  color: var(--brand-green);
+}
+
+/* Weekly sub-mode toggle */
+.weekly-mode-toggle {
+  display: none;
   background: white;
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
-  box-shadow: var(--shadow-card);
-  max-height: 300px;
-  overflow-y: auto;
-  display: none;
-  z-index: 200;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
 }
 
-.search-results.active { display: block; }
+.weekly-mode-toggle.visible {
+  display: flex;
+}
 
-.search-result-item {
-  padding: 10px 14px;
-  border-bottom: 1px solid var(--border-light);
+.weekly-mode-toggle button {
+  padding: 6px 12px;
+  border: none;
+  background: transparent;
+  font-size: 11px;
+  font-weight: 500;
+  font-family: var(--font-body);
   cursor: pointer;
-  transition: background 0.1s;
-}
-
-.search-result-item:hover { background: var(--brand-green-light); }
-.search-result-item:last-child { border-bottom: none; }
-
-.search-result-item h4 {
-  font-size: 12px;
-  font-weight: 600;
-  margin-bottom: 2px;
-}
-
-.search-result-item p {
-  font-size: 10px;
+  transition: all 0.15s;
   color: var(--text-secondary);
 }
 
-.search-result-empty {
-  padding: 16px;
-  text-align: center;
-  color: var(--text-tertiary);
-  font-size: 12px;
+.weekly-mode-toggle button.active {
+  background: var(--brand-green);
+  color: white;
 }
 
-.btn {
-  padding: 8px 14px;
-  border-radius: var(--radius-sm);
-  font-size: 12px;
-  font-weight: 600;
-  cursor: pointer;
-  border: none;
-  transition: all 0.15s;
-  font-family: var(--font-body);
-  box-shadow: var(--shadow-sm);
+/* Export buttons */
+.export-btns {
+  display: flex;
+  gap: 4px;
 }
 
-.btn-primary { background: var(--brand-green); color: white; }
-.btn-primary:hover { background: var(--brand-green-dark); transform: translateY(-1px); }
-.btn-outline { background: white; border: 1px solid var(--border); color: var(--text-primary); }
-.btn-outline:hover { border-color: var(--brand-green); color: var(--brand-green); }
-.btn-sm { padding: 6px 10px; font-size: 11px; }
-.btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
-
-.filter-select {
-  padding: 7px 10px;
+.export-btn {
+  padding: 6px 10px;
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
-  font-size: 11px;
-  font-family: var(--font-body);
   background: white;
-  box-shadow: var(--shadow-sm);
+  font-size: 11px;
+  font-weight: 500;
+  font-family: var(--font-body);
   cursor: pointer;
+  transition: all 0.15s;
+  box-shadow: var(--shadow-sm);
 }
 
-/* Initiative tabs */
-.initiative-section {
-  max-width: 1440px;
+.export-btn:hover {
+  background: var(--brand-green-light);
+  color: var(--brand-green);
+  border-color: var(--brand-green);
+}
+
+/* CALENDAR CONTENT */
+.calendar-content {
+  max-width: 1600px;
   margin: 0 auto;
-  padding: 0 32px;
+  padding: 0 32px 32px;
 }
 
-.initiative-tabs {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid var(--border-light);
+/* YEAR VIEW */
+.year-view {
+  display: none;
   overflow-x: auto;
 }
 
-.initiative-tab {
-  padding: 8px 16px;
-  border-radius: 8px 8px 0 0;
+.year-view.active { display: block; }
+
+.year-grid {
+  min-width: 1200px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: white;
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.year-header {
+  display: grid;
+  grid-template-columns: 180px repeat(52, 1fr);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 5;
+}
+
+.year-header-cell {
+  padding: 8px 2px;
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  text-align: center;
+  border-right: 1px solid var(--border-light);
+}
+
+.year-header-cell.current-week {
+  background: var(--brand-green-light);
+  color: var(--brand-green);
+  font-weight: 700;
+}
+
+.year-header-cell:first-child {
+  font-size: 11px;
+  color: var(--text-secondary);
+  text-align: left;
+  padding-left: 14px;
+}
+
+.year-row {
+  display: grid;
+  grid-template-columns: 180px repeat(52, 1fr);
+  border-bottom: 1px solid var(--border-light);
+  min-height: 36px;
+  align-items: center;
+  position: relative;
+}
+
+.year-row:last-child { border-bottom: none; }
+
+.year-row-label {
+  padding: 8px 14px;
   font-size: 12px;
   font-weight: 600;
-  cursor: pointer;
+  color: var(--text-primary);
   white-space: nowrap;
-  border: 1px solid transparent;
-  border-bottom: none;
-  transition: all 0.15s;
-  color: var(--text-secondary);
-  position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-right: 1px solid var(--border);
   display: flex;
   align-items: center;
   gap: 6px;
 }
 
-.initiative-tab:hover { background: white; color: var(--text-primary); }
-
-.initiative-tab.active {
-  background: white;
-  color: var(--brand-green);
-  border-color: var(--border-light);
-  box-shadow: 0 -2px 0 var(--brand-green) inset;
+.year-row-label .color-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
 }
 
-.initiative-tab .tab-count {
-  font-size: 9px;
+.year-row.releases-row {
+  background: var(--release-bg);
+}
+
+.year-row.releases-row .year-row-label {
+  color: var(--release-color);
   font-weight: 700;
-  background: var(--border-light);
-  color: var(--text-secondary);
-  padding: 2px 6px;
-  border-radius: 10px;
-  min-width: 18px;
-  text-align: center;
 }
 
-.initiative-tab.active .tab-count {
+.year-cell {
+  position: relative;
+  height: 100%;
+  border-right: 1px solid var(--border-light);
+}
+
+.year-cell.current-week {
+  background: rgba(6, 122, 70, 0.04);
+}
+
+.year-bar {
+  position: absolute;
+  top: 8px;
+  bottom: 8px;
+  left: 1px;
+  right: 1px;
+  border-radius: 4px;
+  opacity: 0.8;
+  min-height: 20px;
+}
+
+.year-bar.bar-start {
+  left: 2px;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+
+.year-bar.bar-end {
+  right: 2px;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+.year-bar.bar-single {
+  left: 4px;
+  right: 4px;
+  border-radius: 6px;
+}
+
+.release-marker {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  width: 10px;
+  height: 10px;
+  background: var(--release-color);
+  border: 2px solid white;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  z-index: 2;
+}
+
+.release-marker-label {
+  position: absolute;
+  top: -2px;
+  left: calc(50% + 10px);
+  font-size: 8px;
+  font-weight: 600;
+  color: var(--release-color);
+  white-space: nowrap;
+  z-index: 3;
+}
+
+/* WEEKLY VIEW */
+.weekly-view {
+  display: none;
+  overflow-x: auto;
+}
+
+.weekly-view.active { display: block; }
+
+.weekly-grid {
+  min-width: 900px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: white;
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.weekly-header {
+  display: grid;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 5;
+}
+
+.weekly-header-cell {
+  padding: 10px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-align: center;
+  border-right: 1px solid var(--border-light);
+}
+
+.weekly-header-cell.current-week {
   background: var(--brand-green-light);
   color: var(--brand-green);
 }
 
-.initiative-meta-bar {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  padding: 10px 0;
-  font-size: 12px;
-  flex-wrap: wrap;
+.weekly-header-cell:first-child {
+  text-align: left;
+  padding-left: 14px;
 }
 
-.meta-pill {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  padding: 4px 10px;
-  background: white;
-  border: 1px solid var(--border-light);
-  border-radius: 20px;
-}
-
-.meta-pill label {
+.weekly-header-cell .week-dates {
   font-size: 9px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.4px;
+  font-weight: 400;
   color: var(--text-tertiary);
+  margin-top: 2px;
 }
 
-.meta-pill span {
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--text-primary);
-}
-
-/* Summary stats */
-.stats-row {
-  display: flex;
-  gap: 8px;
-  padding: 8px 0;
-  flex-wrap: wrap;
-}
-
-.stat-chip {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  padding: 4px 10px;
-  background: white;
-  border: 1px solid var(--border-light);
-  border-radius: 20px;
-  font-size: 10px;
-  font-weight: 600;
-}
-
-.stat-chip .stat-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-}
-
-.stat-chip[data-st="planned"] .stat-dot { background: var(--st-planned); }
-.stat-chip[data-st="in-progress"] .stat-dot { background: var(--st-in-progress); }
-.stat-chip[data-st="live"] .stat-dot { background: var(--st-live); }
-.stat-chip[data-st="completed"] .stat-dot { background: var(--st-completed); }
-
-/* Legend */
-.legend-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  padding: 8px 0 12px;
-  align-items: center;
-}
-
-.legend-chip {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 10px;
-  font-weight: 600;
-  padding: 3px 8px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.15s;
-}
-
-.legend-chip:hover { transform: scale(1.05); }
-.legend-chip .ldot { width: 8px; height: 8px; border-radius: 2px; }
-
-.legend-chip[data-ch="crm"] { background: var(--ch-crm-bg); color: var(--ch-crm); }
-.legend-chip[data-ch="appstore"] { background: var(--ch-appstore-bg); color: var(--ch-appstore); }
-.legend-chip[data-ch="web"] { background: var(--ch-web-bg); color: var(--ch-web); }
-.legend-chip[data-ch="paid"] { background: var(--ch-paid-bg); color: var(--ch-paid); }
-.legend-chip[data-ch="influencers"] { background: var(--ch-influencers-bg); color: var(--ch-influencers); }
-.legend-chip[data-ch="organic"] { background: var(--ch-organic-bg); color: var(--ch-organic); }
-.legend-chip[data-ch="print"] { background: var(--ch-print-bg); color: var(--ch-print); }
-
-/* ─── CALENDAR GRID ─── */
-.calendar-section {
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 0 32px 32px;
-}
-
-.calendar {
-  background: white;
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
-  overflow: hidden;
-  box-shadow: var(--shadow-card);
-}
-
-.calendar-header {
+.weekly-row {
   display: grid;
-  grid-template-columns: 40px repeat(7, 1fr);
-  background: var(--brand-green);
+  border-bottom: 1px solid var(--border-light);
+  min-height: 48px;
+  align-items: stretch;
+  position: relative;
 }
 
-.calendar-header div {
-  padding: 10px;
-  text-align: center;
+.weekly-row:last-child { border-bottom: none; }
+
+.weekly-row-label {
+  padding: 10px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-primary);
+  border-right: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.weekly-row-label .color-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.weekly-row.releases-row {
+  background: var(--release-bg);
+  min-height: 40px;
+}
+
+.weekly-cell {
+  position: relative;
+  border-right: 1px solid var(--border-light);
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.weekly-cell.current-week {
+  background: rgba(6, 122, 70, 0.04);
+}
+
+.weekly-bar {
+  height: 22px;
+  border-radius: 4px;
+  opacity: 0.85;
+  display: flex;
+  align-items: center;
+  padding: 0 6px;
+  font-size: 9px;
+  font-weight: 500;
+  color: white;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.weekly-entry-chip {
+  padding: 3px 6px;
+  border-radius: 4px;
+  font-size: 9px;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: default;
+}
+
+/* MONTH VIEW */
+.month-view {
+  display: none;
+}
+
+.month-view.active { display: block; }
+
+.month-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: white;
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.month-day-header {
+  padding: 10px 8px;
   font-size: 11px;
   font-weight: 600;
-  color: white;
+  color: var(--text-tertiary);
+  text-align: center;
   text-transform: uppercase;
-  letter-spacing: 0.6px;
+  letter-spacing: 0.5px;
+  background: white;
+  border-bottom: 1px solid var(--border);
 }
 
-.calendar-header .wk-header {
-  font-size: 9px;
-  opacity: 0.7;
+.month-day-cell {
+  min-height: 130px;
+  border-right: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border-light);
+  padding: 6px;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.1s;
 }
 
-.calendar-body {
-  display: grid;
-  grid-template-columns: 40px repeat(7, 1fr);
+.month-day-cell:nth-child(7n) { border-right: none; }
+
+.month-day-cell:hover { background: rgba(6, 122, 70, 0.02); }
+
+.month-day-cell.other-month {
+  background: #FDFCFA;
+  opacity: 0.5;
 }
 
-.week-number {
+.month-day-cell.today {
+  background: var(--brand-green-light);
+}
+
+.month-day-cell.today .day-number {
+  background: var(--brand-green);
+  color: white;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 10px;
-  font-weight: 600;
-  color: var(--text-tertiary);
-  background: #FAFAF8;
-  border-right: 1px solid var(--border-light);
-  border-bottom: 1px solid var(--border-light);
-  min-height: 130px;
 }
-
-.calendar-day {
-  min-height: 130px;
-  border-right: 1px solid var(--border-light);
-  border-bottom: 1px solid var(--border-light);
-  padding: 6px 5px;
-  position: relative;
-  transition: background 0.1s;
-  cursor: pointer;
-}
-
-.calendar-day:nth-child(8n) { border-right: none; }
-.calendar-day:hover { background: #FDFCFA; }
-.calendar-day.other-month { background: #FBFAF8; }
-.calendar-day.other-month .day-number { color: var(--text-tertiary); }
-.calendar-day.today { background: var(--brand-green-light); box-shadow: inset 0 0 0 2px var(--brand-green); border-radius: 2px; }
-.calendar-day.weekend { background: #FDFCFB; }
 
 .day-number {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 4px;
-  padding: 0 2px;
-}
-
-.day-num {
   font-size: 12px;
   font-weight: 600;
   color: var(--text-secondary);
-}
-
-.today .day-num {
-  background: var(--brand-green);
-  color: white;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
+  margin-bottom: 4px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: 11px;
+  justify-content: flex-end;
 }
 
-/* Entry chips */
+.release-banner {
+  background: var(--release-bg);
+  border: 1px solid var(--release-color);
+  border-radius: 4px;
+  padding: 2px 6px;
+  margin-bottom: 3px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.release-banner .diamond {
+  width: 6px;
+  height: 6px;
+  background: var(--release-color);
+  transform: rotate(45deg);
+  flex-shrink: 0;
+}
+
+.release-banner .release-text {
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--release-color);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .day-entries {
   display: flex;
   flex-direction: column;
   gap: 2px;
 }
 
-.entry-chip {
-  font-size: 10px;
+.day-entry {
   padding: 3px 6px;
   border-radius: 4px;
+  font-size: 10px;
   font-weight: 500;
-  display: flex;
-  align-items: center;
-  gap: 3px;
-  cursor: pointer;
-  transition: all 0.1s;
-  overflow: hidden;
-  border-left: 3px solid transparent;
-  position: relative;
-}
-
-.entry-chip:hover { transform: translateX(1px); box-shadow: var(--shadow-sm); }
-
-.entry-chip .status-dot {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-.entry-chip .status-dot[data-status="planned"] { background: var(--st-planned); }
-.entry-chip .status-dot[data-status="in-progress"] { background: var(--st-in-progress); }
-.entry-chip .status-dot[data-status="live"] { background: var(--st-live); }
-.entry-chip .status-dot[data-status="completed"] { background: var(--st-completed); }
-
-.entry-chip .ch-label {
-  font-size: 8px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.2px;
-  opacity: 0.75;
-  flex-shrink: 0;
-}
-
-.entry-chip .sub-label {
-  font-size: 8px;
-  opacity: 0.6;
-  flex-shrink: 0;
-}
-
-.entry-chip .entry-text {
-  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: opacity 0.1s;
+  border-left: 3px solid;
 }
 
-.entry-chip[data-channel="crm"] { background: var(--ch-crm-bg); color: var(--ch-crm); border-left-color: var(--ch-crm); }
-.entry-chip[data-channel="appstore"] { background: var(--ch-appstore-bg); color: var(--ch-appstore); border-left-color: var(--ch-appstore); }
-.entry-chip[data-channel="web"] { background: var(--ch-web-bg); color: var(--ch-web); border-left-color: var(--ch-web); }
-.entry-chip[data-channel="paid"] { background: var(--ch-paid-bg); color: var(--ch-paid); border-left-color: var(--ch-paid); }
-.entry-chip[data-channel="influencers"] { background: var(--ch-influencers-bg); color: var(--ch-influencers); border-left-color: var(--ch-influencers); }
-.entry-chip[data-channel="organic"] { background: var(--ch-organic-bg); color: var(--ch-organic); border-left-color: var(--ch-organic); }
-.entry-chip[data-channel="print"] { background: var(--ch-print-bg); color: var(--ch-print); border-left-color: var(--ch-print); }
+.day-entry:hover { opacity: 0.8; }
 
-/* Multi-day span bar */
-.span-bar {
-  font-size: 9px;
-  font-weight: 600;
+.day-more-btn {
   padding: 3px 6px;
-  border-radius: 4px;
-  margin-bottom: 2px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  cursor: pointer;
-  position: relative;
-}
-
-.span-bar.span-start { border-radius: 4px 0 0 4px; margin-right: -5px; padding-right: 8px; }
-.span-bar.span-mid { border-radius: 0; margin-left: -5px; margin-right: -5px; padding-left: 8px; }
-.span-bar.span-end { border-radius: 0 4px 4px 0; margin-left: -5px; padding-left: 8px; }
-.span-bar.span-single { border-radius: 4px; }
-
-.span-bar[data-channel="crm"] { background: var(--ch-crm); color: white; }
-.span-bar[data-channel="appstore"] { background: var(--ch-appstore); color: white; }
-.span-bar[data-channel="web"] { background: var(--ch-web); color: white; }
-.span-bar[data-channel="paid"] { background: var(--ch-paid); color: white; }
-.span-bar[data-channel="influencers"] { background: var(--ch-influencers); color: white; }
-.span-bar[data-channel="organic"] { background: var(--ch-organic); color: white; }
-.span-bar[data-channel="print"] { background: var(--ch-print); color: white; }
-
-.more-indicator {
   font-size: 10px;
-  color: var(--text-tertiary);
-  padding: 2px;
-  text-align: center;
-  cursor: pointer;
   font-weight: 600;
+  color: var(--brand-green);
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.1s;
 }
 
-.more-indicator:hover { color: var(--brand-green); }
+.day-more-btn:hover {
+  background: var(--brand-green-light);
+}
 
-/* Day detail */
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-@keyframes slideUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
-
-.detail-overlay {
-  position: fixed;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background: rgba(29,29,29,0.5);
+/* MODAL */
+.modal-overlay {
   display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 1000;
   align-items: center;
   justify-content: center;
-  z-index: 999;
-  backdrop-filter: blur(3px);
-  animation: fadeIn 0.15s ease;
+  padding: 32px;
+  backdrop-filter: blur(4px);
 }
 
-.detail-overlay.active { display: flex; }
+.modal-overlay.active {
+  display: flex;
+}
 
-.detail-panel {
+.modal {
   background: white;
-  border-radius: 16px;
-  padding: 28px;
-  width: 500px;
-  max-width: 92vw;
+  border-radius: 20px;
+  width: 600px;
+  max-width: 100%;
   max-height: 80vh;
   overflow-y: auto;
   box-shadow: var(--shadow-modal);
-  animation: slideUp 0.2s ease;
+  animation: modalIn 0.2s ease;
 }
 
-.detail-panel h2 {
-  font-family: var(--font-headline);
-  font-size: 17px;
-  font-weight: 700;
-  margin-bottom: 3px;
+@keyframes modalIn {
+  from { opacity: 0; transform: scale(0.95) translateY(10px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
 }
 
-.detail-subtitle { font-size: 12px; color: var(--text-secondary); margin-bottom: 18px; }
-
-.detail-group { margin-bottom: 14px; }
-.detail-group-label {
-  font-size: 10px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.4px;
-  padding: 4px 10px;
-  border-radius: 4px;
-  display: inline-block;
-  margin-bottom: 6px;
-}
-
-.detail-entry {
-  padding: 10px 14px;
-  border: 1px solid var(--border-light);
-  border-radius: var(--radius-sm);
-  margin-bottom: 5px;
+.modal-header {
+  padding: 24px 28px 16px;
+  border-bottom: 1px solid var(--border-light);
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.modal-header h2 {
+  font-family: var(--font-headline);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.modal-close {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: var(--bg-cream);
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: all 0.15s;
 }
 
-.detail-entry:hover { border-color: var(--brand-green); background: var(--brand-green-light); }
-.detail-entry-info h4 { font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 6px; }
-.detail-entry-info p { font-size: 11px; color: var(--text-secondary); margin-top: 2px; }
-.detail-entry-meta { font-size: 10px; color: var(--text-tertiary); text-align: right; line-height: 1.6; }
-.detail-empty { text-align: center; padding: 28px; color: var(--text-tertiary); font-size: 13px; }
+.modal-close:hover {
+  background: #fee2e2;
+  color: #DC2626;
+}
 
-.status-badge {
+.modal-body {
+  padding: 20px 28px 28px;
+}
+
+.modal-entries {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.modal-entry {
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1px solid var(--border-light);
+  transition: all 0.15s;
+}
+
+.modal-entry:hover {
+  border-color: var(--border);
+  box-shadow: var(--shadow-sm);
+}
+
+.modal-entry-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.modal-entry-init {
+  padding: 2px 8px;
+  border-radius: 10px;
   font-size: 9px;
   font-weight: 600;
-  padding: 2px 7px;
-  border-radius: 10px;
-  text-transform: capitalize;
+  color: white;
 }
 
-.status-badge[data-status="planned"] { background: var(--st-planned-bg); color: var(--st-planned); }
-.status-badge[data-status="in-progress"] { background: var(--st-in-progress-bg); color: var(--st-in-progress); }
-.status-badge[data-status="live"] { background: var(--st-live-bg); color: var(--st-live); }
-.status-badge[data-status="completed"] { background: var(--st-completed-bg); color: var(--st-completed); }
-
-/* Export bar */
-.export-section {
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 0 32px 40px;
-}
-
-.export-card {
-  background: white;
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
-  padding: 16px 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  box-shadow: var(--shadow-sm);
-}
-
-.export-card p { font-size: 12px; color: var(--text-secondary); }
-.export-actions { display: flex; gap: 6px; flex-wrap: wrap; }
-
-/* Keyboard hint */
-.keyboard-hint {
-  position: fixed;
-  bottom: 16px;
-  right: 16px;
-  background: white;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  padding: 8px 12px;
-  font-size: 10px;
-  color: var(--text-tertiary);
-  box-shadow: var(--shadow-sm);
-  display: flex;
-  gap: 12px;
-  z-index: 50;
-}
-
-.keyboard-hint kbd {
-  background: var(--border-light);
-  padding: 1px 5px;
-  border-radius: 3px;
-  font-family: var(--font-body);
+.modal-entry-channel {
   font-size: 10px;
   font-weight: 600;
-  color: var(--text-secondary);
+  padding: 2px 6px;
+  border-radius: 4px;
 }
 
-/* Toast notification */
-.toast {
-  position: fixed;
-  bottom: 60px;
-  left: 50%;
-  transform: translateX(-50%) translateY(20px);
-  background: var(--text-primary);
-  color: white;
-  padding: 10px 20px;
-  border-radius: var(--radius-sm);
-  font-size: 12px;
+.modal-entry-status {
+  font-size: 9px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-left: auto;
+}
+
+.modal-entry-text {
+  font-size: 13px;
   font-weight: 500;
-  opacity: 0;
-  transition: all 0.3s ease;
-  z-index: 9999;
-  pointer-events: none;
+  margin-bottom: 4px;
 }
 
-.toast.active {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
+.modal-entry-meta {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
-/* Edit modal */
-.entry-form-overlay {
-  position: fixed;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background: rgba(29,29,29,0.5);
-  display: none;
+.modal-release-banner {
+  padding: 12px 16px;
+  background: var(--release-bg);
+  border: 1px solid var(--release-color);
+  border-radius: 10px;
+  display: flex;
   align-items: center;
-  justify-content: center;
-  z-index: 1100;
-  backdrop-filter: blur(3px);
-  animation: fadeIn 0.15s ease;
-}
-.entry-form-overlay.active { display: flex; }
-
-.entry-form-panel {
-  background: white;
-  border-radius: 16px;
-  padding: 28px;
-  width: 480px;
-  max-width: 92vw;
-  max-height: 85vh;
-  overflow-y: auto;
-  box-shadow: var(--shadow-modal);
-  animation: slideUp 0.2s ease;
+  gap: 10px;
 }
 
-.entry-form-panel h2 {
-  font-family: var(--font-headline);
-  font-size: 17px;
-  font-weight: 700;
-  margin-bottom: 18px;
+.modal-release-banner .diamond {
+  width: 10px;
+  height: 10px;
+  background: var(--release-color);
+  transform: rotate(45deg);
+  flex-shrink: 0;
 }
 
-.form-row {
-  margin-bottom: 14px;
+.modal-release-banner .release-info h4 {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--release-color);
 }
 
-.form-row label {
-  display: block;
+.modal-release-banner .release-info p {
+  font-size: 11px;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+/* ENTRY FORM MODAL */
+.form-modal .modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.form-group label {
   font-size: 11px;
   font-weight: 600;
   color: var(--text-secondary);
-  margin-bottom: 4px;
   text-transform: uppercase;
   letter-spacing: 0.3px;
 }
 
-.form-row input,
-.form-row select,
-.form-row textarea {
-  width: 100%;
+.form-group input,
+.form-group select,
+.form-group textarea {
   padding: 9px 12px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
   font-size: 13px;
   font-family: var(--font-body);
-  transition: border-color 0.15s;
+  transition: border 0.15s;
 }
 
-.form-row input:focus,
-.form-row select:focus,
-.form-row textarea:focus {
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
   outline: none;
   border-color: var(--brand-green);
 }
 
-.form-row textarea {
+.form-group textarea {
   resize: vertical;
   min-height: 60px;
 }
 
-.form-row-inline {
-  display: flex;
-  gap: 10px;
-}
-
-.form-row-inline .form-row {
-  flex: 1;
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
 }
 
 .form-actions {
   display: flex;
-  gap: 8px;
   justify-content: flex-end;
-  margin-top: 20px;
-  padding-top: 16px;
-  border-top: 1px solid var(--border-light);
+  gap: 8px;
+  margin-top: 8px;
 }
 
-.btn-danger {
-  background: #DC2626;
-  color: white;
+.form-btn {
+  padding: 9px 18px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: all 0.15s;
 }
-.btn-danger:hover { background: #B91C1C; transform: translateY(-1px); }
 
-.detail-add-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  margin-bottom: 14px;
-  padding: 7px 14px;
+.form-btn-primary {
   background: var(--brand-green);
   color: white;
   border: none;
-  border-radius: var(--radius-sm);
-  font-size: 12px;
-  font-weight: 600;
-  cursor: pointer;
-  font-family: var(--font-body);
-  transition: all 0.15s;
-}
-.detail-add-btn:hover { background: var(--brand-green-dark); transform: translateY(-1px); }
-
-.detail-entry-actions {
-  display: flex;
-  gap: 4px;
-  margin-left: 8px;
-  flex-shrink: 0;
 }
 
-.detail-entry-actions button {
-  padding: 4px 8px;
-  font-size: 10px;
-  font-weight: 600;
-  border: 1px solid var(--border);
-  border-radius: 4px;
+.form-btn-primary:hover { background: var(--brand-green-dark); }
+
+.form-btn-cancel {
   background: white;
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+}
+
+.form-btn-cancel:hover { border-color: var(--text-tertiary); }
+
+.form-btn-danger {
+  background: #FEE2E2;
+  color: #DC2626;
+  border: 1px solid #FECACA;
+}
+
+.form-btn-danger:hover { background: #FECACA; }
+
+/* Keyboard shortcuts help */
+.shortcuts-badge {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 6px 12px;
+  font-size: 11px;
+  color: var(--text-tertiary);
+  box-shadow: var(--shadow-card);
   cursor: pointer;
-  font-family: var(--font-body);
+  z-index: 50;
   transition: all 0.15s;
 }
 
-.detail-entry-actions button:hover {
+.shortcuts-badge:hover {
   border-color: var(--brand-green);
   color: var(--brand-green);
 }
 
-.detail-entry-actions button.del-btn:hover {
-  border-color: #DC2626;
-  color: #DC2626;
+.shortcuts-panel {
+  display: none;
+  position: fixed;
+  bottom: 60px;
+  right: 20px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  box-shadow: var(--shadow-card);
+  z-index: 50;
+  min-width: 220px;
 }
 
-.editor-indicator {
-  font-size: 9px;
-  background: var(--brand-green-light);
-  color: var(--brand-green);
-  padding: 2px 8px;
-  border-radius: 10px;
+.shortcuts-panel.active { display: block; }
+
+.shortcuts-panel h4 {
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: var(--text-primary);
+}
+
+.shortcut-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 0;
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+.shortcut-key {
+  padding: 2px 6px;
+  background: var(--bg-cream);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-size: 10px;
   font-weight: 600;
-  margin-left: 8px;
+  font-family: monospace;
 }
-
-/* Loading state */
-.loading-state {
-  text-align: center;
-  padding: 60px 20px;
-  color: var(--text-tertiary);
-  font-size: 14px;
-}
-
-.loading-state .spinner {
-  display: inline-block;
-  width: 24px;
-  height: 24px;
-  border: 3px solid var(--border-light);
-  border-top-color: var(--brand-green);
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-  margin-bottom: 12px;
-}
-
-@keyframes spin { to { transform: rotate(360deg); } }
 
 /* Responsive */
-@media (max-width: 1000px) {
-  .calendar-day { min-height: 100px; }
-  .entry-chip .ch-label, .entry-chip .sub-label { display: none; }
-  .controls-bar, .initiative-section, .calendar-section, .export-section { padding-left: 16px; padding-right: 16px; }
+@media (max-width: 768px) {
+  .controls-bar { padding: 12px 16px; }
+  .calendar-content { padding: 0 16px 16px; }
   .top-bar { padding: 12px 16px; }
-  .search-box input { width: 140px; }
-  .search-box input:focus { width: 180px; }
-  .keyboard-hint { display: none; }
-  .week-number { display: none; }
-  .calendar-header { grid-template-columns: repeat(7, 1fr); }
-  .calendar-body { grid-template-columns: repeat(7, 1fr); }
+  .top-bar h1 { font-size: 15px; }
+  .nav-controls .nav-label { font-size: 14px; min-width: 140px; }
+  .month-day-cell { min-height: 90px; }
+  .day-entry { font-size: 9px; padding: 2px 4px; }
+  .market-row { display: none; }
+  .controls-right { flex-wrap: nowrap; overflow-x: auto; }
 }
 
-@media (max-width: 600px) {
-  .month-nav .current-month { font-size: 15px; min-width: 140px; }
-  .controls-right { width: 100%; }
-  .export-card { flex-direction: column; gap: 12px; align-items: stretch; }
-  .export-card p { text-align: center; }
-  .export-actions { justify-content: center; }
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-tertiary); }
+
+/* Tooltip */
+.tooltip {
+  position: absolute;
+  background: var(--text-primary);
+  color: white;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  pointer-events: none;
+  z-index: 200;
+  max-width: 200px;
+  white-space: normal;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
 </style>
 </head>
 <body>
 
-<!-- ─── AUTH SCREEN ─── -->
+<!-- AUTH SCREEN -->
 <div class="auth-screen" id="authScreen">
   <div class="auth-card">
-    <img src="https://media.hellofresh.com/w_256,q_100,f_auto,c_limit,fl_lossy/hellofresh_website/logo/Hello_Fresh_Lockup.png" alt="HelloFresh" class="auth-logo">
-    <h1>PMM Campaign Calendar</h1>
-    <p>Enter your HelloFresh email to access the calendar.</p>
-    <form onsubmit="handleAuth(event)">
-      <input type="email" id="authEmail" placeholder="you@hellofresh.com" required>
-      <button type="submit" class="auth-btn">Continue</button>
-    </form>
-    <div class="auth-error" id="authError"></div>
-    <p class="auth-note">Your email is stored locally to remember your session.</p>
+    <h1>Campaign Calendar</h1>
+    <p>PMM team planning tool. Enter your email to continue.</p>
+    <input type="email" id="authEmail" placeholder="your.name@hellofresh.com" autocomplete="email">
+    <button class="auth-btn" onclick="handleAuth()">Sign In</button>
+    <div class="auth-error" id="authError">Please use a valid HelloFresh email</div>
+    <p class="auth-note">View access for all HelloFresh domains. Edit access for PMM team.</p>
     <div class="auth-editors-info">
-      <strong>Editors</strong>
-      Marina Kramer, Domitille Park, Kieran Enright, Marina Zinakova, Isabela Martin
-      <br><span style="opacity:0.7">These accounts can add, edit, and delete entries.</span>
+      <strong>Editors:</strong>
+      Kieran, Marina K, Marina Z, Isabela, Domi
     </div>
   </div>
 </div>
 
-<!-- ─── MAIN APP ─── -->
+<!-- MAIN APP -->
 <div class="app" id="app">
-
-  <!-- Top bar -->
+  <!-- Top Bar -->
   <div class="top-bar">
     <div class="top-bar-inner">
       <div class="top-bar-left">
-        <img src="https://media.hellofresh.com/w_256,q_100,f_auto,c_limit,fl_lossy/hellofresh_website/logo/Hello_Fresh_Lockup.png" alt="HelloFresh" class="top-bar-logo">
-        <div class="top-bar-divider"></div>
-        <h1>PMM Campaign Calendar</h1>
+        <h1>Campaign Calendar</h1>
       </div>
       <div class="top-bar-right">
-        <div id="userBadge"></div>
-        <button class="btn btn-outline btn-sm" onclick="logout()">Sign out</button>
+        <div class="user-badge" id="userBadge">
+          <div class="avatar" id="userAvatar">K</div>
+          <span id="userName">Kieran</span>
+        </div>
+        <button class="export-btn" onclick="signOut()" style="font-size:10px;">Sign Out</button>
       </div>
     </div>
   </div>
 
-  <!-- Controls -->
+  <!-- Controls Bar -->
   <div class="controls-bar">
-    <div class="month-nav">
-      <button onclick="changeMonth(-1)" title="Previous month (&#8592;)">&#8249;</button>
-      <span class="current-month" id="currentMonth"></span>
-      <button onclick="changeMonth(1)" title="Next month (&#8594;)">&#8250;</button>
-    </div>
-    <div class="controls-right">
-      <div class="search-box">
-        <span class="search-icon">&#128269;</span>
-        <input type="text" id="searchInput" placeholder="Search entries..." oninput="handleSearch(this.value)" onfocus="handleSearch(this.value)" onblur="setTimeout(()=>closeSearch(),200)">
-        <div class="search-results" id="searchResults"></div>
+    <!-- Row 1: View toggle, navigation, today -->
+    <div class="controls-row">
+      <div class="controls-left">
+        <div class="view-toggle">
+          <button data-view="year" onclick="setView('year')">Year</button>
+          <button data-view="weekly" onclick="setView('weekly')">Weekly</button>
+          <button data-view="month" class="active" onclick="setView('month')">Month</button>
+        </div>
+        <div class="nav-controls">
+          <button onclick="navPrev()">&lsaquo;</button>
+          <span class="nav-label" id="navLabel">June 2026</span>
+          <button onclick="navNext()">&rsaquo;</button>
+        </div>
+        <button class="btn-today" onclick="goToday()">Today</button>
+        <div class="weekly-mode-toggle" id="weeklyModeToggle">
+          <button class="active" data-mode="initiatives" onclick="setWeeklyMode('initiatives')">Initiatives</button>
+          <button data-mode="channels" onclick="setWeeklyMode('channels')">Channels</button>
+        </div>
       </div>
-      <button class="btn btn-outline btn-sm" onclick="goToToday()">Today</button>
-      <select class="filter-select" id="filterChannel" onchange="renderCalendar()">
-        <option value="all">All channels</option>
-        <option value="crm">CRM</option>
-        <option value="appstore">App Store</option>
-        <option value="web">Web</option>
-        <option value="paid">Paid Social</option>
-        <option value="influencers">Influencers</option>
-        <option value="organic">Organic Social</option>
-        <option value="print">Inbox Print</option>
-      </select>
-      <select class="filter-select" id="filterStatus" onchange="renderCalendar()">
-        <option value="all">All statuses</option>
-        <option value="planned">Planned</option>
-        <option value="in-progress">In Progress</option>
-        <option value="live">Live</option>
-        <option value="completed">Completed</option>
-      </select>
-      <select class="filter-select" id="filterOwner" onchange="renderCalendar()">
-        <option value="all">All owners</option>
-      </select>
-    </div>
-  </div>
-
-  <!-- Initiatives -->
-  <div class="initiative-section">
-    <div class="initiative-tabs" id="initiativeTabs"></div>
-    <div class="initiative-meta-bar" id="metaBar"></div>
-    <div class="stats-row" id="statsRow"></div>
-    <div class="legend-row">
-      <div class="legend-chip" data-ch="crm"><div class="ldot" style="background:var(--ch-crm)"></div>CRM</div>
-      <div class="legend-chip" data-ch="appstore"><div class="ldot" style="background:var(--ch-appstore)"></div>App Store</div>
-      <div class="legend-chip" data-ch="web"><div class="ldot" style="background:var(--ch-web)"></div>Web</div>
-      <div class="legend-chip" data-ch="paid"><div class="ldot" style="background:var(--ch-paid)"></div>Paid Social</div>
-      <div class="legend-chip" data-ch="influencers"><div class="ldot" style="background:var(--ch-influencers)"></div>Influencers</div>
-      <div class="legend-chip" data-ch="organic"><div class="ldot" style="background:var(--ch-organic)"></div>Organic Social</div>
-      <div class="legend-chip" data-ch="print"><div class="ldot" style="background:var(--ch-print)"></div>Inbox Print</div>
-    </div>
-  </div>
-
-  <!-- Calendar -->
-  <div class="calendar-section">
-    <div class="calendar">
-      <div class="calendar-header">
-        <div class="wk-header">WK</div>
-        <div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div><div>Sun</div>
-      </div>
-      <div class="calendar-body" id="calendarBody">
-        <div class="loading-state" style="grid-column: 1 / -1;">
-          <div class="spinner"></div>
-          <div>Loading calendar data...</div>
+      <div class="controls-right">
+        <div class="search-box">
+          <input type="text" id="searchInput" placeholder="Search entries..." oninput="applyFilters()">
+        </div>
+        <select class="filter-select" id="channelFilter" onchange="applyFilters()">
+          <option value="">All Channels</option>
+          <option value="crm">CRM</option>
+          <option value="paid">Paid</option>
+          <option value="organic">Organic</option>
+          <option value="influencers">Influencers</option>
+          <option value="web">Web</option>
+          <option value="appstore">App Store</option>
+          <option value="print">Print</option>
+        </select>
+        <select class="filter-select" id="statusFilter" onchange="applyFilters()">
+          <option value="">All Statuses</option>
+          <option value="planned">Planned</option>
+          <option value="in-progress">In Progress</option>
+          <option value="live">Live</option>
+          <option value="completed">Completed</option>
+        </select>
+        <select class="filter-select" id="ownerFilter" onchange="applyFilters()">
+          <option value="">All Owners</option>
+        </select>
+        <div class="export-btns">
+          <button class="export-btn" onclick="exportJSON()">JSON</button>
+          <button class="export-btn" onclick="exportCSV()">CSV</button>
         </div>
       </div>
     </div>
+
+    <!-- Row 2: Initiative tabs -->
+    <div class="controls-row">
+      <div class="init-tabs" id="initTabs"></div>
+    </div>
+
+    <!-- Row 3: Market pills -->
+    <div class="market-row" id="marketRow"></div>
   </div>
 
-  <!-- Export -->
-  <div class="export-section">
-    <div class="export-card">
-      <p>Export the calendar data for use in spreadsheets or other tools.</p>
-      <div class="export-actions">
-        <button class="btn btn-outline btn-sm" onclick="exportData()">Export JSON</button>
-        <button class="btn btn-outline btn-sm" onclick="exportCSV()">Export CSV</button>
-      </div>
-    </div>
+  <!-- Calendar Views -->
+  <div class="calendar-content">
+    <div class="year-view" id="yearView"></div>
+    <div class="weekly-view" id="weeklyView"></div>
+    <div class="month-view active" id="monthView"></div>
   </div>
 </div>
 
-<!-- Day Detail -->
-<div class="detail-overlay" id="detailOverlay" onclick="if(event.target===this)closeDetail()">
-  <div class="detail-panel">
-    <h2 id="detailTitle"></h2>
-    <p class="detail-subtitle" id="detailSubtitle"></p>
-    <div id="detailContent"></div>
+<!-- Day Detail Modal -->
+<div class="modal-overlay" id="dayModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 id="dayModalTitle">Monday, June 2</h2>
+      <button class="modal-close" onclick="closeModal('dayModal')">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-entries" id="dayModalEntries"></div>
+    </div>
   </div>
 </div>
 
 <!-- Entry Form Modal -->
-<div class="entry-form-overlay" id="entryFormOverlay" onclick="if(event.target===this)closeEntryForm()">
-  <div class="entry-form-panel">
-    <h2 id="entryFormTitle">Add Entry</h2>
-    <form id="entryForm" onsubmit="saveEntry(event)">
-      <input type="hidden" id="entryFormId">
-      <input type="hidden" id="entryFormInitId">
+<div class="modal-overlay form-modal" id="entryFormModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 id="entryFormTitle">New Entry</h2>
+      <button class="modal-close" onclick="closeModal('entryFormModal')">&times;</button>
+    </div>
+    <div class="modal-body">
       <div class="form-row">
-        <label>Activity name</label>
-        <input type="text" id="entryText" placeholder="e.g. Summer Campaign Email" required>
-      </div>
-      <div class="form-row-inline">
-        <div class="form-row">
+        <div class="form-group">
+          <label>Initiative</label>
+          <select id="formInitiative"></select>
+        </div>
+        <div class="form-group">
           <label>Channel</label>
-          <select id="entryChannel" onchange="updateSubchannels()" required>
-            <option value="">Select channel</option>
+          <select id="formChannel">
             <option value="crm">CRM</option>
-            <option value="appstore">App Store</option>
-            <option value="web">Web</option>
-            <option value="paid">Paid Social</option>
+            <option value="paid">Paid</option>
+            <option value="organic">Organic</option>
             <option value="influencers">Influencers</option>
-            <option value="organic">Organic Social</option>
-            <option value="print">Inbox Print</option>
-          </select>
-        </div>
-        <div class="form-row">
-          <label>Type</label>
-          <select id="entrySubchannel" required>
-            <option value="">Select type</option>
+            <option value="web">Web</option>
+            <option value="appstore">App Store</option>
+            <option value="print">Print</option>
           </select>
         </div>
       </div>
-      <div class="form-row-inline">
-        <div class="form-row">
-          <label>Start date</label>
-          <input type="date" id="entryDate" required>
-        </div>
-        <div class="form-row">
-          <label>End date (optional)</label>
-          <input type="date" id="entryEndDate">
-        </div>
+      <div class="form-group">
+        <label>Text</label>
+        <input type="text" id="formText" placeholder="Entry description">
       </div>
-      <div class="form-row-inline">
-        <div class="form-row">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Subchannel</label>
+          <input type="text" id="formSubchannel" placeholder="e.g. Email, Push, Meta">
+        </div>
+        <div class="form-group">
           <label>Owner</label>
-          <input type="text" id="entryOwner" placeholder="e.g. Kieran">
+          <input type="text" id="formOwner" placeholder="Owner name">
         </div>
-        <div class="form-row">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Start Date</label>
+          <input type="date" id="formDate">
+        </div>
+        <div class="form-group">
+          <label>End Date (optional)</label>
+          <input type="date" id="formEndDate">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
           <label>Status</label>
-          <select id="entryStatus">
+          <select id="formStatus">
             <option value="planned">Planned</option>
             <option value="in-progress">In Progress</option>
             <option value="live">Live</option>
             <option value="completed">Completed</option>
           </select>
         </div>
+        <div class="form-group">
+          <label>Markets</label>
+          <input type="text" id="formMarkets" placeholder="US, UK, DE...">
+        </div>
       </div>
-      <div class="form-row">
+      <div class="form-group">
         <label>Notes</label>
-        <textarea id="entryNotes" placeholder="Optional notes..."></textarea>
+        <textarea id="formNotes" placeholder="Additional context"></textarea>
       </div>
       <div class="form-actions">
-        <button type="button" class="btn btn-outline" onclick="closeEntryForm()">Cancel</button>
-        <button type="button" class="btn btn-danger" id="entryDeleteBtn" onclick="deleteEntry()" style="display:none">Delete</button>
-        <button type="submit" class="btn btn-primary">Save</button>
+        <button class="form-btn form-btn-danger" id="formDeleteBtn" onclick="deleteEntry()" style="display:none;">Delete</button>
+        <button class="form-btn form-btn-cancel" onclick="closeModal('entryFormModal')">Cancel</button>
+        <button class="form-btn form-btn-primary" onclick="saveEntry()">Save</button>
       </div>
-    </form>
+    </div>
   </div>
 </div>
 
-<!-- Keyboard hints -->
-<div class="keyboard-hint" id="keyboardHint">
-  <span><kbd>&#8592;</kbd><kbd>&#8594;</kbd> Navigate months</span>
-  <span><kbd>T</kbd> Today</span>
-  <span><kbd>/</kbd> Search</span>
-  <span><kbd>Esc</kbd> Close</span>
+<!-- Keyboard Shortcuts -->
+<div class="shortcuts-badge" onclick="toggleShortcuts()">? Shortcuts</div>
+<div class="shortcuts-panel" id="shortcutsPanel">
+  <h4>Keyboard Shortcuts</h4>
+  <div class="shortcut-row"><span>Previous</span><span class="shortcut-key">&larr;</span></div>
+  <div class="shortcut-row"><span>Next</span><span class="shortcut-key">&rarr;</span></div>
+  <div class="shortcut-row"><span>Today</span><span class="shortcut-key">T</span></div>
+  <div class="shortcut-row"><span>Year view</span><span class="shortcut-key">1</span></div>
+  <div class="shortcut-row"><span>Weekly view</span><span class="shortcut-key">2</span></div>
+  <div class="shortcut-row"><span>Month view</span><span class="shortcut-key">3</span></div>
+  <div class="shortcut-row"><span>New entry</span><span class="shortcut-key">N</span></div>
+  <div class="shortcut-row"><span>Search</span><span class="shortcut-key">/</span></div>
 </div>
 
-<!-- Toast -->
-<div class="toast" id="toast"></div>
+<script>
+const INLINE_CALENDAR_DATA = {"markets":["US","UK","DE","AU","CA","NL","SE","DK","NO","BE","AT","CH","FR","IE","NZ"],"releases":[{"id":"rel-1","date":"2026-03-10","name":"Cookbook v2.0","description":"Recipe saving from social media","markets":["US","UK","AU","CA"]},{"id":"rel-2","date":"2026-04-21","name":"Rewards 2.0 Beta","description":"Loyalty program beta launch for internal testing","markets":["US"]},{"id":"rel-3","date":"2026-06-16","name":"Rewards 2.0 GA","description":"Full rollout of loyalty program to all active subscribers","markets":["US","UK","DE","AU","CA"]},{"id":"rel-4","date":"2026-07-01","name":"Summer Menu Refresh","description":"New seasonal menu with 12 exclusive recipes","markets":["US","UK","DE","AU","CA","NL","SE","DK","NO","BE","AT","CH","FR","IE","NZ"]},{"id":"rel-5","date":"2026-08-18","name":"Meal Planner v3","description":"AI-powered weekly meal planning assistant","markets":["US","UK","AU"]},{"id":"rel-6","date":"2026-09-15","name":"Cookbook Expansion","description":"Cookbook opens to non-subscribers with premium tier","markets":["US","UK","DE","AU","CA"]},{"id":"rel-7","date":"2026-11-01","name":"Holiday Collection","description":"Festive recipe collection and gift box feature","markets":["US","UK","DE","AU","CA","NL","SE","DK","NO","BE","AT","CH","FR","IE","NZ"]}],"initiatives":[{"id":"init-summer","name":"Summer Campaign","poc":"Kieran","objective":"Drive reactivation and trial through seasonal summer messaging","markets":["US","UK","DE","AU","CA"],"color":"#EA580C","entries":[{"id":"s1","date":"2026-06-02","endDate":"2026-06-04","text":"Launch email sequence","channel":"crm","subchannel":"Email","owner":"Marina K","status":"planned","notes":"Active subs, all markets. 3 day drip.","markets":["US","UK","DE","AU","CA"]},{"id":"s2","date":"2026-06-02","text":"Welcome push","channel":"crm","subchannel":"Push","owner":"Marina K","status":"planned","notes":"New joiners W22","markets":["US","UK","DE","AU","CA"]},{"id":"s3","date":"2026-06-03","text":"Teaser reel","channel":"organic","subchannel":"IG","owner":"Isabela","status":"planned","notes":"","markets":["US","UK","DE","AU","CA"]},{"id":"s4","date":"2026-06-02","endDate":"2026-06-15","text":"Prospecting (broad)","channel":"paid","subchannel":"Meta","owner":"Domi","status":"planned","notes":"3 creatives, broad targeting","markets":["US","UK","DE"]},{"id":"s5","date":"2026-06-02","endDate":"2026-06-08","text":"Display retargeting","channel":"paid","subchannel":"Display","owner":"Domi","status":"planned","notes":"","markets":["US","UK"]},{"id":"s6","date":"2026-06-05","text":"A/B test subject lines","channel":"crm","subchannel":"Email","owner":"Kieran","status":"in-progress","notes":"Urgency vs benefit framing","markets":["US","UK","DE","AU","CA"]},{"id":"s7","date":"2026-06-05","text":"TikTok reveal","channel":"organic","subchannel":"TikTok","owner":"Isabela","status":"planned","notes":"","markets":["US","UK","AU"]},{"id":"s8","date":"2026-06-05","text":"Launch post","channel":"organic","subchannel":"FB","owner":"Isabela","status":"planned","notes":"","markets":["US","UK","DE","AU","CA"]},{"id":"s9","date":"2026-06-04","endDate":"2026-06-06","text":"Creator posts wave 1","channel":"influencers","subchannel":"Campaign","owner":"Isabela","status":"planned","notes":"3 creators, IG + TikTok","markets":["US","UK"]},{"id":"s10","date":"2026-06-09","text":"Reminder push","channel":"crm","subchannel":"Push","owner":"Marina K","status":"planned","notes":"","markets":["US","UK","DE","AU","CA"]},{"id":"s11","date":"2026-06-09","text":"Promo inbox card","channel":"crm","subchannel":"Inbox","owner":"Kieran","status":"planned","notes":"","markets":["US","UK","DE","AU","CA"]},{"id":"s12","date":"2026-06-09","endDate":"2026-06-11","text":"Search brand terms","channel":"paid","subchannel":"Search","owner":"Domi","status":"planned","notes":"","markets":["US","UK","DE"]},{"id":"s13","date":"2026-06-10","text":"LP goes live","channel":"web","subchannel":"Landing page","owner":"Kieran","status":"planned","notes":"Dedicated summer landing page","markets":["US","UK","DE","AU","CA"]},{"id":"s14","date":"2026-06-10","text":"Carousel post","channel":"organic","subchannel":"IG","owner":"Isabela","status":"planned","notes":"5 slides, recipe highlights","markets":["US","UK","DE","AU","CA"]},{"id":"s15","date":"2026-06-08","endDate":"2026-06-22","text":"Box flyer","channel":"print","subchannel":"Flyer","owner":"Marina Z","status":"planned","notes":"W23+W24 boxes, all markets","markets":["US","UK","DE","AU","CA"]},{"id":"s16","date":"2026-06-12","text":"Mid-month nudge","channel":"crm","subchannel":"Email","owner":"Marina K","status":"planned","notes":"Churning segment","markets":["US","UK","DE","AU","CA"]},{"id":"s17","date":"2026-06-15","text":"Summer CPP live","channel":"appstore","subchannel":"Custom page","owner":"Marina Z","status":"in-progress","notes":"Linked to Meta paid","markets":["US","UK","DE","AU","CA"]},{"id":"s18","date":"2026-06-16","endDate":"2026-06-30","text":"Meta creative refresh","channel":"paid","subchannel":"Meta","owner":"Domi","status":"planned","notes":"Swap in top performers from W1","markets":["US","UK","DE"]},{"id":"s19","date":"2026-06-16","text":"Homepage hero banner","channel":"crm","subchannel":"In-App","owner":"Kieran","status":"planned","notes":"","markets":["US","UK","DE","AU","CA"]},{"id":"s20","date":"2026-06-16","text":"SMS blast","channel":"crm","subchannel":"SMS","owner":"Marina K","status":"planned","notes":"US only, reactivation","markets":["US"]},{"id":"s21","date":"2026-06-18","endDate":"2026-06-20","text":"Creator wave 2","channel":"influencers","subchannel":"Campaign","owner":"Isabela","status":"planned","notes":"","markets":["US","UK"]},{"id":"s22","date":"2026-06-17","text":"UGC repost","channel":"organic","subchannel":"IG","owner":"Isabela","status":"planned","notes":"","markets":["US","UK","DE","AU","CA"]},{"id":"s23","date":"2026-06-23","text":"Final week email","channel":"crm","subchannel":"Email","owner":"Marina K","status":"planned","notes":"Last call messaging","markets":["US","UK","DE","AU","CA"]},{"id":"s24","date":"2026-06-01","endDate":"2026-06-30","text":"BAU optimisation","channel":"appstore","subchannel":"BAU","owner":"Marina Z","status":"live","notes":"Seasonal screenshots","markets":["US","UK","DE","AU","CA"]}]},{"id":"init-loyalty","name":"Rewards Launch","poc":"Marina K","objective":"Launch Rewards 2.0 to active subscribers and drive first engagement","markets":["US","UK","DE","AU","CA"],"color":"#7C3AED","entries":[{"id":"l1","date":"2026-06-10","endDate":"2026-06-12","text":"Teaser email drip","channel":"crm","subchannel":"Email","owner":"Marina K","status":"planned","notes":"Build anticipation","markets":["US","UK","DE","AU","CA"]},{"id":"l2","date":"2026-06-12","text":"Teaser push","channel":"crm","subchannel":"Push","owner":"Marina K","status":"planned","notes":"","markets":["US","UK","DE","AU","CA"]},{"id":"l3","date":"2026-06-16","text":"Launch day email","channel":"crm","subchannel":"Email","owner":"Marina K","status":"planned","notes":"All active subs","markets":["US","UK","DE","AU","CA"]},{"id":"l4","date":"2026-06-16","text":"Launch push","channel":"crm","subchannel":"Push","owner":"Marina K","status":"planned","notes":"","markets":["US","UK","DE","AU","CA"]},{"id":"l5","date":"2026-06-16","text":"Full-screen in-app modal","channel":"crm","subchannel":"In-App","owner":"Kieran","status":"planned","notes":"Takeover on app open","markets":["US","UK","DE","AU","CA"]},{"id":"l6","date":"2026-06-16","text":"Inbox card","channel":"crm","subchannel":"Inbox","owner":"Kieran","status":"planned","notes":"","markets":["US","UK","DE","AU","CA"]},{"id":"l7","date":"2026-06-17","text":"IG announcement","channel":"organic","subchannel":"IG","owner":"Isabela","status":"planned","notes":"","markets":["US","UK","DE","AU","CA"]},{"id":"l8","date":"2026-06-17","endDate":"2026-06-24","text":"Meta awareness burst","channel":"paid","subchannel":"Meta","owner":"Domi","status":"planned","notes":"","markets":["US","UK","DE"]},{"id":"l9","date":"2026-06-20","text":"Reminder email (non-engagers)","channel":"crm","subchannel":"Email","owner":"Marina K","status":"planned","notes":"","markets":["US","UK","DE","AU","CA"]},{"id":"l10","date":"2026-06-23","text":"First mission push","channel":"crm","subchannel":"Push","owner":"Marina K","status":"planned","notes":"","markets":["US","UK","DE","AU","CA"]}]},{"id":"init-cookbook","name":"Cookbook Growth","poc":"Kieran","objective":"Drive Cookbook adoption and recipe saves among active and lapsed users","markets":["US","UK","AU","CA"],"color":"#0D9488","entries":[{"id":"c1","date":"2026-03-10","endDate":"2026-03-12","text":"Launch email sequence","channel":"crm","subchannel":"Email","owner":"Marina K","status":"completed","notes":"3-day drip for existing app users","markets":["US","UK","AU","CA"]},{"id":"c2","date":"2026-03-10","text":"Launch push notification","channel":"crm","subchannel":"Push","owner":"Marina K","status":"completed","notes":"","markets":["US","UK","AU","CA"]},{"id":"c3","date":"2026-03-10","text":"In-app modal","channel":"crm","subchannel":"In-App","owner":"Kieran","status":"completed","notes":"Full-screen takeover on app open","markets":["US","UK","AU","CA"]},{"id":"c4","date":"2026-03-15","endDate":"2026-04-15","text":"Creator partnerships wave 1","channel":"influencers","subchannel":"Campaign","owner":"Isabela","status":"completed","notes":"Emily Eggers + Spoonful of Si","markets":["US","UK"]},{"id":"c5","date":"2026-04-01","endDate":"2026-04-30","text":"Meta app install campaign","channel":"paid","subchannel":"Meta","owner":"Domi","status":"completed","notes":"Cookbook angle for app installs","markets":["US","UK","AU"]},{"id":"c6","date":"2026-05-05","endDate":"2026-05-30","text":"Organic social content series","channel":"organic","subchannel":"IG","owner":"Isabela","status":"live","notes":"Weekly cookbook tips and recipe saves","markets":["US","UK","AU","CA"]},{"id":"c7","date":"2026-05-12","endDate":"2026-06-12","text":"Creator wave 2","channel":"influencers","subchannel":"Campaign","owner":"Isabela","status":"live","notes":"Extended creator partnerships","markets":["US","UK"]},{"id":"c8","date":"2026-06-01","endDate":"2026-06-30","text":"Retention email nurture","channel":"crm","subchannel":"Email","owner":"Marina K","status":"planned","notes":"Weekly recipe inspiration for savers","markets":["US","UK","AU","CA"]},{"id":"c9","date":"2026-07-01","endDate":"2026-07-31","text":"Summer recipes push","channel":"crm","subchannel":"Push","owner":"Marina K","status":"planned","notes":"Seasonal recipe angle","markets":["US","UK","AU","CA"]}]},{"id":"init-winback","name":"Win-back Q3","poc":"Domi","objective":"Reactivate churned subscribers with personalized offers and new features","markets":["US","UK","DE"],"color":"#DC2626","entries":[{"id":"w1","date":"2026-07-07","endDate":"2026-07-09","text":"We miss you email drip","channel":"crm","subchannel":"Email","owner":"Marina K","status":"planned","notes":"3-touch sequence for 30-90 day churns","markets":["US","UK","DE"]},{"id":"w2","date":"2026-07-07","text":"Discount push","channel":"crm","subchannel":"Push","owner":"Marina K","status":"planned","notes":"50% off first box back","markets":["US","UK","DE"]},{"id":"w3","date":"2026-07-10","endDate":"2026-07-31","text":"Meta retargeting","channel":"paid","subchannel":"Meta","owner":"Domi","status":"planned","notes":"Dynamic product ads for churned users","markets":["US","UK","DE"]},{"id":"w4","date":"2026-07-14","text":"Win-back SMS","channel":"crm","subchannel":"SMS","owner":"Marina K","status":"planned","notes":"US only, personalized offer","markets":["US"]},{"id":"w5","date":"2026-07-21","text":"Last chance email","channel":"crm","subchannel":"Email","owner":"Marina K","status":"planned","notes":"Urgency messaging, offer expires","markets":["US","UK","DE"]},{"id":"w6","date":"2026-08-04","endDate":"2026-08-18","text":"Phase 2 broader retargeting","channel":"paid","subchannel":"Display","owner":"Domi","status":"planned","notes":"Expand to 90-180 day churns","markets":["US","UK"]}]},{"id":"init-holiday","name":"Holiday 2026","poc":"Marina Z","objective":"Maximize Q4 acquisition and gifting through festive campaign","markets":["US","UK","DE","AU","CA","NL","SE","DK","NO","BE","AT","CH","FR","IE","NZ"],"color":"#059669","entries":[{"id":"h1","date":"2026-11-01","endDate":"2026-11-14","text":"Early bird teaser sequence","channel":"crm","subchannel":"Email","owner":"Marina K","status":"planned","notes":"Build anticipation for gift boxes","markets":["US","UK","DE","AU","CA","NL","SE","DK","NO","BE","AT","CH","FR","IE","NZ"]},{"id":"h2","date":"2026-11-15","endDate":"2026-12-20","text":"Gift box paid campaign","channel":"paid","subchannel":"Meta","owner":"Domi","status":"planned","notes":"Full funnel, all markets","markets":["US","UK","DE","AU","CA","NL"]},{"id":"h3","date":"2026-11-20","endDate":"2026-12-15","text":"Holiday creator partnerships","channel":"influencers","subchannel":"Campaign","owner":"Isabela","status":"planned","notes":"10 creators, festive cooking content","markets":["US","UK","DE"]},{"id":"h4","date":"2026-12-01","text":"Holiday homepage takeover","channel":"web","subchannel":"Homepage","owner":"Kieran","status":"planned","notes":"Festive branding + gift CTA","markets":["US","UK","DE","AU","CA","NL","SE","DK","NO","BE","AT","CH","FR","IE","NZ"]},{"id":"h5","date":"2026-12-01","endDate":"2026-12-24","text":"Advent calendar in-app","channel":"crm","subchannel":"In-App","owner":"Kieran","status":"planned","notes":"Daily surprise content and offers","markets":["US","UK","DE","AU","CA"]},{"id":"h6","date":"2026-12-10","text":"Last order date push","channel":"crm","subchannel":"Push","owner":"Marina K","status":"planned","notes":"Urgency for Christmas delivery","markets":["US","UK","DE","AU","CA","NL","SE","DK","NO","BE","AT","CH","FR","IE","NZ"]}]}]};
+
+</script>
 
 <script>
-// ═══════════════════════════════════════
-// AUTH & SESSION
-// ═══════════════════════════════════════
-
+// STATE
+let calendarData = null;
+let currentView = 'month';
+let currentYear = 2026;
+let currentMonth = 5; // 0-indexed, June = 5
+let weeklyStart = null; // Date object for the first Monday of the 12-week window
+let weeklyMode = 'initiatives'; // initiatives | channels
+let activeInitiative = 'all';
+let activeMarkets = new Set();
 let currentUser = null;
+let isEditor = false;
+let editingEntry = null;
+let expandedDays = new Set();
 
-const EDITORS = [
-  'marina.kramer@hellofresh.com',
-  'domitille.park@hellofresh.com',
-  'kieran.enright@hellofresh.com',
-  'marina.zinakova@hellofresh.com',
-  'isabela.martin@hellofresh.com'
-];
+const EDITORS = ['kieran', 'marina k', 'marina z', 'isabela', 'domi'];
+const CHANNEL_COLORS = {
+  crm: { color: '#2563EB', bg: '#EFF6FF' },
+  appstore: { color: '#7C3AED', bg: '#F5F3FF' },
+  web: { color: '#0D9488', bg: '#F0FDFA' },
+  paid: { color: '#EA580C', bg: '#FFF7ED' },
+  influencers: { color: '#DC2626', bg: '#FEF2F2' },
+  organic: { color: '#16A34A', bg: '#F0FDF4' },
+  print: { color: '#92400E', bg: '#FFFBEB' }
+};
+const STATUS_STYLES = {
+  'planned': { color: '#94A3B8', bg: '#F1F5F9' },
+  'in-progress': { color: '#F59E0B', bg: '#FFFBEB' },
+  'live': { color: '#10B981', bg: '#ECFDF5' },
+  'completed': { color: '#6366F1', bg: '#EEF2FF' }
+};
 
-function isEditor() {
-  return currentUser && EDITORS.includes(currentUser);
-}
-
-function handleAuth(e) {
-  e.preventDefault();
+// AUTH
+function handleAuth() {
   const email = document.getElementById('authEmail').value.trim().toLowerCase();
-  if (!email.includes('@')) {
-    showAuthError('Please enter a valid email.');
+  if (!email.includes('@hellofresh') && !email.includes('@hellofresh.com') && !email.includes('@')) {
+    document.getElementById('authError').style.display = 'block';
     return;
   }
-  currentUser = email;
-  localStorage.setItem('hf-cal-user', email);
+  const name = email.split('@')[0].replace('.', ' ').replace(/\b\w/g, c => c.toUpperCase());
+  const firstName = name.split(' ')[0];
+  currentUser = { email, name, firstName };
+  isEditor = EDITORS.some(e => email.toLowerCase().includes(e.replace(' ', '.')));
+  localStorage.setItem('calendarUser', JSON.stringify({ email, name, firstName, isEditor }));
   showApp();
 }
 
-function showAuthError(msg) {
-  const el = document.getElementById('authError');
-  el.textContent = msg;
-  el.style.display = 'block';
+function checkAuth() {
+  const stored = localStorage.getItem('calendarUser');
+  if (stored) {
+    const data = JSON.parse(stored);
+    currentUser = data;
+    isEditor = data.isEditor;
+    showApp();
+    return true;
+  }
+  return false;
+}
+
+function signOut() {
+  localStorage.removeItem('calendarUser');
+  currentUser = null;
+  isEditor = false;
+  document.getElementById('app').classList.remove('active');
+  document.getElementById('authScreen').style.display = 'flex';
 }
 
 function showApp() {
   document.getElementById('authScreen').style.display = 'none';
   document.getElementById('app').classList.add('active');
-
-  const badge = document.getElementById('userBadge');
-  const name = currentUser.split('@')[0].split('.').map(n => n.charAt(0).toUpperCase() + n.slice(1)).join(' ');
-  const initials = name.split(' ').map(n => n[0]).join('');
-  const editorTag = isEditor() ? '<span class="editor-indicator">Editor</span>' : '';
-  badge.innerHTML = `<div class="user-badge"><div class="avatar">${initials}</div><span class="editor-badge">${name}</span>${editorTag}</div>`;
-
+  document.getElementById('userName').textContent = currentUser.firstName;
+  document.getElementById('userAvatar').textContent = currentUser.firstName[0];
   loadData();
 }
 
-function logout() {
-  localStorage.removeItem('hf-cal-user');
-  currentUser = null;
-  document.getElementById('app').classList.remove('active');
-  document.getElementById('authScreen').style.display = 'flex';
-}
-
-// ═══════════════════════════════════════
 // DATA
-// ═══════════════════════════════════════
-
-const CHANNELS = {
-  crm: { name: 'CRM', subs: ['Email', 'Push', 'Inbox', 'In-App', 'SMS', 'Other'] },
-  appstore: { name: 'App Store', subs: ['BAU', 'Custom page'] },
-  web: { name: 'Web', subs: ['Homepage', 'Landing page', 'Other'] },
-  paid: { name: 'Paid Social', subs: ['Meta', 'Display', 'Search', 'Other'] },
-  influencers: { name: 'Influencers', subs: ['Campaign', 'Other'] },
-  organic: { name: 'Organic Social', subs: ['FB', 'IG', 'TikTok', 'Twitter'] },
-  print: { name: 'Inbox Print', subs: ['Flyer', 'Magazine', 'Newsletter'] }
-};
-
-let state = { initiatives: [], activeInitiative: null };
-let currentDate = new Date();
-
 async function loadData() {
   try {
-    const response = await fetch('calendar-data.json');
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    const data = await response.json();
-    state.initiatives = data.initiatives || [];
-
-    // Merge any localStorage edits on top
-    const stored = localStorage.getItem('hf-cal-edits');
+    const resp = await fetch('calendar-data.json');
+    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+    calendarData = await resp.json();
+  } catch (e) {
+    // Fallback: try localStorage, then inline data
+    const stored = localStorage.getItem('calendarDataOverride');
     if (stored) {
-      try {
-        const edits = JSON.parse(stored);
-        // edits is an object keyed by initiative id, each value is the entries array
-        Object.keys(edits).forEach(initId => {
-          const init = state.initiatives.find(i => i.id === initId);
-          if (init) {
-            init.entries = edits[initId];
-          }
-        });
-      } catch(e) { console.warn('Failed to parse stored edits:', e); }
+      calendarData = JSON.parse(stored);
+    } else if (typeof INLINE_CALENDAR_DATA !== 'undefined') {
+      calendarData = INLINE_CALENDAR_DATA;
+    } else {
+      console.error('Failed to load calendar data:', e);
+      document.getElementById('monthView').innerHTML = '<div style="text-align:center;padding:60px;color:#9A9A9A;">Failed to load data. If viewing locally, please use a local server.</div>';
+      return;
     }
-
-    state.activeInitiative = state.initiatives.length ? state.initiatives[0].id : null;
-    render();
-  } catch (err) {
-    console.error('Failed to load calendar data:', err);
-    document.getElementById('calendarBody').innerHTML = `
-      <div class="loading-state" style="grid-column: 1 / -1;">
-        <div style="font-size:24px;margin-bottom:8px;">&#9888;</div>
-        <div>Failed to load calendar data.</div>
-        <div style="font-size:11px;margin-top:4px;color:var(--text-tertiary);">${err.message}</div>
-      </div>
-    `;
   }
-}
-
-function persistEdits() {
-  // Save current entries for all initiatives to localStorage
-  const edits = {};
-  state.initiatives.forEach(init => {
-    edits[init.id] = init.entries || [];
-  });
-  localStorage.setItem('hf-cal-edits', JSON.stringify(edits));
-}
-
-function getInit() {
-  if (state.activeInitiative === '__all__') return null;
-  return state.initiatives.find(i => i.id === state.activeInitiative);
-}
-
-function getAllEntries() {
-  if (state.activeInitiative === '__all__') {
-    return state.initiatives.flatMap(i => (i.entries || []).map(e => ({...e, _initName: i.name, _initId: i.id})));
-  }
-  const init = getInit();
-  return init ? (init.entries || []) : [];
-}
-
-// ═══════════════════════════════════════
-// RENDER
-// ═══════════════════════════════════════
-
-function render() {
-  renderTabs();
-  renderMeta();
-  renderStats();
-  renderCalendar();
-  updateOwnerFilter();
-}
-
-function renderTabs() {
-  const el = document.getElementById('initiativeTabs');
-  el.innerHTML = '';
-
-  // "All" tab
-  const allTab = document.createElement('div');
-  const totalEntries = state.initiatives.reduce((sum, i) => sum + (i.entries||[]).length, 0);
-  allTab.className = 'initiative-tab' + (state.activeInitiative === '__all__' ? ' active' : '');
-  allTab.innerHTML = `All <span class="tab-count">${totalEntries}</span>`;
-  allTab.onclick = () => { state.activeInitiative = '__all__'; render(); };
-  el.appendChild(allTab);
-
-  state.initiatives.forEach(init => {
-    const tab = document.createElement('div');
-    const count = (init.entries || []).length;
-    tab.className = 'initiative-tab' + (init.id === state.activeInitiative ? ' active' : '');
-    tab.innerHTML = `${init.name} <span class="tab-count">${count}</span>`;
-    tab.onclick = () => { state.activeInitiative = init.id; render(); };
-    el.appendChild(tab);
-  });
-}
-
-function renderMeta() {
-  const bar = document.getElementById('metaBar');
-  if (state.activeInitiative === '__all__') {
-    bar.innerHTML = `<div class="meta-pill"><label>View</label><span>All initiatives combined</span></div>`;
-    return;
-  }
-  const init = getInit();
-  if (!init) { bar.innerHTML = ''; return; }
-  bar.innerHTML = `
-    <div class="meta-pill"><label>POC</label><span>${init.poc||'Not set'}</span></div>
-    <div class="meta-pill"><label>Objective</label><span>${init.objective||'Not set'}</span></div>
-  `;
-}
-
-function renderStats() {
-  const entries = getAllEntries();
-  const counts = { planned: 0, 'in-progress': 0, live: 0, completed: 0 };
-  entries.forEach(e => { counts[e.status || 'planned']++; });
-
-  const el = document.getElementById('statsRow');
-  el.innerHTML = `
-    <div class="stat-chip" data-st="planned"><div class="stat-dot"></div>Planned: ${counts.planned}</div>
-    <div class="stat-chip" data-st="in-progress"><div class="stat-dot"></div>In Progress: ${counts['in-progress']}</div>
-    <div class="stat-chip" data-st="live"><div class="stat-dot"></div>Live: ${counts.live}</div>
-    <div class="stat-chip" data-st="completed"><div class="stat-dot"></div>Completed: ${counts.completed}</div>
-  `;
-}
-
-function updateOwnerFilter() {
-  const owners = [...new Set(state.initiatives.flatMap(i => (i.entries||[]).map(e=>e.owner).filter(Boolean)))];
-  const sel = document.getElementById('filterOwner');
-  const val = sel.value;
-  sel.innerHTML = '<option value="all">All owners</option>';
-  owners.sort().forEach(o => sel.innerHTML += `<option value="${o}">${o}</option>`);
-  sel.value = val || 'all';
-}
-
-function getWeekNumber(date) {
-  const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
-  const dayNum = d.getUTCDay() || 7;
-  d.setUTCDate(d.getUTCDate() + 4 - dayNum);
-  const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
-  return Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
-}
-
-function renderCalendar() {
-  const year = currentDate.getFullYear();
-  const month = currentDate.getMonth();
-  const daysInMonth = new Date(year, month+1, 0).getDate();
-  const prevDays = new Date(year, month, 0).getDate();
-  const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-  document.getElementById('currentMonth').textContent = `${monthNames[month]} ${year}`;
-
-  let startDay = new Date(year, month, 1).getDay() - 1;
-  if (startDay < 0) startDay = 6;
-  const totalCells = Math.ceil((startDay + daysInMonth) / 7) * 7;
+  // Initialize markets
+  activeMarkets = new Set(calendarData.markets);
+  // Build owners list
+  buildOwnerFilter();
+  // Build UI
+  buildInitTabs();
+  buildMarketPills();
+  // Set initial date to today
   const today = new Date();
-  const body = document.getElementById('calendarBody');
-  body.innerHTML = '';
-
-  const entries = getAllEntries();
-  const chFilter = document.getElementById('filterChannel').value;
-  const owFilter = document.getElementById('filterOwner').value;
-  const stFilter = document.getElementById('filterStatus').value;
-
-  for (let i = 0; i < totalCells; i++) {
-    // Week number at start of each row
-    if (i % 7 === 0) {
-      let wkDay, wkMonth, wkYear;
-      if (i < startDay) { wkDay = prevDays - startDay + i + 1; wkMonth = month - 1; wkYear = year; if(wkMonth<0){wkMonth=11;wkYear--;} }
-      else if (i >= startDay + daysInMonth) { wkDay = i - startDay - daysInMonth + 1; wkMonth = month + 1; wkYear = year; if(wkMonth>11){wkMonth=0;wkYear++;} }
-      else { wkDay = i - startDay + 1; wkMonth = month; wkYear = year; }
-      const wkDate = new Date(wkYear, wkMonth, wkDay);
-      const wk = getWeekNumber(wkDate);
-      const wkCell = document.createElement('div');
-      wkCell.className = 'week-number';
-      wkCell.textContent = `W${wk}`;
-      body.appendChild(wkCell);
-    }
-
-    let day, cMonth, cYear, isOther = false;
-    if (i < startDay) { day = prevDays - startDay + i + 1; cMonth = month-1; cYear = year; if(cMonth<0){cMonth=11;cYear--;} isOther=true; }
-    else if (i >= startDay + daysInMonth) { day = i - startDay - daysInMonth + 1; cMonth = month+1; cYear = year; if(cMonth>11){cMonth=0;cYear++;} isOther=true; }
-    else { day = i - startDay + 1; cMonth = month; cYear = year; }
-
-    const dateStr = `${cYear}-${String(cMonth+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
-    const dateObj = new Date(cYear, cMonth, day);
-    const isToday = day===today.getDate() && cMonth===today.getMonth() && cYear===today.getFullYear();
-    const isWeekend = dateObj.getDay()===0 || dateObj.getDay()===6;
-
-    const cell = document.createElement('div');
-    cell.className = 'calendar-day' + (isOther?' other-month':'') + (isToday?' today':'') + (isWeekend&&!isOther?' weekend':'');
-
-    const dayNum = document.createElement('div');
-    dayNum.className = 'day-number';
-    dayNum.innerHTML = `<span class="day-num">${day}</span>`;
-    cell.appendChild(dayNum);
-
-    // Get entries for this date
-    let dayEntries = entries.filter(e => {
-      const start = e.date;
-      const end = e.endDate || e.date;
-      return dateStr >= start && dateStr <= end;
-    });
-    if (chFilter !== 'all') dayEntries = dayEntries.filter(e => e.channel === chFilter);
-    if (owFilter !== 'all') dayEntries = dayEntries.filter(e => e.owner === owFilter);
-    if (stFilter !== 'all') dayEntries = dayEntries.filter(e => (e.status || 'planned') === stFilter);
-
-    const entriesDiv = document.createElement('div');
-    entriesDiv.className = 'day-entries';
-
-    // Sort: multi-day spans first, then single-day
-    dayEntries.sort((a,b) => {
-      const aSpan = a.endDate && a.endDate !== a.date ? 1 : 0;
-      const bSpan = b.endDate && b.endDate !== b.date ? 1 : 0;
-      if (bSpan !== aSpan) return bSpan - aSpan;
-      return Object.keys(CHANNELS).indexOf(a.channel) - Object.keys(CHANNELS).indexOf(b.channel);
-    });
-
-    const maxVisible = 4;
-    dayEntries.slice(0, maxVisible).forEach(entry => {
-      const isMultiDay = entry.endDate && entry.endDate !== entry.date;
-      if (isMultiDay) {
-        const bar = document.createElement('div');
-        bar.className = 'span-bar';
-        bar.setAttribute('data-channel', entry.channel);
-        if (dateStr === entry.date) bar.classList.add('span-start');
-        else if (dateStr === entry.endDate) bar.classList.add('span-end');
-        else bar.classList.add('span-mid');
-
-        bar.textContent = dateStr === entry.date ? entry.text : '';
-        bar.title = `${entry.text} (${CHANNELS[entry.channel]?.name || ''})`;
-        bar.onclick = (ev) => { ev.stopPropagation(); openDetail(dateStr); };
-        entriesDiv.appendChild(bar);
-      } else {
-        const chip = document.createElement('div');
-        chip.className = 'entry-chip';
-        chip.setAttribute('data-channel', entry.channel);
-        chip.innerHTML = `<span class="status-dot" data-status="${entry.status||'planned'}"></span><span class="ch-label">${CHANNELS[entry.channel]?.name||''}</span><span class="sub-label">${entry.subchannel}</span><span class="entry-text">${entry.text}</span>`;
-        chip.title = `${entry.text} (${entry.owner || 'No owner'}, ${(entry.status||'planned').replace('-',' ')})`;
-        chip.onclick = (ev) => { ev.stopPropagation(); openDetail(dateStr); };
-        entriesDiv.appendChild(chip);
-      }
-    });
-
-    if (dayEntries.length > maxVisible) {
-      const more = document.createElement('div');
-      more.className = 'more-indicator';
-      more.textContent = `+${dayEntries.length - maxVisible} more`;
-      more.onclick = (ev) => { ev.stopPropagation(); openDetail(dateStr); };
-      entriesDiv.appendChild(more);
-    }
-
-    cell.appendChild(entriesDiv);
-    cell.onclick = () => openDetail(dateStr);
-    body.appendChild(cell);
-  }
-}
-
-// ═══════════════════════════════════════
-// SEARCH
-// ═══════════════════════════════════════
-
-function handleSearch(query) {
-  const results = document.getElementById('searchResults');
-  if (!query.trim()) { results.classList.remove('active'); return; }
-
-  const q = query.toLowerCase();
-  const matches = [];
-  state.initiatives.forEach(init => {
-    (init.entries || []).forEach(entry => {
-      const searchStr = `${entry.text} ${entry.channel} ${entry.subchannel} ${entry.owner} ${entry.notes}`.toLowerCase();
-      if (searchStr.includes(q)) {
-        matches.push({...entry, _initName: init.name, _initId: init.id});
-      }
-    });
-  });
-
-  if (matches.length === 0) {
-    results.innerHTML = '<div class="search-result-empty">No results found.</div>';
-  } else {
-    results.innerHTML = matches.slice(0, 8).map(m => `
-      <div class="search-result-item" onmousedown="navigateToEntry('${m._initId}','${m.date}')">
-        <h4>${m.text}</h4>
-        <p>${CHANNELS[m.channel]?.name || m.channel} / ${m.subchannel} &middot; ${m._initName} &middot; ${formatDate(m.date)}</p>
-      </div>
-    `).join('');
-    if (matches.length > 8) {
-      results.innerHTML += `<div class="search-result-empty">${matches.length - 8} more results...</div>`;
-    }
-  }
-  results.classList.add('active');
-}
-
-function closeSearch() {
-  document.getElementById('searchResults').classList.remove('active');
-}
-
-function navigateToEntry(initId, dateStr) {
-  state.activeInitiative = initId;
-  const date = new Date(dateStr + 'T00:00:00');
-  currentDate = new Date(date.getFullYear(), date.getMonth(), 1);
-  document.getElementById('searchInput').value = '';
-  closeSearch();
+  currentYear = today.getFullYear();
+  currentMonth = today.getMonth();
+  // Set weekly start to current week minus 2
+  const mondayOfCurrentWeek = getMondayOfWeek(today);
+  weeklyStart = new Date(mondayOfCurrentWeek);
+  weeklyStart.setDate(weeklyStart.getDate() - 14);
   render();
-  setTimeout(() => openDetail(dateStr), 100);
 }
 
-// ═══════════════════════════════════════
-// NAVIGATION
-// ═══════════════════════════════════════
-
-function changeMonth(d) { currentDate.setMonth(currentDate.getMonth()+d); renderCalendar(); }
-function goToToday() { currentDate = new Date(); renderCalendar(); }
-
-// ═══════════════════════════════════════
-// DAY DETAIL
-// ═══════════════════════════════════════
-
-let currentDetailDate = null;
-
-function openDetail(dateStr) {
-  currentDetailDate = dateStr;
-  const date = new Date(dateStr+'T00:00:00');
-  document.getElementById('detailTitle').textContent = date.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
-
-  const entries = getAllEntries();
-  const chFilter = document.getElementById('filterChannel').value;
-  const owFilter = document.getElementById('filterOwner').value;
-  const stFilter = document.getElementById('filterStatus').value;
-
-  let dayEntries = entries.filter(e => {
-    const end = e.endDate || e.date;
-    return dateStr >= e.date && dateStr <= end;
+function buildOwnerFilter() {
+  const owners = new Set();
+  calendarData.initiatives.forEach(init => {
+    init.entries.forEach(e => { if (e.owner) owners.add(e.owner); });
   });
-  if (chFilter!=='all') dayEntries = dayEntries.filter(e=>e.channel===chFilter);
-  if (owFilter!=='all') dayEntries = dayEntries.filter(e=>e.owner===owFilter);
-  if (stFilter!=='all') dayEntries = dayEntries.filter(e=>(e.status||'planned')===stFilter);
+  const sel = document.getElementById('ownerFilter');
+  sel.innerHTML = '<option value="">All Owners</option>';
+  [...owners].sort().forEach(o => {
+    sel.innerHTML += `<option value="${o}">${o}</option>`;
+  });
+}
 
-  document.getElementById('detailSubtitle').textContent = `${dayEntries.length} entr${dayEntries.length!==1?'ies':'y'}`;
+function buildInitTabs() {
+  const container = document.getElementById('initTabs');
+  let html = `<button class="init-tab active" data-init="all" onclick="setInitiative('all')">All</button>`;
+  calendarData.initiatives.forEach(init => {
+    html += `<button class="init-tab" data-init="${init.id}" onclick="setInitiative('${init.id}')" style="border-color: ${init.color}30;">${init.name}</button>`;
+  });
+  container.innerHTML = html;
+}
 
-  const content = document.getElementById('detailContent');
-  let html = '';
+function buildMarketPills() {
+  const container = document.getElementById('marketRow');
+  let html = `<span class="market-row-label">Markets</span>`;
+  html += `<button class="market-quick-btn" onclick="toggleAllMarkets(true)">All</button>`;
+  html += `<button class="market-quick-btn" onclick="toggleAllMarkets(false)">None</button>`;
+  calendarData.markets.forEach(m => {
+    const isActive = activeMarkets.has(m);
+    html += `<button class="market-pill ${isActive ? 'active' : ''}" data-market="${m}" onclick="toggleMarket('${m}')">${m}</button>`;
+  });
+  container.innerHTML = html;
+}
+
+// NAVIGATION
+function setView(view) {
+  currentView = view;
+  document.querySelectorAll('.view-toggle button').forEach(b => {
+    b.classList.toggle('active', b.dataset.view === view);
+  });
+  document.getElementById('yearView').classList.toggle('active', view === 'year');
+  document.getElementById('weeklyView').classList.toggle('active', view === 'weekly');
+  document.getElementById('monthView').classList.toggle('active', view === 'month');
+  document.getElementById('weeklyModeToggle').classList.toggle('visible', view === 'weekly');
+  render();
+}
+
+function setWeeklyMode(mode) {
+  weeklyMode = mode;
+  document.querySelectorAll('#weeklyModeToggle button').forEach(b => {
+    b.classList.toggle('active', b.dataset.mode === mode);
+  });
+  render();
+}
+
+function navPrev() {
+  if (currentView === 'month') {
+    currentMonth--;
+    if (currentMonth < 0) { currentMonth = 11; currentYear--; }
+  } else if (currentView === 'year') {
+    currentYear--;
+  } else if (currentView === 'weekly') {
+    weeklyStart.setDate(weeklyStart.getDate() - 84); // 12 weeks back
+  }
+  render();
+}
+
+function navNext() {
+  if (currentView === 'month') {
+    currentMonth++;
+    if (currentMonth > 11) { currentMonth = 0; currentYear++; }
+  } else if (currentView === 'year') {
+    currentYear++;
+  } else if (currentView === 'weekly') {
+    weeklyStart.setDate(weeklyStart.getDate() + 84); // 12 weeks forward
+  }
+  render();
+}
+
+function goToday() {
+  const today = new Date();
+  currentYear = today.getFullYear();
+  currentMonth = today.getMonth();
+  const monday = getMondayOfWeek(today);
+  weeklyStart = new Date(monday);
+  weeklyStart.setDate(weeklyStart.getDate() - 14);
+  render();
+}
+
+function setInitiative(id) {
+  activeInitiative = id;
+  document.querySelectorAll('.init-tab').forEach(t => {
+    t.classList.toggle('active', t.dataset.init === id);
+  });
+  render();
+}
+
+function toggleMarket(market) {
+  if (activeMarkets.has(market)) activeMarkets.delete(market);
+  else activeMarkets.add(market);
+  updateMarketPillStyles();
+  render();
+}
+
+function toggleAllMarkets(all) {
+  if (all) activeMarkets = new Set(calendarData.markets);
+  else activeMarkets = new Set();
+  updateMarketPillStyles();
+  render();
+}
+
+function updateMarketPillStyles() {
+  document.querySelectorAll('.market-pill').forEach(p => {
+    p.classList.toggle('active', activeMarkets.has(p.dataset.market));
+  });
+}
+
+// FILTERING
+function getFilteredEntries() {
+  const search = document.getElementById('searchInput').value.toLowerCase();
+  const channel = document.getElementById('channelFilter').value;
+  const status = document.getElementById('statusFilter').value;
+  const owner = document.getElementById('ownerFilter').value;
+
+  let results = [];
+  const initiatives = activeInitiative === 'all' ? calendarData.initiatives : calendarData.initiatives.filter(i => i.id === activeInitiative);
+
+  initiatives.forEach(init => {
+    init.entries.forEach(entry => {
+      // Market filter
+      if (entry.markets && entry.markets.length > 0) {
+        if (!entry.markets.some(m => activeMarkets.has(m))) return;
+      }
+      // Channel filter
+      if (channel && entry.channel !== channel) return;
+      // Status filter
+      if (status && entry.status !== status) return;
+      // Owner filter
+      if (owner && entry.owner !== owner) return;
+      // Search filter
+      if (search && !entry.text.toLowerCase().includes(search) && !(entry.notes || '').toLowerCase().includes(search) && !(entry.subchannel || '').toLowerCase().includes(search)) return;
+
+      results.push({ ...entry, initiative: init });
+    });
+  });
+  return results;
+}
+
+function getFilteredReleases() {
+  return calendarData.releases.filter(r => {
+    if (r.markets && r.markets.length > 0) {
+      return r.markets.some(m => activeMarkets.has(m));
+    }
+    return true;
+  });
+}
+
+function applyFilters() {
+  render();
+}
+
+// RENDERING
+function render() {
+  updateNavLabel();
+  if (currentView === 'year') renderYear();
+  else if (currentView === 'weekly') renderWeekly();
+  else renderMonth();
+}
+
+function updateNavLabel() {
+  const label = document.getElementById('navLabel');
+  if (currentView === 'year') {
+    label.textContent = currentYear.toString();
+  } else if (currentView === 'month') {
+    const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    label.textContent = `${months[currentMonth]} ${currentYear}`;
+  } else {
+    const endDate = new Date(weeklyStart);
+    endDate.setDate(endDate.getDate() + 83);
+    const fmt = d => `${d.toLocaleDateString('en-US', {month:'short'})} ${d.getDate()}`;
+    label.textContent = `${fmt(weeklyStart)} \u2013 ${fmt(endDate)}`;
+  }
+}
+
+// YEAR VIEW
+function renderYear() {
+  const container = document.getElementById('yearView');
+  const currentWeekNum = getWeekNumber(new Date());
+  const isCurrentYear = new Date().getFullYear() === currentYear;
+
+  // Header
+  let html = `<div class="year-grid"><div class="year-header">`;
+  html += `<div class="year-header-cell">Initiative</div>`;
+  for (let w = 1; w <= 52; w++) {
+    const isCurrent = isCurrentYear && w === currentWeekNum;
+    html += `<div class="year-header-cell ${isCurrent ? 'current-week' : ''}">W${w}</div>`;
+  }
+  html += `</div>`;
+
+  // Releases row
+  const releases = getFilteredReleases();
+  html += `<div class="year-row releases-row"><div class="year-row-label"><span class="diamond" style="width:8px;height:8px;background:var(--release-color);transform:rotate(45deg);flex-shrink:0;"></span>Releases</div>`;
+  for (let w = 1; w <= 52; w++) {
+    const isCurrent = isCurrentYear && w === currentWeekNum;
+    const weekReleases = releases.filter(r => {
+      const d = new Date(r.date + 'T00:00:00');
+      return d.getFullYear() === currentYear && getWeekNumber(d) === w;
+    });
+    html += `<div class="year-cell ${isCurrent ? 'current-week' : ''}" style="position:relative;">`;
+    if (weekReleases.length > 0) {
+      html += `<div class="release-marker" title="${weekReleases.map(r=>r.name).join(', ')}"></div>`;
+    }
+    html += `</div>`;
+  }
+  html += `</div>`;
+
+  // Initiative rows
+  const initiatives = activeInitiative === 'all' ? calendarData.initiatives : calendarData.initiatives.filter(i => i.id === activeInitiative);
+  initiatives.forEach(init => {
+    // Compute which weeks have activity
+    const activeWeeks = new Set();
+    const filteredEntries = getFilteredInitEntries(init);
+    filteredEntries.forEach(entry => {
+      const start = new Date(entry.date + 'T00:00:00');
+      const end = entry.endDate ? new Date(entry.endDate + 'T00:00:00') : start;
+      if (start.getFullYear() !== currentYear && end.getFullYear() !== currentYear) return;
+      let d = new Date(Math.max(start, new Date(currentYear, 0, 1)));
+      const endD = new Date(Math.min(end, new Date(currentYear, 11, 31)));
+      while (d <= endD) {
+        activeWeeks.add(getWeekNumber(d));
+        d.setDate(d.getDate() + 7);
+      }
+      // Also add the exact end week
+      if (endD.getFullYear() === currentYear) activeWeeks.add(getWeekNumber(endD));
+    });
+
+    html += `<div class="year-row"><div class="year-row-label"><span class="color-dot" style="background:${init.color}"></span>${init.name}</div>`;
+    for (let w = 1; w <= 52; w++) {
+      const isCurrent = isCurrentYear && w === currentWeekNum;
+      const hasActivity = activeWeeks.has(w);
+      const prevActive = activeWeeks.has(w - 1);
+      const nextActive = activeWeeks.has(w + 1);
+      html += `<div class="year-cell ${isCurrent ? 'current-week' : ''}">`;
+      if (hasActivity) {
+        let barClass = 'year-bar';
+        if (!prevActive && !nextActive) barClass += ' bar-single';
+        else if (!prevActive) barClass += ' bar-start';
+        else if (!nextActive) barClass += ' bar-end';
+        html += `<div class="${barClass}" style="background:${init.color}"></div>`;
+      }
+      html += `</div>`;
+    }
+    html += `</div>`;
+  });
+
+  html += `</div>`;
+  container.innerHTML = html;
+}
+
+function getFilteredInitEntries(init) {
+  const search = document.getElementById('searchInput').value.toLowerCase();
+  const channel = document.getElementById('channelFilter').value;
+  const status = document.getElementById('statusFilter').value;
+  const owner = document.getElementById('ownerFilter').value;
+
+  return init.entries.filter(entry => {
+    if (entry.markets && entry.markets.length > 0) {
+      if (!entry.markets.some(m => activeMarkets.has(m))) return false;
+    }
+    if (channel && entry.channel !== channel) return false;
+    if (status && entry.status !== status) return false;
+    if (owner && entry.owner !== owner) return false;
+    if (search && !entry.text.toLowerCase().includes(search) && !(entry.notes || '').toLowerCase().includes(search)) return false;
+    return true;
+  });
+}
+
+// WEEKLY VIEW
+function renderWeekly() {
+  const container = document.getElementById('weeklyView');
+  const today = new Date();
+  const currentWeekMonday = getMondayOfWeek(today);
+
+  // Generate 12 weeks
+  const weeks = [];
+  for (let i = 0; i < 12; i++) {
+    const monday = new Date(weeklyStart);
+    monday.setDate(monday.getDate() + i * 7);
+    const sunday = new Date(monday);
+    sunday.setDate(sunday.getDate() + 6);
+    weeks.push({ monday, sunday, weekNum: getWeekNumber(monday) });
+  }
+
+  const colCount = 12;
+  const gridCols = `200px repeat(${colCount}, 1fr)`;
+
+  // Header
+  let html = `<div class="weekly-grid"><div class="weekly-header" style="grid-template-columns:${gridCols};">`;
+  html += `<div class="weekly-header-cell">${weeklyMode === 'initiatives' ? 'Initiative' : 'Channel'}</div>`;
+  weeks.forEach(w => {
+    const isCurrent = w.monday.getTime() === currentWeekMonday.getTime();
+    const fmt = d => `${d.getDate()} ${d.toLocaleDateString('en-US', {month:'short'})}`;
+    html += `<div class="weekly-header-cell ${isCurrent ? 'current-week' : ''}">
+      W${w.weekNum}
+      <div class="week-dates">${fmt(w.monday)} \u2013 ${fmt(w.sunday)}</div>
+    </div>`;
+  });
+  html += `</div>`;
+
+  // Releases row
+  const releases = getFilteredReleases();
+  html += `<div class="weekly-row releases-row" style="grid-template-columns:${gridCols};">`;
+  html += `<div class="weekly-row-label"><span class="diamond" style="width:8px;height:8px;background:var(--release-color);transform:rotate(45deg);flex-shrink:0;"></span>Releases</div>`;
+  weeks.forEach(w => {
+    const isCurrent = w.monday.getTime() === currentWeekMonday.getTime();
+    const weekReleases = releases.filter(r => {
+      const d = new Date(r.date + 'T00:00:00');
+      return d >= w.monday && d <= w.sunday;
+    });
+    html += `<div class="weekly-cell ${isCurrent ? 'current-week' : ''}">`;
+    weekReleases.forEach(r => {
+      html += `<div style="display:flex;align-items:center;gap:4px;padding:2px 4px;background:var(--release-bg);border-radius:4px;border:1px solid var(--release-color);">
+        <span style="width:5px;height:5px;background:var(--release-color);transform:rotate(45deg);flex-shrink:0;"></span>
+        <span style="font-size:8px;font-weight:600;color:var(--release-color);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${r.name}</span>
+      </div>`;
+    });
+    html += `</div>`;
+  });
+  html += `</div>`;
+
+  if (weeklyMode === 'initiatives') {
+    // One row per initiative
+    const initiatives = activeInitiative === 'all' ? calendarData.initiatives : calendarData.initiatives.filter(i => i.id === activeInitiative);
+    initiatives.forEach(init => {
+      const entries = getFilteredInitEntries(init);
+      html += `<div class="weekly-row" style="grid-template-columns:${gridCols};">`;
+      html += `<div class="weekly-row-label"><span class="color-dot" style="background:${init.color}"></span>${init.name}</div>`;
+      weeks.forEach(w => {
+        const isCurrent = w.monday.getTime() === currentWeekMonday.getTime();
+        const weekEntries = entries.filter(e => {
+          const start = new Date(e.date + 'T00:00:00');
+          const end = e.endDate ? new Date(e.endDate + 'T00:00:00') : start;
+          return start <= w.sunday && end >= w.monday;
+        });
+        html += `<div class="weekly-cell ${isCurrent ? 'current-week' : ''}">`;
+        if (weekEntries.length > 0) {
+          // Show as a colored bar with count
+          html += `<div class="weekly-bar" style="background:${init.color}" title="${weekEntries.map(e=>e.text).join(', ')}">${weekEntries.length} ${weekEntries.length === 1 ? 'entry' : 'entries'}</div>`;
+        }
+        html += `</div>`;
+      });
+      html += `</div>`;
+    });
+  } else {
+    // Channels mode: rows = channels within selected initiative
+    const initiatives = activeInitiative === 'all' ? calendarData.initiatives : calendarData.initiatives.filter(i => i.id === activeInitiative);
+    // Gather all channels across filtered initiatives
+    const channelMap = {};
+    initiatives.forEach(init => {
+      const entries = getFilteredInitEntries(init);
+      entries.forEach(e => {
+        const key = e.channel;
+        if (!channelMap[key]) channelMap[key] = [];
+        channelMap[key].push({ ...e, initiative: init });
+      });
+    });
+
+    Object.keys(channelMap).sort().forEach(ch => {
+      const chColor = CHANNEL_COLORS[ch] || { color: '#666', bg: '#f5f5f5' };
+      html += `<div class="weekly-row" style="grid-template-columns:${gridCols};">`;
+      html += `<div class="weekly-row-label"><span class="color-dot" style="background:${chColor.color}"></span>${ch.charAt(0).toUpperCase() + ch.slice(1)}</div>`;
+      weeks.forEach(w => {
+        const isCurrent = w.monday.getTime() === currentWeekMonday.getTime();
+        const weekEntries = channelMap[ch].filter(e => {
+          const start = new Date(e.date + 'T00:00:00');
+          const end = e.endDate ? new Date(e.endDate + 'T00:00:00') : start;
+          return start <= w.sunday && end >= w.monday;
+        });
+        html += `<div class="weekly-cell ${isCurrent ? 'current-week' : ''}">`;
+        weekEntries.forEach(e => {
+          const initColor = e.initiative.color;
+          html += `<div class="weekly-entry-chip" style="background:${chColor.bg};color:${chColor.color};border-left:2px solid ${initColor};" title="${e.text} (${e.initiative.name})">${e.text}</div>`;
+        });
+        html += `</div>`;
+      });
+      html += `</div>`;
+    });
+  }
+
+  html += `</div>`;
+  container.innerHTML = html;
+}
+
+// MONTH VIEW
+function renderMonth() {
+  const container = document.getElementById('monthView');
+  const firstDay = new Date(currentYear, currentMonth, 1);
+  const lastDay = new Date(currentYear, currentMonth + 1, 0);
+  const startOffset = (firstDay.getDay() + 6) % 7; // Monday = 0
+  const totalDays = lastDay.getDate();
+  const today = new Date();
+  const todayStr = formatDate(today);
+
+  const entries = getFilteredEntries();
+  const releases = getFilteredReleases();
+
+  // Group entries by date
+  const entryMap = {};
+  entries.forEach(e => {
+    const start = new Date(e.date + 'T00:00:00');
+    const end = e.endDate ? new Date(e.endDate + 'T00:00:00') : start;
+    let d = new Date(start);
+    while (d <= end) {
+      const key = formatDate(d);
+      if (!entryMap[key]) entryMap[key] = [];
+      entryMap[key].push(e);
+      d.setDate(d.getDate() + 1);
+    }
+  });
+
+  // Group releases by date
+  const releaseMap = {};
+  releases.forEach(r => {
+    const key = r.date;
+    if (!releaseMap[key]) releaseMap[key] = [];
+    releaseMap[key].push(r);
+  });
+
+  let html = `<div class="month-grid">`;
+  // Day headers
+  const dayNames = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  dayNames.forEach(d => {
+    html += `<div class="month-day-header">${d}</div>`;
+  });
+
+  // Previous month padding
+  const prevMonth = new Date(currentYear, currentMonth, 0);
+  for (let i = startOffset - 1; i >= 0; i--) {
+    const dayNum = prevMonth.getDate() - i;
+    html += `<div class="month-day-cell other-month"><div class="day-number">${dayNum}</div></div>`;
+  }
+
+  // Current month days
+  for (let day = 1; day <= totalDays; day++) {
+    const dateStr = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+    const isToday = dateStr === todayStr;
+    const dayEntries = entryMap[dateStr] || [];
+    const dayReleases = releaseMap[dateStr] || [];
+    const dayKey = dateStr;
+    html += `<div class="month-day-cell ${isToday ? 'today' : ''}" onclick="openDayModal('${dateStr}')">`;
+    html += `<div class="day-number">${day}</div>`;
+
+    // Releases
+    dayReleases.forEach(r => {
+      html += `<div class="release-banner"><span class="diamond"></span><span class="release-text">${r.name}</span></div>`;
+    });
+
+    // Entries (show all)
+    html += `<div class="day-entries">`;
+    dayEntries.forEach(e => {
+      const ch = CHANNEL_COLORS[e.channel] || { color: '#666', bg: '#f5f5f5' };
+      html += `<div class="day-entry" style="background:${ch.bg};border-left-color:${ch.color};color:${ch.color};" title="${e.text} | ${e.owner}">${e.text}</div>`;
+    });
+    html += `</div></div>`;
+  }
+
+  // Next month padding
+  const totalCells = startOffset + totalDays;
+  const remaining = (7 - (totalCells % 7)) % 7;
+  for (let i = 1; i <= remaining; i++) {
+    html += `<div class="month-day-cell other-month"><div class="day-number">${i}</div></div>`;
+  }
+
+  html += `</div>`;
 
   // Add entry button for editors
-  if (isEditor() && state.activeInitiative !== '__all__') {
-    html += `<button class="detail-add-btn" onclick="openEntryForm('${dateStr}')">+ Add entry</button>`;
+  if (isEditor) {
+    html += `<div style="text-align:center;margin-top:16px;">
+      <button class="form-btn form-btn-primary" onclick="openNewEntryForm()">+ New Entry</button>
+    </div>`;
   }
 
-  if (!dayEntries.length) {
-    html += '<div class="detail-empty">No entries for this day.</div>';
-  } else {
-    const grouped = {};
-    dayEntries.forEach(e => { if(!grouped[e.channel]) grouped[e.channel]=[]; grouped[e.channel].push(e); });
-    Object.keys(grouped).forEach(ch => {
-      html += `<div class="detail-group"><div class="detail-group-label" style="background:var(--ch-${ch}-bg);color:var(--ch-${ch})">${CHANNELS[ch]?.name||ch}</div>`;
-      grouped[ch].forEach(e => {
-        const spanInfo = (e.endDate && e.endDate !== e.date) ? ` (${formatDate(e.date)} to ${formatDate(e.endDate)})` : '';
-        const initLabel = e._initName ? ` <span style="font-size:9px;color:var(--text-tertiary)">[${e._initName}]</span>` : '';
-        const entryInitId = e._initId || state.activeInitiative;
-        const editBtns = isEditor() ? `<div class="detail-entry-actions"><button onclick="openEditForm('${entryInitId}','${e.id}')">Edit</button><button class="del-btn" onclick="confirmDelete('${entryInitId}','${e.id}')">Del</button></div>` : '';
-        html += `<div class="detail-entry">
-          <div class="detail-entry-info"><h4>${e.subchannel}: ${e.text}${initLabel} <span class="status-badge" data-status="${e.status||'planned'}">${(e.status||'planned').replace('-',' ')}</span></h4><p>${e.notes||'No notes'}${spanInfo}</p></div>
-          <div style="display:flex;align-items:center;"><div class="detail-entry-meta"><div>${e.owner||''}</div></div>${editBtns}</div>
-        </div>`;
-      });
-      html += '</div>';
-    });
-  }
-  content.innerHTML = html;
-
-  document.getElementById('detailOverlay').classList.add('active');
+  container.innerHTML = html;
 }
 
-function closeDetail() { document.getElementById('detailOverlay').classList.remove('active'); }
-
-// ═══════════════════════════════════════
-// EXPORT
-// ═══════════════════════════════════════
-
-function exportData() {
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(new Blob([JSON.stringify(state,null,2)],{type:'application/json'}));
-  a.download = `pmm-calendar-${new Date().toISOString().split('T')[0]}.json`;
-  a.click();
-  showToast('JSON exported.');
+function toggleDayExpand(dayKey) {
+  if (expandedDays.has(dayKey)) expandedDays.delete(dayKey);
+  else expandedDays.add(dayKey);
+  renderMonth();
 }
 
-function exportCSV() {
-  const headers = ['Initiative','Start Date','End Date','Channel','Type','Activity','Owner','Status','Notes'];
-  const rows = [];
-  state.initiatives.forEach(init => {
-    (init.entries||[]).forEach(e => {
-      rows.push([`"${init.name}"`,e.date,e.endDate||e.date,CHANNELS[e.channel]?.name||e.channel,e.subchannel,`"${(e.text||'').replace(/"/g,'""')}"`,e.owner||'',e.status||'planned',`"${(e.notes||'').replace(/"/g,'""')}"`]);
-    });
+// MODAL
+function openDayModal(dateStr) {
+  const entries = getFilteredEntries();
+  const releases = getFilteredReleases();
+  const date = new Date(dateStr + 'T00:00:00');
+  const dayName = date.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+
+  document.getElementById('dayModalTitle').textContent = dayName;
+
+  // Get entries for this day
+  const dayEntries = entries.filter(e => {
+    const start = new Date(e.date + 'T00:00:00');
+    const end = e.endDate ? new Date(e.endDate + 'T00:00:00') : start;
+    return date >= start && date <= end;
   });
-  rows.sort((a,b)=>a[1].localeCompare(b[1]));
-  const csv = [headers.join(','),...rows.map(r=>r.join(','))].join('\n');
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
-  a.download = `pmm-calendar-${new Date().toISOString().split('T')[0]}.csv`;
-  a.click();
-  showToast('CSV exported.');
+
+  const dayReleases = releases.filter(r => r.date === dateStr);
+
+  let html = '';
+
+  // Releases
+  dayReleases.forEach(r => {
+    html += `<div class="modal-release-banner">
+      <span class="diamond"></span>
+      <div class="release-info">
+        <h4>${r.name}</h4>
+        <p>${r.description}</p>
+      </div>
+    </div>`;
+  });
+
+  // Entries
+  dayEntries.forEach(e => {
+    const ch = CHANNEL_COLORS[e.channel] || { color: '#666', bg: '#f5f5f5' };
+    const st = STATUS_STYLES[e.status] || STATUS_STYLES['planned'];
+    const statusLabel = e.status === 'in-progress' ? 'In Progress' : e.status.charAt(0).toUpperCase() + e.status.slice(1);
+    html += `<div class="modal-entry" ${isEditor ? `onclick="openEditEntryForm('${e.id}','${e.initiative.id}')" style="cursor:pointer;"` : ''}>
+      <div class="modal-entry-header">
+        <span class="modal-entry-init" style="background:${e.initiative.color};">${e.initiative.name}</span>
+        <span class="modal-entry-channel" style="background:${ch.bg};color:${ch.color};">${e.channel}${e.subchannel ? ' / ' + e.subchannel : ''}</span>
+        <span class="modal-entry-status" style="background:${st.bg};color:${st.color};">${statusLabel}</span>
+      </div>
+      <div class="modal-entry-text">${e.text}</div>
+      <div class="modal-entry-meta">
+        <span>Owner: ${e.owner}</span>
+        ${e.endDate ? `<span>${e.date} to ${e.endDate}</span>` : `<span>${e.date}</span>`}
+        ${e.markets ? `<span>${e.markets.join(', ')}</span>` : ''}
+      </div>
+      ${e.notes ? `<div style="margin-top:6px;font-size:11px;color:var(--text-tertiary);font-style:italic;">${e.notes}</div>` : ''}
+    </div>`;
+  });
+
+  if (dayEntries.length === 0 && dayReleases.length === 0) {
+    html = `<p style="text-align:center;color:var(--text-tertiary);padding:24px;">No entries for this day.</p>`;
+  }
+
+  // Add new entry button for editors
+  if (isEditor) {
+    html += `<div style="text-align:center;margin-top:16px;">
+      <button class="form-btn form-btn-primary" onclick="closeModal('dayModal');openNewEntryForm('${dateStr}')">+ Add Entry</button>
+    </div>`;
+  }
+
+  document.getElementById('dayModalEntries').innerHTML = html;
+  document.getElementById('dayModal').classList.add('active');
 }
 
-// ═══════════════════════════════════════
-// HELPERS
-// ═══════════════════════════════════════
-
-function formatDate(str) { const d=new Date(str+'T00:00:00'); return d.toLocaleDateString('en-GB',{day:'numeric',month:'short'}); }
-
-function showToast(msg) {
-  const el = document.getElementById('toast');
-  el.textContent = msg;
-  el.classList.add('active');
-  setTimeout(() => el.classList.remove('active'), 2500);
+function closeModal(id) {
+  document.getElementById(id).classList.remove('active');
+  editingEntry = null;
 }
 
-// ═══════════════════════════════════════
-// ENTRY CRUD (editors only)
-// ═══════════════════════════════════════
+// ENTRY CRUD
+function openNewEntryForm(date) {
+  editingEntry = null;
+  document.getElementById('entryFormTitle').textContent = 'New Entry';
+  document.getElementById('formDeleteBtn').style.display = 'none';
 
-let editingEntryId = null;
-let editingInitId = null;
+  // Populate initiative select
+  const initSel = document.getElementById('formInitiative');
+  initSel.innerHTML = '';
+  calendarData.initiatives.forEach(init => {
+    initSel.innerHTML += `<option value="${init.id}">${init.name}</option>`;
+  });
+  if (activeInitiative !== 'all') initSel.value = activeInitiative;
 
-function openEntryForm(dateStr) {
-  if (!isEditor()) return;
-  editingEntryId = null;
-  editingInitId = state.activeInitiative;
-  document.getElementById('entryFormTitle').textContent = 'Add Entry';
-  document.getElementById('entryFormId').value = '';
-  document.getElementById('entryFormInitId').value = state.activeInitiative;
-  document.getElementById('entryText').value = '';
-  document.getElementById('entryChannel').value = '';
-  document.getElementById('entrySubchannel').innerHTML = '<option value="">Select type</option>';
-  document.getElementById('entryDate').value = dateStr;
-  document.getElementById('entryEndDate').value = '';
-  document.getElementById('entryOwner').value = '';
-  document.getElementById('entryStatus').value = 'planned';
-  document.getElementById('entryNotes').value = '';
-  document.getElementById('entryDeleteBtn').style.display = 'none';
-  document.getElementById('entryFormOverlay').classList.add('active');
+  // Clear form
+  document.getElementById('formText').value = '';
+  document.getElementById('formChannel').value = 'crm';
+  document.getElementById('formSubchannel').value = '';
+  document.getElementById('formOwner').value = currentUser.firstName || '';
+  document.getElementById('formDate').value = date || formatDate(new Date());
+  document.getElementById('formEndDate').value = '';
+  document.getElementById('formStatus').value = 'planned';
+  document.getElementById('formMarkets').value = '';
+  document.getElementById('formNotes').value = '';
+
+  document.getElementById('entryFormModal').classList.add('active');
 }
 
-function openEditForm(initId, entryId) {
-  if (!isEditor()) return;
-  const init = state.initiatives.find(i => i.id === initId);
+function openEditEntryForm(entryId, initId) {
+  const init = calendarData.initiatives.find(i => i.id === initId);
   if (!init) return;
-  const entry = (init.entries || []).find(e => e.id === entryId);
+  const entry = init.entries.find(e => e.id === entryId);
   if (!entry) return;
 
-  editingEntryId = entryId;
-  editingInitId = initId;
+  editingEntry = { initId, entryId };
   document.getElementById('entryFormTitle').textContent = 'Edit Entry';
-  document.getElementById('entryFormId').value = entryId;
-  document.getElementById('entryFormInitId').value = initId;
-  document.getElementById('entryText').value = entry.text || '';
-  document.getElementById('entryChannel').value = entry.channel || '';
-  updateSubchannels();
-  document.getElementById('entrySubchannel').value = entry.subchannel || '';
-  document.getElementById('entryDate').value = entry.date || '';
-  document.getElementById('entryEndDate').value = entry.endDate || '';
-  document.getElementById('entryOwner').value = entry.owner || '';
-  document.getElementById('entryStatus').value = entry.status || 'planned';
-  document.getElementById('entryNotes').value = entry.notes || '';
-  document.getElementById('entryDeleteBtn').style.display = 'inline-block';
-  document.getElementById('entryFormOverlay').classList.add('active');
+  document.getElementById('formDeleteBtn').style.display = 'inline-block';
+
+  // Populate initiative select
+  const initSel = document.getElementById('formInitiative');
+  initSel.innerHTML = '';
+  calendarData.initiatives.forEach(i => {
+    initSel.innerHTML += `<option value="${i.id}">${i.name}</option>`;
+  });
+  initSel.value = initId;
+
+  document.getElementById('formText').value = entry.text;
+  document.getElementById('formChannel').value = entry.channel;
+  document.getElementById('formSubchannel').value = entry.subchannel || '';
+  document.getElementById('formOwner').value = entry.owner || '';
+  document.getElementById('formDate').value = entry.date;
+  document.getElementById('formEndDate').value = entry.endDate || '';
+  document.getElementById('formStatus').value = entry.status;
+  document.getElementById('formMarkets').value = (entry.markets || []).join(', ');
+  document.getElementById('formNotes').value = entry.notes || '';
+
+  closeModal('dayModal');
+  document.getElementById('entryFormModal').classList.add('active');
 }
 
-function closeEntryForm() {
-  document.getElementById('entryFormOverlay').classList.remove('active');
-  editingEntryId = null;
-  editingInitId = null;
-}
+function saveEntry() {
+  if (!isEditor) return;
 
-function updateSubchannels() {
-  const ch = document.getElementById('entryChannel').value;
-  const sel = document.getElementById('entrySubchannel');
-  sel.innerHTML = '<option value="">Select type</option>';
-  if (ch && CHANNELS[ch]) {
-    CHANNELS[ch].subs.forEach(s => {
-      sel.innerHTML += `<option value="${s}">${s}</option>`;
-    });
-  }
-}
-
-function saveEntry(e) {
-  e.preventDefault();
-  if (!isEditor()) return;
-
-  const initId = document.getElementById('entryFormInitId').value;
-  const init = state.initiatives.find(i => i.id === initId);
+  const initId = document.getElementById('formInitiative').value;
+  const init = calendarData.initiatives.find(i => i.id === initId);
   if (!init) return;
-  if (!init.entries) init.entries = [];
+
+  const text = document.getElementById('formText').value.trim();
+  if (!text) { alert('Please enter entry text.'); return; }
+
+  const markets = document.getElementById('formMarkets').value.split(',').map(m => m.trim()).filter(Boolean);
 
   const entryData = {
-    id: editingEntryId || ('entry-' + Date.now() + '-' + Math.random().toString(36).slice(2,6)),
-    text: document.getElementById('entryText').value.trim(),
-    channel: document.getElementById('entryChannel').value,
-    subchannel: document.getElementById('entrySubchannel').value,
-    date: document.getElementById('entryDate').value,
-    endDate: document.getElementById('entryEndDate').value || null,
-    owner: document.getElementById('entryOwner').value.trim(),
-    status: document.getElementById('entryStatus').value,
-    notes: document.getElementById('entryNotes').value.trim()
+    text,
+    channel: document.getElementById('formChannel').value,
+    subchannel: document.getElementById('formSubchannel').value.trim(),
+    owner: document.getElementById('formOwner').value.trim(),
+    date: document.getElementById('formDate').value,
+    endDate: document.getElementById('formEndDate').value || undefined,
+    status: document.getElementById('formStatus').value,
+    markets: markets.length > 0 ? markets : init.markets,
+    notes: document.getElementById('formNotes').value.trim()
   };
 
-  if (editingEntryId) {
-    // Update existing
-    const idx = init.entries.findIndex(en => en.id === editingEntryId);
-    if (idx !== -1) {
-      init.entries[idx] = entryData;
+  if (editingEntry) {
+    // Editing existing
+    const oldInit = calendarData.initiatives.find(i => i.id === editingEntry.initId);
+    if (editingEntry.initId !== initId) {
+      // Move to different initiative
+      oldInit.entries = oldInit.entries.filter(e => e.id !== editingEntry.entryId);
+      entryData.id = editingEntry.entryId;
+      init.entries.push(entryData);
+    } else {
+      const idx = init.entries.findIndex(e => e.id === editingEntry.entryId);
+      if (idx >= 0) {
+        entryData.id = editingEntry.entryId;
+        init.entries[idx] = entryData;
+      }
     }
-    showToast('Entry updated.');
   } else {
-    // Add new
+    // New entry
+    entryData.id = 'e' + Date.now();
     init.entries.push(entryData);
-    showToast('Entry added.');
   }
 
-  persistEdits();
-  closeEntryForm();
+  // Save to localStorage override
+  localStorage.setItem('calendarDataOverride', JSON.stringify(calendarData));
+  closeModal('entryFormModal');
+  buildOwnerFilter();
   render();
-  if (currentDetailDate) {
-    setTimeout(() => openDetail(currentDetailDate), 50);
-  }
-}
-
-function confirmDelete(initId, entryId) {
-  if (!isEditor()) return;
-  if (!confirm('Delete this entry?')) return;
-  deleteEntryById(initId, entryId);
 }
 
 function deleteEntry() {
-  if (!isEditor() || !editingEntryId || !editingInitId) return;
+  if (!isEditor || !editingEntry) return;
   if (!confirm('Delete this entry?')) return;
-  deleteEntryById(editingInitId, editingEntryId);
-  closeEntryForm();
-}
 
-function deleteEntryById(initId, entryId) {
-  const init = state.initiatives.find(i => i.id === initId);
-  if (!init || !init.entries) return;
-  init.entries = init.entries.filter(e => e.id !== entryId);
-  persistEdits();
-  render();
-  showToast('Entry deleted.');
-  if (currentDetailDate) {
-    setTimeout(() => openDetail(currentDetailDate), 50);
+  const init = calendarData.initiatives.find(i => i.id === editingEntry.initId);
+  if (init) {
+    init.entries = init.entries.filter(e => e.id !== editingEntry.entryId);
+    localStorage.setItem('calendarDataOverride', JSON.stringify(calendarData));
   }
+  closeModal('entryFormModal');
+  render();
 }
 
-// Keyboard shortcuts
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') { closeEntryForm(); closeDetail(); closeSearch(); }
+// EXPORT
+function exportJSON() {
+  const blob = new Blob([JSON.stringify(calendarData, null, 2)], { type: 'application/json' });
+  downloadBlob(blob, 'campaign-calendar.json');
+}
 
-  // Don't trigger shortcuts when typing in inputs
+function exportCSV() {
+  let csv = 'Initiative,Entry,Channel,Subchannel,Owner,Start Date,End Date,Status,Markets,Notes\n';
+  calendarData.initiatives.forEach(init => {
+    init.entries.forEach(e => {
+      csv += `"${init.name}","${e.text}","${e.channel}","${e.subchannel || ''}","${e.owner || ''}","${e.date}","${e.endDate || ''}","${e.status}","${(e.markets || []).join('; ')}","${(e.notes || '').replace(/"/g, '""')}"\n`;
+    });
+  });
+  const blob = new Blob([csv], { type: 'text/csv' });
+  downloadBlob(blob, 'campaign-calendar.csv');
+}
+
+function downloadBlob(blob, filename) {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+// KEYBOARD SHORTCUTS
+function toggleShortcuts() {
+  document.getElementById('shortcutsPanel').classList.toggle('active');
+}
+
+document.addEventListener('keydown', (e) => {
   if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') return;
+  if (document.querySelector('.modal-overlay.active')) {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.modal-overlay.active').forEach(m => m.classList.remove('active'));
+    }
+    return;
+  }
 
-  if (e.key === 'ArrowLeft') { changeMonth(-1); }
-  if (e.key === 'ArrowRight') { changeMonth(1); }
-  if (e.key === 't' || e.key === 'T') { goToToday(); }
-  if (e.key === '/') { e.preventDefault(); document.getElementById('searchInput').focus(); }
+  switch (e.key) {
+    case 'ArrowLeft': navPrev(); break;
+    case 'ArrowRight': navNext(); break;
+    case 't': case 'T': goToday(); break;
+    case '1': setView('year'); break;
+    case '2': setView('weekly'); break;
+    case '3': setView('month'); break;
+    case 'n': case 'N': if (isEditor) openNewEntryForm(); break;
+    case '/': e.preventDefault(); document.getElementById('searchInput').focus(); break;
+  }
 });
 
-// Check stored session on load
-(function() {
-  const stored = localStorage.getItem('hf-cal-user');
-  if (stored) {
-    currentUser = stored;
-    showApp();
+// UTILITIES
+function formatDate(d) {
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+}
+
+function getWeekNumber(d) {
+  const date = new Date(d.getTime());
+  date.setHours(0, 0, 0, 0);
+  date.setDate(date.getDate() + 3 - (date.getDay() + 6) % 7);
+  const week1 = new Date(date.getFullYear(), 0, 4);
+  return 1 + Math.round(((date.getTime() - week1.getTime()) / 86400000 - 3 + (week1.getDay() + 6) % 7) / 7);
+}
+
+function getMondayOfWeek(d) {
+  const date = new Date(d);
+  const day = date.getDay();
+  const diff = (day === 0 ? -6 : 1) - day;
+  date.setDate(date.getDate() + diff);
+  date.setHours(0, 0, 0, 0);
+  return date;
+}
+
+// INIT
+document.addEventListener('DOMContentLoaded', () => {
+  if (!checkAuth()) {
+    // Show auth screen
+    document.getElementById('authEmail').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') handleAuth();
+    });
   }
-})();
+});
 </script>
 </body>
 </html>
