@@ -1,13 +1,126 @@
 {
-  "markets": ["US", "UK", "DE", "AU", "CA", "NL", "SE", "DK", "NO", "BE", "AT", "CH", "FR", "IE", "NZ"],
+  "markets": [
+    "US",
+    "UK",
+    "DE",
+    "AU",
+    "CA",
+    "NL",
+    "SE",
+    "DK",
+    "NO",
+    "BE",
+    "AT",
+    "CH",
+    "FR",
+    "IE",
+    "NZ"
+  ],
   "releases": [
-    { "id": "rel-1", "date": "2026-03-10", "name": "Cookbook v2.0", "description": "Recipe saving from social media", "markets": ["US", "UK", "AU", "CA"] },
-    { "id": "rel-2", "date": "2026-04-21", "name": "Rewards 2.0 Beta", "description": "Loyalty program beta launch for internal testing", "markets": ["US"] },
-    { "id": "rel-3", "date": "2026-06-16", "name": "Rewards 2.0 GA", "description": "Full rollout of loyalty program to all active subscribers", "markets": ["US", "UK", "DE", "AU", "CA"] },
-    { "id": "rel-4", "date": "2026-07-01", "name": "Summer Menu Refresh", "description": "New seasonal menu with 12 exclusive recipes", "markets": ["US", "UK", "DE", "AU", "CA", "NL", "SE", "DK", "NO", "BE", "AT", "CH", "FR", "IE", "NZ"] },
-    { "id": "rel-5", "date": "2026-08-18", "name": "Meal Planner v3", "description": "AI-powered weekly meal planning assistant", "markets": ["US", "UK", "AU"] },
-    { "id": "rel-6", "date": "2026-09-15", "name": "Cookbook Expansion", "description": "Cookbook opens to non-subscribers with premium tier", "markets": ["US", "UK", "DE", "AU", "CA"] },
-    { "id": "rel-7", "date": "2026-11-01", "name": "Holiday Collection", "description": "Festive recipe collection and gift box feature", "markets": ["US", "UK", "DE", "AU", "CA", "NL", "SE", "DK", "NO", "BE", "AT", "CH", "FR", "IE", "NZ"] }
+    {
+      "id": "rel-1",
+      "date": "2026-03-10",
+      "name": "Cookbook v2.0",
+      "description": "Recipe saving from social media",
+      "markets": [
+        "US",
+        "UK",
+        "AU",
+        "CA"
+      ]
+    },
+    {
+      "id": "rel-2",
+      "date": "2026-04-21",
+      "name": "Rewards 2.0 Beta",
+      "description": "Loyalty program beta launch for internal testing",
+      "markets": [
+        "US"
+      ]
+    },
+    {
+      "id": "rel-3",
+      "date": "2026-06-16",
+      "name": "Rewards 2.0 GA",
+      "description": "Full rollout of loyalty program to all active subscribers",
+      "markets": [
+        "US",
+        "UK",
+        "DE",
+        "AU",
+        "CA"
+      ]
+    },
+    {
+      "id": "rel-4",
+      "date": "2026-07-01",
+      "name": "Summer Menu Refresh",
+      "description": "New seasonal menu with 12 exclusive recipes",
+      "markets": [
+        "US",
+        "UK",
+        "DE",
+        "AU",
+        "CA",
+        "NL",
+        "SE",
+        "DK",
+        "NO",
+        "BE",
+        "AT",
+        "CH",
+        "FR",
+        "IE",
+        "NZ"
+      ]
+    },
+    {
+      "id": "rel-5",
+      "date": "2026-08-18",
+      "name": "Meal Planner v3",
+      "description": "AI-powered weekly meal planning assistant",
+      "markets": [
+        "US",
+        "UK",
+        "AU"
+      ]
+    },
+    {
+      "id": "rel-6",
+      "date": "2026-09-15",
+      "name": "Cookbook Expansion",
+      "description": "Cookbook opens to non-subscribers with premium tier",
+      "markets": [
+        "US",
+        "UK",
+        "DE",
+        "AU",
+        "CA"
+      ]
+    },
+    {
+      "id": "rel-7",
+      "date": "2026-11-01",
+      "name": "Holiday Collection",
+      "description": "Festive recipe collection and gift box feature",
+      "markets": [
+        "US",
+        "UK",
+        "DE",
+        "AU",
+        "CA",
+        "NL",
+        "SE",
+        "DK",
+        "NO",
+        "BE",
+        "AT",
+        "CH",
+        "FR",
+        "IE",
+        "NZ"
+      ]
+    }
   ],
   "initiatives": [
     {
@@ -15,33 +128,412 @@
       "name": "Summer Campaign",
       "poc": "Kieran",
       "objective": "Drive reactivation and trial through seasonal summer messaging",
-      "markets": ["US", "UK", "DE", "AU", "CA"],
+      "markets": [
+        "US",
+        "UK",
+        "DE",
+        "AU",
+        "CA"
+      ],
+      "releaseId": "rel-4",
       "color": "#EA580C",
       "entries": [
-        { "id": "s1", "date": "2026-06-02", "endDate": "2026-06-04", "text": "Launch email sequence", "channel": "crm", "subchannel": "Email", "owner": "Marina K", "status": "planned", "notes": "Active subs, all markets. 3 day drip.", "markets": ["US", "UK", "DE", "AU", "CA"] },
-        { "id": "s2", "date": "2026-06-02", "text": "Welcome push", "channel": "crm", "subchannel": "Push", "owner": "Marina K", "status": "planned", "notes": "New joiners W22", "markets": ["US", "UK", "DE", "AU", "CA"] },
-        { "id": "s3", "date": "2026-06-03", "text": "Teaser reel", "channel": "organic", "subchannel": "IG", "owner": "Isabela", "status": "planned", "notes": "", "markets": ["US", "UK", "DE", "AU", "CA"] },
-        { "id": "s4", "date": "2026-06-02", "endDate": "2026-06-15", "text": "Prospecting (broad)", "channel": "paid", "subchannel": "Meta", "owner": "Domi", "status": "planned", "notes": "3 creatives, broad targeting", "markets": ["US", "UK", "DE"] },
-        { "id": "s5", "date": "2026-06-02", "endDate": "2026-06-08", "text": "Display retargeting", "channel": "paid", "subchannel": "Display", "owner": "Domi", "status": "planned", "notes": "", "markets": ["US", "UK"] },
-        { "id": "s6", "date": "2026-06-05", "text": "A/B test subject lines", "channel": "crm", "subchannel": "Email", "owner": "Kieran", "status": "in-progress", "notes": "Urgency vs benefit framing", "markets": ["US", "UK", "DE", "AU", "CA"] },
-        { "id": "s7", "date": "2026-06-05", "text": "TikTok reveal", "channel": "organic", "subchannel": "TikTok", "owner": "Isabela", "status": "planned", "notes": "", "markets": ["US", "UK", "AU"] },
-        { "id": "s8", "date": "2026-06-05", "text": "Launch post", "channel": "organic", "subchannel": "FB", "owner": "Isabela", "status": "planned", "notes": "", "markets": ["US", "UK", "DE", "AU", "CA"] },
-        { "id": "s9", "date": "2026-06-04", "endDate": "2026-06-06", "text": "Creator posts wave 1", "channel": "influencers", "subchannel": "Campaign", "owner": "Isabela", "status": "planned", "notes": "3 creators, IG + TikTok", "markets": ["US", "UK"] },
-        { "id": "s10", "date": "2026-06-09", "text": "Reminder push", "channel": "crm", "subchannel": "Push", "owner": "Marina K", "status": "planned", "notes": "", "markets": ["US", "UK", "DE", "AU", "CA"] },
-        { "id": "s11", "date": "2026-06-09", "text": "Promo inbox card", "channel": "crm", "subchannel": "Inbox", "owner": "Kieran", "status": "planned", "notes": "", "markets": ["US", "UK", "DE", "AU", "CA"] },
-        { "id": "s12", "date": "2026-06-09", "endDate": "2026-06-11", "text": "Search brand terms", "channel": "paid", "subchannel": "Search", "owner": "Domi", "status": "planned", "notes": "", "markets": ["US", "UK", "DE"] },
-        { "id": "s13", "date": "2026-06-10", "text": "LP goes live", "channel": "web", "subchannel": "Landing page", "owner": "Kieran", "status": "planned", "notes": "Dedicated summer landing page", "markets": ["US", "UK", "DE", "AU", "CA"] },
-        { "id": "s14", "date": "2026-06-10", "text": "Carousel post", "channel": "organic", "subchannel": "IG", "owner": "Isabela", "status": "planned", "notes": "5 slides, recipe highlights", "markets": ["US", "UK", "DE", "AU", "CA"] },
-        { "id": "s15", "date": "2026-06-08", "endDate": "2026-06-22", "text": "Box flyer", "channel": "print", "subchannel": "Flyer", "owner": "Marina Z", "status": "planned", "notes": "W23+W24 boxes, all markets", "markets": ["US", "UK", "DE", "AU", "CA"] },
-        { "id": "s16", "date": "2026-06-12", "text": "Mid-month nudge", "channel": "crm", "subchannel": "Email", "owner": "Marina K", "status": "planned", "notes": "Churning segment", "markets": ["US", "UK", "DE", "AU", "CA"] },
-        { "id": "s17", "date": "2026-06-15", "text": "Summer CPP live", "channel": "appstore", "subchannel": "Custom page", "owner": "Marina Z", "status": "in-progress", "notes": "Linked to Meta paid", "markets": ["US", "UK", "DE", "AU", "CA"] },
-        { "id": "s18", "date": "2026-06-16", "endDate": "2026-06-30", "text": "Meta creative refresh", "channel": "paid", "subchannel": "Meta", "owner": "Domi", "status": "planned", "notes": "Swap in top performers from W1", "markets": ["US", "UK", "DE"] },
-        { "id": "s19", "date": "2026-06-16", "text": "Homepage hero banner", "channel": "crm", "subchannel": "In-App", "owner": "Kieran", "status": "planned", "notes": "", "markets": ["US", "UK", "DE", "AU", "CA"] },
-        { "id": "s20", "date": "2026-06-16", "text": "SMS blast", "channel": "crm", "subchannel": "SMS", "owner": "Marina K", "status": "planned", "notes": "US only, reactivation", "markets": ["US"] },
-        { "id": "s21", "date": "2026-06-18", "endDate": "2026-06-20", "text": "Creator wave 2", "channel": "influencers", "subchannel": "Campaign", "owner": "Isabela", "status": "planned", "notes": "", "markets": ["US", "UK"] },
-        { "id": "s22", "date": "2026-06-17", "text": "UGC repost", "channel": "organic", "subchannel": "IG", "owner": "Isabela", "status": "planned", "notes": "", "markets": ["US", "UK", "DE", "AU", "CA"] },
-        { "id": "s23", "date": "2026-06-23", "text": "Final week email", "channel": "crm", "subchannel": "Email", "owner": "Marina K", "status": "planned", "notes": "Last call messaging", "markets": ["US", "UK", "DE", "AU", "CA"] },
-        { "id": "s24", "date": "2026-06-01", "endDate": "2026-06-30", "text": "BAU optimisation", "channel": "appstore", "subchannel": "BAU", "owner": "Marina Z", "status": "live", "notes": "Seasonal screenshots", "markets": ["US", "UK", "DE", "AU", "CA"] }
+        {
+          "id": "s1",
+          "date": "2026-06-02",
+          "endDate": "2026-06-04",
+          "text": "Launch email sequence",
+          "channel": "crm",
+          "subchannel": "Email",
+          "owner": "Marina K",
+          "status": "planned",
+          "notes": "Active subs, all markets. 3 day drip.",
+          "markets": [
+            "US",
+            "UK",
+            "DE",
+            "AU",
+            "CA"
+          ]
+        },
+        {
+          "id": "s2",
+          "date": "2026-06-02",
+          "text": "Welcome push",
+          "channel": "crm",
+          "subchannel": "Push",
+          "owner": "Marina K",
+          "status": "planned",
+          "notes": "New joiners W22",
+          "markets": [
+            "US",
+            "UK",
+            "DE",
+            "AU",
+            "CA"
+          ]
+        },
+        {
+          "id": "s3",
+          "date": "2026-06-03",
+          "text": "Teaser reel",
+          "channel": "organic",
+          "subchannel": "IG",
+          "owner": "Isabela",
+          "status": "planned",
+          "notes": "",
+          "markets": [
+            "US",
+            "UK",
+            "DE",
+            "AU",
+            "CA"
+          ]
+        },
+        {
+          "id": "s4",
+          "date": "2026-06-02",
+          "endDate": "2026-06-15",
+          "text": "Prospecting (broad)",
+          "channel": "paid",
+          "subchannel": "Meta",
+          "owner": "Domi",
+          "status": "planned",
+          "notes": "3 creatives, broad targeting",
+          "markets": [
+            "US",
+            "UK",
+            "DE"
+          ]
+        },
+        {
+          "id": "s5",
+          "date": "2026-06-02",
+          "endDate": "2026-06-08",
+          "text": "Display retargeting",
+          "channel": "paid",
+          "subchannel": "Display",
+          "owner": "Domi",
+          "status": "planned",
+          "notes": "",
+          "markets": [
+            "US",
+            "UK"
+          ]
+        },
+        {
+          "id": "s6",
+          "date": "2026-06-05",
+          "text": "A/B test subject lines",
+          "channel": "crm",
+          "subchannel": "Email",
+          "owner": "Kieran",
+          "status": "in-progress",
+          "notes": "Urgency vs benefit framing",
+          "markets": [
+            "US",
+            "UK",
+            "DE",
+            "AU",
+            "CA"
+          ]
+        },
+        {
+          "id": "s7",
+          "date": "2026-06-05",
+          "text": "TikTok reveal",
+          "channel": "organic",
+          "subchannel": "TikTok",
+          "owner": "Isabela",
+          "status": "planned",
+          "notes": "",
+          "markets": [
+            "US",
+            "UK",
+            "AU"
+          ]
+        },
+        {
+          "id": "s8",
+          "date": "2026-06-05",
+          "text": "Launch post",
+          "channel": "organic",
+          "subchannel": "FB",
+          "owner": "Isabela",
+          "status": "planned",
+          "notes": "",
+          "markets": [
+            "US",
+            "UK",
+            "DE",
+            "AU",
+            "CA"
+          ]
+        },
+        {
+          "id": "s9",
+          "date": "2026-06-04",
+          "endDate": "2026-06-06",
+          "text": "Creator posts wave 1",
+          "channel": "influencers",
+          "subchannel": "Campaign",
+          "owner": "Isabela",
+          "status": "planned",
+          "notes": "3 creators, IG + TikTok",
+          "markets": [
+            "US",
+            "UK"
+          ]
+        },
+        {
+          "id": "s10",
+          "date": "2026-06-09",
+          "text": "Reminder push",
+          "channel": "crm",
+          "subchannel": "Push",
+          "owner": "Marina K",
+          "status": "planned",
+          "notes": "",
+          "markets": [
+            "US",
+            "UK",
+            "DE",
+            "AU",
+            "CA"
+          ]
+        },
+        {
+          "id": "s11",
+          "date": "2026-06-09",
+          "text": "Promo inbox card",
+          "channel": "crm",
+          "subchannel": "Inbox",
+          "owner": "Kieran",
+          "status": "planned",
+          "notes": "",
+          "markets": [
+            "US",
+            "UK",
+            "DE",
+            "AU",
+            "CA"
+          ]
+        },
+        {
+          "id": "s12",
+          "date": "2026-06-09",
+          "endDate": "2026-06-11",
+          "text": "Search brand terms",
+          "channel": "paid",
+          "subchannel": "Search",
+          "owner": "Domi",
+          "status": "planned",
+          "notes": "",
+          "markets": [
+            "US",
+            "UK",
+            "DE"
+          ]
+        },
+        {
+          "id": "s13",
+          "date": "2026-06-10",
+          "text": "LP goes live",
+          "channel": "web",
+          "subchannel": "Landing page",
+          "owner": "Kieran",
+          "status": "planned",
+          "notes": "Dedicated summer landing page",
+          "markets": [
+            "US",
+            "UK",
+            "DE",
+            "AU",
+            "CA"
+          ]
+        },
+        {
+          "id": "s14",
+          "date": "2026-06-10",
+          "text": "Carousel post",
+          "channel": "organic",
+          "subchannel": "IG",
+          "owner": "Isabela",
+          "status": "planned",
+          "notes": "5 slides, recipe highlights",
+          "markets": [
+            "US",
+            "UK",
+            "DE",
+            "AU",
+            "CA"
+          ]
+        },
+        {
+          "id": "s15",
+          "date": "2026-06-08",
+          "endDate": "2026-06-22",
+          "text": "Box flyer",
+          "channel": "print",
+          "subchannel": "Flyer",
+          "owner": "Marina Z",
+          "status": "planned",
+          "notes": "W23+W24 boxes, all markets",
+          "markets": [
+            "US",
+            "UK",
+            "DE",
+            "AU",
+            "CA"
+          ]
+        },
+        {
+          "id": "s16",
+          "date": "2026-06-12",
+          "text": "Mid-month nudge",
+          "channel": "crm",
+          "subchannel": "Email",
+          "owner": "Marina K",
+          "status": "planned",
+          "notes": "Churning segment",
+          "markets": [
+            "US",
+            "UK",
+            "DE",
+            "AU",
+            "CA"
+          ]
+        },
+        {
+          "id": "s17",
+          "date": "2026-06-15",
+          "text": "Summer CPP live",
+          "channel": "appstore",
+          "subchannel": "Custom page",
+          "owner": "Marina Z",
+          "status": "in-progress",
+          "notes": "Linked to Meta paid",
+          "markets": [
+            "US",
+            "UK",
+            "DE",
+            "AU",
+            "CA"
+          ]
+        },
+        {
+          "id": "s18",
+          "date": "2026-06-16",
+          "endDate": "2026-06-30",
+          "text": "Meta creative refresh",
+          "channel": "paid",
+          "subchannel": "Meta",
+          "owner": "Domi",
+          "status": "planned",
+          "notes": "Swap in top performers from W1",
+          "markets": [
+            "US",
+            "UK",
+            "DE"
+          ]
+        },
+        {
+          "id": "s19",
+          "date": "2026-06-16",
+          "text": "Homepage hero banner",
+          "channel": "crm",
+          "subchannel": "In-App",
+          "owner": "Kieran",
+          "status": "planned",
+          "notes": "",
+          "markets": [
+            "US",
+            "UK",
+            "DE",
+            "AU",
+            "CA"
+          ]
+        },
+        {
+          "id": "s20",
+          "date": "2026-06-16",
+          "text": "SMS blast",
+          "channel": "crm",
+          "subchannel": "SMS",
+          "owner": "Marina K",
+          "status": "planned",
+          "notes": "US only, reactivation",
+          "markets": [
+            "US"
+          ]
+        },
+        {
+          "id": "s21",
+          "date": "2026-06-18",
+          "endDate": "2026-06-20",
+          "text": "Creator wave 2",
+          "channel": "influencers",
+          "subchannel": "Campaign",
+          "owner": "Isabela",
+          "status": "planned",
+          "notes": "",
+          "markets": [
+            "US",
+            "UK"
+          ]
+        },
+        {
+          "id": "s22",
+          "date": "2026-06-17",
+          "text": "UGC repost",
+          "channel": "organic",
+          "subchannel": "IG",
+          "owner": "Isabela",
+          "status": "planned",
+          "notes": "",
+          "markets": [
+            "US",
+            "UK",
+            "DE",
+            "AU",
+            "CA"
+          ]
+        },
+        {
+          "id": "s23",
+          "date": "2026-06-23",
+          "text": "Final week email",
+          "channel": "crm",
+          "subchannel": "Email",
+          "owner": "Marina K",
+          "status": "planned",
+          "notes": "Last call messaging",
+          "markets": [
+            "US",
+            "UK",
+            "DE",
+            "AU",
+            "CA"
+          ]
+        },
+        {
+          "id": "s24",
+          "date": "2026-06-01",
+          "endDate": "2026-06-30",
+          "text": "BAU optimisation",
+          "channel": "appstore",
+          "subchannel": "BAU",
+          "owner": "Marina Z",
+          "status": "live",
+          "notes": "Seasonal screenshots",
+          "markets": [
+            "US",
+            "UK",
+            "DE",
+            "AU",
+            "CA"
+          ]
+        }
       ]
     },
     {
@@ -49,19 +541,186 @@
       "name": "Rewards Launch",
       "poc": "Marina K",
       "objective": "Launch Rewards 2.0 to active subscribers and drive first engagement",
-      "markets": ["US", "UK", "DE", "AU", "CA"],
+      "markets": [
+        "US",
+        "UK",
+        "DE",
+        "AU",
+        "CA"
+      ],
+      "releaseId": "rel-3",
       "color": "#7C3AED",
       "entries": [
-        { "id": "l1", "date": "2026-06-10", "endDate": "2026-06-12", "text": "Teaser email drip", "channel": "crm", "subchannel": "Email", "owner": "Marina K", "status": "planned", "notes": "Build anticipation", "markets": ["US", "UK", "DE", "AU", "CA"] },
-        { "id": "l2", "date": "2026-06-12", "text": "Teaser push", "channel": "crm", "subchannel": "Push", "owner": "Marina K", "status": "planned", "notes": "", "markets": ["US", "UK", "DE", "AU", "CA"] },
-        { "id": "l3", "date": "2026-06-16", "text": "Launch day email", "channel": "crm", "subchannel": "Email", "owner": "Marina K", "status": "planned", "notes": "All active subs", "markets": ["US", "UK", "DE", "AU", "CA"] },
-        { "id": "l4", "date": "2026-06-16", "text": "Launch push", "channel": "crm", "subchannel": "Push", "owner": "Marina K", "status": "planned", "notes": "", "markets": ["US", "UK", "DE", "AU", "CA"] },
-        { "id": "l5", "date": "2026-06-16", "text": "Full-screen in-app modal", "channel": "crm", "subchannel": "In-App", "owner": "Kieran", "status": "planned", "notes": "Takeover on app open", "markets": ["US", "UK", "DE", "AU", "CA"] },
-        { "id": "l6", "date": "2026-06-16", "text": "Inbox card", "channel": "crm", "subchannel": "Inbox", "owner": "Kieran", "status": "planned", "notes": "", "markets": ["US", "UK", "DE", "AU", "CA"] },
-        { "id": "l7", "date": "2026-06-17", "text": "IG announcement", "channel": "organic", "subchannel": "IG", "owner": "Isabela", "status": "planned", "notes": "", "markets": ["US", "UK", "DE", "AU", "CA"] },
-        { "id": "l8", "date": "2026-06-17", "endDate": "2026-06-24", "text": "Meta awareness burst", "channel": "paid", "subchannel": "Meta", "owner": "Domi", "status": "planned", "notes": "", "markets": ["US", "UK", "DE"] },
-        { "id": "l9", "date": "2026-06-20", "text": "Reminder email (non-engagers)", "channel": "crm", "subchannel": "Email", "owner": "Marina K", "status": "planned", "notes": "", "markets": ["US", "UK", "DE", "AU", "CA"] },
-        { "id": "l10", "date": "2026-06-23", "text": "First mission push", "channel": "crm", "subchannel": "Push", "owner": "Marina K", "status": "planned", "notes": "", "markets": ["US", "UK", "DE", "AU", "CA"] }
+        {
+          "id": "l1",
+          "date": "2026-06-10",
+          "endDate": "2026-06-12",
+          "text": "Teaser email drip",
+          "channel": "crm",
+          "subchannel": "Email",
+          "owner": "Marina K",
+          "status": "planned",
+          "notes": "Build anticipation",
+          "markets": [
+            "US",
+            "UK",
+            "DE",
+            "AU",
+            "CA"
+          ]
+        },
+        {
+          "id": "l2",
+          "date": "2026-06-12",
+          "text": "Teaser push",
+          "channel": "crm",
+          "subchannel": "Push",
+          "owner": "Marina K",
+          "status": "planned",
+          "notes": "",
+          "markets": [
+            "US",
+            "UK",
+            "DE",
+            "AU",
+            "CA"
+          ]
+        },
+        {
+          "id": "l3",
+          "date": "2026-06-16",
+          "text": "Launch day email",
+          "channel": "crm",
+          "subchannel": "Email",
+          "owner": "Marina K",
+          "status": "planned",
+          "notes": "All active subs",
+          "markets": [
+            "US",
+            "UK",
+            "DE",
+            "AU",
+            "CA"
+          ]
+        },
+        {
+          "id": "l4",
+          "date": "2026-06-16",
+          "text": "Launch push",
+          "channel": "crm",
+          "subchannel": "Push",
+          "owner": "Marina K",
+          "status": "planned",
+          "notes": "",
+          "markets": [
+            "US",
+            "UK",
+            "DE",
+            "AU",
+            "CA"
+          ]
+        },
+        {
+          "id": "l5",
+          "date": "2026-06-16",
+          "text": "Full-screen in-app modal",
+          "channel": "crm",
+          "subchannel": "In-App",
+          "owner": "Kieran",
+          "status": "planned",
+          "notes": "Takeover on app open",
+          "markets": [
+            "US",
+            "UK",
+            "DE",
+            "AU",
+            "CA"
+          ]
+        },
+        {
+          "id": "l6",
+          "date": "2026-06-16",
+          "text": "Inbox card",
+          "channel": "crm",
+          "subchannel": "Inbox",
+          "owner": "Kieran",
+          "status": "planned",
+          "notes": "",
+          "markets": [
+            "US",
+            "UK",
+            "DE",
+            "AU",
+            "CA"
+          ]
+        },
+        {
+          "id": "l7",
+          "date": "2026-06-17",
+          "text": "IG announcement",
+          "channel": "organic",
+          "subchannel": "IG",
+          "owner": "Isabela",
+          "status": "planned",
+          "notes": "",
+          "markets": [
+            "US",
+            "UK",
+            "DE",
+            "AU",
+            "CA"
+          ]
+        },
+        {
+          "id": "l8",
+          "date": "2026-06-17",
+          "endDate": "2026-06-24",
+          "text": "Meta awareness burst",
+          "channel": "paid",
+          "subchannel": "Meta",
+          "owner": "Domi",
+          "status": "planned",
+          "notes": "",
+          "markets": [
+            "US",
+            "UK",
+            "DE"
+          ]
+        },
+        {
+          "id": "l9",
+          "date": "2026-06-20",
+          "text": "Reminder email (non-engagers)",
+          "channel": "crm",
+          "subchannel": "Email",
+          "owner": "Marina K",
+          "status": "planned",
+          "notes": "",
+          "markets": [
+            "US",
+            "UK",
+            "DE",
+            "AU",
+            "CA"
+          ]
+        },
+        {
+          "id": "l10",
+          "date": "2026-06-23",
+          "text": "First mission push",
+          "channel": "crm",
+          "subchannel": "Push",
+          "owner": "Marina K",
+          "status": "planned",
+          "notes": "",
+          "markets": [
+            "US",
+            "UK",
+            "DE",
+            "AU",
+            "CA"
+          ]
+        }
       ]
     },
     {
@@ -69,18 +728,161 @@
       "name": "Cookbook Growth",
       "poc": "Kieran",
       "objective": "Drive Cookbook adoption and recipe saves among active and lapsed users",
-      "markets": ["US", "UK", "AU", "CA"],
+      "markets": [
+        "US",
+        "UK",
+        "AU",
+        "CA"
+      ],
+      "releaseId": "rel-1",
       "color": "#0D9488",
       "entries": [
-        { "id": "c1", "date": "2026-03-10", "endDate": "2026-03-12", "text": "Launch email sequence", "channel": "crm", "subchannel": "Email", "owner": "Marina K", "status": "completed", "notes": "3-day drip for existing app users", "markets": ["US", "UK", "AU", "CA"] },
-        { "id": "c2", "date": "2026-03-10", "text": "Launch push notification", "channel": "crm", "subchannel": "Push", "owner": "Marina K", "status": "completed", "notes": "", "markets": ["US", "UK", "AU", "CA"] },
-        { "id": "c3", "date": "2026-03-10", "text": "In-app modal", "channel": "crm", "subchannel": "In-App", "owner": "Kieran", "status": "completed", "notes": "Full-screen takeover on app open", "markets": ["US", "UK", "AU", "CA"] },
-        { "id": "c4", "date": "2026-03-15", "endDate": "2026-04-15", "text": "Creator partnerships wave 1", "channel": "influencers", "subchannel": "Campaign", "owner": "Isabela", "status": "completed", "notes": "Emily Eggers + Spoonful of Si", "markets": ["US", "UK"] },
-        { "id": "c5", "date": "2026-04-01", "endDate": "2026-04-30", "text": "Meta app install campaign", "channel": "paid", "subchannel": "Meta", "owner": "Domi", "status": "completed", "notes": "Cookbook angle for app installs", "markets": ["US", "UK", "AU"] },
-        { "id": "c6", "date": "2026-05-05", "endDate": "2026-05-30", "text": "Organic social content series", "channel": "organic", "subchannel": "IG", "owner": "Isabela", "status": "live", "notes": "Weekly cookbook tips and recipe saves", "markets": ["US", "UK", "AU", "CA"] },
-        { "id": "c7", "date": "2026-05-12", "endDate": "2026-06-12", "text": "Creator wave 2", "channel": "influencers", "subchannel": "Campaign", "owner": "Isabela", "status": "live", "notes": "Extended creator partnerships", "markets": ["US", "UK"] },
-        { "id": "c8", "date": "2026-06-01", "endDate": "2026-06-30", "text": "Retention email nurture", "channel": "crm", "subchannel": "Email", "owner": "Marina K", "status": "planned", "notes": "Weekly recipe inspiration for savers", "markets": ["US", "UK", "AU", "CA"] },
-        { "id": "c9", "date": "2026-07-01", "endDate": "2026-07-31", "text": "Summer recipes push", "channel": "crm", "subchannel": "Push", "owner": "Marina K", "status": "planned", "notes": "Seasonal recipe angle", "markets": ["US", "UK", "AU", "CA"] }
+        {
+          "id": "c1",
+          "date": "2026-03-10",
+          "endDate": "2026-03-12",
+          "text": "Launch email sequence",
+          "channel": "crm",
+          "subchannel": "Email",
+          "owner": "Marina K",
+          "status": "completed",
+          "notes": "3-day drip for existing app users",
+          "markets": [
+            "US",
+            "UK",
+            "AU",
+            "CA"
+          ]
+        },
+        {
+          "id": "c2",
+          "date": "2026-03-10",
+          "text": "Launch push notification",
+          "channel": "crm",
+          "subchannel": "Push",
+          "owner": "Marina K",
+          "status": "completed",
+          "notes": "",
+          "markets": [
+            "US",
+            "UK",
+            "AU",
+            "CA"
+          ]
+        },
+        {
+          "id": "c3",
+          "date": "2026-03-10",
+          "text": "In-app modal",
+          "channel": "crm",
+          "subchannel": "In-App",
+          "owner": "Kieran",
+          "status": "completed",
+          "notes": "Full-screen takeover on app open",
+          "markets": [
+            "US",
+            "UK",
+            "AU",
+            "CA"
+          ]
+        },
+        {
+          "id": "c4",
+          "date": "2026-03-15",
+          "endDate": "2026-04-15",
+          "text": "Creator partnerships wave 1",
+          "channel": "influencers",
+          "subchannel": "Campaign",
+          "owner": "Isabela",
+          "status": "completed",
+          "notes": "Emily Eggers + Spoonful of Si",
+          "markets": [
+            "US",
+            "UK"
+          ]
+        },
+        {
+          "id": "c5",
+          "date": "2026-04-01",
+          "endDate": "2026-04-30",
+          "text": "Meta app install campaign",
+          "channel": "paid",
+          "subchannel": "Meta",
+          "owner": "Domi",
+          "status": "completed",
+          "notes": "Cookbook angle for app installs",
+          "markets": [
+            "US",
+            "UK",
+            "AU"
+          ]
+        },
+        {
+          "id": "c6",
+          "date": "2026-05-05",
+          "endDate": "2026-05-30",
+          "text": "Organic social content series",
+          "channel": "organic",
+          "subchannel": "IG",
+          "owner": "Isabela",
+          "status": "live",
+          "notes": "Weekly cookbook tips and recipe saves",
+          "markets": [
+            "US",
+            "UK",
+            "AU",
+            "CA"
+          ]
+        },
+        {
+          "id": "c7",
+          "date": "2026-05-12",
+          "endDate": "2026-06-12",
+          "text": "Creator wave 2",
+          "channel": "influencers",
+          "subchannel": "Campaign",
+          "owner": "Isabela",
+          "status": "live",
+          "notes": "Extended creator partnerships",
+          "markets": [
+            "US",
+            "UK"
+          ]
+        },
+        {
+          "id": "c8",
+          "date": "2026-06-01",
+          "endDate": "2026-06-30",
+          "text": "Retention email nurture",
+          "channel": "crm",
+          "subchannel": "Email",
+          "owner": "Marina K",
+          "status": "planned",
+          "notes": "Weekly recipe inspiration for savers",
+          "markets": [
+            "US",
+            "UK",
+            "AU",
+            "CA"
+          ]
+        },
+        {
+          "id": "c9",
+          "date": "2026-07-01",
+          "endDate": "2026-07-31",
+          "text": "Summer recipes push",
+          "channel": "crm",
+          "subchannel": "Push",
+          "owner": "Marina K",
+          "status": "planned",
+          "notes": "Seasonal recipe angle",
+          "markets": [
+            "US",
+            "UK",
+            "AU",
+            "CA"
+          ]
+        }
       ]
     },
     {
@@ -88,15 +890,103 @@
       "name": "Win-back Q3",
       "poc": "Domi",
       "objective": "Reactivate churned subscribers with personalized offers and new features",
-      "markets": ["US", "UK", "DE"],
+      "markets": [
+        "US",
+        "UK",
+        "DE"
+      ],
       "color": "#DC2626",
       "entries": [
-        { "id": "w1", "date": "2026-07-07", "endDate": "2026-07-09", "text": "We miss you email drip", "channel": "crm", "subchannel": "Email", "owner": "Marina K", "status": "planned", "notes": "3-touch sequence for 30-90 day churns", "markets": ["US", "UK", "DE"] },
-        { "id": "w2", "date": "2026-07-07", "text": "Discount push", "channel": "crm", "subchannel": "Push", "owner": "Marina K", "status": "planned", "notes": "50% off first box back", "markets": ["US", "UK", "DE"] },
-        { "id": "w3", "date": "2026-07-10", "endDate": "2026-07-31", "text": "Meta retargeting", "channel": "paid", "subchannel": "Meta", "owner": "Domi", "status": "planned", "notes": "Dynamic product ads for churned users", "markets": ["US", "UK", "DE"] },
-        { "id": "w4", "date": "2026-07-14", "text": "Win-back SMS", "channel": "crm", "subchannel": "SMS", "owner": "Marina K", "status": "planned", "notes": "US only, personalized offer", "markets": ["US"] },
-        { "id": "w5", "date": "2026-07-21", "text": "Last chance email", "channel": "crm", "subchannel": "Email", "owner": "Marina K", "status": "planned", "notes": "Urgency messaging, offer expires", "markets": ["US", "UK", "DE"] },
-        { "id": "w6", "date": "2026-08-04", "endDate": "2026-08-18", "text": "Phase 2 broader retargeting", "channel": "paid", "subchannel": "Display", "owner": "Domi", "status": "planned", "notes": "Expand to 90-180 day churns", "markets": ["US", "UK"] }
+        {
+          "id": "w1",
+          "date": "2026-07-07",
+          "endDate": "2026-07-09",
+          "text": "We miss you email drip",
+          "channel": "crm",
+          "subchannel": "Email",
+          "owner": "Marina K",
+          "status": "planned",
+          "notes": "3-touch sequence for 30-90 day churns",
+          "markets": [
+            "US",
+            "UK",
+            "DE"
+          ]
+        },
+        {
+          "id": "w2",
+          "date": "2026-07-07",
+          "text": "Discount push",
+          "channel": "crm",
+          "subchannel": "Push",
+          "owner": "Marina K",
+          "status": "planned",
+          "notes": "50% off first box back",
+          "markets": [
+            "US",
+            "UK",
+            "DE"
+          ]
+        },
+        {
+          "id": "w3",
+          "date": "2026-07-10",
+          "endDate": "2026-07-31",
+          "text": "Meta retargeting",
+          "channel": "paid",
+          "subchannel": "Meta",
+          "owner": "Domi",
+          "status": "planned",
+          "notes": "Dynamic product ads for churned users",
+          "markets": [
+            "US",
+            "UK",
+            "DE"
+          ]
+        },
+        {
+          "id": "w4",
+          "date": "2026-07-14",
+          "text": "Win-back SMS",
+          "channel": "crm",
+          "subchannel": "SMS",
+          "owner": "Marina K",
+          "status": "planned",
+          "notes": "US only, personalized offer",
+          "markets": [
+            "US"
+          ]
+        },
+        {
+          "id": "w5",
+          "date": "2026-07-21",
+          "text": "Last chance email",
+          "channel": "crm",
+          "subchannel": "Email",
+          "owner": "Marina K",
+          "status": "planned",
+          "notes": "Urgency messaging, offer expires",
+          "markets": [
+            "US",
+            "UK",
+            "DE"
+          ]
+        },
+        {
+          "id": "w6",
+          "date": "2026-08-04",
+          "endDate": "2026-08-18",
+          "text": "Phase 2 broader retargeting",
+          "channel": "paid",
+          "subchannel": "Display",
+          "owner": "Domi",
+          "status": "planned",
+          "notes": "Expand to 90-180 day churns",
+          "markets": [
+            "US",
+            "UK"
+          ]
+        }
       ]
     },
     {
@@ -104,15 +994,161 @@
       "name": "Holiday 2026",
       "poc": "Marina Z",
       "objective": "Maximize Q4 acquisition and gifting through festive campaign",
-      "markets": ["US", "UK", "DE", "AU", "CA", "NL", "SE", "DK", "NO", "BE", "AT", "CH", "FR", "IE", "NZ"],
+      "markets": [
+        "US",
+        "UK",
+        "DE",
+        "AU",
+        "CA",
+        "NL",
+        "SE",
+        "DK",
+        "NO",
+        "BE",
+        "AT",
+        "CH",
+        "FR",
+        "IE",
+        "NZ"
+      ],
+      "releaseId": "rel-7",
       "color": "#059669",
       "entries": [
-        { "id": "h1", "date": "2026-11-01", "endDate": "2026-11-14", "text": "Early bird teaser sequence", "channel": "crm", "subchannel": "Email", "owner": "Marina K", "status": "planned", "notes": "Build anticipation for gift boxes", "markets": ["US", "UK", "DE", "AU", "CA", "NL", "SE", "DK", "NO", "BE", "AT", "CH", "FR", "IE", "NZ"] },
-        { "id": "h2", "date": "2026-11-15", "endDate": "2026-12-20", "text": "Gift box paid campaign", "channel": "paid", "subchannel": "Meta", "owner": "Domi", "status": "planned", "notes": "Full funnel, all markets", "markets": ["US", "UK", "DE", "AU", "CA", "NL"] },
-        { "id": "h3", "date": "2026-11-20", "endDate": "2026-12-15", "text": "Holiday creator partnerships", "channel": "influencers", "subchannel": "Campaign", "owner": "Isabela", "status": "planned", "notes": "10 creators, festive cooking content", "markets": ["US", "UK", "DE"] },
-        { "id": "h4", "date": "2026-12-01", "text": "Holiday homepage takeover", "channel": "web", "subchannel": "Homepage", "owner": "Kieran", "status": "planned", "notes": "Festive branding + gift CTA", "markets": ["US", "UK", "DE", "AU", "CA", "NL", "SE", "DK", "NO", "BE", "AT", "CH", "FR", "IE", "NZ"] },
-        { "id": "h5", "date": "2026-12-01", "endDate": "2026-12-24", "text": "Advent calendar in-app", "channel": "crm", "subchannel": "In-App", "owner": "Kieran", "status": "planned", "notes": "Daily surprise content and offers", "markets": ["US", "UK", "DE", "AU", "CA"] },
-        { "id": "h6", "date": "2026-12-10", "text": "Last order date push", "channel": "crm", "subchannel": "Push", "owner": "Marina K", "status": "planned", "notes": "Urgency for Christmas delivery", "markets": ["US", "UK", "DE", "AU", "CA", "NL", "SE", "DK", "NO", "BE", "AT", "CH", "FR", "IE", "NZ"] }
+        {
+          "id": "h1",
+          "date": "2026-11-01",
+          "endDate": "2026-11-14",
+          "text": "Early bird teaser sequence",
+          "channel": "crm",
+          "subchannel": "Email",
+          "owner": "Marina K",
+          "status": "planned",
+          "notes": "Build anticipation for gift boxes",
+          "markets": [
+            "US",
+            "UK",
+            "DE",
+            "AU",
+            "CA",
+            "NL",
+            "SE",
+            "DK",
+            "NO",
+            "BE",
+            "AT",
+            "CH",
+            "FR",
+            "IE",
+            "NZ"
+          ]
+        },
+        {
+          "id": "h2",
+          "date": "2026-11-15",
+          "endDate": "2026-12-20",
+          "text": "Gift box paid campaign",
+          "channel": "paid",
+          "subchannel": "Meta",
+          "owner": "Domi",
+          "status": "planned",
+          "notes": "Full funnel, all markets",
+          "markets": [
+            "US",
+            "UK",
+            "DE",
+            "AU",
+            "CA",
+            "NL"
+          ]
+        },
+        {
+          "id": "h3",
+          "date": "2026-11-20",
+          "endDate": "2026-12-15",
+          "text": "Holiday creator partnerships",
+          "channel": "influencers",
+          "subchannel": "Campaign",
+          "owner": "Isabela",
+          "status": "planned",
+          "notes": "10 creators, festive cooking content",
+          "markets": [
+            "US",
+            "UK",
+            "DE"
+          ]
+        },
+        {
+          "id": "h4",
+          "date": "2026-12-01",
+          "text": "Holiday homepage takeover",
+          "channel": "web",
+          "subchannel": "Homepage",
+          "owner": "Kieran",
+          "status": "planned",
+          "notes": "Festive branding + gift CTA",
+          "markets": [
+            "US",
+            "UK",
+            "DE",
+            "AU",
+            "CA",
+            "NL",
+            "SE",
+            "DK",
+            "NO",
+            "BE",
+            "AT",
+            "CH",
+            "FR",
+            "IE",
+            "NZ"
+          ]
+        },
+        {
+          "id": "h5",
+          "date": "2026-12-01",
+          "endDate": "2026-12-24",
+          "text": "Advent calendar in-app",
+          "channel": "crm",
+          "subchannel": "In-App",
+          "owner": "Kieran",
+          "status": "planned",
+          "notes": "Daily surprise content and offers",
+          "markets": [
+            "US",
+            "UK",
+            "DE",
+            "AU",
+            "CA"
+          ]
+        },
+        {
+          "id": "h6",
+          "date": "2026-12-10",
+          "text": "Last order date push",
+          "channel": "crm",
+          "subchannel": "Push",
+          "owner": "Marina K",
+          "status": "planned",
+          "notes": "Urgency for Christmas delivery",
+          "markets": [
+            "US",
+            "UK",
+            "DE",
+            "AU",
+            "CA",
+            "NL",
+            "SE",
+            "DK",
+            "NO",
+            "BE",
+            "AT",
+            "CH",
+            "FR",
+            "IE",
+            "NZ"
+          ]
+        }
       ]
     }
   ]
