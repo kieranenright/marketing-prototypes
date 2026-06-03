@@ -574,7 +574,7 @@
     }
 
     @media (max-width: 900px) {
-      .why-features { grid-template-columns: 1fr; max-width: 400px; }
+      .why-features { grid-template-columns: 1fr !important; max-width: 400px; }
     }
 
     /* How It Works */
@@ -1235,15 +1235,15 @@
     <div class="hero-container">
       <div class="hero-text">
         <div class="hero-eyebrow">HELLOFRESH COOKBOOK CREATOR PLATFORM</div>
-        <h1>The only place where every user is looking for dinner.</h1>
-        <p class="hero-subtitle">Your recipes live inside the HelloFresh app where our entire audience opened it for one reason: they need something to cook tonight.</p>
+        <h1>Your videos become recipes that actually get cooked.</h1>
+        <p class="hero-subtitle">Professional presentation. Distribution to 1M+ active users. A dashboard that shows you who saved, viewed, and cooked. Zero extra work on your end.</p>
         <div style="display: inline-flex; align-items: center; gap: 12px; background: rgba(6, 122, 70, 0.06); border: 1px solid rgba(6, 122, 70, 0.15); border-radius: 980px; padding: 10px 20px 10px 12px; margin-bottom: 24px; font-size: 14px; line-height: 1.4;">
           <span style="background: var(--color-brand); color: white; font-family: 'agrandir-tight-black', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 10px; border-radius: 980px;">Beta</span>
-          <span style="color: var(--color-text);">First <strong>200 creators</strong> get free access — paid after that</span>
+          <span style="color: var(--color-text);">First <strong>200 creators</strong> get free access. Paid after that.</span>
         </div>
         <div class="hero-ctas" style="flex-direction: column; align-items: flex-start; gap: 16px;">
-          <a href="#apply" class="btn btn-primary btn-large">Apply now — it's free</a>
-          <a href="#how" style="color: var(--color-text-secondary); font-size: 14px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">See how it works <span style="font-size: 18px;">&#8595;</span></a>
+          <a href="#apply" class="btn btn-primary btn-large">Apply now, it's free</a>
+          <a href="#what-you-get" style="color: var(--color-text-secondary); font-size: 14px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">See what you get <span style="font-size: 18px;">&#8595;</span></a>
         </div>
       </div>
 
@@ -1261,227 +1261,22 @@
   </section>
   </div><!-- end landing -->
 
-  <!-- Chef Carousel -->
-  <section class="chefs-showcase" style="position: relative; z-index: 20;">
-    <div class="section-header" style="padding: 0 24px; margin-bottom: 12px;">
-      <div class="section-eyebrow" style="margin-bottom: 0;">CREATORS ON THE PLATFORM</div>
-    </div>
-
-    <div class="chefs-scroll-container">
-      <!-- HF Chef: Avram -->
-      <div class="chef-card">
-        <div class="chef-avatar-wrapper">
-          <img src="https://media.hellofresh.com/q_auto,f_auto,w_400,c_fill,g_face,ar_1/food-content-live/recipe-developers/headshots/5b5a5243-6b0c-4212-b472-8d7dc36b302e" alt="Avram Salzmann" class="chef-avatar">
-          <div class="chef-lime-accent">&#127819;</div>
-        </div>
-        <div class="chef-name">Avram Salzmann</div>
-        <div class="chef-specialty">HelloFresh Chef</div>
-      </div>
-
-      <!-- Partner Creator: Emily Eggers -->
-      <div class="chef-card">
-        <div class="chef-avatar-wrapper">
-          <img src="https://emilyeggers.com/wp-content/uploads/bb-plugin/cache/emily-4-square-b3217d34717ad2552399e95bae165f07-70w9hrn2bo3d.png" alt="Emily Eggers" class="chef-avatar">
-          <div class="chef-lime-accent partner"><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></div>
-        </div>
-        <div class="chef-name">Emily Eggers</div>
-        <div class="chef-specialty">Partner Creator</div>
-      </div>
-
-      <!-- HF Chef: Michelle -->
-      <div class="chef-card">
-        <div class="chef-avatar-wrapper">
-          <img src="https://media.hellofresh.com/q_auto,f_auto,w_400,c_fill,g_face,ar_1/food-content-live/recipe-developers/headshots/579f4ccd-272f-48e4-ac0b-e04b9d6203e9" alt="Michelle Doll Olson" class="chef-avatar">
-          <div class="chef-lime-accent">&#127819;</div>
-        </div>
-        <div class="chef-name">Michelle Doll Olson</div>
-        <div class="chef-specialty">HelloFresh Chef</div>
-      </div>
-
-      <!-- Partner Creator: Sierra -->
-      <div class="chef-card">
-        <div class="chef-avatar-wrapper">
-          <img src="https://ugc.production.linktr.ee/5a4a144f-5489-4858-90b0-f87bc215b94a_IMG-3484.jpeg?io=true&size=avatar-v3_0" alt="Sierra Georgistis" class="chef-avatar">
-          <div class="chef-lime-accent partner"><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></div>
-        </div>
-        <div class="chef-name">Sierra Georgistis</div>
-        <div class="chef-specialty">Partner Creator</div>
-      </div>
-
-      <!-- HF Chef: Daniel -->
-      <div class="chef-card">
-        <div class="chef-avatar-wrapper">
-          <img src="https://media.hellofresh.com/q_auto,f_auto,w_400,c_fill,g_face,ar_1/food-content-live/recipe-developers/headshots/221699a6-bcdd-4668-b5d4-328f485e48f2" alt="Daniel Kim" class="chef-avatar">
-          <div class="chef-lime-accent">&#127819;</div>
-        </div>
-        <div class="chef-name">Daniel Kim</div>
-        <div class="chef-specialty">HelloFresh Chef</div>
-      </div>
-
-      <!-- HF Chef: Christina -->
-      <div class="chef-card">
-        <div class="chef-avatar-wrapper">
-          <img src="https://media.hellofresh.com/q_auto,f_auto,w_400,c_fill,g_face,ar_1/food-content-live/recipe-developers/headshots/507da507-c7ee-442d-b6b6-7fe3155a0b67" alt="Christina Boateng" class="chef-avatar">
-          <div class="chef-lime-accent">&#127819;</div>
-        </div>
-        <div class="chef-name">Christina Boateng</div>
-        <div class="chef-specialty">HelloFresh Chef</div>
-      </div>
-
-      <!-- HF Chef: Sara -->
-      <div class="chef-card">
-        <div class="chef-avatar-wrapper">
-          <img src="https://media.hellofresh.com/q_auto,f_auto,w_400,c_fill,g_face,ar_1/food-content-live/recipe-developers/headshots/d6403d64-adb8-49d6-827d-b54a398e509d" alt="Sara Heilman" class="chef-avatar">
-          <div class="chef-lime-accent">&#127819;</div>
-        </div>
-        <div class="chef-name">Sara Heilman</div>
-        <div class="chef-specialty">HelloFresh Chef</div>
-      </div>
-
-      <!-- HF Chef: Joanna -->
-      <div class="chef-card">
-        <div class="chef-avatar-wrapper">
-          <img src="https://media.hellofresh.com/q_auto,f_auto,w_400,c_fill,g_face,ar_1/food-content-live/recipe-developers/headshots/ff587d72-9b3f-41cc-87cd-8c40c800d751" alt="Joanna Han" class="chef-avatar">
-          <div class="chef-lime-accent">&#127819;</div>
-        </div>
-        <div class="chef-name">Joanna Han</div>
-        <div class="chef-specialty">HelloFresh Chef</div>
-      </div>
-
-      <!-- Duplicates for seamless loop -->
-      <div class="chef-card">
-        <div class="chef-avatar-wrapper">
-          <img src="https://media.hellofresh.com/q_auto,f_auto,w_400,c_fill,g_face,ar_1/food-content-live/recipe-developers/headshots/5b5a5243-6b0c-4212-b472-8d7dc36b302e" alt="Avram Salzmann" class="chef-avatar">
-          <div class="chef-lime-accent">&#127819;</div>
-        </div>
-        <div class="chef-name">Avram Salzmann</div>
-        <div class="chef-specialty">HelloFresh Chef</div>
-      </div>
-
-      <div class="chef-card">
-        <div class="chef-avatar-wrapper">
-          <img src="https://emilyeggers.com/wp-content/uploads/bb-plugin/cache/emily-4-square-b3217d34717ad2552399e95bae165f07-70w9hrn2bo3d.png" alt="Emily Eggers" class="chef-avatar">
-          <div class="chef-lime-accent partner"><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></div>
-        </div>
-        <div class="chef-name">Emily Eggers</div>
-        <div class="chef-specialty">Partner Creator</div>
-      </div>
-
-      <div class="chef-card">
-        <div class="chef-avatar-wrapper">
-          <img src="https://media.hellofresh.com/q_auto,f_auto,w_400,c_fill,g_face,ar_1/food-content-live/recipe-developers/headshots/579f4ccd-272f-48e4-ac0b-e04b9d6203e9" alt="Michelle Doll Olson" class="chef-avatar">
-          <div class="chef-lime-accent">&#127819;</div>
-        </div>
-        <div class="chef-name">Michelle Doll Olson</div>
-        <div class="chef-specialty">HelloFresh Chef</div>
-      </div>
-
-      <div class="chef-card">
-        <div class="chef-avatar-wrapper">
-          <img src="https://ugc.production.linktr.ee/5a4a144f-5489-4858-90b0-f87bc215b94a_IMG-3484.jpeg?io=true&size=avatar-v3_0" alt="Sierra Georgistis" class="chef-avatar">
-          <div class="chef-lime-accent partner"><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></div>
-        </div>
-        <div class="chef-name">Sierra Georgistis</div>
-        <div class="chef-specialty">Partner Creator</div>
-      </div>
-
-      <div class="chef-card">
-        <div class="chef-avatar-wrapper">
-          <img src="https://media.hellofresh.com/q_auto,f_auto,w_400,c_fill,g_face,ar_1/food-content-live/recipe-developers/headshots/221699a6-bcdd-4668-b5d4-328f485e48f2" alt="Daniel Kim" class="chef-avatar">
-          <div class="chef-lime-accent">&#127819;</div>
-        </div>
-        <div class="chef-name">Daniel Kim</div>
-        <div class="chef-specialty">HelloFresh Chef</div>
-      </div>
-
-      <div class="chef-card">
-        <div class="chef-avatar-wrapper">
-          <img src="https://media.hellofresh.com/q_auto,f_auto,w_400,c_fill,g_face,ar_1/food-content-live/recipe-developers/headshots/507da507-c7ee-442d-b6b6-7fe3155a0b67" alt="Christina Boateng" class="chef-avatar">
-          <div class="chef-lime-accent">&#127819;</div>
-        </div>
-        <div class="chef-name">Christina Boateng</div>
-        <div class="chef-specialty">HelloFresh Chef</div>
-      </div>
-
-      <div class="chef-card">
-        <div class="chef-avatar-wrapper">
-          <img src="https://media.hellofresh.com/q_auto,f_auto,w_400,c_fill,g_face,ar_1/food-content-live/recipe-developers/headshots/d6403d64-adb8-49d6-827d-b54a398e509d" alt="Sara Heilman" class="chef-avatar">
-          <div class="chef-lime-accent">&#127819;</div>
-        </div>
-        <div class="chef-name">Sara Heilman</div>
-        <div class="chef-specialty">HelloFresh Chef</div>
-      </div>
-
-      <div class="chef-card">
-        <div class="chef-avatar-wrapper">
-          <img src="https://media.hellofresh.com/q_auto,f_auto,w_400,c_fill,g_face,ar_1/food-content-live/recipe-developers/headshots/ff587d72-9b3f-41cc-87cd-8c40c800d751" alt="Joanna Han" class="chef-avatar">
-          <div class="chef-lime-accent">&#127819;</div>
-        </div>
-        <div class="chef-name">Joanna Han</div>
-        <div class="chef-specialty">HelloFresh Chef</div>
-      </div>
-    </div>
-
-    <div class="carousel-cta" style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
-      <a href="#apply" class="btn btn-primary btn-large">Join the Cookbook Creator Platform</a>
-      <button type="button" class="btn btn-secondary btn-large" onclick="toggleWhoSection()">Who can join?</button>
-    </div>
-  </section>
-
-  <!-- Testimonial -->
-  <section class="testimonial-section" style="background: var(--color-surface); padding: 80px 24px; position: relative; z-index: 20;">
-    <div class="testimonial" style="margin-top: 0;">
-      <blockquote>
-        "I went from commercial fishing boats to creating recipes that reach millions of home kitchens. HelloFresh lets me focus on what I love — sustainable seafood and making quality cuisine accessible to everyone."
-      </blockquote>
-      <div class="testimonial-author">
-        <img src="https://media.hellofresh.com/q_auto,f_auto,w_400,c_fill,g_face,ar_1/food-content-live/recipe-developers/headshots/5b5a5243-6b0c-4212-b472-8d7dc36b302e" alt="Avram Salzmann">
-        <div>
-          <strong>Avram Salzmann</strong>
-          <span>Recipe Developer &middot; 84 recipes</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Why Create with HelloFresh -->
-  <section class="why-section" id="why">
-    <div class="section-header" style="margin-bottom: 32px;">
-      <div class="section-eyebrow">WHY COOKBOOK</div>
-      <h2>From content to kitchen. Where your recipes actually get made.</h2>
-    </div>
-    <div class="why-features">
-      <div class="why-card">
-        <div class="why-card-visual">
-          <img src="https://media.hellofresh.com/w_3840,q_auto,f_auto,c_limit,fl_lossy/hellofresh_s3/image/HFRC_R15365G_Hero_OnePanPineappleSalsaPorkTacos_W31_3_2024-6993aa99.jpg" alt="One Pan Pineapple Salsa Pork Tacos">
-        </div>
-        <div class="why-card-content">
-          <div class="why-card-label">REACH</div>
-          <h3>Beyond the algorithm</h3>
-          <p>Reach 1M+ active users (and their households) across the US, UK, Australia, and New Zealand. People deciding what to cook tonight, not just scrolling.</p>
-        </div>
-      </div>
-
-      <div class="why-card">
-        <div class="why-card-visual">
-          <img src="https://media.hellofresh.com/w_3840,q_auto,f_auto,c_limit,fl_lossy/hellofresh_website/us/cms/howitworks/hiw-family.jpg" alt="Family cooking and enjoying a meal together">
-        </div>
-        <div class="why-card-content">
-          <div class="why-card-label">SERVE</div>
-          <h3>The feedback social never gives you</h3>
-          <p>See exactly who cooked, rated, and saved your recipe — not just who liked it.</p>
-        </div>
-      </div>
-
-      <div class="why-card">
-        <div class="why-card-visual">
-          <img src="https://media.hellofresh.com/w_3840,q_auto,f_auto,c_limit,fl_lossy/c_fill,f_auto,fl_lossy,h_768,q_auto/hellofresh_s3/image/66a7c44db9d3dca060611fe3-50c94513-20328e3b.jpeg" alt="Szechuan Pork and Green Bean Stir-Fry">
-        </div>
-        <div class="why-card-content">
-          <div class="why-card-label">CURATE</div>
-          <h3>Publish once. Cooked across four countries.</h3>
-          <p>Your recipe goes live in every market — no extra work, no re-uploading, no adapting.</p>
-        </div>
+  <!-- Your Audience -->
+  <section style="background: var(--color-surface); padding: 80px 24px; position: relative; z-index: 20; text-align: center;">
+    <div style="max-width: 800px; margin: 0 auto;">
+      <div class="section-eyebrow">YOUR AUDIENCE</div>
+      <h2 style="font-family: 'agrandir-tight-bold', var(--font-headline); font-size: clamp(28px, 4vw, 42px); line-height: 1.15; margin-bottom: 32px;">Millions of home cooks hungry for more delicious ideas, from across the world.</h2>
+      <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; font-size: 28px;">
+        <span title="United States">&#127482;&#127480;</span>
+        <span title="Canada">&#127464;&#127462;</span>
+        <span title="United Kingdom">&#127468;&#127463;</span>
+        <span title="Ireland">&#127470;&#127466;</span>
+        <span title="Germany">&#127465;&#127466;</span>
+        <span title="Austria">&#127462;&#127481;</span>
+        <span title="Denmark">&#127465;&#127472;</span>
+        <span title="France">&#127467;&#127479;</span>
+        <span title="Belgium">&#127463;&#127466;</span>
+        <span title="Netherlands">&#127475;&#127473;</span>
       </div>
     </div>
   </section>
@@ -1489,8 +1284,8 @@
   <!-- How It Works -->
   <section class="how-section" id="how">
     <div class="section-header" style="margin-bottom: 40px;">
-      <div class="section-eyebrow">HOW IT WORKS</div>
-      <h2>Zero extra work. We convert your existing content.</h2>
+      <div class="section-eyebrow">CREATORS BETA</div>
+      <h2>How it works.</h2>
     </div>
     <div class="how-steps">
       <div class="how-step">
@@ -1502,7 +1297,7 @@
 
       <div class="how-step">
         <div class="how-step-number">2</div>
-        <div class="how-step-icon">&#9889;</div>
+        <div class="how-step-icon">&#128293;</div>
         <h3>We convert them</h3>
         <p>We turn your video content into structured step-by-step recipe cards with ingredients, timings, and photos.</p>
       </div>
@@ -1511,7 +1306,127 @@
         <div class="how-step-number">3</div>
         <div class="how-step-icon">&#127869;</div>
         <h3>People cook them</h3>
-        <p>Your recipes go live in the app where 1M+ users browse, save, and cook in real kitchens.</p>
+        <p>Your recipes go live in the HelloFresh app where home cooks around the world browse, save, and cook in real kitchens.</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- What You Get -->
+  <section class="why-section" id="what-you-get">
+    <div class="section-header" style="margin-bottom: 32px;">
+      <div class="section-eyebrow">WHAT YOU GET</div>
+      <h2>Everything you need to turn content into real-world impact.</h2>
+    </div>
+    <div class="why-features" style="grid-template-columns: repeat(2, 1fr);">
+      <div class="why-card">
+        <div class="why-card-visual">
+          <img src="https://media.hellofresh.com/w_3840,q_auto,f_auto,c_limit,fl_lossy/hellofresh_s3/image/HFRC_R15365G_Hero_OnePanPineappleSalsaPorkTacos_W31_3_2024-6993aa99.jpg" alt="Professional recipe presentation">
+        </div>
+        <div class="why-card-content">
+          <div class="why-card-label">PRESENTATION</div>
+          <h3>Your recipes look like they belong in a cookbook</h3>
+          <p>AI-generated hero images, standardized formatting, and HelloFresh-quality presentation. Your content elevated to professional publishing standards without you lifting a finger.</p>
+        </div>
+      </div>
+
+      <div class="why-card">
+        <div class="why-card-visual">
+          <img src="assets/creator-cooking-lifestyle.webp" alt="Creator cooking in their kitchen">
+        </div>
+        <div class="why-card-content">
+          <div class="why-card-label">DISTRIBUTION</div>
+          <h3>1M+ people who opened the app to find dinner</h3>
+          <p>Your recipes land in front of HelloFresh's active subscriber base across the US, UK, Australia, and New Zealand. No algorithm roulette. Every user is there to cook.</p>
+        </div>
+      </div>
+
+      <div class="why-card">
+        <div class="why-card-visual">
+          <img src="https://media.hellofresh.com/w_3840,q_auto,f_auto,c_limit,fl_lossy/hellofresh_website/us/cms/howitworks/hiw-family.jpg" alt="People cooking your recipes">
+        </div>
+        <div class="why-card-content">
+          <div class="why-card-label">PERFORMANCE</div>
+          <h3>Know exactly who saved, viewed, and cooked your food</h3>
+          <p>A real dashboard showing saves, views, and engagement. Not vanity metrics. The data that tells you which recipes land and which audiences love your style.</p>
+        </div>
+      </div>
+
+      <div class="why-card">
+        <div class="why-card-visual">
+          <img src="https://media.hellofresh.com/w_3840,q_auto,f_auto,c_limit,fl_lossy/c_fill,f_auto,fl_lossy,h_768,q_auto/hellofresh_s3/image/66e85d5f4aa722a30066c073-e4768f00-885ea574.jpeg" alt="Trending recipe ideas">
+        </div>
+        <div class="why-card-content">
+          <div class="why-card-label">INTELLIGENCE</div>
+          <h3>See what's trending before everyone else creates it</h3>
+          <p>Trend data from millions of real cooking decisions. Know what flavours, cuisines, and formats are surging so you can create content that already has demand.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Partners That Joined -->
+  <section style="background: #e8f5e0; padding: 80px 24px; position: relative; z-index: 20;">
+    <div style="max-width: 1000px; margin: 0 auto; text-align: center;">
+      <div class="section-eyebrow">PARTNERS THAT JOINED</div>
+      <h2 style="font-family: 'agrandir-tight-bold', var(--font-headline); font-size: clamp(28px, 4vw, 40px); line-height: 1.15; margin-bottom: 48px;">Built with creators, for creators.</h2>
+
+      <div style="display: flex; gap: 32px; justify-content: center; flex-wrap: wrap;">
+        <!-- Emily Eggers -->
+        <div style="background: var(--color-surface); border-radius: 16px; overflow: hidden; display: flex; max-width: 460px; flex: 1; min-width: 320px; box-shadow: 0 4px 16px rgba(0,0,0,0.06);">
+          <div style="width: 180px; min-height: 220px; flex-shrink: 0; overflow: hidden;">
+            <img src="https://emilyeggers.com/wp-content/uploads/bb-plugin/cache/emily-4-square-b3217d34717ad2552399e95bae165f07-70w9hrn2bo3d.png" alt="Emily Eggers" style="width: 100%; height: 100%; object-fit: cover;">
+          </div>
+          <div style="padding: 24px; display: flex; flex-direction: column; justify-content: center;">
+            <h3 style="font-family: 'agrandir-tight-bold', var(--font-headline); font-size: 20px; margin-bottom: 8px;">Emily Eggers</h3>
+            <p style="font-size: 14px; color: var(--color-text-secondary); line-height: 1.5; margin-bottom: 16px;">@emilyeggers. NYC private chef. Plant-forward, pasta-led recipes. ICE trained.</p>
+            <div style="display: flex; gap: 8px; margin-bottom: 16px;">
+              <span style="width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(45deg, #f09433, #dc2743, #bc1888); display: flex; align-items: center; justify-content: center;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+              </span>
+              <span style="width: 32px; height: 32px; border-radius: 50%; background: #000; display: flex; align-items: center; justify-content: center;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
+              </span>
+              <span style="width: 32px; height: 32px; border-radius: 50%; background: #1877F2; display: flex; align-items: center; justify-content: center;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+              </span>
+            </div>
+            <div>
+              <span style="font-family: 'agrandir-tight-bold', var(--font-headline); font-size: 22px;">412K</span>
+              <span style="display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-text-secondary);">Followers</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sierra Georgistis -->
+        <div style="background: var(--color-surface); border-radius: 16px; overflow: hidden; display: flex; max-width: 460px; flex: 1; min-width: 320px; box-shadow: 0 4px 16px rgba(0,0,0,0.06);">
+          <div style="width: 180px; min-height: 220px; flex-shrink: 0; overflow: hidden;">
+            <img src="https://ugc.production.linktr.ee/5a4a144f-5489-4858-90b0-f87bc215b94a_IMG-3484.jpeg?io=true&size=avatar-v3_0" alt="Sierra Georgistis" style="width: 100%; height: 100%; object-fit: cover;">
+          </div>
+          <div style="padding: 24px; display: flex; flex-direction: column; justify-content: center;">
+            <h3 style="font-family: 'agrandir-tight-bold', var(--font-headline); font-size: 20px; margin-bottom: 8px;">Sierra Georgistis</h3>
+            <p style="font-size: 14px; color: var(--color-text-secondary); line-height: 1.5; margin-bottom: 16px;">@spoonfulofsi. Greek and seasonal, San Diego. Cross-platform creator (IG, TikTok, YT, Pinterest).</p>
+            <div style="display: flex; gap: 8px; margin-bottom: 16px;">
+              <span style="width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(45deg, #f09433, #dc2743, #bc1888); display: flex; align-items: center; justify-content: center;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+              </span>
+              <span style="width: 32px; height: 32px; border-radius: 50%; background: #000; display: flex; align-items: center; justify-content: center;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
+              </span>
+              <span style="width: 32px; height: 32px; border-radius: 50%; background: #FF0000; display: flex; align-items: center; justify-content: center;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+              </span>
+              <span style="width: 32px; height: 32px; border-radius: 50%; background: #E60023; display: flex; align-items: center; justify-content: center;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.406.042-3.442.218-.936 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.195.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.208 0 1.031.397 2.137.893 2.739a.36.36 0 0 1 .083.344c-.091.379-.293 1.194-.333 1.361-.052.218-.173.265-.4.159-1.492-.694-2.424-2.875-2.424-4.627 0-3.769 2.737-7.229 7.892-7.229 4.144 0 7.365 2.953 7.365 6.899 0 4.117-2.595 7.431-6.199 7.431-1.211 0-2.35-.63-2.739-1.375 0 0-.599 2.282-.745 2.838-.269 1.039-1.001 2.341-1.492 3.134C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+              </span>
+            </div>
+            <div>
+              <span style="font-family: 'agrandir-tight-bold', var(--font-headline); font-size: 22px;">435K</span>
+              <span style="display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-text-secondary);">Followers</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -1554,40 +1469,40 @@
   </section>
 
 
-  <!-- INTAKE FORM -->
+  <!-- SIGN UP FORM -->
   <section class="section" id="apply" style="background: var(--color-bg); padding: 80px 24px 100px;">
     <div class="section-content" style="max-width: 680px;">
       <div class="section-header" style="margin-bottom: 36px;">
-        <div class="section-eyebrow">JOIN THE COOKBOOK CREATOR PLATFORM</div>
-        <h2>Register your interest</h2>
-        <p>Drop your name and socials — we'll take it from there.</p>
+        <div class="section-eyebrow">GET STARTED</div>
+        <h2>Sign up in seconds</h2>
+        <p>Connect your social account and we'll import your profile automatically.</p>
       </div>
 
       <div class="intake-form-card">
-        <!-- Quick Setup CTAs -->
-        <div class="quick-setup">
-          <button type="button" class="quick-setup-btn tiktok" onclick="quickSetup('tiktok')">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
-            Quick start with TikTok
+        <!-- Import Profile CTAs -->
+        <div class="intake-section-title">Import your profile</div>
+        <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px;">
+          <button type="button" class="quick-setup-btn instagram" onclick="importProfile('instagram')" style="justify-content: center; padding: 16px; font-size: 15px; border-radius: 12px;">
+            <svg viewBox="0 0 24 24" fill="white" style="width: 22px; height: 22px;"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            Continue with Instagram
           </button>
-          <button type="button" class="quick-setup-btn instagram" onclick="quickSetup('instagram')">
-            <svg viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-            Quick start with Instagram
+          <button type="button" class="quick-setup-btn tiktok" onclick="importProfile('tiktok')" style="justify-content: center; padding: 16px; font-size: 15px; border-radius: 12px;">
+            <svg viewBox="0 0 24 24" fill="currentColor" style="width: 22px; height: 22px;"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
+            Continue with TikTok
+          </button>
+          <button type="button" class="quick-setup-btn" onclick="importProfile('youtube')" style="justify-content: center; padding: 16px; font-size: 15px; border-radius: 12px; background: #FF0000; color: white; border-color: #FF0000;">
+            <svg viewBox="0 0 24 24" fill="white" style="width: 22px; height: 22px;"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Continue with YouTube
           </button>
         </div>
-        <div class="quick-setup-divider">or fill in manually</div>
+
+        <div class="quick-setup-divider">or enter your profile URL</div>
 
         <form id="creatorForm">
-
-          <div class="intake-row">
-            <div class="intake-group">
-              <label class="intake-label" for="firstName">First name</label>
-              <input type="text" id="firstName" class="intake-input" placeholder="Jamie" required>
-            </div>
-            <div class="intake-group">
-              <label class="intake-label" for="lastName">Last name</label>
-              <input type="text" id="lastName" class="intake-input" placeholder="Oliver" required>
-            </div>
+          <div class="intake-group">
+            <label class="intake-label" for="profileUrl">Profile link</label>
+            <input type="url" id="profileUrl" class="intake-input" placeholder="https://instagram.com/yourhandle" required>
+            <p class="intake-helper">Paste a link to your Instagram, TikTok, or YouTube profile. We'll pull in your name, bio, and follower count.</p>
           </div>
 
           <div class="intake-group">
@@ -1595,61 +1510,33 @@
             <input type="email" id="email" class="intake-input" placeholder="you@email.com" required>
           </div>
 
-          <hr class="intake-divider">
-
-          <div class="intake-group">
-            <label class="intake-label">Primary platform</label>
-            <div class="intake-social-row">
-              <div class="intake-social-platform">
-                <select id="platform1" class="intake-select" required>
-                  <option value="" disabled selected>Platform</option>
-                  <option value="instagram">Instagram</option>
-                  <option value="tiktok">TikTok</option>
-                  <option value="youtube">YouTube</option>
-                  <option value="facebook">Facebook</option>
-                  <option value="other">Other</option>
-                </select>
+          <!-- Imported Profile Preview (hidden until import) -->
+          <div id="profilePreview" style="display: none; margin-top: 24px; padding: 20px; background: var(--color-bg); border-radius: 12px; border: 1.5px solid var(--color-border);">
+            <div style="display: flex; align-items: center; gap: 16px;">
+              <div id="previewAvatar" style="width: 56px; height: 56px; border-radius: 50%; background: var(--color-border); overflow: hidden;">
+                <img id="previewImg" src="" alt="" style="width: 100%; height: 100%; object-fit: cover;">
               </div>
-              <div class="intake-social-handle">
-                <input type="text" id="handle1" class="intake-input" placeholder="@yourhandle" required>
+              <div style="flex: 1;">
+                <div id="previewName" style="font-weight: 700; font-size: 16px;"></div>
+                <div id="previewHandle" style="font-size: 14px; color: var(--color-text-secondary);"></div>
+              </div>
+              <div style="text-align: right;">
+                <div id="previewFollowers" style="font-family: 'agrandir-tight-bold', var(--font-headline); font-size: 18px;"></div>
+                <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-text-secondary);">Followers</div>
               </div>
             </div>
+            <div id="previewBio" style="margin-top: 12px; font-size: 14px; color: var(--color-text-secondary); line-height: 1.5;"></div>
           </div>
 
-          <div id="extraSocial" class="intake-extra-social">
-            <div class="intake-group">
-              <label class="intake-label">Additional platform</label>
-              <div class="intake-social-row">
-                <div class="intake-social-platform">
-                  <select id="platform2" class="intake-select">
-                    <option value="" disabled selected>Platform</option>
-                    <option value="instagram">Instagram</option>
-                    <option value="tiktok">TikTok</option>
-                    <option value="youtube">YouTube</option>
-                    <option value="facebook">Facebook</option>
-                    <option value="other">Other</option>
-                  </select>
-                </div>
-                <div class="intake-social-handle">
-                  <input type="text" id="handle2" class="intake-input" placeholder="@yourhandle">
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <button type="button" class="intake-add-another" onclick="document.getElementById('extraSocial').classList.add('show'); this.style.display='none';">
-            + Add another platform
-          </button>
-
-          <!-- SUBMIT -->
-          <button type="submit" class="intake-submit">SUBMIT INTEREST</button>
+          <button type="submit" class="intake-submit">CREATE MY ACCOUNT</button>
+          <p style="text-align: center; font-size: 12px; color: var(--color-text-secondary); margin-top: 12px; line-height: 1.5;">By signing up you agree to our <a href="#" style="color: var(--color-brand); text-decoration: none; font-weight: 600;">Terms</a> and <a href="#" style="color: var(--color-brand); text-decoration: none; font-weight: 600;">Privacy Policy</a>.</p>
         </form>
 
         <!-- SUCCESS STATE -->
         <div class="intake-success" id="successState">
-          <div class="intake-success-icon">&#127859;</div>
-          <h2 style="font-size: 28px; margin-bottom: 12px;"><span id="successName"></span>, you're on the list</h2>
-          <p style="font-size: 15px; color: var(--color-text-secondary); line-height: 1.6; max-width: 380px; margin: 0 auto;">Thanks for your interest in the Cookbook Creator Platform. Our partnerships team will review your application and be in touch within 5 business days.</p>
+          <div class="intake-success-icon">&#127881;</div>
+          <h2 style="font-size: 28px; margin-bottom: 12px;">You're in.</h2>
+          <p style="font-size: 15px; color: var(--color-text-secondary); line-height: 1.6; max-width: 380px; margin: 0 auto;">Your creator profile is set up. Check your email for next steps on submitting your first recipes.</p>
         </div>
       </div>
     </div>
@@ -1791,23 +1678,32 @@
       }
     }
 
-    // Quick setup - simulates OAuth flow (demo only)
-    function quickSetup(platform) {
-      const platformNames = { tiktok: 'TikTok', instagram: 'Instagram' };
-      alert(`In production, this would open ${platformNames[platform]} OAuth to fetch your profile info, bio, and follower count automatically.`);
+    // Import profile via OAuth (demo)
+    function importProfile(platform) {
+      const platformNames = { tiktok: 'TikTok', instagram: 'Instagram', youtube: 'YouTube' };
+      const demoProfiles = {
+        instagram: { name: 'Jamie Chen', handle: '@jamiecooks', followers: '128K', bio: 'NYC home cook. Weeknight dinners in 30 mins or less.', img: '' },
+        tiktok: { name: 'Jamie Chen', handle: '@jamiecooks', followers: '128K', bio: 'NYC home cook. Weeknight dinners in 30 mins or less.', img: '' },
+        youtube: { name: 'Jamie Chen', handle: '@jamiecooks', followers: '128K', bio: 'NYC home cook. Weeknight dinners in 30 mins or less.', img: '' }
+      };
 
-      // Demo: Pre-fill with placeholder data
-      document.getElementById('platform1').value = platform;
-      document.getElementById('handle1').value = '@demo_creator';
-      document.getElementById('handle1').focus();
+      const profile = demoProfiles[platform];
+      const preview = document.getElementById('profilePreview');
+      document.getElementById('previewName').textContent = profile.name;
+      document.getElementById('previewHandle').textContent = profile.handle;
+      document.getElementById('previewFollowers').textContent = profile.followers;
+      document.getElementById('previewBio').textContent = profile.bio;
+      preview.style.display = 'block';
+
+      document.getElementById('profileUrl').value = `https://${platform}.com/${profile.handle.replace('@','')}`;
+      document.getElementById('email').focus();
     }
 
     // Form submission
     document.getElementById('creatorForm').addEventListener('submit', function(e) {
       e.preventDefault();
-      const firstName = document.getElementById('firstName').value;
-      document.getElementById('successName').textContent = firstName.charAt(0).toUpperCase() + firstName.slice(1).toLowerCase();
       this.style.display = 'none';
+      document.getElementById('profilePreview').style.display = 'none';
       document.getElementById('successState').classList.add('show');
       document.querySelector('.intake-form-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
