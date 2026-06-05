@@ -2050,6 +2050,83 @@ body {
   border-radius: 3px;
 }
 
+.leadership-swimlane {
+  cursor: pointer;
+}
+
+.leadership-swimlane:hover .leadership-lane-name {
+  color: var(--brand-green);
+}
+
+.leadership-detail-panel {
+  display: none;
+  padding: 16px 0 16px 220px;
+  border-top: 1px dashed #E2E8F0;
+  animation: slideDown 0.2s ease-out;
+}
+
+.leadership-detail-panel.open {
+  display: block;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.leadership-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 10px;
+}
+
+.leadership-detail-entry {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  background: #F8FAFC;
+  border-radius: 6px;
+  border-left: 3px solid var(--border);
+}
+
+.leadership-detail-entry .entry-date {
+  font-size: 11px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  min-width: 52px;
+}
+
+.leadership-detail-entry .entry-text {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-primary);
+  flex: 1;
+}
+
+.leadership-detail-entry .entry-channel-badge {
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: 3px;
+  white-space: nowrap;
+}
+
+.leadership-detail-entry .entry-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.leadership-detail-objective {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+  font-style: italic;
+}
+
 /* PRODUCT VIEW STATS */
 .product-release-stats {
   padding: 12px 24px 0;
@@ -4137,7 +4214,7 @@ function renderLeadership() {
     const launchDate = release ? new Date(release.date + 'T00:00:00') : new Date(barStart + 'T00:00:00');
     const launchPct = dateToPercent(release ? release.date : barStart);
 
-    html += '<div class="leadership-swimlane">';
+    html += `<div class="leadership-swimlane" onclick="toggleLeadershipDetail('${init.id}')">`;
 
     // Left label
     html += '<div class="leadership-lane-label">';
@@ -4174,6 +4251,27 @@ function renderLeadership() {
 
     html += '</div>';
     html += '</div>';
+
+    // Detail panel (hidden by default)
+    html += `<div class="leadership-detail-panel" id="leadership-detail-${init.id}">`;
+    if (init.objective) {
+      html += `<div class="leadership-detail-objective">${init.objective}</div>`;
+    }
+    html += '<div class="leadership-detail-grid">';
+    const sortedEntries = [...filteredEntries].sort((a, b) => a.date.localeCompare(b.date));
+    sortedEntries.forEach(e => {
+      const eDate = new Date(e.date + 'T00:00:00');
+      const dateStr = eDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+      const chColor = CHANNEL_COLORS[e.channel] || { color: '#666', bg: '#F1F5F9' };
+      const statusColor = e.status === 'completed' ? '#10B981' : e.status === 'planned' ? '#94A3B8' : e.status === 'in-progress' ? '#F59E0B' : '#6366F1';
+      html += `<div class="leadership-detail-entry" style="border-left-color:${barColor};">`;
+      html += `<span class="entry-status-dot" style="background:${statusColor};"></span>`;
+      html += `<span class="entry-date">${dateStr}</span>`;
+      html += `<span class="entry-text">${e.text}</span>`;
+      html += `<span class="entry-channel-badge" style="background:${chColor.bg};color:${chColor.color};">${e.subchannel || formatChannel(e.channel)}</span>`;
+      html += '</div>';
+    });
+    html += '</div></div>';
   });
 
   // Today label at top
@@ -4192,6 +4290,12 @@ function renderLeadership() {
 
   html += '</div>';
   container.innerHTML = html;
+}
+
+function toggleLeadershipDetail(initId) {
+  const panel = document.getElementById('leadership-detail-' + initId);
+  if (!panel) return;
+  panel.classList.toggle('open');
 }
 
 // MARKETS VIEW
