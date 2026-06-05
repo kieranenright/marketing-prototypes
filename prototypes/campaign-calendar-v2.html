@@ -1,0 +1,5155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PMM Campaign Calendar | HelloFresh</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+@font-face {
+  font-family: 'Agrandir';
+  src: url('fonts/Agrandir-TightBold.ttf') format('truetype');
+  font-weight: 700;
+}
+
+:root {
+  --font-headline: 'Agrandir', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --brand-green: #067A46;
+  --brand-green-dark: #055933;
+  --brand-green-light: #E8F5EE;
+  --brand-lime: #96DC14;
+  --brand-lime-light: #F2FCDE;
+  --bg-cream: #FAF8F3;
+  --white: #FFFFFF;
+  --text-primary: #1D1D1D;
+  --text-secondary: #5A5A5A;
+  --text-tertiary: #9A9A9A;
+  --border: #E0D9CE;
+  --border-light: #EDE9E2;
+  --radius: 14px;
+  --radius-sm: 8px;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-card: 0 2px 8px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.06);
+  --shadow-modal: 0 20px 60px rgba(0,0,0,0.18);
+
+  --ch-crm: #2563EB;
+  --ch-crm-bg: #EFF6FF;
+  --ch-appstore: #7C3AED;
+  --ch-appstore-bg: #F5F3FF;
+  --ch-web: #0D9488;
+  --ch-web-bg: #F0FDFA;
+  --ch-paid: #EA580C;
+  --ch-paid-bg: #FFF7ED;
+  --ch-influencers: #DC2626;
+  --ch-influencers-bg: #FEF2F2;
+  --ch-organic: #16A34A;
+  --ch-organic-bg: #F0FDF4;
+  --ch-print: #92400E;
+  --ch-print-bg: #FFFBEB;
+
+  --st-planned: #94A3B8;
+  --st-planned-bg: #F1F5F9;
+  --st-in-progress: #F59E0B;
+  --st-in-progress-bg: #FFFBEB;
+  --st-live: #10B981;
+  --st-live-bg: #ECFDF5;
+  --st-completed: #6366F1;
+  --st-completed-bg: #EEF2FF;
+
+  --release-color: #D97706;
+  --release-bg: #FFFBEB;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg-cream);
+  color: var(--text-primary);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* AUTH SCREEN */
+.auth-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+}
+
+.auth-card {
+  background: white;
+  border-radius: 20px;
+  padding: 48px;
+  width: 420px;
+  max-width: 100%;
+  box-shadow: var(--shadow-card);
+  text-align: center;
+}
+
+.auth-card h1 {
+  font-family: var(--font-headline);
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: var(--brand-green);
+}
+
+.auth-card p {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+.auth-card input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: var(--font-body);
+  transition: border 0.2s;
+  margin-bottom: 12px;
+}
+
+.auth-card input:focus {
+  outline: none;
+  border-color: var(--brand-green);
+}
+
+.auth-card .auth-btn {
+  width: 100%;
+  padding: 12px;
+  background: var(--brand-green);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.auth-card .auth-btn:hover { background: var(--brand-green-dark); }
+
+.auth-error {
+  color: #DC2626;
+  font-size: 12px;
+  margin-top: 8px;
+  display: none;
+}
+
+.auth-card .auth-note {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  margin-top: 16px;
+}
+
+.auth-editors-info {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-light);
+  font-size: 11px;
+  color: var(--text-tertiary);
+  line-height: 1.6;
+}
+
+.auth-editors-info strong {
+  color: var(--text-secondary);
+  display: block;
+  margin-bottom: 4px;
+}
+
+/* MAIN APP */
+.app { display: none; }
+.app.active { display: block; }
+
+/* Top bar */
+.top-bar {
+  background: white;
+  border-bottom: 1px solid var(--border);
+  padding: 14px 32px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(12px);
+  background: rgba(255,255,255,0.95);
+}
+
+.top-bar-inner {
+  max-width: 1600px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.top-bar-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.top-bar h1 {
+  font-family: var(--font-headline);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--brand-green);
+}
+
+.top-bar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  background: var(--brand-green-light);
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--brand-green);
+}
+
+.user-badge .avatar {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--brand-green);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  font-weight: 700;
+}
+
+/* Controls bar */
+.controls-bar {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 16px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.controls-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.controls-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.controls-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* View toggle */
+.view-toggle {
+  display: flex;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.view-toggle button {
+  padding: 7px 14px;
+  border: none;
+  background: transparent;
+  font-size: 12px;
+  font-weight: 500;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: all 0.15s;
+  color: var(--text-secondary);
+}
+
+.view-toggle button.active {
+  background: var(--brand-green);
+  color: white;
+}
+
+.view-toggle button:hover:not(.active) {
+  background: var(--brand-green-light);
+  color: var(--brand-green);
+}
+
+/* Navigation */
+.nav-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-controls button {
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--border);
+  background: white;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+  box-shadow: var(--shadow-sm);
+}
+
+.nav-controls button:hover {
+  background: var(--brand-green);
+  color: white;
+  border-color: var(--brand-green);
+}
+
+.nav-controls .nav-label {
+  font-family: var(--font-headline);
+  font-size: 18px;
+  font-weight: 700;
+  min-width: 180px;
+  text-align: center;
+}
+
+.btn-today {
+  padding: 7px 14px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-weight: 500;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: all 0.15s;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-today:hover {
+  background: var(--brand-green-light);
+  color: var(--brand-green);
+  border-color: var(--brand-green);
+}
+
+/* Tabs */
+.init-tabs {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.init-tab {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  border: 2px solid var(--border);
+  background: white;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: var(--font-body);
+}
+
+.init-tab.active {
+  border-color: var(--brand-green);
+  background: var(--brand-green-light);
+  color: var(--brand-green);
+}
+
+.init-tab:hover:not(.active) {
+  border-color: var(--text-tertiary);
+}
+
+/* Search and filters */
+.search-box {
+  position: relative;
+}
+
+.search-box input {
+  padding: 7px 12px 7px 32px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-family: var(--font-body);
+  width: 180px;
+  background: white;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.15s;
+}
+
+.search-box input:focus {
+  outline: none;
+  border-color: var(--brand-green);
+  width: 240px;
+}
+
+.search-box::before {
+  content: '\1F50D';
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 12px;
+}
+
+.filter-select {
+  padding: 7px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-family: var(--font-body);
+  background: white;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: var(--brand-green);
+}
+
+/* Market pills */
+/* Market dropdown */
+.market-dropdown {
+  position: relative;
+}
+
+.market-dropdown-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.market-dropdown-arrow {
+  font-size: 9px;
+  color: var(--text-tertiary);
+}
+
+.market-dropdown-panel {
+  display: none;
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-card);
+  z-index: 200;
+  min-width: 200px;
+  padding: 8px;
+}
+
+.market-dropdown-panel.active {
+  display: block;
+}
+
+.market-dropdown-actions {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.market-dropdown-actions button {
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 10px;
+  font-weight: 600;
+  border: 1px solid var(--border);
+  background: white;
+  cursor: pointer;
+  font-family: var(--font-body);
+  transition: all 0.15s;
+}
+
+.market-dropdown-actions button:hover {
+  background: var(--brand-green-light);
+  color: var(--brand-green);
+  border-color: var(--brand-green);
+}
+
+.market-dropdown-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 4px;
+}
+
+.market-dropdown-item {
+  padding: 5px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  border: 1.5px solid var(--border);
+  background: white;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: var(--font-body);
+  user-select: none;
+  text-align: center;
+}
+
+.market-dropdown-item.active {
+  background: var(--brand-green);
+  color: white;
+  border-color: var(--brand-green);
+}
+
+.market-dropdown-item:hover:not(.active) {
+  border-color: var(--brand-green);
+  color: var(--brand-green);
+}
+
+/* Weekly sub-mode toggle */
+.weekly-mode-toggle {
+  display: none;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.weekly-mode-toggle.visible {
+  display: flex;
+}
+
+.weekly-mode-toggle button {
+  padding: 6px 12px;
+  border: none;
+  background: transparent;
+  font-size: 11px;
+  font-weight: 500;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: all 0.15s;
+  color: var(--text-secondary);
+}
+
+.weekly-mode-toggle button.active {
+  background: var(--brand-green);
+  color: white;
+}
+
+/* Export buttons */
+.export-btns {
+  display: flex;
+  gap: 4px;
+}
+
+.export-btn {
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: white;
+  font-size: 11px;
+  font-weight: 500;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: all 0.15s;
+  box-shadow: var(--shadow-sm);
+}
+
+.export-btn:hover {
+  background: var(--brand-green-light);
+  color: var(--brand-green);
+  border-color: var(--brand-green);
+}
+
+.import-btn {
+  background: var(--brand-green-light);
+  color: var(--brand-green);
+  border-color: var(--brand-green);
+  font-weight: 600;
+}
+
+.import-btn:hover {
+  background: var(--brand-green);
+  color: white;
+}
+
+/* CALENDAR CONTENT */
+.calendar-content {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 32px 32px;
+}
+
+/* YEAR VIEW */
+.year-view {
+  display: none;
+  overflow-x: auto;
+}
+
+.year-view.active { display: block; }
+
+.year-grid {
+  min-width: 1200px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: white;
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.year-header {
+  display: grid;
+  grid-template-columns: 180px repeat(52, 1fr);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 5;
+}
+
+.year-header-cell {
+  padding: 8px 2px;
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  text-align: center;
+  border-right: 1px solid var(--border-light);
+}
+
+.year-header-cell.current-week {
+  background: var(--brand-green-light);
+  color: var(--brand-green);
+  font-weight: 700;
+}
+
+.year-header-cell:first-child {
+  font-size: 11px;
+  color: var(--text-secondary);
+  text-align: left;
+  padding-left: 14px;
+}
+
+.year-row {
+  display: grid;
+  grid-template-columns: 180px repeat(52, 1fr);
+  border-bottom: 1px solid var(--border-light);
+  min-height: 36px;
+  align-items: center;
+  position: relative;
+}
+
+.year-row:last-child { border-bottom: none; }
+
+.year-row-label {
+  padding: 8px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-right: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.year-row-label .color-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.year-row.releases-row {
+  background: var(--release-bg);
+}
+
+.year-row.releases-row .year-row-label {
+  color: var(--release-color);
+  font-weight: 700;
+}
+
+.year-cell {
+  position: relative;
+  height: 100%;
+  border-right: 1px solid var(--border-light);
+}
+
+.year-cell.current-week {
+  background: rgba(6, 122, 70, 0.04);
+}
+
+.year-bar {
+  position: absolute;
+  top: 8px;
+  bottom: 8px;
+  left: 1px;
+  right: 1px;
+  border-radius: 4px;
+  opacity: 0.8;
+  min-height: 20px;
+}
+
+.year-bar.bar-start {
+  left: 2px;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+
+.year-bar.bar-end {
+  right: 2px;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+.year-bar.bar-single {
+  left: 4px;
+  right: 4px;
+  border-radius: 6px;
+}
+
+.release-marker {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  width: 10px;
+  height: 10px;
+  background: var(--release-color);
+  border: 2px solid white;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  z-index: 2;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.release-marker:hover {
+  transform: translate(-50%, -50%) rotate(45deg) scale(1.3);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+.release-marker-label {
+  position: absolute;
+  top: -2px;
+  left: calc(50% + 10px);
+  font-size: 8px;
+  font-weight: 600;
+  color: var(--release-color);
+  white-space: nowrap;
+  z-index: 3;
+}
+
+.year-cell .release-hover-pill {
+  display: none;
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 4px 10px;
+  background: var(--release-color);
+  color: white;
+  font-size: 10px;
+  font-weight: 600;
+  border-radius: 6px;
+  white-space: nowrap;
+  z-index: 10;
+  pointer-events: none;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.year-cell .release-hover-pill::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: var(--release-color);
+}
+
+.year-cell:hover .release-hover-pill {
+  display: block;
+}
+
+/* WEEKLY VIEW */
+.weekly-view {
+  display: none;
+  overflow-x: auto;
+}
+
+.weekly-view.active { display: block; }
+
+.weekly-grid {
+  min-width: 900px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: white;
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.weekly-header {
+  display: grid;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 5;
+}
+
+.weekly-header-cell {
+  padding: 10px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-align: center;
+  border-right: 1px solid var(--border-light);
+}
+
+.weekly-header-cell.current-week {
+  background: var(--brand-green-light);
+  color: var(--brand-green);
+}
+
+.weekly-header-cell:first-child {
+  text-align: left;
+  padding-left: 14px;
+}
+
+.weekly-header-cell .week-dates {
+  font-size: 9px;
+  font-weight: 400;
+  color: var(--text-tertiary);
+  margin-top: 2px;
+}
+
+.weekly-row {
+  display: grid;
+  border-bottom: 1px solid var(--border-light);
+  min-height: 48px;
+  align-items: stretch;
+  position: relative;
+}
+
+.weekly-row:last-child { border-bottom: none; }
+
+.weekly-row-label {
+  padding: 10px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-primary);
+  border-right: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.weekly-row-label .color-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.weekly-row.releases-row {
+  background: var(--release-bg);
+  min-height: 40px;
+}
+
+.weekly-cell {
+  position: relative;
+  border-right: 1px solid var(--border-light);
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.weekly-cell.current-week {
+  background: rgba(6, 122, 70, 0.04);
+}
+
+.weekly-bar {
+  height: 22px;
+  border-radius: 4px;
+  opacity: 0.85;
+  display: flex;
+  align-items: center;
+  padding: 0 6px;
+  font-size: 9px;
+  font-weight: 500;
+  color: white;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.weekly-entry-chip {
+  padding: 3px 6px;
+  border-radius: 4px;
+  font-size: 9px;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: default;
+}
+
+/* MONTH VIEW */
+.month-view {
+  display: none;
+}
+
+.month-view.active { display: block; }
+
+.month-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: white;
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.month-day-header {
+  padding: 10px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: white;
+  border-bottom: 1px solid var(--border);
+}
+
+.month-day-cell {
+  min-height: 130px;
+  border-right: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border-light);
+  padding: 6px;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.month-day-cell:nth-child(7n) { border-right: none; }
+
+.month-day-cell:hover { background: rgba(6, 122, 70, 0.02); }
+
+.month-day-cell.other-month {
+  background: #FDFCFA;
+  opacity: 0.5;
+}
+
+.month-day-cell.today {
+  background: var(--brand-green-light);
+}
+
+.month-day-cell.today .day-number {
+  background: var(--brand-green);
+  color: white;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.day-number {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.release-banner {
+  background: var(--release-bg);
+  border: 1px solid var(--release-color);
+  border-radius: 4px;
+  padding: 2px 6px;
+  margin-bottom: 3px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: background 0.15s;
+}
+
+.release-banner:hover {
+  background: #FEF3C7;
+}
+
+.release-banner .diamond {
+  width: 6px;
+  height: 6px;
+  background: var(--release-color);
+  transform: rotate(45deg);
+  flex-shrink: 0;
+}
+
+.release-banner .release-text {
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--release-color);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.day-entries {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.day-entry {
+  padding: 3px 6px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: opacity 0.1s;
+  border-left: 3px solid;
+}
+
+.day-entry:hover { opacity: 0.8; }
+
+.day-more-btn {
+  padding: 4px 8px;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--brand-green);
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.1s;
+  background: var(--brand-green-light);
+  text-align: center;
+  border: 1px solid transparent;
+}
+
+.day-more-btn:hover {
+  background: var(--brand-green);
+  color: white;
+  border-color: var(--brand-green);
+}
+
+/* MODAL */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  backdrop-filter: blur(4px);
+}
+
+.modal-overlay.active {
+  display: flex;
+}
+
+.modal {
+  background: white;
+  border-radius: 20px;
+  width: 600px;
+  max-width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-modal);
+  animation: modalIn 0.2s ease;
+}
+
+@keyframes modalIn {
+  from { opacity: 0; transform: scale(0.95) translateY(10px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.modal-header {
+  padding: 24px 28px 16px;
+  border-bottom: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal-header h2 {
+  font-family: var(--font-headline);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.modal-close {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: var(--bg-cream);
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+
+.modal-close:hover {
+  background: #fee2e2;
+  color: #DC2626;
+}
+
+.modal-body {
+  padding: 20px 28px 28px;
+}
+
+.modal-entries {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.modal-entry {
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1px solid var(--border-light);
+  transition: all 0.15s;
+}
+
+.modal-entry:hover {
+  border-color: var(--border);
+  box-shadow: var(--shadow-sm);
+}
+
+.modal-entry-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.modal-entry-init {
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 9px;
+  font-weight: 600;
+  color: white;
+}
+
+.modal-entry-channel {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.modal-entry-status {
+  font-size: 9px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-left: auto;
+}
+
+.modal-entry-text {
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.modal-entry-meta {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.modal-release-banner {
+  padding: 12px 16px;
+  background: var(--release-bg);
+  border: 1px solid var(--release-color);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.modal-release-banner .diamond {
+  width: 10px;
+  height: 10px;
+  background: var(--release-color);
+  transform: rotate(45deg);
+  flex-shrink: 0;
+}
+
+.modal-release-banner .release-info h4 {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--release-color);
+}
+
+.modal-release-banner .release-info p {
+  font-size: 11px;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+/* ENTRY FORM MODAL */
+.form-modal .modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.form-group label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 9px 12px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-size: 13px;
+  font-family: var(--font-body);
+  transition: border 0.15s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--brand-green);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.form-btn {
+  padding: 9px 18px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.form-btn-primary {
+  background: var(--brand-green);
+  color: white;
+  border: none;
+}
+
+.form-btn-primary:hover { background: var(--brand-green-dark); }
+
+.form-btn-cancel {
+  background: white;
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+}
+
+.form-btn-cancel:hover { border-color: var(--text-tertiary); }
+
+.form-btn-danger {
+  background: #FEE2E2;
+  color: #DC2626;
+  border: 1px solid #FECACA;
+}
+
+.form-btn-danger:hover { background: #FECACA; }
+
+/* Keyboard shortcuts help */
+.shortcuts-badge {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 6px 12px;
+  font-size: 11px;
+  color: var(--text-tertiary);
+  box-shadow: var(--shadow-card);
+  cursor: pointer;
+  z-index: 50;
+  transition: all 0.15s;
+}
+
+.shortcuts-badge:hover {
+  border-color: var(--brand-green);
+  color: var(--brand-green);
+}
+
+.shortcuts-panel {
+  display: none;
+  position: fixed;
+  bottom: 60px;
+  right: 20px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  box-shadow: var(--shadow-card);
+  z-index: 50;
+  min-width: 220px;
+}
+
+.shortcuts-panel.active { display: block; }
+
+.shortcuts-panel h4 {
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: var(--text-primary);
+}
+
+.shortcut-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 0;
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+.shortcut-key {
+  padding: 2px 6px;
+  background: var(--bg-cream);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 600;
+  font-family: monospace;
+}
+
+/* PRODUCT VIEW TOGGLE */
+.mode-toggle {
+  display: flex;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.mode-toggle button {
+  padding: 7px 14px;
+  border: none;
+  background: transparent;
+  font-size: 12px;
+  font-weight: 500;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: all 0.15s;
+  color: var(--text-secondary);
+}
+
+.mode-toggle button.active {
+  background: var(--brand-green);
+  color: white;
+}
+
+.mode-toggle button:hover:not(.active) {
+  background: var(--brand-green-light);
+  color: var(--brand-green);
+}
+
+/* PRODUCT TIMELINE VIEW */
+.product-view {
+  display: none;
+}
+
+.product-view.active {
+  display: block;
+}
+
+.product-release-section {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  margin-bottom: 24px;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease;
+  scroll-margin-top: 100px;
+}
+
+.product-release-header {
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.product-release-header:hover {
+  background: var(--bg-cream);
+}
+
+.release-chevron {
+  margin-left: auto;
+  font-size: 14px;
+  color: var(--text-tertiary);
+  transition: transform 0.2s;
+}
+
+.release-chevron.expanded {
+  transform: rotate(180deg);
+}
+
+.product-release-body {
+  border-top: 1px solid var(--border-light);
+}
+
+.product-release-header .release-icon {
+  width: 40px;
+  height: 40px;
+  background: var(--brand-green-light);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-release-header .release-icon .diamond {
+  width: 12px;
+  height: 12px;
+  background: var(--brand-green);
+  transform: rotate(45deg);
+}
+
+.product-release-header .release-details h3 {
+  font-family: var(--font-headline);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+
+.product-release-header .release-details .release-meta {
+  font-size: 12px;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.product-release-header .release-details .release-meta .release-date-badge {
+  padding: 2px 8px;
+  background: var(--brand-green-light);
+  color: var(--brand-green);
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 11px;
+}
+
+.product-timeline-container {
+  padding: 20px 24px;
+  overflow-x: auto;
+}
+
+.product-timeline {
+  position: relative;
+  min-width: 800px;
+}
+
+.product-timeline-header {
+  display: flex;
+  border-bottom: 1px solid var(--border-light);
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+}
+
+.product-timeline-header .timeline-week {
+  flex: 1;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  min-width: 60px;
+}
+
+.product-timeline-header .timeline-week.launch-week {
+  color: var(--brand-green);
+  font-weight: 700;
+}
+
+.product-timeline-body {
+  position: relative;
+}
+
+.product-timeline-initiative {
+  margin-bottom: 16px;
+}
+
+.product-timeline-initiative-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.product-timeline-initiative-label .color-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.product-timeline-entries {
+  position: relative;
+  min-height: 32px;
+}
+
+.product-timeline-entry-row {
+  display: flex;
+  position: relative;
+  height: 28px;
+  margin-bottom: 4px;
+}
+
+.product-timeline-entry-row .timeline-cell {
+  flex: 1;
+  position: relative;
+  min-width: 60px;
+}
+
+.product-entry-bar {
+  position: absolute;
+  top: 2px;
+  bottom: 2px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  font-size: 10px;
+  font-weight: 500;
+  color: white;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: default;
+  transition: opacity 0.15s;
+  z-index: 2;
+}
+
+.product-entry-bar:hover {
+  opacity: 0.85;
+}
+
+.product-launch-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--brand-green);
+  z-index: 3;
+  border-radius: 2px;
+}
+
+.product-launch-label {
+  position: absolute;
+  top: -20px;
+  transform: translateX(-50%);
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--brand-green);
+  background: var(--brand-green-light);
+  padding: 2px 6px;
+  border-radius: 4px;
+  white-space: nowrap;
+  z-index: 4;
+}
+
+.product-no-entries {
+  padding: 16px 24px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-tertiary);
+  font-style: italic;
+}
+
+.product-timeline-tooltip {
+  position: fixed;
+  background: var(--text-primary);
+  color: white;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 12px;
+  pointer-events: none;
+  z-index: 1000;
+  max-width: 260px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  line-height: 1.5;
+}
+
+.product-timeline-tooltip .tooltip-channel {
+  font-size: 10px;
+  font-weight: 600;
+  opacity: 0.8;
+  margin-bottom: 2px;
+}
+
+.product-timeline-tooltip .tooltip-text {
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.product-timeline-tooltip .tooltip-meta {
+  font-size: 10px;
+  opacity: 0.7;
+}
+
+/* CRM HEATMAP VIEW */
+.crm-view {
+  display: none;
+}
+
+.crm-view.active {
+  display: block;
+}
+
+.crm-heatmap-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  margin-bottom: 24px;
+}
+
+.crm-heatmap-card .crm-table-wrap {
+  overflow-x: auto;
+}
+
+.crm-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px 12px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.crm-header-row h3 {
+  font-family: var(--font-headline);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.crm-date-range {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.crm-date-range label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+}
+
+.crm-date-range input[type="date"] {
+  padding: 5px 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-family: var(--font-body);
+  background: white;
+  cursor: pointer;
+}
+
+.crm-date-range input[type="date"]:focus {
+  outline: none;
+  border-color: var(--brand-green);
+}
+
+.crm-week-count {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--brand-green);
+  background: var(--brand-green-light);
+  padding: 4px 10px;
+  border-radius: 12px;
+}
+
+.crm-heatmap-card h3 {
+  font-family: var(--font-headline);
+  font-size: 16px;
+  font-weight: 700;
+  padding: 20px 24px 12px;
+  color: var(--text-primary);
+}
+
+.crm-heatmap-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.crm-heatmap-table th,
+.crm-heatmap-table td {
+  text-align: center;
+  padding: 0;
+  border: 1px solid var(--border-light);
+  font-size: 11px;
+}
+
+.crm-heatmap-table th {
+  padding: 10px 6px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: white;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.crm-heatmap-table th.current-week {
+  background: var(--brand-green-light);
+  color: var(--brand-green);
+}
+
+.crm-heatmap-table th:first-child {
+  text-align: left;
+  padding-left: 16px;
+  min-width: 120px;
+  font-size: 12px;
+}
+
+.crm-heatmap-table td {
+  height: 60px;
+  font-size: 14px;
+  font-weight: 600;
+  vertical-align: middle;
+}
+
+.crm-heatmap-table td:first-child {
+  text-align: left;
+  padding-left: 16px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.crm-heatmap-table tr.summary-row td {
+  background: var(--bg-cream);
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--text-primary);
+  border-top: 2px solid var(--border);
+}
+
+.crm-heatmap-table tr.summary-row td:first-child {
+  font-weight: 700;
+}
+
+.crm-heat-0 { background: var(--white); color: var(--text-tertiary); }
+.crm-heat-1 { background: #ECFDF5; color: #065F46; }
+.crm-heat-2 { background: #D1FAE5; color: #065F46; }
+.crm-heat-3 { background: #FEF3C7; color: #92400E; }
+.crm-heat-4 { background: #FDE68A; color: #92400E; }
+.crm-heat-5 { background: #FEE2E2; color: #991B1B; }
+
+.crm-releases-section {
+  padding: 20px 24px;
+}
+
+.crm-releases-section h4 {
+  font-family: var(--font-headline);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+
+.crm-release-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  margin-bottom: 8px;
+  transition: all 0.15s;
+}
+
+.crm-release-item:hover {
+  border-color: var(--border);
+  box-shadow: var(--shadow-sm);
+}
+
+.crm-release-item .diamond {
+  width: 8px;
+  height: 8px;
+  background: var(--release-color);
+  transform: rotate(45deg);
+  flex-shrink: 0;
+}
+
+.crm-release-item .release-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.crm-release-item .release-date {
+  font-size: 11px;
+  color: var(--text-secondary);
+  margin-left: auto;
+  padding: 2px 8px;
+  background: var(--release-bg);
+  border-radius: 10px;
+  font-weight: 500;
+}
+
+/* LEADERSHIP ROADMAP VIEW */
+.leadership-view {
+  display: none;
+}
+
+.leadership-view.active {
+  display: block;
+}
+
+.leadership-timeline-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  padding: 32px;
+}
+
+.leadership-timeline-months {
+  display: flex;
+  border-bottom: 2px solid var(--border);
+  margin-bottom: 0;
+  position: relative;
+}
+
+.leadership-month-label {
+  flex: 1;
+  text-align: center;
+  padding: 10px 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.leadership-month-label.current-month {
+  color: var(--brand-green);
+  font-weight: 700;
+}
+
+.leadership-timeline-body {
+  position: relative;
+  min-height: 200px;
+  padding-top: 24px;
+}
+
+.leadership-today-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--brand-green);
+  z-index: 5;
+  opacity: 0.7;
+}
+
+.leadership-today-label {
+  position: absolute;
+  top: 4px;
+  transform: translateX(-50%);
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--brand-green);
+  background: var(--brand-green-light);
+  padding: 2px 6px;
+  border-radius: 4px;
+  white-space: nowrap;
+  z-index: 6;
+}
+
+.leadership-release-card {
+  position: absolute;
+  width: 220px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  box-shadow: var(--shadow-card);
+  transition: all 0.2s;
+  z-index: 3;
+}
+
+.leadership-release-card:hover {
+  box-shadow: var(--shadow-modal);
+  transform: translateY(-2px);
+}
+
+.leadership-release-card .release-card-name {
+  font-family: var(--font-headline);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.leadership-release-card .release-card-date {
+  font-size: 11px;
+  color: var(--text-secondary);
+  margin-bottom: 10px;
+}
+
+.leadership-release-card .release-card-readiness {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.leadership-readiness-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.leadership-readiness-dot.green { background: #10B981; }
+.leadership-readiness-dot.amber { background: #F59E0B; }
+.leadership-readiness-dot.red { background: #94A3B8; }
+
+.leadership-release-card .release-card-readiness-label {
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.leadership-release-card .release-card-count {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.leadership-release-card .release-card-channels {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.leadership-channel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+/* PRODUCT VIEW STATS */
+.product-release-stats {
+  padding: 12px 24px 0;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.product-stats-total {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.product-stats-statuses {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.product-stats-pill {
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.product-stats-channels {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+}
+
+.product-stats-channels .channel-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1.5px solid transparent;
+}
+
+.product-stats-channels .channel-indicator.missing {
+  opacity: 0.3;
+  border-color: var(--text-tertiary);
+  background: transparent;
+}
+
+.product-stats-channels .channel-label {
+  font-size: 9px;
+  color: var(--text-tertiary);
+  margin-left: 2px;
+  margin-right: 6px;
+}
+
+/* MARKETS VIEW */
+.markets-view {
+  display: none;
+}
+
+.markets-view.active {
+  display: block;
+}
+
+.markets-view-selector {
+  margin-bottom: 24px;
+}
+
+.markets-view-selector label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-right: 8px;
+}
+
+.markets-view-selector select {
+  padding: 9px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 600;
+  font-family: var(--font-body);
+  background: white;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  min-width: 120px;
+}
+
+.markets-view-selector select:focus {
+  outline: none;
+  border-color: var(--brand-green);
+}
+
+.markets-release-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.markets-release-card-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.markets-release-card-header .release-icon {
+  width: 32px;
+  height: 32px;
+  background: var(--brand-green-light);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.markets-release-card-header .release-icon .diamond {
+  width: 10px;
+  height: 10px;
+  background: var(--brand-green);
+  transform: rotate(45deg);
+}
+
+.markets-release-card-header .release-name {
+  font-family: var(--font-headline);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.markets-release-card-header .release-date {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-left: auto;
+  padding: 3px 10px;
+  background: var(--brand-green-light);
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+.markets-entry-list {
+  padding: 16px 20px;
+}
+
+.markets-entry-item {
+  padding: 10px 14px;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.markets-entry-item:last-child {
+  margin-bottom: 0;
+}
+
+.markets-entry-text {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary);
+  flex: 1;
+  min-width: 150px;
+}
+
+.markets-entry-subchannel {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.markets-entry-owner {
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+.markets-entry-dates {
+  font-size: 11px;
+  color: var(--text-tertiary);
+}
+
+.markets-no-campaigns {
+  padding: 20px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-tertiary);
+  font-style: italic;
+}
+
+.markets-comparison-section {
+  margin-top: 32px;
+}
+
+.markets-comparison-section h3 {
+  font-family: var(--font-headline);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+}
+
+.markets-comparison-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  overflow-x: auto;
+}
+
+.markets-comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+}
+
+.markets-comparison-table th,
+.markets-comparison-table td {
+  padding: 10px 12px;
+  text-align: center;
+  border: 1px solid var(--border-light);
+  font-size: 12px;
+}
+
+.markets-comparison-table th {
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: white;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.markets-comparison-table th:first-child {
+  text-align: left;
+  min-width: 180px;
+  padding-left: 16px;
+}
+
+.markets-comparison-table td:first-child {
+  text-align: left;
+  padding-left: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.markets-comparison-table td:first-child .comp-release-date {
+  font-size: 10px;
+  font-weight: 400;
+  color: var(--text-tertiary);
+  display: block;
+  margin-top: 2px;
+}
+
+.markets-cell {
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.markets-cell:hover {
+  background: var(--brand-green-light);
+}
+
+.markets-cell-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.markets-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.markets-dot.has-campaigns {
+  background: var(--brand-green);
+}
+
+.markets-dot.no-campaigns {
+  background: var(--border);
+}
+
+.markets-cell-count {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+  .controls-bar { padding: 12px 16px; }
+  .calendar-content { padding: 0 16px 16px; }
+  .top-bar { padding: 12px 16px; }
+  .top-bar h1 { font-size: 15px; }
+  .nav-controls .nav-label { font-size: 14px; min-width: 140px; }
+  .month-day-cell { min-height: 90px; }
+  .day-entry { font-size: 9px; padding: 2px 4px; }
+  .controls-right { flex-wrap: nowrap; overflow-x: auto; }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-tertiary); }
+
+/* Tooltip */
+.tooltip {
+  position: absolute;
+  background: var(--text-primary);
+  color: white;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  pointer-events: none;
+  z-index: 200;
+  max-width: 200px;
+  white-space: normal;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* Link Badges (Jira / Airtable) */
+.link-badges {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+
+.link-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 10px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity 0.15s;
+  line-height: 1.4;
+}
+
+.link-badge:hover {
+  opacity: 0.85;
+}
+
+.link-badge-jira {
+  background: #0052CC;
+  color: #FFFFFF;
+}
+
+.link-badge-airtable {
+  background: #18BFFF;
+  color: #FFFFFF;
+}
+
+.link-badge.inherited {
+  opacity: 0.6;
+}
+
+.link-badge.inherited:hover {
+  opacity: 0.75;
+}
+
+.link-badge-icon {
+  font-size: 9px;
+}
+
+/* Progress Ring in Init Tabs */
+.init-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.init-tab .progress-ring {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.init-tab .progress-ring circle {
+  fill: none;
+  stroke-width: 2.5;
+}
+
+.init-tab .progress-ring .ring-track {
+  stroke: var(--border);
+}
+
+.init-tab .progress-ring .ring-fill {
+  transition: stroke-dashoffset 0.3s ease;
+  transform: rotate(-90deg);
+  transform-origin: center;
+}
+
+.init-tab .progress-check {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 10px;
+  font-weight: 700;
+  color: white;
+}
+
+/* Initiative Legend Panel */
+.legend-container {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 50;
+}
+
+.legend-toggle-btn {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  box-shadow: var(--shadow-card);
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: var(--font-body);
+}
+
+.legend-toggle-btn:hover {
+  border-color: var(--brand-green);
+  color: var(--brand-green);
+}
+
+.legend-panel {
+  display: none;
+  position: absolute;
+  bottom: 40px;
+  left: 0;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 18px;
+  box-shadow: var(--shadow-card);
+  min-width: 220px;
+  max-width: 280px;
+}
+
+.legend-panel.active {
+  display: block;
+}
+
+.legend-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.legend-panel-header h4 {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.legend-panel-close {
+  width: 22px;
+  height: 22px;
+  border: none;
+  background: var(--bg-cream);
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+  color: var(--text-tertiary);
+}
+
+.legend-panel-close:hover {
+  background: #fee2e2;
+  color: #DC2626;
+}
+
+.legend-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+  font-size: 11px;
+}
+
+.legend-row .legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.legend-row .legend-name {
+  flex: 1;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.legend-row .legend-poc {
+  font-size: 10px;
+  color: var(--text-tertiary);
+  font-weight: 400;
+}
+</style>
+</head>
+<body>
+
+<!-- AUTH SCREEN -->
+<div class="auth-screen" id="authScreen">
+  <div class="auth-card">
+    <h1>Campaign Calendar</h1>
+    <p>PMM team planning tool. Enter your email to continue.</p>
+    <input type="email" id="authEmail" placeholder="your.name@hellofresh.com" autocomplete="email">
+    <button class="auth-btn" onclick="handleAuth()">Sign In</button>
+    <div class="auth-error" id="authError">Please use a valid HelloFresh email</div>
+    <p class="auth-note">View access for all HelloFresh domains. Edit access for PMM team.</p>
+    <div class="auth-editors-info">
+      <strong>Editors:</strong>
+      Kieran, Marina K, Marina Z, Isabela, Domi
+    </div>
+  </div>
+</div>
+
+<!-- MAIN APP -->
+<div class="app" id="app">
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="top-bar-inner">
+      <div class="top-bar-left">
+        <h1>Campaign Calendar</h1>
+        <div class="mode-toggle" id="modeToggle">
+          <button class="active" data-mode="marketing" onclick="setMode('marketing')">Product Marketing</button>
+          <button data-mode="product" onclick="setMode('product')">Product</button>
+          <button data-mode="crm" onclick="setMode('crm')">CRM</button>
+          <button data-mode="leadership" onclick="setMode('leadership')">Leadership</button>
+          <button data-mode="markets" onclick="setMode('markets')">Markets</button>
+        </div>
+      </div>
+      <div class="top-bar-right">
+        <div class="user-badge" id="userBadge">
+          <div class="avatar" id="userAvatar">K</div>
+          <span id="userName">Kieran</span>
+        </div>
+        <button class="export-btn" onclick="signOut()" style="font-size:10px;">Sign Out</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Controls Bar -->
+  <div class="controls-bar">
+    <!-- Row 1: View toggle, navigation, today -->
+    <div class="controls-row">
+      <div class="controls-left">
+        <div class="view-toggle">
+          <button data-view="year" onclick="setView('year')">Year</button>
+          <button data-view="weekly" onclick="setView('weekly')">Weekly</button>
+          <button data-view="month" class="active" onclick="setView('month')">Month</button>
+        </div>
+        <div class="nav-controls" id="navControls">
+          <button onclick="navPrev()">&lsaquo;</button>
+          <span class="nav-label" id="navLabel">June 2026</span>
+          <button onclick="navNext()">&rsaquo;</button>
+        </div>
+        <button class="btn-today" id="btnToday" onclick="goToday()">Today</button>
+        <div class="weekly-mode-toggle" id="weeklyModeToggle">
+          <button class="active" data-mode="initiatives" onclick="setWeeklyMode('initiatives')">Initiatives</button>
+          <button data-mode="channels" onclick="setWeeklyMode('channels')">Channels</button>
+        </div>
+      </div>
+      <div class="controls-right">
+        <div class="search-box">
+          <input type="text" id="searchInput" placeholder="Search entries..." oninput="applyFilters()">
+        </div>
+        <select class="filter-select" id="channelFilter" onchange="applyFilters()">
+          <option value="">All Channels</option>
+          <option value="crm">CRM</option>
+          <option value="paid">Paid</option>
+          <option value="organic">Organic</option>
+          <option value="influencers">Influencers</option>
+          <option value="web">Web</option>
+          <option value="appstore">App Store</option>
+          <option value="print">Print</option>
+        </select>
+        <select class="filter-select" id="statusFilter" onchange="applyFilters()">
+          <option value="">All Statuses</option>
+          <option value="planned">Planned</option>
+          <option value="in-progress">In Progress</option>
+          <option value="live">Live</option>
+          <option value="completed">Completed</option>
+        </select>
+        <select class="filter-select" id="ownerFilter" onchange="applyFilters()">
+          <option value="">All Owners</option>
+        </select>
+        <div class="market-dropdown" id="marketDropdown">
+          <button class="filter-select market-dropdown-btn" id="marketDropdownBtn" onclick="toggleMarketDropdown()">
+            <span id="marketDropdownLabel">All Markets</span>
+            <span class="market-dropdown-arrow">&#9662;</span>
+          </button>
+          <div class="market-dropdown-panel" id="marketDropdownPanel">
+            <div class="market-dropdown-actions">
+              <button onclick="toggleAllMarkets(true)">All</button>
+              <button onclick="toggleAllMarkets(false)">None</button>
+            </div>
+            <div class="market-dropdown-list" id="marketDropdownList"></div>
+          </div>
+        </div>
+        <div class="export-btns">
+          <button class="export-btn" onclick="exportJSON()">JSON</button>
+          <button class="export-btn" onclick="exportCSV()">CSV</button>
+          <button class="export-btn import-btn" id="importBtn" onclick="document.getElementById('csvFileInput').click()" style="display:none;">Import CSV</button>
+          <input type="file" id="csvFileInput" accept=".csv" style="display:none;" onchange="handleCSVImport(event)">
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 2: Initiative tabs -->
+    <div class="controls-row">
+      <div class="init-tabs" id="initTabs"></div>
+    </div>
+
+  </div>
+
+  <!-- Calendar Views -->
+  <div class="calendar-content">
+    <div class="year-view" id="yearView"></div>
+    <div class="weekly-view" id="weeklyView"></div>
+    <div class="month-view active" id="monthView"></div>
+    <div class="product-view" id="productView"></div>
+    <div class="crm-view" id="crmView"></div>
+    <div class="leadership-view" id="leadershipView"></div>
+    <div class="markets-view" id="marketsView"></div>
+  </div>
+</div>
+
+<!-- Day Detail Modal -->
+<div class="modal-overlay" id="dayModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 id="dayModalTitle">Monday, June 2</h2>
+      <button class="modal-close" onclick="closeModal('dayModal')">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-entries" id="dayModalEntries"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Entry Form Modal -->
+<div class="modal-overlay form-modal" id="entryFormModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 id="entryFormTitle">New Entry</h2>
+      <button class="modal-close" onclick="closeModal('entryFormModal')">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Initiative</label>
+          <select id="formInitiative"></select>
+        </div>
+        <div class="form-group">
+          <label>Channel</label>
+          <select id="formChannel">
+            <option value="crm">CRM</option>
+            <option value="paid">Paid</option>
+            <option value="organic">Organic</option>
+            <option value="influencers">Influencers</option>
+            <option value="web">Web</option>
+            <option value="appstore">App Store</option>
+            <option value="print">Print</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Text</label>
+        <input type="text" id="formText" placeholder="Entry description">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Subchannel</label>
+          <input type="text" id="formSubchannel" placeholder="e.g. Email, Push, Meta">
+        </div>
+        <div class="form-group">
+          <label>Owner</label>
+          <input type="text" id="formOwner" placeholder="Owner name">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Start Date</label>
+          <input type="date" id="formDate">
+        </div>
+        <div class="form-group">
+          <label>End Date (optional)</label>
+          <input type="date" id="formEndDate">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Status</label>
+          <select id="formStatus">
+            <option value="planned">Planned</option>
+            <option value="in-progress">In Progress</option>
+            <option value="live">Live</option>
+            <option value="completed">Completed</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Markets</label>
+          <input type="text" id="formMarkets" placeholder="US, UK, DE...">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Jira Ticket</label>
+          <input type="text" id="formJiraTicket" placeholder="e.g. CREA-123 or full URL">
+        </div>
+        <div class="form-group">
+          <label>Airtable Link</label>
+          <input type="text" id="formAirtableLink" placeholder="Paste Airtable URL">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Notes</label>
+        <textarea id="formNotes" placeholder="Additional context"></textarea>
+      </div>
+      <div class="form-actions">
+        <button class="form-btn form-btn-danger" id="formDeleteBtn" onclick="deleteEntry()" style="display:none;">Delete</button>
+        <button class="form-btn form-btn-cancel" onclick="closeModal('entryFormModal')">Cancel</button>
+        <button class="form-btn form-btn-primary" onclick="saveEntry()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Initiative Legend -->
+<div class="legend-container" id="legendContainer" style="display:none;">
+  <div class="legend-panel" id="legendPanel">
+    <div class="legend-panel-header">
+      <h4>Initiatives</h4>
+      <button class="legend-panel-close" onclick="toggleLegend()">&times;</button>
+    </div>
+    <div id="legendContent"></div>
+  </div>
+  <button class="legend-toggle-btn" onclick="toggleLegend()">&#9632; Legend</button>
+</div>
+
+<!-- Keyboard Shortcuts -->
+<div class="shortcuts-badge" onclick="toggleShortcuts()">? Shortcuts</div>
+<div class="shortcuts-panel" id="shortcutsPanel">
+  <h4>Keyboard Shortcuts</h4>
+  <div class="shortcut-row"><span>Previous</span><span class="shortcut-key">&larr;</span></div>
+  <div class="shortcut-row"><span>Next</span><span class="shortcut-key">&rarr;</span></div>
+  <div class="shortcut-row"><span>Today</span><span class="shortcut-key">T</span></div>
+  <div class="shortcut-row"><span>Year view</span><span class="shortcut-key">1</span></div>
+  <div class="shortcut-row"><span>Weekly view</span><span class="shortcut-key">2</span></div>
+  <div class="shortcut-row"><span>Month view</span><span class="shortcut-key">3</span></div>
+  <div class="shortcut-row"><span>New entry</span><span class="shortcut-key">N</span></div>
+  <div class="shortcut-row"><span>Search</span><span class="shortcut-key">/</span></div>
+</div>
+
+<script>
+const INLINE_CALENDAR_DATA = {"markets":["US","UK","DE","AU","CA","NL","SE","DK","NO","BE","AT","CH","FR","IE","NZ"],"releases":[{"id":"rel-1","date":"2025-12-01","endDate":"2026-12-31","name":"Cookbook","description":"Save social media cooking videos as step-by-step recipes in the app","status":"live","markets":["US","UK","AU","CA","NZ"]},{"id":"rel-cp","date":"2026-05-06","name":"Creator Platform","description":"In-app Discover page featuring creator content","markets":["US"]},{"id":"rel-fp","date":"2026-06-15","name":"Food Profile","description":"Personalised food preferences driving recipe recommendations","markets":["US"]},{"id":"rel-dp","date":"2026-06-16","name":"Double Protein","description":"Double protein option available on all recipes","markets":["US","UK","AU","NZ"]}],"initiatives":[{"id":"init-cookbook","name":"Cookbook","poc":"Kieran","objective":"Transform the app into a daily food companion","markets":["US","UK","AU","CA","NZ"],"releaseId":"rel-1","color":"#0D9488","entries":[{"id":"c6","date":"2026-05-01","text":"UGC Video C4","channel":"organic","subchannel":"Reel","owner":"Kieran","status":"completed","notes":"IG 2,003 + FB 1,741 views, 47 interactions","markets":["US"]},{"id":"c7","date":"2026-05-02","text":"UGC Video C6","channel":"organic","subchannel":"Reel","owner":"Kieran","status":"completed","notes":"FB 1,741 views, 5 interactions","markets":["US"]},{"id":"c8","date":"2026-05-04","text":"Turn Reels into Recipes","channel":"organic","subchannel":"Reel","owner":"Kieran","status":"completed","notes":"31,433 views, 9 interactions","markets":["AU"]},{"id":"c9","date":"2026-05-04","text":"Turn Reels into Recipes","channel":"organic","subchannel":"Reel","owner":"Kieran","status":"completed","notes":"<500 views, 7 interactions","markets":["NZ"]},{"id":"c10","date":"2026-05-07","text":"UGC Video C5","channel":"organic","subchannel":"Reel","owner":"Kieran","status":"completed","notes":"1,923 views, 11 interactions","markets":["US"]},{"id":"c11","date":"2026-05-07","text":"Stop scrolling and start cooking","channel":"organic","subchannel":"Static","owner":"Kieran","status":"completed","notes":"9,900 views, 49 interactions","markets":["US"]},{"id":"c12","date":"2026-05-07","text":"Never lose another dinner idea","channel":"organic","subchannel":"Carousel","owner":"Kieran","status":"completed","notes":"1,811 views, 6 interactions","markets":["AU"]},{"id":"c13","date":"2026-05-07","text":"Never lose another dinner idea","channel":"organic","subchannel":"Carousel","owner":"Kieran","status":"completed","notes":"<500 views, 4 interactions","markets":["NZ"]},{"id":"c14","date":"2026-05-07","text":"Reels hit different when you cook them","channel":"organic","subchannel":"Carousel","owner":"Kieran","status":"completed","notes":"1,483 views, 21 interactions","markets":["CA"]},{"id":"c15","date":"2026-05-08","text":"UGC Video C4","channel":"organic","subchannel":"Reel","owner":"Kieran","status":"completed","notes":"772 views, 11 interactions","markets":["CA"]},{"id":"c16","date":"2026-05-13","text":"UGC Video C3","channel":"organic","subchannel":"Reel","owner":"Kieran","status":"completed","notes":"1,304 views, 12 interactions","markets":["US"]},{"id":"c17","date":"2026-05-14","text":"UGC Video — Concept 3","channel":"organic","subchannel":"Reel","owner":"Kieran","status":"completed","notes":"Meta 9:16","markets":["US"]},{"id":"c18","date":"2026-05-18","text":"Creators Wanted","channel":"organic","subchannel":"Static","owner":"Kieran","status":"completed","notes":"Creator Platform recruitment. 45 applications, 9 contacted","markets":["US"]},{"id":"c19","date":"2026-05-19","text":"UGC Video — Concept 9","channel":"organic","subchannel":"Reel","owner":"Kieran","status":"completed","notes":"TikTok 9:16","markets":["US"]},{"id":"c20","date":"2026-05-19","text":"UGC Video — Save to Cookbook","channel":"organic","subchannel":"Reel","owner":"Kieran","status":"completed","notes":"18 interactions","markets":["UK"]},{"id":"c21","date":"2026-05-20","text":"Meme Static","channel":"organic","subchannel":"Static","owner":"Kieran","status":"completed","notes":"Meta","markets":["US"]},{"id":"c22","date":"2026-05-23","text":"Post-Pause Push Rollout","channel":"crm","subchannel":"Push","owner":"Kieran","status":"completed","notes":"Paused subscribers get Cookbook content. 6.6% fewer cancellations in test.","markets":["US"]},{"id":"c23","date":"2026-05-26","text":"UGC Video — Concept 12a (Global)","channel":"organic","subchannel":"Reel","owner":"Kieran","status":"completed","notes":"IG 1,812 + FB 2,782 views, 14 interactions","markets":["US"]},{"id":"c24","date":"2026-05-27","text":"Creator Collab — Jorge Orozco Crazy Recipe","channel":"organic","subchannel":"Reel","owner":"Kieran","status":"completed","notes":"IG 3,467 + FB 2,275 views, 132 interactions, 2.3% eng rate","markets":["US"]},{"id":"c25","date":"2026-05-30","text":"Recipe Creators Wanted","channel":"organic","subchannel":"Static","owner":"Kieran","status":"completed","notes":"","markets":["US"]},{"id":"c26","date":"2026-06-01","text":"Cookbook UGC Video","channel":"organic","subchannel":"Reel","owner":"Kieran","status":"completed","notes":"","markets":["US"]},{"id":"c27","date":"2026-06-02","text":"Cook the internet","channel":"organic","subchannel":"Static","owner":"Kieran","status":"completed","notes":"","markets":["US"]},{"id":"c28","date":"2026-05-06","text":"Emily Eggers — IG Reel","channel":"influencers","subchannel":"IG","owner":"Kieran","status":"completed","notes":"First creator post live","markets":["US"]},{"id":"c29","date":"2026-05-06","text":"Emily Eggers — TikTok","channel":"influencers","subchannel":"TikTok","owner":"Kieran","status":"completed","notes":"","markets":["US"]},{"id":"c30","date":"2026-05-20","text":"Spoonful of Si — Cookbook Post","channel":"influencers","subchannel":"IG","owner":"Kieran","status":"completed","notes":"","markets":["US"]}]},{"id":"init-creator-platform","name":"Creator Platform","poc":"Kieran","objective":"Increase Cookbook daily users by suggesting content created by influencers","markets":["US"],"releaseId":"rel-cp","color":"#7C3AED","entries":[{"id":"cp1","date":"2026-05-06","text":"Emily Eggers (Live)","channel":"influencers","subchannel":"Discover","owner":"Kieran","status":"completed","notes":"","markets":["US"]},{"id":"cp2","date":"2026-05-20","text":"Spoonful of Si (Live)","channel":"influencers","subchannel":"Discover","owner":"Kieran","status":"completed","notes":"","markets":["US"]},{"id":"cp3","date":"2026-06-02","text":"Nutrition with Nat (Live)","channel":"influencers","subchannel":"Discover","owner":"Kieran","status":"completed","notes":"","markets":["US"]},{"id":"cp4","date":"2026-06-05","text":"Jasmine Ramsey (Live)","channel":"influencers","subchannel":"Discover","owner":"Kieran","status":"completed","notes":"","markets":["US"]}]},{"id":"init-food-profile","name":"Food Profile","poc":"Isabela","objective":"Reach 80% adoption of Food Profile","markets":["US"],"releaseId":"rel-fp","color":"#2563EB","entries":[{"id":"fp1","date":"2026-06-15","endDate":"2026-07-15","text":"Homepage Banner","channel":"crm","subchannel":"In-App","owner":"Isabela","status":"planned","notes":"All customers","markets":["US"]},{"id":"fp2","date":"2026-06-15","text":"Push Notification","channel":"crm","subchannel":"Push","owner":"Isabela","status":"planned","notes":"All customers","markets":["US"]},{"id":"fp3","date":"2026-06-15","text":"Organic Social","channel":"organic","subchannel":"IG","owner":"Isabela","status":"planned","notes":"","markets":["US"]}]},{"id":"init-double-protein","name":"Double Protein","poc":"Marina K","objective":"Launch Double Protein feature across test markets","markets":["US","UK","AU","NZ"],"releaseId":"rel-dp","color":"#16A34A","entries":[{"id":"dp1","date":"2026-05-25","endDate":"2026-07-06","text":"New Double Protein Carousel + Nested Page","channel":"crm","subchannel":"In-App","owner":"Marina K","status":"planned","notes":"All recipes eligible, Double Protein pre-selected","markets":["US","UK","AU","NZ"]},{"id":"dp2","date":"2026-06-02","endDate":"2026-06-22","text":"Onboarding Drawer","channel":"crm","subchannel":"In-App","owner":"Marina K","status":"planned","notes":"","markets":["US","UK","AU","NZ"]},{"id":"dp4","date":"2026-05-25","endDate":"2026-06-08","text":"Newsletter","channel":"crm","subchannel":"Email","owner":"Marina K","status":"planned","notes":"US only","markets":["US"]},{"id":"dp5","date":"2026-06-23","endDate":"2026-07-06","text":"Onboarding Flow (2nd Meal Selection Email)","channel":"crm","subchannel":"Email","owner":"Marina K","status":"planned","notes":"","markets":["US","UK","AU","NZ"]},{"id":"dp6","date":"2026-06-16","endDate":"2026-06-29","text":"Homepage Banner #1 position Message 1","channel":"crm","subchannel":"In-App","owner":"Marina K","status":"planned","notes":"#2 position in US","markets":["US","UK","AU","NZ"]},{"id":"dp7","date":"2026-06-23","endDate":"2026-07-06","text":"Homepage Banner #2 position Message 2","channel":"crm","subchannel":"In-App","owner":"Marina K","status":"planned","notes":"","markets":["US","UK","AU","NZ"]},{"id":"dp8","date":"2026-06-09","endDate":"2026-06-22","text":"Push Notification (Test 2 Variants)","channel":"crm","subchannel":"Push","owner":"Marina K","status":"planned","notes":"","markets":["US","UK","AU","NZ"]},{"id":"dp9","date":"2026-06-16","endDate":"2026-06-22","text":"Inbox message","channel":"crm","subchannel":"Inbox","owner":"Marina K","status":"planned","notes":"","markets":["US","UK","AU","NZ"]},{"id":"dp11","date":"2026-06-16","endDate":"2026-06-22","text":"Integration to Protein Flyer","channel":"print","subchannel":"Flyer","owner":"Marina K","status":"planned","notes":"UK only","markets":["UK"]}]}]};
+
+</script>
+
+<script>
+// STATE
+let calendarData = null;
+let currentView = 'month';
+let currentMode = 'marketing'; // marketing | product | crm | leadership
+let currentYear = 2026;
+let currentMonth = 5; // 0-indexed, June = 5
+let weeklyStart = null; // Date object for the first Monday of the 12-week window
+let weeklyMode = 'initiatives'; // initiatives | channels
+let activeInitiative = 'all';
+let activeMarkets = new Set();
+let currentUser = null;
+let isEditor = false;
+let editingEntry = null;
+let crmRangeStart = null; // null = use weeklyStart
+let crmRangeWeeks = null; // null = default 12
+let expandedDays = new Set();
+
+const EDITORS = ['kieran', 'marina k', 'marina z', 'isabela', 'domi'];
+const CHANNEL_COLORS = {
+  crm: { color: '#2563EB', bg: '#EFF6FF' },
+  appstore: { color: '#7C3AED', bg: '#F5F3FF' },
+  web: { color: '#0D9488', bg: '#F0FDFA' },
+  paid: { color: '#EA580C', bg: '#FFF7ED' },
+  influencers: { color: '#DC2626', bg: '#FEF2F2' },
+  organic: { color: '#16A34A', bg: '#F0FDF4' },
+  print: { color: '#92400E', bg: '#FFFBEB' }
+};
+const STATUS_STYLES = {
+  'planned': { color: '#94A3B8', bg: '#F1F5F9' },
+  'in-progress': { color: '#F59E0B', bg: '#FFFBEB' },
+  'live': { color: '#10B981', bg: '#ECFDF5' },
+  'completed': { color: '#6366F1', bg: '#EEF2FF' }
+};
+const CHANNEL_LABELS = { crm: 'CRM', appstore: 'App Store', web: 'Web', paid: 'Paid', influencers: 'Influencers', organic: 'Organic', print: 'Print' };
+function formatChannel(ch) { return CHANNEL_LABELS[ch] || ch.charAt(0).toUpperCase() + ch.slice(1); }
+
+// AUTH
+function handleAuth() {
+  const email = document.getElementById('authEmail').value.trim().toLowerCase();
+  if (!email.includes('@hellofresh') && !email.includes('@hellofresh.com') && !email.includes('@')) {
+    document.getElementById('authError').style.display = 'block';
+    return;
+  }
+  const name = email.split('@')[0].replace('.', ' ').replace(/\b\w/g, c => c.toUpperCase());
+  const firstName = name.split(' ')[0];
+  currentUser = { email, name, firstName };
+  isEditor = EDITORS.some(e => email.toLowerCase().includes(e.replace(' ', '.')));
+  localStorage.setItem('calendarUser', JSON.stringify({ email, name, firstName, isEditor }));
+  showApp();
+}
+
+function checkAuth() {
+  const stored = localStorage.getItem('calendarUser');
+  if (stored) {
+    const data = JSON.parse(stored);
+    currentUser = data;
+    isEditor = data.isEditor;
+    showApp();
+    return true;
+  }
+  return false;
+}
+
+function signOut() {
+  localStorage.removeItem('calendarUser');
+  currentUser = null;
+  isEditor = false;
+  document.getElementById('app').classList.remove('active');
+  document.getElementById('authScreen').style.display = 'flex';
+}
+
+function showApp() {
+  document.getElementById('authScreen').style.display = 'none';
+  document.getElementById('app').classList.add('active');
+  document.getElementById('userName').textContent = currentUser.firstName;
+  document.getElementById('userAvatar').textContent = currentUser.firstName[0];
+  if (isEditor) document.getElementById('importBtn').style.display = '';
+  loadData();
+}
+
+// DATA
+async function loadData() {
+  localStorage.removeItem('calendarDataOverride');
+  try {
+    const resp = await fetch('calendar-data.json');
+    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+    calendarData = await resp.json();
+  } catch (e) {
+    if (typeof INLINE_CALENDAR_DATA !== 'undefined') {
+      calendarData = INLINE_CALENDAR_DATA;
+    } else {
+      console.error('Failed to load calendar data:', e);
+      document.getElementById('monthView').innerHTML = '<div style="text-align:center;padding:60px;color:#9A9A9A;">Failed to load data. If viewing locally, please use a local server.</div>';
+      return;
+    }
+  }
+  // Initialize markets
+  activeMarkets = new Set(calendarData.markets);
+  // Build owners list
+  buildOwnerFilter();
+  // Build UI
+  buildInitTabs();
+  buildMarketPills();
+  buildLegend();
+  // Set initial date to today
+  const today = new Date();
+  currentYear = today.getFullYear();
+  currentMonth = today.getMonth();
+  // Set weekly start to current week minus 2
+  const mondayOfCurrentWeek = getMondayOfWeek(today);
+  weeklyStart = new Date(mondayOfCurrentWeek);
+  weeklyStart.setDate(weeklyStart.getDate() - 14);
+  render();
+}
+
+function buildOwnerFilter() {
+  const owners = new Set();
+  calendarData.initiatives.forEach(init => {
+    init.entries.forEach(e => { if (e.owner) owners.add(e.owner); });
+  });
+  const sel = document.getElementById('ownerFilter');
+  sel.innerHTML = '<option value="">All Owners</option>';
+  [...owners].sort().forEach(o => {
+    sel.innerHTML += `<option value="${o}">${o}</option>`;
+  });
+}
+
+function buildInitTabs() {
+  const container = document.getElementById('initTabs');
+
+  // Calculate overall progress for "All" tab
+  let html = `<button class="init-tab active" data-init="all" onclick="setInitiative('all')">All</button>`;
+  calendarData.initiatives.forEach(init => {
+    html += `<button class="init-tab" data-init="${init.id}" onclick="setInitiative('${init.id}')" style="border-color: ${init.color}30;">${init.name}</button>`;
+  });
+  container.innerHTML = html;
+}
+
+function buildProgressRing(pct, color) {
+  const radius = 7;
+  const circumference = 2 * Math.PI * radius;
+  const offset = circumference - (pct / 100) * circumference;
+
+  if (pct >= 100) {
+    return `<span class="progress-check" style="background:${color};">&#10003;</span>`;
+  }
+
+  return `<svg class="progress-ring" viewBox="0 0 18 18">
+    <circle class="ring-track" cx="9" cy="9" r="${radius}"/>
+    <circle class="ring-fill" cx="9" cy="9" r="${radius}" stroke="${color}" stroke-dasharray="${circumference}" stroke-dashoffset="${offset}" stroke-linecap="round"/>
+  </svg>`;
+}
+
+function buildMarketPills() {
+  const container = document.getElementById('marketDropdownList');
+  let html = '';
+  calendarData.markets.forEach(m => {
+    const isActive = activeMarkets.has(m);
+    html += `<button class="market-dropdown-item ${isActive ? 'active' : ''}" data-market="${m}" onclick="toggleMarket('${m}')">${m}</button>`;
+  });
+  container.innerHTML = html;
+  updateMarketLabel();
+}
+
+function toggleMarketDropdown() {
+  document.getElementById('marketDropdownPanel').classList.toggle('active');
+}
+
+function updateMarketLabel() {
+  const label = document.getElementById('marketDropdownLabel');
+  const total = calendarData.markets.length;
+  const active = activeMarkets.size;
+  if (active === total) label.textContent = 'All Markets';
+  else if (active === 0) label.textContent = 'No Markets';
+  else if (active <= 3) label.textContent = [...activeMarkets].join(', ');
+  else label.textContent = active + ' Markets';
+}
+
+// NAVIGATION
+function setMode(mode) {
+  currentMode = mode;
+  document.querySelectorAll('#modeToggle button').forEach(b => {
+    b.classList.toggle('active', b.dataset.mode === mode);
+  });
+
+  // Toggle visibility of marketing-specific controls
+  const marketingOnlyEls = [
+    document.querySelector('.view-toggle'),
+    document.getElementById('weeklyModeToggle'),
+    document.getElementById('initTabs').parentElement,
+    document.getElementById('btnToday')
+  ];
+  const navButtons = document.querySelectorAll('#navControls button');
+
+  // Hide all special views first
+  document.getElementById('productView').classList.remove('active');
+  document.getElementById('crmView').classList.remove('active');
+  document.getElementById('leadershipView').classList.remove('active');
+  document.getElementById('marketsView').classList.remove('active');
+  document.getElementById('yearView').classList.remove('active');
+  document.getElementById('weeklyView').classList.remove('active');
+  document.getElementById('monthView').classList.remove('active');
+
+  if (mode === 'marketing') {
+    marketingOnlyEls.forEach(el => { if (el) el.style.display = ''; });
+    navButtons.forEach(b => b.style.display = '');
+    // Restore the current marketing view
+    document.getElementById('yearView').classList.toggle('active', currentView === 'year');
+    document.getElementById('weeklyView').classList.toggle('active', currentView === 'weekly');
+    document.getElementById('monthView').classList.toggle('active', currentView === 'month');
+    document.getElementById('weeklyModeToggle').classList.toggle('visible', currentView === 'weekly');
+  } else if (mode === 'product') {
+    marketingOnlyEls.forEach(el => { if (el) el.style.display = 'none'; });
+    navButtons.forEach(b => b.style.display = 'none');
+    document.getElementById('productView').classList.add('active');
+  } else if (mode === 'crm') {
+    marketingOnlyEls.forEach(el => { if (el) el.style.display = 'none'; });
+    navButtons.forEach(b => b.style.display = 'none');
+    document.getElementById('crmView').classList.add('active');
+  } else if (mode === 'leadership') {
+    marketingOnlyEls.forEach(el => { if (el) el.style.display = 'none'; });
+    navButtons.forEach(b => b.style.display = 'none');
+    document.getElementById('leadershipView').classList.add('active');
+  } else if (mode === 'markets') {
+    marketingOnlyEls.forEach(el => { if (el) el.style.display = 'none'; });
+    navButtons.forEach(b => b.style.display = 'none');
+    document.getElementById('marketsView').classList.add('active');
+  }
+  render();
+}
+
+function navigateToRelease(releaseId) {
+  setMode('product');
+  setTimeout(() => {
+    const el = document.getElementById('release-' + releaseId);
+    if (el) {
+      // Expand if collapsed
+      const body = el.querySelector('.product-release-body');
+      if (body && body.style.display === 'none') {
+        body.style.display = '';
+        el.querySelector('.release-chevron').classList.add('expanded');
+      }
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      el.style.boxShadow = '0 0 0 3px var(--brand-green), var(--shadow-card)';
+      setTimeout(() => { el.style.boxShadow = ''; }, 2000);
+    }
+  }, 100);
+}
+
+function toggleReleaseSection(releaseId) {
+  const el = document.getElementById('release-' + releaseId);
+  if (!el) return;
+  const body = el.querySelector('.product-release-body');
+  const chevron = el.querySelector('.release-chevron');
+  if (body.style.display === 'none') {
+    body.style.display = '';
+    chevron.classList.add('expanded');
+  } else {
+    body.style.display = 'none';
+    chevron.classList.remove('expanded');
+  }
+}
+
+function toggleMarketsRelease(releaseId) {
+  const body = document.getElementById('marketsBody-' + releaseId);
+  const chevron = document.getElementById('marketsChevron-' + releaseId);
+  if (!body) return;
+  if (body.style.display === 'none') {
+    body.style.display = '';
+    chevron.style.transform = 'rotate(180deg)';
+  } else {
+    body.style.display = 'none';
+    chevron.style.transform = '';
+  }
+}
+
+function setView(view) {
+  currentView = view;
+  document.querySelectorAll('.view-toggle button').forEach(b => {
+    b.classList.toggle('active', b.dataset.view === view);
+  });
+  document.getElementById('yearView').classList.toggle('active', view === 'year');
+  document.getElementById('weeklyView').classList.toggle('active', view === 'weekly');
+  document.getElementById('monthView').classList.toggle('active', view === 'month');
+  document.getElementById('productView').classList.remove('active');
+  document.getElementById('weeklyModeToggle').classList.toggle('visible', view === 'weekly');
+  render();
+}
+
+function setWeeklyMode(mode) {
+  weeklyMode = mode;
+  document.querySelectorAll('#weeklyModeToggle button').forEach(b => {
+    b.classList.toggle('active', b.dataset.mode === mode);
+  });
+  render();
+}
+
+function navPrev() {
+  if (currentView === 'month') {
+    currentMonth--;
+    if (currentMonth < 0) { currentMonth = 11; currentYear--; }
+  } else if (currentView === 'year') {
+    currentYear--;
+  } else if (currentView === 'weekly') {
+    weeklyStart.setDate(weeklyStart.getDate() - 84); // 12 weeks back
+  }
+  render();
+}
+
+function navNext() {
+  if (currentView === 'month') {
+    currentMonth++;
+    if (currentMonth > 11) { currentMonth = 0; currentYear++; }
+  } else if (currentView === 'year') {
+    currentYear++;
+  } else if (currentView === 'weekly') {
+    weeklyStart.setDate(weeklyStart.getDate() + 84); // 12 weeks forward
+  }
+  render();
+}
+
+function goToday() {
+  const today = new Date();
+  currentYear = today.getFullYear();
+  currentMonth = today.getMonth();
+  const monday = getMondayOfWeek(today);
+  weeklyStart = new Date(monday);
+  weeklyStart.setDate(weeklyStart.getDate() - 14);
+  render();
+}
+
+function setInitiative(id) {
+  activeInitiative = id;
+  document.querySelectorAll('.init-tab').forEach(t => {
+    t.classList.toggle('active', t.dataset.init === id);
+  });
+  render();
+}
+
+function toggleMarket(market) {
+  if (activeMarkets.has(market)) activeMarkets.delete(market);
+  else activeMarkets.add(market);
+  updateMarketPillStyles();
+  render();
+}
+
+function toggleAllMarkets(all) {
+  if (all) activeMarkets = new Set(calendarData.markets);
+  else activeMarkets = new Set();
+  updateMarketPillStyles();
+  render();
+}
+
+function updateMarketPillStyles() {
+  document.querySelectorAll('.market-dropdown-item').forEach(p => {
+    p.classList.toggle('active', activeMarkets.has(p.dataset.market));
+  });
+  updateMarketLabel();
+}
+
+// FILTERING
+function getFilteredEntries() {
+  const search = document.getElementById('searchInput').value.toLowerCase();
+  const channel = document.getElementById('channelFilter').value;
+  const status = document.getElementById('statusFilter').value;
+  const owner = document.getElementById('ownerFilter').value;
+
+  let results = [];
+  const initiatives = activeInitiative === 'all' ? calendarData.initiatives : calendarData.initiatives.filter(i => i.id === activeInitiative);
+
+  initiatives.forEach(init => {
+    init.entries.forEach(entry => {
+      // Market filter
+      if (entry.markets && entry.markets.length > 0) {
+        if (!entry.markets.some(m => activeMarkets.has(m))) return;
+      }
+      // Channel filter
+      if (channel && entry.channel !== channel) return;
+      // Status filter
+      if (status && entry.status !== status) return;
+      // Owner filter
+      if (owner && entry.owner !== owner) return;
+      // Search filter
+      if (search && !entry.text.toLowerCase().includes(search) && !(entry.notes || '').toLowerCase().includes(search) && !(entry.subchannel || '').toLowerCase().includes(search)) return;
+
+      results.push({ ...entry, initiative: init });
+    });
+  });
+  return results;
+}
+
+function getFilteredReleases() {
+  return calendarData.releases.filter(r => {
+    if (r.markets && r.markets.length > 0) {
+      return r.markets.some(m => activeMarkets.has(m));
+    }
+    return true;
+  });
+}
+
+function applyFilters() {
+  render();
+}
+
+
+// RENDERING
+function render() {
+  updateNavLabel();
+  // Update legend visibility based on mode
+  const legendEl = document.getElementById('legendContainer');
+  if (legendEl) legendEl.style.display = (currentMode === 'marketing') ? '' : 'none';
+  if (currentMode === 'product') {
+    renderProduct();
+  } else if (currentMode === 'crm') {
+    renderCRM();
+  } else if (currentMode === 'leadership') {
+    renderLeadership();
+  } else if (currentMode === 'markets') {
+    renderMarkets();
+  } else {
+    if (currentView === 'year') renderYear();
+    else if (currentView === 'weekly') renderWeekly();
+    else renderMonth();
+  }
+}
+
+function updateNavLabel() {
+  const label = document.getElementById('navLabel');
+  if (currentMode === 'product') {
+    label.textContent = 'Product Releases';
+    return;
+  }
+  if (currentMode === 'crm') {
+    label.textContent = 'CRM Workload';
+    return;
+  }
+  if (currentMode === 'leadership') {
+    label.textContent = currentYear + ' Roadmap';
+    return;
+  }
+  if (currentMode === 'markets') {
+    label.textContent = 'Market View';
+    return;
+  }
+  if (currentView === 'year') {
+    label.textContent = currentYear.toString();
+  } else if (currentView === 'month') {
+    const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    label.textContent = `${months[currentMonth]} ${currentYear}`;
+  } else {
+    const endDate = new Date(weeklyStart);
+    endDate.setDate(endDate.getDate() + 83);
+    const fmt = d => `${d.toLocaleDateString('en-US', {month:'short'})} ${d.getDate()}`;
+    label.textContent = `${fmt(weeklyStart)} \u2013 ${fmt(endDate)}`;
+  }
+}
+
+// YEAR VIEW
+function renderYear() {
+  const container = document.getElementById('yearView');
+  const currentWeekNum = getWeekNumber(new Date());
+  const isCurrentYear = new Date().getFullYear() === currentYear;
+
+  // Header
+  let html = `<div class="year-grid"><div class="year-header">`;
+  html += `<div class="year-header-cell">Initiative</div>`;
+  for (let w = 1; w <= 52; w++) {
+    const isCurrent = isCurrentYear && w === currentWeekNum;
+    html += `<div class="year-header-cell ${isCurrent ? 'current-week' : ''}" style="cursor:pointer;" onclick="openYearWeekModal(${w})">W${w}</div>`;
+  }
+  html += `</div>`;
+
+  // Releases row
+  const releases = getFilteredReleases();
+  html += `<div class="year-row releases-row"><div class="year-row-label"><span class="diamond" style="width:8px;height:8px;background:var(--release-color);transform:rotate(45deg);flex-shrink:0;"></span>Releases</div>`;
+  for (let w = 1; w <= 52; w++) {
+    const isCurrent = isCurrentYear && w === currentWeekNum;
+    const weekReleases = releases.filter(r => {
+      const d = new Date(r.date + 'T00:00:00');
+      return d.getFullYear() === currentYear && getWeekNumber(d) === w;
+    });
+    html += `<div class="year-cell ${isCurrent ? 'current-week' : ''}" style="position:relative;overflow:visible;">`;
+    if (weekReleases.length > 0) {
+      html += `<div class="release-marker" style="cursor:pointer;" onclick="navigateToRelease('${weekReleases[0].id}')"></div>`;
+      html += `<div class="release-hover-pill">${weekReleases[0].name}</div>`;
+    }
+    html += `</div>`;
+  }
+  html += `</div>`;
+
+  // Initiative rows
+  const initiatives = activeInitiative === 'all' ? calendarData.initiatives : calendarData.initiatives.filter(i => i.id === activeInitiative);
+  initiatives.forEach(init => {
+    // Compute which weeks have activity
+    const activeWeeks = new Set();
+    const filteredEntries = getFilteredInitEntries(init);
+    filteredEntries.forEach(entry => {
+      const start = new Date(entry.date + 'T00:00:00');
+      const end = entry.endDate ? new Date(entry.endDate + 'T00:00:00') : start;
+      if (start.getFullYear() !== currentYear && end.getFullYear() !== currentYear) return;
+      let d = new Date(Math.max(start, new Date(currentYear, 0, 1)));
+      const endD = new Date(Math.min(end, new Date(currentYear, 11, 31)));
+      while (d <= endD) {
+        activeWeeks.add(getWeekNumber(d));
+        d.setDate(d.getDate() + 7);
+      }
+      // Also add the exact end week
+      if (endD.getFullYear() === currentYear) activeWeeks.add(getWeekNumber(endD));
+    });
+
+    html += `<div class="year-row"><div class="year-row-label"><span class="color-dot" style="background:${init.color}"></span>${init.name}</div>`;
+    for (let w = 1; w <= 52; w++) {
+      const isCurrent = isCurrentYear && w === currentWeekNum;
+      const hasActivity = activeWeeks.has(w);
+      const prevActive = activeWeeks.has(w - 1);
+      const nextActive = activeWeeks.has(w + 1);
+      html += `<div class="year-cell ${isCurrent ? 'current-week' : ''}">`;
+      if (hasActivity) {
+        let barClass = 'year-bar';
+        if (!prevActive && !nextActive) barClass += ' bar-single';
+        else if (!prevActive) barClass += ' bar-start';
+        else if (!nextActive) barClass += ' bar-end';
+        html += `<div class="${barClass}" style="background:${init.color};cursor:pointer;" onclick="openYearWeekModal(${w})"></div>`;
+      }
+      html += `</div>`;
+    }
+    html += `</div>`;
+  });
+
+  html += `</div>`;
+  container.innerHTML = html;
+}
+
+function getFilteredInitEntries(init) {
+  const search = document.getElementById('searchInput').value.toLowerCase();
+  const channel = document.getElementById('channelFilter').value;
+  const status = document.getElementById('statusFilter').value;
+  const owner = document.getElementById('ownerFilter').value;
+
+  return init.entries.filter(entry => {
+    if (entry.markets && entry.markets.length > 0) {
+      if (!entry.markets.some(m => activeMarkets.has(m))) return false;
+    }
+    if (channel && entry.channel !== channel) return false;
+    if (status && entry.status !== status) return false;
+    if (owner && entry.owner !== owner) return false;
+    if (search && !entry.text.toLowerCase().includes(search) && !(entry.notes || '').toLowerCase().includes(search)) return false;
+    return true;
+  });
+}
+
+// WEEKLY VIEW
+function renderWeekly() {
+  const container = document.getElementById('weeklyView');
+  const today = new Date();
+  const currentWeekMonday = getMondayOfWeek(today);
+
+  // Generate 12 weeks
+  const weeks = [];
+  for (let i = 0; i < 12; i++) {
+    const monday = new Date(weeklyStart);
+    monday.setDate(monday.getDate() + i * 7);
+    const sunday = new Date(monday);
+    sunday.setDate(sunday.getDate() + 6);
+    weeks.push({ monday, sunday, weekNum: getWeekNumber(monday) });
+  }
+
+  const colCount = 12;
+  const gridCols = `200px repeat(${colCount}, 1fr)`;
+
+  // Header
+  let html = `<div class="weekly-grid"><div class="weekly-header" style="grid-template-columns:${gridCols};">`;
+  html += `<div class="weekly-header-cell">${weeklyMode === 'initiatives' ? 'Initiative' : 'Channel'}</div>`;
+  weeks.forEach(w => {
+    const isCurrent = w.monday.getTime() === currentWeekMonday.getTime();
+    const fmt = d => `${d.getDate()} ${d.toLocaleDateString('en-US', {month:'short'})}`;
+    html += `<div class="weekly-header-cell ${isCurrent ? 'current-week' : ''}" style="cursor:pointer;" onclick="openWeekModalByDate('${formatDate(w.monday)}')">
+      W${w.weekNum}
+      <div class="week-dates">${fmt(w.monday)} \u2013 ${fmt(w.sunday)}</div>
+    </div>`;
+  });
+  html += `</div>`;
+
+  // Releases row
+  const releases = getFilteredReleases();
+  html += `<div class="weekly-row releases-row" style="grid-template-columns:${gridCols};">`;
+  html += `<div class="weekly-row-label"><span class="diamond" style="width:8px;height:8px;background:var(--release-color);transform:rotate(45deg);flex-shrink:0;"></span>Releases</div>`;
+  weeks.forEach(w => {
+    const isCurrent = w.monday.getTime() === currentWeekMonday.getTime();
+    const weekReleases = releases.filter(r => {
+      const d = new Date(r.date + 'T00:00:00');
+      return d >= w.monday && d <= w.sunday;
+    });
+    html += `<div class="weekly-cell ${isCurrent ? 'current-week' : ''}">`;
+    weekReleases.forEach(r => {
+      html += `<div style="display:flex;align-items:center;gap:4px;padding:2px 4px;background:var(--release-bg);border-radius:4px;border:1px solid var(--release-color);cursor:pointer;" onclick="navigateToRelease('${r.id}')">
+        <span style="width:5px;height:5px;background:var(--release-color);transform:rotate(45deg);flex-shrink:0;"></span>
+        <span style="font-size:8px;font-weight:600;color:var(--release-color);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${r.name}</span>
+      </div>`;
+    });
+    html += `</div>`;
+  });
+  html += `</div>`;
+
+  if (weeklyMode === 'initiatives') {
+    // One row per initiative
+    const initiatives = activeInitiative === 'all' ? calendarData.initiatives : calendarData.initiatives.filter(i => i.id === activeInitiative);
+    initiatives.forEach(init => {
+      const entries = getFilteredInitEntries(init);
+      html += `<div class="weekly-row" style="grid-template-columns:${gridCols};">`;
+      html += `<div class="weekly-row-label"><span class="color-dot" style="background:${init.color}"></span>${init.name}</div>`;
+      weeks.forEach(w => {
+        const isCurrent = w.monday.getTime() === currentWeekMonday.getTime();
+        const weekEntries = entries.filter(e => {
+          const start = new Date(e.date + 'T00:00:00');
+          const end = e.endDate ? new Date(e.endDate + 'T00:00:00') : start;
+          return start <= w.sunday && end >= w.monday;
+        });
+        html += `<div class="weekly-cell ${isCurrent ? 'current-week' : ''}">`;
+        if (weekEntries.length > 0) {
+          const weekKey = formatDate(w.monday);
+          html += `<div class="weekly-bar" style="background:${init.color};cursor:pointer;" onclick="openWeekDetailModal('${init.id}','${weekKey}')">${weekEntries.length} ${weekEntries.length === 1 ? 'entry' : 'entries'}</div>`;
+        }
+        html += `</div>`;
+      });
+      html += `</div>`;
+    });
+  } else {
+    // Channels mode: rows = channels within selected initiative
+    const initiatives = activeInitiative === 'all' ? calendarData.initiatives : calendarData.initiatives.filter(i => i.id === activeInitiative);
+    // Gather all channels across filtered initiatives
+    const channelMap = {};
+    initiatives.forEach(init => {
+      const entries = getFilteredInitEntries(init);
+      entries.forEach(e => {
+        const key = e.channel;
+        if (!channelMap[key]) channelMap[key] = [];
+        channelMap[key].push({ ...e, initiative: init });
+      });
+    });
+
+    Object.keys(channelMap).sort().forEach(ch => {
+      const chColor = CHANNEL_COLORS[ch] || { color: '#666', bg: '#f5f5f5' };
+      html += `<div class="weekly-row" style="grid-template-columns:${gridCols};">`;
+      html += `<div class="weekly-row-label"><span class="color-dot" style="background:${chColor.color}"></span>${formatChannel(ch)}</div>`;
+      weeks.forEach(w => {
+        const isCurrent = w.monday.getTime() === currentWeekMonday.getTime();
+        const weekEntries = channelMap[ch].filter(e => {
+          const start = new Date(e.date + 'T00:00:00');
+          const end = e.endDate ? new Date(e.endDate + 'T00:00:00') : start;
+          return start <= w.sunday && end >= w.monday;
+        });
+        html += `<div class="weekly-cell ${isCurrent ? 'current-week' : ''}">`;
+        weekEntries.forEach(e => {
+          const initColor = e.initiative.color;
+          html += `<div class="weekly-entry-chip" style="background:${chColor.bg};color:${chColor.color};border-left:2px solid ${initColor};cursor:pointer;" onclick="openWeekDetailModal('${e.initiative.id}','${formatDate(w.monday)}')">${e.text}</div>`;
+        });
+        html += `</div>`;
+      });
+      html += `</div>`;
+    });
+  }
+
+  html += `</div>`;
+  container.innerHTML = html;
+}
+
+// MONTH VIEW
+function renderMonth() {
+  const container = document.getElementById('monthView');
+  const firstDay = new Date(currentYear, currentMonth, 1);
+  const lastDay = new Date(currentYear, currentMonth + 1, 0);
+  const startOffset = (firstDay.getDay() + 6) % 7; // Monday = 0
+  const totalDays = lastDay.getDate();
+  const today = new Date();
+  const todayStr = formatDate(today);
+
+  const entries = getFilteredEntries();
+  const releases = getFilteredReleases();
+
+  // Group entries by date
+  const entryMap = {};
+  entries.forEach(e => {
+    const start = new Date(e.date + 'T00:00:00');
+    const end = e.endDate ? new Date(e.endDate + 'T00:00:00') : start;
+    let d = new Date(start);
+    while (d <= end) {
+      const key = formatDate(d);
+      if (!entryMap[key]) entryMap[key] = [];
+      entryMap[key].push(e);
+      d.setDate(d.getDate() + 1);
+    }
+  });
+
+  // Group releases by date
+  const releaseMap = {};
+  releases.forEach(r => {
+    const key = r.date;
+    if (!releaseMap[key]) releaseMap[key] = [];
+    releaseMap[key].push(r);
+  });
+
+  let html = `<div class="month-grid">`;
+  // Day headers
+  const dayNames = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  dayNames.forEach(d => {
+    html += `<div class="month-day-header">${d}</div>`;
+  });
+
+  // Previous month padding
+  const prevMonth = new Date(currentYear, currentMonth, 0);
+  for (let i = startOffset - 1; i >= 0; i--) {
+    const dayNum = prevMonth.getDate() - i;
+    html += `<div class="month-day-cell other-month"><div class="day-number">${dayNum}</div></div>`;
+  }
+
+  // Current month days
+  for (let day = 1; day <= totalDays; day++) {
+    const dateStr = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+    const isToday = dateStr === todayStr;
+    const dayEntries = entryMap[dateStr] || [];
+    const dayReleases = releaseMap[dateStr] || [];
+    const dayKey = dateStr;
+    html += `<div class="month-day-cell ${isToday ? 'today' : ''}" onclick="openDayModal('${dateStr}')">`;
+    html += `<div class="day-number">${day}</div>`;
+
+    // Releases
+    dayReleases.forEach(r => {
+      html += `<div class="release-banner" style="cursor:pointer;" onclick="event.stopPropagation();navigateToRelease('${r.id}')"><span class="diamond"></span><span class="release-text">${r.name}</span></div>`;
+    });
+
+    // Entries (show all)
+    html += `<div class="day-entries">`;
+    dayEntries.forEach(e => {
+      const ch = CHANNEL_COLORS[e.channel] || { color: '#666', bg: '#f5f5f5' };
+      html += `<div class="day-entry" style="background:${ch.bg};border-left-color:${ch.color};color:${ch.color};" title="${e.text} | ${e.owner}">${e.text}</div>`;
+    });
+    html += `</div></div>`;
+  }
+
+  // Next month padding
+  const totalCells = startOffset + totalDays;
+  const remaining = (7 - (totalCells % 7)) % 7;
+  for (let i = 1; i <= remaining; i++) {
+    html += `<div class="month-day-cell other-month"><div class="day-number">${i}</div></div>`;
+  }
+
+  html += `</div>`;
+
+  // Add entry button for editors
+  if (isEditor) {
+    html += `<div style="text-align:center;margin-top:16px;">
+      <button class="form-btn form-btn-primary" onclick="openNewEntryForm()">+ New Entry</button>
+    </div>`;
+  }
+
+  container.innerHTML = html;
+}
+
+function toggleDayExpand(dayKey) {
+  if (expandedDays.has(dayKey)) expandedDays.delete(dayKey);
+  else expandedDays.add(dayKey);
+  renderMonth();
+}
+
+// PRODUCT VIEW
+function renderProduct() {
+  const container = document.getElementById('productView');
+  if (!calendarData) { container.innerHTML = ''; return; }
+
+  // Get initiatives that have a releaseId
+  const initiativesWithRelease = calendarData.initiatives.filter(init => init.releaseId);
+
+  // Group initiatives by releaseId
+  const releaseGroups = {};
+  initiativesWithRelease.forEach(init => {
+    if (!releaseGroups[init.releaseId]) releaseGroups[init.releaseId] = [];
+    releaseGroups[init.releaseId].push(init);
+  });
+
+  // Get releases that have at least one initiative linked
+  const linkedReleases = calendarData.releases.filter(r => releaseGroups[r.id]);
+
+  // Sort releases by date
+  linkedReleases.sort((a, b) => new Date(a.date) - new Date(b.date));
+
+  let html = '';
+
+  linkedReleases.forEach(release => {
+    const releaseDate = new Date(release.date + 'T00:00:00');
+    const releaseDateFormatted = releaseDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+    const initiatives = releaseGroups[release.id];
+
+    // Check if release passes market filter
+    if (release.markets && release.markets.length > 0) {
+      if (!release.markets.some(m => activeMarkets.has(m))) return;
+    }
+
+    // Get all filtered entries for initiatives linked to this release
+    const allEntries = [];
+    initiatives.forEach(init => {
+      const entries = getFilteredInitEntries(init);
+      entries.forEach(e => {
+        allEntries.push({ ...e, initiative: init });
+      });
+    });
+
+    // Determine timeline range: 8 weeks before launch, 4 weeks after (or fit all entries)
+    let timelineStart = new Date(releaseDate);
+    timelineStart.setDate(timelineStart.getDate() - 56); // 8 weeks before
+    let timelineEnd = new Date(releaseDate);
+    timelineEnd.setDate(timelineEnd.getDate() + 28); // 4 weeks after
+
+    // Expand timeline to fit all entries if they exceed the range
+    allEntries.forEach(e => {
+      const eStart = new Date(e.date + 'T00:00:00');
+      const eEnd = e.endDate ? new Date(e.endDate + 'T00:00:00') : eStart;
+      if (eStart < timelineStart) timelineStart = new Date(eStart);
+      if (eEnd > timelineEnd) timelineEnd = new Date(eEnd);
+    });
+
+    // Align timeline start to Monday
+    const startDay = timelineStart.getDay();
+    const startAdjust = startDay === 0 ? -6 : 1 - startDay;
+    timelineStart.setDate(timelineStart.getDate() + startAdjust);
+
+    // Align timeline end to Sunday
+    const endDay = timelineEnd.getDay();
+    const endAdjust = endDay === 0 ? 0 : 7 - endDay;
+    timelineEnd.setDate(timelineEnd.getDate() + endAdjust);
+
+    // Generate weeks
+    const weeks = [];
+    let weekCursor = new Date(timelineStart);
+    while (weekCursor <= timelineEnd) {
+      const weekEnd = new Date(weekCursor);
+      weekEnd.setDate(weekEnd.getDate() + 6);
+      weeks.push({ start: new Date(weekCursor), end: weekEnd });
+      weekCursor.setDate(weekCursor.getDate() + 7);
+    }
+
+    const totalWeeks = weeks.length;
+
+    // Find which week index the launch date falls in
+    let launchWeekIdx = -1;
+    weeks.forEach((w, idx) => {
+      if (releaseDate >= w.start && releaseDate <= w.end) {
+        launchWeekIdx = idx;
+      }
+    });
+
+    // Calculate launch line position as fraction within the week
+    let launchFraction = 0;
+    if (launchWeekIdx >= 0) {
+      const w = weeks[launchWeekIdx];
+      const dayOffset = (releaseDate - w.start) / (1000 * 60 * 60 * 24);
+      launchFraction = dayOffset / 7;
+    }
+
+    html += `<div class="product-release-section" id="release-${release.id}">`;
+    html += `<div class="product-release-header" onclick="toggleReleaseSection('${release.id}')">
+      <div class="release-icon"><span class="diamond"></span></div>
+      <div class="release-details">
+        <h3>${release.name}</h3>
+        <div class="release-meta">
+          <span class="release-date-badge">${releaseDateFormatted}</span>
+          <span>${release.description}</span>
+          <span class="product-stats-pill" style="background:var(--brand-green-light);color:var(--brand-green);margin-left:8px;">${allEntries.length} campaign${allEntries.length !== 1 ? 's' : ''}</span>
+        </div>
+      </div>
+      <div class="release-chevron">&#9662;</div>
+    </div>`;
+    html += `<div class="product-release-body" style="display:none;">`;
+
+    // Stats section
+    if (allEntries.length > 0) {
+      const statusCounts = { planned: 0, 'in-progress': 0, live: 0, completed: 0 };
+      const activeChannels = new Set();
+      allEntries.forEach(e => {
+        statusCounts[e.status] = (statusCounts[e.status] || 0) + 1;
+        activeChannels.add(e.channel);
+      });
+
+      html += `<div class="product-release-stats">`;
+      html += `<span class="product-stats-total">${allEntries.length} campaign${allEntries.length !== 1 ? 's' : ''}</span>`;
+      html += `<div class="product-stats-statuses">`;
+      if (statusCounts.planned > 0) html += `<span class="product-stats-pill" style="background:${STATUS_STYLES['planned'].bg};color:${STATUS_STYLES['planned'].color};">${statusCounts.planned} Planned</span>`;
+      if (statusCounts['in-progress'] > 0) html += `<span class="product-stats-pill" style="background:${STATUS_STYLES['in-progress'].bg};color:${STATUS_STYLES['in-progress'].color};">${statusCounts['in-progress']} In Progress</span>`;
+      if (statusCounts.live > 0) html += `<span class="product-stats-pill" style="background:${STATUS_STYLES['live'].bg};color:${STATUS_STYLES['live'].color};">${statusCounts.live} Live</span>`;
+      if (statusCounts.completed > 0) html += `<span class="product-stats-pill" style="background:${STATUS_STYLES['completed'].bg};color:${STATUS_STYLES['completed'].color};">${statusCounts.completed} Completed</span>`;
+      html += `</div>`;
+
+      // Channel coverage
+      const majorChannels = ['crm', 'paid', 'organic'];
+      html += `<div class="product-stats-channels">`;
+      Object.keys(CHANNEL_COLORS).forEach(ch => {
+        const isActive = activeChannels.has(ch);
+        const chColor = CHANNEL_COLORS[ch];
+        const isMajor = majorChannels.includes(ch);
+        if (isActive) {
+          html += `<span class="channel-indicator" style="background:${chColor.color};" title="${formatChannel(ch)}"></span>`;
+        } else if (isMajor) {
+          html += `<span class="channel-indicator missing" title="${formatChannel(ch)} (none)"></span>`;
+        }
+      });
+      html += `</div>`;
+      html += `</div>`;
+    }
+
+    if (allEntries.length === 0) {
+      html += `<div class="product-no-entries">No campaigns planned</div>`;
+    } else {
+      html += `<div class="product-timeline-container">`;
+      html += `<div class="product-timeline" style="min-width:${totalWeeks * 70}px;">`;
+
+      // Week header
+      html += `<div class="product-timeline-header">`;
+      weeks.forEach((w, idx) => {
+        const isLaunchWeek = idx === launchWeekIdx;
+        const weekLabel = w.start.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+        html += `<div class="timeline-week ${isLaunchWeek ? 'launch-week' : ''}">${weekLabel}</div>`;
+      });
+      html += `</div>`;
+
+      // Timeline body with launch line
+      html += `<div class="product-timeline-body" style="position:relative;">`;
+
+      // Draw launch line
+      if (launchWeekIdx >= 0) {
+        const lineLeftPercent = ((launchWeekIdx + launchFraction) / totalWeeks) * 100;
+        html += `<div class="product-launch-line" style="left:${lineLeftPercent}%;"></div>`;
+        html += `<div class="product-launch-label" style="left:${lineLeftPercent}%;">Launch</div>`;
+      }
+
+      // Render per initiative
+      initiatives.forEach(init => {
+        const initEntries = allEntries.filter(e => e.initiative.id === init.id);
+        if (initEntries.length === 0) return;
+
+        html += `<div class="product-timeline-initiative">`;
+        html += `<div class="product-timeline-initiative-label"><span class="color-dot" style="background:${init.color}"></span>${init.name}</div>`;
+        html += `<div class="product-timeline-entries">`;
+
+        // Each entry gets its own row
+        initEntries.forEach(entry => {
+          const entryStart = new Date(entry.date + 'T00:00:00');
+          const entryEnd = entry.endDate ? new Date(entry.endDate + 'T00:00:00') : entryStart;
+          const chColor = CHANNEL_COLORS[entry.channel] || { color: '#666', bg: '#f5f5f5' };
+
+          // Calculate position as percentage of the total timeline
+          const totalTimelineMs = timelineEnd.getTime() - timelineStart.getTime();
+          const startOffset = Math.max(0, (entryStart.getTime() - timelineStart.getTime()) / totalTimelineMs) * 100;
+          const endOffset = Math.min(100, ((entryEnd.getTime() - timelineStart.getTime() + 86400000) / totalTimelineMs) * 100);
+          const barWidth = Math.max(1.5, endOffset - startOffset);
+
+          const tooltipData = btoa(encodeURIComponent(JSON.stringify({
+            text: entry.text,
+            channel: formatChannel(entry.channel) + (entry.subchannel ? ' / ' + entry.subchannel : ''),
+            owner: entry.owner,
+            dates: entry.date + (entry.endDate ? ' to ' + entry.endDate : ''),
+            status: entry.status,
+            jiraTicket: entry.jiraTicket || null,
+            airtableRecord: entry.airtableRecord || null,
+            initJiraEpic: entry.initiative.jiraEpic || null,
+            initAirtableView: entry.initiative.airtableView || null
+          })));
+
+          html += `<div class="product-timeline-entry-row">`;
+          html += `<div class="product-entry-bar" style="left:${startOffset}%;width:${barWidth}%;background:${chColor.color};cursor:pointer;" onmouseenter="showProductTooltip(event, this)" onmouseleave="hideProductTooltip()" onclick="openProductEntryModal('${entry.id}','${entry.initiative.id}')" data-tooltip="${tooltipData}">`;
+          // Show text if bar is wide enough (> 8%)
+          if (barWidth > 8) {
+            html += entry.text;
+          }
+          html += `</div>`;
+          html += `</div>`;
+        });
+
+        html += `</div></div>`;
+      });
+
+      html += `</div></div></div>`;
+    }
+
+    html += `</div></div>`;
+  });
+
+  if (html === '') {
+    html = `<div style="text-align:center;padding:60px;color:var(--text-tertiary);">No releases with linked campaigns found for the current filters.</div>`;
+  }
+
+  container.innerHTML = html;
+}
+
+// Product view tooltip
+let productTooltipEl = null;
+
+function showProductTooltip(event, barEl) {
+  const data = JSON.parse(decodeURIComponent(atob(barEl.getAttribute('data-tooltip'))));
+  if (!productTooltipEl) {
+    productTooltipEl = document.createElement('div');
+    productTooltipEl.className = 'product-timeline-tooltip';
+    document.body.appendChild(productTooltipEl);
+  }
+  const statusLabel = data.status === 'in-progress' ? 'In Progress' : data.status.charAt(0).toUpperCase() + data.status.slice(1);
+  let linksHtml = '';
+  const jira = data.jiraTicket || data.initJiraEpic;
+  const airtable = data.airtableRecord || data.initAirtableView;
+  if (jira || airtable) {
+    const parts = [];
+    if (jira) {
+      const label = (data.jiraTicket && !data.jiraTicket.startsWith('http')) ? data.jiraTicket : 'Jira';
+      parts.push(label);
+    }
+    if (airtable) parts.push('Airtable');
+    linksHtml = `<div class="tooltip-meta" style="margin-top:3px;">Links: ${parts.join(', ')}</div>`;
+  }
+  productTooltipEl.innerHTML = `
+    <div class="tooltip-channel">${formatChannel(data.channel)}</div>
+    <div class="tooltip-text">${data.text}</div>
+    <div class="tooltip-meta">${data.owner} | ${data.dates} | ${statusLabel}</div>
+    ${linksHtml}
+  `;
+  productTooltipEl.style.display = 'block';
+  positionProductTooltip(event);
+}
+
+function positionProductTooltip(event) {
+  if (!productTooltipEl) return;
+  const x = event.clientX + 12;
+  const y = event.clientY - 10;
+  productTooltipEl.style.left = x + 'px';
+  productTooltipEl.style.top = y + 'px';
+}
+
+function hideProductTooltip() {
+  if (productTooltipEl) {
+    productTooltipEl.style.display = 'none';
+  }
+}
+
+document.addEventListener('mousemove', (e) => {
+  if (productTooltipEl && productTooltipEl.style.display === 'block') {
+    positionProductTooltip(e);
+  }
+});
+
+// CRM VIEW
+function setCRMRange() {
+  const startVal = document.getElementById('crmStartDate').value;
+  const endVal = document.getElementById('crmEndDate').value;
+  if (startVal) crmRangeStart = getMondayOfWeek(new Date(startVal + 'T00:00:00'));
+  if (endVal) {
+    const endDate = new Date(endVal + 'T00:00:00');
+    const diffDays = Math.ceil((endDate - crmRangeStart) / (1000 * 60 * 60 * 24));
+    crmRangeWeeks = Math.max(1, Math.ceil(diffDays / 7));
+  }
+  renderCRM();
+}
+
+function renderCRM() {
+  const container = document.getElementById('crmView');
+  if (!calendarData) { container.innerHTML = ''; return; }
+
+  const today = new Date();
+  const currentWeekMonday = getMondayOfWeek(today);
+
+  const rangeStart = crmRangeStart || weeklyStart;
+  const numWeeks = crmRangeWeeks || 12;
+
+  // Generate weeks based on range
+  const weeks = [];
+  for (let i = 0; i < numWeeks; i++) {
+    const monday = new Date(rangeStart);
+    monday.setDate(monday.getDate() + i * 7);
+    const sunday = new Date(monday);
+    sunday.setDate(sunday.getDate() + 6);
+    weeks.push({ monday, sunday, weekNum: getWeekNumber(monday) });
+  }
+
+  // CRM subchannels to show
+  const crmSubchannels = ['Email', 'Push', 'In-App', 'Inbox', 'SMS'];
+
+  // Get all CRM entries (filtered by status, owner, search, markets but not channel filter)
+  const search = document.getElementById('searchInput').value.toLowerCase();
+  const status = document.getElementById('statusFilter').value;
+  const owner = document.getElementById('ownerFilter').value;
+
+  let crmEntries = [];
+  const initiatives = activeInitiative === 'all' ? calendarData.initiatives : calendarData.initiatives.filter(i => i.id === activeInitiative);
+  initiatives.forEach(init => {
+    init.entries.forEach(entry => {
+      if (entry.channel !== 'crm') return;
+      if (entry.markets && entry.markets.length > 0) {
+        if (!entry.markets.some(m => activeMarkets.has(m))) return;
+      }
+      if (status && entry.status !== status) return;
+      if (owner && entry.owner !== owner) return;
+      if (search && !entry.text.toLowerCase().includes(search) && !(entry.notes || '').toLowerCase().includes(search) && !(entry.subchannel || '').toLowerCase().includes(search)) return;
+      crmEntries.push({ ...entry, initiative: init });
+    });
+  });
+
+  // Build count grid: subchannel x week
+  const countGrid = {};
+  crmSubchannels.forEach(sc => { countGrid[sc] = new Array(numWeeks).fill(0); });
+  const totalPerWeek = new Array(numWeeks).fill(0);
+
+  crmEntries.forEach(entry => {
+    const sc = entry.subchannel || 'Email';
+    const normalizedSc = crmSubchannels.find(s => s.toLowerCase() === sc.toLowerCase()) || null;
+    if (!normalizedSc) return;
+
+    const start = new Date(entry.date + 'T00:00:00');
+    const end = entry.endDate ? new Date(entry.endDate + 'T00:00:00') : start;
+
+    weeks.forEach((w, idx) => {
+      if (start <= w.sunday && end >= w.monday) {
+        countGrid[normalizedSc][idx]++;
+        totalPerWeek[idx]++;
+      }
+    });
+  });
+
+  // Helper for heat class
+  function heatClass(count) {
+    if (count === 0) return 'crm-heat-0';
+    if (count <= 1) return 'crm-heat-1';
+    if (count <= 2) return 'crm-heat-2';
+    if (count <= 3) return 'crm-heat-3';
+    if (count <= 4) return 'crm-heat-4';
+    return 'crm-heat-5';
+  }
+
+  // Date range default values
+  const rangeStartStr = formatDate(rangeStart);
+  const rangeEndDate = new Date(rangeStart);
+  rangeEndDate.setDate(rangeEndDate.getDate() + (numWeeks * 7) - 1);
+  const rangeEndStr = formatDate(rangeEndDate);
+
+  let html = '<div class="crm-heatmap-card">';
+  html += `<div class="crm-header-row">
+    <h3>CRM Channel Workload</h3>
+    <div class="crm-date-range">
+      <label>From</label>
+      <input type="date" id="crmStartDate" value="${rangeStartStr}" onchange="setCRMRange()">
+      <label>To</label>
+      <input type="date" id="crmEndDate" value="${rangeEndStr}" onchange="setCRMRange()">
+      <span class="crm-week-count">${numWeeks} weeks</span>
+    </div>
+  </div>`;
+  html += '<div class="crm-table-wrap"><table class="crm-heatmap-table"><thead><tr>';
+  html += '<th>Subchannel</th>';
+  weeks.forEach(w => {
+    const isCurrent = w.monday.getTime() === currentWeekMonday.getTime();
+    const label = 'W' + w.weekNum;
+    const dateLabel = w.monday.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    html += `<th class="${isCurrent ? 'current-week' : ''}">${label}<br><span style="font-size:9px;font-weight:400;color:var(--text-tertiary);">${dateLabel}</span></th>`;
+  });
+  html += '</tr></thead><tbody>';
+
+  // Summary row first
+  html += '<tr class="summary-row"><td>Total</td>';
+  weeks.forEach((w, idx) => {
+    html += `<td class="${heatClass(totalPerWeek[idx])}">${totalPerWeek[idx]}</td>`;
+  });
+  html += '</tr>';
+
+  // Subchannel rows
+  crmSubchannels.forEach(sc => {
+    html += `<tr><td>${sc}</td>`;
+    weeks.forEach((w, idx) => {
+      const count = countGrid[sc][idx];
+      html += `<td class="${heatClass(count)}">${count || ''}</td>`;
+    });
+    html += '</tr>';
+  });
+
+  html += '</tbody></table></div>';
+
+  // Upcoming releases section
+  const releases = getFilteredReleases();
+  const upcomingReleases = releases.filter(r => {
+    const d = new Date(r.date + 'T00:00:00');
+    return d >= rangeStart && d <= rangeEndDate;
+  }).sort((a, b) => new Date(a.date) - new Date(b.date));
+
+  if (upcomingReleases.length > 0) {
+    html += '<div class="crm-releases-section">';
+    html += '<h4>Releases in Range</h4>';
+    upcomingReleases.forEach(r => {
+      const rDate = new Date(r.date + 'T00:00:00');
+      const dateFormatted = rDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+      html += `<div class="crm-release-item">
+        <span class="diamond"></span>
+        <span class="release-name">${r.name}</span>
+        <span class="release-date">${dateFormatted}</span>
+      </div>`;
+    });
+    html += '</div>';
+  }
+
+
+  html += '</div>';
+  container.innerHTML = html;
+}
+
+// LEADERSHIP VIEW
+function renderLeadership() {
+  const container = document.getElementById('leadershipView');
+  if (!calendarData) { container.innerHTML = ''; return; }
+
+  const today = new Date();
+  const yearStart = new Date(currentYear, 0, 1);
+  const yearEnd = new Date(currentYear, 11, 31);
+  const totalDays = (yearEnd - yearStart) / (1000 * 60 * 60 * 24) + 1;
+
+  const releases = getFilteredReleases().filter(r => {
+    const d = new Date(r.date + 'T00:00:00');
+    const end = r.endDate ? new Date(r.endDate + 'T00:00:00') : d;
+    return d.getFullYear() === currentYear || end.getFullYear() === currentYear;
+  }).sort((a, b) => new Date(a.date) - new Date(b.date));
+
+  const entries = getFilteredEntries();
+
+  // Calculate position as percentage for a given date
+  function dateToPercent(dateStr) {
+    const d = new Date(dateStr + 'T00:00:00');
+    const dayOffset = (d - yearStart) / (1000 * 60 * 60 * 24);
+    return (dayOffset / totalDays) * 100;
+  }
+
+  // Today line
+  const todayPercent = today.getFullYear() === currentYear ? ((today - yearStart) / (1000 * 60 * 60 * 24) / totalDays) * 100 : -1;
+
+  let html = '<div class="leadership-timeline-card">';
+
+  // Month labels
+  html += '<div class="leadership-timeline-months">';
+  const monthNames = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  monthNames.forEach((m, idx) => {
+    const isCurrent = today.getFullYear() === currentYear && today.getMonth() === idx;
+    html += `<div class="leadership-month-label ${isCurrent ? 'current-month' : ''}">${m}</div>`;
+  });
+  html += '</div>';
+
+  // Timeline body
+  // Determine row positions to avoid overlap
+  const cardWidth = 220; // px, but we'll use percentage for horizontal
+  const cardWidthPct = (cardWidth / 14); // approx percent of container (assume ~1400px container)
+  const rows = []; // array of { endPercent } per row
+
+  function getRow(startPct) {
+    const buffer = 16; // percentage buffer between cards (approx 16% = ~220px)
+    for (let i = 0; i < rows.length; i++) {
+      if (startPct > rows[i] + 1) {
+        return i;
+      }
+    }
+    rows.push(0);
+    return rows.length - 1;
+  }
+
+  const releaseCards = releases.map(release => {
+    const pct = dateToPercent(release.date);
+    const row = getRow(pct);
+    rows[row] = pct + 15; // reserve 15% width for the card
+
+    // Get linked entries for readiness
+    const linkedInits = calendarData.initiatives.filter(i => i.releaseId === release.id);
+    let linkedEntries = [];
+    linkedInits.forEach(init => {
+      init.entries.forEach(e => {
+        // Apply market filter
+        if (e.markets && e.markets.length > 0) {
+          if (!e.markets.some(m => activeMarkets.has(m))) return;
+        }
+        linkedEntries.push(e);
+      });
+    });
+
+    const totalCount = linkedEntries.length;
+    const statusCounts = { planned: 0, 'in-progress': 0, live: 0, completed: 0 };
+    linkedEntries.forEach(e => { statusCounts[e.status] = (statusCounts[e.status] || 0) + 1; });
+
+    // Readiness
+    let readiness = 'red';
+    let readinessLabel = 'Planning';
+    if (totalCount > 0) {
+      const liveOrCompleted = (statusCounts.live + statusCounts.completed) / totalCount;
+      const inProgressOrLive = (statusCounts['in-progress'] + statusCounts.live) / totalCount;
+      if (liveOrCompleted > 0.75) { readiness = 'green'; readinessLabel = 'Ready'; }
+      else if (inProgressOrLive > 0.25 || liveOrCompleted > 0.25) { readiness = 'amber'; readinessLabel = 'In Progress'; }
+    }
+
+    // Unique channels
+    const channels = new Set();
+    linkedEntries.forEach(e => channels.add(e.channel));
+
+    return { release, pct, row, totalCount, readiness, readinessLabel, channels: [...channels] };
+  });
+
+  const totalRows = rows.length || 1;
+  const bodyHeight = Math.max(200, totalRows * 120 + 40);
+
+  html += `<div class="leadership-timeline-body" style="height:${bodyHeight}px;">`;
+
+  // Today line
+  if (todayPercent >= 0 && todayPercent <= 100) {
+    html += `<div class="leadership-today-line" style="left:${todayPercent}%;"></div>`;
+    html += `<div class="leadership-today-label" style="left:${todayPercent}%;">Today</div>`;
+  }
+
+  // Release cards
+  releaseCards.forEach(({ release, pct, row, totalCount, readiness, readinessLabel, channels }) => {
+    const rDate = new Date(release.date + 'T00:00:00');
+    const topPx = 30 + row * 110;
+
+    if (release.endDate) {
+      // Render as a bar spanning the full duration
+      const startPct = Math.max(0, pct);
+      const endPct = Math.min(100, dateToPercent(release.endDate));
+      const widthPct = endPct - startPct;
+      const statusLabel = release.status === 'live' ? 'Live' : readinessLabel;
+      const statusColor = release.status === 'live' ? '#10B981' : (readiness === 'green' ? '#10B981' : readiness === 'amber' ? '#F59E0B' : '#94A3B8');
+      const launchDate = new Date(release.date + 'T00:00:00');
+      const dateLabel = launchDate.getFullYear() < currentYear ? `Live since ${launchDate.toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}` : '';
+      html += `<div class="leadership-release-card" style="left:${startPct}%;top:${topPx}px;width:${widthPct}%;min-width:0;max-width:none;">`;
+      html += `<div class="release-card-name">${release.name}</div>`;
+      if (dateLabel) html += `<div class="release-card-date">${dateLabel}</div>`;
+      html += `<div class="release-card-readiness">
+        <span class="leadership-readiness-dot green"></span>
+        <span class="release-card-readiness-label" style="color:${statusColor};">${statusLabel}</span>
+      </div>`;
+      html += `<div class="release-card-count">${totalCount} campaign${totalCount !== 1 ? 's' : ''}</div>`;
+      html += '<div class="release-card-channels">';
+      channels.forEach(ch => {
+        const chColor = CHANNEL_COLORS[ch] || { color: '#666' };
+        html += `<span class="leadership-channel-dot" style="background:${chColor.color};" title="${ch}"></span>`;
+      });
+      html += '</div></div>';
+    } else {
+      const dateFormatted = rDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
+      // Adjust left to keep card in view
+      let leftPct = pct;
+      if (leftPct > 82) leftPct = 82;
+
+      html += `<div class="leadership-release-card" style="left:${leftPct}%;top:${topPx}px;">`;
+      html += `<div class="release-card-name">${release.name}</div>`;
+      html += `<div class="release-card-date">${dateFormatted}</div>`;
+      html += `<div class="release-card-readiness">
+        <span class="leadership-readiness-dot ${readiness}"></span>
+        <span class="release-card-readiness-label" style="color:${readiness === 'green' ? '#10B981' : readiness === 'amber' ? '#F59E0B' : '#94A3B8'};">${readinessLabel}</span>
+      </div>`;
+      html += `<div class="release-card-count">${totalCount} campaign${totalCount !== 1 ? 's' : ''}</div>`;
+      html += '<div class="release-card-channels">';
+      channels.forEach(ch => {
+        const chColor = CHANNEL_COLORS[ch] || { color: '#666' };
+        html += `<span class="leadership-channel-dot" style="background:${chColor.color};" title="${ch}"></span>`;
+      });
+      html += '</div></div>';
+    }
+  });
+
+  html += '</div></div>';
+  container.innerHTML = html;
+}
+
+// MARKETS VIEW
+let selectedMarketView = null;
+
+function renderMarkets() {
+  const container = document.getElementById('marketsView');
+  if (!calendarData) { container.innerHTML = ''; return; }
+
+  // Default to first market if not set
+  if (!selectedMarketView || !calendarData.markets.includes(selectedMarketView)) {
+    selectedMarketView = calendarData.markets[0];
+  }
+
+  // Get current filters (excluding market filter, which this view manages itself)
+  const search = document.getElementById('searchInput').value.toLowerCase();
+  const channel = document.getElementById('channelFilter').value;
+  const status = document.getElementById('statusFilter').value;
+  const owner = document.getElementById('ownerFilter').value;
+
+  function filterEntry(entry) {
+    if (channel && entry.channel !== channel) return false;
+    if (status && entry.status !== status) return false;
+    if (owner && entry.owner !== owner) return false;
+    if (search && !entry.text.toLowerCase().includes(search) && !(entry.notes || '').toLowerCase().includes(search) && !(entry.subchannel || '').toLowerCase().includes(search)) return false;
+    return true;
+  }
+
+  // Section A: Single Market Timeline
+  let html = '<div class="markets-view-selector">';
+  html += '<label>Select Market:</label>';
+  html += '<select onchange="setSelectedMarket(this.value)" id="marketsViewSelect">';
+  calendarData.markets.forEach(m => {
+    html += `<option value="${m}" ${m === selectedMarketView ? 'selected' : ''}>${m}</option>`;
+  });
+  html += '</select></div>';
+
+  // Get releases relevant to the selected market
+  const marketReleases = calendarData.releases.filter(r => {
+    if (!r.markets || r.markets.length === 0) return true;
+    return r.markets.includes(selectedMarketView);
+  }).sort((a, b) => new Date(a.date) - new Date(b.date));
+
+  // For each release, find campaigns for the selected market
+  marketReleases.forEach(release => {
+    const releaseDate = new Date(release.date + 'T00:00:00');
+    const releaseDateFormatted = releaseDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+
+    // Find initiatives linked to this release
+    const linkedInits = calendarData.initiatives.filter(i => i.releaseId === release.id);
+
+    // Get entries for this market from linked initiatives
+    const marketEntries = [];
+    linkedInits.forEach(init => {
+      init.entries.forEach(entry => {
+        if (!entry.markets || entry.markets.length === 0 || entry.markets.includes(selectedMarketView)) {
+          if (filterEntry(entry)) {
+            marketEntries.push({ ...entry, initiative: init });
+          }
+        }
+      });
+    });
+
+    const entryCount = marketEntries.length;
+    const countLabel = entryCount === 0 ? `No campaigns for ${selectedMarketView}` : `${entryCount} campaign${entryCount === 1 ? '' : 's'}`;
+
+    html += '<div class="markets-release-card">';
+    html += `<div class="markets-release-card-header" style="cursor:pointer;" onclick="toggleMarketsRelease('${release.id}')">
+      <div class="release-icon"><span class="diamond"></span></div>
+      <span class="release-name">${release.name}</span>
+      <span class="release-date">${releaseDateFormatted}</span>
+      <span style="margin-left:auto;font-size:11px;color:#6B7280;font-weight:500;">${countLabel}</span>
+      <span class="markets-chevron" id="marketsChevron-${release.id}" style="margin-left:8px;transition:transform 0.2s;display:inline-block;">&#9660;</span>
+    </div>`;
+
+    html += `<div class="markets-release-body" id="marketsBody-${release.id}" style="display:none;">`;
+
+    if (marketEntries.length === 0) {
+      html += `<div class="markets-no-campaigns">No campaigns planned for ${selectedMarketView}</div>`;
+    } else {
+      const channelGroups = {};
+      marketEntries.forEach(e => {
+        const ch = e.channel;
+        if (!channelGroups[ch]) channelGroups[ch] = [];
+        channelGroups[ch].push(e);
+      });
+
+      html += '<div class="markets-entry-list">';
+      Object.keys(channelGroups).sort().forEach(ch => {
+        const chColor = CHANNEL_COLORS[ch] || { color: '#666', bg: '#f5f5f5' };
+        channelGroups[ch].forEach(entry => {
+          const st = STATUS_STYLES[entry.status] || STATUS_STYLES['planned'];
+          const statusLabel = entry.status === 'in-progress' ? 'In Progress' : entry.status.charAt(0).toUpperCase() + entry.status.slice(1);
+          const dateLabel = entry.endDate ? entry.date + ' to ' + entry.endDate : entry.date;
+          html += `<div class="markets-entry-item">
+            <span class="markets-entry-text">${entry.text}</span>
+            <span class="markets-entry-subchannel" style="background:${chColor.bg};color:${chColor.color};">${entry.subchannel || formatChannel(ch)}</span>
+            <span class="modal-entry-status" style="background:${st.bg};color:${st.color};font-size:10px;">${statusLabel}</span>
+            <span class="markets-entry-owner">${entry.owner || ''}</span>
+            <span class="markets-entry-dates">${dateLabel}</span>
+          </div>`;
+        });
+      });
+      html += '</div>';
+    }
+
+    html += '</div></div>';
+  });
+
+  // Section B: Market Comparison Grid
+  html += '<div class="markets-comparison-section">';
+  html += '<h3>Market Comparison</h3>';
+  html += '<div class="markets-comparison-card">';
+  html += '<table class="markets-comparison-table">';
+
+  // Header row
+  html += '<thead><tr><th>Release</th>';
+  calendarData.markets.forEach(m => {
+    html += `<th>${m}</th>`;
+  });
+  html += '</tr></thead><tbody>';
+
+  // Filter releases to current year or upcoming
+  const currentYearStart = new Date(new Date().getFullYear(), 0, 1);
+  const comparisonReleases = calendarData.releases.filter(r => {
+    const d = new Date(r.date + 'T00:00:00');
+    return d >= currentYearStart;
+  }).sort((a, b) => new Date(a.date) - new Date(b.date));
+
+  comparisonReleases.forEach(release => {
+    const releaseDate = new Date(release.date + 'T00:00:00');
+    const releaseDateFormatted = releaseDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+
+    // Find initiatives linked to this release
+    const linkedInits = calendarData.initiatives.filter(i => i.releaseId === release.id);
+
+    html += '<tr>';
+    html += `<td>${release.name}<span class="comp-release-date">${releaseDateFormatted}</span></td>`;
+
+    calendarData.markets.forEach(market => {
+      // Count entries for this market in linked initiatives
+      let entryCount = 0;
+      linkedInits.forEach(init => {
+        init.entries.forEach(entry => {
+          if (!entry.markets || entry.markets.length === 0 || entry.markets.includes(market)) {
+            if (filterEntry(entry)) {
+              entryCount++;
+            }
+          }
+        });
+      });
+
+      const hasCampaigns = entryCount > 0;
+      html += `<td class="markets-cell" onclick="setSelectedMarket('${market}')">
+        <span class="markets-cell-indicator">
+          <span class="markets-dot ${hasCampaigns ? 'has-campaigns' : 'no-campaigns'}"></span>
+          <span class="markets-cell-count">${entryCount > 0 ? entryCount : ''}</span>
+        </span>
+      </td>`;
+    });
+
+    html += '</tr>';
+  });
+
+  html += '</tbody></table></div></div>';
+
+  container.innerHTML = html;
+}
+
+function setSelectedMarket(market) {
+  selectedMarketView = market;
+  renderMarkets();
+  // Scroll to top of markets view
+  const selector = document.getElementById('marketsViewSelect');
+  if (selector) selector.value = market;
+}
+
+// MODAL
+function openDayModal(dateStr) {
+  const entries = getFilteredEntries();
+  const releases = getFilteredReleases();
+  const date = new Date(dateStr + 'T00:00:00');
+  const dayName = date.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+
+  document.getElementById('dayModalTitle').textContent = dayName;
+
+  // Get entries for this day
+  const dayEntries = entries.filter(e => {
+    const start = new Date(e.date + 'T00:00:00');
+    const end = e.endDate ? new Date(e.endDate + 'T00:00:00') : start;
+    return date >= start && date <= end;
+  });
+
+  const dayReleases = releases.filter(r => r.date === dateStr);
+
+  let html = '';
+
+
+  // Releases
+  dayReleases.forEach(r => {
+    html += `<div class="modal-release-banner" style="cursor:pointer;" onclick="closeModal('dayModal');navigateToRelease('${r.id}')">
+      <span class="diamond"></span>
+      <div class="release-info">
+        <h4>${r.name}</h4>
+        <p>${r.description}</p>
+      </div>
+    </div>`;
+  });
+
+  // Entries
+  dayEntries.forEach(e => {
+    const ch = CHANNEL_COLORS[e.channel] || { color: '#666', bg: '#f5f5f5' };
+    const st = STATUS_STYLES[e.status] || STATUS_STYLES['planned'];
+    const statusLabel = e.status === 'in-progress' ? 'In Progress' : e.status.charAt(0).toUpperCase() + e.status.slice(1);
+    html += `<div class="modal-entry" ${isEditor ? `onclick="openEditEntryForm('${e.id}','${e.initiative.id}')" style="cursor:pointer;"` : ''}>
+      <div class="modal-entry-header">
+        <span class="modal-entry-init" style="background:${e.initiative.color};">${e.initiative.name}</span>
+        <span class="modal-entry-channel" style="background:${ch.bg};color:${ch.color};">${formatChannel(e.channel)}${e.subchannel ? ' / ' + e.subchannel : ''}</span>
+        <span class="modal-entry-status" style="background:${st.bg};color:${st.color};">${statusLabel}</span>
+      </div>
+      <div class="modal-entry-text">${e.text}</div>
+      <div class="modal-entry-meta">
+        <span>Owner: ${e.owner}</span>
+        ${e.endDate ? `<span>${e.date} to ${e.endDate}</span>` : `<span>${e.date}</span>`}
+        ${e.markets ? `<span>${e.markets.join(', ')}</span>` : ''}
+      </div>
+      ${renderLinkBadges(e, e.initiative)}
+      ${e.notes ? `<div style="margin-top:6px;font-size:11px;color:var(--text-tertiary);font-style:italic;">${e.notes}</div>` : ''}
+    </div>`;
+  });
+
+  if (dayEntries.length === 0 && dayReleases.length === 0) {
+    html = `<p style="text-align:center;color:var(--text-tertiary);padding:24px;">No entries for this day.</p>`;
+  }
+
+  // Add new entry button for editors
+  if (isEditor) {
+    html += `<div style="text-align:center;margin-top:16px;">
+      <button class="form-btn form-btn-primary" onclick="closeModal('dayModal');openNewEntryForm('${dateStr}')">+ Add Entry</button>
+    </div>`;
+  }
+
+  document.getElementById('dayModalEntries').innerHTML = html;
+  document.getElementById('dayModal').classList.add('active');
+}
+
+function closeModal(id) {
+  document.getElementById(id).classList.remove('active');
+  editingEntry = null;
+}
+
+function openWeekDetailModal(initId, mondayStr) {
+  const init = calendarData.initiatives.find(i => i.id === initId);
+  if (!init) return;
+
+  const monday = new Date(mondayStr + 'T00:00:00');
+  const sunday = new Date(monday);
+  sunday.setDate(sunday.getDate() + 6);
+
+  const fmt = d => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  document.getElementById('dayModalTitle').textContent = `${init.name}: W${getWeekNumber(monday)} (${fmt(monday)} to ${fmt(sunday)})`;
+
+  const entries = getFilteredInitEntries(init).filter(e => {
+    const start = new Date(e.date + 'T00:00:00');
+    const end = e.endDate ? new Date(e.endDate + 'T00:00:00') : start;
+    return start <= sunday && end >= monday;
+  });
+
+  let html = '';
+
+  if (entries.length > 0) {
+    // Channel summary
+    const channelCounts = {};
+    entries.forEach(e => {
+      const label = e.subchannel || formatChannel(e.channel);
+      channelCounts[label] = (channelCounts[label] || 0) + 1;
+    });
+    const summaryParts = Object.entries(channelCounts).map(([ch, count]) => `${count} ${ch}`);
+    html += `<div style="padding:10px 14px;background:var(--bg-cream);border-radius:8px;margin-bottom:12px;font-size:12px;color:var(--text-secondary);font-weight:500;">${entries.length} campaigns: ${summaryParts.join(', ')}</div>`;
+  }
+
+  entries.forEach(e => {
+    const ch = CHANNEL_COLORS[e.channel] || { color: '#666', bg: '#f5f5f5' };
+    const st = STATUS_STYLES[e.status] || STATUS_STYLES['planned'];
+    const statusLabel = e.status === 'in-progress' ? 'In Progress' : e.status.charAt(0).toUpperCase() + e.status.slice(1);
+    html += `<div class="modal-entry" ${isEditor ? `onclick="openEditEntryForm('${e.id}','${init.id}')" style="cursor:pointer;"` : ''}>
+      <div class="modal-entry-header">
+        <span class="modal-entry-init" style="background:${init.color};">${init.name}</span>
+        <span class="modal-entry-channel" style="background:${ch.bg};color:${ch.color};">${formatChannel(e.channel)}${e.subchannel ? ' / ' + e.subchannel : ''}</span>
+        <span class="modal-entry-status" style="background:${st.bg};color:${st.color};">${statusLabel}</span>
+      </div>
+      <div class="modal-entry-text">${e.text}</div>
+      <div class="modal-entry-meta">
+        <span>Owner: ${e.owner}</span>
+        ${e.endDate ? `<span>${e.date} to ${e.endDate}</span>` : `<span>${e.date}</span>`}
+        ${e.markets ? `<span>${e.markets.join(', ')}</span>` : ''}
+      </div>
+      ${renderLinkBadges(e, init)}
+      ${e.notes ? `<div style="margin-top:6px;font-size:11px;color:var(--text-tertiary);font-style:italic;">${e.notes}</div>` : ''}
+    </div>`;
+  });
+
+  if (entries.length === 0) {
+    html = `<p style="text-align:center;color:var(--text-tertiary);padding:24px;">No entries for this week.</p>`;
+  }
+
+  document.getElementById('dayModalEntries').innerHTML = html;
+  document.getElementById('dayModal').classList.add('active');
+}
+
+function openYearWeekModal(weekNum) {
+  const monday = getMondayFromWeekNum(weekNum, currentYear);
+  const sunday = new Date(monday);
+  sunday.setDate(sunday.getDate() + 6);
+
+  const fmt = d => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  document.getElementById('dayModalTitle').textContent = `W${weekNum}: ${fmt(monday)} to ${fmt(sunday)}`;
+
+  const initiatives = activeInitiative === 'all' ? calendarData.initiatives : calendarData.initiatives.filter(i => i.id === activeInitiative);
+  const allEntries = [];
+  initiatives.forEach(init => {
+    getFilteredInitEntries(init).forEach(e => {
+      const start = new Date(e.date + 'T00:00:00');
+      const end = e.endDate ? new Date(e.endDate + 'T00:00:00') : start;
+      if (start <= sunday && end >= monday) {
+        allEntries.push({ ...e, initiative: init });
+      }
+    });
+  });
+
+  let html = '';
+
+  if (allEntries.length > 0) {
+    const channelCounts = {};
+    allEntries.forEach(e => {
+      const label = e.subchannel || formatChannel(e.channel);
+      channelCounts[label] = (channelCounts[label] || 0) + 1;
+    });
+    const summaryParts = Object.entries(channelCounts).map(([ch, count]) => `${count} ${ch}`);
+    html += `<div style="padding:10px 14px;background:var(--bg-cream);border-radius:8px;margin-bottom:12px;font-size:12px;color:var(--text-secondary);font-weight:500;">${allEntries.length} campaigns: ${summaryParts.join(', ')}</div>`;
+  }
+
+  allEntries.forEach(e => {
+    const ch = CHANNEL_COLORS[e.channel] || { color: '#666', bg: '#f5f5f5' };
+    const st = STATUS_STYLES[e.status] || STATUS_STYLES['planned'];
+    const statusLabel = e.status === 'in-progress' ? 'In Progress' : e.status.charAt(0).toUpperCase() + e.status.slice(1);
+    html += `<div class="modal-entry" ${isEditor ? `onclick="openEditEntryForm('${e.id}','${e.initiative.id}')" style="cursor:pointer;"` : ''}>
+      <div class="modal-entry-header">
+        <span class="modal-entry-init" style="background:${e.initiative.color};">${e.initiative.name}</span>
+        <span class="modal-entry-channel" style="background:${ch.bg};color:${ch.color};">${formatChannel(e.channel)}${e.subchannel ? ' / ' + e.subchannel : ''}</span>
+        <span class="modal-entry-status" style="background:${st.bg};color:${st.color};">${statusLabel}</span>
+      </div>
+      <div class="modal-entry-text">${e.text}</div>
+      <div class="modal-entry-meta">
+        <span>Owner: ${e.owner}</span>
+        ${e.endDate ? `<span>${e.date} to ${e.endDate}</span>` : `<span>${e.date}</span>`}
+        ${e.markets ? `<span>${e.markets.join(', ')}</span>` : ''}
+      </div>
+      ${renderLinkBadges(e, e.initiative)}
+      ${e.notes ? `<div style="margin-top:6px;font-size:11px;color:var(--text-tertiary);font-style:italic;">${e.notes}</div>` : ''}
+    </div>`;
+  });
+
+  if (allEntries.length === 0) {
+    html = `<p style="text-align:center;color:var(--text-tertiary);padding:24px;">No entries for this week.</p>`;
+  }
+
+  document.getElementById('dayModalEntries').innerHTML = html;
+  document.getElementById('dayModal').classList.add('active');
+}
+
+function getMondayFromWeekNum(weekNum, year) {
+  const jan4 = new Date(year, 0, 4);
+  const dayOfWeek = jan4.getDay() || 7;
+  const firstMonday = new Date(jan4);
+  firstMonday.setDate(jan4.getDate() - dayOfWeek + 1);
+  const monday = new Date(firstMonday);
+  monday.setDate(firstMonday.getDate() + (weekNum - 1) * 7);
+  return monday;
+}
+
+function openWeekModalByDate(mondayStr) {
+  const monday = new Date(mondayStr + 'T00:00:00');
+  const sunday = new Date(monday);
+  sunday.setDate(sunday.getDate() + 6);
+  const weekNum = getWeekNumber(monday);
+
+  const fmt = d => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  document.getElementById('dayModalTitle').textContent = `W${weekNum}: ${fmt(monday)} to ${fmt(sunday)}`;
+
+  const initiatives = activeInitiative === 'all' ? calendarData.initiatives : calendarData.initiatives.filter(i => i.id === activeInitiative);
+  const allEntries = [];
+  initiatives.forEach(init => {
+    getFilteredInitEntries(init).forEach(e => {
+      const start = new Date(e.date + 'T00:00:00');
+      const end = e.endDate ? new Date(e.endDate + 'T00:00:00') : start;
+      if (start <= sunday && end >= monday) {
+        allEntries.push({ ...e, initiative: init });
+      }
+    });
+  });
+
+  let html = '';
+
+  if (allEntries.length > 0) {
+    const channelCounts = {};
+    allEntries.forEach(e => {
+      const label = e.subchannel || formatChannel(e.channel);
+      channelCounts[label] = (channelCounts[label] || 0) + 1;
+    });
+    const summaryParts = Object.entries(channelCounts).map(([ch, count]) => `${count} ${ch}`);
+    html += `<div style="padding:10px 14px;background:var(--bg-cream);border-radius:8px;margin-bottom:12px;font-size:12px;color:var(--text-secondary);font-weight:500;">${allEntries.length} campaigns: ${summaryParts.join(', ')}</div>`;
+  }
+
+  allEntries.forEach(e => {
+    const ch = CHANNEL_COLORS[e.channel] || { color: '#666', bg: '#f5f5f5' };
+    const st = STATUS_STYLES[e.status] || STATUS_STYLES['planned'];
+    const statusLabel = e.status === 'in-progress' ? 'In Progress' : e.status.charAt(0).toUpperCase() + e.status.slice(1);
+    html += `<div class="modal-entry" ${isEditor ? `onclick="openEditEntryForm('${e.id}','${e.initiative.id}')" style="cursor:pointer;"` : ''}>
+      <div class="modal-entry-header">
+        <span class="modal-entry-init" style="background:${e.initiative.color};">${e.initiative.name}</span>
+        <span class="modal-entry-channel" style="background:${ch.bg};color:${ch.color};">${formatChannel(e.channel)}${e.subchannel ? ' / ' + e.subchannel : ''}</span>
+        <span class="modal-entry-status" style="background:${st.bg};color:${st.color};">${statusLabel}</span>
+      </div>
+      <div class="modal-entry-text">${e.text}</div>
+      <div class="modal-entry-meta">
+        <span>Owner: ${e.owner}</span>
+        ${e.endDate ? `<span>${e.date} to ${e.endDate}</span>` : `<span>${e.date}</span>`}
+        ${e.markets ? `<span>${e.markets.join(', ')}</span>` : ''}
+      </div>
+      ${renderLinkBadges(e, e.initiative)}
+      ${e.notes ? `<div style="margin-top:6px;font-size:11px;color:var(--text-tertiary);font-style:italic;">${e.notes}</div>` : ''}
+    </div>`;
+  });
+
+  if (allEntries.length === 0) {
+    html = `<p style="text-align:center;color:var(--text-tertiary);padding:24px;">No entries for this week.</p>`;
+  }
+
+  document.getElementById('dayModalEntries').innerHTML = html;
+  document.getElementById('dayModal').classList.add('active');
+}
+
+function openProductEntryModal(entryId, initId) {
+  const init = calendarData.initiatives.find(i => i.id === initId);
+  if (!init) return;
+  const entry = init.entries.find(e => e.id === entryId);
+  if (!entry) return;
+
+  document.getElementById('dayModalTitle').textContent = entry.text;
+
+  const ch = CHANNEL_COLORS[entry.channel] || { color: '#666', bg: '#f5f5f5' };
+  const st = STATUS_STYLES[entry.status] || STATUS_STYLES['planned'];
+  const statusLabel = entry.status === 'in-progress' ? 'In Progress' : entry.status.charAt(0).toUpperCase() + entry.status.slice(1);
+
+  let html = `<div class="modal-entry" ${isEditor ? `onclick="openEditEntryForm('${entry.id}','${init.id}')" style="cursor:pointer;"` : ''}>
+    <div class="modal-entry-header">
+      <span class="modal-entry-init" style="background:${init.color};">${init.name}</span>
+      <span class="modal-entry-channel" style="background:${ch.bg};color:${ch.color};">${formatChannel(entry.channel)}${entry.subchannel ? ' / ' + entry.subchannel : ''}</span>
+      <span class="modal-entry-status" style="background:${st.bg};color:${st.color};">${statusLabel}</span>
+    </div>
+    <div class="modal-entry-text">${entry.text}</div>
+    <div class="modal-entry-meta">
+      <span>Owner: ${entry.owner}</span>
+      ${entry.endDate ? `<span>${entry.date} to ${entry.endDate}</span>` : `<span>${entry.date}</span>`}
+      ${entry.markets ? `<span>${entry.markets.join(', ')}</span>` : ''}
+    </div>
+    ${renderLinkBadges(entry, init)}
+    ${entry.notes ? `<div style="margin-top:6px;font-size:11px;color:var(--text-tertiary);font-style:italic;">${entry.notes}</div>` : ''}
+  </div>`;
+
+  document.getElementById('dayModalEntries').innerHTML = html;
+  document.getElementById('dayModal').classList.add('active');
+}
+
+// ENTRY CRUD
+function openNewEntryForm(date) {
+  editingEntry = null;
+  document.getElementById('entryFormTitle').textContent = 'New Entry';
+  document.getElementById('formDeleteBtn').style.display = 'none';
+
+  // Populate initiative select
+  const initSel = document.getElementById('formInitiative');
+  initSel.innerHTML = '';
+  calendarData.initiatives.forEach(init => {
+    initSel.innerHTML += `<option value="${init.id}">${init.name}</option>`;
+  });
+  if (activeInitiative !== 'all') initSel.value = activeInitiative;
+
+  // Clear form
+  document.getElementById('formText').value = '';
+  document.getElementById('formChannel').value = 'crm';
+  document.getElementById('formSubchannel').value = '';
+  document.getElementById('formOwner').value = currentUser.firstName || '';
+  document.getElementById('formDate').value = date || formatDate(new Date());
+  document.getElementById('formEndDate').value = '';
+  document.getElementById('formStatus').value = 'planned';
+  document.getElementById('formMarkets').value = '';
+  document.getElementById('formJiraTicket').value = '';
+  document.getElementById('formAirtableLink').value = '';
+  document.getElementById('formNotes').value = '';
+
+  document.getElementById('entryFormModal').classList.add('active');
+}
+
+function openEditEntryForm(entryId, initId) {
+  const init = calendarData.initiatives.find(i => i.id === initId);
+  if (!init) return;
+  const entry = init.entries.find(e => e.id === entryId);
+  if (!entry) return;
+
+  editingEntry = { initId, entryId };
+  document.getElementById('entryFormTitle').textContent = 'Edit Entry';
+  document.getElementById('formDeleteBtn').style.display = 'inline-block';
+
+  // Populate initiative select
+  const initSel = document.getElementById('formInitiative');
+  initSel.innerHTML = '';
+  calendarData.initiatives.forEach(i => {
+    initSel.innerHTML += `<option value="${i.id}">${i.name}</option>`;
+  });
+  initSel.value = initId;
+
+  document.getElementById('formText').value = entry.text;
+  document.getElementById('formChannel').value = entry.channel;
+  document.getElementById('formSubchannel').value = entry.subchannel || '';
+  document.getElementById('formOwner').value = entry.owner || '';
+  document.getElementById('formDate').value = entry.date;
+  document.getElementById('formEndDate').value = entry.endDate || '';
+  document.getElementById('formStatus').value = entry.status;
+  document.getElementById('formMarkets').value = (entry.markets || []).join(', ');
+  document.getElementById('formJiraTicket').value = entry.jiraTicket || '';
+  document.getElementById('formAirtableLink').value = entry.airtableRecord || '';
+  document.getElementById('formNotes').value = entry.notes || '';
+
+  closeModal('dayModal');
+  document.getElementById('entryFormModal').classList.add('active');
+}
+
+function saveEntry() {
+  if (!isEditor) return;
+
+  const initId = document.getElementById('formInitiative').value;
+  const init = calendarData.initiatives.find(i => i.id === initId);
+  if (!init) return;
+
+  const text = document.getElementById('formText').value.trim();
+  if (!text) { alert('Please enter entry text.'); return; }
+
+  const markets = document.getElementById('formMarkets').value.split(',').map(m => m.trim()).filter(Boolean);
+
+  const jiraTicket = document.getElementById('formJiraTicket').value.trim() || undefined;
+  const airtableRecord = document.getElementById('formAirtableLink').value.trim() || undefined;
+
+  const entryData = {
+    text,
+    channel: document.getElementById('formChannel').value,
+    subchannel: document.getElementById('formSubchannel').value.trim(),
+    owner: document.getElementById('formOwner').value.trim(),
+    date: document.getElementById('formDate').value,
+    endDate: document.getElementById('formEndDate').value || undefined,
+    status: document.getElementById('formStatus').value,
+    markets: markets.length > 0 ? markets : init.markets,
+    jiraTicket: jiraTicket,
+    airtableRecord: airtableRecord,
+    notes: document.getElementById('formNotes').value.trim()
+  };
+
+  if (editingEntry) {
+    // Editing existing
+    const oldInit = calendarData.initiatives.find(i => i.id === editingEntry.initId);
+    if (editingEntry.initId !== initId) {
+      // Move to different initiative
+      oldInit.entries = oldInit.entries.filter(e => e.id !== editingEntry.entryId);
+      entryData.id = editingEntry.entryId;
+      init.entries.push(entryData);
+    } else {
+      const idx = init.entries.findIndex(e => e.id === editingEntry.entryId);
+      if (idx >= 0) {
+        entryData.id = editingEntry.entryId;
+        init.entries[idx] = entryData;
+      }
+    }
+  } else {
+    // New entry
+    entryData.id = 'e' + Date.now();
+    init.entries.push(entryData);
+  }
+
+  // Save to localStorage override
+  localStorage.setItem('calendarDataOverride', JSON.stringify(calendarData));
+  closeModal('entryFormModal');
+  buildOwnerFilter();
+  render();
+}
+
+function deleteEntry() {
+  if (!isEditor || !editingEntry) return;
+  if (!confirm('Delete this entry?')) return;
+
+  const init = calendarData.initiatives.find(i => i.id === editingEntry.initId);
+  if (init) {
+    init.entries = init.entries.filter(e => e.id !== editingEntry.entryId);
+    localStorage.setItem('calendarDataOverride', JSON.stringify(calendarData));
+  }
+  closeModal('entryFormModal');
+  render();
+}
+
+// EXPORT
+function exportJSON() {
+  const blob = new Blob([JSON.stringify(calendarData, null, 2)], { type: 'application/json' });
+  downloadBlob(blob, 'campaign-calendar.json');
+}
+
+function exportCSV() {
+  let csv = 'Initiative,Entry,Channel,Subchannel,Owner,Start Date,End Date,Status,Markets,Jira Link,Airtable Link,Notes\n';
+  calendarData.initiatives.forEach(init => {
+    init.entries.forEach(e => {
+      const jira = e.jiraTicket || '';
+      const airtable = e.airtableRecord || '';
+      csv += `"${init.name}","${e.text}","${e.channel}","${e.subchannel || ''}","${e.owner || ''}","${e.date}","${e.endDate || ''}","${e.status}","${(e.markets || []).join('; ')}","${jira}","${airtable}","${(e.notes || '').replace(/"/g, '""')}"\n`;
+    });
+  });
+  const blob = new Blob([csv], { type: 'text/csv' });
+  downloadBlob(blob, 'campaign-calendar.csv');
+}
+
+function downloadBlob(blob, filename) {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+// CSV IMPORT
+function handleCSVImport(event) {
+  if (!isEditor) return;
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const text = e.target.result;
+    const rows = parseCSV(text);
+    if (rows.length < 2) { alert('No data rows found in CSV.'); return; }
+
+    const headers = rows[0].map(h => h.trim().toLowerCase());
+    const data = rows.slice(1).filter(row => row.some(cell => cell.trim()));
+
+    // Map columns
+    const col = (name) => headers.indexOf(name);
+    const iInit = col('initiative name');
+    const iPoc = col('initiative poc');
+    const iObj = col('initiative objective');
+    const iRelease = col('release link');
+    const iText = col('entry text');
+    const iChannel = col('channel');
+    const iSubchannel = col('subchannel');
+    const iOwner = col('owner');
+    const iStart = col('start date');
+    const iEnd = col('end date');
+    const iStatus = col('status');
+    const iMarkets = col('markets');
+    const iNotes = col('notes');
+    const iJira = col('jira link');
+    const iAirtable = col('airtable link');
+
+    if (iText === -1 || iChannel === -1 || iStart === -1) {
+      alert('CSV must have at minimum: Entry Text, Channel, and Start Date columns.');
+      return;
+    }
+
+    // Group rows by initiative
+    let currentInitName = '';
+    let currentInitPoc = '';
+    let currentInitObj = '';
+    let currentRelease = '';
+    let currentInitJira = '';
+    let currentInitAirtable = '';
+    const importedInits = {};
+
+    data.forEach(row => {
+      const get = (idx) => idx >= 0 && idx < row.length ? row[idx].trim() : '';
+
+      // When a new initiative name appears, capture initiative-level fields
+      if (get(iInit)) {
+        currentInitName = get(iInit);
+        currentInitJira = get(iJira) || '';
+        currentInitAirtable = get(iAirtable) || '';
+      }
+      if (get(iPoc)) currentInitPoc = get(iPoc);
+      if (get(iObj)) currentInitObj = get(iObj);
+      if (get(iRelease)) currentRelease = get(iRelease);
+
+      if (!currentInitName) currentInitName = 'Imported Campaign';
+
+      if (!importedInits[currentInitName]) {
+        importedInits[currentInitName] = {
+          poc: currentInitPoc,
+          objective: currentInitObj,
+          releaseName: currentRelease,
+          jiraEpic: currentInitJira || undefined,
+          airtableView: currentInitAirtable || undefined,
+          entries: []
+        };
+      }
+
+      const entryText = get(iText);
+      if (!entryText) return;
+
+      const channelRaw = get(iChannel).toLowerCase();
+      const channelMap = { 'crm': 'crm', 'paid': 'paid', 'organic': 'organic', 'influencers': 'influencers', 'web': 'web', 'app store': 'appstore', 'appstore': 'appstore', 'print': 'print' };
+      const channel = channelMap[channelRaw] || 'crm';
+
+      const statusRaw = get(iStatus).toLowerCase();
+      const statusMap = { 'planned': 'planned', 'in progress': 'in-progress', 'in-progress': 'in-progress', 'live': 'live', 'completed': 'completed' };
+      const entryStatus = statusMap[statusRaw] || 'planned';
+
+      const marketsRaw = get(iMarkets);
+      let markets = [];
+      if (marketsRaw.toLowerCase() === 'all') {
+        markets = [...calendarData.markets];
+      } else {
+        markets = marketsRaw.split(',').map(m => m.trim()).filter(Boolean);
+      }
+
+      const entryJira = get(iJira) || undefined;
+      const entryAirtable = get(iAirtable) || undefined;
+
+      importedInits[currentInitName].entries.push({
+        id: 'imp' + Date.now() + Math.random().toString(36).slice(2, 6),
+        text: entryText,
+        channel: channel,
+        subchannel: get(iSubchannel),
+        owner: get(iOwner),
+        date: get(iStart),
+        endDate: get(iEnd) || undefined,
+        status: entryStatus,
+        markets: markets.length > 0 ? markets : [...calendarData.markets],
+        jiraTicket: entryJira,
+        airtableRecord: entryAirtable,
+        notes: get(iNotes)
+      });
+    });
+
+    // Merge into calendarData
+    const INIT_COLORS = ['#EA580C', '#7C3AED', '#0D9488', '#DC2626', '#059669', '#2563EB', '#92400E', '#16A34A'];
+    let colorIdx = calendarData.initiatives.length;
+
+    Object.entries(importedInits).forEach(([name, data]) => {
+      // Check if initiative already exists
+      const existing = calendarData.initiatives.find(i => i.name.toLowerCase() === name.toLowerCase());
+      if (existing) {
+        existing.entries.push(...data.entries);
+        // Update initiative-level links if provided and not already set
+        if (data.jiraEpic && !existing.jiraEpic) existing.jiraEpic = data.jiraEpic;
+        if (data.airtableView && !existing.airtableView) existing.airtableView = data.airtableView;
+      } else {
+        // Find releaseId from release name
+        let releaseId = undefined;
+        if (data.releaseName) {
+          const release = calendarData.releases.find(r => r.name.toLowerCase() === data.releaseName.toLowerCase());
+          if (release) releaseId = release.id;
+        }
+
+        calendarData.initiatives.push({
+          id: 'init-' + name.toLowerCase().replace(/[^a-z0-9]/g, '').slice(0, 12) + Date.now().toString(36).slice(-4),
+          name: name,
+          poc: data.poc || currentUser.firstName,
+          objective: data.objective || '',
+          markets: [...new Set(data.entries.flatMap(e => e.markets))],
+          releaseId: releaseId,
+          jiraEpic: data.jiraEpic,
+          airtableView: data.airtableView,
+          color: INIT_COLORS[colorIdx % INIT_COLORS.length],
+          entries: data.entries
+        });
+        colorIdx++;
+      }
+    });
+
+    // Save and refresh
+    localStorage.setItem('calendarDataOverride', JSON.stringify(calendarData));
+    buildOwnerFilter();
+    buildInitTabs();
+    buildMarketPills();
+    buildLegend();
+    render();
+
+    // Push live: download updated calendar-data.json for the repo
+    const totalEntries = Object.values(importedInits).reduce((sum, i) => sum + i.entries.length, 0);
+    const initNames = Object.keys(importedInits).join(', ');
+    const jsonBlob = new Blob([JSON.stringify(calendarData, null, 2)], { type: 'application/json' });
+    downloadBlob(jsonBlob, 'calendar-data.json');
+    alert(`Imported ${totalEntries} entries (${initNames}).\n\ncalendar-data.json has been downloaded. Drop it into the prototypes folder and run:\n\npush-calendar`);
+  };
+  reader.readAsText(file);
+  event.target.value = '';
+}
+
+function parseCSV(text) {
+  const rows = [];
+  let current = [];
+  let cell = '';
+  let inQuotes = false;
+
+  for (let i = 0; i < text.length; i++) {
+    const ch = text[i];
+    if (inQuotes) {
+      if (ch === '"' && text[i + 1] === '"') {
+        cell += '"';
+        i++;
+      } else if (ch === '"') {
+        inQuotes = false;
+      } else {
+        cell += ch;
+      }
+    } else {
+      if (ch === '"') {
+        inQuotes = true;
+      } else if (ch === ',') {
+        current.push(cell);
+        cell = '';
+      } else if (ch === '\n' || (ch === '\r' && text[i + 1] === '\n')) {
+        current.push(cell);
+        cell = '';
+        rows.push(current);
+        current = [];
+        if (ch === '\r') i++;
+      } else {
+        cell += ch;
+      }
+    }
+  }
+  if (cell || current.length > 0) {
+    current.push(cell);
+    rows.push(current);
+  }
+  return rows;
+}
+
+// KEYBOARD SHORTCUTS
+function toggleShortcuts() {
+  document.getElementById('shortcutsPanel').classList.toggle('active');
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') return;
+  if (document.querySelector('.modal-overlay.active')) {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.modal-overlay.active').forEach(m => m.classList.remove('active'));
+    }
+    return;
+  }
+
+  switch (e.key) {
+    case 'ArrowLeft': navPrev(); break;
+    case 'ArrowRight': navNext(); break;
+    case 't': case 'T': goToday(); break;
+    case '1': setView('year'); break;
+    case '2': setView('weekly'); break;
+    case '3': setView('month'); break;
+    case 'n': case 'N': if (isEditor) openNewEntryForm(); break;
+    case '/': e.preventDefault(); document.getElementById('searchInput').focus(); break;
+  }
+});
+
+// HELPER: Get initials from owner name
+function getInitials(name) {
+  if (!name) return '';
+  const parts = name.trim().split(/\s+/);
+  if (parts.length === 1) return parts[0][0].toUpperCase();
+  return parts.map(p => p[0].toUpperCase()).join('');
+}
+
+// LEGEND
+function toggleLegend() {
+  const panel = document.getElementById('legendPanel');
+  panel.classList.toggle('active');
+}
+
+function buildLegend() {
+  if (!calendarData) return;
+  const container = document.getElementById('legendContainer');
+  const content = document.getElementById('legendContent');
+
+  // Show legend container only in marketing mode
+  container.style.display = (currentMode === 'marketing') ? '' : 'none';
+
+  let html = '';
+  calendarData.initiatives.forEach(init => {
+    html += `<div class="legend-row">
+      <span class="legend-dot" style="background:${init.color};"></span>
+      <span class="legend-name">${init.name}</span>
+      <span class="legend-poc">${init.poc || ''}</span>
+    </div>`;
+  });
+  content.innerHTML = html;
+}
+
+// UTILITIES
+function resolveLink(value, type) {
+  if (!value) return null;
+  if (type === 'jira') {
+    if (value.startsWith('http')) return value;
+    return `https://hellofresh.atlassian.net/browse/${value}`;
+  }
+  if (type === 'airtable') {
+    if (value.startsWith('http')) return value;
+    return null;
+  }
+  return null;
+}
+
+function renderLinkBadges(entry, initiative) {
+  let html = '';
+  const badges = [];
+
+  // Entry-level Jira
+  if (entry.jiraTicket) {
+    const url = resolveLink(entry.jiraTicket, 'jira');
+    if (url) {
+      const label = entry.jiraTicket.startsWith('http') ? 'Jira' : 'Jira: ' + entry.jiraTicket;
+      badges.push(`<a class="link-badge link-badge-jira" href="${url}" target="_blank" rel="noopener" onclick="event.stopPropagation();">${label} <span class="link-badge-icon">↗</span></a>`);
+    }
+  } else if (initiative && initiative.jiraEpic) {
+    // Inherited from initiative
+    const url = resolveLink(initiative.jiraEpic, 'jira');
+    if (url) {
+      const label = initiative.jiraEpic.startsWith('http') ? 'Epic' : 'Epic: ' + initiative.jiraEpic;
+      badges.push(`<a class="link-badge link-badge-jira inherited" href="${url}" target="_blank" rel="noopener" onclick="event.stopPropagation();">${label} <span class="link-badge-icon">↗</span></a>`);
+    }
+  }
+
+  // Entry-level Airtable
+  if (entry.airtableRecord) {
+    const url = resolveLink(entry.airtableRecord, 'airtable');
+    if (url) {
+      badges.push(`<a class="link-badge link-badge-airtable" href="${url}" target="_blank" rel="noopener" onclick="event.stopPropagation();">Airtable <span class="link-badge-icon">↗</span></a>`);
+    }
+  } else if (initiative && initiative.airtableView) {
+    const url = resolveLink(initiative.airtableView, 'airtable');
+    if (url) {
+      badges.push(`<a class="link-badge link-badge-airtable inherited" href="${url}" target="_blank" rel="noopener" onclick="event.stopPropagation();">Airtable <span class="link-badge-icon">↗</span></a>`);
+    }
+  }
+
+  if (badges.length > 0) {
+    html = `<div class="link-badges">${badges.join('')}</div>`;
+  }
+  return html;
+}
+
+function formatDate(d) {
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+}
+
+function getWeekNumber(d) {
+  const date = new Date(d.getTime());
+  date.setHours(0, 0, 0, 0);
+  date.setDate(date.getDate() + 3 - (date.getDay() + 6) % 7);
+  const week1 = new Date(date.getFullYear(), 0, 4);
+  return 1 + Math.round(((date.getTime() - week1.getTime()) / 86400000 - 3 + (week1.getDay() + 6) % 7) / 7);
+}
+
+function getMondayOfWeek(d) {
+  const date = new Date(d);
+  const day = date.getDay();
+  const diff = (day === 0 ? -6 : 1) - day;
+  date.setDate(date.getDate() + diff);
+  date.setHours(0, 0, 0, 0);
+  return date;
+}
+
+// INIT
+document.addEventListener('click', (e) => {
+  const dropdown = document.getElementById('marketDropdown');
+  if (dropdown && !dropdown.contains(e.target)) {
+    document.getElementById('marketDropdownPanel').classList.remove('active');
+  }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  if (!checkAuth()) {
+    document.getElementById('authEmail').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') handleAuth();
+    });
+  }
+});
+</script>
+</body>
+</html>
