@@ -4202,6 +4202,9 @@ function renderLeadership() {
     if (release && release.status === 'live') {
       statusLabel = 'Live';
       statusType = 'live';
+    } else if (statusCounts.planned === totalCount) {
+      statusLabel = 'Planned';
+      statusType = 'planned';
     } else {
       statusLabel = 'Active';
       statusType = 'active';
@@ -4284,6 +4287,7 @@ function renderLeadership() {
   html += '<div class="leadership-legend">';
   html += '<div class="leadership-legend-item"><div class="leadership-legend-dot" style="background:#10B981;"></div>Live</div>';
   html += '<div class="leadership-legend-item"><div class="leadership-legend-dot" style="background:#F59E0B;"></div>Active</div>';
+  html += '<div class="leadership-legend-item"><div class="leadership-legend-dot" style="background:#94A3B8;"></div>Planned</div>';
   html += '<div class="leadership-legend-item"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;border:2px solid #64748B;"></span>Launch date</div>';
   html += '</div>';
 
