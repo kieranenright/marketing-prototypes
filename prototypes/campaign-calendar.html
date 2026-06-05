@@ -1882,11 +1882,19 @@ body {
   padding: 32px;
 }
 
-.leadership-timeline-months {
+.leadership-header {
   display: flex;
-  border-bottom: 2px solid var(--border);
-  margin-bottom: 0;
-  position: relative;
+  margin-bottom: 24px;
+}
+
+.leadership-header-label {
+  width: 220px;
+  flex-shrink: 0;
+}
+
+.leadership-header-months {
+  flex: 1;
+  display: flex;
 }
 
 .leadership-month-label {
@@ -1903,25 +1911,100 @@ body {
   font-weight: 700;
 }
 
-.leadership-timeline-body {
+.leadership-swimlane {
+  display: flex;
+  align-items: center;
+  padding: 16px 0;
+  border-top: 1px solid #F1F5F9;
+}
+
+.leadership-swimlane:last-child {
+  border-bottom: 1px solid #F1F5F9;
+}
+
+.leadership-lane-label {
+  width: 220px;
+  flex-shrink: 0;
+  padding-right: 20px;
+}
+
+.leadership-lane-name {
+  font-family: var(--font-headline);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+
+.leadership-lane-meta {
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+.leadership-lane-timeline {
+  flex: 1;
   position: relative;
-  min-height: 200px;
-  padding-top: 24px;
+  height: 48px;
+}
+
+.leadership-lane-bar {
+  position: absolute;
+  top: 8px;
+  height: 32px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  gap: 8px;
+  min-width: 40px;
+  transition: opacity 0.2s;
+}
+
+.leadership-lane-bar:hover {
+  opacity: 0.85;
+}
+
+.leadership-bar-status {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.leadership-bar-count {
+  font-size: 11px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.leadership-bar-channels {
+  display: flex;
+  gap: 3px;
+  margin-left: auto;
+}
+
+.leadership-bar-channel-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.5);
 }
 
 .leadership-today-line {
   position: absolute;
-  top: 0;
-  bottom: 0;
+  top: -8px;
+  bottom: -8px;
   width: 2px;
   background: var(--brand-green);
   z-index: 5;
-  opacity: 0.7;
+  opacity: 0.8;
+  pointer-events: none;
 }
 
 .leadership-today-label {
   position: absolute;
-  top: 4px;
+  top: -24px;
   transform: translateX(-50%);
   font-size: 9px;
   font-weight: 700;
@@ -1933,76 +2016,38 @@ body {
   z-index: 6;
 }
 
-.leadership-release-card {
+.leadership-launch-marker {
   position: absolute;
-  width: 220px;
-  background: white;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 16px 18px;
-  box-shadow: var(--shadow-card);
-  transition: all 0.2s;
-  z-index: 3;
+  top: 4px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid white;
+  transform: translateX(-50%);
+  z-index: 4;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }
 
-.leadership-release-card:hover {
-  box-shadow: var(--shadow-modal);
-  transform: translateY(-2px);
+.leadership-legend {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
 }
 
-.leadership-release-card .release-card-name {
-  font-family: var(--font-headline);
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: 4px;
-}
-
-.leadership-release-card .release-card-date {
-  font-size: 11px;
-  color: var(--text-secondary);
-  margin-bottom: 10px;
-}
-
-.leadership-release-card .release-card-readiness {
+.leadership-legend-item {
   display: flex;
   align-items: center;
   gap: 6px;
-  margin-bottom: 8px;
+  font-size: 11px;
+  color: var(--text-secondary);
 }
 
-.leadership-readiness-dot {
+.leadership-legend-dot {
   width: 10px;
   height: 10px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-.leadership-readiness-dot.green { background: #10B981; }
-.leadership-readiness-dot.amber { background: #F59E0B; }
-.leadership-readiness-dot.red { background: #94A3B8; }
-
-.leadership-release-card .release-card-readiness-label {
-  font-size: 11px;
-  font-weight: 600;
-}
-
-.leadership-release-card .release-card-count {
-  font-size: 12px;
-  color: var(--text-secondary);
-  margin-bottom: 8px;
-}
-
-.leadership-release-card .release-card-channels {
-  display: flex;
-  gap: 4px;
-  flex-wrap: wrap;
-}
-
-.leadership-channel-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
+  border-radius: 3px;
 }
 
 /* PRODUCT VIEW STATS */
@@ -4007,154 +4052,145 @@ function renderLeadership() {
   const yearEnd = new Date(currentYear, 11, 31);
   const totalDays = (yearEnd - yearStart) / (1000 * 60 * 60 * 24) + 1;
 
-  const releases = getFilteredReleases().filter(r => {
-    const d = new Date(r.date + 'T00:00:00');
-    const end = r.endDate ? new Date(r.endDate + 'T00:00:00') : d;
-    return d.getFullYear() === currentYear || end.getFullYear() === currentYear;
-  }).sort((a, b) => new Date(a.date) - new Date(b.date));
-
-  const entries = getFilteredEntries();
-
-  // Calculate position as percentage for a given date
   function dateToPercent(dateStr) {
     const d = new Date(dateStr + 'T00:00:00');
     const dayOffset = (d - yearStart) / (1000 * 60 * 60 * 24);
-    return (dayOffset / totalDays) * 100;
+    return Math.max(0, Math.min(100, (dayOffset / totalDays) * 100));
   }
 
-  // Today line
   const todayPercent = today.getFullYear() === currentYear ? ((today - yearStart) / (1000 * 60 * 60 * 24) / totalDays) * 100 : -1;
+
+  const initiatives = calendarData.initiatives.filter(init => {
+    if (!init.entries || init.entries.length === 0) return false;
+    const hasMarketMatch = init.entries.some(e => {
+      if (!e.markets || e.markets.length === 0) return true;
+      return e.markets.some(m => activeMarkets.has(m));
+    });
+    return hasMarketMatch;
+  });
 
   let html = '<div class="leadership-timeline-card">';
 
-  // Month labels
-  html += '<div class="leadership-timeline-months">';
+  // Header with months
+  html += '<div class="leadership-header">';
+  html += '<div class="leadership-header-label"></div>';
+  html += '<div class="leadership-header-months">';
   const monthNames = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   monthNames.forEach((m, idx) => {
     const isCurrent = today.getFullYear() === currentYear && today.getMonth() === idx;
     html += `<div class="leadership-month-label ${isCurrent ? 'current-month' : ''}">${m}</div>`;
   });
+  html += '</div></div>';
+
+  // Swim lanes
+  initiatives.forEach(init => {
+    const release = calendarData.releases.find(r => r.id === init.releaseId);
+    const filteredEntries = init.entries.filter(e => {
+      if (e.markets && e.markets.length > 0) {
+        if (!e.markets.some(m => activeMarkets.has(m))) return false;
+      }
+      return true;
+    });
+    if (filteredEntries.length === 0) return;
+
+    // Determine bar span
+    let barStart, barEnd;
+    if (release && release.endDate) {
+      barStart = release.date < currentYear + '-01-01' ? currentYear + '-01-01' : release.date;
+      barEnd = release.endDate;
+    } else {
+      const dates = filteredEntries.map(e => e.date).sort();
+      const endDates = filteredEntries.filter(e => e.endDate).map(e => e.endDate);
+      barStart = dates[0];
+      barEnd = [...dates, ...endDates].sort().pop();
+    }
+
+    const startPct = dateToPercent(barStart);
+    const endPct = dateToPercent(barEnd);
+    const widthPct = Math.max(3, endPct - startPct);
+
+    // Status
+    const totalCount = filteredEntries.length;
+    const statusCounts = { planned: 0, 'in-progress': 0, live: 0, completed: 0 };
+    filteredEntries.forEach(e => { statusCounts[e.status] = (statusCounts[e.status] || 0) + 1; });
+
+    let statusLabel, statusType;
+    if (release && release.status === 'live') {
+      statusLabel = 'Live';
+      statusType = 'live';
+    } else if (statusCounts.completed === totalCount) {
+      statusLabel = 'Completed';
+      statusType = 'completed';
+    } else if (statusCounts.planned === totalCount) {
+      statusLabel = 'Planned';
+      statusType = 'planned';
+    } else {
+      statusLabel = 'Active';
+      statusType = 'active';
+    }
+
+    // Channels
+    const channels = new Set();
+    filteredEntries.forEach(e => channels.add(e.channel));
+
+    // Launch date
+    const launchDate = release ? new Date(release.date + 'T00:00:00') : new Date(barStart + 'T00:00:00');
+    const launchPct = dateToPercent(release ? release.date : barStart);
+
+    html += '<div class="leadership-swimlane">';
+
+    // Left label
+    html += '<div class="leadership-lane-label">';
+    html += `<div class="leadership-lane-name">${init.name}</div>`;
+    html += `<div class="leadership-lane-meta">${init.poc} · ${totalCount} campaigns</div>`;
+    html += '</div>';
+
+    // Timeline area
+    html += '<div class="leadership-lane-timeline">';
+
+    // Today line
+    if (todayPercent >= 0 && todayPercent <= 100) {
+      html += `<div class="leadership-today-line" style="left:${todayPercent}%;"></div>`;
+    }
+
+    // Bar
+    const barColor = init.color || '#64748B';
+    const textColor = '#fff';
+    html += `<div class="leadership-lane-bar" style="left:${startPct}%;width:${widthPct}%;background:${barColor};">`;
+    html += `<span class="leadership-bar-status" style="color:${textColor};">${statusLabel}</span>`;
+    html += `<span class="leadership-bar-count" style="color:rgba(255,255,255,0.85);">${totalCount} entries</span>`;
+    html += '<span class="leadership-bar-channels">';
+    channels.forEach(ch => {
+      const chColor = CHANNEL_COLORS[ch] || { color: '#fff' };
+      html += `<span class="leadership-bar-channel-dot" style="background:${chColor.color};" title="${formatChannel(ch)}"></span>`;
+    });
+    html += '</span>';
+    html += '</div>';
+
+    // Launch marker
+    if (release && launchPct >= 0 && launchPct <= 100) {
+      html += `<div class="leadership-launch-marker" style="left:${launchPct}%;background:${barColor};" title="Launched ${launchDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}"></div>`;
+    }
+
+    html += '</div>';
+    html += '</div>';
+  });
+
+  // Today label at top
+  if (todayPercent >= 0 && todayPercent <= 100) {
+    html += `<div style="position:relative;"><div class="leadership-today-label" style="left:calc(220px + ${todayPercent}% * 0.83);position:absolute;top:-100%;">Today</div></div>`;
+  }
+
+  // Legend
+  html += '<div class="leadership-legend">';
+  html += '<div class="leadership-legend-item"><div class="leadership-legend-dot" style="background:#10B981;"></div>Live</div>';
+  html += '<div class="leadership-legend-item"><div class="leadership-legend-dot" style="background:#6366F1;"></div>Completed</div>';
+  html += '<div class="leadership-legend-item"><div class="leadership-legend-dot" style="background:#F59E0B;"></div>Active</div>';
+  html += '<div class="leadership-legend-item"><div class="leadership-legend-dot" style="background:#94A3B8;"></div>Planned</div>';
+  html += '<div class="leadership-legend-item"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;border:2px solid #64748B;"></span>Launch date</div>';
   html += '</div>';
 
-  // Timeline body
-  // Determine row positions to avoid overlap
-  const cardWidth = 220; // px, but we'll use percentage for horizontal
-  const cardWidthPct = (cardWidth / 14); // approx percent of container (assume ~1400px container)
-  const rows = []; // array of { endPercent } per row
-
-  function getRow(startPct) {
-    const buffer = 16; // percentage buffer between cards (approx 16% = ~220px)
-    for (let i = 0; i < rows.length; i++) {
-      if (startPct > rows[i] + 1) {
-        return i;
-      }
-    }
-    rows.push(0);
-    return rows.length - 1;
-  }
-
-  const releaseCards = releases.map(release => {
-    const pct = dateToPercent(release.date);
-    const row = getRow(pct);
-    rows[row] = pct + 15; // reserve 15% width for the card
-
-    // Get linked entries for readiness
-    const linkedInits = calendarData.initiatives.filter(i => i.releaseId === release.id);
-    let linkedEntries = [];
-    linkedInits.forEach(init => {
-      init.entries.forEach(e => {
-        // Apply market filter
-        if (e.markets && e.markets.length > 0) {
-          if (!e.markets.some(m => activeMarkets.has(m))) return;
-        }
-        linkedEntries.push(e);
-      });
-    });
-
-    const totalCount = linkedEntries.length;
-    const statusCounts = { planned: 0, 'in-progress': 0, live: 0, completed: 0 };
-    linkedEntries.forEach(e => { statusCounts[e.status] = (statusCounts[e.status] || 0) + 1; });
-
-    // Readiness
-    let readiness = 'red';
-    let readinessLabel = 'Planning';
-    if (totalCount > 0) {
-      const liveOrCompleted = (statusCounts.live + statusCounts.completed) / totalCount;
-      const inProgressOrLive = (statusCounts['in-progress'] + statusCounts.live) / totalCount;
-      if (liveOrCompleted > 0.75) { readiness = 'green'; readinessLabel = 'Ready'; }
-      else if (inProgressOrLive > 0.25 || liveOrCompleted > 0.25) { readiness = 'amber'; readinessLabel = 'In Progress'; }
-    }
-
-    // Unique channels
-    const channels = new Set();
-    linkedEntries.forEach(e => channels.add(e.channel));
-
-    return { release, pct, row, totalCount, readiness, readinessLabel, channels: [...channels] };
-  });
-
-  const totalRows = rows.length || 1;
-  const bodyHeight = Math.max(200, totalRows * 120 + 40);
-
-  html += `<div class="leadership-timeline-body" style="height:${bodyHeight}px;">`;
-
-  // Today line
-  if (todayPercent >= 0 && todayPercent <= 100) {
-    html += `<div class="leadership-today-line" style="left:${todayPercent}%;"></div>`;
-    html += `<div class="leadership-today-label" style="left:${todayPercent}%;">Today</div>`;
-  }
-
-  // Release cards
-  releaseCards.forEach(({ release, pct, row, totalCount, readiness, readinessLabel, channels }) => {
-    const rDate = new Date(release.date + 'T00:00:00');
-    const topPx = 30 + row * 110;
-
-    if (release.endDate) {
-      // Render as a bar spanning the full duration
-      const startPct = Math.max(0, pct);
-      const endPct = Math.min(100, dateToPercent(release.endDate));
-      const widthPct = endPct - startPct;
-      const statusLabel = release.status === 'live' ? 'Live' : readinessLabel;
-      const statusColor = release.status === 'live' ? '#10B981' : (readiness === 'green' ? '#10B981' : readiness === 'amber' ? '#F59E0B' : '#94A3B8');
-      const launchDate = new Date(release.date + 'T00:00:00');
-      const dateLabel = launchDate.getFullYear() < currentYear ? `Live since ${launchDate.toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}` : '';
-      html += `<div class="leadership-release-card" style="left:${startPct}%;top:${topPx}px;width:${widthPct}%;min-width:0;max-width:none;">`;
-      html += `<div class="release-card-name">${release.name}</div>`;
-      if (dateLabel) html += `<div class="release-card-date">${dateLabel}</div>`;
-      html += `<div class="release-card-readiness">
-        <span class="leadership-readiness-dot green"></span>
-        <span class="release-card-readiness-label" style="color:${statusColor};">${statusLabel}</span>
-      </div>`;
-      html += `<div class="release-card-count">${totalCount} campaign${totalCount !== 1 ? 's' : ''}</div>`;
-      html += '<div class="release-card-channels">';
-      channels.forEach(ch => {
-        const chColor = CHANNEL_COLORS[ch] || { color: '#666' };
-        html += `<span class="leadership-channel-dot" style="background:${chColor.color};" title="${ch}"></span>`;
-      });
-      html += '</div></div>';
-    } else {
-      const dateFormatted = rDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
-      // Adjust left to keep card in view
-      let leftPct = pct;
-      if (leftPct > 82) leftPct = 82;
-
-      html += `<div class="leadership-release-card" style="left:${leftPct}%;top:${topPx}px;">`;
-      html += `<div class="release-card-name">${release.name}</div>`;
-      html += `<div class="release-card-date">${dateFormatted}</div>`;
-      html += `<div class="release-card-readiness">
-        <span class="leadership-readiness-dot ${readiness}"></span>
-        <span class="release-card-readiness-label" style="color:${readiness === 'green' ? '#10B981' : readiness === 'amber' ? '#F59E0B' : '#94A3B8'};">${readinessLabel}</span>
-      </div>`;
-      html += `<div class="release-card-count">${totalCount} campaign${totalCount !== 1 ? 's' : ''}</div>`;
-      html += '<div class="release-card-channels">';
-      channels.forEach(ch => {
-        const chColor = CHANNEL_COLORS[ch] || { color: '#666' };
-        html += `<span class="leadership-channel-dot" style="background:${chColor.color};" title="${ch}"></span>`;
-      });
-      html += '</div></div>';
-    }
-  });
-
-  html += '</div></div>';
+  html += '</div>';
   container.innerHTML = html;
 }
 
