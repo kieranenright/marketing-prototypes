@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cookbook — Weekly Marketing Update | W14</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+  --hf-green: #1B8A4A;
+  --hf-lime: #C8F065;
+  --hf-dark: #1A1A1A;
+  --hf-muted: #888;
+  --hf-light: #F6F6F6;
+  --col-acquire: #2D6BE0;
+  --col-engage: #1B8A4A;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  background: #e0e0e0;
+  color: var(--hf-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 24px;
+}
+
+.slide {
+  width: 1600px;
+  height: 900px;
+  background: white;
+  border-radius: 6px;
+  box-shadow: 0 8px 60px rgba(0,0,0,0.15);
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  padding: 28px 40px;
+  gap: 18px;
+}
+
+/* === HEADER === */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.header-left img { height: 26px; }
+.header-sep { width: 1px; height: 20px; background: rgba(0,0,0,0.12); }
+.header-feature { font-size: 17px; font-weight: 800; color: var(--hf-green); }
+.header-right { font-size: 12px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase; letter-spacing: 1.5px; }
+
+/* === MAIN COLUMNS === */
+.main-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  min-height: 0;
+}
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 0;
+}
+.col-header {
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid;
+}
+.col-header.acquire { color: var(--col-acquire); border-color: var(--col-acquire); }
+.col-header.engage { color: var(--col-engage); border-color: var(--col-engage); }
+
+/* Section cards */
+.section-card {
+  border-radius: 10px;
+  background: var(--hf-light);
+  border: 1px solid rgba(0,0,0,0.03);
+  padding: 12px 16px;
+}
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.section-title {
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--hf-dark);
+}
+.section-period {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--hf-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Data tables */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.data-table th {
+  font-size: 9px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--hf-muted);
+  text-align: left;
+  padding: 3px 6px;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+.data-table th:not(:first-child) { text-align: center; }
+.data-table td {
+  padding: 5px 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--hf-dark);
+  border-bottom: 1px solid rgba(0,0,0,0.03);
+}
+.data-table td:not(:first-child) { text-align: center; }
+.data-table tr:last-child td { border-bottom: none; }
+.val-green { color: var(--hf-green); font-weight: 800; }
+.val-blue { color: var(--col-acquire); font-weight: 800; }
+.val-neutral { font-weight: 700; }
+.ci { font-size: 10px; font-weight: 500; color: var(--hf-muted); }
+.stat-sig {
+  display: inline-block;
+  font-size: 8px;
+  font-weight: 800;
+  padding: 1px 4px;
+  border-radius: 3px;
+  margin-left: 3px;
+  text-transform: uppercase;
+  background: rgba(27, 138, 74, 0.1);
+  color: var(--hf-green);
+}
+
+/* Post list */
+.post-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.post-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 8px;
+  border-radius: 6px;
+  background: white;
+  border: 1px solid rgba(0,0,0,0.04);
+}
+.post-thumb {
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  object-fit: cover;
+  cursor: pointer;
+}
+.post-info { flex: 1; }
+.post-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--hf-dark);
+}
+.post-stats {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--hf-muted);
+}
+.post-views {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--hf-dark);
+}
+
+/* Totals bar */
+.totals-bar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.total-chip {
+  flex: 1;
+  text-align: center;
+  padding: 6px;
+  background: white;
+  border-radius: 6px;
+  border: 1px solid rgba(0,0,0,0.04);
+}
+.total-value {
+  font-size: 16px;
+  font-weight: 900;
+  color: var(--hf-dark);
+}
+.total-value.highlight { color: var(--col-acquire); }
+.total-label {
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--hf-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Influencer */
+.creator-pills {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+.creator-pill {
+  font-size: 10px;
+  font-weight: 600;
+  background: white;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 12px;
+  padding: 3px 8px;
+}
+.creator-pill.signed {
+  border-color: rgba(45, 107, 224, 0.2);
+  background: rgba(45, 107, 224, 0.04);
+  color: var(--col-acquire);
+  font-weight: 700;
+}
+
+/* Rec box */
+.rec-box {
+  margin-top: 8px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  background: rgba(27, 138, 74, 0.04);
+  border: 1px solid rgba(27, 138, 74, 0.1);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--hf-dark);
+  line-height: 1.5;
+}
+.rec-box strong { color: var(--hf-green); }
+
+/* Two-cell grid */
+.two-cells {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.cell {
+  background: white;
+  border-radius: 6px;
+  padding: 8px 10px;
+  border: 1px solid rgba(0,0,0,0.04);
+}
+.cell-title {
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--hf-muted);
+  margin-bottom: 4px;
+}
+
+/* Lightbox */
+.lightbox-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.85);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.lightbox-overlay.active { display: flex; }
+.lightbox-overlay img,
+.lightbox-overlay video {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 8px;
+  box-shadow: 0 4px 40px rgba(0,0,0,0.5);
+}
+
+</style>
+</head>
+<body>
+
+<div class="slide">
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-left">
+      <img src="https://media.hellofresh.com/w_256,q_100,f_auto,c_limit,fl_lossy/hellofresh_website/logo/Hello_Fresh_Lockup.png" alt="HelloFresh">
+      <div class="header-sep"></div>
+      <div class="header-feature">Cookbook Marketing Update</div>
+    </div>
+    <div class="header-right">W14 — March 30 – April 5</div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div style="padding: 16px 20px; border-radius: 12px; background: rgba(45, 107, 224, 0.04); border: 1px solid rgba(45, 107, 224, 0.1);">
+    <div style="font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--col-acquire); margin-bottom: 6px;">This Week</div>
+    <div style="font-size: 14px; font-weight: 700; color: var(--hf-dark); line-height: 1.4; margin-bottom: 10px;">2 posts: UGC reel (Evan + Marc) + "Never lose another dinner idea" static. 13.3K combined views, 1.39% engagement.</div>
+    <div style="display: flex; gap: 24px;">
+      <div style="text-align: center;">
+        <div style="font-size: 28px; font-weight: 900; color: var(--col-acquire);">13,312</div>
+        <div style="font-size: 10px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase;">Views</div>
+      </div>
+      <div style="text-align: center;">
+        <div style="font-size: 28px; font-weight: 900; color: var(--col-acquire);">9,347</div>
+        <div style="font-size: 10px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase;">Reach</div>
+      </div>
+      <div style="text-align: center;">
+        <div style="font-size: 28px; font-weight: 900; color: var(--col-acquire);">130</div>
+        <div style="font-size: 10px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase;">Interactions</div>
+      </div>
+      <div style="text-align: center;">
+        <div style="font-size: 28px; font-weight: 900; color: var(--col-acquire);">1.39%</div>
+        <div style="font-size: 10px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase;">Eng. Rate</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SINGLE POST DETAIL -->
+  <div class="main-row" style="grid-template-columns: 1fr;">
+    <div class="column">
+      <div class="col-header acquire">Organic Social</div>
+
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-title">Posts This Week</div>
+          <div class="section-period">2 posts</div>
+        </div>
+        <ul class="post-list">
+          <li class="post-item" style="padding: 10px 12px;">
+            <img class="post-thumb" src="../assets/w14-reel-cookbook.jpg" alt="Evan + Marc UGC reel" style="width: 48px; height: 48px;">
+            <div class="post-info">
+              <div class="post-title" style="font-size: 13px;">UGC Reel: Evan + Marc</div>
+              <div class="post-stats" style="font-size: 11px;">5,434 reach · 70 likes · 7 comments · 3 shares · 18 sends · 5 saves · 5s avg watch</div>
+            </div>
+            <div class="post-views" style="font-size: 16px;">6,266</div>
+          </li>
+          <li class="post-item" style="padding: 10px 12px;">
+            <img class="post-thumb" src="../assets/w14-static-cookbook.jpg" alt="Never lose another dinner idea" style="width: 48px; height: 48px;">
+            <div class="post-info">
+              <div class="post-title" style="font-size: 13px;">"Never lose another dinner idea" · Static · Apr 3</div>
+              <div class="post-stats" style="font-size: 11px;">3,913 reach · 21 likes · 2 comments · 1 share · 2 sends · 1 save · 9 profile visits</div>
+            </div>
+            <div class="post-views" style="font-size: 16px;">7,046</div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="section-card" style="background: rgba(0,0,0,0.02); border: 1px dashed rgba(0,0,0,0.08);">
+        <div style="font-size: 12px; font-weight: 600; color: var(--hf-muted); text-align: center; padding: 8px 0;">No ASO, CRM, or creator activity this week</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox-overlay" id="lightbox"></div>
+
+<script>
+const lightbox = document.getElementById('lightbox');
+document.querySelectorAll('.post-thumb').forEach(el => {
+  el.addEventListener('click', () => {
+    let clone;
+    if (el.tagName === 'VIDEO') {
+      clone = document.createElement('video');
+      clone.src = el.src;
+      clone.controls = true;
+      clone.autoplay = true;
+      clone.loop = true;
+    } else {
+      clone = document.createElement('img');
+      clone.src = el.src;
+    }
+    lightbox.innerHTML = '';
+    lightbox.appendChild(clone);
+    lightbox.classList.add('active');
+  });
+});
+lightbox.addEventListener('click', () => {
+  lightbox.classList.remove('active');
+  const vid = lightbox.querySelector('video');
+  if (vid) vid.pause();
+  lightbox.innerHTML = '';
+});
+</script>
+
+</body>
+</html>
