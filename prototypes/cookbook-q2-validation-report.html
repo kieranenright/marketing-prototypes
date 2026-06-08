@@ -208,13 +208,15 @@ section {
 
 /* Scorecard */
 .score-row {
-  display: flex; align-items: center; justify-content: space-between;
+  display: grid; grid-template-columns: 1fr 200px 120px;
+  align-items: center;
   padding: 14px 0;
   border-bottom: 1px solid rgba(0,0,0,0.04);
 }
 .score-row:last-child { border-bottom: none; }
 .score-kpi { font-size: 14px; font-weight: 700; }
-.score-result { font-size: 14px; font-weight: 800; }
+.score-result { font-size: 14px; font-weight: 800; text-align: center; }
+.score-row .verdict { justify-self: end; }
 
 </style>
 </head>
