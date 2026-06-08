@@ -75,6 +75,10 @@ section {
   font-size: 48px; font-weight: 900;
   letter-spacing: -2px; line-height: 1.0; margin-bottom: 20px;
 }
+.section-desc {
+  font-size: 15px; color: var(--hf-muted);
+  line-height: 1.6; max-width: 560px; margin-bottom: 32px;
+}
 
 .hero {
   min-height: 100vh;
@@ -112,14 +116,9 @@ section {
   color: white;
 }
 .dark-section .section-tag { color: var(--hf-lime); }
+.dark-section .section-desc { color: rgba(255,255,255,0.5); }
 
 /* Takeaway cards */
-.takeaway-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  margin-top: 32px;
-}
 .takeaway {
   background: white;
   border-radius: 16px;
@@ -175,17 +174,6 @@ section {
 .callout strong { color: var(--hf-green); }
 .callout-red strong { color: var(--col-warn); }
 
-/* Funnel */
-.funnel { display: flex; align-items: center; margin: 40px 0; }
-.funnel-step { flex: 1; text-align: center; position: relative; }
-.funnel-step::after {
-  content: '\2192'; position: absolute; right: -4px; top: 50%;
-  transform: translateY(-50%); font-size: 24px; color: rgba(255,255,255,0.2);
-}
-.funnel-step:last-child::after { display: none; }
-.funnel-num { font-size: 56px; font-weight: 900; line-height: 1; }
-.funnel-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 8px; }
-
 /* Verdict */
 .verdict {
   display: inline-flex; align-items: center; gap: 6px;
@@ -198,12 +186,25 @@ section {
 /* Two-col layout */
 .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 32px; }
 
-/* CRM result cards */
+/* Result cards */
 .result-card {
   background: white; border-radius: 16px; padding: 36px;
   border: 1px solid rgba(0,0,0,0.04);
   box-shadow: 0 2px 16px rgba(0,0,0,0.04);
 }
+
+/* Learning cards */
+.learning-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 32px; }
+.learning-card {
+  background: white; border-radius: 14px; padding: 24px;
+  border-left: 4px solid var(--hf-green);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+}
+.learning-num {
+  font-size: 10px; font-weight: 900; color: var(--hf-green);
+  text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;
+}
+.learning-title { font-size: 15px; font-weight: 800; line-height: 1.3; }
 
 /* Scorecard */
 .score-row {
@@ -225,6 +226,9 @@ section {
   <div class="nav-logo"><img src="https://media.hellofresh.com/w_256,q_100,f_auto,c_limit,fl_lossy/hellofresh_website/logo/Hello_Fresh_Lockup.png" alt="HelloFresh"></div>
   <div class="nav-links">
     <a href="#formats" data-section="formats">Formats</a>
+    <a href="#progression" data-section="progression">Progression</a>
+    <a href="#learnings" data-section="learnings">Learnings</a>
+    <a href="#creators" data-section="creators">Creators</a>
     <a href="#crm" data-section="crm">CRM</a>
     <a href="#aso" data-section="aso">ASO</a>
     <a href="#scorecard" data-section="scorecard">Scorecard</a>
@@ -240,8 +244,8 @@ section {
       <span style="font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--hf-lime);">Q2 2026 | Validation Report</span>
     </div>
     <h1>Cookbook<br><span>Playbook.</span></h1>
-    <p class="hero-sub">10 weeks. 25+ posts. 4 markets. 5 channels.<br>Here are the 6 things that matter.</p>
-    <div style="display: flex; gap: 20px; justify-content: center; margin-top: 32px; animation: fadeInUp 0.8s ease 0.8s both;">
+    <p class="hero-sub">10 weeks. 25+ posts. 4 markets. 5 channels.<br>What we tested, what we learned, what to scale.</p>
+    <div style="display: flex; gap: 24px; justify-content: center; margin-top: 32px; animation: fadeInUp 0.8s ease 0.8s both;">
       <div style="text-align: center;">
         <div style="font-size: 36px; font-weight: 900; color: white;">134K</div>
         <div style="font-size: 10px; font-weight: 700; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 1px;">Views</div>
@@ -249,12 +253,17 @@ section {
       <div style="width: 1px; background: rgba(255,255,255,0.15);"></div>
       <div style="text-align: center;">
         <div style="font-size: 36px; font-weight: 900; color: white;">0.87%</div>
-        <div style="font-size: 10px; font-weight: 700; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 1px;">Avg Eng</div>
+        <div style="font-size: 10px; font-weight: 700; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 1px;">Avg Eng Rate</div>
       </div>
       <div style="width: 1px; background: rgba(255,255,255,0.15);"></div>
       <div style="text-align: center;">
-        <div style="font-size: 36px; font-weight: 900; color: var(--hf-lime);">7/10</div>
+        <div style="font-size: 36px; font-weight: 900; color: var(--hf-lime);">7/8</div>
         <div style="font-size: 10px; font-weight: 700; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 1px;">KPIs Passed</div>
+      </div>
+      <div style="width: 1px; background: rgba(255,255,255,0.15);"></div>
+      <div style="text-align: center;">
+        <div style="font-size: 36px; font-weight: 900; color: white;">W14–W23</div>
+        <div style="font-size: 10px; font-weight: 700; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 1px;">Mar 30 – Jun 3</div>
       </div>
     </div>
   </div>
@@ -268,14 +277,15 @@ section {
 <section id="formats" style="min-height: auto; padding: 100px 60px;">
   <div class="section-inner reveal">
     <div class="section-tag">Organic Social</div>
-    <div class="section-title">What works.</div>
+    <div class="section-title">Format ranking.</div>
+    <div class="section-desc">5 formats tested head to head across 25+ posts. Ranked by composite score: reach, engagement rate, and conversion actions.</div>
 
     <div class="rank-list">
       <div class="rank-row">
         <div class="rank-num">1</div>
         <div class="rank-info">
           <div class="rank-name">Produced Video (Creative-Led)</div>
-          <div class="rank-stat">2.30% engagement | 5.7K views | Highest interaction rate by 3x</div>
+          <div class="rank-stat">2.30% engagement | 5.7K views | 132 interactions | Highest by 3x</div>
           <div class="rank-bar-bg"><div class="rank-bar-fill" style="width: 100%;"></div></div>
         </div>
       </div>
@@ -283,7 +293,7 @@ section {
         <div class="rank-num">2</div>
         <div class="rank-info">
           <div class="rank-name">Meme / Relatable Static</div>
-          <div class="rank-stat">7.1K avg views | Best reach format | "That's me" hooks hit 9.9K</div>
+          <div class="rank-stat">7.1K avg views | 0.63% eng | Best reach format | "That's me" hooks hit 9.9K</div>
           <div class="rank-bar-bg"><div class="rank-bar-fill" style="width: 78%;"></div></div>
         </div>
       </div>
@@ -291,48 +301,190 @@ section {
         <div class="rank-num">3</div>
         <div class="rank-info">
           <div class="rank-name">Carousel</div>
-          <div class="rank-stat">0.92% engagement | Only format that generates profile follows</div>
+          <div class="rank-stat">6.4K views | 0.92% eng | Only format generating profile follows</div>
           <div class="rank-bar-bg"><div class="rank-bar-fill" style="width: 60%;"></div></div>
         </div>
       </div>
       <div class="rank-row" style="opacity: 0.6;">
         <div class="rank-num" style="color: var(--hf-muted);">4</div>
         <div class="rank-info">
-          <div class="rank-name">Billboard Static</div>
-          <div class="rank-stat">4.7K views | 0.75% eng | Fine, not special</div>
+          <div class="rank-name">Billboard / Brand Static</div>
+          <div class="rank-stat">4.7K views | 0.75% eng | Consistent but unremarkable</div>
           <div class="rank-bar-bg"><div class="rank-bar-fill" style="width: 42%;"></div></div>
         </div>
       </div>
       <div class="rank-row" style="opacity: 0.6;">
         <div class="rank-num" style="color: var(--col-warn);">5</div>
         <div class="rank-info">
-          <div class="rank-name">UGC Product Demo</div>
-          <div class="rank-stat">~2.2K ceiling | Needs paid to break through</div>
+          <div class="rank-name">UGC Product Demo (9:16)</div>
+          <div class="rank-stat">~2.2K avg views | 0.77% eng | Hard ceiling, needs paid amplification</div>
           <div class="rank-bar-bg"><div class="rank-bar-fill" style="width: 25%;"></div></div>
         </div>
       </div>
     </div>
 
     <div class="callout callout-green">
-      <strong>Core takeaway:</strong> Problem framing outperforms feature education across every format tested. Lead with the pain ("never lose another dinner idea"), not the product.
+      <strong>Takeaway:</strong> Produced video drives 3x the engagement. Meme statics drive reach. UGC product demos have a hard organic ceiling of ~2.5K regardless of concept.
     </div>
   </div>
 </section>
 
+<!-- ===== WEEKLY PROGRESSION ===== -->
+<section id="progression" class="dark-section" style="min-height: auto; padding: 100px 60px;">
+  <div class="section-inner reveal">
+    <div class="section-tag">Organic Social</div>
+    <div class="section-title" style="color: white;">Weekly progression.</div>
+    <div class="section-desc">Views and engagement across 6 measured weeks. Volume scaled as markets were added (AU, NZ, CA in W20, UK in W21), then normalised.</div>
+
+    <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; margin-top: 32px;">
+      <div class="dark-takeaway" style="padding: 20px 12px;">
+        <div style="font-size: 10px; font-weight: 800; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">W14</div>
+        <div style="font-size: 22px; font-weight: 900; color: white;">13.3K</div>
+        <div style="font-size: 10px; color: rgba(255,255,255,0.4); margin-top: 4px;">2 posts</div>
+        <div style="font-size: 11px; font-weight: 700; color: var(--hf-lime); margin-top: 4px;">1.39%</div>
+      </div>
+      <div class="dark-takeaway" style="padding: 20px 12px;">
+        <div style="font-size: 10px; font-weight: 800; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">W19</div>
+        <div style="font-size: 22px; font-weight: 900; color: white;">28.1K</div>
+        <div style="font-size: 10px; color: rgba(255,255,255,0.4); margin-top: 4px;">5 posts</div>
+        <div style="font-size: 11px; font-weight: 700; color: var(--hf-lime); margin-top: 4px;">0.79%</div>
+      </div>
+      <div class="dark-takeaway" style="padding: 20px 12px;">
+        <div style="font-size: 10px; font-weight: 800; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">W20</div>
+        <div style="font-size: 22px; font-weight: 900; color: white;">51.9K</div>
+        <div style="font-size: 10px; color: rgba(255,255,255,0.4); margin-top: 4px;">10 posts | 4 mkts</div>
+        <div style="font-size: 11px; font-weight: 700; color: rgba(214,69,69,0.8); margin-top: 4px;">0.30%</div>
+      </div>
+      <div class="dark-takeaway" style="padding: 20px 12px;">
+        <div style="font-size: 10px; font-weight: 800; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">W21</div>
+        <div style="font-size: 22px; font-weight: 900; color: white;">17.0K</div>
+        <div style="font-size: 10px; color: rgba(255,255,255,0.4); margin-top: 4px;">5 posts | US+UK</div>
+        <div style="font-size: 11px; font-weight: 700; color: var(--hf-lime); margin-top: 4px;">0.94%</div>
+      </div>
+      <div class="dark-takeaway" style="padding: 20px 12px;">
+        <div style="font-size: 10px; font-weight: 800; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">W22</div>
+        <div style="font-size: 22px; font-weight: 900; color: white;">10.3K</div>
+        <div style="font-size: 10px; color: rgba(255,255,255,0.4); margin-top: 4px;">2 posts | US</div>
+        <div style="font-size: 11px; font-weight: 700; color: var(--hf-lime); margin-top: 4px;">1.40%</div>
+      </div>
+      <div class="dark-takeaway" style="padding: 20px 12px;">
+        <div style="font-size: 10px; font-weight: 800; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">W23</div>
+        <div style="font-size: 22px; font-weight: 900; color: white;">13.7K</div>
+        <div style="font-size: 10px; color: rgba(255,255,255,0.4); margin-top: 4px;">3 posts | US</div>
+        <div style="font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.5); margin-top: 4px;">0.77%</div>
+      </div>
+    </div>
+
+    <div style="padding: 20px 24px; border-radius: 14px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); margin-top: 32px;">
+      <div style="font-size: 15px; font-weight: 600; color: rgba(255,255,255,0.7); line-height: 1.6;">
+        <strong style="color: var(--hf-lime);">Takeaway:</strong> Quality over quantity. W20 had the most posts (10) but the lowest engagement (0.30%). Fewer, stronger posts (W22: 2 posts, 1.40% eng) consistently outperformed high volume weeks.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== KEY LEARNINGS ===== -->
+<section id="learnings" style="min-height: auto; padding: 100px 60px;">
+  <div class="section-inner reveal">
+    <div class="section-tag">Organic Social</div>
+    <div class="section-title">Key learnings.</div>
+
+    <div class="learning-grid">
+      <div class="learning-card">
+        <div class="learning-num">01</div>
+        <div class="learning-title">"That's me" memes drive the highest organic reach (9.9K best)</div>
+      </div>
+      <div class="learning-card">
+        <div class="learning-num">02</div>
+        <div class="learning-title">Produced creative-led video generates 3x the engagement of UGC demos</div>
+      </div>
+      <div class="learning-card">
+        <div class="learning-num">03</div>
+        <div class="learning-title">UGC product demos have a hard organic ceiling of ~2.5K views</div>
+      </div>
+      <div class="learning-card">
+        <div class="learning-num">04</div>
+        <div class="learning-title">Carousels are the only format generating profile follows</div>
+      </div>
+      <div class="learning-card" style="grid-column: span 2; border-left-color: var(--hf-dark);">
+        <div class="learning-num" style="color: var(--hf-dark);">05</div>
+        <div class="learning-title">Problem framing outperforms feature education. Always. Lead with the pain, not the product.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CREATOR ATTRIBUTION ===== -->
+<section id="creators" class="dark-section" style="min-height: auto; padding: 100px 60px;">
+  <div class="section-inner reveal">
+    <div class="section-tag">Creator Platform</div>
+    <div class="section-title" style="color: white;">Creator performance.</div>
+    <div class="section-desc">2 creators live in Q2 with UTM tracking. Pipeline growing fast.</div>
+
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 32px;">
+      <div class="dark-takeaway">
+        <div style="font-size: 40px; font-weight: 900; color: var(--hf-lime);">3</div>
+        <div style="font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.4); text-transform: uppercase; margin-top: 8px;">Creators Live</div>
+      </div>
+      <div class="dark-takeaway">
+        <div style="font-size: 40px; font-weight: 900; color: white;">5</div>
+        <div style="font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.4); text-transform: uppercase; margin-top: 8px;">Onboarding</div>
+      </div>
+      <div class="dark-takeaway">
+        <div style="font-size: 40px; font-weight: 900; color: white;">93</div>
+        <div style="font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.4); text-transform: uppercase; margin-top: 8px;">Applied</div>
+      </div>
+      <div class="dark-takeaway">
+        <div style="font-size: 40px; font-weight: 900; color: white;">91</div>
+        <div style="font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.4); text-transform: uppercase; margin-top: 8px;">UTM Sessions</div>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px;">
+      <div class="dark-takeaway" style="text-align: left; padding: 24px;">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+          <div style="width: 32px; height: 32px; border-radius: 50%; background: var(--hf-lime); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; color: var(--hf-dark-green);">EE</div>
+          <div>
+            <div style="font-size: 14px; font-weight: 800; color: white;">@emilyeggers</div>
+            <div style="font-size: 11px; color: rgba(255,255,255,0.4);">3.5 weeks live</div>
+          </div>
+        </div>
+        <div style="font-size: 13px; color: rgba(255,255,255,0.6);">80 sessions | ~3.3/day | 1 Cookbook view</div>
+      </div>
+      <div class="dark-takeaway" style="text-align: left; padding: 24px;">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+          <div style="width: 32px; height: 32px; border-radius: 50%; background: var(--hf-lime); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; color: var(--hf-dark-green);">SS</div>
+          <div>
+            <div style="font-size: 14px; font-weight: 800; color: white;">@spoonfulofsi</div>
+            <div style="font-size: 11px; color: rgba(255,255,255,0.4);">3 days (early data)</div>
+          </div>
+        </div>
+        <div style="font-size: 13px; color: rgba(255,255,255,0.6);">11 sessions | 0 Cookbook views</div>
+      </div>
+    </div>
+
+    <div style="padding: 20px 24px; border-radius: 14px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); margin-top: 24px;">
+      <div style="font-size: 15px; font-weight: 600; color: rgba(255,255,255,0.7); line-height: 1.6;">
+        <strong style="color: var(--hf-lime);">Takeaway:</strong> Recruitment is working (93 applications from a single social post). Traffic is flowing. Creator UTM links need to deep link directly to Cookbook rather than the generic landing page.
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- ===== CRM ===== -->
 <section id="crm" style="min-height: auto; padding: 100px 60px;">
   <div class="section-inner reveal">
     <div class="section-tag">CRM</div>
     <div class="section-title">One win, one kill.</div>
+    <div class="section-desc">Two trigger-based push notification tests. One statistically significant reduction in churn. One to avoid entirely.</div>
 
     <div class="two-col">
       <div class="result-card" style="border-left: 5px solid var(--hf-green);">
         <span class="verdict verdict-pass" style="margin-bottom: 16px;">Scale this</span>
         <h3 style="font-size: 20px; font-weight: 900; margin-top: 12px;">Post-Pausing Push</h3>
         <div style="font-size: 56px; font-weight: 900; color: var(--hf-green); margin: 20px 0;">-6.6%</div>
-        <div style="font-size: 14px; font-weight: 700; color: var(--hf-muted);">cancellation rate (statistically significant)</div>
-        <div style="font-size: 13px; color: var(--hf-muted); margin-top: 16px; line-height: 1.5;">Cookbook push to paused customers reduces churn. No negative side effects. Roll out to all markets.</div>
+        <div style="font-size: 14px; font-weight: 700; color: var(--hf-muted);">cancellation rate (statistically significant, 90% CI)</div>
+        <div style="font-size: 13px; color: var(--hf-muted); margin-top: 16px; line-height: 1.5;">Cookbook push to paused customers reduces churn with no negative side effects. Roll out to all markets, once per month.</div>
       </div>
 
       <div class="result-card" style="border-left: 5px solid var(--col-warn);">
@@ -340,7 +492,7 @@ section {
         <h3 style="font-size: 20px; font-weight: 900; margin-top: 12px;">Post-Meal Selection Push</h3>
         <div style="font-size: 56px; font-weight: 900; color: var(--col-warn); margin: 20px 0;">+2.0%</div>
         <div style="font-size: 14px; font-weight: 700; color: var(--hf-muted);">pause rate increase (statistically significant)</div>
-        <div style="font-size: 13px; color: var(--hf-muted); margin-top: 16px; line-height: 1.5;">Pushing Cookbook after meal selection signals "you can cook without us." Increases pausing. Do not scale.</div>
+        <div style="font-size: 13px; color: var(--hf-muted); margin-top: 16px; line-height: 1.5;">Pushing Cookbook after meal selection signals "you can cook without us." Increases pausing at the worst possible moment. Do not scale.</div>
       </div>
     </div>
   </div>
@@ -351,12 +503,13 @@ section {
   <div class="section-inner reveal">
     <div class="section-tag">ASO</div>
     <div class="section-title" style="color: white;">Store performance.</div>
+    <div class="section-desc">Custom Product Pages, In-App Events, and Featuring results.</div>
 
     <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 32px;">
       <div class="dark-takeaway">
         <div style="font-size: 48px; font-weight: 900; color: var(--col-warn);">7%</div>
         <div style="font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.4); text-transform: uppercase; margin-top: 8px;">Google CPP CVR</div>
-        <div style="font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 12px;">Baseline: 17.95%. Needs new creative.</div>
+        <div style="font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 12px;">Baseline: 17.95%. Screenshots need iteration.</div>
       </div>
       <div class="dark-takeaway">
         <div style="font-size: 48px; font-weight: 900; color: var(--hf-lime);">25K</div>
@@ -372,7 +525,7 @@ section {
 
     <div style="padding: 20px 24px; border-radius: 14px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); margin-top: 32px;">
       <div style="font-size: 15px; font-weight: 600; color: rgba(255,255,255,0.7); line-height: 1.6;">
-        <strong style="color: var(--hf-lime);">Takeaway:</strong> CPP screenshots need iteration. Featuring drives massive top-of-funnel but CVR is well below baseline.
+        <strong style="color: var(--hf-lime);">Takeaway:</strong> Featuring drives massive top-of-funnel (25K viewers) but CPP conversion is well below baseline. New screenshot creative needed before scaling paid traffic to CPPs.
       </div>
     </div>
   </div>
@@ -395,13 +548,13 @@ section {
       </div>
       <div class="takeaway">
         <div class="takeaway-value" style="color: var(--col-acquire);">5</div>
-        <div class="takeaway-label">Channels</div>
+        <div class="takeaway-label">Channels Tested</div>
       </div>
     </div>
 
     <div style="background: white; border-radius: 16px; padding: 32px; border: 1px solid rgba(0,0,0,0.04); box-shadow: 0 2px 16px rgba(0,0,0,0.04);">
       <div class="score-row">
-        <div class="score-kpi">Organic reach per post</div>
+        <div class="score-kpi">Organic reach per post (US)</div>
         <div class="score-result" style="color: var(--hf-green);">5.2K avg</div>
         <span class="verdict verdict-pass">Pass</span>
       </div>
@@ -416,8 +569,8 @@ section {
         <span class="verdict verdict-pass">Pass</span>
       </div>
       <div class="score-row">
-        <div class="score-kpi">Formats tested</div>
-        <div class="score-result" style="color: var(--hf-green);">5</div>
+        <div class="score-kpi">Content formats tested</div>
+        <div class="score-result" style="color: var(--hf-green);">5 formats</div>
         <span class="verdict verdict-pass">Pass</span>
       </div>
       <div class="score-row">
@@ -438,13 +591,13 @@ section {
       <div class="score-row">
         <div class="score-kpi">ASO conversion rate</div>
         <div class="score-result" style="color: var(--col-warn);">7% (baseline 18%)</div>
-        <span class="verdict verdict-fail">Fail</span>
+        <span class="verdict verdict-fail">Needs Work</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== WHAT'S NEXT ===== -->
+<!-- ===== FOOTER ===== -->
 <section style="min-height: 80vh; background: var(--hf-green); display: flex; align-items: center; justify-content: center; text-align: center; color: white; padding: 80px 60px;">
   <div style="max-width: 700px;" class="reveal">
     <div style="font-size: 11px; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; color: var(--hf-lime); margin-bottom: 16px;">Next Steps</div>
@@ -456,11 +609,15 @@ section {
       </div>
       <div style="display: flex; gap: 12px; align-items: center;">
         <div style="width: 28px; height: 28px; border-radius: 50%; background: rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; flex-shrink: 0;">2</div>
-        <div style="font-size: 15px; font-weight: 600; color: rgba(255,255,255,0.85);">Iterate CPP screenshots (7% CVR too low)</div>
+        <div style="font-size: 15px; font-weight: 600; color: rgba(255,255,255,0.85);">Double down on meme statics + produced video</div>
       </div>
       <div style="display: flex; gap: 12px; align-items: center;">
         <div style="width: 28px; height: 28px; border-radius: 50%; background: rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; flex-shrink: 0;">3</div>
-        <div style="font-size: 15px; font-weight: 600; color: rgba(255,255,255,0.85);">Double down on meme statics + produced video</div>
+        <div style="font-size: 15px; font-weight: 600; color: rgba(255,255,255,0.85);">Iterate CPP screenshots (7% CVR too low)</div>
+      </div>
+      <div style="display: flex; gap: 12px; align-items: center;">
+        <div style="width: 28px; height: 28px; border-radius: 50%; background: rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; flex-shrink: 0;">4</div>
+        <div style="font-size: 15px; font-weight: 600; color: rgba(255,255,255,0.85);">Deep link creator UTMs directly to Cookbook</div>
       </div>
     </div>
     <div style="font-size: 13px; color: rgba(255,255,255,0.4); margin-top: 48px;">
