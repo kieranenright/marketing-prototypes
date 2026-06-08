@@ -609,6 +609,59 @@ body {
   line-height: 1.4;
 }
 
+/* PHASE HEADER */
+.phase-header {
+  max-width: 900px;
+  margin: 0 auto 32px;
+  padding: 0 40px;
+}
+
+.phase-banner {
+  background: var(--brand-green);
+  border-radius: var(--radius);
+  padding: 28px 32px;
+  color: var(--white);
+}
+
+.phase-eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.7;
+  margin-bottom: 8px;
+}
+
+.phase-title {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 6px;
+}
+
+.phase-desc {
+  font-size: 14px;
+  opacity: 0.85;
+  line-height: 1.5;
+  max-width: 600px;
+}
+
+.phase-banner--secondary {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+}
+
+.phase-banner--secondary .phase-eyebrow {
+  color: var(--brand-green);
+  opacity: 1;
+}
+
+.phase-banner--secondary .phase-desc {
+  color: var(--text-secondary);
+  opacity: 1;
+}
+
 /* FOOTER */
 .site-footer {
   max-width: 900px;
@@ -652,7 +705,7 @@ body {
     <span class="top-bar-team">CRM Strategy</span>
   </div>
   <div class="top-bar-right">
-    <span class="top-bar-badge">v2.0</span>
+    <span class="top-bar-badge">v3.0</span>
   </div>
 </nav>
 
@@ -668,11 +721,11 @@ body {
     </div>
     <div class="meta-item">
       <span class="meta-label">Use Cases</span>
-      <span class="meta-value">10</span>
+      <span class="meta-value">12</span>
     </div>
     <div class="meta-item">
       <span class="meta-label">Total Touchpoints</span>
-      <span class="meta-value">22</span>
+      <span class="meta-value">29</span>
     </div>
     <div class="meta-item">
       <span class="meta-label">Audience</span>
@@ -680,7 +733,7 @@ body {
     </div>
     <div class="meta-item">
       <span class="meta-label">Updated</span>
-      <span class="meta-value">June 1, 2026</span>
+      <span class="meta-value">June 8, 2026</span>
     </div>
   </div>
 </header>
@@ -723,11 +776,422 @@ body {
   </div>
 </section>
 
-<!-- USE CASE OVERVIEW -->
+<!-- PHASE 1 HEADER -->
+<div class="phase-header">
+  <div class="phase-banner">
+    <div class="phase-eyebrow">Phase 1</div>
+    <div class="phase-title">Meal Kit Lifecycle</div>
+    <div class="phase-desc">The core loop: box arrives, plan the week, cook each meal. These pushes drive planner adoption and recipe cook-through using only meal kit data. No Cookbook dependency, no complex event signals.</div>
+  </div>
+</div>
+
+<!-- PHASE 1: USE CASE OVERVIEW -->
 <section class="section">
   <div class="section-card">
     <div class="section-header">
-      <span class="section-label">Use Case Overview</span>
+      <span class="section-label">Phase 1 Overview</span>
+      <span class="section-count">2 Use Cases / 7 Touchpoints</span>
+    </div>
+    <div class="section-body" style="padding: 0;">
+      <table class="segment-table">
+        <thead>
+          <tr>
+            <th>Use Case</th>
+            <th>Trigger Event</th>
+            <th>Goal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="seg-name">Plan Your Week</td>
+            <td class="seg-def">Meal selection cutoff passed</td>
+            <td class="seg-goal">Drive planner adoption</td>
+          </tr>
+          <tr>
+            <td class="seg-name">Cook Tonight</td>
+            <td class="seg-def">Planned recipe assigned to today</td>
+            <td class="seg-goal">Drive recipe cook-through</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- PHASE 1 USE CASE 1: PLAN YOUR WEEK -->
+<section class="section">
+  <div class="section-card">
+    <div class="section-header">
+      <span class="section-label">1. Plan Your Week</span>
+      <span class="section-count">4 Variants</span>
+    </div>
+    <div class="section-body">
+      <div class="segment-detail">
+        <div class="trigger-box">
+          <div class="trigger-label">Trigger Event</div>
+          <div class="trigger-text">User's meal selection cutoff has passed (e.g. Saturday 8pm). Their choices are locked in and they know exactly which meals are coming. The push encourages them to assign each meal to a specific night in the planner before the week runs away from them.</div>
+        </div>
+        <div class="ei-insight-box">
+          <div class="ei-insight-label">EI Insight</div>
+          <div class="ei-insight-text">The EI operates on "penciled structure." They don't want a rigid plan, but they do want the scaffolding in place so they can make fast decisions later. 58% choose meals based on available prep time. The planner gives them that at-a-glance view: what's quick for Monday, what's worth the effort for Saturday. Surfacing the planner right after cutoff catches the transition from "choosing meals" to "planning the week." Their selections are fresh, momentum is high, and there's still time before delivery to map nights out.</div>
+        </div>
+        <div class="exit-box">
+          <div class="exit-label">Suppression</div>
+          <ul class="exit-list">
+            <li>One send per delivery cycle (weekly)</li>
+            <li>Do not send if user has already opened the planner since cutoff</li>
+            <li>Do not stack with cutoff confirmation or delivery push (space by 4+ hours)</li>
+            <li>Standard 24h cross-team suppression applies</li>
+          </ul>
+        </div>
+
+        <div class="push-sequence">
+          <div class="push-card">
+            <div class="push-card-header">
+              <span class="push-label">Variant A: Autonomy</span>
+              <span class="push-timing">Morning after cutoff | 07:30-09:00 AM</span>
+            </div>
+            <div class="push-card-body">
+              <div class="push-phone">
+                <div class="push-notch"></div>
+                <div class="push-notification">
+                  <div class="push-notif-header">
+                    <div class="push-notif-icon"></div>
+                    <span class="push-notif-app">HelloFresh</span>
+                    <span class="push-notif-time">now</span>
+                  </div>
+                  <div class="push-notif-title">Your meals. Your nights. Your call.</div>
+                  <div class="push-notif-body">Open the planner and assign them however you want.</div>
+                </div>
+              </div>
+              <div class="push-meta">
+                <div>
+                  <div class="push-meta-label">EI Insight</div>
+                  <div class="push-meta-value">They don't want to be told what to do. They want tools that work on their behalf. Triple "Your" reinforces ownership and control. "However you want" gives explicit permission to plan their own way. The push feels like a tool surfacing, not a brand directing.</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">Test Hypothesis</div>
+                  <div class="push-meta-value">Does autonomy language ("your call", "however you want") outperform direct instruction? Tests whether respecting the EI's need for control drives higher engagement than telling them what to do.</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">TOV Flavour</div>
+                  <div class="push-meta-value">Zesty + Sharp</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">Character Count</div>
+                  <div class="push-meta-value">
+                    Title: <span class="char-count char-ok">30/30</span> &nbsp;
+                    Body: <span class="char-count char-ok">50/80</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="push-card">
+            <div class="push-card-header">
+              <span class="push-label">Variant B: Time Buy-back</span>
+              <span class="push-timing">Morning after cutoff | 07:30-09:00 AM</span>
+            </div>
+            <div class="push-card-body">
+              <div class="push-phone">
+                <div class="push-notch"></div>
+                <div class="push-notification">
+                  <div class="push-notif-header">
+                    <div class="push-notif-icon"></div>
+                    <span class="push-notif-app">HelloFresh</span>
+                    <span class="push-notif-time">now</span>
+                  </div>
+                  <div class="push-notif-title">30 seconds now saves decisions all week.</div>
+                  <div class="push-notif-body">Your meals are set. Plan them once, never think twice.</div>
+                </div>
+              </div>
+              <div class="push-meta">
+                <div>
+                  <div class="push-meta-label">EI Insight</div>
+                  <div class="push-meta-value">58% choose meals based on available prep time. They use tools to reclaim minutes. This frames the planner as a time investment: 30 seconds of effort now eliminates daily "what's for dinner?" decisions all week. Speaks directly to their optimisation mindset.</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">Test Hypothesis</div>
+                  <div class="push-meta-value">Does framing the planner as a time trade (tiny effort now vs. repeated decisions later) resonate more than emotional or control-based appeals?</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">TOV Flavour</div>
+                  <div class="push-meta-value">Sharp + Fresh</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">Character Count</div>
+                  <div class="push-meta-value">
+                    Title: <span class="char-count char-ok">30/30</span> &nbsp;
+                    Body: <span class="char-count char-ok">51/80</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="push-card">
+            <div class="push-card-header">
+              <span class="push-label">Variant C: Penciled Structure</span>
+              <span class="push-timing">Morning after cutoff | 07:30-09:00 AM</span>
+            </div>
+            <div class="push-card-body">
+              <div class="push-phone">
+                <div class="push-notch"></div>
+                <div class="push-notification">
+                  <div class="push-notif-header">
+                    <div class="push-notif-icon"></div>
+                    <span class="push-notif-app">HelloFresh</span>
+                    <span class="push-notif-time">now</span>
+                  </div>
+                  <div class="push-notif-title">Pencil in your week. Change it later.</div>
+                  <div class="push-notif-body">Assign meals to nights. Nothing's locked, it's just a start.</div>
+                </div>
+              </div>
+              <div class="push-meta">
+                <div>
+                  <div class="push-meta-label">EI Insight</div>
+                  <div class="push-meta-value">They plan loosely and protect their right to change course. "Pencil in" mirrors their actual behaviour. "Change it later" and "Nothing's locked" give explicit permission to be flexible. Lowers the commitment barrier by framing the planner as provisional, not permanent.</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">Test Hypothesis</div>
+                  <div class="push-meta-value">Does giving explicit permission to be flexible ("change it later", "nothing's locked") lower the barrier to planner adoption more than other framings?</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">TOV Flavour</div>
+                  <div class="push-meta-value">Fresh + Zesty</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">Character Count</div>
+                  <div class="push-meta-value">
+                    Title: <span class="char-count char-ok">30/30</span> &nbsp;
+                    Body: <span class="char-count char-ok">55/80</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="push-card">
+            <div class="push-card-header">
+              <span class="push-label">Variant D: Accomplishment</span>
+              <span class="push-timing">Morning after cutoff | 07:30-09:00 AM</span>
+            </div>
+            <div class="push-card-body">
+              <div class="push-phone">
+                <div class="push-notch"></div>
+                <div class="push-notification">
+                  <div class="push-notif-header">
+                    <div class="push-notif-icon"></div>
+                    <span class="push-notif-app">HelloFresh</span>
+                    <span class="push-notif-time">now</span>
+                  </div>
+                  <div class="push-notif-title">Get ahead of your week.</div>
+                  <div class="push-notif-body">Meals are ready. Plan the nights and start the week winning.</div>
+                </div>
+              </div>
+              <div class="push-meta">
+                <div>
+                  <div class="push-meta-label">EI Insight</div>
+                  <div class="push-meta-value">41% say cooking gives them a sense of accomplishment and pride. "Get ahead" positions planning as a proactive win. "Start the week winning" taps into their achiever identity. The planner isn't a chore, it's the first move that makes them feel in control.</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">Test Hypothesis</div>
+                  <div class="push-meta-value">Does tapping into the EI's achiever identity ("get ahead", "winning") drive more engagement than practical or autonomy-based framing?</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">TOV Flavour</div>
+                  <div class="push-meta-value">Vivid + Fresh</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">Character Count</div>
+                  <div class="push-meta-value">
+                    Title: <span class="char-count char-ok">23/30</span> &nbsp;
+                    Body: <span class="char-count char-ok">57/80</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHASE 1 USE CASE 2: COOK TONIGHT -->
+<section class="section">
+  <div class="section-card">
+    <div class="section-header">
+      <span class="section-label">2. Cook Tonight</span>
+      <span class="section-count">3 Variants</span>
+    </div>
+    <div class="section-body">
+      <div class="segment-detail">
+        <div class="trigger-box">
+          <div class="trigger-label">Trigger Event</div>
+          <div class="trigger-text">User has a meal kit recipe assigned to today's planner slot. The meal is in the fridge. This push closes the loop between planning and cooking: a same-day prompt that surfaces the recipe at the right moment.</div>
+        </div>
+        <div class="ei-insight-box">
+          <div class="ei-insight-label">EI Insight</div>
+          <div class="ei-insight-text">Plans erode. The EI assigned this meal three days ago, but today they're tired and tempted to order in. The push isn't a guilt trip. It's a system confirmation: you made this decision already, the ingredients are here, just follow through. It reduces the cognitive load of re-deciding. 41% say cooking gives them a sense of accomplishment. The push nudges them toward that feeling, not away from convenience.</div>
+        </div>
+        <div class="exit-box">
+          <div class="exit-label">Suppression</div>
+          <ul class="exit-list">
+            <li>Max 3 per week (choose the first 3 planned days in the cycle to avoid fatigue)</li>
+            <li>Do not send if user has already opened the recipe today</li>
+            <li>Do not send if user un-assigned the meal from this slot earlier today</li>
+            <li>Standard 24h cross-team suppression applies</li>
+          </ul>
+        </div>
+
+        <div class="push-sequence">
+          <div class="push-card">
+            <div class="push-card-header">
+              <span class="push-label">Primary: Confirmation</span>
+              <span class="push-timing">Day of planned meal | 17:00-18:00 PM</span>
+            </div>
+            <div class="push-card-body">
+              <div class="push-phone">
+                <div class="push-notch"></div>
+                <div class="push-notification">
+                  <div class="push-notif-header">
+                    <div class="push-notif-icon"></div>
+                    <span class="push-notif-app">HelloFresh</span>
+                    <span class="push-notif-time">now</span>
+                  </div>
+                  <div class="push-notif-title">Tonight: {{recipe_name}}</div>
+                  <div class="push-notif-body">You planned it. Ingredients are in. Tap to start cooking.</div>
+                </div>
+              </div>
+              <div class="push-meta">
+                <div>
+                  <div class="push-meta-label">Angle</div>
+                  <div class="push-meta-value">"Tonight:" is immediate and anchoring. Body validates their past decision ("You planned it"), removes friction ("Ingredients are in"), and gives a clear CTA ("Tap to start cooking"). No sell, no fluff. The system is working on their behalf.</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">TOV Flavour</div>
+                  <div class="push-meta-value">Sharp + Fresh</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">Personalisation</div>
+                  <div class="push-meta-value">{{recipe_name}} = the meal kit recipe assigned to today's planner slot</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">Character Count</div>
+                  <div class="push-meta-value">
+                    Title: <span class="char-count char-ok">~26/30</span> &nbsp;
+                    Body: <span class="char-count char-ok">52/80</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="push-card">
+            <div class="push-card-header">
+              <span class="push-label">Variant B: Time Anchor</span>
+              <span class="push-timing">A/B rotation | 17:00-18:00 PM</span>
+            </div>
+            <div class="push-card-body">
+              <div class="push-phone">
+                <div class="push-notch"></div>
+                <div class="push-notification">
+                  <div class="push-notif-header">
+                    <div class="push-notif-icon"></div>
+                    <span class="push-notif-app">HelloFresh</span>
+                    <span class="push-notif-time">now</span>
+                  </div>
+                  <div class="push-notif-title">{{cook_time}} mins. That's it.</div>
+                  <div class="push-notif-body">{{recipe_name}} is on the plan. Everything's in the fridge.</div>
+                </div>
+              </div>
+              <div class="push-meta">
+                <div>
+                  <div class="push-meta-label">Angle</div>
+                  <div class="push-meta-value">Leads with time because 58% of EIs choose meals based on prep time. "That's it." makes the commitment feel small. Body reassures: planned + ingredients ready. Removes both the "what" and the "how long" from the dinner decision. Nothing left to think about.</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">TOV Flavour</div>
+                  <div class="push-meta-value">Sharp + Vivid</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">Personalisation</div>
+                  <div class="push-meta-value">{{cook_time}} = recipe total time in minutes. {{recipe_name}} = assigned meal.</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">Character Count</div>
+                  <div class="push-meta-value">
+                    Title: <span class="char-count char-ok">~20/30</span> &nbsp;
+                    Body: <span class="char-count char-ok">~55/80</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="push-card">
+            <div class="push-card-header">
+              <span class="push-label">Variant C: Momentum</span>
+              <span class="push-timing">A/B rotation | 17:00-18:00 PM</span>
+            </div>
+            <div class="push-card-body">
+              <div class="push-phone">
+                <div class="push-notch"></div>
+                <div class="push-notification">
+                  <div class="push-notif-header">
+                    <div class="push-notif-icon"></div>
+                    <span class="push-notif-app">HelloFresh</span>
+                    <span class="push-notif-time">now</span>
+                  </div>
+                  <div class="push-notif-title">{{day_of_week}} = {{recipe_name}}</div>
+                  <div class="push-notif-body">Your plan says so. Open the recipe and get going.</div>
+                </div>
+              </div>
+              <div class="push-meta">
+                <div>
+                  <div class="push-meta-label">Angle</div>
+                  <div class="push-meta-value">"Wednesday = Chicken Parm" mirrors how the EI thinks: day equals meal, decision made. "Your plan says so" gives the planner authority. "Get going" is Zesty, action-first. Builds the habit loop: plan, reminder, cook, satisfaction.</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">TOV Flavour</div>
+                  <div class="push-meta-value">Zesty + Fresh</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">Personalisation</div>
+                  <div class="push-meta-value">{{day_of_week}} = today (e.g. "Wednesday"). {{recipe_name}} = assigned meal kit recipe.</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">Character Count</div>
+                  <div class="push-meta-value">
+                    Title: <span class="char-count char-ok">~28/30</span> &nbsp;
+                    Body: <span class="char-count char-ok">48/80</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHASE 2 HEADER -->
+<div class="phase-header">
+  <div class="phase-banner phase-banner--secondary">
+    <div class="phase-eyebrow">Phase 2</div>
+    <div class="phase-title">Cookbook Event Triggers</div>
+    <div class="phase-desc">Advanced behavioural pushes that require Cookbook adoption, real-time event signals, and complex personalisation logic. Builds on Phase 1 planner habits to drive Cookbook engagement on off-nights.</div>
+  </div>
+</div>
+
+<!-- PHASE 2: USE CASE OVERVIEW -->
+<section class="section">
+  <div class="section-card">
+    <div class="section-header">
+      <span class="section-label">Phase 2 Overview</span>
       <span class="section-count">10 Event Triggers</span>
     </div>
     <div class="section-body" style="padding: 0;">
@@ -2131,7 +2595,7 @@ body {
     <img src="https://media.hellofresh.com/w_256,q_100,f_auto,c_limit,fl_lossy/hellofresh_website/logo/Hello_Fresh_Lockup.png" alt="HelloFresh" class="footer-logo">
     <span class="footer-text">Product Marketing</span>
   </div>
-  <span class="footer-updated">Updated: June 1, 2026</span>
+  <span class="footer-updated">Updated: June 8, 2026</span>
 </footer>
 
 <script src="../auth.js"></script>
