@@ -9,34 +9,67 @@
 
 :root {
   --hf-green: #1B8A4A;
-  --hf-dark-green: #0F5C32;
+  --hf-dark-green: #0B5C30;
   --hf-lime: #C8F065;
-  --hf-forest: #2D6B4A;
-  --hf-sage: #5A9E7C;
-  --hf-dark: #1A1A1A;
-  --hf-muted: #888;
-  --hf-cream: #FAF8F3;
+  --hf-cream: #F5F1EB;
   --hf-white: #FFFFFF;
+  --hf-dark: #1A1A1A;
+  --hf-muted: #6B6B6B;
+  --hf-forest: #2D6B4F;
+  --hf-sage: #5E9B7E;
   --col-acquire: #2D6BE0;
   --col-engage: #1B8A4A;
   --col-warn: #D64545;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 
 body {
-  font-family: 'Inter', -apple-system, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   background: var(--hf-cream);
   color: var(--hf-dark);
+  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
 
 /* PROGRESS BAR */
 .progress-bar {
-  position: fixed; top: 0; left: 0; height: 3px; z-index: 9999;
+  position: fixed; top: 0; left: 0; height: 4px; z-index: 1000;
   background: linear-gradient(90deg, var(--hf-green), var(--hf-lime));
   transition: width 0.1s linear;
 }
+
+/* NAV */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; height: 56px;
+  background: rgba(245, 241, 235, 0.92);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  z-index: 999; display: flex; align-items: center;
+  justify-content: space-between; padding: 0 40px;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  transform: translateY(-100%); transition: transform 0.3s ease;
+}
+.nav.visible { transform: translateY(0); }
+.nav-logo img { height: 22px; }
+.nav-links { display: flex; gap: 6px; }
+.nav-links a {
+  text-decoration: none; font-size: 11px; font-weight: 600;
+  color: var(--hf-muted); padding: 6px 14px; border-radius: 20px; transition: all 0.2s;
+}
+.nav-links a:hover, .nav-links a.active { background: var(--hf-green); color: white; }
+
+/* REVEAL ANIMATIONS */
+.reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.stagger-1 { transition-delay: 0.1s; }
+.stagger-2 { transition-delay: 0.2s; }
+.stagger-3 { transition-delay: 0.3s; }
+.stagger-4 { transition-delay: 0.4s; }
+
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes bounce { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(10px); } }
 
 /* SECTIONS */
 section {
@@ -68,9 +101,55 @@ section {
   line-height: 1.7; max-width: 600px; margin-bottom: 32px;
 }
 
+/* HERO */
+.hero {
+  min-height: 100vh;
+  background: linear-gradient(160deg, var(--hf-green) 0%, var(--hf-dark-green) 100%);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; top: -200px; right: -200px;
+  width: 800px; height: 800px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(200,240,101,0.12) 0%, transparent 60%);
+}
+.hero::after {
+  content: ''; position: absolute; bottom: -200px; left: -200px;
+  width: 600px; height: 600px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(200,240,101,0.08) 0%, transparent 60%);
+}
+.hero-content { text-align: center; z-index: 1; max-width: 900px; }
+.hero h1 {
+  font-size: 64px; font-weight: 900; color: white;
+  letter-spacing: -3px; line-height: 0.95; margin-bottom: 20px;
+  animation: fadeInUp 0.8s ease 0.4s both;
+}
+.hero h1 span { color: var(--hf-lime); }
+.hero-sub {
+  font-size: 18px; font-weight: 400; color: rgba(255,255,255,0.6);
+  line-height: 1.5; margin-bottom: 32px;
+  animation: fadeInUp 0.8s ease 0.6s both;
+}
+.hero-tags {
+  display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+  animation: fadeInUp 0.8s ease 0.8s both;
+}
+.hero-tag {
+  background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.85);
+  padding: 8px 20px; border-radius: 8px; font-size: 13px; font-weight: 600;
+  border: 1px solid rgba(255,255,255,0.15);
+}
+.scroll-cue {
+  position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  animation: bounce 2s ease infinite 1.5s; z-index: 2;
+}
+.scroll-cue span { font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.35); letter-spacing: 2px; text-transform: uppercase; }
+.scroll-arrow { width: 24px; height: 24px; border-right: 2px solid rgba(255,255,255,0.3); border-bottom: 2px solid rgba(255,255,255,0.3); transform: rotate(45deg); }
+
 /* DARK SECTIONS */
 .dark-section {
-  background: linear-gradient(160deg, #1a1a1a 0%, #2a2a2a 100%);
+  background: linear-gradient(160deg, var(--hf-dark) 0%, #2a2a2a 100%);
   color: white;
 }
 .dark-section .section-tag { color: var(--hf-lime); }
@@ -255,51 +334,50 @@ section {
 
 <div class="progress-bar" id="progressBar" style="width: 0%;"></div>
 
+<nav class="nav" id="mainNav">
+  <div class="nav-logo"><img src="https://media.hellofresh.com/w_256,q_100,f_auto,c_limit,fl_lossy/hellofresh_website/logo/Hello_Fresh_Lockup.png" alt="HelloFresh"></div>
+  <div class="nav-links">
+    <a href="#formats" data-section="formats">Formats</a>
+    <a href="#progression" data-section="progression">Progression</a>
+    <a href="#learnings" data-section="learnings">Learnings</a>
+    <a href="#attribution" data-section="attribution">Attribution</a>
+    <a href="#creators" data-section="creators">Creators</a>
+    <a href="#aso" data-section="aso">ASO</a>
+    <a href="#crm" data-section="crm">CRM</a>
+    <a href="#recommendations" data-section="recommendations">Recommendations</a>
+    <a href="#scorecard" data-section="scorecard">Scorecard</a>
+  </div>
+</nav>
+
 <!-- ===== HERO ===== -->
-<section class="dark-section" style="min-height: 80vh;">
-  <div class="section-inner">
-    <div class="section-tag">Q2 2026 Validation Report</div>
-    <div class="section-title" style="color: white; font-size: 52px;">HelloFresh Tech Feature<br>Marketing Playbook.</div>
-    <div class="section-desc" style="max-width: none;">Cookbook is the proving ground. 10 weeks of testing across organic social, ASO, CRM, and creator partnerships. Here is what we learned.</div>
-
-    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 48px;">
-      <div class="dark-card" style="text-align: center; padding: 32px 20px;">
-        <div style="font-size: 36px; font-weight: 900; color: var(--hf-lime);">134K+</div>
-        <div style="font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.5); text-transform: uppercase; margin-top: 8px;">Total Social Views</div>
-      </div>
-      <div class="dark-card" style="text-align: center; padding: 32px 20px;">
-        <div style="font-size: 36px; font-weight: 900; color: var(--hf-lime);">25+</div>
-        <div style="font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.5); text-transform: uppercase; margin-top: 8px;">Posts Published</div>
-      </div>
-      <div class="dark-card" style="text-align: center; padding: 32px 20px;">
-        <div style="font-size: 36px; font-weight: 900; color: var(--hf-lime);">4</div>
-        <div style="font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.5); text-transform: uppercase; margin-top: 8px;">Markets Live</div>
-      </div>
-      <div class="dark-card" style="text-align: center; padding: 32px 20px;">
-        <div style="font-size: 36px; font-weight: 900; color: var(--hf-lime);">5</div>
-        <div style="font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.5); text-transform: uppercase; margin-top: 8px;">Channels Tested</div>
-      </div>
+<section class="hero" id="hero">
+  <div class="hero-content">
+    <div style="display: inline-flex; align-items: center; gap: 16px; margin-bottom: 24px; animation: fadeInDown 0.8s ease 0.2s both;">
+      <img src="https://media.hellofresh.com/w_256,q_100,f_auto,c_limit,fl_lossy/hellofresh_website/logo/Hello_Fresh_Lockup.png" alt="HelloFresh" style="height: 24px; filter: brightness(0) invert(1);">
+      <div style="width: 1px; height: 20px; background: rgba(255,255,255,0.25);"></div>
+      <span style="font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--hf-lime);">Q2 2026 | Validation Report | Product Marketing</span>
     </div>
-
-    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 16px;">
-      <div class="dark-card" style="text-align: center; padding: 20px;">
-        <div style="font-size: 24px; font-weight: 900; color: white;">W14 – W23</div>
-        <div style="font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.4); margin-top: 4px;">March 30 – June 3, 2026</div>
-      </div>
-      <div class="dark-card" style="text-align: center; padding: 20px;">
-        <div style="font-size: 24px; font-weight: 900; color: white;">US, AU, NZ, CA, UK</div>
-        <div style="font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.4); margin-top: 4px;">Market Coverage</div>
-      </div>
-      <div class="dark-card" style="text-align: center; padding: 20px;">
-        <div style="font-size: 24px; font-weight: 900; color: white;">Organic, ASO, CRM, Creators</div>
-        <div style="font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.4); margin-top: 4px;">Channels Validated</div>
-      </div>
+    <h1>Tech Feature Marketing<br><span>Playbook.</span></h1>
+    <p class="hero-sub">Cookbook is the proving ground. 10 weeks of testing across organic social, ASO, CRM, and creator partnerships. Here is what we learned.</p>
+    <div class="hero-tags">
+      <div class="hero-tag">134K+ Social Views</div>
+      <div class="hero-tag">25+ Posts Published</div>
+      <div class="hero-tag">4 Markets</div>
+      <div class="hero-tag">5 Channels</div>
     </div>
+    <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 16px; animation: fadeInUp 0.8s ease 1s both;">
+      <div class="hero-tag" style="background: rgba(200,240,101,0.15); border-color: rgba(200,240,101,0.3);">W14 – W23 (Mar 30 – Jun 3)</div>
+      <div class="hero-tag" style="background: rgba(200,240,101,0.15); border-color: rgba(200,240,101,0.3);">US, AU, NZ, CA, UK</div>
+    </div>
+  </div>
+  <div class="scroll-cue">
+    <span>Scroll to explore</span>
+    <div class="scroll-arrow"></div>
   </div>
 </section>
 
 <!-- ===== ORGANIC SOCIAL: FORMAT RANKING ===== -->
-<section style="min-height: auto; padding: 80px 60px;">
+<section id="formats" style="min-height: auto; padding: 80px 60px;">
   <div class="section-inner">
     <div class="section-tag">Organic Social</div>
     <div class="section-title">Format performance<br>ranking.</div>
@@ -413,7 +491,7 @@ section {
 </section>
 
 <!-- ===== ORGANIC SOCIAL: WEEKLY PROGRESSION ===== -->
-<section class="dark-section" style="min-height: auto; padding: 80px 60px;">
+<section id="progression" class="dark-section" style="min-height: auto; padding: 80px 60px;">
   <div class="section-inner">
     <div class="section-tag">Organic Social</div>
     <div class="section-title" style="color: white; font-size: 40px;">Week over week<br>progression.</div>
@@ -481,7 +559,7 @@ section {
 </section>
 
 <!-- ===== ORGANIC SOCIAL: KEY LEARNINGS ===== -->
-<section style="min-height: auto; padding: 80px 60px;">
+<section id="learnings" style="min-height: auto; padding: 80px 60px;">
   <div class="section-inner">
     <div class="section-tag">Organic Social</div>
     <div class="section-title">What we learned.</div>
@@ -538,7 +616,7 @@ section {
 </section>
 
 <!-- ===== SOCIAL ATTRIBUTION ===== -->
-<section class="dark-section" style="min-height: auto; padding: 80px 60px;">
+<section id="attribution" class="dark-section" style="min-height: auto; padding: 80px 60px;">
   <div class="section-inner">
     <div class="section-tag">Social Attribution</div>
     <div class="section-title" style="color: white; font-size: 40px;">The conversion gap.</div>
@@ -599,7 +677,7 @@ section {
 </section>
 
 <!-- ===== CREATOR ATTRIBUTION ===== -->
-<section style="min-height: auto; padding: 80px 60px;">
+<section id="creators" style="min-height: auto; padding: 80px 60px;">
   <div class="section-inner">
     <div class="section-tag">Creator Attribution</div>
     <div class="section-title">Creator performance.</div>
@@ -665,7 +743,7 @@ section {
 </section>
 
 <!-- ===== ASO ===== -->
-<section class="dark-section" style="min-height: auto; padding: 80px 60px;">
+<section id="aso" class="dark-section" style="min-height: auto; padding: 80px 60px;">
   <div class="section-inner">
     <div class="section-tag">App Store Optimisation</div>
     <div class="section-title" style="color: white; font-size: 40px;">Store performance.</div>
@@ -742,7 +820,7 @@ section {
 </section>
 
 <!-- ===== CRM ===== -->
-<section style="min-height: auto; padding: 80px 60px;">
+<section id="crm" style="min-height: auto; padding: 80px 60px;">
   <div class="section-inner">
     <div class="section-tag">CRM / Lifecycle</div>
     <div class="section-title">Push notification<br>test results.</div>
@@ -817,7 +895,7 @@ section {
 </section>
 
 <!-- ===== RECOMMENDATIONS ===== -->
-<section class="dark-section" style="min-height: auto; padding: 80px 60px;">
+<section id="recommendations" class="dark-section" style="min-height: auto; padding: 80px 60px;">
   <div class="section-inner">
     <div class="section-tag">Playbook Recommendations</div>
     <div class="section-title" style="color: white; font-size: 40px;">What to do next.</div>
@@ -859,7 +937,7 @@ section {
 </section>
 
 <!-- ===== VALIDATION SCORECARD ===== -->
-<section style="min-height: auto; padding: 80px 60px;">
+<section id="scorecard" style="min-height: auto; padding: 80px 60px;">
   <div class="section-inner">
     <div class="section-tag">Validation Scorecard</div>
     <div class="section-title">Q2 gate check.</div>
@@ -954,13 +1032,13 @@ section {
 </section>
 
 <!-- ===== FOOTER ===== -->
-<section class="dark-section" style="min-height: 30vh; padding: 60px;">
-  <div class="section-inner" style="text-align: center;">
-    <div style="font-size: 16px; color: rgba(255,255,255,0.4); font-weight: 600; margin-bottom: 8px;">HelloFresh Tech Feature Marketing Playbook</div>
-    <div style="font-size: 32px; font-weight: 900; color: white;">Q2 2026 Validation Complete.</div>
-    <div style="font-size: 14px; color: rgba(255,255,255,0.4); margin-top: 16px;">
-      Compiled from weekly marketing updates W14 – W23 (March 30 – June 3, 2026)<br>
-      Product Marketing | Kieran Enright
+<section style="min-height: 60vh; background: var(--hf-green); display: flex; align-items: center; justify-content: center; text-align: center; color: white; padding: 80px 60px;">
+  <div style="max-width: 700px;">
+    <h2 style="font-size: 48px; font-weight: 900; letter-spacing: -2px; line-height: 1.05; margin-bottom: 16px;">Q2 validation<br><span style="color: var(--hf-lime);">complete.</span></h2>
+    <div style="font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.6; margin-top: 20px;">
+      <strong style="color: white;">March 30 – June 3, 2026</strong> &nbsp;|&nbsp; W14 – W23 &nbsp;|&nbsp; 25+ posts across 4 markets<br>
+      Organic Social + ASO + CRM + Creator Partnerships<br><br>
+      Product Marketing &nbsp;|&nbsp; Kieran Enright
     </div>
   </div>
 </section>
@@ -970,8 +1048,24 @@ function updateProgress() {
   const s = window.scrollY, d = document.documentElement.scrollHeight - window.innerHeight;
   document.getElementById('progressBar').style.width = (s / d * 100) + '%';
 }
-window.addEventListener('scroll', updateProgress);
-updateProgress();
+function updateNav() {
+  const n = document.getElementById('mainNav');
+  n.classList.toggle('visible', window.scrollY > window.innerHeight * 0.5);
+}
+function updateActiveNav() {
+  const ss = document.querySelectorAll('section[id]'), ls = document.querySelectorAll('.nav-links a');
+  let c = '';
+  ss.forEach(s => { if (window.scrollY >= s.offsetTop - 200) c = s.id; });
+  ls.forEach(l => { l.classList.toggle('active', l.dataset.section === c); });
+}
+function revealOnScroll() {
+  document.querySelectorAll('.reveal').forEach(el => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight - 80) el.classList.add('visible');
+  });
+}
+window.addEventListener('scroll', () => { updateProgress(); updateNav(); updateActiveNav(); revealOnScroll(); });
+updateProgress(); revealOnScroll();
 </script>
 
 </body>
