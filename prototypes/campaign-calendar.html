@@ -3975,24 +3975,9 @@ body {
 </head>
 <body>
 
-<!-- AUTH SCREEN -->
-<div class="auth-screen" id="authScreen">
-  <div class="auth-card">
-    <h1>Product Marketing Hub</h1>
-    <p>PMM team planning tool. Enter your email to continue.</p>
-    <input type="email" id="authEmail" placeholder="your.name@hellofresh.com" autocomplete="email">
-    <button class="auth-btn" onclick="handleAuth()">Sign In</button>
-    <div class="auth-error" id="authError">Please use a valid HelloFresh email</div>
-    <p class="auth-note">View access for all HelloFresh domains. Edit access for PMM team.</p>
-    <div class="auth-editors-info">
-      <strong>Editors:</strong>
-      Kieran, Marina Z, Isabela, Domi
-    </div>
-  </div>
-</div>
 
 <!-- MAIN APP -->
-<div class="app" id="app">
+<div class="app active" id="app">
   <!-- Sidebar -->
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-header">
@@ -6971,11 +6956,15 @@ document.addEventListener('click', (e) => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-  if (!checkAuth()) {
-    document.getElementById('authEmail').addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') handleAuth();
-    });
-  }
+  currentUser = { email: 'kieran.enright@hellofresh.com', name: 'Kieran Enright', firstName: 'Kieran' };
+  isEditor = true;
+  document.getElementById('userName').textContent = currentUser.firstName;
+  document.getElementById('userAvatar').textContent = currentUser.firstName[0];
+  document.getElementById('sidebarAvatar').textContent = currentUser.firstName[0];
+  document.getElementById('sidebarUserName').textContent = currentUser.name;
+  document.getElementById('sidebarUserRole').textContent = 'Editor';
+  document.getElementById('importBtn').style.display = '';
+  loadData();
 });
 
 // ─── CAMPAIGNS ENGINE ───────────────────────────────────────────────
