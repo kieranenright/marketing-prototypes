@@ -3362,6 +3362,7 @@ body {
   font-weight: 400;
 }
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 </head>
 <body>
 
@@ -6326,7 +6327,7 @@ function renderInsights() {
     <div class="insights-upload-area">
       <button class="insights-upload-btn" onclick="document.getElementById('insightsFileInput').click()">Upload File</button>
       <button class="insights-upload-btn" onclick="loadCalendarAsInsights()" style="background:white;border-color:var(--border);color:var(--text-secondary);">Use Calendar Data</button>
-      <input type="file" id="insightsFileInput" accept=".csv,.json,.tsv,.txt,.md" style="display:none;" onchange="handleInsightsUpload(event)">
+      <input type="file" id="insightsFileInput" accept=".csv,.json,.tsv,.txt,.md,.pdf" style="display:none;" onchange="handleInsightsUpload(event)">
       ${dataStatus}
     </div>
   </div>`;
@@ -6368,6 +6369,12 @@ function handleInsightsUpload(event) {
   const file = event.target.files[0];
   if (!file) return;
   const ext = file.name.split('.').pop().toLowerCase();
+
+  if (ext === 'pdf') {
+    handlePDFUpload(file);
+    return;
+  }
+
   const reader = new FileReader();
   reader.onload = function(e) {
     const text = e.target.result;
@@ -6390,6 +6397,30 @@ function handleInsightsUpload(event) {
     renderInsights();
   };
   reader.readAsText(file);
+}
+
+async function handlePDFUpload(file) {
+  insightsMessages = [{ role: 'bot', html: 'Reading PDF...' }];
+  renderInsights();
+
+  try {
+    const arrayBuffer = await file.arrayBuffer();
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+    const pages = [];
+    for (let i = 1; i <= pdf.numPages; i++) {
+      const page = await pdf.getPage(i);
+      const content = await page.getTextContent();
+      const text = content.items.map(item => item.str).join(' ');
+      if (text.trim()) pages.push({ title: `Page ${i}`, content: text.trim() });
+    }
+    insightsData = { columns: ['title', 'content'], rows: pages, isDocument: true };
+    localStorage.setItem('insightsData', JSON.stringify(insightsData));
+    insightsMessages = [{ role: 'bot', html: `Loaded PDF: <strong>${escapeHTML(file.name)}</strong> (${pages.length} pages). Ask me anything about its content, or I can help extract best practices.` }];
+  } catch (e) {
+    insightsMessages = [{ role: 'bot', html: `Failed to read PDF: ${escapeHTML(e.message)}. Try a text-based PDF (scanned images are not supported).` }];
+  }
+  renderInsights();
 }
 
 function parseJSON(text) {
