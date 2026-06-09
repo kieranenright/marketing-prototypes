@@ -8434,7 +8434,13 @@ async function callClaude(systemPrompt, userMessage, imageData) {
   }
 
   const data = await resp.json();
-  return data.candidates[0].content.parts[0].text;
+  const parts = data.candidates[0].content.parts || [];
+  const textParts = parts.filter(p => p.text && !p.thought).map(p => p.text);
+  if (textParts.length === 0) {
+    const allText = parts.map(p => p.text).filter(Boolean);
+    return allText[allText.length - 1] || '';
+  }
+  return textParts.join('\n');
 }
 
 // ─── EXTRACT BEST PRACTICES ────────────────────────────────────────
@@ -8559,10 +8565,16 @@ Focus on actionable insights. Be specific with numbers and campaign names. Ident
   try {
     const response = await callClaude(systemPrompt, `Here are the campaign results to analyze:\n\nSource: ${sourceName}\n\n${text.substring(0, 12000)}`, imageData);
 
-    const jsonMatch = response.match(/\{[\s\S]*\}/);
-    if (!jsonMatch) throw new Error('Could not parse AI response');
+    let cleaned = response.replace(/```json\s*/g, '').replace(/```\s*/g, '').trim();
+    const jsonMatch = cleaned.match(/\{[\s\S]*\}/);
+    if (!jsonMatch) throw new Error('Could not parse AI response. The AI returned text but no structured JSON. Try a different file format.');
 
-    const parsed = JSON.parse(jsonMatch[0]);
+    let parsed;
+    try {
+      parsed = JSON.parse(jsonMatch[0]);
+    } catch (parseErr) {
+      throw new Error(`JSON parse error: ${parseErr.message}`);
+    }
     renderExtractionResults(parsed.practices, sourceName);
   } catch (e) {
     resultsEl.innerHTML = `<div style="padding:20px;color:#DC2626;font-size:13px;"><strong>Error:</strong> ${escapeHTML(e.message)}</div>`;
@@ -8735,10 +8747,17 @@ Be specific and actionable. Reference real data from the best practices and cale
   try {
     const response = await callClaude(systemPrompt, `Here is the campaign plan to audit:\n\nPlan: ${planName}\n\n${text.substring(0, 12000)}`, imageData);
 
-    const jsonMatch = response.match(/\{[\s\S]*\}/);
-    if (!jsonMatch) throw new Error('Could not parse AI response');
+    let cleaned = response.replace(/```json\s*/g, '').replace(/```\s*/g, '').trim();
+    const jsonMatch = cleaned.match(/\{[\s\S]*\}/);
+    if (!jsonMatch) throw new Error('Could not parse AI response. The AI returned text but no structured JSON. Try uploading a simpler file or a different format.');
 
-    const parsed = JSON.parse(jsonMatch[0]);
+    let parsed;
+    try {
+      parsed = JSON.parse(jsonMatch[0]);
+    } catch (parseErr) {
+      const truncated = jsonMatch[0].substring(0, 500);
+      throw new Error(`JSON parse error: ${parseErr.message}. Response started with: ${truncated}...`);
+    }
     renderAuditResults(parsed, planName);
   } catch (e) {
     resultsEl.innerHTML = `<div style="padding:20px;color:#DC2626;font-size:13px;"><strong>Error:</strong> ${escapeHTML(e.message)}</div>`;
