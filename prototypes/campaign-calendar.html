@@ -3853,11 +3853,11 @@ body {
           <span class="group-chevron expanded">&#9662;</span>
         </div>
         <div class="sidebar-group-items">
-          <div class="sidebar-item active" data-sidebar="marketing-month" onclick="sidebarNav('marketing','month')">
+          <div class="sidebar-item" data-sidebar="marketing-month" onclick="sidebarNav('marketing','month')">
             <span class="sidebar-icon">&#128466;</span>
             <span class="sidebar-label">Month View</span>
           </div>
-          <div class="sidebar-item" data-sidebar="marketing-weekly" onclick="sidebarNav('marketing','weekly')">
+          <div class="sidebar-item active" data-sidebar="marketing-weekly" onclick="sidebarNav('marketing','weekly')">
             <span class="sidebar-icon">&#128221;</span>
             <span class="sidebar-label">Weekly View</span>
           </div>
@@ -3955,8 +3955,8 @@ body {
         <div class="view-toggle">
           <button data-view="year" onclick="setView('year')">Year</button>
           <button data-view="quarter" onclick="setView('quarter')">Quarter</button>
-          <button data-view="weekly" onclick="setView('weekly')">Weekly</button>
-          <button data-view="month" class="active" onclick="setView('month')">Month</button>
+          <button data-view="weekly" class="active" onclick="setView('weekly')">Weekly</button>
+          <button data-view="month" onclick="setView('month')">Month</button>
         </div>
         <div class="nav-controls" id="navControls">
           <button onclick="navPrev()">&lsaquo;</button>
@@ -4177,7 +4177,7 @@ const INLINE_CALENDAR_DATA = {"markets":["US","UK","DE","AU","CA","NL","SE","DK"
 <script>
 // STATE
 let calendarData = null;
-let currentView = 'month';
+let currentView = 'weekly';
 let currentMode = 'marketing'; // marketing | product | crm | leadership
 let currentYear = 2026;
 let currentMonth = 5; // 0-indexed, June = 5
@@ -6881,7 +6881,7 @@ function renderInsights() {
   html += `<div class="insights-chat">`;
   html += `<div class="insights-messages" id="insightsMessages">`;
   if (insightsMessages.length === 0) {
-    html += `<div class="insights-msg bot"><div class="msg-label">Assistant</div>Hi! Upload a CSV with your campaign results, then ask me anything. I can count, filter, group, and compare your data.</div>`;
+    html += `<div class="insights-msg bot"><div class="msg-label">Assistant</div>Hi! Upload a file with your campaign results, then ask me anything. I can count, filter, group, and compare your data.</div>`;
   } else {
     insightsMessages.forEach(msg => {
       html += `<div class="insights-msg ${msg.role}"><div class="msg-label">${msg.role === 'bot' ? 'Assistant' : 'You'}</div>${msg.html}</div>`;
@@ -6899,7 +6899,7 @@ function renderInsights() {
   html += `</div>`;
 
   html += `<div class="insights-input-area">
-    <input class="insights-input" id="insightsInput" type="text" placeholder="${hasData ? 'Ask a question about your data...' : 'Upload a CSV first...'}" ${hasData ? '' : 'disabled'} onkeypress="if(event.key==='Enter')sendInsights()">
+    <input class="insights-input" id="insightsInput" type="text" placeholder="${hasData ? 'Ask a question about your data...' : 'Upload a file first...'}" ${hasData ? '' : 'disabled'} onkeypress="if(event.key==='Enter')sendInsights()">
     <button class="insights-send-btn" onclick="sendInsights()" ${hasData ? '' : 'disabled'}>&#10148;</button>
   </div>`;
 
