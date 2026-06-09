@@ -1278,248 +1278,6 @@ body {
 
 .quarter-view.active { display: block; }
 
-/* INSIGHTS CHAT VIEW */
-.insights-view {
-  display: none;
-}
-
-.insights-view.active {
-  display: flex;
-  flex-direction: column;
-  height: calc(100vh - 70px);
-}
-
-.insights-container {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  max-width: 900px;
-}
-
-.insights-header-card {
-  background: white;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 20px 24px;
-  margin-bottom: 16px;
-  box-shadow: var(--shadow-sm);
-}
-
-.insights-header-card h3 {
-  font-family: var(--font-headline);
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: 4px;
-}
-
-.insights-header-card p {
-  font-size: 12px;
-  color: var(--text-secondary);
-  line-height: 1.5;
-}
-
-.insights-upload-area {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-top: 12px;
-  padding-top: 12px;
-  border-top: 1px solid var(--border-light);
-}
-
-.insights-upload-btn {
-  padding: 7px 14px;
-  background: var(--brand-green-light);
-  color: var(--brand-green);
-  border: 1px solid var(--brand-green);
-  border-radius: var(--radius-sm);
-  font-size: 12px;
-  font-weight: 600;
-  font-family: var(--font-body);
-  cursor: pointer;
-  transition: all 0.15s;
-}
-
-.insights-upload-btn:hover {
-  background: var(--brand-green);
-  color: white;
-}
-
-.insights-upload-status {
-  font-size: 11px;
-  color: var(--text-tertiary);
-}
-
-.insights-upload-status.has-data {
-  color: var(--brand-green);
-  font-weight: 500;
-}
-
-.insights-clear-btn {
-  padding: 5px 10px;
-  background: white;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  font-size: 10px;
-  font-weight: 500;
-  font-family: var(--font-body);
-  color: var(--text-tertiary);
-  cursor: pointer;
-  transition: all 0.12s;
-}
-
-.insights-clear-btn:hover {
-  border-color: #DC2626;
-  color: #DC2626;
-}
-
-.insights-chat {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  background: white;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-sm);
-  overflow: hidden;
-}
-
-.insights-messages {
-  flex: 1;
-  overflow-y: auto;
-  padding: 20px 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.insights-msg {
-  max-width: 85%;
-  padding: 10px 14px;
-  border-radius: 12px;
-  font-size: 13px;
-  line-height: 1.5;
-}
-
-.insights-msg.bot {
-  align-self: flex-start;
-  background: var(--bg-cream);
-  color: var(--text-primary);
-  border-bottom-left-radius: 4px;
-}
-
-.insights-msg.user {
-  align-self: flex-end;
-  background: var(--brand-green);
-  color: white;
-  border-bottom-right-radius: 4px;
-}
-
-.insights-msg .msg-label {
-  font-size: 10px;
-  font-weight: 600;
-  opacity: 0.6;
-  margin-bottom: 3px;
-}
-
-.insights-msg pre {
-  font-size: 11px;
-  background: rgba(0,0,0,0.05);
-  padding: 8px 10px;
-  border-radius: 6px;
-  margin-top: 8px;
-  overflow-x: auto;
-  white-space: pre-wrap;
-  font-family: 'SF Mono', 'Monaco', monospace;
-}
-
-.insights-msg table {
-  border-collapse: collapse;
-  margin-top: 8px;
-  width: 100%;
-  font-size: 11px;
-}
-
-.insights-msg table th,
-.insights-msg table td {
-  padding: 5px 8px;
-  border: 1px solid var(--border-light);
-  text-align: left;
-}
-
-.insights-msg table th {
-  background: var(--border-light);
-  font-weight: 600;
-}
-
-.insights-input-area {
-  padding: 14px 20px;
-  border-top: 1px solid var(--border-light);
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
-
-.insights-input {
-  flex: 1;
-  padding: 10px 14px;
-  border: 1.5px solid var(--border);
-  border-radius: 10px;
-  font-size: 13px;
-  font-family: var(--font-body);
-  transition: border 0.15s;
-}
-
-.insights-input:focus {
-  outline: none;
-  border-color: var(--brand-green);
-}
-
-.insights-send-btn {
-  width: 36px;
-  height: 36px;
-  border: none;
-  background: var(--brand-green);
-  color: white;
-  border-radius: 50%;
-  cursor: pointer;
-  font-size: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.15s;
-  flex-shrink: 0;
-}
-
-.insights-send-btn:hover {
-  background: var(--brand-green-dark);
-}
-
-.insights-suggestions {
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-  padding: 0 20px 12px;
-}
-
-.insights-suggestion {
-  padding: 5px 10px;
-  background: var(--brand-green-light);
-  border: 1px solid transparent;
-  border-radius: 16px;
-  font-size: 11px;
-  font-weight: 500;
-  color: var(--brand-green);
-  cursor: pointer;
-  transition: all 0.12s;
-  font-family: var(--font-body);
-}
-
-.insights-suggestion:hover {
-  border-color: var(--brand-green);
-  background: white;
-}
 
 /* BEST PRACTICES VIEW */
 .best-practices-view {
@@ -4298,10 +4056,6 @@ body {
         <span class="sidebar-icon">&#128269;</span>
         <span class="sidebar-label">Audit Plan</span>
       </div>
-      <div class="sidebar-item" data-sidebar="insights" onclick="sidebarNav('insights')">
-        <span class="sidebar-icon">&#128172;</span>
-        <span class="sidebar-label">Insights Chat</span>
-      </div>
       <div class="sidebar-divider"></div>
       <div class="sidebar-section-label">Knowledge Base</div>
       <div class="sidebar-item" data-sidebar="best-practices" onclick="sidebarNav('best-practices')">
@@ -4433,7 +4187,6 @@ body {
     <div class="crm-view" id="crmView"></div>
     <div class="leadership-view" id="leadershipView"></div>
     <div class="markets-view" id="marketsView"></div>
-    <div class="insights-view" id="insightsView"></div>
     <div class="extract-bp-view" id="extractBPView"></div>
     <div class="audit-plan-view" id="auditPlanView"></div>
     <div class="best-practices-view" id="bestPracticesView"></div>
@@ -4786,7 +4539,6 @@ function sidebarNav(mode, view) {
     'leadership': 'Leadership Roadmap',
     'markets': 'Local Markets',
     'campaigns': 'Campaigns',
-    'insights': 'Insights Chat',
     'extract-bp': 'Extract Learnings',
     'audit-plan': 'Audit Plan',
     'best-practices': 'Best Practices'
@@ -4836,7 +4588,6 @@ function setMode(mode) {
   document.getElementById('crmView').classList.remove('active');
   document.getElementById('leadershipView').classList.remove('active');
   document.getElementById('marketsView').classList.remove('active');
-  document.getElementById('insightsView').classList.remove('active');
   document.getElementById('extractBPView').classList.remove('active');
   document.getElementById('auditPlanView').classList.remove('active');
   document.getElementById('bestPracticesView').classList.remove('active');
@@ -4871,11 +4622,6 @@ function setMode(mode) {
     marketingOnlyEls.forEach(el => { if (el) el.style.display = 'none'; });
     navButtons.forEach(b => b.style.display = 'none');
     document.getElementById('marketsView').classList.add('active');
-  } else if (mode === 'insights') {
-    marketingOnlyEls.forEach(el => { if (el) el.style.display = 'none'; });
-    navButtons.forEach(b => b.style.display = 'none');
-    document.getElementById('insightsView').classList.add('active');
-    renderInsights();
   } else if (mode === 'extract-bp') {
     marketingOnlyEls.forEach(el => { if (el) el.style.display = 'none'; });
     navButtons.forEach(b => b.style.display = 'none');
@@ -5133,10 +4879,6 @@ function updateNavLabel() {
   }
   if (currentMode === 'markets') {
     label.textContent = 'Market View';
-    return;
-  }
-  if (currentMode === 'insights') {
-    label.textContent = 'Insights';
     return;
   }
   if (currentMode === 'extract-bp') {
@@ -7548,583 +7290,6 @@ function deleteGalleryImage(initId, idx) {
   renderCampaigns();
 }
 
-// ─── INSIGHTS CHAT ENGINE ───────────────────────────────────────────
-
-let insightsData = JSON.parse(localStorage.getItem('insightsData') || 'null');
-let insightsMessages = [];
-
-function loadCalendarAsInsights() {
-  if (!calendarData) return;
-  const rows = [];
-  calendarData.initiatives.forEach(init => {
-    init.entries.forEach(entry => {
-      rows.push({
-        initiative: init.name,
-        text: entry.text,
-        channel: entry.channel,
-        subchannel: entry.subchannel || '',
-        status: entry.status,
-        owner: entry.owner || '',
-        date: entry.date,
-        endDate: entry.endDate || '',
-        markets: (entry.markets || []).join(', '),
-        notes: entry.notes || ''
-      });
-    });
-  });
-  const columns = ['initiative', 'text', 'channel', 'subchannel', 'status', 'owner', 'date', 'endDate', 'markets', 'notes'];
-  insightsData = { columns, rows };
-  localStorage.setItem('insightsData', JSON.stringify(insightsData));
-  insightsMessages = [];
-  insightsMessages.push({ role: 'bot', html: `Loaded <strong>${rows.length}</strong> entries from the calendar data. Ask me anything!` });
-  renderInsights();
-}
-
-function renderInsights() {
-  const container = document.getElementById('insightsView');
-  const hasData = insightsData && insightsData.rows && insightsData.rows.length > 0;
-  const dataStatus = hasData
-    ? `<span class="insights-upload-status has-data">${insightsData.rows.length} rows loaded (${insightsData.columns.length} columns)</span><button class="insights-clear-btn" onclick="clearInsightsData()">Clear</button>`
-    : `<span class="insights-upload-status">No data uploaded yet</span>`;
-
-  let html = `<div class="insights-container">`;
-  html += `<div class="insights-header-card">
-    <h3>Insights Chat</h3>
-    <p>Upload campaign results (CSV, JSON, TSV, TXT, or Markdown) and ask questions about your data. Useful findings can be saved directly to Best Practices.</p>
-    <div class="insights-upload-area">
-      <button class="insights-upload-btn" onclick="document.getElementById('insightsFileInput').click()">Upload File</button>
-      <button class="insights-upload-btn" onclick="loadCalendarAsInsights()" style="background:white;border-color:var(--border);color:var(--text-secondary);">Use Calendar Data</button>
-      <input type="file" id="insightsFileInput" accept=".csv,.json,.tsv,.txt,.md,.pdf,.png,.jpg,.jpeg,.gif,.webp" style="display:none;" onchange="handleInsightsUpload(event)">
-      ${dataStatus}
-    </div>
-  </div>`;
-
-  html += `<div class="insights-chat">`;
-  html += `<div class="insights-messages" id="insightsMessages">`;
-  if (insightsMessages.length === 0) {
-    html += `<div class="insights-msg bot"><div class="msg-label">Assistant</div>Hi! Upload a file with your campaign results, then ask me anything. I can count, filter, group, and compare your data.</div>`;
-  } else {
-    insightsMessages.forEach(msg => {
-      html += `<div class="insights-msg ${msg.role}"><div class="msg-label">${msg.role === 'bot' ? 'Assistant' : 'You'}</div>${msg.html}</div>`;
-    });
-  }
-  html += `</div>`;
-
-  html += `<div class="insights-suggestions" id="insightsSuggestions">`;
-  if (hasData) {
-    const suggestions = getInsightsSuggestions();
-    suggestions.forEach(s => {
-      html += `<button class="insights-suggestion" onclick="askInsights('${s.replace(/'/g, "\\'")}')">${s}</button>`;
-    });
-  }
-  html += `</div>`;
-
-  html += `<div class="insights-input-area">
-    <input class="insights-input" id="insightsInput" type="text" placeholder="${hasData ? 'Ask a question about your data...' : 'Upload a file first...'}" ${hasData ? '' : 'disabled'} onkeypress="if(event.key==='Enter')sendInsights()">
-    <button class="insights-send-btn" onclick="sendInsights()" ${hasData ? '' : 'disabled'}>&#10148;</button>
-  </div>`;
-
-  html += `</div></div>`;
-  container.innerHTML = html;
-
-  // Scroll to bottom
-  const msgArea = document.getElementById('insightsMessages');
-  if (msgArea) msgArea.scrollTop = msgArea.scrollHeight;
-}
-
-function handleInsightsUpload(event) {
-  const file = event.target.files[0];
-  if (!file) return;
-  const ext = file.name.split('.').pop().toLowerCase();
-  const imageExts = ['png', 'jpg', 'jpeg', 'gif', 'webp'];
-
-  if (ext === 'pdf') {
-    handlePDFUpload(file);
-    return;
-  }
-
-  if (imageExts.includes(ext)) {
-    handleImageUpload(file, 'insights');
-    return;
-  }
-
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    const text = e.target.result;
-    if (ext === 'json') {
-      insightsData = parseJSON(text);
-    } else if (ext === 'tsv') {
-      insightsData = parseTSV(text);
-    } else if (ext === 'txt' || ext === 'md') {
-      insightsData = parseTextFile(text, file.name);
-    } else {
-      insightsData = parseCSV(text);
-    }
-    localStorage.setItem('insightsData', JSON.stringify(insightsData));
-    insightsMessages = [];
-    if (insightsData.isDocument) {
-      insightsMessages.push({ role: 'bot', html: `Loaded document: <strong>${escapeHTML(file.name)}</strong> (${insightsData.rows.length} sections). You can ask questions about its content, or I can help extract best practices from it.` });
-    } else {
-      insightsMessages.push({ role: 'bot', html: `Loaded <strong>${insightsData.rows.length}</strong> rows with columns: <strong>${insightsData.columns.join(', ')}</strong>. Ask me anything!` });
-    }
-    renderInsights();
-  };
-  reader.readAsText(file);
-}
-
-async function handlePDFUpload(file) {
-  insightsMessages = [{ role: 'bot', html: 'Reading PDF...' }];
-  renderInsights();
-
-  try {
-    const arrayBuffer = await file.arrayBuffer();
-    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-    const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
-    const pages = [];
-    for (let i = 1; i <= pdf.numPages; i++) {
-      const page = await pdf.getPage(i);
-      const content = await page.getTextContent();
-      const text = content.items.map(item => item.str).join(' ');
-      if (text.trim()) pages.push({ title: `Page ${i}`, content: text.trim() });
-    }
-    insightsData = { columns: ['title', 'content'], rows: pages, isDocument: true };
-    localStorage.setItem('insightsData', JSON.stringify(insightsData));
-    insightsMessages = [{ role: 'bot', html: `Loaded PDF: <strong>${escapeHTML(file.name)}</strong> (${pages.length} pages). Ask me anything about its content, or I can help extract best practices.` }];
-  } catch (e) {
-    insightsMessages = [{ role: 'bot', html: `Failed to read PDF: ${escapeHTML(e.message)}. Try a text-based PDF (scanned images are not supported).` }];
-  }
-  renderInsights();
-}
-
-async function handleImageUpload(file, target) {
-  const arrayBuffer = await file.arrayBuffer();
-  const base64 = btoa(new Uint8Array(arrayBuffer).reduce((data, byte) => data + String.fromCharCode(byte), ''));
-  const ext = file.name.split('.').pop().toLowerCase();
-  const mimeType = file.type || `image/${ext === 'jpg' ? 'jpeg' : ext}`;
-
-  if (target === 'insights') {
-    window._insightsImageData = { base64, mimeType, fileName: file.name };
-    insightsData = { columns: ['type'], rows: [{ type: 'image' }], isDocument: true, isImage: true };
-    insightsMessages = [{ role: 'bot', html: `Loaded image: <strong>${escapeHTML(file.name)}</strong>. Ask me anything about what you see in this image (metrics, data, campaign details, etc).` }];
-    renderInsights();
-  }
-}
-
-function parseJSON(text) {
-  try {
-    const data = JSON.parse(text);
-    if (Array.isArray(data) && data.length > 0) {
-      const columns = Object.keys(data[0]);
-      return { columns, rows: data };
-    } else if (typeof data === 'object') {
-      // Single object or nested: flatten
-      const rows = [];
-      Object.entries(data).forEach(([key, val]) => {
-        if (Array.isArray(val)) {
-          val.forEach(item => {
-            if (typeof item === 'object') rows.push({ section: key, ...item });
-            else rows.push({ section: key, value: String(item) });
-          });
-        } else if (typeof val === 'object') {
-          rows.push({ section: key, ...val });
-        } else {
-          rows.push({ key, value: String(val) });
-        }
-      });
-      const columns = rows.length > 0 ? Object.keys(rows[0]) : [];
-      return { columns, rows };
-    }
-  } catch (e) {}
-  return { columns: ['content'], rows: [{ content: text }], isDocument: true };
-}
-
-function parseTSV(text) {
-  const lines = text.trim().split('\n');
-  if (lines.length < 2) return { columns: [], rows: [] };
-  const columns = lines[0].split('\t').map(c => c.trim());
-  const rows = [];
-  for (let i = 1; i < lines.length; i++) {
-    const values = lines[i].split('\t');
-    if (values.length >= columns.length - 1) {
-      const row = {};
-      columns.forEach((col, idx) => { row[col] = (values[idx] || '').trim(); });
-      rows.push(row);
-    }
-  }
-  return { columns, rows };
-}
-
-function parseTextFile(text, filename) {
-  // Parse text/markdown into searchable sections
-  const sections = [];
-  const lines = text.split('\n');
-  let currentTitle = filename;
-  let currentContent = [];
-
-  lines.forEach(line => {
-    if (line.match(/^#{1,3}\s/) || line.match(/^[A-Z][A-Za-z\s]{3,}:?\s*$/)) {
-      if (currentContent.length > 0) {
-        sections.push({ title: currentTitle, content: currentContent.join('\n').trim() });
-      }
-      currentTitle = line.replace(/^#+\s*/, '').trim();
-      currentContent = [];
-    } else {
-      currentContent.push(line);
-    }
-  });
-  if (currentContent.length > 0) {
-    sections.push({ title: currentTitle, content: currentContent.join('\n').trim() });
-  }
-
-  return {
-    columns: ['title', 'content'],
-    rows: sections.filter(s => s.content.length > 0),
-    isDocument: true
-  };
-}
-
-function clearInsightsData() {
-  insightsData = null;
-  localStorage.removeItem('insightsData');
-  insightsMessages = [];
-  renderInsights();
-}
-
-function parseCSV(text) {
-  const lines = text.trim().split('\n');
-  if (lines.length < 2) return { columns: [], rows: [] };
-  const columns = parseCSVLine(lines[0]);
-  const rows = [];
-  for (let i = 1; i < lines.length; i++) {
-    const values = parseCSVLine(lines[i]);
-    if (values.length === columns.length) {
-      const row = {};
-      columns.forEach((col, idx) => { row[col] = values[idx]; });
-      rows.push(row);
-    }
-  }
-  return { columns, rows };
-}
-
-function parseCSVLine(line) {
-  const result = [];
-  let current = '';
-  let inQuotes = false;
-  for (let i = 0; i < line.length; i++) {
-    const ch = line[i];
-    if (ch === '"') {
-      inQuotes = !inQuotes;
-    } else if (ch === ',' && !inQuotes) {
-      result.push(current.trim());
-      current = '';
-    } else {
-      current += ch;
-    }
-  }
-  result.push(current.trim());
-  return result;
-}
-
-function getInsightsSuggestions() {
-  if (!insightsData || !insightsData.columns.length) return [];
-  const cols = insightsData.columns;
-  const suggestions = [];
-  if (insightsData.isDocument) {
-    suggestions.push('What sections are in this document?');
-    suggestions.push('Show me all content');
-    return suggestions;
-  }
-  suggestions.push(`How many rows total?`);
-  if (cols.some(c => /status/i.test(c))) suggestions.push('Breakdown by status');
-  if (cols.some(c => /channel/i.test(c))) suggestions.push('Breakdown by channel');
-  if (cols.some(c => /market|country/i.test(c))) suggestions.push('Breakdown by market');
-  if (cols.some(c => /owner/i.test(c))) suggestions.push('Who has the most entries?');
-  if (cols.some(c => /date/i.test(c))) suggestions.push('Entries this month');
-  return suggestions.slice(0, 5);
-}
-
-async function sendInsights() {
-  const input = document.getElementById('insightsInput');
-  const query = input.value.trim();
-  if (!query || !insightsData) return;
-
-  insightsMessages.push({ role: 'user', html: escapeHTML(query) });
-  input.value = '';
-
-  if (insightsData.isImage && window._insightsImageData) {
-    insightsMessages.push({ role: 'bot', html: '<em>Analyzing image...</em>' });
-    renderInsights();
-    try {
-      const response = await callClaude(
-        'You are a marketing analytics assistant. The user has uploaded an image (screenshot, chart, report, etc). Answer their question about it. Be specific with any numbers or data you can see. Format your response in HTML suitable for inline display (use <strong>, <br>, <table> tags as needed).',
-        query,
-        window._insightsImageData
-      );
-      insightsMessages[insightsMessages.length - 1] = { role: 'bot', html: response };
-    } catch (e) {
-      insightsMessages[insightsMessages.length - 1] = { role: 'bot', html: `<strong>Error:</strong> ${escapeHTML(e.message)}` };
-    }
-    renderInsights();
-    return;
-  }
-
-  const answer = processInsightsQuery(query);
-  insightsMessages.push({ role: 'bot', html: answer });
-
-  // Offer to save to best practices for substantive answers
-  const isSubstantive = answer.includes('<table') || answer.includes('<strong>') || answer.length > 100;
-  const isError = answer.includes('could not interpret');
-  if (isSubstantive && !isError) {
-    const saveSummary = query;
-    insightsMessages.push({ role: 'bot', html: buildSaveOfferHTML(saveSummary) });
-  }
-
-  renderInsights();
-}
-
-function buildSaveOfferHTML(queryTitle) {
-  let html = `<div style="font-size:11px;color:var(--text-secondary);">Save this as a best practice?</div>`;
-  html += `<div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:6px;">`;
-  BP_CHANNELS.forEach(ch => {
-    html += `<button class="insights-suggestion" onclick="saveLastAnswerToBP('${ch.id}','${escapeHTML(queryTitle).replace(/'/g, "\\'")}')" style="font-size:10px;">${ch.name}</button>`;
-  });
-  html += `<button class="insights-suggestion" onclick="dismissSaveOffer()" style="font-size:10px;background:var(--border-light);color:var(--text-tertiary);">No thanks</button>`;
-  html += `</div>`;
-  return html;
-}
-
-function saveLastAnswerToBP(channelId, title) {
-  // Find the last substantive bot answer (not the save offer itself)
-  let answerHtml = '';
-  for (let i = insightsMessages.length - 1; i >= 0; i--) {
-    const msg = insightsMessages[i];
-    if (msg.role === 'bot' && !msg.html.includes('Save this as a best practice') && !msg.html.includes('Saved to')) {
-      answerHtml = msg.html;
-      break;
-    }
-  }
-  // Strip HTML for plain text storage
-  const tempDiv = document.createElement('div');
-  tempDiv.innerHTML = answerHtml;
-  const plainText = tempDiv.textContent || tempDiv.innerText || answerHtml;
-
-  addBestPractice(channelId, title, plainText.substring(0, 1000), 'Insights Chat');
-  insightsMessages.push({ role: 'bot', html: `Saved to <strong>${BP_CHANNELS.find(c => c.id === channelId).name}</strong> best practices.` });
-  renderInsights();
-}
-
-function dismissSaveOffer() {
-  // Remove the last save offer message
-  for (let i = insightsMessages.length - 1; i >= 0; i--) {
-    if (insightsMessages[i].html && insightsMessages[i].html.includes('Save this as a best practice')) {
-      insightsMessages.splice(i, 1);
-      break;
-    }
-  }
-  renderInsights();
-}
-
-function askInsights(query) {
-  const input = document.getElementById('insightsInput');
-  if (input) input.value = query;
-  sendInsights();
-}
-
-function processInsightsQuery(query) {
-  const q = query.toLowerCase();
-  const data = insightsData;
-  const rows = data.rows;
-  const cols = data.columns;
-
-  // Document-specific queries
-  if (data.isDocument) {
-    if (/sections|headings|titles|what.*(in|about)/i.test(q)) {
-      let html = `<strong>${rows.length} sections found:</strong><br>`;
-      html += '<table><tr><th>Section</th><th>Preview</th></tr>';
-      rows.forEach(r => {
-        const preview = (r.content || '').substring(0, 80) + ((r.content || '').length > 80 ? '...' : '');
-        html += `<tr><td><strong>${escapeHTML(r.title)}</strong></td><td>${escapeHTML(preview)}</td></tr>`;
-      });
-      html += '</table>';
-      return html;
-    }
-    if (/show.*all|full content|everything/i.test(q)) {
-      let html = '';
-      rows.forEach(r => {
-        html += `<strong>${escapeHTML(r.title)}</strong><pre>${escapeHTML(r.content)}</pre>`;
-      });
-      return html;
-    }
-    // Search within document content
-    const searchTerms = q.replace(/show|find|search|about|what|how|where|is|the|for|me/gi, '').trim().split(/\s+/).filter(t => t.length > 2);
-    if (searchTerms.length > 0) {
-      const matches = rows.filter(r => {
-        const text = (r.title + ' ' + r.content).toLowerCase();
-        return searchTerms.some(t => text.includes(t));
-      });
-      if (matches.length > 0) {
-        let html = `Found <strong>${matches.length}</strong> relevant section(s):<br>`;
-        matches.forEach(r => {
-          html += `<strong>${escapeHTML(r.title)}</strong><pre>${escapeHTML(r.content.substring(0, 300))}${r.content.length > 300 ? '...' : ''}</pre>`;
-        });
-        return html;
-      }
-    }
-    return `No matching content found. Try searching for specific keywords, or ask "What sections are in this document?"`;
-  }
-
-  // Total count
-  if (/how many (rows|entries|total|records)|count all/i.test(q)) {
-    return `There are <strong>${rows.length}</strong> total rows in your data.`;
-  }
-
-  // Breakdown by column
-  const breakdownMatch = q.match(/breakdown by (\w+)|group by (\w+)|by (\w+)/i);
-  if (breakdownMatch) {
-    const target = (breakdownMatch[1] || breakdownMatch[2] || breakdownMatch[3]).toLowerCase();
-    const col = findColumn(target);
-    if (col) return buildBreakdown(rows, col);
-  }
-
-  // "Who has the most" / top owner
-  if (/who has the most|top owner|most entries/i.test(q)) {
-    const col = findColumn('owner') || findColumn('assigned') || findColumn('poc');
-    if (col) return buildBreakdown(rows, col, 'Top contributors');
-  }
-
-  // Filter by value: "show me X" / "entries where X is Y" / "how many X"
-  const filterMatch = q.match(/(?:show|filter|how many|list|entries)(?: (?:me|where|with))?\s+(\w+)\s*(?:=|is|:| )\s*(.+)/i);
-  if (filterMatch) {
-    const colHint = filterMatch[1].toLowerCase();
-    const value = filterMatch[2].trim().toLowerCase();
-    const col = findColumn(colHint);
-    if (col) {
-      const filtered = rows.filter(r => (r[col] || '').toLowerCase().includes(value));
-      if (/how many/i.test(q)) {
-        return `There are <strong>${filtered.length}</strong> rows where <strong>${col}</strong> contains "${escapeHTML(filterMatch[2].trim())}".`;
-      }
-      if (filtered.length === 0) return `No rows found where <strong>${col}</strong> contains "${escapeHTML(filterMatch[2].trim())}".`;
-      return buildTable(filtered.slice(0, 15), cols) + (filtered.length > 15 ? `<br><em>Showing 15 of ${filtered.length} results.</em>` : '');
-    }
-  }
-
-  // "this month" / "this week"
-  if (/this month|current month/i.test(q)) {
-    const dateCol = findColumn('date') || findColumn('start') || findColumn('launch');
-    if (dateCol) {
-      const now = new Date();
-      const filtered = rows.filter(r => {
-        const d = new Date(r[dateCol]);
-        return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear();
-      });
-      return `<strong>${filtered.length}</strong> entries this month (${now.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}).` + (filtered.length > 0 ? '<br>' + buildTable(filtered.slice(0, 10), cols) : '');
-    }
-  }
-
-  // "columns" / "what data"
-  if (/columns|fields|what data|schema/i.test(q)) {
-    return `Your data has <strong>${cols.length}</strong> columns:<br><pre>${cols.join('\n')}</pre>`;
-  }
-
-  // Sum / average
-  const sumMatch = q.match(/(?:sum|total|add up) (?:of |the )?(\w+)/i);
-  if (sumMatch) {
-    const col = findColumn(sumMatch[1]);
-    if (col) {
-      const nums = rows.map(r => parseFloat(r[col])).filter(n => !isNaN(n));
-      if (nums.length > 0) {
-        const sum = nums.reduce((a, b) => a + b, 0);
-        return `Sum of <strong>${col}</strong>: <strong>${sum.toLocaleString()}</strong> (across ${nums.length} numeric values).`;
-      }
-    }
-  }
-
-  const avgMatch = q.match(/(?:average|avg|mean) (?:of |the )?(\w+)/i);
-  if (avgMatch) {
-    const col = findColumn(avgMatch[1]);
-    if (col) {
-      const nums = rows.map(r => parseFloat(r[col])).filter(n => !isNaN(n));
-      if (nums.length > 0) {
-        const avg = nums.reduce((a, b) => a + b, 0) / nums.length;
-        return `Average of <strong>${col}</strong>: <strong>${avg.toFixed(2)}</strong> (across ${nums.length} values).`;
-      }
-    }
-  }
-
-  // Unique values
-  const uniqueMatch = q.match(/unique|distinct|values (?:of|in|for) (\w+)/i);
-  if (uniqueMatch) {
-    const col = findColumn(uniqueMatch[1] || q.split(' ').pop());
-    if (col) {
-      const unique = [...new Set(rows.map(r => r[col]).filter(Boolean))];
-      return `<strong>${unique.length}</strong> unique values in <strong>${col}</strong>:<br><pre>${unique.slice(0, 30).join('\n')}</pre>` + (unique.length > 30 ? `<em>...and ${unique.length - 30} more</em>` : '');
-    }
-  }
-
-  // Fallback: try to find any keyword that matches a column value and filter
-  for (const col of cols) {
-    const values = [...new Set(rows.map(r => (r[col] || '').toLowerCase()))];
-    const match = values.find(v => v && q.includes(v));
-    if (match) {
-      const filtered = rows.filter(r => (r[col] || '').toLowerCase() === match);
-      return `Found <strong>${filtered.length}</strong> rows where <strong>${col}</strong> = "${escapeHTML(match)}":` + '<br>' + buildTable(filtered.slice(0, 10), cols) + (filtered.length > 10 ? `<br><em>Showing 10 of ${filtered.length}.</em>` : '');
-    }
-  }
-
-  return `I could not interpret that query. Try:<br>
-    &bull; "How many rows total?"<br>
-    &bull; "Breakdown by [column]"<br>
-    &bull; "Show me [column] is [value]"<br>
-    &bull; "Sum of [column]" or "Average of [column]"<br>
-    &bull; "Columns" to see available fields<br>
-    <br>Available columns: <strong>${cols.join(', ')}</strong>`;
-}
-
-function findColumn(hint) {
-  if (!insightsData) return null;
-  const h = hint.toLowerCase();
-  // Exact match
-  const exact = insightsData.columns.find(c => c.toLowerCase() === h);
-  if (exact) return exact;
-  // Partial match
-  const partial = insightsData.columns.find(c => c.toLowerCase().includes(h));
-  if (partial) return partial;
-  // Reverse partial
-  return insightsData.columns.find(c => h.includes(c.toLowerCase()));
-}
-
-function buildBreakdown(rows, col, title) {
-  const counts = {};
-  rows.forEach(r => {
-    const val = r[col] || '(empty)';
-    counts[val] = (counts[val] || 0) + 1;
-  });
-  const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
-  let html = title ? `<strong>${title}</strong> (by ${col}):<br>` : `Breakdown by <strong>${col}</strong>:<br>`;
-  html += '<table><tr><th>' + escapeHTML(col) + '</th><th>Count</th><th></th></tr>';
-  const max = sorted[0][1];
-  sorted.forEach(([val, count]) => {
-    const pct = Math.round((count / rows.length) * 100);
-    const bar = '&#9608;'.repeat(Math.max(1, Math.round((count / max) * 12)));
-    html += `<tr><td>${escapeHTML(val)}</td><td>${count}</td><td style="color:var(--brand-green);font-size:10px;">${bar} ${pct}%</td></tr>`;
-  });
-  html += '</table>';
-  return html;
-}
-
-function buildTable(rows, cols) {
-  const showCols = cols.slice(0, 6);
-  let html = '<table><tr>';
-  showCols.forEach(c => { html += `<th>${escapeHTML(c)}</th>`; });
-  html += '</tr>';
-  rows.forEach(r => {
-    html += '<tr>';
-    showCols.forEach(c => { html += `<td>${escapeHTML(r[c] || '')}</td>`; });
-    html += '</tr>';
-  });
-  html += '</table>';
-  return html;
-}
 
 function escapeHTML(str) {
   return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -8343,29 +7508,6 @@ function submitBPForm(channelId) {
   renderBestPractices();
 }
 
-// Save insight to best practices (called from chat)
-let pendingBPSave = null;
-
-function offerSaveToBP(title, content, source) {
-  pendingBPSave = { title, content, source };
-  let html = `Would you like to save this to Best Practices?<br>`;
-  html += `<div style="display:flex;gap:6px;margin-top:8px;">`;
-  BP_CHANNELS.forEach(ch => {
-    html += `<button class="insights-suggestion" onclick="confirmSaveToBP('${ch.id}')" style="font-size:10px;">${ch.name}</button>`;
-  });
-  html += `</div>`;
-  insightsMessages.push({ role: 'bot', html });
-  renderInsights();
-}
-
-function confirmSaveToBP(channelId) {
-  if (!pendingBPSave) return;
-  addBestPractice(channelId, pendingBPSave.title, pendingBPSave.content, pendingBPSave.source);
-  insightsMessages.push({ role: 'bot', html: `Saved to <strong>${BP_CHANNELS.find(c => c.id === channelId).name}</strong> best practices.` });
-  pendingBPSave = null;
-  renderInsights();
-}
-
 // ─── AI SETTINGS ────────────────────────────────────────────────────
 
 function getAIKey() {
@@ -8405,6 +7547,19 @@ function updateAISettingsStatus() {
   } else {
     statusEl.className = 'ai-settings-status not-connected';
     statusEl.textContent = 'No API key configured';
+  }
+}
+
+function sanitizeAndParseJSON(raw) {
+  let s = raw;
+  s = s.replace(/,\s*([}\]])/g, '$1');
+  s = s.replace(/[\x00-\x1F\x7F]/g, (ch) => ch === '\n' || ch === '\r' || ch === '\t' ? ch : '');
+  try { return JSON.parse(s); } catch(e) {}
+  s = s.replace(/([{,]\s*)(\w+)\s*:/g, '$1"$2":');
+  try { return JSON.parse(s); } catch(e) {}
+  s = s.replace(/"([^"]*?)"/g, (match, inner) => '"' + inner.replace(/\n/g, '\\n').replace(/\t/g, '\\t') + '"');
+  try { return JSON.parse(s); } catch(e) {
+    throw new Error('Failed to parse AI response as JSON. Try re-running or uploading a simpler file.');
   }
 }
 
@@ -8569,12 +7724,7 @@ Focus on actionable insights. Be specific with numbers and campaign names. Ident
     const jsonMatch = cleaned.match(/\{[\s\S]*\}/);
     if (!jsonMatch) throw new Error('Could not parse AI response. The AI returned text but no structured JSON. Try a different file format.');
 
-    let parsed;
-    try {
-      parsed = JSON.parse(jsonMatch[0]);
-    } catch (parseErr) {
-      throw new Error(`JSON parse error: ${parseErr.message}`);
-    }
+    const parsed = sanitizeAndParseJSON(jsonMatch[0]);
     renderExtractionResults(parsed.practices, sourceName);
   } catch (e) {
     resultsEl.innerHTML = `<div style="padding:20px;color:#DC2626;font-size:13px;"><strong>Error:</strong> ${escapeHTML(e.message)}</div>`;
@@ -8751,13 +7901,7 @@ Be specific and actionable. Reference real data from the best practices and cale
     const jsonMatch = cleaned.match(/\{[\s\S]*\}/);
     if (!jsonMatch) throw new Error('Could not parse AI response. The AI returned text but no structured JSON. Try uploading a simpler file or a different format.');
 
-    let parsed;
-    try {
-      parsed = JSON.parse(jsonMatch[0]);
-    } catch (parseErr) {
-      const truncated = jsonMatch[0].substring(0, 500);
-      throw new Error(`JSON parse error: ${parseErr.message}. Response started with: ${truncated}...`);
-    }
+    const parsed = sanitizeAndParseJSON(jsonMatch[0]);
     renderAuditResults(parsed, planName);
   } catch (e) {
     resultsEl.innerHTML = `<div style="padding:20px;color:#DC2626;font-size:13px;"><strong>Error:</strong> ${escapeHTML(e.message)}</div>`;
