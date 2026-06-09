@@ -3815,6 +3815,403 @@ body {
   color: var(--text-tertiary);
   font-weight: 400;
 }
+
+/* ─── CAMPAIGNS VIEW ─────────────────────────────────────────── */
+.campaigns-view { display: none; padding: 24px; }
+.campaigns-view.active { display: block; }
+
+.campaigns-nav {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+.campaigns-nav-btn {
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1.5px solid var(--border);
+  background: var(--white);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.campaigns-nav-btn:hover { border-color: var(--text-tertiary); }
+.campaigns-nav-btn.active { background: var(--text-primary); color: var(--white); border-color: var(--text-primary); }
+.campaigns-nav-btn .nav-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+}
+.campaigns-nav-btn.dashboard-btn { border-color: var(--brand-green); color: var(--brand-green); font-weight: 600; }
+.campaigns-nav-btn.dashboard-btn.active { background: var(--brand-green); color: var(--white); }
+
+.campaign-page { display: none; }
+.campaign-page.active { display: block; }
+
+.campaign-hero {
+  background: var(--white);
+  border-radius: var(--radius);
+  border: 1px solid var(--border-light);
+  padding: 32px;
+  margin-bottom: 24px;
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+}
+.campaign-hero-info { flex: 1; min-width: 0; }
+.campaign-hero-info h2 {
+  font-family: var(--font-headline);
+  font-size: 28px;
+  margin: 0 0 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.campaign-hero-info h2 .color-dot {
+  width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0;
+}
+.campaign-hero-meta {
+  display: flex;
+  gap: 24px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+.campaign-hero-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.campaign-hero-meta-item .meta-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-tertiary);
+  font-weight: 600;
+}
+.campaign-hero-meta-item .meta-value {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+.campaign-objective {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-top: 12px;
+  line-height: 1.5;
+}
+.campaign-hero-stats {
+  display: flex;
+  gap: 16px;
+  flex-shrink: 0;
+}
+.campaign-stat-card {
+  background: var(--bg-cream);
+  border-radius: var(--radius-sm);
+  padding: 16px 20px;
+  text-align: center;
+  min-width: 90px;
+}
+.campaign-stat-card .stat-num {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.campaign-stat-card .stat-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-tertiary);
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.campaign-section {
+  background: var(--white);
+  border-radius: var(--radius);
+  border: 1px solid var(--border-light);
+  padding: 24px;
+  margin-bottom: 24px;
+}
+.campaign-section h3 {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0 0 16px;
+  color: var(--text-primary);
+}
+
+.campaign-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+}
+.campaign-gallery-item {
+  position: relative;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  aspect-ratio: 16/10;
+  background: var(--bg-cream);
+  border: 1px solid var(--border-light);
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+.campaign-gallery-item:hover { transform: scale(1.02); }
+.campaign-gallery-item img {
+  width: 100%; height: 100%; object-fit: cover;
+}
+.campaign-gallery-item .gallery-label {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 6px 10px;
+  background: linear-gradient(transparent, rgba(0,0,0,0.7));
+  color: white;
+  font-size: 11px;
+  font-weight: 500;
+}
+.campaign-gallery-empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 40px;
+  color: var(--text-tertiary);
+  font-size: 13px;
+}
+.campaign-gallery-upload {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 16/10;
+  border: 2px dashed var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  color: var(--text-tertiary);
+  font-size: 13px;
+  font-weight: 500;
+  transition: border-color 0.15s, color 0.15s;
+}
+.campaign-gallery-upload:hover { border-color: var(--brand-green); color: var(--brand-green); }
+
+.campaign-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.campaign-timeline-entry {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-cream);
+  font-size: 13px;
+}
+.campaign-timeline-entry .timeline-date {
+  font-weight: 600;
+  color: var(--text-secondary);
+  min-width: 80px;
+  font-size: 12px;
+}
+.campaign-timeline-entry .timeline-channel {
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  min-width: 60px;
+  text-align: center;
+}
+.campaign-timeline-entry .timeline-text {
+  flex: 1;
+  color: var(--text-primary);
+}
+.campaign-timeline-entry .timeline-status {
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* Gallery lightbox */
+.gallery-lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.9);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+.gallery-lightbox.active { opacity: 1; pointer-events: all; }
+.gallery-lightbox img { max-width: 90%; max-height: 90%; border-radius: 8px; }
+.gallery-lightbox-close {
+  position: absolute;
+  top: 20px; right: 20px;
+  background: none; border: none;
+  color: white; font-size: 32px;
+  cursor: pointer;
+}
+.gallery-lightbox-caption {
+  position: absolute;
+  bottom: 30px;
+  color: white;
+  font-size: 14px;
+  text-align: center;
+}
+
+/* Performance Dashboard */
+.perf-dashboard { padding: 0; }
+.perf-controls {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.perf-controls select {
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  font-size: 13px;
+  background: var(--white);
+}
+.perf-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.perf-summary-card {
+  background: var(--bg-cream);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  text-align: center;
+}
+.perf-summary-card .perf-card-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-tertiary);
+  font-weight: 600;
+}
+.perf-summary-card .perf-card-value {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-top: 4px;
+}
+.perf-comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.perf-comparison-table th {
+  text-align: left;
+  padding: 10px 12px;
+  border-bottom: 2px solid var(--border);
+  font-weight: 600;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-tertiary);
+}
+.perf-comparison-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border-light);
+}
+.perf-comparison-table tr:hover td { background: var(--bg-cream); }
+.perf-comparison-table .init-name-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+}
+.perf-bar-cell { width: 150px; }
+.perf-bar {
+  height: 8px;
+  border-radius: 4px;
+  background: var(--border-light);
+  overflow: hidden;
+}
+.perf-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.3s;
+}
+.perf-chart-area {
+  margin-top: 24px;
+  background: var(--bg-cream);
+  border-radius: var(--radius-sm);
+  padding: 20px;
+}
+.perf-chart-area h4 {
+  font-size: 13px;
+  font-weight: 600;
+  margin: 0 0 12px;
+  color: var(--text-secondary);
+}
+.perf-chart-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  height: 140px;
+}
+.perf-chart-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  justify-content: flex-end;
+}
+.perf-chart-bar {
+  width: 100%;
+  max-width: 40px;
+  border-radius: 4px 4px 0 0;
+  transition: height 0.3s;
+}
+.perf-chart-label {
+  font-size: 10px;
+  color: var(--text-tertiary);
+  margin-top: 6px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 60px;
+}
+.perf-input-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.perf-input-row label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  min-width: 100px;
+}
+.perf-input-row input {
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 13px;
+  width: 120px;
+}
+.perf-save-btn {
+  padding: 8px 16px;
+  background: var(--brand-green);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 12px;
+}
+.perf-save-btn:hover { background: var(--brand-green-dark); }
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 </head>
@@ -3870,6 +4267,10 @@ body {
             <span class="sidebar-label">Year View</span>
           </div>
         </div>
+      </div>
+      <div class="sidebar-item" data-sidebar="campaigns" onclick="sidebarNav('campaigns')">
+        <span class="sidebar-icon">&#127912;</span>
+        <span class="sidebar-label">Campaigns</span>
       </div>
       <div class="sidebar-item" data-sidebar="product" onclick="sidebarNav('product')">
         <span class="sidebar-icon">&#128640;</span>
@@ -4026,7 +4427,7 @@ body {
   <div class="calendar-content">
     <div class="year-view" id="yearView"></div>
     <div class="weekly-view" id="weeklyView"></div>
-    <div class="month-view active" id="monthView"></div>
+    <div class="month-view" id="monthView"></div>
     <div class="quarter-view" id="quarterView"></div>
     <div class="product-view" id="productView"></div>
     <div class="crm-view" id="crmView"></div>
@@ -4036,6 +4437,7 @@ body {
     <div class="extract-bp-view" id="extractBPView"></div>
     <div class="audit-plan-view" id="auditPlanView"></div>
     <div class="best-practices-view" id="bestPracticesView"></div>
+    <div class="campaigns-view" id="campaignsView"></div>
   </div>
   </div><!-- /.app-main -->
 </div>
@@ -4383,6 +4785,7 @@ function sidebarNav(mode, view) {
     'crm': 'CRM Heatmap',
     'leadership': 'Leadership Roadmap',
     'markets': 'Local Markets',
+    'campaigns': 'Campaigns',
     'insights': 'Insights Chat',
     'extract-bp': 'Extract Learnings',
     'audit-plan': 'Audit Plan',
@@ -4437,6 +4840,7 @@ function setMode(mode) {
   document.getElementById('extractBPView').classList.remove('active');
   document.getElementById('auditPlanView').classList.remove('active');
   document.getElementById('bestPracticesView').classList.remove('active');
+  document.getElementById('campaignsView').classList.remove('active');
   document.getElementById('yearView').classList.remove('active');
   document.getElementById('quarterView').classList.remove('active');
   document.getElementById('weeklyView').classList.remove('active');
@@ -4487,6 +4891,11 @@ function setMode(mode) {
     navButtons.forEach(b => b.style.display = 'none');
     document.getElementById('bestPracticesView').classList.add('active');
     renderBestPractices();
+  } else if (mode === 'campaigns') {
+    marketingOnlyEls.forEach(el => { if (el) el.style.display = 'none'; });
+    navButtons.forEach(b => b.style.display = 'none');
+    document.getElementById('campaignsView').classList.add('active');
+    renderCampaigns();
   }
   render();
 }
@@ -6826,6 +7235,318 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+
+// ─── CAMPAIGNS ENGINE ───────────────────────────────────────────────
+
+let activeCampaignPage = 'dashboard';
+let campaignGalleries = JSON.parse(localStorage.getItem('campaignGalleries') || '{}');
+let campaignPerformance = JSON.parse(localStorage.getItem('campaignPerformance') || '{}');
+
+function saveCampaignGalleries() {
+  localStorage.setItem('campaignGalleries', JSON.stringify(campaignGalleries));
+}
+function saveCampaignPerformance() {
+  localStorage.setItem('campaignPerformance', JSON.stringify(campaignPerformance));
+}
+
+function renderCampaigns() {
+  if (!calendarData) return;
+  const container = document.getElementById('campaignsView');
+  const inits = calendarData.initiatives;
+
+  let html = '<div class="campaigns-nav">';
+  html += `<button class="campaigns-nav-btn dashboard-btn${activeCampaignPage === 'dashboard' ? ' active' : ''}" onclick="setCampaignPage('dashboard')">Performance Dashboard</button>`;
+  inits.forEach(init => {
+    html += `<button class="campaigns-nav-btn${activeCampaignPage === init.id ? ' active' : ''}" onclick="setCampaignPage('${init.id}')"><span class="nav-dot" style="background:${init.color}"></span>${init.name}</button>`;
+  });
+  html += '</div>';
+
+  if (activeCampaignPage === 'dashboard') {
+    html += renderCampaignDashboard(inits);
+  } else {
+    const init = inits.find(i => i.id === activeCampaignPage);
+    if (init) html += renderCampaignPage(init);
+  }
+
+  container.innerHTML = html;
+}
+
+function setCampaignPage(page) {
+  activeCampaignPage = page;
+  renderCampaigns();
+}
+
+function renderCampaignPage(init) {
+  const entries = init.entries || [];
+  const completed = entries.filter(e => e.status === 'completed').length;
+  const inProgress = entries.filter(e => e.status === 'in-progress').length;
+  const planned = entries.filter(e => e.status === 'planned').length;
+  const dates = entries.map(e => e.date).sort();
+  const startDate = dates[0] ? formatDateShort(dates[0]) : 'TBD';
+  const endDates = entries.map(e => e.endDate || e.date).sort();
+  const endDate = endDates[endDates.length - 1] ? formatDateShort(endDates[endDates.length - 1]) : 'TBD';
+  const channels = [...new Set(entries.map(e => e.channel))];
+
+  let html = '<div class="campaign-page active">';
+
+  // Hero section
+  html += `<div class="campaign-hero">
+    <div class="campaign-hero-info">
+      <h2><span class="color-dot" style="background:${init.color}"></span>${init.name}</h2>
+      <div class="campaign-objective">${init.objective || ''}</div>
+      <div class="campaign-hero-meta">
+        <div class="campaign-hero-meta-item"><span class="meta-label">Owner</span><span class="meta-value">${init.poc || 'Unassigned'}</span></div>
+        <div class="campaign-hero-meta-item"><span class="meta-label">Timeline</span><span class="meta-value">${startDate} &rarr; ${endDate}</span></div>
+        <div class="campaign-hero-meta-item"><span class="meta-label">Markets</span><span class="meta-value">${(init.markets || []).join(', ')}</span></div>
+        <div class="campaign-hero-meta-item"><span class="meta-label">Channels</span><span class="meta-value">${channels.length}</span></div>
+      </div>
+    </div>
+    <div class="campaign-hero-stats">
+      <div class="campaign-stat-card"><div class="stat-num">${completed}</div><div class="stat-label">Completed</div></div>
+      <div class="campaign-stat-card"><div class="stat-num">${inProgress}</div><div class="stat-label">In Progress</div></div>
+      <div class="campaign-stat-card"><div class="stat-num">${planned}</div><div class="stat-label">Planned</div></div>
+    </div>
+  </div>`;
+
+  // Gallery section
+  const gallery = campaignGalleries[init.id] || [];
+  html += `<div class="campaign-section">
+    <h3>Creative Gallery</h3>
+    <div class="campaign-gallery">`;
+  gallery.forEach((img, idx) => {
+    html += `<div class="campaign-gallery-item" onclick="openGalleryLightbox('${init.id}', ${idx})">
+      <img src="${img.src}" alt="${escapeHTML(img.label || '')}">
+      ${img.label ? `<div class="gallery-label">${escapeHTML(img.label)}</div>` : ''}
+    </div>`;
+  });
+  if (isEditor) {
+    html += `<div class="campaign-gallery-upload" onclick="document.getElementById('galleryUpload-${init.id}').click()">+ Add Image</div>
+    <input type="file" id="galleryUpload-${init.id}" accept="image/*" multiple style="display:none;" onchange="handleGalleryUpload(event, '${init.id}')">`;
+  }
+  if (gallery.length === 0 && !isEditor) {
+    html += `<div class="campaign-gallery-empty">No creative assets uploaded yet.</div>`;
+  }
+  html += `</div></div>`;
+
+  // Performance section (per-campaign)
+  const perf = campaignPerformance[init.id] || {};
+  html += `<div class="campaign-section">
+    <h3>Performance Metrics</h3>
+    <div id="campaignPerfForm-${init.id}">`;
+  if (isEditor) {
+    html += `<div class="perf-input-row"><label>Impressions</label><input type="number" id="perf-impressions-${init.id}" value="${perf.impressions || ''}"></div>`;
+    html += `<div class="perf-input-row"><label>Clicks</label><input type="number" id="perf-clicks-${init.id}" value="${perf.clicks || ''}"></div>`;
+    html += `<div class="perf-input-row"><label>Conversions</label><input type="number" id="perf-conversions-${init.id}" value="${perf.conversions || ''}"></div>`;
+    html += `<div class="perf-input-row"><label>Revenue</label><input type="number" id="perf-revenue-${init.id}" value="${perf.revenue || ''}"></div>`;
+    html += `<div class="perf-input-row"><label>Notes</label><input type="text" id="perf-notes-${init.id}" value="${escapeHTML(perf.notes || '')}" style="width:300px;"></div>`;
+    html += `<button class="perf-save-btn" onclick="saveCampaignPerfMetrics('${init.id}')">Save Metrics</button>`;
+  } else {
+    if (Object.keys(perf).length === 0) {
+      html += `<p style="color:var(--text-tertiary);font-size:13px;">No performance data entered yet.</p>`;
+    } else {
+      html += `<div class="perf-summary-grid">`;
+      if (perf.impressions) html += `<div class="perf-summary-card"><div class="perf-card-label">Impressions</div><div class="perf-card-value">${Number(perf.impressions).toLocaleString()}</div></div>`;
+      if (perf.clicks) html += `<div class="perf-summary-card"><div class="perf-card-label">Clicks</div><div class="perf-card-value">${Number(perf.clicks).toLocaleString()}</div></div>`;
+      if (perf.conversions) html += `<div class="perf-summary-card"><div class="perf-card-label">Conversions</div><div class="perf-card-value">${Number(perf.conversions).toLocaleString()}</div></div>`;
+      if (perf.revenue) html += `<div class="perf-summary-card"><div class="perf-card-label">Revenue</div><div class="perf-card-value">$${Number(perf.revenue).toLocaleString()}</div></div>`;
+      html += `</div>`;
+      if (perf.notes) html += `<p style="color:var(--text-secondary);font-size:13px;margin-top:8px;">${escapeHTML(perf.notes)}</p>`;
+    }
+  }
+  html += `</div></div>`;
+
+  // Activity timeline
+  html += `<div class="campaign-section">
+    <h3>Activity Timeline</h3>
+    <div class="campaign-timeline">`;
+  const sortedEntries = [...entries].sort((a, b) => b.date.localeCompare(a.date));
+  sortedEntries.slice(0, 20).forEach(e => {
+    const chColor = CHANNEL_COLORS[e.channel] || { color: '#64748B', bg: '#F1F5F9' };
+    const statusStyle = STATUS_STYLES[e.status] || { color: '#94A3B8', bg: '#F1F5F9' };
+    html += `<div class="campaign-timeline-entry">
+      <span class="timeline-date">${formatDateShort(e.date)}</span>
+      <span class="timeline-channel" style="background:${chColor.bg};color:${chColor.color};">${e.channel}</span>
+      <span class="timeline-text">${escapeHTML(e.text)}</span>
+      <span class="timeline-status" style="background:${statusStyle.bg};color:${statusStyle.color};">${e.status}</span>
+    </div>`;
+  });
+  if (entries.length === 0) {
+    html += `<p style="color:var(--text-tertiary);font-size:13px;text-align:center;padding:20px;">No entries yet.</p>`;
+  }
+  html += `</div></div>`;
+
+  html += '</div>';
+  return html;
+}
+
+function renderCampaignDashboard(inits) {
+  let html = '<div class="campaign-page active">';
+
+  // Summary cards across all initiatives
+  let totalEntries = 0, totalCompleted = 0, totalInProgress = 0, totalPlanned = 0;
+  inits.forEach(init => {
+    const entries = init.entries || [];
+    totalEntries += entries.length;
+    totalCompleted += entries.filter(e => e.status === 'completed').length;
+    totalInProgress += entries.filter(e => e.status === 'in-progress').length;
+    totalPlanned += entries.filter(e => e.status === 'planned').length;
+  });
+
+  html += `<div class="campaign-section">
+    <h3>Overview</h3>
+    <div class="perf-summary-grid">
+      <div class="perf-summary-card"><div class="perf-card-label">Initiatives</div><div class="perf-card-value">${inits.length}</div></div>
+      <div class="perf-summary-card"><div class="perf-card-label">Total Entries</div><div class="perf-card-value">${totalEntries}</div></div>
+      <div class="perf-summary-card"><div class="perf-card-label">Completed</div><div class="perf-card-value">${totalCompleted}</div></div>
+      <div class="perf-summary-card"><div class="perf-card-label">In Progress</div><div class="perf-card-value">${totalInProgress}</div></div>
+      <div class="perf-summary-card"><div class="perf-card-label">Planned</div><div class="perf-card-value">${totalPlanned}</div></div>
+      <div class="perf-summary-card"><div class="perf-card-label">Completion Rate</div><div class="perf-card-value">${totalEntries ? Math.round((totalCompleted / totalEntries) * 100) : 0}%</div></div>
+    </div>
+  </div>`;
+
+  // Comparison table
+  html += `<div class="campaign-section">
+    <h3>Initiative Comparison</h3>
+    <table class="perf-comparison-table">
+      <thead><tr>
+        <th>Initiative</th>
+        <th>Entries</th>
+        <th>Completed</th>
+        <th>Progress</th>
+        <th>Impressions</th>
+        <th>Clicks</th>
+        <th>Conversions</th>
+        <th>Revenue</th>
+      </tr></thead><tbody>`;
+
+  inits.forEach(init => {
+    const entries = init.entries || [];
+    const completed = entries.filter(e => e.status === 'completed').length;
+    const pct = entries.length ? Math.round((completed / entries.length) * 100) : 0;
+    const perf = campaignPerformance[init.id] || {};
+    html += `<tr>
+      <td><div class="init-name-cell"><span class="nav-dot" style="background:${init.color};width:8px;height:8px;border-radius:50;display:inline-block;"></span>${init.name}</div></td>
+      <td>${entries.length}</td>
+      <td>${completed}</td>
+      <td><div class="perf-bar-cell"><div class="perf-bar"><div class="perf-bar-fill" style="width:${pct}%;background:${init.color};"></div></div></div></td>
+      <td>${perf.impressions ? Number(perf.impressions).toLocaleString() : '—'}</td>
+      <td>${perf.clicks ? Number(perf.clicks).toLocaleString() : '—'}</td>
+      <td>${perf.conversions ? Number(perf.conversions).toLocaleString() : '—'}</td>
+      <td>${perf.revenue ? '$' + Number(perf.revenue).toLocaleString() : '—'}</td>
+    </tr>`;
+  });
+  html += `</tbody></table></div>`;
+
+  // Bar chart: entries per initiative
+  const maxEntries = Math.max(...inits.map(i => (i.entries || []).length), 1);
+  html += `<div class="campaign-section">
+    <h3>Entries by Initiative</h3>
+    <div class="perf-chart-area">
+      <div class="perf-chart-bars">`;
+  inits.forEach(init => {
+    const count = (init.entries || []).length;
+    const heightPct = Math.round((count / maxEntries) * 100);
+    html += `<div class="perf-chart-col">
+      <div class="perf-chart-bar" style="height:${heightPct}%;background:${init.color};"></div>
+      <div class="perf-chart-label">${init.name}</div>
+    </div>`;
+  });
+  html += `</div></div></div>`;
+
+  // Bar chart: performance comparison (impressions)
+  const hasPerf = inits.some(i => campaignPerformance[i.id] && campaignPerformance[i.id].impressions);
+  if (hasPerf) {
+    const maxImpr = Math.max(...inits.map(i => Number((campaignPerformance[i.id] || {}).impressions || 0)), 1);
+    html += `<div class="campaign-section">
+      <h3>Impressions Comparison</h3>
+      <div class="perf-chart-area">
+        <div class="perf-chart-bars">`;
+    inits.forEach(init => {
+      const val = Number((campaignPerformance[init.id] || {}).impressions || 0);
+      const heightPct = Math.round((val / maxImpr) * 100);
+      html += `<div class="perf-chart-col">
+        <div class="perf-chart-bar" style="height:${heightPct}%;background:${init.color};"></div>
+        <div class="perf-chart-label">${init.name}</div>
+      </div>`;
+    });
+    html += `</div></div></div>`;
+  }
+
+  html += '</div>';
+  return html;
+}
+
+function formatDateShort(dateStr) {
+  if (!dateStr) return '';
+  const d = new Date(dateStr + 'T00:00:00');
+  return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+}
+
+function handleGalleryUpload(event, initId) {
+  const files = event.target.files;
+  if (!files.length) return;
+  if (!campaignGalleries[initId]) campaignGalleries[initId] = [];
+
+  let processed = 0;
+  Array.from(files).forEach(file => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      campaignGalleries[initId].push({
+        src: e.target.result,
+        label: file.name.replace(/\.[^/.]+$/, ''),
+        added: new Date().toISOString()
+      });
+      processed++;
+      if (processed === files.length) {
+        saveCampaignGalleries();
+        renderCampaigns();
+      }
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+function openGalleryLightbox(initId, idx) {
+  const gallery = campaignGalleries[initId] || [];
+  const img = gallery[idx];
+  if (!img) return;
+  let lb = document.getElementById('galleryLightbox');
+  if (!lb) {
+    lb = document.createElement('div');
+    lb.id = 'galleryLightbox';
+    lb.className = 'gallery-lightbox';
+    lb.onclick = (e) => { if (e.target === lb) closeGalleryLightbox(); };
+    lb.innerHTML = `<button class="gallery-lightbox-close" onclick="closeGalleryLightbox()">&times;</button><img><div class="gallery-lightbox-caption"></div>`;
+    document.body.appendChild(lb);
+  }
+  lb.querySelector('img').src = img.src;
+  lb.querySelector('.gallery-lightbox-caption').textContent = img.label || '';
+  lb.classList.add('active');
+}
+
+function closeGalleryLightbox() {
+  const lb = document.getElementById('galleryLightbox');
+  if (lb) lb.classList.remove('active');
+}
+
+function saveCampaignPerfMetrics(initId) {
+  campaignPerformance[initId] = {
+    impressions: document.getElementById(`perf-impressions-${initId}`).value || '',
+    clicks: document.getElementById(`perf-clicks-${initId}`).value || '',
+    conversions: document.getElementById(`perf-conversions-${initId}`).value || '',
+    revenue: document.getElementById(`perf-revenue-${initId}`).value || '',
+    notes: document.getElementById(`perf-notes-${initId}`).value || ''
+  };
+  saveCampaignPerformance();
+  renderCampaigns();
+}
+
+function deleteGalleryImage(initId, idx) {
+  if (!campaignGalleries[initId]) return;
+  campaignGalleries[initId].splice(idx, 1);
+  saveCampaignGalleries();
+  renderCampaigns();
+}
 
 // ─── INSIGHTS CHAT ENGINE ───────────────────────────────────────────
 
