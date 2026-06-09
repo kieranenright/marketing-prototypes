@@ -7408,7 +7408,7 @@ function confirmSaveToBP(channelId) {
 // ─── AI SETTINGS ────────────────────────────────────────────────────
 
 function getAIKey() {
-  return localStorage.getItem('anthropicApiKey') || '';
+  return localStorage.getItem('geminiApiKey') || '';
 }
 
 function hasAIKey() {
@@ -7428,9 +7428,9 @@ function closeAISettings() {
 function saveAIKey() {
   const key = document.getElementById('aiKeyInput').value.trim();
   if (key) {
-    localStorage.setItem('anthropicApiKey', key);
+    localStorage.setItem('geminiApiKey', key);
   } else {
-    localStorage.removeItem('anthropicApiKey');
+    localStorage.removeItem('geminiApiKey');
   }
   updateAISettingsStatus();
   closeAISettings();
@@ -7449,21 +7449,15 @@ function updateAISettingsStatus() {
 
 async function callClaude(systemPrompt, userMessage) {
   const key = getAIKey();
-  if (!key) throw new Error('No API key configured. Go to AI Settings to add your Anthropic API key.');
+  if (!key) throw new Error('No API key configured. Go to AI Settings to add your Google Gemini API key.');
 
-  const resp = await fetch('https://api.anthropic.com/v1/messages', {
+  const resp = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${key}`, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'x-api-key': key,
-      'anthropic-version': '2023-06-01',
-      'anthropic-dangerous-direct-browser-access': 'true'
-    },
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      model: 'claude-sonnet-4-20250514',
-      max_tokens: 4096,
-      system: systemPrompt,
-      messages: [{ role: 'user', content: userMessage }]
+      system_instruction: { parts: [{ text: systemPrompt }] },
+      contents: [{ parts: [{ text: userMessage }] }],
+      generationConfig: { maxOutputTokens: 4096, temperature: 0.3 }
     })
   });
 
@@ -7473,7 +7467,7 @@ async function callClaude(systemPrompt, userMessage) {
   }
 
   const data = await resp.json();
-  return data.content[0].text;
+  return data.candidates[0].content.parts[0].text;
 }
 
 // ─── EXTRACT BEST PRACTICES ────────────────────────────────────────
@@ -7486,7 +7480,7 @@ function renderExtractBP() {
   html += `<div class="ai-tool-header">
     <h3>Extract Learnings</h3>
     <p>Upload your campaign results (any format) and AI will extract best practices for each channel, referencing specific campaigns that demonstrated them.</p>
-    ${noKey ? '<div class="ai-no-key-warning">You need to configure your Claude API key before using AI features.<button onclick="openAISettings()">Configure API Key</button></div>' : ''}
+    ${noKey ? '<div class="ai-no-key-warning">You need to configure your Google Gemini API key before using AI features.<button onclick="openAISettings()">Configure API Key</button></div>' : ''}
     <div class="ai-tool-upload">
       <button class="ai-tool-upload-btn" onclick="document.getElementById('extractFileInput').click()" ${noKey ? 'disabled' : ''}>Upload Results</button>
       <button class="ai-tool-upload-btn" onclick="extractFromCalendar()" style="background:white;color:var(--brand-green);border:1px solid var(--brand-green);" ${noKey ? 'disabled' : ''}>Analyze Calendar Data</button>
@@ -7645,7 +7639,7 @@ function renderAuditPlan() {
   html += `<div class="ai-tool-header">
     <h3>Audit Campaign Plan</h3>
     <p>Upload a campaign plan and AI will check it against your stored best practices and calendar history. It will flag potential issues and suggest improvements with specific references.</p>
-    ${noKey ? '<div class="ai-no-key-warning">You need to configure your Claude API key before using AI features.<button onclick="openAISettings()">Configure API Key</button></div>' : ''}
+    ${noKey ? '<div class="ai-no-key-warning">You need to configure your Google Gemini API key before using AI features.<button onclick="openAISettings()">Configure API Key</button></div>' : ''}
     <div class="ai-tool-upload">
       <button class="ai-tool-upload-btn" onclick="document.getElementById('auditFileInput').click()" ${noKey ? 'disabled' : ''}>Upload Plan</button>
       <input type="file" id="auditFileInput" accept=".csv,.json,.tsv,.txt,.md,.pdf" style="display:none;" onchange="handleAuditUpload(event)">
@@ -7816,10 +7810,10 @@ function getCalendarContext() {
 <div class="ai-settings-overlay" id="aiSettingsOverlay">
   <div class="ai-settings-modal">
     <h3>AI Settings</h3>
-    <p>Enter your Anthropic API key to enable AI-powered features (Extract Learnings and Audit Plan). Your key is stored locally in your browser only.</p>
+    <p>Enter your Google Gemini API key to enable AI-powered features (Extract Learnings and Audit Plan). Your key is stored locally in your browser only. Get a free key at <a href="https://aistudio.google.com/apikey" target="_blank" style="color:var(--brand-green);">Google AI Studio</a>.</p>
     <div class="ai-settings-status not-connected" id="aiSettingsStatusEl">No API key configured</div>
-    <label>Anthropic API Key</label>
-    <input type="password" id="aiKeyInput" placeholder="sk-ant-...">
+    <label>Google Gemini API Key</label>
+    <input type="password" id="aiKeyInput" placeholder="AIza...">
     <div class="ai-settings-actions">
       <button class="bp-cancel-btn" onclick="closeAISettings()">Cancel</button>
       <button class="bp-save-btn" onclick="saveAIKey()">Save</button>
