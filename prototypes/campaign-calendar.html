@@ -6854,7 +6854,7 @@ function renderInsights() {
     <div class="insights-upload-area">
       <button class="insights-upload-btn" onclick="document.getElementById('insightsFileInput').click()">Upload File</button>
       <button class="insights-upload-btn" onclick="loadCalendarAsInsights()" style="background:white;border-color:var(--border);color:var(--text-secondary);">Use Calendar Data</button>
-      <input type="file" id="insightsFileInput" accept=".csv,.json,.tsv,.txt,.md,.pdf" style="display:none;" onchange="handleInsightsUpload(event)">
+      <input type="file" id="insightsFileInput" accept=".csv,.json,.tsv,.txt,.md,.pdf,.png,.jpg,.jpeg,.gif,.webp" style="display:none;" onchange="handleInsightsUpload(event)">
       ${dataStatus}
     </div>
   </div>`;
@@ -6896,9 +6896,15 @@ function handleInsightsUpload(event) {
   const file = event.target.files[0];
   if (!file) return;
   const ext = file.name.split('.').pop().toLowerCase();
+  const imageExts = ['png', 'jpg', 'jpeg', 'gif', 'webp'];
 
   if (ext === 'pdf') {
     handlePDFUpload(file);
+    return;
+  }
+
+  if (imageExts.includes(ext)) {
+    handleImageUpload(file, 'insights');
     return;
   }
 
@@ -6948,6 +6954,20 @@ async function handlePDFUpload(file) {
     insightsMessages = [{ role: 'bot', html: `Failed to read PDF: ${escapeHTML(e.message)}. Try a text-based PDF (scanned images are not supported).` }];
   }
   renderInsights();
+}
+
+async function handleImageUpload(file, target) {
+  const arrayBuffer = await file.arrayBuffer();
+  const base64 = btoa(new Uint8Array(arrayBuffer).reduce((data, byte) => data + String.fromCharCode(byte), ''));
+  const ext = file.name.split('.').pop().toLowerCase();
+  const mimeType = file.type || `image/${ext === 'jpg' ? 'jpeg' : ext}`;
+
+  if (target === 'insights') {
+    window._insightsImageData = { base64, mimeType, fileName: file.name };
+    insightsData = { columns: ['type'], rows: [{ type: 'image' }], isDocument: true, isImage: true };
+    insightsMessages = [{ role: 'bot', html: `Loaded image: <strong>${escapeHTML(file.name)}</strong>. Ask me anything about what you see in this image (metrics, data, campaign details, etc).` }];
+    renderInsights();
+  }
 }
 
 function parseJSON(text) {
@@ -7083,12 +7103,31 @@ function getInsightsSuggestions() {
   return suggestions.slice(0, 5);
 }
 
-function sendInsights() {
+async function sendInsights() {
   const input = document.getElementById('insightsInput');
   const query = input.value.trim();
   if (!query || !insightsData) return;
 
   insightsMessages.push({ role: 'user', html: escapeHTML(query) });
+  input.value = '';
+
+  if (insightsData.isImage && window._insightsImageData) {
+    insightsMessages.push({ role: 'bot', html: '<em>Analyzing image...</em>' });
+    renderInsights();
+    try {
+      const response = await callClaude(
+        'You are a marketing analytics assistant. The user has uploaded an image (screenshot, chart, report, etc). Answer their question about it. Be specific with any numbers or data you can see. Format your response in HTML suitable for inline display (use <strong>, <br>, <table> tags as needed).',
+        query,
+        window._insightsImageData
+      );
+      insightsMessages[insightsMessages.length - 1] = { role: 'bot', html: response };
+    } catch (e) {
+      insightsMessages[insightsMessages.length - 1] = { role: 'bot', html: `<strong>Error:</strong> ${escapeHTML(e.message)}` };
+    }
+    renderInsights();
+    return;
+  }
+
   const answer = processInsightsQuery(query);
   insightsMessages.push({ role: 'bot', html: answer });
 
@@ -7100,7 +7139,6 @@ function sendInsights() {
     insightsMessages.push({ role: 'bot', html: buildSaveOfferHTML(saveSummary) });
   }
 
-  input.value = '';
   renderInsights();
 }
 
@@ -7544,16 +7582,22 @@ function updateAISettingsStatus() {
   }
 }
 
-async function callClaude(systemPrompt, userMessage) {
+async function callClaude(systemPrompt, userMessage, imageData) {
   const key = getAIKey();
   if (!key) throw new Error('No API key configured. Go to AI Settings to add your Google Gemini API key.');
+
+  const parts = [];
+  if (imageData) {
+    parts.push({ inline_data: { mime_type: imageData.mimeType, data: imageData.base64 } });
+  }
+  parts.push({ text: userMessage });
 
   const resp = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${key}`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       system_instruction: { parts: [{ text: systemPrompt }] },
-      contents: [{ parts: [{ text: userMessage }] }],
+      contents: [{ parts }],
       generationConfig: { maxOutputTokens: 4096, temperature: 0.3 }
     })
   });
@@ -7576,12 +7620,12 @@ function renderExtractBP() {
   let html = `<div class="ai-tool-container">`;
   html += `<div class="ai-tool-header">
     <h3>Extract Learnings</h3>
-    <p>Upload your campaign results (any format) and AI will extract best practices for each channel, referencing specific campaigns that demonstrated them.</p>
+    <p>Upload your campaign results (any format, including screenshots) and AI will extract best practices for each channel, referencing specific campaigns that demonstrated them.</p>
     ${noKey ? '<div class="ai-no-key-warning">You need to configure your Google Gemini API key before using AI features.<button onclick="openAISettings()">Configure API Key</button></div>' : ''}
     <div class="ai-tool-upload">
       <button class="ai-tool-upload-btn" onclick="document.getElementById('extractFileInput').click()" ${noKey ? 'disabled' : ''}>Upload Results</button>
       <button class="ai-tool-upload-btn" onclick="extractFromCalendar()" style="background:white;color:var(--brand-green);border:1px solid var(--brand-green);" ${noKey ? 'disabled' : ''}>Analyze Calendar Data</button>
-      <input type="file" id="extractFileInput" accept=".csv,.json,.tsv,.txt,.md,.pdf" style="display:none;" onchange="handleExtractUpload(event)">
+      <input type="file" id="extractFileInput" accept=".csv,.json,.tsv,.txt,.md,.pdf,.png,.jpg,.jpeg,.gif,.webp" style="display:none;" onchange="handleExtractUpload(event)">
       <span class="ai-tool-upload-status" id="extractStatus"></span>
     </div>
   </div>`;
@@ -7601,6 +7645,20 @@ async function handleExtractUpload(event) {
   document.getElementById('extractStatus').className = 'ai-tool-upload-status loaded';
 
   const ext = file.name.split('.').pop().toLowerCase();
+  const imageExts = ['png', 'jpg', 'jpeg', 'gif', 'webp'];
+
+  if (imageExts.includes(ext)) {
+    try {
+      const arrayBuffer = await file.arrayBuffer();
+      const base64 = btoa(new Uint8Array(arrayBuffer).reduce((data, byte) => data + String.fromCharCode(byte), ''));
+      const mimeType = file.type || `image/${ext === 'jpg' ? 'jpeg' : ext}`;
+      runExtraction('Analyze the uploaded image for campaign results, metrics, performance data, or learnings.', file.name, { base64, mimeType });
+    } catch (e) {
+      document.getElementById('extractStatus').textContent = 'Failed to read image';
+    }
+    return;
+  }
+
   let text = '';
 
   if (ext === 'pdf') {
@@ -7639,7 +7697,7 @@ async function extractFromCalendar() {
   runExtraction(text, 'Calendar Data');
 }
 
-async function runExtraction(text, sourceName) {
+async function runExtraction(text, sourceName, imageData) {
   const resultsEl = document.getElementById('extractResults');
   resultsEl.innerHTML = `<div class="ai-loading"><div class="spinner"></div>Analyzing campaign results and extracting best practices...</div>`;
   document.getElementById('extractStatus').textContent = `Analyzing: ${sourceName}`;
@@ -7673,7 +7731,7 @@ Respond in this exact JSON format:
 Focus on actionable insights. Be specific with numbers and campaign names. Identify patterns across campaigns. Include warnings about what NOT to do as well as what works.`;
 
   try {
-    const response = await callClaude(systemPrompt, `Here are the campaign results to analyze:\n\nSource: ${sourceName}\n\n${text.substring(0, 12000)}`);
+    const response = await callClaude(systemPrompt, `Here are the campaign results to analyze:\n\nSource: ${sourceName}\n\n${text.substring(0, 12000)}`, imageData);
 
     const jsonMatch = response.match(/\{[\s\S]*\}/);
     if (!jsonMatch) throw new Error('Could not parse AI response');
@@ -7739,7 +7797,7 @@ function renderAuditPlan() {
     ${noKey ? '<div class="ai-no-key-warning">You need to configure your Google Gemini API key before using AI features.<button onclick="openAISettings()">Configure API Key</button></div>' : ''}
     <div class="ai-tool-upload">
       <button class="ai-tool-upload-btn" onclick="document.getElementById('auditFileInput').click()" ${noKey ? 'disabled' : ''}>Upload Plan</button>
-      <input type="file" id="auditFileInput" accept=".csv,.json,.tsv,.txt,.md,.pdf" style="display:none;" onchange="handleAuditUpload(event)">
+      <input type="file" id="auditFileInput" accept=".csv,.json,.tsv,.txt,.md,.pdf,.png,.jpg,.jpeg,.gif,.webp" style="display:none;" onchange="handleAuditUpload(event)">
       <span class="ai-tool-upload-status" id="auditStatus">${bpCount > 0 ? bpCount + ' best practices loaded for reference' : 'No best practices stored yet. Extract some first!'}</span>
     </div>
   </div>`;
@@ -7759,6 +7817,20 @@ async function handleAuditUpload(event) {
   document.getElementById('auditStatus').className = 'ai-tool-upload-status loaded';
 
   const ext = file.name.split('.').pop().toLowerCase();
+  const imageExts = ['png', 'jpg', 'jpeg', 'gif', 'webp'];
+
+  if (imageExts.includes(ext)) {
+    try {
+      const arrayBuffer = await file.arrayBuffer();
+      const base64 = btoa(new Uint8Array(arrayBuffer).reduce((data, byte) => data + String.fromCharCode(byte), ''));
+      const mimeType = file.type || `image/${ext === 'jpg' ? 'jpeg' : ext}`;
+      runAudit('Analyze the uploaded image of this campaign plan.', file.name, { base64, mimeType });
+    } catch (e) {
+      document.getElementById('auditStatus').textContent = 'Failed to read image';
+    }
+    return;
+  }
+
   let text = '';
 
   if (ext === 'pdf') {
@@ -7784,7 +7856,7 @@ async function handleAuditUpload(event) {
   runAudit(text, file.name);
 }
 
-async function runAudit(text, planName) {
+async function runAudit(text, planName, imageData) {
   const resultsEl = document.getElementById('auditResults');
   resultsEl.innerHTML = `<div class="ai-loading"><div class="spinner"></div>Auditing campaign plan against best practices and calendar history...</div>`;
   document.getElementById('auditStatus').textContent = `Auditing: ${planName}`;
@@ -7834,7 +7906,7 @@ Respond in this exact JSON format:
 Be specific and actionable. Reference real data from the best practices and calendar history.`;
 
   try {
-    const response = await callClaude(systemPrompt, `Here is the campaign plan to audit:\n\nPlan: ${planName}\n\n${text.substring(0, 12000)}`);
+    const response = await callClaude(systemPrompt, `Here is the campaign plan to audit:\n\nPlan: ${planName}\n\n${text.substring(0, 12000)}`, imageData);
 
     const jsonMatch = response.match(/\{[\s\S]*\}/);
     if (!jsonMatch) throw new Error('Could not parse AI response');
