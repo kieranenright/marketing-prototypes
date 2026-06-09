@@ -1521,6 +1521,246 @@ body {
   background: white;
 }
 
+/* BEST PRACTICES VIEW */
+.best-practices-view {
+  display: none;
+}
+
+.best-practices-view.active {
+  display: block;
+}
+
+.bp-container {
+  max-width: 1000px;
+}
+
+.bp-channel-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+
+.bp-channel-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  cursor: pointer;
+  transition: background 0.12s;
+}
+
+.bp-channel-header:hover {
+  background: var(--bg-cream);
+}
+
+.bp-channel-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.bp-channel-name {
+  font-family: var(--font-headline);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+  flex: 1;
+}
+
+.bp-entry-count {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  background: var(--border-light);
+  border-radius: 10px;
+  color: var(--text-tertiary);
+}
+
+.bp-chevron {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  transition: transform 0.2s;
+}
+
+.bp-chevron.expanded {
+  transform: rotate(180deg);
+}
+
+.bp-channel-body {
+  border-top: 1px solid var(--border-light);
+  padding: 16px 20px;
+  display: none;
+}
+
+.bp-channel-body.open {
+  display: block;
+}
+
+.bp-entries {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.bp-entry {
+  padding: 12px 16px;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  background: var(--bg-cream);
+  position: relative;
+}
+
+.bp-entry-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.bp-entry-content {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+.bp-entry-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+  font-size: 10px;
+  color: var(--text-tertiary);
+}
+
+.bp-entry-delete {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 22px;
+  height: 22px;
+  border: none;
+  background: transparent;
+  color: var(--text-tertiary);
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.12s;
+  opacity: 0;
+}
+
+.bp-entry:hover .bp-entry-delete {
+  opacity: 1;
+}
+
+.bp-entry-delete:hover {
+  background: #FEE2E2;
+  color: #DC2626;
+}
+
+.bp-add-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px;
+  border: 1.5px dashed var(--border);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  font-size: 12px;
+  font-weight: 500;
+  font-family: var(--font-body);
+  color: var(--text-tertiary);
+  cursor: pointer;
+  transition: all 0.12s;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.bp-add-btn:hover {
+  border-color: var(--brand-green);
+  color: var(--brand-green);
+  background: var(--brand-green-light);
+}
+
+.bp-empty {
+  text-align: center;
+  padding: 16px;
+  font-size: 12px;
+  color: var(--text-tertiary);
+  font-style: italic;
+}
+
+.bp-add-form {
+  padding: 12px 16px;
+  border: 1.5px solid var(--brand-green);
+  border-radius: var(--radius-sm);
+  background: white;
+  margin-top: 10px;
+}
+
+.bp-add-form input,
+.bp-add-form textarea {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 12px;
+  font-family: var(--font-body);
+  margin-bottom: 8px;
+  transition: border 0.15s;
+}
+
+.bp-add-form input:focus,
+.bp-add-form textarea:focus {
+  outline: none;
+  border-color: var(--brand-green);
+}
+
+.bp-add-form textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.bp-add-form-actions {
+  display: flex;
+  gap: 6px;
+  justify-content: flex-end;
+}
+
+.bp-add-form-actions button {
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: all 0.12s;
+}
+
+.bp-save-btn {
+  background: var(--brand-green);
+  color: white;
+  border: none;
+}
+
+.bp-save-btn:hover { background: var(--brand-green-dark); }
+
+.bp-cancel-btn {
+  background: white;
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+}
+
+.bp-cancel-btn:hover { border-color: var(--text-tertiary); }
+
 /* MODAL */
 .modal-overlay {
   display: none;
@@ -3200,6 +3440,12 @@ body {
         <span class="sidebar-label">Insights Chat</span>
       </div>
       <div class="sidebar-divider"></div>
+      <div class="sidebar-section-label">Knowledge Base</div>
+      <div class="sidebar-item" data-sidebar="best-practices" onclick="sidebarNav('best-practices')">
+        <span class="sidebar-icon">&#128218;</span>
+        <span class="sidebar-label">Best Practices</span>
+      </div>
+      <div class="sidebar-divider"></div>
       <div class="sidebar-section-label">Resources</div>
       <a class="sidebar-item" href="campaign-calendar-guide.html" target="_blank">
         <span class="sidebar-icon">&#128214;</span>
@@ -3321,6 +3567,7 @@ body {
     <div class="leadership-view" id="leadershipView"></div>
     <div class="markets-view" id="marketsView"></div>
     <div class="insights-view" id="insightsView"></div>
+    <div class="best-practices-view" id="bestPracticesView"></div>
   </div>
   </div><!-- /.app-main -->
 </div>
@@ -3666,7 +3913,8 @@ function sidebarNav(mode, view) {
     'crm': 'CRM Heatmap',
     'leadership': 'Leadership Roadmap',
     'markets': 'Local Markets',
-    'insights': 'Insights Chat'
+    'insights': 'Insights Chat',
+    'best-practices': 'Best Practices'
   };
   document.getElementById('pageTitle').textContent = titles[mode] || 'Product Marketing Hub';
 
@@ -3714,6 +3962,7 @@ function setMode(mode) {
   document.getElementById('leadershipView').classList.remove('active');
   document.getElementById('marketsView').classList.remove('active');
   document.getElementById('insightsView').classList.remove('active');
+  document.getElementById('bestPracticesView').classList.remove('active');
   document.getElementById('yearView').classList.remove('active');
   document.getElementById('quarterView').classList.remove('active');
   document.getElementById('weeklyView').classList.remove('active');
@@ -3749,6 +3998,11 @@ function setMode(mode) {
     navButtons.forEach(b => b.style.display = 'none');
     document.getElementById('insightsView').classList.add('active');
     renderInsights();
+  } else if (mode === 'best-practices') {
+    marketingOnlyEls.forEach(el => { if (el) el.style.display = 'none'; });
+    navButtons.forEach(b => b.style.display = 'none');
+    document.getElementById('bestPracticesView').classList.add('active');
+    renderBestPractices();
   }
   render();
 }
@@ -3990,6 +4244,10 @@ function updateNavLabel() {
   }
   if (currentMode === 'insights') {
     label.textContent = 'Insights';
+    return;
+  }
+  if (currentMode === 'best-practices') {
+    label.textContent = 'Best Practices';
     return;
   }
   if (currentView === 'year') {
@@ -6065,11 +6323,11 @@ function renderInsights() {
   let html = `<div class="insights-container">`;
   html += `<div class="insights-header-card">
     <h3>Insights Chat</h3>
-    <p>Upload campaign results (CSV) and ask questions about your data. The search engine understands queries about totals, filters, breakdowns, and comparisons.</p>
+    <p>Upload campaign results (CSV, JSON, TSV, TXT, or Markdown) and ask questions about your data. Useful findings can be saved directly to Best Practices.</p>
     <div class="insights-upload-area">
-      <button class="insights-upload-btn" onclick="document.getElementById('insightsFileInput').click()">Upload CSV</button>
+      <button class="insights-upload-btn" onclick="document.getElementById('insightsFileInput').click()">Upload File</button>
       <button class="insights-upload-btn" onclick="loadCalendarAsInsights()" style="background:white;border-color:var(--border);color:var(--text-secondary);">Use Calendar Data</button>
-      <input type="file" id="insightsFileInput" accept=".csv" style="display:none;" onchange="handleInsightsUpload(event)">
+      <input type="file" id="insightsFileInput" accept=".csv,.json,.tsv,.txt,.md" style="display:none;" onchange="handleInsightsUpload(event)">
       ${dataStatus}
     </div>
   </div>`;
@@ -6110,16 +6368,102 @@ function renderInsights() {
 function handleInsightsUpload(event) {
   const file = event.target.files[0];
   if (!file) return;
+  const ext = file.name.split('.').pop().toLowerCase();
   const reader = new FileReader();
   reader.onload = function(e) {
     const text = e.target.result;
-    insightsData = parseCSV(text);
+    if (ext === 'json') {
+      insightsData = parseJSON(text);
+    } else if (ext === 'tsv') {
+      insightsData = parseTSV(text);
+    } else if (ext === 'txt' || ext === 'md') {
+      insightsData = parseTextFile(text, file.name);
+    } else {
+      insightsData = parseCSV(text);
+    }
     localStorage.setItem('insightsData', JSON.stringify(insightsData));
     insightsMessages = [];
-    insightsMessages.push({ role: 'bot', html: `Loaded <strong>${insightsData.rows.length}</strong> rows with columns: <strong>${insightsData.columns.join(', ')}</strong>. Ask me anything!` });
+    if (insightsData.isDocument) {
+      insightsMessages.push({ role: 'bot', html: `Loaded document: <strong>${escapeHTML(file.name)}</strong> (${insightsData.rows.length} sections). You can ask questions about its content, or I can help extract best practices from it.` });
+    } else {
+      insightsMessages.push({ role: 'bot', html: `Loaded <strong>${insightsData.rows.length}</strong> rows with columns: <strong>${insightsData.columns.join(', ')}</strong>. Ask me anything!` });
+    }
     renderInsights();
   };
   reader.readAsText(file);
+}
+
+function parseJSON(text) {
+  try {
+    const data = JSON.parse(text);
+    if (Array.isArray(data) && data.length > 0) {
+      const columns = Object.keys(data[0]);
+      return { columns, rows: data };
+    } else if (typeof data === 'object') {
+      // Single object or nested: flatten
+      const rows = [];
+      Object.entries(data).forEach(([key, val]) => {
+        if (Array.isArray(val)) {
+          val.forEach(item => {
+            if (typeof item === 'object') rows.push({ section: key, ...item });
+            else rows.push({ section: key, value: String(item) });
+          });
+        } else if (typeof val === 'object') {
+          rows.push({ section: key, ...val });
+        } else {
+          rows.push({ key, value: String(val) });
+        }
+      });
+      const columns = rows.length > 0 ? Object.keys(rows[0]) : [];
+      return { columns, rows };
+    }
+  } catch (e) {}
+  return { columns: ['content'], rows: [{ content: text }], isDocument: true };
+}
+
+function parseTSV(text) {
+  const lines = text.trim().split('\n');
+  if (lines.length < 2) return { columns: [], rows: [] };
+  const columns = lines[0].split('\t').map(c => c.trim());
+  const rows = [];
+  for (let i = 1; i < lines.length; i++) {
+    const values = lines[i].split('\t');
+    if (values.length >= columns.length - 1) {
+      const row = {};
+      columns.forEach((col, idx) => { row[col] = (values[idx] || '').trim(); });
+      rows.push(row);
+    }
+  }
+  return { columns, rows };
+}
+
+function parseTextFile(text, filename) {
+  // Parse text/markdown into searchable sections
+  const sections = [];
+  const lines = text.split('\n');
+  let currentTitle = filename;
+  let currentContent = [];
+
+  lines.forEach(line => {
+    if (line.match(/^#{1,3}\s/) || line.match(/^[A-Z][A-Za-z\s]{3,}:?\s*$/)) {
+      if (currentContent.length > 0) {
+        sections.push({ title: currentTitle, content: currentContent.join('\n').trim() });
+      }
+      currentTitle = line.replace(/^#+\s*/, '').trim();
+      currentContent = [];
+    } else {
+      currentContent.push(line);
+    }
+  });
+  if (currentContent.length > 0) {
+    sections.push({ title: currentTitle, content: currentContent.join('\n').trim() });
+  }
+
+  return {
+    columns: ['title', 'content'],
+    rows: sections.filter(s => s.content.length > 0),
+    isDocument: true
+  };
 }
 
 function clearInsightsData() {
@@ -6168,6 +6512,11 @@ function getInsightsSuggestions() {
   if (!insightsData || !insightsData.columns.length) return [];
   const cols = insightsData.columns;
   const suggestions = [];
+  if (insightsData.isDocument) {
+    suggestions.push('What sections are in this document?');
+    suggestions.push('Show me all content');
+    return suggestions;
+  }
   suggestions.push(`How many rows total?`);
   if (cols.some(c => /status/i.test(c))) suggestions.push('Breakdown by status');
   if (cols.some(c => /channel/i.test(c))) suggestions.push('Breakdown by channel');
@@ -6186,7 +6535,57 @@ function sendInsights() {
   const answer = processInsightsQuery(query);
   insightsMessages.push({ role: 'bot', html: answer });
 
+  // Offer to save to best practices for substantive answers
+  const isSubstantive = answer.includes('<table') || answer.includes('<strong>') || answer.length > 100;
+  const isError = answer.includes('could not interpret');
+  if (isSubstantive && !isError) {
+    const saveSummary = query;
+    insightsMessages.push({ role: 'bot', html: buildSaveOfferHTML(saveSummary) });
+  }
+
   input.value = '';
+  renderInsights();
+}
+
+function buildSaveOfferHTML(queryTitle) {
+  let html = `<div style="font-size:11px;color:var(--text-secondary);">Save this as a best practice?</div>`;
+  html += `<div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:6px;">`;
+  BP_CHANNELS.forEach(ch => {
+    html += `<button class="insights-suggestion" onclick="saveLastAnswerToBP('${ch.id}','${escapeHTML(queryTitle).replace(/'/g, "\\'")}')" style="font-size:10px;">${ch.name}</button>`;
+  });
+  html += `<button class="insights-suggestion" onclick="dismissSaveOffer()" style="font-size:10px;background:var(--border-light);color:var(--text-tertiary);">No thanks</button>`;
+  html += `</div>`;
+  return html;
+}
+
+function saveLastAnswerToBP(channelId, title) {
+  // Find the last substantive bot answer (not the save offer itself)
+  let answerHtml = '';
+  for (let i = insightsMessages.length - 1; i >= 0; i--) {
+    const msg = insightsMessages[i];
+    if (msg.role === 'bot' && !msg.html.includes('Save this as a best practice') && !msg.html.includes('Saved to')) {
+      answerHtml = msg.html;
+      break;
+    }
+  }
+  // Strip HTML for plain text storage
+  const tempDiv = document.createElement('div');
+  tempDiv.innerHTML = answerHtml;
+  const plainText = tempDiv.textContent || tempDiv.innerText || answerHtml;
+
+  addBestPractice(channelId, title, plainText.substring(0, 1000), 'Insights Chat');
+  insightsMessages.push({ role: 'bot', html: `Saved to <strong>${BP_CHANNELS.find(c => c.id === channelId).name}</strong> best practices.` });
+  renderInsights();
+}
+
+function dismissSaveOffer() {
+  // Remove the last save offer message
+  for (let i = insightsMessages.length - 1; i >= 0; i--) {
+    if (insightsMessages[i].html && insightsMessages[i].html.includes('Save this as a best practice')) {
+      insightsMessages.splice(i, 1);
+      break;
+    }
+  }
   renderInsights();
 }
 
@@ -6201,6 +6600,43 @@ function processInsightsQuery(query) {
   const data = insightsData;
   const rows = data.rows;
   const cols = data.columns;
+
+  // Document-specific queries
+  if (data.isDocument) {
+    if (/sections|headings|titles|what.*(in|about)/i.test(q)) {
+      let html = `<strong>${rows.length} sections found:</strong><br>`;
+      html += '<table><tr><th>Section</th><th>Preview</th></tr>';
+      rows.forEach(r => {
+        const preview = (r.content || '').substring(0, 80) + ((r.content || '').length > 80 ? '...' : '');
+        html += `<tr><td><strong>${escapeHTML(r.title)}</strong></td><td>${escapeHTML(preview)}</td></tr>`;
+      });
+      html += '</table>';
+      return html;
+    }
+    if (/show.*all|full content|everything/i.test(q)) {
+      let html = '';
+      rows.forEach(r => {
+        html += `<strong>${escapeHTML(r.title)}</strong><pre>${escapeHTML(r.content)}</pre>`;
+      });
+      return html;
+    }
+    // Search within document content
+    const searchTerms = q.replace(/show|find|search|about|what|how|where|is|the|for|me/gi, '').trim().split(/\s+/).filter(t => t.length > 2);
+    if (searchTerms.length > 0) {
+      const matches = rows.filter(r => {
+        const text = (r.title + ' ' + r.content).toLowerCase();
+        return searchTerms.some(t => text.includes(t));
+      });
+      if (matches.length > 0) {
+        let html = `Found <strong>${matches.length}</strong> relevant section(s):<br>`;
+        matches.forEach(r => {
+          html += `<strong>${escapeHTML(r.title)}</strong><pre>${escapeHTML(r.content.substring(0, 300))}${r.content.length > 300 ? '...' : ''}</pre>`;
+        });
+        return html;
+      }
+    }
+    return `No matching content found. Try searching for specific keywords, or ask "What sections are in this document?"`;
+  }
 
   // Total count
   if (/how many (rows|entries|total|records)|count all/i.test(q)) {
@@ -6357,6 +6793,156 @@ function buildTable(rows, cols) {
 
 function escapeHTML(str) {
   return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+// ─── BEST PRACTICES ENGINE ─────────────────────────────────────────
+
+const BP_CHANNELS = [
+  { id: 'crm', name: 'CRM', color: '#2563EB' },
+  { id: 'organic', name: 'Organic Social', color: '#16A34A' },
+  { id: 'paid', name: 'Paid Media', color: '#EA580C' },
+  { id: 'influencers', name: 'Influencers', color: '#DC2626' },
+  { id: 'appstore', name: 'App Store (ASO)', color: '#7C3AED' },
+  { id: 'web', name: 'Web', color: '#0D9488' },
+  { id: 'print', name: 'Print', color: '#92400E' },
+  { id: 'general', name: 'General', color: '#64748B' }
+];
+
+function getBestPractices() {
+  return JSON.parse(localStorage.getItem('bestPractices') || '{}');
+}
+
+function saveBestPractices(data) {
+  localStorage.setItem('bestPractices', JSON.stringify(data));
+}
+
+function addBestPractice(channel, title, content, source) {
+  const bp = getBestPractices();
+  if (!bp[channel]) bp[channel] = [];
+  bp[channel].push({
+    id: 'bp-' + Date.now(),
+    title,
+    content,
+    source: source || '',
+    addedBy: currentUser ? currentUser.firstName : 'Unknown',
+    date: new Date().toISOString().split('T')[0]
+  });
+  saveBestPractices(bp);
+}
+
+function deleteBestPractice(channel, id) {
+  const bp = getBestPractices();
+  if (bp[channel]) {
+    bp[channel] = bp[channel].filter(e => e.id !== id);
+    saveBestPractices(bp);
+  }
+  renderBestPractices();
+}
+
+function renderBestPractices() {
+  const container = document.getElementById('bestPracticesView');
+  const bp = getBestPractices();
+
+  let html = `<div class="bp-container">`;
+
+  BP_CHANNELS.forEach(ch => {
+    const entries = bp[ch.id] || [];
+    const isExpanded = entries.length > 0;
+    html += `<div class="bp-channel-card" id="bp-card-${ch.id}">`;
+    html += `<div class="bp-channel-header" onclick="toggleBPChannel('${ch.id}')">`;
+    html += `<span class="bp-channel-dot" style="background:${ch.color}"></span>`;
+    html += `<span class="bp-channel-name">${ch.name}</span>`;
+    html += `<span class="bp-entry-count">${entries.length}</span>`;
+    html += `<span class="bp-chevron ${isExpanded ? 'expanded' : ''}" id="bp-chevron-${ch.id}">&#9662;</span>`;
+    html += `</div>`;
+    html += `<div class="bp-channel-body ${isExpanded ? 'open' : ''}" id="bp-body-${ch.id}">`;
+
+    if (entries.length === 0) {
+      html += `<div class="bp-empty">No best practices added yet for ${ch.name}.</div>`;
+    } else {
+      html += `<div class="bp-entries">`;
+      entries.forEach(entry => {
+        html += `<div class="bp-entry">`;
+        html += `<button class="bp-entry-delete" onclick="deleteBestPractice('${ch.id}','${entry.id}')" title="Remove">&times;</button>`;
+        html += `<div class="bp-entry-title">${escapeHTML(entry.title)}</div>`;
+        html += `<div class="bp-entry-content">${escapeHTML(entry.content)}</div>`;
+        html += `<div class="bp-entry-meta">`;
+        html += `<span>Added by ${escapeHTML(entry.addedBy)}</span>`;
+        html += `<span>${entry.date}</span>`;
+        if (entry.source) html += `<span>Source: ${escapeHTML(entry.source)}</span>`;
+        html += `</div></div>`;
+      });
+      html += `</div>`;
+    }
+
+    html += `<button class="bp-add-btn" onclick="showBPForm('${ch.id}')">+ Add best practice</button>`;
+    html += `<div class="bp-add-form" id="bp-form-${ch.id}" style="display:none;">
+      <input type="text" id="bp-title-${ch.id}" placeholder="Title (e.g. Subject line length)">
+      <textarea id="bp-content-${ch.id}" placeholder="Best practice details..."></textarea>
+      <input type="text" id="bp-source-${ch.id}" placeholder="Source (optional, e.g. Q1 results analysis)">
+      <div class="bp-add-form-actions">
+        <button class="bp-cancel-btn" onclick="hideBPForm('${ch.id}')">Cancel</button>
+        <button class="bp-save-btn" onclick="submitBPForm('${ch.id}')">Save</button>
+      </div>
+    </div>`;
+
+    html += `</div></div>`;
+  });
+
+  html += `</div>`;
+  container.innerHTML = html;
+}
+
+function toggleBPChannel(channelId) {
+  const body = document.getElementById('bp-body-' + channelId);
+  const chevron = document.getElementById('bp-chevron-' + channelId);
+  if (body.classList.contains('open')) {
+    body.classList.remove('open');
+    chevron.classList.remove('expanded');
+  } else {
+    body.classList.add('open');
+    chevron.classList.add('expanded');
+  }
+}
+
+function showBPForm(channelId) {
+  document.getElementById('bp-form-' + channelId).style.display = '';
+}
+
+function hideBPForm(channelId) {
+  document.getElementById('bp-form-' + channelId).style.display = 'none';
+}
+
+function submitBPForm(channelId) {
+  const title = document.getElementById('bp-title-' + channelId).value.trim();
+  const content = document.getElementById('bp-content-' + channelId).value.trim();
+  const source = document.getElementById('bp-source-' + channelId).value.trim();
+  if (!title || !content) return;
+  addBestPractice(channelId, title, content, source);
+  renderBestPractices();
+}
+
+// Save insight to best practices (called from chat)
+let pendingBPSave = null;
+
+function offerSaveToBP(title, content, source) {
+  pendingBPSave = { title, content, source };
+  let html = `Would you like to save this to Best Practices?<br>`;
+  html += `<div style="display:flex;gap:6px;margin-top:8px;">`;
+  BP_CHANNELS.forEach(ch => {
+    html += `<button class="insights-suggestion" onclick="confirmSaveToBP('${ch.id}')" style="font-size:10px;">${ch.name}</button>`;
+  });
+  html += `</div>`;
+  insightsMessages.push({ role: 'bot', html });
+  renderInsights();
+}
+
+function confirmSaveToBP(channelId) {
+  if (!pendingBPSave) return;
+  addBestPractice(channelId, pendingBPSave.title, pendingBPSave.content, pendingBPSave.source);
+  insightsMessages.push({ role: 'bot', html: `Saved to <strong>${BP_CHANNELS.find(c => c.id === channelId).name}</strong> best practices.` });
+  pendingBPSave = null;
+  renderInsights();
 }
 </script>
 </body>
