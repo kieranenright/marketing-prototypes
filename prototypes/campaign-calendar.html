@@ -6,7 +6,7 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PMM Campaign Calendar | HelloFresh</title>
+<title>Product Marketing Hub | HelloFresh</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
@@ -171,7 +171,217 @@ body {
 
 /* MAIN APP */
 .app { display: none; }
-.app.active { display: block; }
+.app.active { display: flex; min-height: 100vh; }
+
+/* SIDEBAR */
+.sidebar {
+  width: 260px;
+  min-width: 260px;
+  background: white;
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  z-index: 101;
+}
+
+.sidebar-header {
+  padding: 20px 20px 16px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.sidebar-header h2 {
+  font-family: var(--font-headline);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--brand-green);
+}
+
+.sidebar-header .sidebar-subtitle {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  margin-top: 2px;
+}
+
+.sidebar-nav {
+  padding: 12px 0;
+  flex: 1;
+}
+
+.sidebar-section-label {
+  padding: 8px 20px 6px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-tertiary);
+}
+
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 20px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.12s;
+  border-left: 3px solid transparent;
+  text-decoration: none;
+}
+
+.sidebar-item:hover {
+  background: var(--bg-cream);
+  color: var(--text-primary);
+}
+
+.sidebar-item.active {
+  background: var(--brand-green-light);
+  color: var(--brand-green);
+  border-left-color: var(--brand-green);
+  font-weight: 600;
+}
+
+.sidebar-item .sidebar-icon {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.sidebar-item .sidebar-label {
+  flex: 1;
+}
+
+.sidebar-item .sidebar-badge {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 8px;
+  background: var(--border-light);
+  color: var(--text-tertiary);
+}
+
+.sidebar-group {
+  margin-bottom: 4px;
+}
+
+.sidebar-group-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: background 0.12s;
+}
+
+.sidebar-group-header:hover {
+  background: var(--bg-cream);
+}
+
+.sidebar-group-header .group-chevron {
+  font-size: 10px;
+  color: var(--text-tertiary);
+  transition: transform 0.2s;
+  margin-left: auto;
+}
+
+.sidebar-group-header .group-chevron.expanded {
+  transform: rotate(180deg);
+}
+
+.sidebar-group-header .group-icon {
+  font-size: 14px;
+}
+
+.sidebar-group-items {
+  padding-left: 12px;
+}
+
+.sidebar-divider {
+  height: 1px;
+  background: var(--border-light);
+  margin: 8px 16px;
+}
+
+.sidebar-footer {
+  padding: 12px 20px;
+  border-top: 1px solid var(--border-light);
+}
+
+.sidebar-user {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sidebar-user .avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--brand-green);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.sidebar-user .user-info {
+  flex: 1;
+}
+
+.sidebar-user .user-info .user-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.sidebar-user .user-info .user-role {
+  font-size: 10px;
+  color: var(--text-tertiary);
+}
+
+.sidebar-signout {
+  margin-top: 8px;
+  padding: 5px 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: white;
+  font-size: 10px;
+  font-weight: 500;
+  font-family: var(--font-body);
+  color: var(--text-tertiary);
+  cursor: pointer;
+  transition: all 0.12s;
+  width: 100%;
+  text-align: center;
+}
+
+.sidebar-signout:hover {
+  border-color: #DC2626;
+  color: #DC2626;
+  background: #FEF2F2;
+}
+
+/* Main content area (right of sidebar) */
+.app-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
 
 /* Top bar */
 .top-bar {
@@ -185,9 +395,9 @@ body {
   background: rgba(255,255,255,0.95);
 }
 
+.mode-toggle { display: none; }
+
 .top-bar-inner {
-  max-width: 1600px;
-  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -240,8 +450,6 @@ body {
 
 /* Controls bar */
 .controls-bar {
-  max-width: 1600px;
-  margin: 0 auto;
   padding: 16px 32px;
   display: flex;
   flex-direction: column;
@@ -597,8 +805,7 @@ body {
 
 /* CALENDAR CONTENT */
 .calendar-content {
-  max-width: 1600px;
-  margin: 0 auto;
+  max-width: none;
   padding: 0 32px 32px;
 }
 
@@ -1062,6 +1269,14 @@ body {
   color: white;
   border-color: var(--brand-green);
 }
+
+/* QUARTER VIEW */
+.quarter-view {
+  display: none;
+  overflow-x: auto;
+}
+
+.quarter-view.active { display: block; }
 
 /* MODAL */
 .modal-overlay {
@@ -2425,7 +2640,21 @@ body {
 
 
 /* Responsive */
+@media (max-width: 1024px) {
+  .sidebar { width: 220px; min-width: 220px; }
+}
+
 @media (max-width: 768px) {
+  .app.active { flex-direction: column; }
+  .sidebar {
+    width: 100%;
+    min-width: 100%;
+    height: auto;
+    position: relative;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    max-height: 50vh;
+  }
   .controls-bar { padding: 12px 16px; }
   .calendar-content { padding: 0 16px 16px; }
   .top-bar { padding: 12px 16px; }
@@ -2656,7 +2885,7 @@ body {
 <!-- AUTH SCREEN -->
 <div class="auth-screen" id="authScreen">
   <div class="auth-card">
-    <h1>Campaign Calendar</h1>
+    <h1>Product Marketing Hub</h1>
     <p>PMM team planning tool. Enter your email to continue.</p>
     <input type="email" id="authEmail" placeholder="your.name@hellofresh.com" autocomplete="email">
     <button class="auth-btn" onclick="handleAuth()">Sign In</button>
@@ -2671,25 +2900,88 @@ body {
 
 <!-- MAIN APP -->
 <div class="app" id="app">
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <h2>Product Marketing Hub</h2>
+      <div class="sidebar-subtitle">PMM Planning Tool</div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-section-label">Campaign Calendars</div>
+
+      <div class="sidebar-group">
+        <div class="sidebar-group-header" onclick="toggleSidebarGroup(this)">
+          <span class="group-icon">&#128197;</span>
+          <span>Product Marketing</span>
+          <span class="group-chevron expanded">&#9662;</span>
+        </div>
+        <div class="sidebar-group-items">
+          <div class="sidebar-item active" data-sidebar="marketing-month" onclick="sidebarNav('marketing','month')">
+            <span class="sidebar-icon">&#128466;</span>
+            <span class="sidebar-label">Month View</span>
+          </div>
+          <div class="sidebar-item" data-sidebar="marketing-weekly" onclick="sidebarNav('marketing','weekly')">
+            <span class="sidebar-icon">&#128221;</span>
+            <span class="sidebar-label">Weekly View</span>
+          </div>
+          <div class="sidebar-item" data-sidebar="marketing-quarter" onclick="sidebarNav('marketing','quarter')">
+            <span class="sidebar-icon">&#128198;</span>
+            <span class="sidebar-label">Quarterly View</span>
+          </div>
+          <div class="sidebar-item" data-sidebar="marketing-year" onclick="sidebarNav('marketing','year')">
+            <span class="sidebar-icon">&#128200;</span>
+            <span class="sidebar-label">Year View</span>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar-item" data-sidebar="product" onclick="sidebarNav('product')">
+        <span class="sidebar-icon">&#128640;</span>
+        <span class="sidebar-label">Product Releases</span>
+      </div>
+      <div class="sidebar-item" data-sidebar="crm" onclick="sidebarNav('crm')">
+        <span class="sidebar-icon">&#128231;</span>
+        <span class="sidebar-label">CRM Heatmap</span>
+      </div>
+      <div class="sidebar-item" data-sidebar="leadership" onclick="sidebarNav('leadership')">
+        <span class="sidebar-icon">&#127919;</span>
+        <span class="sidebar-label">Leadership Roadmap</span>
+      </div>
+      <div class="sidebar-item" data-sidebar="markets" onclick="sidebarNav('markets')">
+        <span class="sidebar-icon">&#127760;</span>
+        <span class="sidebar-label">Local Markets</span>
+      </div>
+      <div class="sidebar-divider"></div>
+      <div class="sidebar-section-label">Resources</div>
+      <a class="sidebar-item" href="campaign-calendar-guide.html" target="_blank">
+        <span class="sidebar-icon">&#128214;</span>
+        <span class="sidebar-label">How to Submit</span>
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <div class="avatar" id="sidebarAvatar">K</div>
+        <div class="user-info">
+          <div class="user-name" id="sidebarUserName">Kieran</div>
+          <div class="user-role" id="sidebarUserRole">Editor</div>
+        </div>
+      </div>
+      <button class="sidebar-signout" onclick="signOut()">Sign Out</button>
+    </div>
+  </aside>
+
+  <!-- Main Content Area -->
+  <div class="app-main">
   <!-- Top Bar -->
   <div class="top-bar">
     <div class="top-bar-inner">
       <div class="top-bar-left">
-        <h1>Campaign Calendar</h1>
-        <div class="mode-toggle" id="modeToggle">
-          <button class="active" data-mode="marketing" onclick="setMode('marketing')">Product Marketing</button>
-          <button data-mode="product" onclick="setMode('product')">Product</button>
-          <button data-mode="crm" onclick="setMode('crm')">CRM</button>
-          <button data-mode="leadership" onclick="setMode('leadership')">Leadership</button>
-          <button data-mode="markets" onclick="setMode('markets')">Markets</button>
-        </div>
+        <h1 id="pageTitle">Product Marketing</h1>
       </div>
       <div class="top-bar-right">
         <div class="user-badge" id="userBadge">
           <div class="avatar" id="userAvatar">K</div>
           <span id="userName">Kieran</span>
         </div>
-        <button class="export-btn" onclick="signOut()" style="font-size:10px;">Sign Out</button>
       </div>
     </div>
   </div>
@@ -2701,8 +2993,9 @@ body {
       <div class="controls-left">
         <div class="view-toggle">
           <button data-view="year" onclick="setView('year')">Year</button>
-          <button data-view="weekly" class="active" onclick="setView('weekly')">Weekly</button>
-          <button data-view="month" onclick="setView('month')">Month</button>
+          <button data-view="quarter" onclick="setView('quarter')">Quarter</button>
+          <button data-view="weekly" onclick="setView('weekly')">Weekly</button>
+          <button data-view="month" class="active" onclick="setView('month')">Month</button>
         </div>
         <div class="nav-controls" id="navControls">
           <button onclick="navPrev()">&lsaquo;</button>
@@ -2773,11 +3066,13 @@ body {
     <div class="year-view" id="yearView"></div>
     <div class="weekly-view" id="weeklyView"></div>
     <div class="month-view active" id="monthView"></div>
+    <div class="quarter-view" id="quarterView"></div>
     <div class="product-view" id="productView"></div>
     <div class="crm-view" id="crmView"></div>
     <div class="leadership-view" id="leadershipView"></div>
     <div class="markets-view" id="marketsView"></div>
   </div>
+  </div><!-- /.app-main -->
 </div>
 
 <!-- Day Detail Modal -->
@@ -2915,7 +3210,7 @@ const INLINE_CALENDAR_DATA = {"markets":["US","UK","DE","AU","CA","NL","SE","DK"
 <script>
 // STATE
 let calendarData = null;
-let currentView = 'weekly';
+let currentView = 'month';
 let currentMode = 'marketing'; // marketing | product | crm | leadership
 let currentYear = 2026;
 let currentMonth = 5; // 0-indexed, June = 5
@@ -2989,6 +3284,9 @@ function showApp() {
   document.getElementById('app').classList.add('active');
   document.getElementById('userName').textContent = currentUser.firstName;
   document.getElementById('userAvatar').textContent = currentUser.firstName[0];
+  document.getElementById('sidebarAvatar').textContent = currentUser.firstName[0];
+  document.getElementById('sidebarUserName').textContent = currentUser.name || currentUser.firstName;
+  document.getElementById('sidebarUserRole').textContent = isEditor ? 'Editor' : 'Viewer';
   if (isEditor) document.getElementById('importBtn').style.display = '';
   loadData();
 }
@@ -3027,6 +3325,7 @@ async function loadData() {
   weeklyStart.setDate(weeklyStart.getDate() - 14);
   // Apply initial view state
   document.getElementById('yearView').classList.toggle('active', currentView === 'year');
+  document.getElementById('quarterView').classList.toggle('active', currentView === 'quarter');
   document.getElementById('weeklyView').classList.toggle('active', currentView === 'weekly');
   document.getElementById('monthView').classList.toggle('active', currentView === 'month');
   document.getElementById('weeklyModeToggle').classList.toggle('visible', currentView === 'weekly');
@@ -3096,6 +3395,52 @@ function updateMarketLabel() {
   else label.textContent = active + ' Markets';
 }
 
+// SIDEBAR NAVIGATION
+function sidebarNav(mode, view) {
+  // Update sidebar active state
+  document.querySelectorAll('.sidebar-item').forEach(item => item.classList.remove('active'));
+  let selector;
+  if (mode === 'marketing' && view) {
+    selector = `[data-sidebar="marketing-${view}"]`;
+  } else {
+    selector = `[data-sidebar="${mode}"]`;
+  }
+  const activeItem = document.querySelector(selector);
+  if (activeItem) activeItem.classList.add('active');
+
+  // Update page title
+  const viewTitles = { month: 'Month View', weekly: 'Weekly View', quarter: 'Quarterly View', year: 'Year View' };
+  const titles = {
+    'marketing': viewTitles[view] || 'Product Marketing',
+    'product': 'Product Releases',
+    'crm': 'CRM Heatmap',
+    'leadership': 'Leadership Roadmap',
+    'markets': 'Local Markets'
+  };
+  document.getElementById('pageTitle').textContent = titles[mode] || 'Product Marketing Hub';
+
+  // If marketing mode, also set the view
+  if (mode === 'marketing' && view) {
+    currentView = view;
+    document.querySelectorAll('.view-toggle button').forEach(b => {
+      b.classList.toggle('active', b.dataset.view === view);
+    });
+  }
+  setMode(mode);
+}
+
+function toggleSidebarGroup(headerEl) {
+  const chevron = headerEl.querySelector('.group-chevron');
+  const items = headerEl.nextElementSibling;
+  if (chevron.classList.contains('expanded')) {
+    chevron.classList.remove('expanded');
+    items.style.display = 'none';
+  } else {
+    chevron.classList.add('expanded');
+    items.style.display = '';
+  }
+}
+
 // NAVIGATION
 function setMode(mode) {
   currentMode = mode;
@@ -3118,6 +3463,7 @@ function setMode(mode) {
   document.getElementById('leadershipView').classList.remove('active');
   document.getElementById('marketsView').classList.remove('active');
   document.getElementById('yearView').classList.remove('active');
+  document.getElementById('quarterView').classList.remove('active');
   document.getElementById('weeklyView').classList.remove('active');
   document.getElementById('monthView').classList.remove('active');
 
@@ -3126,6 +3472,7 @@ function setMode(mode) {
     navButtons.forEach(b => b.style.display = '');
     // Restore the current marketing view
     document.getElementById('yearView').classList.toggle('active', currentView === 'year');
+    document.getElementById('quarterView').classList.toggle('active', currentView === 'quarter');
     document.getElementById('weeklyView').classList.toggle('active', currentView === 'weekly');
     document.getElementById('monthView').classList.toggle('active', currentView === 'month');
     document.getElementById('weeklyModeToggle').classList.toggle('visible', currentView === 'weekly');
@@ -3200,10 +3547,18 @@ function setView(view) {
     b.classList.toggle('active', b.dataset.view === view);
   });
   document.getElementById('yearView').classList.toggle('active', view === 'year');
+  document.getElementById('quarterView').classList.toggle('active', view === 'quarter');
   document.getElementById('weeklyView').classList.toggle('active', view === 'weekly');
   document.getElementById('monthView').classList.toggle('active', view === 'month');
   document.getElementById('productView').classList.remove('active');
   document.getElementById('weeklyModeToggle').classList.toggle('visible', view === 'weekly');
+  // Update sidebar active state
+  document.querySelectorAll('.sidebar-item').forEach(item => item.classList.remove('active'));
+  const sidebarItem = document.querySelector(`[data-sidebar="marketing-${view}"]`);
+  if (sidebarItem) sidebarItem.classList.add('active');
+  // Update page title
+  const titles = { month: 'Month View', weekly: 'Weekly View', quarter: 'Quarterly View', year: 'Year View' };
+  document.getElementById('pageTitle').textContent = titles[view] || 'Product Marketing';
   render();
 }
 
@@ -3219,10 +3574,13 @@ function navPrev() {
   if (currentView === 'month') {
     currentMonth--;
     if (currentMonth < 0) { currentMonth = 11; currentYear--; }
+  } else if (currentView === 'quarter') {
+    currentMonth -= 3;
+    if (currentMonth < 0) { currentMonth += 12; currentYear--; }
   } else if (currentView === 'year') {
     currentYear--;
   } else if (currentView === 'weekly') {
-    weeklyStart.setDate(weeklyStart.getDate() - 84); // 12 weeks back
+    weeklyStart.setDate(weeklyStart.getDate() - 84);
   }
   render();
 }
@@ -3231,10 +3589,13 @@ function navNext() {
   if (currentView === 'month') {
     currentMonth++;
     if (currentMonth > 11) { currentMonth = 0; currentYear++; }
+  } else if (currentView === 'quarter') {
+    currentMonth += 3;
+    if (currentMonth > 11) { currentMonth -= 12; currentYear++; }
   } else if (currentView === 'year') {
     currentYear++;
   } else if (currentView === 'weekly') {
-    weeklyStart.setDate(weeklyStart.getDate() + 84); // 12 weeks forward
+    weeklyStart.setDate(weeklyStart.getDate() + 84);
   }
   render();
 }
@@ -3346,6 +3707,7 @@ function render() {
     renderMarkets();
   } else {
     if (currentView === 'year') renderYear();
+    else if (currentView === 'quarter') renderQuarter();
     else if (currentView === 'weekly') renderWeekly();
     else renderMonth();
   }
@@ -3371,6 +3733,10 @@ function updateNavLabel() {
   }
   if (currentView === 'year') {
     label.textContent = currentYear.toString();
+  } else if (currentView === 'quarter') {
+    const qStart = Math.floor(currentMonth / 3) * 3;
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    label.textContent = `${months[qStart]} – ${months[qStart + 2]} ${currentYear}`;
   } else if (currentView === 'month') {
     const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
     label.textContent = `${months[currentMonth]} ${currentYear}`;
@@ -3593,6 +3959,103 @@ function renderWeekly() {
 }
 
 // MONTH VIEW
+// QUARTER VIEW
+function renderQuarter() {
+  const container = document.getElementById('quarterView');
+  const qStart = Math.floor(currentMonth / 3) * 3;
+  const quarterStartDate = new Date(currentYear, qStart, 1);
+  const quarterEndDate = new Date(currentYear, qStart + 3, 0);
+
+  // Build list of weeks in this quarter
+  const firstMonday = getMondayOfWeek(quarterStartDate);
+  const weeks = [];
+  let d = new Date(firstMonday);
+  while (d <= quarterEndDate) {
+    weeks.push(new Date(d));
+    d.setDate(d.getDate() + 7);
+  }
+  const numWeeks = weeks.length;
+
+  const today = new Date();
+  const currentWeekMonday = getMondayOfWeek(today);
+  const isCurrentQuarter = today.getFullYear() === currentYear && Math.floor(today.getMonth() / 3) === Math.floor(qStart / 3);
+
+  const gridCols = `180px repeat(${numWeeks}, 1fr)`;
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+  // Header
+  let html = `<div class="year-grid"><div class="year-header" style="grid-template-columns:${gridCols};">`;
+  html += `<div class="year-header-cell">Initiative</div>`;
+  weeks.forEach(monday => {
+    const isCurrent = isCurrentQuarter && monday.getTime() === currentWeekMonday.getTime();
+    const wNum = getWeekNumber(monday);
+    const fmt = `${monday.getDate()} ${months[monday.getMonth()]}`;
+    html += `<div class="year-header-cell ${isCurrent ? 'current-week' : ''}" style="cursor:pointer;font-size:10px;" onclick="openWeekModalByDate('${formatDate(monday)}')" title="${fmt}">W${wNum}</div>`;
+  });
+  html += `</div>`;
+
+  // Releases row
+  const releases = getFilteredReleases();
+  html += `<div class="year-row releases-row" style="grid-template-columns:${gridCols};"><div class="year-row-label"><span class="diamond" style="width:8px;height:8px;background:var(--release-color);transform:rotate(45deg);flex-shrink:0;"></span>Releases</div>`;
+  weeks.forEach(monday => {
+    const isCurrent = isCurrentQuarter && monday.getTime() === currentWeekMonday.getTime();
+    const sunday = new Date(monday);
+    sunday.setDate(sunday.getDate() + 6);
+    const weekReleases = releases.filter(r => {
+      const rd = new Date(r.date + 'T00:00:00');
+      return rd >= monday && rd <= sunday;
+    });
+    html += `<div class="year-cell ${isCurrent ? 'current-week' : ''}" style="position:relative;overflow:visible;">`;
+    if (weekReleases.length > 0) {
+      html += `<div class="release-marker" style="cursor:pointer;" onclick="navigateToRelease('${weekReleases[0].id}')"></div>`;
+      html += `<div class="release-hover-pill">${weekReleases[0].name}</div>`;
+    }
+    html += `</div>`;
+  });
+  html += `</div>`;
+
+  // Initiative rows
+  const initiatives = getActiveInitiatives();
+  initiatives.forEach(init => {
+    const filteredEntries = getFilteredInitEntries(init);
+
+    // Compute which week indices have activity
+    const activeWeekIdxs = new Set();
+    filteredEntries.forEach(entry => {
+      const start = new Date(entry.date + 'T00:00:00');
+      const end = entry.endDate ? new Date(entry.endDate + 'T00:00:00') : start;
+      weeks.forEach((monday, idx) => {
+        const sunday = new Date(monday);
+        sunday.setDate(sunday.getDate() + 6);
+        if (start <= sunday && end >= monday) {
+          activeWeekIdxs.add(idx);
+        }
+      });
+    });
+
+    html += `<div class="year-row" style="grid-template-columns:${gridCols};"><div class="year-row-label"><span class="color-dot" style="background:${init.color}"></span>${init.name}</div>`;
+    weeks.forEach((monday, idx) => {
+      const isCurrent = isCurrentQuarter && monday.getTime() === currentWeekMonday.getTime();
+      const hasActivity = activeWeekIdxs.has(idx);
+      const prevActive = activeWeekIdxs.has(idx - 1);
+      const nextActive = activeWeekIdxs.has(idx + 1);
+      html += `<div class="year-cell ${isCurrent ? 'current-week' : ''}">`;
+      if (hasActivity) {
+        let barClass = 'year-bar';
+        if (!prevActive && !nextActive) barClass += ' bar-single';
+        else if (!prevActive) barClass += ' bar-start';
+        else if (!nextActive) barClass += ' bar-end';
+        html += `<div class="${barClass}" style="background:${init.color};cursor:pointer;" onclick="openWeekModalByDate('${formatDate(monday)}')"></div>`;
+      }
+      html += `</div>`;
+    });
+    html += `</div>`;
+  });
+
+  html += `</div>`;
+  container.innerHTML = html;
+}
+
 function renderMonth() {
   const container = document.getElementById('monthView');
   const firstDay = new Date(currentYear, currentMonth, 1);
