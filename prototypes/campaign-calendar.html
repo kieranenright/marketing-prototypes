@@ -2398,6 +2398,47 @@ body {
   border: 1px solid var(--border);
 }
 
+.form-btn-jira {
+  background: #0052CC;
+  color: white;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.form-btn-jira:hover { background: #0747A6; }
+
+.form-btn-jira.copied {
+  background: #10B981;
+}
+
+.jira-toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: #0052CC;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  box-shadow: 0 4px 20px rgba(0,82,204,0.3);
+  z-index: 9999;
+  animation: toastIn 0.2s ease;
+  font-family: var(--font-body);
+}
+
+.jira-toast.fade-out {
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+@keyframes toastIn {
+  from { transform: translateY(10px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
 .form-btn-cancel:hover { border-color: var(--text-tertiary); }
 
 .form-btn-danger {
@@ -4074,6 +4115,8 @@ body {
       </div>
       <div class="form-actions">
         <button class="form-btn form-btn-danger" id="formDeleteBtn" onclick="deleteEntry()" style="display:none;">Delete</button>
+        <button class="form-btn form-btn-jira" id="formJiraBtn" onclick="createJiraTicket()">Create Jira Ticket</button>
+        <div style="flex:1;"></div>
         <button class="form-btn form-btn-cancel" onclick="closeModal('entryFormModal')">Cancel</button>
         <button class="form-btn form-btn-primary" onclick="saveEntry()">Save</button>
       </div>
@@ -6323,6 +6366,60 @@ function deleteEntry() {
   }
   closeModal('entryFormModal');
   render();
+}
+
+function createJiraTicket() {
+  const initId = document.getElementById('formInitiative').value;
+  const init = calendarData.initiatives.find(i => i.id === initId);
+  const initName = init ? init.name : '';
+
+  const text = document.getElementById('formText').value.trim();
+  const channel = document.getElementById('formChannel').value;
+  const subchannel = document.getElementById('formSubchannel').value.trim();
+  const owner = document.getElementById('formOwner').value.trim();
+  const date = document.getElementById('formDate').value;
+  const endDate = document.getElementById('formEndDate').value;
+  const markets = document.getElementById('formMarkets').value.trim();
+  const notes = document.getElementById('formNotes').value.trim();
+
+  const channelLabel = formatChannel(channel) + (subchannel ? ' / ' + subchannel : '');
+  const summary = `[${initName}] ${text} — ${channelLabel} Creative`;
+
+  let description = `Campaign: ${initName}\n`;
+  description += `Channel: ${channelLabel}\n`;
+  description += `Owner: ${owner || 'TBC'}\n`;
+  description += `Date: ${date || 'TBC'}${endDate ? ' to ' + endDate : ''}\n`;
+  description += `Markets: ${markets || (init ? init.markets.join(', ') : 'TBC')}\n`;
+  if (notes) description += `\nNotes: ${notes}\n`;
+  description += `\nPlease create the creative assets for this campaign entry.`;
+
+  const clipboardText = `Summary: ${summary}\n\nDescription:\n${description}`;
+
+  navigator.clipboard.writeText(clipboardText).then(() => {
+    const btn = document.getElementById('formJiraBtn');
+    const origText = btn.textContent;
+    btn.textContent = 'Copied to clipboard!';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = origText;
+      btn.classList.remove('copied');
+    }, 2000);
+
+    const toast = document.createElement('div');
+    toast.className = 'jira-toast';
+    toast.textContent = 'Ticket details copied. Opening service desk portal...';
+    document.body.appendChild(toast);
+    setTimeout(() => {
+      toast.classList.add('fade-out');
+      setTimeout(() => toast.remove(), 300);
+    }, 3000);
+
+    setTimeout(() => {
+      window.open('https://hellofresh.atlassian.net/servicedesk/customer/portal/1827/group/-1', '_blank');
+    }, 500);
+  }).catch(() => {
+    window.open('https://hellofresh.atlassian.net/servicedesk/customer/portal/1827/group/-1', '_blank');
+  });
 }
 
 // EXPORT
