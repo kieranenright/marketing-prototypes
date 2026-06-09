@@ -2701,8 +2701,8 @@ body {
       <div class="controls-left">
         <div class="view-toggle">
           <button data-view="year" onclick="setView('year')">Year</button>
-          <button data-view="weekly" onclick="setView('weekly')">Weekly</button>
-          <button data-view="month" class="active" onclick="setView('month')">Month</button>
+          <button data-view="weekly" class="active" onclick="setView('weekly')">Weekly</button>
+          <button data-view="month" onclick="setView('month')">Month</button>
         </div>
         <div class="nav-controls" id="navControls">
           <button onclick="navPrev()">&lsaquo;</button>
@@ -2915,7 +2915,7 @@ const INLINE_CALENDAR_DATA = {"markets":["US","UK","DE","AU","CA","NL","SE","DK"
 <script>
 // STATE
 let calendarData = null;
-let currentView = 'month';
+let currentView = 'weekly';
 let currentMode = 'marketing'; // marketing | product | crm | leadership
 let currentYear = 2026;
 let currentMonth = 5; // 0-indexed, June = 5
@@ -3025,6 +3025,11 @@ async function loadData() {
   const mondayOfCurrentWeek = getMondayOfWeek(today);
   weeklyStart = new Date(mondayOfCurrentWeek);
   weeklyStart.setDate(weeklyStart.getDate() - 14);
+  // Apply initial view state
+  document.getElementById('yearView').classList.toggle('active', currentView === 'year');
+  document.getElementById('weeklyView').classList.toggle('active', currentView === 'weekly');
+  document.getElementById('monthView').classList.toggle('active', currentView === 'month');
+  document.getElementById('weeklyModeToggle').classList.toggle('visible', currentView === 'weekly');
   render();
 }
 
