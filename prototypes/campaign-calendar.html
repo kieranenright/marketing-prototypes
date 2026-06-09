@@ -7589,10 +7589,10 @@ async function callClaude(systemPrompt, userMessage, imageData) {
   }
 
   const data = await resp.json();
-  const parts = data.candidates[0].content.parts || [];
-  const textParts = parts.filter(p => p.text && !p.thought).map(p => p.text);
+  const responseParts = data.candidates[0].content.parts || [];
+  const textParts = responseParts.filter(p => p.text && !p.thought).map(p => p.text);
   if (textParts.length === 0) {
-    const allText = parts.map(p => p.text).filter(Boolean);
+    const allText = responseParts.map(p => p.text).filter(Boolean);
     return allText[allText.length - 1] || '';
   }
   return textParts.join('\n');
