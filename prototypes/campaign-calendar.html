@@ -4033,13 +4033,13 @@ body {
       </div>
       <div class="sidebar-divider"></div>
       <div class="sidebar-section-label">AI Tools</div>
-      <div class="sidebar-item" data-sidebar="extract-bp" onclick="sidebarNav('extract-bp')" style="opacity:0.5;">
+      <div class="sidebar-item" data-sidebar="extract-bp" onclick="sidebarNav('extract-bp')">
         <span class="sidebar-icon">&#9889;</span>
-        <span class="sidebar-label">Extract Learnings <span style="font-size:9px;background:#F59E0B;color:white;padding:1px 5px;border-radius:3px;margin-left:4px;">WIP</span></span>
+        <span class="sidebar-label">Extract Learnings</span>
       </div>
-      <div class="sidebar-item" data-sidebar="audit-plan" onclick="sidebarNav('audit-plan')" style="opacity:0.5;">
+      <div class="sidebar-item" data-sidebar="audit-plan" onclick="sidebarNav('audit-plan')">
         <span class="sidebar-icon">&#128269;</span>
-        <span class="sidebar-label">Audit Plan <span style="font-size:9px;background:#F59E0B;color:white;padding:1px 5px;border-radius:3px;margin-left:4px;">WIP</span></span>
+        <span class="sidebar-label">Audit Plan</span>
       </div>
       <div class="sidebar-divider"></div>
       <div class="sidebar-section-label">Knowledge Base</div>
@@ -7539,19 +7539,6 @@ function updateAISettingsStatus() {
   }
 }
 
-function sanitizeAndParseJSON(raw) {
-  let s = raw;
-  s = s.replace(/,\s*([}\]])/g, '$1');
-  s = s.replace(/[\x00-\x1F\x7F]/g, (ch) => ch === '\n' || ch === '\r' || ch === '\t' ? ch : '');
-  try { return JSON.parse(s); } catch(e) {}
-  s = s.replace(/([{,]\s*)(\w+)\s*:/g, '$1"$2":');
-  try { return JSON.parse(s); } catch(e) {}
-  s = s.replace(/"([^"]*?)"/g, (match, inner) => '"' + inner.replace(/\n/g, '\\n').replace(/\t/g, '\\t') + '"');
-  try { return JSON.parse(s); } catch(e) {
-    throw new Error('Failed to parse AI response as JSON. Try re-running or uploading a simpler file.');
-  }
-}
-
 async function callClaude(systemPrompt, userMessage, imageData) {
   const key = getAIKey();
   if (!key) throw new Error('No API key configured. Go to AI Settings to add your Google Gemini API key.');
@@ -7568,7 +7555,11 @@ async function callClaude(systemPrompt, userMessage, imageData) {
     body: JSON.stringify({
       system_instruction: { parts: [{ text: systemPrompt }] },
       contents: [{ parts }],
-      generationConfig: { maxOutputTokens: 4096, temperature: 0.3 }
+      generationConfig: {
+        maxOutputTokens: 4096,
+        temperature: 0.3,
+        responseMimeType: 'application/json'
+      }
     })
   });
 
@@ -7708,12 +7699,7 @@ Focus on actionable insights. Be specific with numbers and campaign names. Ident
 
   try {
     const response = await callClaude(systemPrompt, `Here are the campaign results to analyze:\n\nSource: ${sourceName}\n\n${text.substring(0, 12000)}`, imageData);
-
-    let cleaned = response.replace(/```json\s*/g, '').replace(/```\s*/g, '').trim();
-    const jsonMatch = cleaned.match(/\{[\s\S]*\}/);
-    if (!jsonMatch) throw new Error('Could not parse AI response. The AI returned text but no structured JSON. Try a different file format.');
-
-    const parsed = sanitizeAndParseJSON(jsonMatch[0]);
+    const parsed = JSON.parse(response);
     renderExtractionResults(parsed.practices, sourceName);
   } catch (e) {
     resultsEl.innerHTML = `<div style="padding:20px;color:#DC2626;font-size:13px;"><strong>Error:</strong> ${escapeHTML(e.message)}</div>`;
@@ -7885,12 +7871,7 @@ Be specific and actionable. Reference real data from the best practices and cale
 
   try {
     const response = await callClaude(systemPrompt, `Here is the campaign plan to audit:\n\nPlan: ${planName}\n\n${text.substring(0, 12000)}`, imageData);
-
-    let cleaned = response.replace(/```json\s*/g, '').replace(/```\s*/g, '').trim();
-    const jsonMatch = cleaned.match(/\{[\s\S]*\}/);
-    if (!jsonMatch) throw new Error('Could not parse AI response. The AI returned text but no structured JSON. Try uploading a simpler file or a different format.');
-
-    const parsed = sanitizeAndParseJSON(jsonMatch[0]);
+    const parsed = JSON.parse(response);
     renderAuditResults(parsed, planName);
   } catch (e) {
     resultsEl.innerHTML = `<div style="padding:20px;color:#DC2626;font-size:13px;"><strong>Error:</strong> ${escapeHTML(e.message)}</div>`;
