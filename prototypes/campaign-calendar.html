@@ -3948,6 +3948,115 @@ body {
   margin-top: 12px;
 }
 .perf-save-btn:hover { background: var(--brand-green-dark); }
+
+/* DRAG AND DROP */
+.month-day-cell.drag-over {
+  background: var(--brand-green-light) !important;
+  box-shadow: inset 0 0 0 2px var(--brand-green);
+}
+
+.day-entry[draggable="true"] {
+  cursor: grab;
+  transition: opacity 0.15s, transform 0.15s;
+}
+
+.day-entry[draggable="true"]:active {
+  cursor: grabbing;
+}
+
+.day-entry.dragging {
+  opacity: 0.4;
+  transform: scale(0.95);
+}
+
+.drag-ghost {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  padding: 6px 12px;
+  background: white;
+  border: 2px solid var(--brand-green);
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--brand-green);
+  box-shadow: var(--shadow-card);
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.drag-indicator {
+  display: none;
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  background: var(--brand-green-light);
+  color: var(--brand-green);
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 14px;
+  text-align: center;
+}
+
+.day-entry:hover .drag-indicator {
+  display: block;
+}
+
+/* PDF EXPORT */
+.pdf-export-btn {
+  padding: 6px 12px;
+  border: 1px solid var(--brand-green);
+  border-radius: var(--radius-sm);
+  background: var(--brand-green-light);
+  color: var(--brand-green);
+  font-size: 11px;
+  font-weight: 600;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: all 0.15s;
+  box-shadow: var(--shadow-sm);
+}
+
+.pdf-export-btn:hover {
+  background: var(--brand-green);
+  color: white;
+}
+
+.pdf-export-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pdf-export-btn .spinner {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  margin-right: 4px;
+  vertical-align: middle;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@media print {
+  .sidebar, .top-bar, .controls-bar, .shortcuts-badge, .shortcuts-panel,
+  .legend-container, .pdf-export-btn, .export-btns { display: none !important; }
+  .app.active { display: block !important; }
+  .app-main { margin: 0 !important; padding: 0 !important; }
+  .calendar-content { padding: 0 !important; }
+  body { background: white !important; }
+  .year-grid, .weekly-grid, .month-grid { box-shadow: none !important; border: 1px solid #ccc !important; }
+}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 </head>
@@ -4127,6 +4236,7 @@ body {
         <div class="export-btns">
           <button class="export-btn" onclick="exportJSON()">JSON</button>
           <button class="export-btn" onclick="exportCSV()">CSV</button>
+          <button class="pdf-export-btn" onclick="exportPDF()">PDF</button>
           <button class="export-btn import-btn" id="importBtn" onclick="document.getElementById('csvFileInput').click()" style="display:none;">Import CSV</button>
           <input type="file" id="csvFileInput" accept=".csv" style="display:none;" onchange="handleCSVImport(event)">
         </div>
@@ -4285,6 +4395,7 @@ body {
   <div class="shortcut-row"><span>Month view</span><span class="shortcut-key">3</span></div>
   <div class="shortcut-row"><span>New entry</span><span class="shortcut-key">N</span></div>
   <div class="shortcut-row"><span>Search</span><span class="shortcut-key">/</span></div>
+  <div class="shortcut-row"><span>Export PDF</span><span class="shortcut-key">P</span></div>
 </div>
 
 <script>
@@ -5237,7 +5348,7 @@ function renderMonth() {
     const dayEntries = entryMap[dateStr] || [];
     const dayReleases = releaseMap[dateStr] || [];
     const dayKey = dateStr;
-    html += `<div class="month-day-cell ${isToday ? 'today' : ''}" onclick="openDayModal('${dateStr}')">`;
+    html += `<div class="month-day-cell ${isToday ? 'today' : ''}" data-date="${dateStr}" onclick="openDayModal('${dateStr}')">`;
     html += `<div class="day-number">${day}</div>`;
 
     // Releases
@@ -5249,7 +5360,8 @@ function renderMonth() {
     html += `<div class="day-entries">`;
     dayEntries.forEach(e => {
       const ch = CHANNEL_COLORS[e.channel] || { color: '#666', bg: '#f5f5f5' };
-      html += `<div class="day-entry" style="background:${ch.bg};border-left-color:${ch.color};color:${ch.color};" title="${e.text} | ${e.owner}">${e.text}</div>`;
+      const draggable = isEditor ? 'draggable="true"' : '';
+      html += `<div class="day-entry" ${draggable} data-entry-id="${e.id}" data-init-id="${e.initiative.id}" style="background:${ch.bg};border-left-color:${ch.color};color:${ch.color};" title="${e.text} | ${e.owner}">${e.text}${isEditor ? '<span class="drag-indicator">⋮⋮</span>' : ''}</div>`;
     });
     html += `</div></div>`;
   }
@@ -6816,6 +6928,7 @@ document.addEventListener('keydown', (e) => {
     case '3': setView('month'); break;
     case 'n': case 'N': if (isEditor) openNewEntryForm(); break;
     case '/': e.preventDefault(); document.getElementById('searchInput').focus(); break;
+    case 'p': case 'P': exportPDF(); break;
   }
 });
 
@@ -6944,6 +7057,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('sidebarUserRole').textContent = 'Editor';
   document.getElementById('importBtn').style.display = '';
   loadData();
+  initDragAndDrop();
 });
 
 // ─── CAMPAIGNS ENGINE ───────────────────────────────────────────────
@@ -6974,6 +7088,170 @@ function saveCampaignGalleries() {
 function saveCampaignPerformance() {
   localStorage.setItem('campaignPerformance', JSON.stringify(campaignPerformance));
 }
+
+// ─── DRAG AND DROP ─────────────────────────────────────────────────
+
+let dragData = null;
+
+function initDragAndDrop() {
+  const content = document.querySelector('.calendar-content');
+  if (!content) return;
+
+  content.addEventListener('dragstart', (e) => {
+    const entry = e.target.closest('.day-entry[draggable]');
+    if (!entry || !isEditor) return;
+
+    dragData = {
+      entryId: entry.dataset.entryId,
+      initId: entry.dataset.initId
+    };
+
+    entry.classList.add('dragging');
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/plain', entry.dataset.entryId);
+
+    const ghost = document.createElement('div');
+    ghost.className = 'drag-ghost';
+    ghost.textContent = entry.textContent.replace('⋮⋮', '').trim();
+    document.body.appendChild(ghost);
+    e.dataTransfer.setDragImage(ghost, 10, 10);
+    setTimeout(() => ghost.remove(), 0);
+  });
+
+  content.addEventListener('dragend', (e) => {
+    const entry = e.target.closest('.day-entry');
+    if (entry) entry.classList.remove('dragging');
+    document.querySelectorAll('.month-day-cell.drag-over').forEach(c => c.classList.remove('drag-over'));
+    dragData = null;
+  });
+
+  content.addEventListener('dragover', (e) => {
+    const cell = e.target.closest('.month-day-cell[data-date]');
+    if (!cell || !dragData) return;
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+
+    document.querySelectorAll('.month-day-cell.drag-over').forEach(c => c.classList.remove('drag-over'));
+    cell.classList.add('drag-over');
+  });
+
+  content.addEventListener('dragleave', (e) => {
+    const cell = e.target.closest('.month-day-cell[data-date]');
+    if (cell && !cell.contains(e.relatedTarget)) {
+      cell.classList.remove('drag-over');
+    }
+  });
+
+  content.addEventListener('drop', (e) => {
+    e.preventDefault();
+    const cell = e.target.closest('.month-day-cell[data-date]');
+    if (!cell || !dragData) return;
+
+    cell.classList.remove('drag-over');
+    const newDate = cell.dataset.date;
+
+    const init = calendarData.initiatives.find(i => i.id === dragData.initId);
+    if (!init) return;
+    const entry = init.entries.find(en => en.id === dragData.entryId);
+    if (!entry) return;
+
+    const oldDate = entry.date;
+    if (oldDate === newDate) return;
+
+    if (entry.endDate) {
+      const oldStart = new Date(oldDate + 'T00:00:00');
+      const oldEnd = new Date(entry.endDate + 'T00:00:00');
+      const duration = Math.round((oldEnd - oldStart) / (1000 * 60 * 60 * 24));
+      const newStart = new Date(newDate + 'T00:00:00');
+      const newEnd = new Date(newStart);
+      newEnd.setDate(newEnd.getDate() + duration);
+      entry.endDate = formatDate(newEnd);
+    }
+
+    entry.date = newDate;
+    localStorage.setItem('calendarDataOverride', JSON.stringify(calendarData));
+    render();
+
+    dragData = null;
+  });
+}
+
+// ─── PDF EXPORT ────────────────────────────────────────────────────
+
+function exportPDF() {
+  const btn = document.querySelector('.pdf-export-btn');
+  const origHTML = btn.innerHTML;
+  btn.innerHTML = '<span class="spinner"></span>Generating...';
+  btn.disabled = true;
+
+  setTimeout(() => {
+    const sidebar = document.querySelector('.sidebar');
+    const topBar = document.querySelector('.top-bar');
+    const controlsBar = document.querySelector('.controls-bar');
+    const shortcuts = document.querySelector('.shortcuts-badge');
+    const shortcutsPanel = document.getElementById('shortcutsPanel');
+    const legend = document.getElementById('legendContainer');
+
+    sidebar.style.display = 'none';
+    topBar.style.display = 'none';
+    controlsBar.style.display = 'none';
+    if (shortcuts) shortcuts.style.display = 'none';
+    if (shortcutsPanel) shortcutsPanel.style.display = 'none';
+    if (legend) legend.style.display = 'none';
+
+    const appMain = document.querySelector('.app-main');
+    appMain.style.margin = '0';
+    appMain.style.padding = '0';
+
+    const titleBanner = document.createElement('div');
+    titleBanner.id = 'pdf-title-banner';
+    titleBanner.style.cssText = 'padding:24px 32px 16px;background:white;border-bottom:2px solid #067A46;margin-bottom:16px;';
+
+    const viewTitles = { year: 'Year View', quarter: 'Quarterly View', weekly: 'Weekly View', month: 'Month View' };
+    const viewTitle = currentMode === 'marketing' ? (viewTitles[currentView] || 'Calendar') : document.getElementById('pageTitle').textContent;
+    const navLabel = document.getElementById('navLabel').textContent;
+    const filterInfo = [];
+    if (activeInitiative !== 'all') {
+      const init = calendarData.initiatives.find(i => i.id === activeInitiative);
+      if (init) filterInfo.push(init.name);
+    }
+    const channelVal = document.getElementById('channelFilter').value;
+    if (channelVal) filterInfo.push(formatChannel(channelVal));
+    const statusVal = document.getElementById('statusFilter').value;
+    if (statusVal) filterInfo.push(statusVal);
+
+    titleBanner.innerHTML = `
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;">
+        <div>
+          <div style="font-family:var(--font-headline);font-size:20px;font-weight:700;color:#067A46;">Product Marketing Hub</div>
+          <div style="font-size:14px;font-weight:600;color:#1D1D1D;margin-top:4px;">${viewTitle}: ${navLabel}</div>
+          ${filterInfo.length > 0 ? `<div style="font-size:11px;color:#5A5A5A;margin-top:4px;">Filters: ${filterInfo.join(', ')}</div>` : ''}
+        </div>
+        <div style="font-size:10px;color:#9A9A9A;">Generated ${new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</div>
+      </div>
+    `;
+
+    const calendarContent = document.querySelector('.calendar-content');
+    calendarContent.insertBefore(titleBanner, calendarContent.firstChild);
+
+    window.print();
+
+    titleBanner.remove();
+    sidebar.style.display = '';
+    topBar.style.display = '';
+    controlsBar.style.display = '';
+    if (shortcuts) shortcuts.style.display = '';
+    if (shortcutsPanel) shortcutsPanel.style.display = '';
+    if (legend) legend.style.display = '';
+    appMain.style.margin = '';
+    appMain.style.padding = '';
+
+    btn.innerHTML = origHTML;
+    btn.disabled = false;
+  }, 100);
+}
+
+// ─── CAMPAIGNS ENGINE ───────────────────────────────────────────────
 
 function renderCampaigns() {
   if (!calendarData) return;
