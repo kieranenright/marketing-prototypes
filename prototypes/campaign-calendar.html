@@ -1551,12 +1551,22 @@ body {
 
 .bp-cancel-btn:hover { border-color: var(--text-tertiary); }
 
-/* EXTRACT BP & AUDIT PLAN VIEWS */
+/* AI TOOL VIEWS */
 .ask-advisor-view {
   display: none;
 }
 
 .ask-advisor-view.active {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 70px);
+}
+
+.ask-ei-view {
+  display: none;
+}
+
+.ask-ei-view.active {
   display: flex;
   flex-direction: column;
   height: calc(100vh - 70px);
@@ -4005,6 +4015,10 @@ body {
         <span class="sidebar-icon">&#128172;</span>
         <span class="sidebar-label">Ask Advisor</span>
       </div>
+      <div class="sidebar-item" data-sidebar="ask-ei" onclick="sidebarNav('ask-ei')">
+        <span class="sidebar-icon">&#129504;</span>
+        <span class="sidebar-label">Ask the EI</span>
+      </div>
       <div class="sidebar-divider"></div>
       <div class="sidebar-section-label">Knowledge Base</div>
       <div class="sidebar-item" data-sidebar="best-practices" onclick="sidebarNav('best-practices')">
@@ -4137,6 +4151,7 @@ body {
     <div class="leadership-view" id="leadershipView"></div>
     <div class="markets-view" id="marketsView"></div>
     <div class="ask-advisor-view" id="askAdvisorView"></div>
+    <div class="ask-ei-view" id="askEIView"></div>
     <div class="best-practices-view" id="bestPracticesView"></div>
     <div class="campaigns-view" id="campaignsView"></div>
   </div>
@@ -4489,6 +4504,7 @@ function sidebarNav(mode, view) {
     'markets': 'Local Markets',
     'campaigns': 'Campaigns',
     'ask-advisor': 'Ask Advisor',
+    'ask-ei': 'Ask the EI',
     'best-practices': 'Best Practices'
   };
   document.getElementById('pageTitle').textContent = titles[mode] || 'Product Marketing Hub';
@@ -4537,6 +4553,7 @@ function setMode(mode) {
   document.getElementById('leadershipView').classList.remove('active');
   document.getElementById('marketsView').classList.remove('active');
   document.getElementById('askAdvisorView').classList.remove('active');
+  document.getElementById('askEIView').classList.remove('active');
   document.getElementById('bestPracticesView').classList.remove('active');
   document.getElementById('campaignsView').classList.remove('active');
   document.getElementById('yearView').classList.remove('active');
@@ -4574,6 +4591,11 @@ function setMode(mode) {
     navButtons.forEach(b => b.style.display = 'none');
     document.getElementById('askAdvisorView').classList.add('active');
     renderAskAdvisor();
+  } else if (mode === 'ask-ei') {
+    marketingOnlyEls.forEach(el => { if (el) el.style.display = 'none'; });
+    navButtons.forEach(b => b.style.display = 'none');
+    document.getElementById('askEIView').classList.add('active');
+    renderAskEI();
   } else if (mode === 'best-practices') {
     marketingOnlyEls.forEach(el => { if (el) el.style.display = 'none'; });
     navButtons.forEach(b => b.style.display = 'none');
@@ -4825,6 +4847,10 @@ function updateNavLabel() {
   }
   if (currentMode === 'ask-advisor') {
     label.textContent = 'Ask Advisor';
+    return;
+  }
+  if (currentMode === 'ask-ei') {
+    label.textContent = 'Ask the EI';
     return;
   }
   if (currentMode === 'best-practices') {
@@ -7796,6 +7822,431 @@ function getCalendarContext() {
     ctx += '\n';
   });
   return ctx.substring(0, 3000);
+}
+
+// ========== ASK THE EI ==========
+let eiMessages = [];
+
+const EI_RESEARCH_DATA = `EFFICIENT INSPIRED (EI) SEGMENT RESEARCH
+Source: HelloFresh Global Consumer Insights, "Behind the Screen" Report (2024)
+Global sample: n=922 EI, n=899 GenPop (AU, FR, UK, US)
+
+=== SECTION 1: CORE PROFILE & DRIVERS ===
+
+WHO THEY ARE:
+- Adults in the prime of their lives (25-45), managing complex households while holding full-time jobs and living life to the fullest
+- Higher household income than GenPop
+- Skew slightly male (varies by market)
+- Dual-income households common, often with children
+- Working full-time, urban/suburban
+
+THE EI FOOD MINDSET:
+Their defining tension: they WANT to cook healthy, creative, varied meals but their busy, unpredictable lives create constant friction.
+They are "life optimizers" who treat food as both fuel and joy, never just one.
+
+KEY DEMANDS:
+1. Variety and newness: 50% want to try something new when planning meals
+2. Health and balance: 63% aim to fit a healthy and balanced diet
+3. Quality ingredients: 56% seek fresh ingredients, 45% taste-good ingredients
+4. Efficiency without sacrifice: They want quality but won't spend hours achieving it
+5. Flexibility: 85% treat their weekly plan as a guide, not a rule
+
+WHAT MAKES EI DIFFERENT FROM GENPOP:
+- More intentional about food (plan more, cook more, shop more frequently)
+- Higher engagement with food media across ALL channels
+- More willing to pay for quality and convenience
+- More digitally active and tech-forward in food management
+- More socially oriented around food (hosting, sharing, experiences)
+- More likely to have modified eating habits in the past year (64% vs GenPop)
+
+=== SECTION 2: AUDIENCE UNDERSTANDING ===
+
+INTERESTS & LIFESTYLE:
+- Multi-passionate: gaming, music/concerts, outdoors/hiking, fitness, reading
+- "Out and about" lifestyle: they are doers, not just watchers
+- Tech-savvy early adopters
+- Active social lives: host dinners, attend food events
+- Medieval/fantasy interests (gaming, events)
+
+BRAND AFFINITIES:
+- Apple ecosystem heavy
+- Premium but accessible brands: Nike, Spotify, Netflix, Dyson
+- Food-related: premium supermarkets, specialty stores
+- View HelloFresh as creative, fun, and aspirational (already positive brand perception)
+
+COMMUNITY & SOCIAL:
+- Food is a social activity: hosting friends, cooking together
+- Share food content and discoveries with peers
+- Active in online communities around interests
+- Value authentic, relatable content over polished corporate messaging
+
+PARTNERSHIPS THAT RESONATE:
+- Must enable "newness" and teach something tangible
+- Partnerships should give them opportunity to try/learn something new
+- Premium food-related brands (Harris Farm, M&S, Target for lifestyle)
+- Tech brands (Ninja, air fryers, kitchen gadgets they buy to optimize)
+- Should show tangible "life-hack" value, not just brand association
+- Examples that work: "Combine HelloFresh with a Ninja air-fryer to buy back 20 minutes of your Tuesday evening"
+- Examples that work: "Airbnb x HelloFresh: Hack your vacation rental kitchen" (foraging + local ingredients + HelloFresh base recipe)
+- Passive sweepstakes/competitions alone won't resonate. They want active learning and skill-building.
+
+=== SECTION 3: MEDIA CONSUMPTION ===
+
+CHANNEL USAGE (EI vs GenPop engagement levels):
+- Instagram: 68% daily (vs 51% GenPop) - PRIMARY visual inspiration channel
+- YouTube: 63% daily (vs 52% GenPop) - education and deep-dive content
+- TikTok: 44% daily (vs 33% GenPop) - discovery and short entertainment
+- Facebook: 52% daily (vs 53% GenPop) - community, aligned with GenPop
+- Spotify/Podcasts: 46% daily (vs 33% GenPop) - significantly higher audio engagement
+- Streaming TV: 74% daily (vs 69% GenPop) - lean-back entertainment
+- Linear TV: 37% daily (vs 46% GenPop) - LOWER than GenPop
+
+PLATFORM FREQUENCY:
+- EIs use MORE platforms MORE often than GenPop
+- No single "center of gravity" - fragmented media footprint
+- They are everywhere but not captive anywhere
+
+CONTENT CADENCE THROUGHOUT THE DAY:
+- Morning (wake-up): Social media scrolling, podcasts during commute
+- Midday: Quick social checks, browsing during lunch
+- Afternoon: Lighter content, planning mode kicks in
+- Evening: Streaming/TV, longer YouTube content
+- Before bed: Social media wind-down
+
+FOOD MEDIA CONSUMPTION:
+- Social media is #1 source for food inspiration (especially Instagram and TikTok)
+- YouTube for instructional/educational food content (5-30 minute videos)
+- Podcasts and audiobooks for food adjacent content (on-the-go)
+- TV/Streaming for aspirational cooking shows (lean-back)
+- Web browsing for recipe lookup and planning
+
+FOOD CONTENT PREFERENCES ON SOCIAL:
+- Short recipe videos showing quick ideas using existing ingredients
+- "What I eat in a day" content
+- Ingredient-led content (what to do with X)
+- Seasonal/trending food content
+- NOT interested in overly produced, unrelatable content
+
+YOUTUBE FOOD CONTENT:
+- Full-length instructional videos (5-30 mins)
+- More detail, explanation, and educational vibe
+- Professional chefs AND accessible home cooks
+- Want to learn techniques, not just see finished dishes
+- Informative, aspirational, and inspirational tone
+
+INFLUENCER PREFERENCES:
+- Skilled yet accessible foodie influencers
+- Must combine: genuine culinary skill + authentic storytelling + fun to watch
+- They seek the "golden standard" from professionals but need "proof of concept" from relatable figures
+- Not celebrity chefs (too unattainable), not pure amateurs (not aspirational enough)
+- The sweet spot: highly relatable guides who make discovering flavors feel exciting AND achievable
+- Partner with influencers who champion diverse, worldwide cuisines
+
+WEEKNIGHT INSPIRATION SOURCES:
+- 36% save recipes from internet to browser folder
+- 35% food planning and recipe apps
+- 27% bookmarking recipes from social media
+- 22% smart home assistant or voice memo
+- 43% supermarket app or website
+- 42% writing things on mobile phone
+- Despite tech, 39% still use pen and paper (fragmented tools, juggling 2.6 average)
+
+=== SECTION 4: FOOD ROUTINE ===
+
+FOOD PLANNING - THE "PENCILED STRUCTURE":
+- 68% have a high-level structured weekly cooking plan
+- 59% plan SOME of their meals for the week in advance
+- 33% plan on the day what to eat
+- 3% do not plan meals at all
+- They AVOID rigid, all-week scheduling
+- They PRIORITIZE meal-time flexibility over batch cooking
+- Quote: "I plan enough to have lots of good food in the house, so I can choose what to cook in the moment."
+
+NAVIGATING THE WEEK DYNAMIC:
+The weekly pattern: start disciplined and healthy Monday-Wednesday, shift toward flexible, high-energy, pleasure/reward choices Thursday-Friday and weekend.
+- Monday-Wednesday: Health & Control
+- Thursday-Friday: Convenience & Morale
+- Weekend: Pleasure & Reward
+
+INTENT vs FRICTION (when planning meals):
+- 63% want healthy and balanced diet (INTENT) vs 44% running out of ideas (FRICTION)
+- 53% want to use fridge contents (INTENT) vs 30% plans changing last minute (FRICTION)
+- 50% want to try something new (INTENT) vs 27% lacking time to prepare what they want (FRICTION)
+
+FOOD COOKING - THE "ROLLING FORECAST":
+- Cook from scratch 4-6 times a week (38%, significantly more than GenPop's 31%)
+- Unlike GenPop who cook daily (34%), EIs purposefully leave 1-2 days for spontaneity
+- 25% decide on dinner the day before (significantly more than GenPop)
+- This 24-hour window allows midweek top-up shopping to get needed ingredients
+- 65% want to enjoy the experience of preparing food (only 28% prioritize speed)
+- Scratch cooking wins when it: ensures household enjoyment (51%), delivers vegetable variety (44%), minimizes food waste (43%), is enjoyed as experience (43%)
+
+WHY PLANS CHANGE (EI reasons for not cooking what was planned):
+- 85% treat weekly framework as guide, regularly deviating
+- 58% "sometimes" don't make what was planned (vs 51% GenPop)
+- Top reasons: Low energy/tired (25%), Stress relief/wanted easy treat (24%), Missing key ingredient (22%), Ran out of time (19%), Partner offered dinner (17%)
+- They recalibrate plans to fit the day's reality in real-time
+
+FOOD SUPPLY - SHOPPING BEHAVIORS:
+- Rapid-cycle grocery buyers: 52% do big shop weekly in-store, online big shop twice as often as GenPop
+- Saturday is the consistent big-shop anchor across all markets
+- Online shopping: Friday 45% and Sunday 30% peak (significantly higher than GenPop)
+- Weekend = "logistical reset" using smartphones as "Mission Control"
+- Mid-week top-up shops: 29% twice a week in-store (vs 24% GenPop), 18% rapid delivery twice a week (vs 9% GenPop)
+
+WHAT EIs SEEK WHEN SHOPPING (more than GenPop):
+- 56% Fresh ingredients
+- 45% Ingredients which taste good
+- 44% Healthy choices
+- 40% Seasonal produce
+- 26% New and different choices
+- 44% prioritize variety of different vegetables when cooking from scratch
+
+WHERE THEY SHOP:
+- Common ground with GenPop: big-name supermarket hubs for basics
+- EI-specific: also frequent specialized stores for different needs
+  - Tech-forward: Fresh, Milkrun, Deliveroo
+  - Quality/Ethics: Harris Farm, Fresh, Biocoop
+  - Lifestyle/Innovation: M&S, Target
+  - Limited-time "treasure hunt": Costco
+- GenPop-only: Budget-friendly (Aldi, Lidl, Intermarche)
+
+GROCERY PLANNING TOOLS (what they use):
+- 43% supermarket app or website (vs 28% GenPop)
+- 42% writing things on mobile phone (vs 29% GenPop)
+- 39% pen and paper (vs 46% GenPop - EIs use LESS paper)
+- 36% saving recipes from internet to browser folder (vs 20% GenPop)
+- 35% food planning and recipe apps (vs 18% GenPop)
+- 27% bookmarking from social media (vs 18% GenPop)
+- 22% smart home assistant or voice memo (vs 10% GenPop)
+- Average tools selected: 2.6 (vs 1.8 GenPop) - they juggle more tools
+
+=== SECTION 4a: DISRUPTIONS OF FOOD ROUTINE ===
+
+- 64% of EI segment has modified how they eat or cook in the past year (significantly vs GenPop)
+- Change is the only constant for this segment
+
+TRIGGERS FOR HABIT CHANGE:
+- Betterment: 32% wanted to be healthier (vs 18% GenPop) - changed ingredients, food types
+- Home Evolution: Got pet 13%, moved in with partner 7%, moved home 7%, bought house 5%, had baby 5%
+- Health Disruption: Injury/poor health 11%
+- Routine Break: Extended travel 11%
+- Professional Pivot: Changed jobs 11%, started WFH 10%, started working on-site 9% (all significantly higher than GenPop)
+
+WHAT CHANGED when disrupted:
+- The ingredients used, type of food eaten (diet changed)
+- The household grocery budget
+- Who mainly does mid-week cooking
+- When meals are cooked and eaten
+- How often they go out or get takeaways
+- Who plans meals, shops, and cooks
+
+=== SECTION 5: FROM INSIGHT TO ACTION - STRATEGIC RECOMMENDATIONS ===
+
+STRATEGIC LEVERS:
+
+1. BRAND: Double-down on "Aspirational Lifestyle Partner"
+- Elevate from "just a meal provider" to aspirational lifestyle partner
+- Enable high-output days and foster rich social lifestyle (family dinners to hosting friends)
+- Position as holistic tool for lifestyle and time optimization
+- We are the enabler of their gregarious lifestyle, not a niche diet brand
+
+2. NUTRITIONAL MESSAGING: Fuel the "Abundance" Mindset
+- Healthy eating = enrichment, NOT restriction
+- Promote abundance of fresh, nutrient-dense, balanced meals
+- Position as culinary life-hack that fuels high-output lifestyles
+- Deliver tasty and quality experience they desire
+
+3. PRODUCT: Embrace the "Penciled Structure" of Food Routines
+- Weekly framework firm enough for preparedness, flexible enough to redraw daily
+- Bridge gap between aspiration (healthy, tasty meals) and friction (busy unpredictable days)
+- Empower customers to pivot effortlessly when plans change
+
+4. PARTNERSHIPS: Enable "Newness" & Culinary Exploration
+- EIs are active explorers willing to try new trends and buy equipment to optimize
+- Passive engagement/competitions alone won't resonate
+- Partnerships should give opportunity to try/learn something new
+- Anchor with premium food brands, expand to lifestyle brands only when showing tangible "life-hack"
+
+5. MEDIA: Ensure Content Is Channel-Native to Maximize Impact
+- EIs engage more platforms than others, using it to optimize not zone out
+- While TV slots offer reach, leverage multiple digital channels for different culinary needs:
+  - Short social for visual inspiration
+  - Full-length video for deep education
+  - Audio for on-the-go intrigue
+
+6. INFLUENCERS: Partner with Relatable Culinary Authority
+- EIs are invested, not just interested. They want culinary intel from accessible authorities
+- Prioritize balance of professional skill and relatable authenticity
+- They seek "golden standard" from professionals but need "proof of concept" from relatable figures
+
+TACTICAL MOVES:
+
+1. Brand & Acquisition:
+- Establish clear brand boundaries: holistic lifestyle tool, not just fitness/diet brand
+- Dual brand strategy: consistent premium global aesthetic + diverse local cultural touchpoints
+- Capitalize on "out and about" lifestyle through experiential marketing (food festivals, makers conferences)
+- Target beyond "dinner time" pain points: capitalize on major life pivots (64% modify habits during job changes, moves)
+
+2. Overarching Media Strategy:
+- Mission 1 "Spark Inspiration": Instagram + TikTok, early morning sweet spot, short recipe videos, foodie influencers, Fun/Inspirational/Entertaining/Accessible tone
+- Mission 2 "Drive Education": YouTube, full-length instructional videos, foodie influencers + pro chefs, Informative/Aspirational/Inspirational tone
+- Mission 3 "Fuel On-the-Go": Podcasts + Audiobooks, intercept when away from screen, deliver tangible value, Entertaining/Intriguing/Inspirational tone
+
+3. Partnership & Influencers:
+- Sponsor/create 5-30 min YouTube instructional videos with professional chefs
+- Explore streaming/subscription integrations (30+ min, premium cinematic production)
+- Every collaboration must teach something new that takes their high-output day to next level
+- Leverage tech/gaming affinity for active daily interaction (not passive sweepstakes)
+- Design interactive social challenges to share relatable, attainable inspiration
+- Ideal partner: genuine culinary skill + authentic storytelling + fun to watch + diverse worldwide cuisines
+
+4. Product & Innovation:
+- Reframe specific offerings as "life-hacks" for dynamic days (15-min meals as reliable fallbacks, not just "quick")
+- Evolve app into dynamic hub, explore integration into Apple/Google ecosystems
+- Expand "fridge-raid" concept into AI assistant (stretch 2-person kit for guests, repurpose missed dinner into work lunch)
+- Target push notifications and app interventions on weekend when EIs use smartphones as mission control for weekly stock-up shops`;
+
+function renderAskEI() {
+  const container = document.getElementById('askEIView');
+  const noKey = !hasAIKey();
+
+  let html = `<div class="advisor-chat-container">`;
+  html += `<div class="advisor-chat-header">
+    <h3>Ask the EI</h3>
+    <p>Ask questions about the Efficient Inspired target audience. Grounded in the full "Behind the Screen" research deck. Try: "Will a flash sale resonate with EIs?" or "What media channels should I prioritize for this campaign?"</p>
+    ${noKey ? '<div class="ai-no-key-warning">You need to configure your Google Gemini API key before using AI features.<button onclick="openAISettings()">Configure API Key</button></div>' : ''}
+    <span class="advisor-bp-count">EI research data loaded (105 pages)</span>
+  </div>`;
+
+  html += `<div class="advisor-chat-messages" id="eiMessages">`;
+  if (eiMessages.length === 0) {
+    html += `<div class="advisor-msg system">Ask anything about the Efficient Inspired audience. I have the full research data on their demographics, media habits, food routines, shopping behaviors, and strategic recommendations.</div>`;
+  } else {
+    eiMessages.forEach(msg => {
+      html += renderEIMessage(msg);
+    });
+  }
+  html += `</div>`;
+
+  html += `<div class="advisor-chat-input-bar">
+    <input type="text" id="eiInput" placeholder="e.g. Will this campaign resonate with the EI audience?" ${noKey ? 'disabled' : ''} onkeydown="if(event.key==='Enter')sendEIMessage()">
+    <button onclick="sendEIMessage()" ${noKey ? 'disabled' : ''} id="eiSendBtn">&#10148;</button>
+  </div>`;
+
+  html += `</div>`;
+  container.innerHTML = html;
+
+  const messagesEl = document.getElementById('eiMessages');
+  if (messagesEl) messagesEl.scrollTop = messagesEl.scrollHeight;
+}
+
+function renderEIMessage(msg) {
+  if (msg.role === 'user') {
+    return `<div class="advisor-msg user">${escapeHTML(msg.text)}</div>`;
+  } else if (msg.role === 'ai') {
+    let html = `<div class="advisor-msg ai">`;
+    if (msg.verdict) {
+      const verdictClass = msg.verdict === 'STRONG FIT' ? 'go' : msg.verdict === 'PARTIAL FIT' ? 'caution' : 'stop';
+      html += `<span class="advisor-verdict ${verdictClass}">${msg.verdict}</span>`;
+    }
+    html += `<div>${msg.html || escapeHTML(msg.text)}</div>`;
+    html += `</div>`;
+    return html;
+  }
+  return '';
+}
+
+async function sendEIMessage() {
+  const input = document.getElementById('eiInput');
+  const text = input.value.trim();
+  if (!text) return;
+
+  input.value = '';
+  input.disabled = true;
+  document.getElementById('eiSendBtn').disabled = true;
+
+  eiMessages.push({ role: 'user', text });
+
+  const messagesEl = document.getElementById('eiMessages');
+  const systemMsg = messagesEl.querySelector('.advisor-msg.system');
+  if (systemMsg) systemMsg.remove();
+
+  messagesEl.innerHTML += renderEIMessage({ role: 'user', text });
+  messagesEl.innerHTML += `<div class="advisor-typing" id="eiTyping"><div class="dot-pulse"><span></span><span></span><span></span></div>Thinking...</div>`;
+  messagesEl.scrollTop = messagesEl.scrollHeight;
+
+  try {
+    const response = await callEI(text);
+    eiMessages.push({ role: 'ai', ...response });
+
+    const typing = document.getElementById('eiTyping');
+    if (typing) typing.remove();
+
+    messagesEl.innerHTML += renderEIMessage({ role: 'ai', ...response });
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+  } catch (e) {
+    const typing = document.getElementById('eiTyping');
+    if (typing) typing.remove();
+
+    messagesEl.innerHTML += `<div class="advisor-msg ai" style="border-color:#FCA5A5;background:#FEF2F2;"><strong>Error:</strong> ${escapeHTML(e.message)}</div>`;
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+  }
+
+  input.disabled = false;
+  document.getElementById('eiSendBtn').disabled = false;
+  input.focus();
+}
+
+async function callEI(question) {
+  const conversationHistory = eiMessages.slice(-8).map(m => {
+    if (m.role === 'user') return `User: ${m.text}`;
+    if (m.role === 'ai') return `EI Expert: ${m.text || ''}`;
+    return '';
+  }).filter(Boolean).join('\n');
+
+  const systemPrompt = `You are an expert on the "Efficient Inspired" (EI) consumer segment for HelloFresh. You have deep knowledge of this target audience from comprehensive global research. Your job is to answer questions about whether campaign ideas, messaging, channels, or strategies will resonate with EI consumers.
+
+EI RESEARCH DATABASE:
+${EI_RESEARCH_DATA}
+
+INSTRUCTIONS:
+- Answer the user's question directly and conversationally, grounded in the EI research data above.
+- Always cite specific data points, percentages, or behavioral insights that support your answer.
+- If asked whether something will work for the EI audience, give a clear assessment with evidence.
+- If the question is about channels or timing, reference the specific EI media behaviors and daily cadence.
+- If the question is about messaging or positioning, reference EI values, motivations, and what resonates.
+- Be specific about what makes EI different from GenPop where relevant.
+- Keep answers concise but evidence-rich.
+
+CONVERSATION HISTORY:
+${conversationHistory}
+
+Respond in this exact JSON format:
+{
+  "verdict": "STRONG FIT|PARTIAL FIT|WEAK FIT",
+  "answer": "Your main answer (2-4 sentences, conversational, cite data)",
+  "evidence": "Key data points from the research that support this (2-3 bullet points)",
+  "recommendation": "What to do or adjust to better reach the EI (1-2 sentences, or null if not needed)"
+}`;
+
+  const response = await callClaude(systemPrompt, question);
+  const parsed = JSON.parse(response);
+
+  let html = '';
+  if (parsed.verdict) {
+    const verdictClass = parsed.verdict === 'STRONG FIT' ? 'go' : parsed.verdict === 'PARTIAL FIT' ? 'caution' : 'stop';
+    html += `<span class="advisor-verdict ${verdictClass}">${parsed.verdict}</span><br>`;
+  }
+  html += `<div style="margin-bottom:6px;">${escapeHTML(parsed.answer)}</div>`;
+  if (parsed.evidence) {
+    html += `<div class="advisor-section"><div class="advisor-section-title">Evidence</div><div class="advisor-ref">${escapeHTML(parsed.evidence)}</div></div>`;
+  }
+  if (parsed.recommendation) {
+    html += `<div class="advisor-section"><div class="advisor-section-title">Recommendation</div><div style="font-size:12px;color:var(--text-secondary);">${escapeHTML(parsed.recommendation)}</div></div>`;
+  }
+
+  return { verdict: parsed.verdict, text: parsed.answer, html };
 }
 </script>
 
