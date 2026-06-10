@@ -1552,26 +1552,25 @@ body {
 .bp-cancel-btn:hover { border-color: var(--text-tertiary); }
 
 /* EXTRACT BP & AUDIT PLAN VIEWS */
-.extract-bp-view,
-.audit-plan-view {
+.ask-advisor-view {
   display: none;
 }
 
-.extract-bp-view.active,
-.audit-plan-view.active {
+.ask-advisor-view.active {
   display: flex;
   flex-direction: column;
   height: calc(100vh - 70px);
 }
 
-.ai-tool-container {
+/* AI Advisor Chat */
+.advisor-chat-container {
   max-width: 900px;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: calc(100vh - 140px);
 }
 
-.ai-tool-header {
+.advisor-chat-header {
   background: white;
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -1580,7 +1579,7 @@ body {
   box-shadow: var(--shadow-sm);
 }
 
-.ai-tool-header h3 {
+.advisor-chat-header h3 {
   font-family: var(--font-headline);
   font-size: 16px;
   font-weight: 700;
@@ -1588,249 +1587,205 @@ body {
   margin-bottom: 4px;
 }
 
-.ai-tool-header p {
+.advisor-chat-header p {
   font-size: 12px;
   color: var(--text-secondary);
   line-height: 1.5;
 }
 
-.ai-tool-upload {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-top: 14px;
-  padding-top: 14px;
-  border-top: 1px solid var(--border-light);
-  flex-wrap: wrap;
-}
-
-.ai-tool-upload-btn {
-  padding: 8px 16px;
-  background: var(--brand-green);
-  color: white;
-  border: none;
-  border-radius: var(--radius-sm);
-  font-size: 12px;
-  font-weight: 600;
-  font-family: var(--font-body);
-  cursor: pointer;
-  transition: background 0.15s;
-}
-
-.ai-tool-upload-btn:hover {
-  background: var(--brand-green-dark);
-}
-
-.ai-tool-upload-btn:disabled {
-  background: var(--border);
-  cursor: not-allowed;
-}
-
-.ai-tool-upload-status {
+.advisor-chat-header .advisor-bp-count {
+  display: inline-block;
+  margin-top: 8px;
   font-size: 11px;
-  color: var(--text-tertiary);
-}
-
-.ai-tool-upload-status.loaded {
-  color: var(--brand-green);
   font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 12px;
+  background: var(--brand-green-light);
+  color: var(--brand-green);
 }
 
-.ai-tool-results {
+.advisor-chat-messages {
   flex: 1;
   overflow-y: auto;
   background: white;
   border: 1px solid var(--border);
-  border-radius: var(--radius);
+  border-radius: var(--radius) var(--radius) 0 0;
   box-shadow: var(--shadow-sm);
-}
-
-.ai-tool-results-inner {
-  padding: 20px 24px;
-}
-
-.ai-tool-empty {
+  padding: 24px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 60px 24px;
-  color: var(--text-tertiary);
-  text-align: center;
+  gap: 16px;
 }
 
-.ai-tool-empty .empty-icon {
-  font-size: 36px;
-  margin-bottom: 12px;
-  opacity: 0.5;
-}
-
-.ai-tool-empty p {
-  font-size: 13px;
-  max-width: 400px;
-  line-height: 1.5;
-}
-
-.ai-loading {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 20px 24px;
-  font-size: 13px;
-  color: var(--text-secondary);
-}
-
-.ai-loading .spinner {
-  width: 18px;
-  height: 18px;
-  border: 2px solid var(--border);
-  border-top-color: var(--brand-green);
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-.ai-result-card {
-  border: 1px solid var(--border-light);
-  border-radius: var(--radius-sm);
-  margin-bottom: 12px;
-  overflow: hidden;
-}
-
-.ai-result-card-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+.advisor-msg {
+  max-width: 85%;
   padding: 12px 16px;
-  background: var(--bg-cream);
-  border-bottom: 1px solid var(--border-light);
-}
-
-.ai-result-channel-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-.ai-result-channel-name {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--text-primary);
-}
-
-.ai-result-save-btn {
-  margin-left: auto;
-  padding: 4px 10px;
-  background: var(--brand-green-light);
-  color: var(--brand-green);
-  border: 1px solid var(--brand-green);
-  border-radius: 6px;
-  font-size: 10px;
-  font-weight: 600;
-  font-family: var(--font-body);
-  cursor: pointer;
-  transition: all 0.12s;
-}
-
-.ai-result-save-btn:hover {
-  background: var(--brand-green);
-  color: white;
-}
-
-.ai-result-save-btn.saved {
-  background: var(--brand-green);
-  color: white;
-  pointer-events: none;
-}
-
-.ai-result-body {
-  padding: 12px 16px;
-}
-
-.ai-result-title {
+  border-radius: 12px;
   font-size: 13px;
-  font-weight: 600;
-  color: var(--text-primary);
-  margin-bottom: 4px;
-}
-
-.ai-result-content {
-  font-size: 12px;
-  color: var(--text-secondary);
   line-height: 1.6;
+  animation: msgFadeIn 0.2s ease;
+}
+
+@keyframes msgFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.advisor-msg.user {
+  align-self: flex-end;
+  background: var(--brand-green);
+  color: white;
+  border-bottom-right-radius: 4px;
+}
+
+.advisor-msg.ai {
+  align-self: flex-start;
+  background: var(--bg-cream);
+  color: var(--text-primary);
+  border-bottom-left-radius: 4px;
+  border: 1px solid var(--border-light);
+}
+
+.advisor-msg.ai .advisor-verdict {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 4px;
   margin-bottom: 8px;
 }
 
-.ai-result-reference {
-  font-size: 11px;
-  color: var(--text-tertiary);
-  padding: 6px 10px;
-  background: #F8FAFC;
-  border-radius: 4px;
-  border-left: 3px solid var(--brand-green);
-}
-
-.ai-result-reference strong {
-  color: var(--text-secondary);
-}
-
-/* Audit-specific */
-.audit-flag {
-  border-left: 4px solid;
-  padding: 12px 16px;
-  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-  margin-bottom: 12px;
-  background: white;
-  border-color: var(--border);
-}
-
-.audit-flag.warning {
-  border-color: #F59E0B;
-  background: #FFFBEB;
-}
-
-.audit-flag.info {
-  border-color: #2563EB;
-  background: #EFF6FF;
-}
-
-.audit-flag.success {
-  border-color: #10B981;
+.advisor-msg.ai .advisor-verdict.go {
   background: #ECFDF5;
+  color: #065F46;
 }
 
-.audit-flag-header {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+.advisor-msg.ai .advisor-verdict.caution {
+  background: #FFFBEB;
+  color: #92400E;
+}
+
+.advisor-msg.ai .advisor-verdict.stop {
+  background: #FEF2F2;
+  color: #991B1B;
+}
+
+.advisor-msg.ai .advisor-section {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border-light);
+}
+
+.advisor-msg.ai .advisor-section-title {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  color: var(--text-tertiary);
   margin-bottom: 4px;
 }
 
-.audit-flag-icon {
-  font-size: 14px;
-}
-
-.audit-flag-title {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text-primary);
-}
-
-.audit-flag-content {
-  font-size: 12px;
-  color: var(--text-secondary);
-  line-height: 1.5;
-  margin-bottom: 6px;
-}
-
-.audit-flag-reference {
+.advisor-msg.ai .advisor-ref {
   font-size: 11px;
   color: var(--text-tertiary);
   font-style: italic;
+  margin-top: 6px;
+}
+
+.advisor-msg.system {
+  align-self: center;
+  background: transparent;
+  color: var(--text-tertiary);
+  font-size: 12px;
+  text-align: center;
+  padding: 8px;
+}
+
+.advisor-chat-input-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background: white;
+  border: 1px solid var(--border);
+  border-top: none;
+  border-radius: 0 0 var(--radius) var(--radius);
+  box-shadow: var(--shadow-sm);
+}
+
+.advisor-chat-input-bar input {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 20px;
+  font-size: 13px;
+  font-family: var(--font-body);
+  transition: border 0.15s;
+}
+
+.advisor-chat-input-bar input:focus {
+  outline: none;
+  border-color: var(--brand-green);
+}
+
+.advisor-chat-input-bar button {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: var(--brand-green);
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
+
+.advisor-chat-input-bar button:hover {
+  background: var(--brand-green-dark);
+}
+
+.advisor-chat-input-bar button:disabled {
+  background: var(--border);
+  cursor: not-allowed;
+}
+
+.advisor-typing {
+  align-self: flex-start;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  background: var(--bg-cream);
+  border-radius: 12px;
+  border-bottom-left-radius: 4px;
+  border: 1px solid var(--border-light);
+  font-size: 12px;
+  color: var(--text-tertiary);
+}
+
+.advisor-typing .dot-pulse {
+  display: flex;
+  gap: 3px;
+}
+
+.advisor-typing .dot-pulse span {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--text-tertiary);
+  animation: dotBounce 1.2s infinite;
+}
+
+.advisor-typing .dot-pulse span:nth-child(2) { animation-delay: 0.2s; }
+.advisor-typing .dot-pulse span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes dotBounce {
+  0%, 60%, 100% { opacity: 0.3; transform: translateY(0); }
+  30% { opacity: 1; transform: translateY(-3px); }
 }
 
 /* AI Settings Modal */
@@ -4046,13 +4001,9 @@ body {
       </div>
       <div class="sidebar-divider"></div>
       <div class="sidebar-section-label">AI Tools</div>
-      <div class="sidebar-item" data-sidebar="extract-bp" onclick="sidebarNav('extract-bp')">
-        <span class="sidebar-icon">&#9889;</span>
-        <span class="sidebar-label">Extract Learnings</span>
-      </div>
-      <div class="sidebar-item" data-sidebar="audit-plan" onclick="sidebarNav('audit-plan')">
-        <span class="sidebar-icon">&#128269;</span>
-        <span class="sidebar-label">Audit Plan</span>
+      <div class="sidebar-item" data-sidebar="ask-advisor" onclick="sidebarNav('ask-advisor')">
+        <span class="sidebar-icon">&#128172;</span>
+        <span class="sidebar-label">Ask Advisor</span>
       </div>
       <div class="sidebar-divider"></div>
       <div class="sidebar-section-label">Knowledge Base</div>
@@ -4185,8 +4136,7 @@ body {
     <div class="crm-view" id="crmView"></div>
     <div class="leadership-view" id="leadershipView"></div>
     <div class="markets-view" id="marketsView"></div>
-    <div class="extract-bp-view" id="extractBPView"></div>
-    <div class="audit-plan-view" id="auditPlanView"></div>
+    <div class="ask-advisor-view" id="askAdvisorView"></div>
     <div class="best-practices-view" id="bestPracticesView"></div>
     <div class="campaigns-view" id="campaignsView"></div>
   </div>
@@ -4538,8 +4488,7 @@ function sidebarNav(mode, view) {
     'leadership': 'Leadership Roadmap',
     'markets': 'Local Markets',
     'campaigns': 'Campaigns',
-    'extract-bp': 'Extract Learnings',
-    'audit-plan': 'Audit Plan',
+    'ask-advisor': 'Ask Advisor',
     'best-practices': 'Best Practices'
   };
   document.getElementById('pageTitle').textContent = titles[mode] || 'Product Marketing Hub';
@@ -4587,8 +4536,7 @@ function setMode(mode) {
   document.getElementById('crmView').classList.remove('active');
   document.getElementById('leadershipView').classList.remove('active');
   document.getElementById('marketsView').classList.remove('active');
-  document.getElementById('extractBPView').classList.remove('active');
-  document.getElementById('auditPlanView').classList.remove('active');
+  document.getElementById('askAdvisorView').classList.remove('active');
   document.getElementById('bestPracticesView').classList.remove('active');
   document.getElementById('campaignsView').classList.remove('active');
   document.getElementById('yearView').classList.remove('active');
@@ -4621,16 +4569,11 @@ function setMode(mode) {
     marketingOnlyEls.forEach(el => { if (el) el.style.display = 'none'; });
     navButtons.forEach(b => b.style.display = 'none');
     document.getElementById('marketsView').classList.add('active');
-  } else if (mode === 'extract-bp') {
+  } else if (mode === 'ask-advisor') {
     marketingOnlyEls.forEach(el => { if (el) el.style.display = 'none'; });
     navButtons.forEach(b => b.style.display = 'none');
-    document.getElementById('extractBPView').classList.add('active');
-    renderExtractBP();
-  } else if (mode === 'audit-plan') {
-    marketingOnlyEls.forEach(el => { if (el) el.style.display = 'none'; });
-    navButtons.forEach(b => b.style.display = 'none');
-    document.getElementById('auditPlanView').classList.add('active');
-    renderAuditPlan();
+    document.getElementById('askAdvisorView').classList.add('active');
+    renderAskAdvisor();
   } else if (mode === 'best-practices') {
     marketingOnlyEls.forEach(el => { if (el) el.style.display = 'none'; });
     navButtons.forEach(b => b.style.display = 'none');
@@ -4880,12 +4823,8 @@ function updateNavLabel() {
     label.textContent = 'Market View';
     return;
   }
-  if (currentMode === 'extract-bp') {
-    label.textContent = 'Extract Learnings';
-    return;
-  }
-  if (currentMode === 'audit-plan') {
-    label.textContent = 'Audit Plan';
+  if (currentMode === 'ask-advisor') {
+    label.textContent = 'Ask Advisor';
     return;
   }
   if (currentMode === 'best-practices') {
@@ -7682,257 +7621,108 @@ async function callClaude(systemPrompt, userMessage, imageData) {
   return textParts.join('\n');
 }
 
-// ─── EXTRACT BEST PRACTICES ────────────────────────────────────────
+// ─── ASK ADVISOR (CHAT-BASED BEST PRACTICES Q&A) ──────────────────
 
-function renderExtractBP() {
-  const container = document.getElementById('extractBPView');
-  const noKey = !hasAIKey();
+let advisorMessages = [];
 
-  let html = `<div class="ai-tool-container">`;
-  html += `<div class="ai-tool-header">
-    <h3>Extract Learnings</h3>
-    <p>Upload your campaign results (any format, including screenshots) and AI will extract best practices for each channel, referencing specific campaigns that demonstrated them.</p>
-    ${noKey ? '<div class="ai-no-key-warning">You need to configure your Google Gemini API key before using AI features.<button onclick="openAISettings()">Configure API Key</button></div>' : ''}
-    <div class="ai-tool-upload">
-      <button class="ai-tool-upload-btn" onclick="document.getElementById('extractFileInput').click()" ${noKey ? 'disabled' : ''}>Upload Results</button>
-      <button class="ai-tool-upload-btn" onclick="extractFromCalendar()" style="background:white;color:var(--brand-green);border:1px solid var(--brand-green);" ${noKey ? 'disabled' : ''}>Analyze Calendar Data</button>
-      <input type="file" id="extractFileInput" accept=".csv,.json,.tsv,.txt,.md,.pdf,.png,.jpg,.jpeg,.gif,.webp" style="display:none;" onchange="handleExtractUpload(event)">
-      <span class="ai-tool-upload-status" id="extractStatus"></span>
-    </div>
-  </div>`;
-
-  html += `<div class="ai-tool-results"><div class="ai-tool-results-inner" id="extractResults">`;
-  html += `<div class="ai-tool-empty"><span class="empty-icon">&#9889;</span><p>Upload campaign results to extract channel-specific best practices. The AI will analyze performance patterns and create actionable learnings.</p></div>`;
-  html += `</div></div>`;
-  html += `</div>`;
-  container.innerHTML = html;
-}
-
-async function handleExtractUpload(event) {
-  const file = event.target.files[0];
-  if (!file) return;
-
-  document.getElementById('extractStatus').textContent = 'Reading file...';
-  document.getElementById('extractStatus').className = 'ai-tool-upload-status loaded';
-
-  const ext = file.name.split('.').pop().toLowerCase();
-  const imageExts = ['png', 'jpg', 'jpeg', 'gif', 'webp'];
-
-  if (imageExts.includes(ext)) {
-    try {
-      const arrayBuffer = await file.arrayBuffer();
-      const base64 = btoa(new Uint8Array(arrayBuffer).reduce((data, byte) => data + String.fromCharCode(byte), ''));
-      const mimeType = file.type || `image/${ext === 'jpg' ? 'jpeg' : ext}`;
-      runExtraction('Analyze the uploaded image for campaign results, metrics, performance data, or learnings.', file.name, { base64, mimeType });
-    } catch (e) {
-      document.getElementById('extractStatus').textContent = 'Failed to read image';
-    }
-    return;
-  }
-
-  let text = '';
-
-  if (ext === 'pdf') {
-    try {
-      const arrayBuffer = await file.arrayBuffer();
-      pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-      const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
-      const pages = [];
-      for (let i = 1; i <= pdf.numPages; i++) {
-        const page = await pdf.getPage(i);
-        const content = await page.getTextContent();
-        pages.push(content.items.map(item => item.str).join(' '));
-      }
-      text = pages.join('\n\n');
-    } catch (e) {
-      document.getElementById('extractStatus').textContent = 'Failed to read PDF';
-      return;
-    }
-  } else {
-    text = await file.text();
-  }
-
-  runExtraction(text, file.name);
-}
-
-async function extractFromCalendar() {
-  if (!calendarData) return;
-  let text = 'Campaign Calendar Data:\n\n';
-  calendarData.initiatives.forEach(init => {
-    text += `Initiative: ${init.name} (POC: ${init.poc})\nObjective: ${init.objective}\n`;
-    init.entries.forEach(e => {
-      text += `  - ${e.date}${e.endDate ? ' to ' + e.endDate : ''} | ${e.channel}/${e.subchannel || ''} | "${e.text}" | Status: ${e.status} | Owner: ${e.owner} | Markets: ${(e.markets||[]).join(',')} | Notes: ${e.notes || ''}\n`;
-    });
-    text += '\n';
-  });
-  runExtraction(text, 'Calendar Data');
-}
-
-async function runExtraction(text, sourceName, imageData) {
-  const resultsEl = document.getElementById('extractResults');
-  resultsEl.innerHTML = `<div class="ai-loading"><div class="spinner"></div>Analyzing campaign results and extracting best practices...</div>`;
-  document.getElementById('extractStatus').textContent = `Analyzing: ${sourceName}`;
-
-  const calendarContext = getCalendarContext();
-
-  const systemPrompt = `You are a marketing analytics expert analyzing campaign results to extract actionable best practices.
-
-You have access to the team's campaign calendar for cross-referencing:
-${calendarContext}
-
-Your task: Analyze the uploaded campaign results and extract specific, actionable best practices organized by marketing channel.
-
-For each best practice, provide:
-1. A clear title
-2. The specific learning/recommendation
-3. Reference the specific campaign(s) that demonstrated this (include dates, metrics if available)
-
-Respond in this exact JSON format:
-{
-  "practices": [
-    {
-      "channel": "atl|paid-social|display-video|seo-sea|crm-actives|crm-reactivations|crm-referrals|crm-activations|affiliate|app|landing-pages|general",
-      "title": "Short descriptive title",
-      "content": "The specific best practice recommendation with details",
-      "reference": "Campaign name, date, and key metric that supports this"
-    }
-  ]
-}
-
-Focus on actionable insights. Be specific with numbers and campaign names. Identify patterns across campaigns. Include warnings about what NOT to do as well as what works.`;
-
-  try {
-    const response = await callClaude(systemPrompt, `Here are the campaign results to analyze:\n\nSource: ${sourceName}\n\n${text.substring(0, 12000)}`, imageData);
-    const parsed = JSON.parse(response);
-    renderExtractionResults(parsed.practices, sourceName);
-  } catch (e) {
-    resultsEl.innerHTML = `<div style="padding:20px;color:#DC2626;font-size:13px;"><strong>Error:</strong> ${escapeHTML(e.message)}</div>`;
-    document.getElementById('extractStatus').textContent = 'Error';
-  }
-}
-
-function renderExtractionResults(practices, sourceName) {
-  const resultsEl = document.getElementById('extractResults');
-  const channelColors = {};
-  const channelNames = {};
-  BP_CHANNELS.forEach(ch => { channelColors[ch.id] = ch.color; channelNames[ch.id] = ch.name; });
-
-  let html = `<div style="margin-bottom:16px;font-size:12px;color:var(--text-secondary);">Extracted <strong>${practices.length}</strong> best practices from <strong>${escapeHTML(sourceName)}</strong></div>`;
-
-  practices.forEach((p, idx) => {
-    const color = channelColors[p.channel] || '#64748B';
-    const name = channelNames[p.channel] || p.channel;
-    html += `<div class="ai-result-card">
-      <div class="ai-result-card-header">
-        <span class="ai-result-channel-dot" style="background:${color}"></span>
-        <span class="ai-result-channel-name">${name}</span>
-        <button class="ai-result-save-btn" id="save-extract-${idx}" onclick="saveExtractedBP(${idx})">Save to Best Practices</button>
-      </div>
-      <div class="ai-result-body">
-        <div class="ai-result-title">${escapeHTML(p.title)}</div>
-        <div class="ai-result-content">${escapeHTML(p.content)}</div>
-        ${p.reference ? `<div class="ai-result-reference"><strong>Evidence:</strong> ${escapeHTML(p.reference)}</div>` : ''}
-      </div>
-    </div>`;
-  });
-
-  resultsEl.innerHTML = html;
-  window._extractedPractices = practices;
-  document.getElementById('extractStatus').textContent = `${practices.length} practices extracted`;
-}
-
-function saveExtractedBP(idx) {
-  const p = window._extractedPractices[idx];
-  if (!p) return;
-  const content = p.content + (p.reference ? '\n\nEvidence: ' + p.reference : '');
-  addBestPractice(p.channel, p.title, content, 'AI Extraction');
-  const btn = document.getElementById('save-extract-' + idx);
-  if (btn) { btn.textContent = 'Saved'; btn.classList.add('saved'); }
-}
-
-// ─── AUDIT CAMPAIGN PLAN ───────────────────────────────────────────
-
-function renderAuditPlan() {
-  const container = document.getElementById('auditPlanView');
+function renderAskAdvisor() {
+  const container = document.getElementById('askAdvisorView');
   const noKey = !hasAIKey();
   const bp = getBestPractices();
   const bpCount = Object.values(bp).reduce((sum, arr) => sum + arr.length, 0);
 
-  let html = `<div class="ai-tool-container">`;
-  html += `<div class="ai-tool-header">
-    <h3>Audit Campaign Plan</h3>
-    <p>Upload a campaign plan and AI will check it against your stored best practices and calendar history. It will flag potential issues and suggest improvements with specific references.</p>
+  let html = `<div class="advisor-chat-container">`;
+  html += `<div class="advisor-chat-header">
+    <h3>Ask Advisor</h3>
+    <p>Ask questions about your campaign plans and get answers grounded in your team's best practices. Try: "I want to run a flash sale on paid social next week, will that work?"</p>
     ${noKey ? '<div class="ai-no-key-warning">You need to configure your Google Gemini API key before using AI features.<button onclick="openAISettings()">Configure API Key</button></div>' : ''}
-    <div class="ai-tool-upload">
-      <button class="ai-tool-upload-btn" onclick="document.getElementById('auditFileInput').click()" ${noKey ? 'disabled' : ''}>Upload Plan</button>
-      <input type="file" id="auditFileInput" accept=".csv,.json,.tsv,.txt,.md,.pdf,.png,.jpg,.jpeg,.gif,.webp" style="display:none;" onchange="handleAuditUpload(event)">
-      <span class="ai-tool-upload-status" id="auditStatus">${bpCount > 0 ? bpCount + ' best practices loaded for reference' : 'No best practices stored yet. Extract some first!'}</span>
-    </div>
+    ${bpCount > 0 ? `<span class="advisor-bp-count">${bpCount} best practices loaded as context</span>` : '<span class="advisor-bp-count" style="background:#FEF2F2;color:#991B1B;">No best practices stored yet. Extract some first for better answers.</span>'}
   </div>`;
 
-  html += `<div class="ai-tool-results"><div class="ai-tool-results-inner" id="auditResults">`;
-  html += `<div class="ai-tool-empty"><span class="empty-icon">&#128269;</span><p>Upload a campaign plan to audit it against your best practices and historical calendar data. The AI will highlight potential issues, opportunities, and conflicts.</p></div>`;
-  html += `</div></div>`;
+  html += `<div class="advisor-chat-messages" id="advisorMessages">`;
+  if (advisorMessages.length === 0) {
+    html += `<div class="advisor-msg system">Ask anything about campaign strategy. The advisor will reference your stored best practices and calendar history.</div>`;
+  } else {
+    advisorMessages.forEach(msg => {
+      html += renderAdvisorMessage(msg);
+    });
+  }
+  html += `</div>`;
+
+  html += `<div class="advisor-chat-input-bar">
+    <input type="text" id="advisorInput" placeholder="e.g. Can I run a discount campaign on paid social next week?" ${noKey ? 'disabled' : ''} onkeydown="if(event.key==='Enter')sendAdvisorMessage()">
+    <button onclick="sendAdvisorMessage()" ${noKey ? 'disabled' : ''} id="advisorSendBtn">&#10148;</button>
+  </div>`;
+
   html += `</div>`;
   container.innerHTML = html;
+
+  const messagesEl = document.getElementById('advisorMessages');
+  if (messagesEl) messagesEl.scrollTop = messagesEl.scrollHeight;
 }
 
-async function handleAuditUpload(event) {
-  const file = event.target.files[0];
-  if (!file) return;
-
-  document.getElementById('auditStatus').textContent = 'Reading plan...';
-  document.getElementById('auditStatus').className = 'ai-tool-upload-status loaded';
-
-  const ext = file.name.split('.').pop().toLowerCase();
-  const imageExts = ['png', 'jpg', 'jpeg', 'gif', 'webp'];
-
-  if (imageExts.includes(ext)) {
-    try {
-      const arrayBuffer = await file.arrayBuffer();
-      const base64 = btoa(new Uint8Array(arrayBuffer).reduce((data, byte) => data + String.fromCharCode(byte), ''));
-      const mimeType = file.type || `image/${ext === 'jpg' ? 'jpeg' : ext}`;
-      runAudit('Analyze the uploaded image of this campaign plan.', file.name, { base64, mimeType });
-    } catch (e) {
-      document.getElementById('auditStatus').textContent = 'Failed to read image';
+function renderAdvisorMessage(msg) {
+  if (msg.role === 'user') {
+    return `<div class="advisor-msg user">${escapeHTML(msg.text)}</div>`;
+  } else if (msg.role === 'ai') {
+    let html = `<div class="advisor-msg ai">`;
+    if (msg.verdict) {
+      const verdictClass = msg.verdict === 'GO' ? 'go' : msg.verdict === 'CAUTION' ? 'caution' : 'stop';
+      html += `<span class="advisor-verdict ${verdictClass}">${msg.verdict}</span>`;
     }
-    return;
+    html += `<div>${msg.html || escapeHTML(msg.text)}</div>`;
+    html += `</div>`;
+    return html;
   }
-
-  let text = '';
-
-  if (ext === 'pdf') {
-    try {
-      const arrayBuffer = await file.arrayBuffer();
-      pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-      const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
-      const pages = [];
-      for (let i = 1; i <= pdf.numPages; i++) {
-        const page = await pdf.getPage(i);
-        const content = await page.getTextContent();
-        pages.push(content.items.map(item => item.str).join(' '));
-      }
-      text = pages.join('\n\n');
-    } catch (e) {
-      document.getElementById('auditStatus').textContent = 'Failed to read PDF';
-      return;
-    }
-  } else {
-    text = await file.text();
-  }
-
-  runAudit(text, file.name);
+  return '';
 }
 
-async function runAudit(text, planName, imageData) {
-  const resultsEl = document.getElementById('auditResults');
-  resultsEl.innerHTML = `<div class="ai-loading"><div class="spinner"></div>Auditing campaign plan against best practices and calendar history...</div>`;
-  document.getElementById('auditStatus').textContent = `Auditing: ${planName}`;
+async function sendAdvisorMessage() {
+  const input = document.getElementById('advisorInput');
+  const text = input.value.trim();
+  if (!text) return;
 
+  input.value = '';
+  input.disabled = true;
+  document.getElementById('advisorSendBtn').disabled = true;
+
+  advisorMessages.push({ role: 'user', text });
+
+  const messagesEl = document.getElementById('advisorMessages');
+  const systemMsg = messagesEl.querySelector('.advisor-msg.system');
+  if (systemMsg) systemMsg.remove();
+
+  messagesEl.innerHTML += renderAdvisorMessage({ role: 'user', text });
+  messagesEl.innerHTML += `<div class="advisor-typing" id="advisorTyping"><div class="dot-pulse"><span></span><span></span><span></span></div>Thinking...</div>`;
+  messagesEl.scrollTop = messagesEl.scrollHeight;
+
+  try {
+    const response = await callAdvisor(text);
+    advisorMessages.push({ role: 'ai', ...response });
+
+    const typing = document.getElementById('advisorTyping');
+    if (typing) typing.remove();
+
+    messagesEl.innerHTML += renderAdvisorMessage({ role: 'ai', ...response });
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+  } catch (e) {
+    const typing = document.getElementById('advisorTyping');
+    if (typing) typing.remove();
+
+    messagesEl.innerHTML += `<div class="advisor-msg ai" style="border-color:#FCA5A5;background:#FEF2F2;"><strong>Error:</strong> ${escapeHTML(e.message)}</div>`;
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+  }
+
+  input.disabled = false;
+  document.getElementById('advisorSendBtn').disabled = false;
+  input.focus();
+}
+
+async function callAdvisor(question) {
   const bp = getBestPractices();
   const calendarContext = getCalendarContext();
 
-  let bpContext = 'Team Best Practices:\n\n';
+  let bpContext = '';
   Object.entries(bp).forEach(([channel, entries]) => {
     if (entries.length > 0) {
       bpContext += `[${channel.toUpperCase()}]\n`;
@@ -7943,86 +7733,56 @@ async function runAudit(text, planName, imageData) {
     }
   });
 
-  const systemPrompt = `You are a marketing strategy auditor reviewing a campaign plan against established best practices and historical data.
+  const conversationHistory = advisorMessages.slice(-8).map(m => {
+    if (m.role === 'user') return `User: ${m.text}`;
+    if (m.role === 'ai') return `Advisor: ${m.text || ''}`;
+    return '';
+  }).filter(Boolean).join('\n');
 
-Here are the team's stored best practices:
-${bpContext}
+  const systemPrompt = `You are a marketing campaign advisor for a product marketing team. Your job is to answer questions about whether campaign ideas will work, based on the team's stored best practices and calendar history.
 
-Here is the team's campaign calendar history for context:
+BEST PRACTICES DATABASE:
+${bpContext || '(No best practices stored yet. Give general marketing advice.)'}
+
+CAMPAIGN CALENDAR CONTEXT:
 ${calendarContext}
 
-Your task: Review the uploaded campaign plan and identify:
-1. WARNINGS: Things that conflict with best practices or historical learnings (e.g. too many pushes in a short window, missing channels, timing conflicts)
-2. RECOMMENDATIONS: Suggestions based on what has worked before
-3. GOOD: Things the plan does well based on best practices
+INSTRUCTIONS:
+- Answer the user's question directly and conversationally.
+- Ground your answer in the specific best practices above. Cite which best practice supports your point.
+- If the question is about a specific channel, focus on best practices for that channel.
+- Give a clear verdict: will this work, will it need adjustment, or should they avoid it?
+- Be concise but specific. Mention timing conflicts, frequency issues, or opportunities from the calendar.
+- If the best practices don't cover the topic, say so honestly and give your best general advice.
 
-For each flag, reference the specific best practice or historical campaign that supports your point.
+CONVERSATION HISTORY:
+${conversationHistory}
 
 Respond in this exact JSON format:
 {
-  "flags": [
-    {
-      "type": "warning|info|success",
-      "title": "Short issue/recommendation title",
-      "content": "Detailed explanation of the issue or recommendation",
-      "reference": "The specific best practice or campaign that supports this (with dates/metrics if possible)"
-    }
-  ],
-  "summary": "1-2 sentence overall assessment"
-}
+  "verdict": "GO|CAUTION|STOP",
+  "answer": "Your main answer (2-4 sentences, conversational)",
+  "reasoning": "Brief explanation of which best practices support this (1-2 sentences)",
+  "suggestion": "Optional: what they should do instead or additionally (1 sentence, or null if not needed)"
+}`;
 
-Be specific and actionable. Reference real data from the best practices and calendar history.`;
-
-  try {
-    const response = await callClaude(systemPrompt, `Here is the campaign plan to audit:\n\nPlan: ${planName}\n\n${text.substring(0, 12000)}`, imageData);
-    const parsed = JSON.parse(response);
-    renderAuditResults(parsed, planName);
-  } catch (e) {
-    resultsEl.innerHTML = `<div style="padding:20px;color:#DC2626;font-size:13px;"><strong>Error:</strong> ${escapeHTML(e.message)}</div>`;
-    document.getElementById('auditStatus').textContent = 'Error';
-  }
-}
-
-function renderAuditResults(result, planName) {
-  const resultsEl = document.getElementById('auditResults');
-  const flags = result.flags || [];
-  const icons = { warning: '&#9888;', info: '&#128161;', success: '&#10003;' };
+  const response = await callClaude(systemPrompt, question);
+  const parsed = JSON.parse(response);
 
   let html = '';
-  if (result.summary) {
-    html += `<div style="margin-bottom:16px;padding:12px 16px;background:var(--bg-cream);border-radius:var(--radius-sm);font-size:13px;color:var(--text-primary);line-height:1.5;"><strong>Summary:</strong> ${escapeHTML(result.summary)}</div>`;
+  if (parsed.verdict) {
+    const verdictClass = parsed.verdict === 'GO' ? 'go' : parsed.verdict === 'CAUTION' ? 'caution' : 'stop';
+    html += `<span class="advisor-verdict ${verdictClass}">${parsed.verdict}</span><br>`;
+  }
+  html += `<div style="margin-bottom:6px;">${escapeHTML(parsed.answer)}</div>`;
+  if (parsed.reasoning) {
+    html += `<div class="advisor-section"><div class="advisor-section-title">Based on</div><div class="advisor-ref">${escapeHTML(parsed.reasoning)}</div></div>`;
+  }
+  if (parsed.suggestion) {
+    html += `<div class="advisor-section"><div class="advisor-section-title">Suggestion</div><div style="font-size:12px;color:var(--text-secondary);">${escapeHTML(parsed.suggestion)}</div></div>`;
   }
 
-  const warnings = flags.filter(f => f.type === 'warning');
-  const infos = flags.filter(f => f.type === 'info');
-  const successes = flags.filter(f => f.type === 'success');
-
-  if (warnings.length > 0) {
-    html += `<div style="font-size:12px;font-weight:600;color:#92400E;margin:12px 0 8px;">&#9888; Warnings (${warnings.length})</div>`;
-    warnings.forEach(f => { html += renderAuditFlag(f, icons); });
-  }
-  if (infos.length > 0) {
-    html += `<div style="font-size:12px;font-weight:600;color:#1E40AF;margin:12px 0 8px;">&#128161; Recommendations (${infos.length})</div>`;
-    infos.forEach(f => { html += renderAuditFlag(f, icons); });
-  }
-  if (successes.length > 0) {
-    html += `<div style="font-size:12px;font-weight:600;color:#065F46;margin:12px 0 8px;">&#10003; Good (${successes.length})</div>`;
-    successes.forEach(f => { html += renderAuditFlag(f, icons); });
-  }
-
-  resultsEl.innerHTML = html;
-  document.getElementById('auditStatus').textContent = `${flags.length} findings for ${planName}`;
-}
-
-function renderAuditFlag(flag, icons) {
-  return `<div class="audit-flag ${flag.type}">
-    <div class="audit-flag-header">
-      <span class="audit-flag-icon">${icons[flag.type] || ''}</span>
-      <span class="audit-flag-title">${escapeHTML(flag.title)}</span>
-    </div>
-    <div class="audit-flag-content">${escapeHTML(flag.content)}</div>
-    ${flag.reference ? `<div class="audit-flag-reference">${escapeHTML(flag.reference)}</div>` : ''}
-  </div>`;
+  return { verdict: parsed.verdict, text: parsed.answer, html };
 }
 
 // Helper: build calendar context string for AI prompts
