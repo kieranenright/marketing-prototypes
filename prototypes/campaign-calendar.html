@@ -4007,50 +4007,9 @@ body {
   display: block;
 }
 
-/* PDF EXPORT */
-.pdf-export-btn {
-  padding: 6px 12px;
-  border: 1px solid var(--brand-green);
-  border-radius: var(--radius-sm);
-  background: var(--brand-green-light);
-  color: var(--brand-green);
-  font-size: 11px;
-  font-weight: 600;
-  font-family: var(--font-body);
-  cursor: pointer;
-  transition: all 0.15s;
-  box-shadow: var(--shadow-sm);
-}
-
-.pdf-export-btn:hover {
-  background: var(--brand-green);
-  color: white;
-}
-
-.pdf-export-btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.pdf-export-btn .spinner {
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  border: 2px solid currentColor;
-  border-top-color: transparent;
-  border-radius: 50%;
-  animation: spin 0.6s linear infinite;
-  margin-right: 4px;
-  vertical-align: middle;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
 @media print {
   .sidebar, .top-bar, .controls-bar, .shortcuts-badge, .shortcuts-panel,
-  .legend-container, .pdf-export-btn, .export-btns { display: none !important; }
+  .legend-container, .export-btns { display: none !important; }
   .app.active { display: block !important; }
   .app-main { margin: 0 !important; padding: 0 !important; }
   .calendar-content { padding: 0 !important; }
@@ -4235,7 +4194,6 @@ body {
         <div class="export-btns">
           <button class="export-btn" onclick="exportJSON()">JSON</button>
           <button class="export-btn" onclick="exportCSV()">CSV</button>
-          <button class="pdf-export-btn" onclick="exportPDF()">PDF</button>
           <button class="export-btn import-btn" id="importBtn" onclick="document.getElementById('csvFileInput').click()" style="display:none;">Import CSV</button>
           <input type="file" id="csvFileInput" accept=".csv" style="display:none;" onchange="handleCSVImport(event)">
         </div>
@@ -4394,7 +4352,6 @@ body {
   <div class="shortcut-row"><span>Month view</span><span class="shortcut-key">3</span></div>
   <div class="shortcut-row"><span>New entry</span><span class="shortcut-key">N</span></div>
   <div class="shortcut-row"><span>Search</span><span class="shortcut-key">/</span></div>
-  <div class="shortcut-row"><span>Export PDF</span><span class="shortcut-key">P</span></div>
 </div>
 
 <script>
@@ -6927,7 +6884,6 @@ document.addEventListener('keydown', (e) => {
     case '3': setView('month'); break;
     case 'n': case 'N': if (isEditor) openNewEntryForm(); break;
     case '/': e.preventDefault(); document.getElementById('searchInput').focus(); break;
-    case 'p': case 'P': exportPDF(); break;
   }
 });
 
@@ -7175,80 +7131,6 @@ function initDragAndDrop() {
   });
 }
 
-// ─── PDF EXPORT ────────────────────────────────────────────────────
-
-function exportPDF() {
-  const btn = document.querySelector('.pdf-export-btn');
-  const origHTML = btn.innerHTML;
-  btn.innerHTML = '<span class="spinner"></span>Generating...';
-  btn.disabled = true;
-
-  setTimeout(() => {
-    const sidebar = document.querySelector('.sidebar');
-    const topBar = document.querySelector('.top-bar');
-    const controlsBar = document.querySelector('.controls-bar');
-    const shortcuts = document.querySelector('.shortcuts-badge');
-    const shortcutsPanel = document.getElementById('shortcutsPanel');
-    const legend = document.getElementById('legendContainer');
-
-    sidebar.style.display = 'none';
-    topBar.style.display = 'none';
-    controlsBar.style.display = 'none';
-    if (shortcuts) shortcuts.style.display = 'none';
-    if (shortcutsPanel) shortcutsPanel.style.display = 'none';
-    if (legend) legend.style.display = 'none';
-
-    const appMain = document.querySelector('.app-main');
-    appMain.style.margin = '0';
-    appMain.style.padding = '0';
-
-    const titleBanner = document.createElement('div');
-    titleBanner.id = 'pdf-title-banner';
-    titleBanner.style.cssText = 'padding:24px 32px 16px;background:white;border-bottom:2px solid #067A46;margin-bottom:16px;';
-
-    const viewTitles = { year: 'Year View', quarter: 'Quarterly View', weekly: 'Weekly View', month: 'Month View' };
-    const viewTitle = currentMode === 'marketing' ? (viewTitles[currentView] || 'Calendar') : document.getElementById('pageTitle').textContent;
-    const navLabel = document.getElementById('navLabel').textContent;
-    const filterInfo = [];
-    if (activeInitiative !== 'all') {
-      const init = calendarData.initiatives.find(i => i.id === activeInitiative);
-      if (init) filterInfo.push(init.name);
-    }
-    const channelVal = document.getElementById('channelFilter').value;
-    if (channelVal) filterInfo.push(formatChannel(channelVal));
-    const statusVal = document.getElementById('statusFilter').value;
-    if (statusVal) filterInfo.push(statusVal);
-
-    titleBanner.innerHTML = `
-      <div style="display:flex;justify-content:space-between;align-items:flex-end;">
-        <div>
-          <div style="font-family:var(--font-headline);font-size:20px;font-weight:700;color:#067A46;">Product Marketing Hub</div>
-          <div style="font-size:14px;font-weight:600;color:#1D1D1D;margin-top:4px;">${viewTitle}: ${navLabel}</div>
-          ${filterInfo.length > 0 ? `<div style="font-size:11px;color:#5A5A5A;margin-top:4px;">Filters: ${filterInfo.join(', ')}</div>` : ''}
-        </div>
-        <div style="font-size:10px;color:#9A9A9A;">Generated ${new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</div>
-      </div>
-    `;
-
-    const calendarContent = document.querySelector('.calendar-content');
-    calendarContent.insertBefore(titleBanner, calendarContent.firstChild);
-
-    window.print();
-
-    titleBanner.remove();
-    sidebar.style.display = '';
-    topBar.style.display = '';
-    controlsBar.style.display = '';
-    if (shortcuts) shortcuts.style.display = '';
-    if (shortcutsPanel) shortcutsPanel.style.display = '';
-    if (legend) legend.style.display = '';
-    appMain.style.margin = '';
-    appMain.style.padding = '';
-
-    btn.innerHTML = origHTML;
-    btn.disabled = false;
-  }, 100);
-}
 
 // ─── CAMPAIGNS ENGINE ───────────────────────────────────────────────
 
