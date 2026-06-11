@@ -721,11 +721,11 @@ body {
     </div>
     <div class="meta-item">
       <span class="meta-label">Use Cases</span>
-      <span class="meta-value">12</span>
+      <span class="meta-value">13</span>
     </div>
     <div class="meta-item">
       <span class="meta-label">Total Touchpoints</span>
-      <span class="meta-value">29</span>
+      <span class="meta-value">32</span>
     </div>
     <div class="meta-item">
       <span class="meta-label">Audience</span>
@@ -733,7 +733,7 @@ body {
     </div>
     <div class="meta-item">
       <span class="meta-label">Updated</span>
-      <span class="meta-value">June 8, 2026</span>
+      <span class="meta-value">June 11, 2026</span>
     </div>
   </div>
 </header>
@@ -2437,6 +2437,170 @@ body {
   </div>
 </section>
 
+<!-- PHASE 3 HEADER -->
+<div class="phase-header">
+  <div class="phase-banner phase-banner--secondary">
+    <div class="phase-eyebrow">Phase 3</div>
+    <div class="phase-title">General Cookbook Comms</div>
+    <div class="phase-desc">Scheduled pushes not tied to a specific user event. These drive general Cookbook discovery and re-engagement, sending users to the Cookbook home screen.</div>
+  </div>
+</div>
+
+<!-- PHASE 3: GENERAL COOKBOOK -->
+<section class="section">
+  <div class="section-card">
+    <div class="section-header">
+      <span class="section-label">General Cookbook</span>
+      <span class="section-count">3 Variants</span>
+    </div>
+    <div class="section-body">
+      <div class="segment-detail">
+        <div class="trigger-box">
+          <div class="trigger-label">Send Logic</div>
+          <div class="trigger-text">Scheduled send to all users with push opt-in and Cookbook feature enabled. Not event-triggered. Max 1 general Cookbook push per 7 days. Do not send if user received any event-triggered Cookbook push in the last 5 days. Deep link: Cookbook home screen.</div>
+        </div>
+        <div class="exit-box">
+          <div class="exit-label">Suppression</div>
+          <ul class="exit-list">
+            <li>Max 1 general push per 7 days</li>
+            <li>Do not send if any event-triggered Cookbook push sent in last 5 days</li>
+            <li>Standard 24h cross-team suppression applies</li>
+            <li>Deep link: Cookbook home screen (not a specific recipe)</li>
+          </ul>
+        </div>
+
+        <div class="push-sequence">
+          <div class="push-card">
+            <div class="push-card-header">
+              <span class="push-label">Variant A: Forgotten Saves</span>
+              <span class="push-timing">Scheduled | PM window 17:00-18:00</span>
+            </div>
+            <div class="push-card-body">
+              <div class="push-phone">
+                <div class="push-notch"></div>
+                <div class="push-notification">
+                  <div class="push-notif-header">
+                    <div class="push-notif-icon"></div>
+                    <span class="push-notif-app">HelloFresh</span>
+                    <span class="push-notif-time">now</span>
+                  </div>
+                  <div class="push-notif-title">Remember what you saved?</div>
+                  <div class="push-notif-body">Your Cookbook is full of ideas. Tonight could be one of them.</div>
+                </div>
+              </div>
+              <div class="push-meta">
+                <div>
+                  <div class="push-meta-label">Angle</div>
+                  <div class="push-meta-value">Taps the curiosity loop. "Remember" activates their own prior intent without prescribing a recipe. "Tonight could be one of them" keeps it open and low pressure. Respects the EI's need to choose in the moment.</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">TOV Flavour</div>
+                  <div class="push-meta-value">Fresh + Zesty</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">Deep Link</div>
+                  <div class="push-meta-value">Cookbook home screen</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">Character Count</div>
+                  <div class="push-meta-value">
+                    Title: <span class="char-count char-ok">25/30</span> &nbsp;
+                    Body: <span class="char-count char-ok">56/80</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="push-card">
+            <div class="push-card-header">
+              <span class="push-label">Variant B: Low Effort</span>
+              <span class="push-timing">Scheduled | PM window 17:00-18:00</span>
+            </div>
+            <div class="push-card-body">
+              <div class="push-phone">
+                <div class="push-notch"></div>
+                <div class="push-notification">
+                  <div class="push-notif-header">
+                    <div class="push-notif-icon"></div>
+                    <span class="push-notif-app">HelloFresh</span>
+                    <span class="push-notif-time">now</span>
+                  </div>
+                  <div class="push-notif-title">No plan? No problem.</div>
+                  <div class="push-notif-body">Open your Cookbook. Pick something. Cook it tonight.</div>
+                </div>
+              </div>
+              <div class="push-meta">
+                <div>
+                  <div class="push-meta-label">Angle</div>
+                  <div class="push-meta-value">Burst rhythm mirrors the Skip Week copy. Removes decision paralysis by making the next step feel tiny: open, pick, cook. Three verbs, three actions, zero thinking. Catches users who haven't planned dinner yet.</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">TOV Flavour</div>
+                  <div class="push-meta-value">Sharp + Zesty</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">Deep Link</div>
+                  <div class="push-meta-value">Cookbook home screen</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">Character Count</div>
+                  <div class="push-meta-value">
+                    Title: <span class="char-count char-ok">20/30</span> &nbsp;
+                    Body: <span class="char-count char-ok">49/80</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="push-card">
+            <div class="push-card-header">
+              <span class="push-label">Variant C: Try Something New</span>
+              <span class="push-timing">Scheduled | PM window 17:00-18:00</span>
+            </div>
+            <div class="push-card-body">
+              <div class="push-phone">
+                <div class="push-notch"></div>
+                <div class="push-notification">
+                  <div class="push-notif-header">
+                    <div class="push-notif-icon"></div>
+                    <span class="push-notif-app">HelloFresh</span>
+                    <span class="push-notif-time">now</span>
+                  </div>
+                  <div class="push-notif-title">Cook something different.</div>
+                  <div class="push-notif-body">Your Cookbook has recipes you haven't tried yet. Tonight's the night.</div>
+                </div>
+              </div>
+              <div class="push-meta">
+                <div>
+                  <div class="push-meta-label">Angle</div>
+                  <div class="push-meta-value">"Different" appeals to the EI's desire for variety and novelty. "Haven't tried yet" creates a subtle gap between what they've saved and what they've actually cooked. "Tonight's the night" adds urgency without pressure. Motivational, not directive.</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">TOV Flavour</div>
+                  <div class="push-meta-value">Fresh + Vivid</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">Deep Link</div>
+                  <div class="push-meta-value">Cookbook home screen</div>
+                </div>
+                <div>
+                  <div class="push-meta-label">Character Count</div>
+                  <div class="push-meta-value">
+                    Title: <span class="char-count char-ok">25/30</span> &nbsp;
+                    Body: <span class="char-count char-ok">63/80</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- GLOBAL RULES -->
 <section class="section">
   <div class="section-card">
@@ -2595,7 +2759,7 @@ body {
     <img src="https://media.hellofresh.com/w_256,q_100,f_auto,c_limit,fl_lossy/hellofresh_website/logo/Hello_Fresh_Lockup.png" alt="HelloFresh" class="footer-logo">
     <span class="footer-text">Product Marketing</span>
   </div>
-  <span class="footer-updated">Updated: June 8, 2026</span>
+  <span class="footer-updated">Updated: June 11, 2026</span>
 </footer>
 
 <script src="../auth.js"></script>
