@@ -1131,14 +1131,18 @@ body {
 
 .month-view.active { display: block; }
 
-.month-grid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
+.month-container {
+  background: white;
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  background: white;
   box-shadow: var(--shadow-card);
   overflow: hidden;
+}
+
+.month-header-row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  border-bottom: 1px solid var(--border);
 }
 
 .month-day-header {
@@ -1150,63 +1154,142 @@ body {
   text-transform: uppercase;
   letter-spacing: 0.5px;
   background: white;
-  border-bottom: 1px solid var(--border);
 }
 
-.month-day-cell {
-  min-height: 130px;
-  border-right: 1px solid var(--border-light);
+.month-week-row {
   border-bottom: 1px solid var(--border-light);
-  padding: 6px;
-  position: relative;
+}
+
+.month-week-row:last-child { border-bottom: none; }
+
+.week-day-numbers {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.day-num-cell {
+  padding: 6px 8px 2px;
+  text-align: right;
   cursor: pointer;
   transition: background 0.1s;
+  border-right: 1px solid var(--border-light);
 }
 
-.month-day-cell:nth-child(7n) { border-right: none; }
+.day-num-cell:last-child { border-right: none; }
 
-.month-day-cell:hover { background: rgba(6, 122, 70, 0.02); }
+.day-num-cell:hover { background: rgba(6, 122, 70, 0.02); }
 
-.month-day-cell.other-month {
-  background: #FDFCFA;
-  opacity: 0.5;
+.day-num-cell.other-month { opacity: 0.4; }
+
+.day-num-cell.today { background: var(--brand-green-light); }
+
+.day-num-cell .day-number {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.month-day-cell.today {
-  background: var(--brand-green-light);
-}
-
-.month-day-cell.today .day-number {
+.day-num-cell.today .day-number {
   background: var(--brand-green);
   color: white;
   border-radius: 50%;
   width: 22px;
   height: 22px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
-.day-number {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--text-secondary);
-  margin-bottom: 4px;
+.week-spans-area {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  padding: 2px 0;
+  row-gap: 2px;
+}
+
+.span-entry {
+  padding: 3px 6px;
+  font-size: 10px;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: opacity 0.15s;
+  margin: 0 2px;
+  border-radius: 4px;
+  min-height: 20px;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
 }
+
+.span-entry:hover { opacity: 0.8; }
+
+.span-entry.span-start {
+  margin-left: 4px;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.span-entry.span-end {
+  margin-right: 4px;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+.span-entry.span-mid {
+  border-radius: 0;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.span-entry.span-single {
+  margin: 0 4px;
+  border-radius: 4px;
+}
+
+.week-singles-area {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  min-height: 24px;
+}
+
+.day-singles-cell {
+  padding: 2px 4px 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  border-right: 1px solid var(--border-light);
+}
+
+.day-singles-cell:last-child { border-right: none; }
+
+.day-entry {
+  padding: 3px 6px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: opacity 0.1s;
+  border-left: 3px solid;
+}
+
+.day-entry:hover { opacity: 0.8; }
 
 .release-banner {
   background: var(--release-bg);
   border: 1px solid var(--release-color);
   border-radius: 4px;
   padding: 2px 6px;
-  margin-bottom: 3px;
+  margin-bottom: 2px;
   display: flex;
   align-items: center;
   gap: 4px;
   transition: background 0.15s;
+  cursor: pointer;
 }
 
 .release-banner:hover {
@@ -1229,27 +1312,6 @@ body {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-
-.day-entries {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.day-entry {
-  padding: 3px 6px;
-  border-radius: 4px;
-  font-size: 10px;
-  font-weight: 500;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  cursor: pointer;
-  transition: opacity 0.1s;
-  border-left: 3px solid;
-}
-
-.day-entry:hover { opacity: 0.8; }
 
 .day-more-btn {
   padding: 4px 8px;
@@ -4014,7 +4076,7 @@ body {
   .app-main { margin: 0 !important; padding: 0 !important; }
   .calendar-content { padding: 0 !important; }
   body { background: white !important; }
-  .year-grid, .weekly-grid, .month-grid { box-shadow: none !important; border: 1px solid #ccc !important; }
+  .year-grid, .weekly-grid, .month-container { box-shadow: none !important; border: 1px solid #ccc !important; }
 }
 </style>
 </head>
@@ -5253,7 +5315,7 @@ function renderMonth() {
   const container = document.getElementById('monthView');
   const firstDay = new Date(currentYear, currentMonth, 1);
   const lastDay = new Date(currentYear, currentMonth + 1, 0);
-  const startOffset = (firstDay.getDay() + 6) % 7; // Monday = 0
+  const startOffset = (firstDay.getDay() + 6) % 7;
   const totalDays = lastDay.getDate();
   const today = new Date();
   const todayStr = formatDate(today);
@@ -5261,77 +5323,171 @@ function renderMonth() {
   const entries = getFilteredEntries();
   const releases = getFilteredReleases();
 
-  // Group entries by date
-  const entryMap = {};
-  entries.forEach(e => {
-    const start = new Date(e.date + 'T00:00:00');
-    const end = e.endDate ? new Date(e.endDate + 'T00:00:00') : start;
-    let d = new Date(start);
-    while (d <= end) {
-      const key = formatDate(d);
-      if (!entryMap[key]) entryMap[key] = [];
-      entryMap[key].push(e);
-      d.setDate(d.getDate() + 1);
-    }
-  });
+  // Build array of all dates displayed (including padding)
+  const allDates = [];
+  const prevMonth = new Date(currentYear, currentMonth, 0);
+  for (let i = startOffset - 1; i >= 0; i--) {
+    const d = new Date(currentYear, currentMonth - 1, prevMonth.getDate() - i);
+    allDates.push({ date: d, dateStr: formatDate(d), isOther: true, day: d.getDate() });
+  }
+  for (let day = 1; day <= totalDays; day++) {
+    const d = new Date(currentYear, currentMonth, day);
+    allDates.push({ date: d, dateStr: formatDate(d), isOther: false, day });
+  }
+  const totalCells = startOffset + totalDays;
+  const remaining = (7 - (totalCells % 7)) % 7;
+  for (let i = 1; i <= remaining; i++) {
+    const d = new Date(currentYear, currentMonth + 1, i);
+    allDates.push({ date: d, dateStr: formatDate(d), isOther: true, day: i });
+  }
+
+  // Split into weeks
+  const weeks = [];
+  for (let i = 0; i < allDates.length; i += 7) {
+    weeks.push(allDates.slice(i, i + 7));
+  }
+
+  // Separate multi-day entries from single-day entries
+  const multiDayEntries = entries.filter(e => e.endDate && e.endDate !== e.date);
+  const singleDayEntries = entries.filter(e => !e.endDate || e.endDate === e.date);
 
   // Group releases by date
   const releaseMap = {};
   releases.forEach(r => {
-    const key = r.date;
-    if (!releaseMap[key]) releaseMap[key] = [];
-    releaseMap[key].push(r);
+    if (!releaseMap[r.date]) releaseMap[r.date] = [];
+    releaseMap[r.date].push(r);
   });
 
-  let html = `<div class="month-grid">`;
-  // Day headers
+  // Group single-day entries by date
+  const singleMap = {};
+  singleDayEntries.forEach(e => {
+    if (!singleMap[e.date]) singleMap[e.date] = [];
+    singleMap[e.date].push(e);
+  });
+
+  // For each week, determine which multi-day entries are visible and allocate lanes
+  function allocateLanes(weekDates, multiEntries) {
+    const weekStart = weekDates[0].date;
+    const weekEnd = weekDates[6].date;
+    const visible = [];
+
+    multiEntries.forEach(e => {
+      const eStart = new Date(e.date + 'T00:00:00');
+      const eEnd = new Date(e.endDate + 'T00:00:00');
+      if (eEnd >= weekStart && eStart <= weekEnd) {
+        const startCol = Math.max(0, Math.round((eStart - weekStart) / 86400000));
+        const endCol = Math.min(6, Math.round((eEnd - weekStart) / 86400000));
+        visible.push({ entry: e, startCol, endCol });
+      }
+    });
+
+    // Sort by start col, then by span length (longer first for better packing)
+    visible.sort((a, b) => a.startCol - b.startCol || (b.endCol - b.startCol) - (a.endCol - a.startCol));
+
+    // Greedy lane allocation
+    const lanes = [];
+    visible.forEach(item => {
+      let placed = false;
+      for (let i = 0; i < lanes.length; i++) {
+        if (lanes[i].every(existing => existing.endCol < item.startCol || existing.startCol > item.endCol)) {
+          lanes[i].push(item);
+          item.lane = i;
+          placed = true;
+          break;
+        }
+      }
+      if (!placed) {
+        item.lane = lanes.length;
+        lanes.push([item]);
+      }
+    });
+
+    return { visible, laneCount: lanes.length };
+  }
+
+  let html = `<div class="month-container">`;
+  html += `<div class="month-header-row">`;
   const dayNames = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
-  dayNames.forEach(d => {
-    html += `<div class="month-day-header">${d}</div>`;
+  dayNames.forEach(d => { html += `<div class="month-day-header">${d}</div>`; });
+  html += `</div>`;
+
+  weeks.forEach(weekDates => {
+    const { visible, laneCount } = allocateLanes(weekDates, multiDayEntries);
+
+    html += `<div class="month-week-row">`;
+
+    // Day numbers row
+    html += `<div class="week-day-numbers">`;
+    weekDates.forEach(d => {
+      const classes = [d.isOther ? 'other-month' : '', d.dateStr === todayStr ? 'today' : ''].filter(Boolean).join(' ');
+      html += `<div class="day-num-cell ${classes}" onclick="openDayModal('${d.dateStr}')"><span class="day-number">${d.day}</span></div>`;
+    });
+    html += `</div>`;
+
+    // Spanning entries area
+    if (laneCount > 0) {
+      for (let lane = 0; lane < laneCount; lane++) {
+        html += `<div class="week-spans-area">`;
+        const laneItems = visible.filter(v => v.lane === lane);
+        // Build 7-column grid row: fill each column
+        let col = 0;
+        const sorted = laneItems.sort((a, b) => a.startCol - b.startCol);
+        sorted.forEach(item => {
+          // Empty spacer cells before this item
+          if (item.startCol > col) {
+            const gap = item.startCol - col;
+            html += `<div style="grid-column: span ${gap};"></div>`;
+          }
+          const span = item.endCol - item.startCol + 1;
+          const ch = CHANNEL_COLORS[item.entry.channel] || { color: '#666', bg: '#f5f5f5' };
+          const eStart = new Date(item.entry.date + 'T00:00:00');
+          const eEnd = new Date(item.entry.endDate + 'T00:00:00');
+          const weekStartDate = weekDates[0].date;
+          const weekEndDate = weekDates[6].date;
+          const startsThisWeek = eStart >= weekStartDate;
+          const endsThisWeek = eEnd <= weekEndDate;
+
+          let posClass = '';
+          if (startsThisWeek && endsThisWeek) posClass = 'span-single';
+          else if (startsThisWeek) posClass = 'span-start';
+          else if (endsThisWeek) posClass = 'span-end';
+          else posClass = 'span-mid';
+
+          html += `<div class="span-entry ${posClass}" style="grid-column: span ${span}; background:${ch.bg}; color:${ch.color}; border-left: 3px solid ${ch.color};" title="${item.entry.text} | ${item.entry.owner}" onclick="event.stopPropagation();openDayModal('${item.entry.date}')">${startsThisWeek ? item.entry.text : ''}</div>`;
+          col = item.endCol + 1;
+        });
+        // Fill remaining columns
+        if (col < 7) {
+          html += `<div style="grid-column: span ${7 - col};"></div>`;
+        }
+        html += `</div>`;
+      }
+    }
+
+    // Single-day entries + releases row
+    html += `<div class="week-singles-area">`;
+    weekDates.forEach(d => {
+      html += `<div class="day-singles-cell">`;
+      // Releases
+      const dayReleases = releaseMap[d.dateStr] || [];
+      dayReleases.forEach(r => {
+        html += `<div class="release-banner" onclick="event.stopPropagation();navigateToRelease('${r.id}')"><span class="diamond"></span><span class="release-text">${r.name}</span></div>`;
+      });
+      // Single-day entries
+      const dayEntries = singleMap[d.dateStr] || [];
+      dayEntries.forEach(e => {
+        const ch = CHANNEL_COLORS[e.channel] || { color: '#666', bg: '#f5f5f5' };
+        html += `<div class="day-entry" style="background:${ch.bg};border-left-color:${ch.color};color:${ch.color};" title="${e.text} | ${e.owner}" onclick="event.stopPropagation();openDayModal('${d.dateStr}')">${e.text}</div>`;
+      });
+      html += `</div>`;
+    });
+    html += `</div>`;
+
+    html += `</div>`;
   });
-
-  // Previous month padding
-  const prevMonth = new Date(currentYear, currentMonth, 0);
-  for (let i = startOffset - 1; i >= 0; i--) {
-    const dayNum = prevMonth.getDate() - i;
-    html += `<div class="month-day-cell other-month"><div class="day-number">${dayNum}</div></div>`;
-  }
-
-  // Current month days
-  for (let day = 1; day <= totalDays; day++) {
-    const dateStr = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-    const isToday = dateStr === todayStr;
-    const dayEntries = entryMap[dateStr] || [];
-    const dayReleases = releaseMap[dateStr] || [];
-    const dayKey = dateStr;
-    html += `<div class="month-day-cell ${isToday ? 'today' : ''}" data-date="${dateStr}" onclick="openDayModal('${dateStr}')">`;
-    html += `<div class="day-number">${day}</div>`;
-
-    // Releases
-    dayReleases.forEach(r => {
-      html += `<div class="release-banner" style="cursor:pointer;" onclick="event.stopPropagation();navigateToRelease('${r.id}')"><span class="diamond"></span><span class="release-text">${r.name}</span></div>`;
-    });
-
-    // Entries (show all)
-    html += `<div class="day-entries">`;
-    dayEntries.forEach(e => {
-      const ch = CHANNEL_COLORS[e.channel] || { color: '#666', bg: '#f5f5f5' };
-      const draggable = isEditor ? 'draggable="true"' : '';
-      html += `<div class="day-entry" ${draggable} data-entry-id="${e.id}" data-init-id="${e.initiative.id}" style="background:${ch.bg};border-left-color:${ch.color};color:${ch.color};" title="${e.text} | ${e.owner}">${e.text}${isEditor ? '<span class="drag-indicator">⋮⋮</span>' : ''}</div>`;
-    });
-    html += `</div></div>`;
-  }
-
-  // Next month padding
-  const totalCells = startOffset + totalDays;
-  const remaining = (7 - (totalCells % 7)) % 7;
-  for (let i = 1; i <= remaining; i++) {
-    html += `<div class="month-day-cell other-month"><div class="day-number">${i}</div></div>`;
-  }
 
   html += `</div>`;
 
-  // Add entry button for editors
   if (isEditor) {
     html += `<div style="text-align:center;margin-top:16px;">
       <button class="form-btn form-btn-primary" onclick="openNewEntryForm()">+ New Entry</button>
