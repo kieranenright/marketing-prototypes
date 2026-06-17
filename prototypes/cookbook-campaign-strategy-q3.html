@@ -771,21 +771,21 @@ section {
 <section style="background: #F7F7F5; min-height: auto; padding: 100px 60px;" id="why">
   <div class="section-inner">
     <div class="section-tag reveal" style="color: var(--hf-green);">Pillar 1: Push Notifications</div>
-    <div class="section-title reveal" style="font-size: 40px; color: var(--hf-dark);">12 use cases.<br>29 touchpoints.</div>
-    <div class="section-desc reveal" style="color: var(--hf-muted); max-width: 800px;">Two phases: meal kit lifecycle triggers (planner adoption, cook-through) plus Cookbook event triggers (off-night engagement, recipe discovery). Every push is personalised, suppression-controlled, and deep-linked. Grounded in the Efficient Inspired profile and Global TOV (Fresh, Vivid, Sharp, Zesty).</div>
+    <div class="section-title reveal" style="font-size: 40px; color: var(--hf-dark);">14 use cases.<br>35 touchpoints.</div>
+    <div class="section-desc reveal" style="color: var(--hf-muted); max-width: 800px;">Four phases: Cookbook onboarding (first save + cook habits), meal kit lifecycle triggers (planner adoption, cook-through), Cookbook event triggers (off-night engagement, recipe discovery), and general Cookbook comms (scheduled re-engagement). Every push is personalised, suppression-controlled, and deep-linked. Grounded in the Efficient Inspired profile and Global TOV (Fresh, Vivid, Sharp, Zesty).</div>
 
     <!-- Stats Bar -->
     <div class="reveal" style="display: flex; gap: 16px; margin-top: 32px; margin-bottom: 48px;">
       <div style="flex: 1; background: white; border-radius: 12px; padding: 20px; text-align: center; border: 1px solid rgba(0,0,0,0.06);">
-        <div style="font-size: 28px; font-weight: 900; color: var(--hf-green);">12</div>
+        <div style="font-size: 28px; font-weight: 900; color: var(--hf-green);">14</div>
         <div style="font-size: 11px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase; letter-spacing: 1px;">Use Cases</div>
       </div>
       <div style="flex: 1; background: white; border-radius: 12px; padding: 20px; text-align: center; border: 1px solid rgba(0,0,0,0.06);">
-        <div style="font-size: 28px; font-weight: 900; color: var(--hf-green);">29</div>
+        <div style="font-size: 28px; font-weight: 900; color: var(--hf-green);">35</div>
         <div style="font-size: 11px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase; letter-spacing: 1px;">Touchpoints</div>
       </div>
       <div style="flex: 1; background: white; border-radius: 12px; padding: 20px; text-align: center; border: 1px solid rgba(0,0,0,0.06);">
-        <div style="font-size: 28px; font-weight: 900; color: var(--hf-green);">2</div>
+        <div style="font-size: 28px; font-weight: 900; color: var(--hf-green);">4</div>
         <div style="font-size: 11px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase; letter-spacing: 1px;">Phases</div>
       </div>
       <div style="flex: 1; background: white; border-radius: 12px; padding: 20px; text-align: center; border: 1px solid rgba(0,0,0,0.06);">
@@ -795,23 +795,83 @@ section {
     </div>
 
     <!-- Phase Labels -->
-    <div class="reveal" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 32px;">
+    <div class="reveal" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 32px;">
+      <div style="background: var(--hf-dark); border-radius: 14px; padding: 20px; color: white;">
+        <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--hf-lime); margin-bottom: 6px;">Phase 0</div>
+        <div style="font-size: 14px; font-weight: 800; margin-bottom: 4px;">Cookbook Onboarding</div>
+        <div style="font-size: 11px; opacity: 0.7; line-height: 1.5;">Drive first saves and cook marks from box day. Establishes the habit loop.</div>
+        <div style="margin-top: 10px; font-size: 10px; font-weight: 700; opacity: 0.5;">1 use case &bull; 4 variants</div>
+      </div>
       <div style="background: var(--hf-green); border-radius: 14px; padding: 20px; color: white;">
         <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; opacity: 0.7; margin-bottom: 6px;">Phase 1</div>
-        <div style="font-size: 16px; font-weight: 800; margin-bottom: 4px;">Meal Kit Lifecycle</div>
-        <div style="font-size: 12px; opacity: 0.8; line-height: 1.5;">Drive planner adoption and recipe cook-through using meal kit data. No Cookbook dependency.</div>
-        <div style="margin-top: 10px; font-size: 11px; font-weight: 700; opacity: 0.6;">2 use cases &bull; 7 touchpoints</div>
+        <div style="font-size: 14px; font-weight: 800; margin-bottom: 4px;">Meal Kit Lifecycle</div>
+        <div style="font-size: 11px; opacity: 0.8; line-height: 1.5;">Planner adoption and recipe cook-through using meal kit data.</div>
+        <div style="margin-top: 10px; font-size: 10px; font-weight: 700; opacity: 0.6;">2 use cases &bull; 7 touchpoints</div>
       </div>
       <div style="background: white; border-radius: 14px; padding: 20px; border: 1px solid rgba(0,0,0,0.06);">
         <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--hf-green); margin-bottom: 6px;">Phase 2</div>
-        <div style="font-size: 16px; font-weight: 800; color: var(--hf-dark); margin-bottom: 4px;">Cookbook Event Triggers</div>
-        <div style="font-size: 12px; color: var(--hf-muted); line-height: 1.5;">Advanced behavioural pushes requiring Cookbook adoption, real-time event signals, and complex personalisation.</div>
-        <div style="margin-top: 10px; font-size: 11px; font-weight: 700; color: var(--hf-muted);">10 use cases &bull; 22 touchpoints</div>
+        <div style="font-size: 14px; font-weight: 800; color: var(--hf-dark); margin-bottom: 4px;">Cookbook Event Triggers</div>
+        <div style="font-size: 11px; color: var(--hf-muted); line-height: 1.5;">Advanced behavioural pushes with real-time event signals and personalisation.</div>
+        <div style="margin-top: 10px; font-size: 10px; font-weight: 700; color: var(--hf-muted);">10 use cases &bull; 21 touchpoints</div>
+      </div>
+      <div style="background: var(--hf-cream); border-radius: 14px; padding: 20px; border: 1px solid rgba(0,0,0,0.06);">
+        <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--hf-green); margin-bottom: 6px;">Phase 3</div>
+        <div style="font-size: 14px; font-weight: 800; color: var(--hf-dark); margin-bottom: 4px;">General Cookbook Comms</div>
+        <div style="font-size: 11px; color: var(--hf-muted); line-height: 1.5;">Scheduled pushes for discovery and re-engagement. Not event-triggered.</div>
+        <div style="margin-top: 10px; font-size: 10px; font-weight: 700; color: var(--hf-muted);">1 use case &bull; 3 variants</div>
       </div>
     </div>
 
     <!-- Use Cases Grid -->
     <div class="reveal" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;">
+
+      <!-- PHASE 0: Box Day Cookbook Activation -->
+      <div style="background: white; border-radius: 16px; padding: 28px; border: 1px solid rgba(0,0,0,0.06); position: relative; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.04);">
+        <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--hf-dark);"></div>
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 14px;">
+          <span style="background: rgba(26,26,26,0.08); color: var(--hf-dark); padding: 3px 8px; border-radius: 6px; font-size: 10px; font-weight: 800;">P0</span>
+          <span style="font-size: 15px; font-weight: 800; color: var(--hf-dark);">Box Day Cookbook Activation</span>
+        </div>
+        <div style="font-size: 11px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">Trigger</div>
+        <div style="font-size: 13px; color: var(--hf-muted); line-height: 1.5; margin-bottom: 14px;">Weekly box delivery confirmed (same day). Box recipes auto-populate Cookbook carousel.</div>
+        <div style="background: var(--hf-cream); border-radius: 10px; padding: 14px;">
+          <div style="font-size: 14px; font-weight: 900; color: var(--hf-dark); margin-bottom: 2px;">Cooked tonight?</div>
+          <div style="font-size: 12px; color: var(--hf-muted);">It's already in your Cookbook. Save it and mark it cooked to keep it forever.</div>
+        </div>
+        <div style="margin-top: 10px; font-size: 10px; font-weight: 700; color: var(--hf-muted);">PM window &bull; Max 1/cycle &bull; Drives first save + cook mark</div>
+      </div>
+
+      <!-- PHASE 1: Plan Your Week -->
+      <div style="background: white; border-radius: 16px; padding: 28px; border: 1px solid rgba(0,0,0,0.06); position: relative; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.04);">
+        <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--hf-green);"></div>
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 14px;">
+          <span style="background: rgba(6,122,70,0.08); color: var(--hf-green); padding: 3px 8px; border-radius: 6px; font-size: 10px; font-weight: 800;">P1</span>
+          <span style="font-size: 15px; font-weight: 800; color: var(--hf-dark);">Plan Your Week</span>
+        </div>
+        <div style="font-size: 11px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">Trigger</div>
+        <div style="font-size: 13px; color: var(--hf-muted); line-height: 1.5; margin-bottom: 14px;">Meal selection cutoff passed. Choices locked in, momentum high.</div>
+        <div style="background: var(--hf-cream); border-radius: 10px; padding: 14px;">
+          <div style="font-size: 14px; font-weight: 900; color: var(--hf-dark); margin-bottom: 2px;">Your meals. Your nights. Your call.</div>
+          <div style="font-size: 12px; color: var(--hf-muted);">Open the planner and assign them however you want.</div>
+        </div>
+        <div style="margin-top: 10px; font-size: 10px; font-weight: 700; color: var(--hf-muted);">AM window &bull; 1/cycle &bull; Drives planner adoption</div>
+      </div>
+
+      <!-- PHASE 1: Cook Tonight -->
+      <div style="background: white; border-radius: 16px; padding: 28px; border: 1px solid rgba(0,0,0,0.06); position: relative; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.04);">
+        <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--hf-green);"></div>
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 14px;">
+          <span style="background: rgba(6,122,70,0.08); color: var(--hf-green); padding: 3px 8px; border-radius: 6px; font-size: 10px; font-weight: 800;">P1</span>
+          <span style="font-size: 15px; font-weight: 800; color: var(--hf-dark);">Cook Tonight</span>
+        </div>
+        <div style="font-size: 11px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">Trigger</div>
+        <div style="font-size: 13px; color: var(--hf-muted); line-height: 1.5; margin-bottom: 14px;">Meal kit recipe assigned to today's planner slot. Ingredients in the fridge.</div>
+        <div style="background: var(--hf-cream); border-radius: 10px; padding: 14px;">
+          <div style="font-size: 14px; font-weight: 900; color: var(--hf-dark); margin-bottom: 2px;">Tonight: {{recipe_name}}</div>
+          <div style="font-size: 12px; color: var(--hf-muted);">You planned it. Ingredients are in. Tap to start cooking.</div>
+        </div>
+        <div style="margin-top: 10px; font-size: 10px; font-weight: 700; color: var(--hf-muted);">PM window &bull; Max 3/week &bull; Drives recipe cook-through</div>
+      </div>
 
       <!-- 1. Removed Meal Reminder -->
       <div style="background: white; border-radius: 16px; padding: 28px; border: 1px solid rgba(0,0,0,0.06); position: relative; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.04);">
@@ -957,6 +1017,38 @@ section {
         <div style="margin-top: 10px; font-size: 10px; font-weight: 700; color: var(--hf-muted);">AM window &bull; Max 3/week &bull; Skip if recipe already opened</div>
       </div>
 
+      <!-- 10. Batch Cooking Detection -->
+      <div style="background: white; border-radius: 16px; padding: 28px; border: 1px solid rgba(0,0,0,0.06); position: relative; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.04);">
+        <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--hf-honey);"></div>
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 14px;">
+          <span style="background: rgba(212,165,100,0.12); color: var(--hf-honey); padding: 3px 8px; border-radius: 6px; font-size: 10px; font-weight: 800;">10</span>
+          <span style="font-size: 15px; font-weight: 800; color: var(--hf-dark);">Batch Cooking Detection</span>
+        </div>
+        <div style="font-size: 11px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">Trigger</div>
+        <div style="font-size: 13px; color: var(--hf-muted); line-height: 1.5; margin-bottom: 14px;">2+ recipes assigned to same day OR recipe with portions &gt;2. Suppression-first use case.</div>
+        <div style="background: var(--hf-cream); border-radius: 10px; padding: 14px;">
+          <div style="font-size: 14px; font-weight: 900; color: var(--hf-dark); margin-bottom: 2px;">Meal prep mode: on.</div>
+          <div style="font-size: 12px; color: var(--hf-muted);">{{x}} dinners handled in one session. We won't bug you till {{next_day}}.</div>
+        </div>
+        <div style="margin-top: 10px; font-size: 10px; font-weight: 700; color: var(--hf-muted);">PM window &bull; Suppresses gap-fill pushes for covered days</div>
+      </div>
+
+      <!-- PHASE 3: General Cookbook -->
+      <div style="background: white; border-radius: 16px; padding: 28px; border: 1px solid rgba(0,0,0,0.06); position: relative; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.04);">
+        <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--hf-sage);"></div>
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 14px;">
+          <span style="background: rgba(94,155,126,0.1); color: var(--hf-sage); padding: 3px 8px; border-radius: 6px; font-size: 10px; font-weight: 800;">P3</span>
+          <span style="font-size: 15px; font-weight: 800; color: var(--hf-dark);">General Cookbook Comms</span>
+        </div>
+        <div style="font-size: 11px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">Send Logic</div>
+        <div style="font-size: 13px; color: var(--hf-muted); line-height: 1.5; margin-bottom: 14px;">Scheduled send. Not event-triggered. Max 1 per 7 days. Suppressed if event-triggered push sent in last 5 days.</div>
+        <div style="background: var(--hf-cream); border-radius: 10px; padding: 14px;">
+          <div style="font-size: 14px; font-weight: 900; color: var(--hf-dark); margin-bottom: 2px;">Remember what you saved?</div>
+          <div style="font-size: 12px; color: var(--hf-muted);">Your Cookbook is full of ideas. Tonight could be one of them.</div>
+        </div>
+        <div style="margin-top: 10px; font-size: 10px; font-weight: 700; color: var(--hf-muted);">PM window &bull; Max 1/7 days &bull; Deep link: Cookbook home</div>
+      </div>
+
     </div>
 
     <!-- Global Rules -->
@@ -987,6 +1079,14 @@ section {
           <div style="font-size: 13px; font-weight: 800; color: var(--hf-dark); margin-bottom: 4px;">Priority Order</div>
           <div style="font-size: 12px; color: var(--hf-muted);">Removed Meal &gt; Gap Fill &gt; Planned Night &gt; Missing Protein &gt; High-Rated &gt; Skip &gt; Delivery &gt; Pause &gt; Trending</div>
         </div>
+        <div style="background: white; border-radius: 12px; padding: 18px; border: 1px solid rgba(0,0,0,0.06);">
+          <div style="font-size: 13px; font-weight: 800; color: var(--hf-dark); margin-bottom: 4px;">Batch Coverage Override</div>
+          <div style="font-size: 12px; color: var(--hf-muted);">Batch cook detected (portions &gt;2 or 2+ recipes same day) suppresses gap-fill for covered days</div>
+        </div>
+        <div style="background: white; border-radius: 12px; padding: 18px; border: 1px solid rgba(0,0,0,0.06);">
+          <div style="font-size: 13px; font-weight: 800; color: var(--hf-dark); margin-bottom: 4px;">Personalisation Fallback</div>
+          <div style="font-size: 12px; color: var(--hf-muted);">If recipe name &gt;20 chars in title, move to body with generic title. Never truncate mid-word.</div>
+        </div>
       </div>
     </div>
 
@@ -998,8 +1098,10 @@ section {
         <span style="background: rgba(6,122,70,0.08); color: var(--hf-green); padding: 6px 14px; border-radius: 8px; font-size: 12px; font-weight: 700;">Cook-through: 15%+</span>
         <span style="background: rgba(6,122,70,0.08); color: var(--hf-green); padding: 6px 14px; border-radius: 8px; font-size: 12px; font-weight: 700;">Cookbook open within 24h: 20%+</span>
         <span style="background: rgba(6,122,70,0.08); color: var(--hf-green); padding: 6px 14px; border-radius: 8px; font-size: 12px; font-weight: 700;">New recipe save: 12%+</span>
+        <span style="background: rgba(6,122,70,0.08); color: var(--hf-green); padding: 6px 14px; border-radius: 8px; font-size: 12px; font-weight: 700;">Planned recipe cook-through: 20%+</span>
         <span style="background: rgba(6,122,70,0.08); color: var(--hf-green); padding: 6px 14px; border-radius: 8px; font-size: 12px; font-weight: 700;">Skip-week retention: +10% vs control</span>
         <span style="background: rgba(6,122,70,0.08); color: var(--hf-green); padding: 6px 14px; border-radius: 8px; font-size: 12px; font-weight: 700;">Off-night sessions: +25%</span>
+        <span style="background: rgba(6,122,70,0.08); color: var(--hf-green); padding: 6px 14px; border-radius: 8px; font-size: 12px; font-weight: 700;">False gap-fill reduction: 80%+</span>
         <span style="background: rgba(6,122,70,0.08); color: var(--hf-green); padding: 6px 14px; border-radius: 8px; font-size: 12px; font-weight: 700;">Opt-out rate: &lt;0.5%</span>
       </div>
     </div>
