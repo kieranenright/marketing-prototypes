@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cookbook — Weekly Marketing Update W25</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+  --hf-green: #1B8A4A;
+  --hf-lime: #C8F065;
+  --hf-dark: #1A1A1A;
+  --hf-muted: #888;
+  --hf-light: #F6F6F6;
+  --col-acquire: #2D6BE0;
+  --col-engage: #1B8A4A;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  background: #e0e0e0;
+  color: var(--hf-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 24px;
+}
+
+.slide {
+  width: 1600px;
+  height: auto;
+  min-height: 900px;
+  background: white;
+  border-radius: 6px;
+  box-shadow: 0 8px 60px rgba(0,0,0,0.15);
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  padding: 28px 40px;
+  gap: 18px;
+}
+
+/* === HEADER === */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.header-left img { height: 26px; }
+.header-sep { width: 1px; height: 20px; background: rgba(0,0,0,0.12); }
+.header-feature { font-size: 17px; font-weight: 800; color: var(--hf-green); }
+.header-right { font-size: 12px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase; letter-spacing: 1.5px; }
+
+/* === MAIN COLUMNS === */
+.main-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  min-height: 0;
+}
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 0;
+}
+.col-header {
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid;
+}
+.col-header.acquire { color: var(--col-acquire); border-color: var(--col-acquire); }
+.col-header.engage { color: var(--col-engage); border-color: var(--col-engage); }
+
+/* Section cards */
+.section-card {
+  border-radius: 10px;
+  background: var(--hf-light);
+  border: 1px solid rgba(0,0,0,0.03);
+  padding: 12px 16px;
+}
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.section-title {
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--hf-dark);
+}
+.section-title.acquire { color: #0F2E6B; }
+.section-title.engage { color: #0A4422; }
+.section-period {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--hf-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Data tables */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.data-table th {
+  font-size: 9px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--hf-muted);
+  text-align: left;
+  padding: 3px 6px;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+.data-table th:not(:first-child) { text-align: center; }
+.data-table td {
+  padding: 5px 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--hf-dark);
+  border-bottom: 1px solid rgba(0,0,0,0.03);
+}
+.data-table td:not(:first-child) { text-align: center; }
+.data-table tr:last-child td { border-bottom: none; }
+.val-green { color: var(--hf-green); font-weight: 800; }
+.val-blue { color: var(--col-acquire); font-weight: 800; }
+.val-neutral { font-weight: 700; }
+.val-red { color: #D64545; font-weight: 800; }
+
+/* Post list */
+.post-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.post-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 8px;
+  border-radius: 6px;
+  background: white;
+  border: 1px solid rgba(0,0,0,0.04);
+}
+.post-thumb {
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  object-fit: cover;
+  cursor: pointer;
+}
+.post-info { flex: 1; }
+.post-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--hf-dark);
+}
+.post-stats {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--hf-muted);
+}
+.post-views {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--hf-dark);
+}
+
+/* Totals bar */
+.totals-bar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.total-chip {
+  flex: 1;
+  text-align: center;
+  padding: 6px;
+  background: white;
+  border-radius: 6px;
+  border: 1px solid rgba(0,0,0,0.04);
+}
+.total-value {
+  font-size: 16px;
+  font-weight: 900;
+  color: var(--hf-dark);
+}
+.total-value.highlight { color: var(--col-acquire); }
+.total-label {
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--hf-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Creator pills */
+.creator-pills {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+.creator-pill {
+  font-size: 10px;
+  font-weight: 600;
+  background: white;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 12px;
+  padding: 3px 8px;
+}
+.creator-pill.signed {
+  border-color: rgba(45, 107, 224, 0.2);
+  background: rgba(45, 107, 224, 0.04);
+  color: var(--col-acquire);
+  font-weight: 700;
+}
+
+/* Rec box */
+.rec-box {
+  margin-top: 8px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  background: rgba(27, 138, 74, 0.04);
+  border: 1px solid rgba(27, 138, 74, 0.1);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--hf-dark);
+  line-height: 1.5;
+}
+.rec-box strong { color: var(--hf-green); }
+
+/* Lightbox */
+.lightbox-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.85);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.lightbox-overlay.active { display: flex; }
+.lightbox-overlay img,
+.lightbox-overlay video {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 8px;
+  box-shadow: 0 4px 40px rgba(0,0,0,0.5);
+}
+
+</style>
+</head>
+<body>
+
+<div class="slide">
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-left">
+      <img src="https://media.hellofresh.com/w_256,q_100,f_auto,c_limit,fl_lossy/hellofresh_website/logo/Hello_Fresh_Lockup.png" alt="HelloFresh">
+      <div class="header-sep"></div>
+      <div class="header-feature">Cookbook Marketing Update</div>
+    </div>
+    <div class="header-right">W25 — June 11 – June 17</div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+    <div style="padding: 16px 20px; border-radius: 12px; background: rgba(45, 107, 224, 0.04); border: 1px solid rgba(45, 107, 224, 0.1);">
+      <div style="font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--col-acquire); margin-bottom: 6px;">Awareness & Acquisition</div>
+      <div style="font-size: 14px; font-weight: 700; color: var(--hf-dark); line-height: 1.4; margin-bottom: 10px;">Marina Lancellotta Reel (posted Jun 10) now at 14.4K views. Up 70% from W24 snapshot (8.4K). Comments strong at 34 (vs 10 in W24). Still the top performing creator UGC post.</div>
+      <div style="display: flex; gap: 16px;">
+        <div style="text-align: center;">
+          <div style="font-size: 24px; font-weight: 900; color: var(--col-acquire);">1</div>
+          <div style="font-size: 10px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase;">Posts</div>
+        </div>
+        <div style="text-align: center;">
+          <div style="font-size: 24px; font-weight: 900; color: var(--col-acquire);">14,394</div>
+          <div style="font-size: 10px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase;">Views</div>
+        </div>
+        <div style="text-align: center;">
+          <div style="font-size: 24px; font-weight: 900; color: var(--col-acquire);">71</div>
+          <div style="font-size: 10px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase;">Interactions</div>
+        </div>
+      </div>
+    </div>
+    <div style="padding: 16px 20px; border-radius: 12px; background: rgba(27, 138, 74, 0.04); border: 1px solid rgba(27, 138, 74, 0.1);">
+      <div style="font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--col-engage); margin-bottom: 6px;">Activation & Engagement</div>
+      <div style="font-size: 14px; font-weight: 700; color: var(--hf-dark); line-height: 1.4; margin-bottom: 10px;">LiB traffic normalised to 381 clickers after last week's 1,281 spike. Still zero Cookbook engagement from social traffic. Creator UTM sessions steady (21 this week from @emilyeggers) but no conversions across either creator.</div>
+      <div style="display: flex; gap: 16px;">
+        <div style="text-align: center;">
+          <div style="font-size: 24px; font-weight: 900; color: var(--col-engage);">381</div>
+          <div style="font-size: 10px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase;">LiB Clickers</div>
+        </div>
+        <div style="text-align: center;">
+          <div style="font-size: 24px; font-weight: 900; color: var(--col-engage);">0%</div>
+          <div style="font-size: 10px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase;">Click→View</div>
+        </div>
+        <div style="text-align: center;">
+          <div style="font-size: 24px; font-weight: 900; color: var(--col-engage);">0</div>
+          <div style="font-size: 10px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase;">Recipe Saves</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN COLUMNS -->
+  <div class="main-row">
+    <!-- LEFT: Awareness & Acquisition -->
+    <div class="column">
+      <div class="col-header acquire">Awareness & Acquisition</div>
+
+      <!-- Organic Social — Posts This Week -->
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-title acquire">Organic Social — Active Post</div>
+          <div class="section-period">Posted Jun 10 · Cumulative · US</div>
+        </div>
+        <div class="totals-bar">
+          <div class="total-chip">
+            <div class="total-value highlight">14,394</div>
+            <div class="total-label">Views</div>
+            <div style="font-size: 9px; font-weight: 700; color: var(--hf-muted); margin-top: 2px;">vs W24 snap (8,444)</div>
+          </div>
+          <div class="total-chip">
+            <div class="total-value highlight">71</div>
+            <div class="total-label">Interactions</div>
+            <div style="font-size: 9px; font-weight: 700; color: var(--hf-muted); margin-top: 2px;">vs W24 snap (27)</div>
+          </div>
+          <div class="total-chip">
+            <div class="total-value highlight">0.49%</div>
+            <div class="total-label">Eng. Rate</div>
+            <div style="font-size: 9px; font-weight: 700; color: var(--hf-muted); margin-top: 2px;">vs W24 (0.32%)</div>
+          </div>
+        </div>
+        <ul class="post-list">
+          <li class="post-item">
+            <video class="post-thumb" src="assets/HF_CookBookCreator_Marina_Lancellotta_Concept3a.mp4" muted></video>
+            <div class="post-info">
+              <div class="post-title">Creator UGC — Marina Lancellotta (Concept 3a)</div>
+              <div class="post-stats">Jun 10 · Instagram Reel · 32♥ 34💬 0↗ 1✈ 4🔖</div>
+            </div>
+            <div class="post-views">14,394</div>
+          </li>
+        </ul>
+        <div class="rec-box" style="margin-top: 10px; padding: 8px 12px; font-size: 11px; line-height: 1.5;">
+          <strong>Note:</strong> Same post as W24 (no new posts this week), but cumulative performance is strong. Views +70% WoW. Comments at 34 confirm creator UGC drives significantly more conversation than brand posts. Reach of 5,352 accounts with 1 new follower gained.
+        </div>
+      </div>
+
+      <!-- Creator Platform -->
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-title acquire">Creator Platform & Influencer</div>
+        </div>
+
+        <!-- Live -->
+        <div style="font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--hf-green); margin-bottom: 4px;">Live (13)</div>
+        <div class="creator-pills" style="margin-bottom: 10px;">
+          <span class="creator-pill signed" style="border-color: rgba(27, 138, 74, 0.3); background: rgba(27, 138, 74, 0.06); color: var(--hf-green);">@emilyeggers</span>
+          <span class="creator-pill signed" style="border-color: rgba(27, 138, 74, 0.3); background: rgba(27, 138, 74, 0.06); color: var(--hf-green);">@spoonfulofsi</span>
+          <span class="creator-pill signed" style="border-color: rgba(27, 138, 74, 0.3); background: rgba(27, 138, 74, 0.06); color: var(--hf-green);">@_nutritionwithnat</span>
+          <span class="creator-pill signed" style="border-color: rgba(27, 138, 74, 0.3); background: rgba(27, 138, 74, 0.06); color: var(--hf-green);">+4 organic</span>
+          <span class="creator-pill signed" style="border-color: rgba(27, 138, 74, 0.3); background: rgba(27, 138, 74, 0.06); color: var(--hf-green);">+6 paid</span>
+        </div>
+
+        <!-- Recipe Stats -->
+        <div style="font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--col-acquire); margin-bottom: 8px;">Active Recipes</div>
+        <div style="display: flex; gap: 10px; margin-bottom: 12px;">
+          <div style="flex: 1; text-align: center; padding: 10px 8px; background: white; border-radius: 8px; border: 1px solid rgba(0,0,0,0.04);">
+            <div style="font-size: 22px; font-weight: 900; color: var(--col-acquire);">42</div>
+            <div style="font-size: 9px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase;">Total Recipes</div>
+          </div>
+          <div style="flex: 1; text-align: center; padding: 10px 8px; background: white; border-radius: 8px; border: 1px solid rgba(0,0,0,0.04);">
+            <div style="font-size: 22px; font-weight: 900; color: var(--col-engage);">30</div>
+            <div style="font-size: 9px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase;">Organic</div>
+          </div>
+          <div style="flex: 1; text-align: center; padding: 10px 8px; background: white; border-radius: 8px; border: 1px solid rgba(0,0,0,0.04);">
+            <div style="font-size: 22px; font-weight: 900; color: var(--hf-dark);">12</div>
+            <div style="font-size: 9px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase;">Paid</div>
+          </div>
+        </div>
+
+        <!-- Progress to 100 Creators -->
+        <div style="font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--col-acquire); margin-bottom: 8px;">Progress to 100 Creators</div>
+        <div style="background: white; border-radius: 10px; border: 1px solid rgba(0,0,0,0.04); padding: 14px 16px; margin-bottom: 12px;">
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+            <div style="flex: 1; height: 20px; background: rgba(0,0,0,0.04); border-radius: 10px; overflow: hidden; position: relative;">
+              <div style="position: absolute; top: 0; left: 0; height: 100%; width: 100%; background: rgba(45, 107, 224, 0.12); border-radius: 10px;"></div>
+              <div style="position: absolute; top: 0; left: 0; height: 100%; width: 30%; background: rgba(45, 107, 224, 0.3); border-radius: 10px;"></div>
+              <div style="position: absolute; top: 0; left: 0; height: 100%; width: 13%; background: var(--col-acquire); border-radius: 10px;"></div>
+            </div>
+            <div style="font-size: 14px; font-weight: 900; color: var(--col-acquire); white-space: nowrap;">13 / 100</div>
+          </div>
+          <div style="display: flex; gap: 16px;">
+            <div style="display: flex; align-items: center; gap: 6px;">
+              <div style="width: 10px; height: 10px; border-radius: 3px; background: var(--col-acquire);"></div>
+              <div style="font-size: 10px; font-weight: 700; color: var(--hf-dark);">Live <span style="font-weight: 900; color: var(--col-acquire);">13</span></div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 6px;">
+              <div style="width: 10px; height: 10px; border-radius: 3px; background: rgba(45, 107, 224, 0.3);"></div>
+              <div style="font-size: 10px; font-weight: 700; color: var(--hf-dark);">Contacted <span style="font-weight: 900; color: var(--col-acquire);">30</span></div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 6px;">
+              <div style="width: 10px; height: 10px; border-radius: 3px; background: rgba(45, 107, 224, 0.12);"></div>
+              <div style="font-size: 10px; font-weight: 700; color: var(--hf-dark);">Applied <span style="font-weight: 900; color: var(--col-acquire);">112</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Toolkit -->
+        <div style="font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--hf-muted); margin-bottom: 4px;">Toolkit</div>
+        <div style="display: flex; gap: 8px;">
+          <a href="https://kieranenright.github.io/marketing-prototypes/prototypes/creators-join-with-form.html" target="_blank" style="font-size: 10px; font-weight: 700; padding: 4px 10px; border-radius: 5px; background: rgba(45, 107, 224, 0.08); border: 1px solid rgba(45, 107, 224, 0.2); color: var(--col-acquire); text-decoration: none;">Landing Page ↗</a>
+          <a href="https://kieranenright.github.io/marketing-prototypes/prototypes/creator-value-proposition.html" target="_blank" style="font-size: 10px; font-weight: 700; padding: 4px 10px; border-radius: 5px; background: rgba(45, 107, 224, 0.08); border: 1px solid rgba(45, 107, 224, 0.2); color: var(--col-acquire); text-decoration: none;">Value Proposition ↗</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Activation & Engagement -->
+    <div class="column">
+      <div class="col-header engage">Activation & Engagement</div>
+
+      <!-- Social → Cookbook Attribution (LiB) -->
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-title engage">Social → Cookbook Attribution</div>
+          <div class="section-period">W24 vs W25 · US</div>
+        </div>
+        <div style="font-size: 11px; font-weight: 600; color: var(--hf-dark); margin-bottom: 10px;">
+          Instagram link-in-bio clickers → Cookbook engagement (5-day window)
+        </div>
+
+        <!-- W24 vs W25 Funnel comparison -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px;">
+          <!-- W24 -->
+          <div style="padding: 10px 14px; background: white; border-radius: 8px; border: 1px solid rgba(0,0,0,0.04);">
+            <div style="font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--hf-muted); margin-bottom: 6px;">W24 (Jun 4 – Jun 10)</div>
+            <div style="display: flex; align-items: center; gap: 6px;">
+              <div style="text-align: center; flex: 1;">
+                <div style="font-size: 18px; font-weight: 900; color: var(--col-engage);">1,288</div>
+                <div style="font-size: 8px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase;">Clickers</div>
+              </div>
+              <div style="font-size: 14px; color: #ccc;">→</div>
+              <div style="text-align: center; flex: 1;">
+                <div style="font-size: 18px; font-weight: 900; color: var(--hf-muted);">0</div>
+                <div style="font-size: 8px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase;">Viewers</div>
+              </div>
+              <div style="font-size: 14px; color: #ccc;">→</div>
+              <div style="text-align: center; flex: 1;">
+                <div style="font-size: 18px; font-weight: 900; color: var(--hf-muted);">0</div>
+                <div style="font-size: 8px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase;">Saves</div>
+              </div>
+            </div>
+            <div style="font-size: 10px; font-weight: 700; color: var(--hf-muted); margin-top: 6px; text-align: center;">0% click-to-view</div>
+          </div>
+          <!-- W25 -->
+          <div style="padding: 10px 14px; background: white; border-radius: 8px; border: 1px solid rgba(0,0,0,0.04);">
+            <div style="font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--hf-muted); margin-bottom: 6px;">W25 (Jun 11 – Jun 15*)</div>
+            <div style="display: flex; align-items: center; gap: 6px;">
+              <div style="text-align: center; flex: 1;">
+                <div style="font-size: 18px; font-weight: 900; color: var(--col-engage);">381</div>
+                <div style="font-size: 8px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase;">Clickers</div>
+              </div>
+              <div style="font-size: 14px; color: #ccc;">→</div>
+              <div style="text-align: center; flex: 1;">
+                <div style="font-size: 18px; font-weight: 900; color: var(--hf-muted);">0</div>
+                <div style="font-size: 8px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase;">Viewers</div>
+              </div>
+              <div style="font-size: 14px; color: #ccc;">→</div>
+              <div style="text-align: center; flex: 1;">
+                <div style="font-size: 18px; font-weight: 900; color: var(--hf-muted);">0</div>
+                <div style="font-size: 8px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase;">Saves</div>
+              </div>
+            </div>
+            <div style="font-size: 10px; font-weight: 700; color: var(--hf-muted); margin-top: 6px; text-align: center;">0% click-to-view · *5 of 7 days</div>
+          </div>
+        </div>
+
+        <!-- WoW change -->
+        <table class="data-table">
+          <thead>
+            <tr><th>Metric</th><th>W24</th><th>W25*</th><th>Change</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>LiB Clickers (US)</td>
+              <td class="val-neutral">1,288</td>
+              <td class="val-neutral">381</td>
+              <td class="val-red" style="text-align: center;">-70%</td>
+            </tr>
+            <tr>
+              <td>Cookbook Viewers</td>
+              <td class="val-neutral">0</td>
+              <td class="val-neutral">0</td>
+              <td class="val-neutral" style="text-align: center;">—</td>
+            </tr>
+            <tr>
+              <td>Recipe Saves</td>
+              <td class="val-neutral">0</td>
+              <td class="val-neutral">0</td>
+              <td class="val-neutral" style="text-align: center;">—</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="rec-box" style="padding: 8px 12px; font-size: 11px; line-height: 1.5;">
+          <strong>Insight:</strong> LiB traffic fell 70% after last week's anomalous spike (1,288 → 381). W25 daily average is ~76 clickers/day, closer to the pre-spike baseline. Zero Cookbook engagement continues for the 5th consecutive week. The conversion gap between LiB landing and Cookbook remains the single biggest issue.
+        </div>
+      </div>
+
+      <!-- Creator Attribution -->
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-title engage">Creator Attribution</div>
+          <div class="section-period">May 12 – Jun 15 · UTM Tracked</div>
+        </div>
+        <div style="font-size: 11px; font-weight: 600; color: var(--hf-dark); margin-bottom: 10px;">
+          Cumulative link-in-bio sessions and Cookbook engagement from creator campaigns.
+        </div>
+
+        <!-- Summary metrics -->
+        <div style="display: flex; gap: 10px; margin-bottom: 12px;">
+          <div style="flex: 1; text-align: center; padding: 10px 8px; background: white; border-radius: 8px; border: 1px solid rgba(0,0,0,0.04);">
+            <div style="font-size: 16px; font-weight: 900; color: var(--col-engage);">@emilyeggers</div>
+            <div style="font-size: 9px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase; margin-top: 4px;">109 sessions · 1 view · 0 saves</div>
+          </div>
+          <div style="flex: 1; text-align: center; padding: 10px 8px; background: white; border-radius: 8px; border: 1px solid rgba(0,0,0,0.04);">
+            <div style="font-size: 16px; font-weight: 900; color: var(--col-engage);">@spoonfulofsi</div>
+            <div style="font-size: 9px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase; margin-top: 4px;">11 sessions · 0 views · 0 saves</div>
+          </div>
+        </div>
+
+        <!-- Weekly breakdown -->
+        <table class="data-table">
+          <thead>
+            <tr><th>Creator</th><th>W25 Sessions</th><th>Cumulative</th><th>Cookbook Views</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>@emilyeggers</td>
+              <td class="val-neutral">21</td>
+              <td class="val-neutral">109</td>
+              <td class="val-neutral">1 (CA, May 13)</td>
+            </tr>
+            <tr>
+              <td>@spoonfulofsi</td>
+              <td class="val-neutral">0</td>
+              <td class="val-neutral">11</td>
+              <td class="val-neutral">0</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="rec-box" style="padding: 8px 12px; font-size: 11px; line-height: 1.5;">
+          <strong>Note:</strong> @emilyeggers continues to drive steady daily traffic (3-7 sessions/day). @spoonfulofsi has had zero sessions since May 22, suggesting their UTM campaign link may have been dropped or content paused. Only 1 Cookbook view recorded across 5 weeks of creator traffic (120 total sessions).
+        </div>
+      </div>
+
+      <!-- Push Notification Update -->
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-title engage">Push Notifications — Status</div>
+          <div class="section-period">Launched Jun 12 · In Market</div>
+        </div>
+        <div style="font-size: 11px; font-weight: 600; color: var(--hf-dark); margin-bottom: 10px;">
+          Box Delivery Day push live since Jun 12. Soft launch at 100 users, scaling daily. Performance data pending first full reporting cycle.
+        </div>
+
+        <div style="display: flex; gap: 10px; margin-bottom: 12px;">
+          <div style="flex: 1; text-align: center; padding: 10px 8px; background: white; border-radius: 8px; border: 1px solid rgba(0,0,0,0.04);">
+            <div style="font-size: 22px; font-weight: 900; color: var(--col-engage);">1 / 10</div>
+            <div style="font-size: 9px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase;">Use Cases Live</div>
+          </div>
+          <div style="flex: 1; text-align: center; padding: 10px 8px; background: white; border-radius: 8px; border: 1px solid rgba(0,0,0,0.04);">
+            <div style="font-size: 22px; font-weight: 900; color: var(--col-engage);">5 days</div>
+            <div style="font-size: 9px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase;">In Market</div>
+          </div>
+          <div style="flex: 1; text-align: center; padding: 10px 8px; background: white; border-radius: 8px; border: 1px solid rgba(0,0,0,0.04);">
+            <div style="font-size: 22px; font-weight: 900; color: var(--col-engage);">4</div>
+            <div style="font-size: 9px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase;">Copy Variants</div>
+          </div>
+        </div>
+
+        <div class="rec-box" style="padding: 8px 12px; font-size: 11px; line-height: 1.5;">
+          <strong>Next step:</strong> First open rate and Cookbook engagement data expected next week once reporting catches up. Continue scaling cohort size daily.
+        </div>
+
+        <div style="margin-top: 10px;">
+          <a href="https://kieranenright.github.io/marketing-prototypes/prototypes/cookbook-push-journey.html" target="_blank" style="font-size: 10px; font-weight: 700; padding: 4px 10px; border-radius: 5px; background: rgba(27, 138, 74, 0.08); border: 1px solid rgba(27, 138, 74, 0.2); color: var(--col-engage); text-decoration: none;">View Full Strategy ↗</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox-overlay" id="lightbox"></div>
+
+<script>
+const lightbox = document.getElementById('lightbox');
+document.querySelectorAll('.post-thumb').forEach(el => {
+  el.addEventListener('click', () => {
+    let clone;
+    if (el.tagName === 'VIDEO') {
+      clone = document.createElement('video');
+      clone.src = el.src;
+      clone.controls = true;
+      clone.autoplay = true;
+      clone.loop = true;
+    } else {
+      clone = document.createElement('img');
+      clone.src = el.src;
+    }
+    lightbox.innerHTML = '';
+    lightbox.appendChild(clone);
+    lightbox.classList.add('active');
+  });
+});
+lightbox.addEventListener('click', () => {
+  lightbox.classList.remove('active');
+  const vid = lightbox.querySelector('video');
+  if (vid) vid.pause();
+  lightbox.innerHTML = '';
+});
+</script>
+
+</body>
+</html>
