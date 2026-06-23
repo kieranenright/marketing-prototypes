@@ -769,17 +769,17 @@ section {
 <section style="background: #F7F7F5; min-height: auto; padding: 100px 60px;" id="why">
   <div class="section-inner">
     <div class="section-tag reveal" style="color: var(--hf-green);">Pillar 1: Push Notifications</div>
-    <div class="section-title reveal" style="font-size: 40px; color: var(--hf-dark);">14 use cases.<br>35 touchpoints.</div>
+    <div class="section-title reveal" style="font-size: 40px; color: var(--hf-dark);">16 use cases.<br>39 touchpoints.</div>
     <div class="section-desc reveal" style="color: var(--hf-muted); max-width: 800px;">Four phases: Cookbook onboarding (first save + cook habits), meal kit lifecycle triggers (planner adoption, cook-through), Cookbook event triggers (off-night engagement, recipe discovery), and general Cookbook comms (scheduled re-engagement). Every push is personalised, suppression-controlled, and deep-linked. Grounded in the Efficient Inspired profile and Global TOV (Fresh, Vivid, Sharp, Zesty).</div>
 
     <!-- Stats Bar -->
     <div class="reveal" style="display: flex; gap: 16px; margin-top: 32px; margin-bottom: 48px;">
       <div style="flex: 1; background: white; border-radius: 12px; padding: 20px; text-align: center; border: 1px solid rgba(0,0,0,0.06);">
-        <div style="font-size: 28px; font-weight: 900; color: var(--hf-green);">14</div>
+        <div style="font-size: 28px; font-weight: 900; color: var(--hf-green);">16</div>
         <div style="font-size: 11px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase; letter-spacing: 1px;">Use Cases</div>
       </div>
       <div style="flex: 1; background: white; border-radius: 12px; padding: 20px; text-align: center; border: 1px solid rgba(0,0,0,0.06);">
-        <div style="font-size: 28px; font-weight: 900; color: var(--hf-green);">35</div>
+        <div style="font-size: 28px; font-weight: 900; color: var(--hf-green);">39</div>
         <div style="font-size: 11px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase; letter-spacing: 1px;">Touchpoints</div>
       </div>
       <div style="flex: 1; background: white; border-radius: 12px; padding: 20px; text-align: center; border: 1px solid rgba(0,0,0,0.06);">
@@ -810,7 +810,7 @@ section {
         <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--hf-green); margin-bottom: 6px;">Phase 2</div>
         <div style="font-size: 14px; font-weight: 800; color: var(--hf-dark); margin-bottom: 4px;">Cookbook Event Triggers</div>
         <div style="font-size: 11px; color: var(--hf-muted); line-height: 1.5;">Advanced behavioural pushes with real-time event signals and personalisation.</div>
-        <div style="margin-top: 10px; font-size: 10px; font-weight: 700; color: var(--hf-muted);">10 use cases &bull; 21 touchpoints</div>
+        <div style="margin-top: 10px; font-size: 10px; font-weight: 700; color: var(--hf-muted);">12 use cases &bull; 25 touchpoints</div>
       </div>
       <div style="background: var(--hf-cream); border-radius: 14px; padding: 20px; border: 1px solid rgba(0,0,0,0.06);">
         <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--hf-green); margin-bottom: 6px;">Phase 3</div>
@@ -1029,6 +1029,38 @@ section {
           <div style="font-size: 12px; color: var(--hf-muted);">{{x}} dinners handled in one session. We won't bug you till {{next_day}}.</div>
         </div>
         <div style="margin-top: 10px; font-size: 10px; font-weight: 700; color: var(--hf-muted);">PM window &bull; Suppresses gap-fill pushes for covered days</div>
+      </div>
+
+      <!-- 11. Cold-Traffic Reactivation -->
+      <div style="background: white; border-radius: 16px; padding: 28px; border: 1px solid rgba(0,0,0,0.06); position: relative; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.04);">
+        <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--hf-green);"></div>
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 14px;">
+          <span style="background: rgba(6,122,70,0.08); color: var(--hf-green); padding: 3px 8px; border-radius: 6px; font-size: 10px; font-weight: 800;">11</span>
+          <span style="font-size: 15px; font-weight: 800; color: var(--hf-dark);">Cold-Traffic Reactivation</span>
+        </div>
+        <div style="font-size: 11px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">Trigger</div>
+        <div style="font-size: 13px; color: var(--hf-muted); line-height: 1.5; margin-bottom: 14px;">User saved 1+ recipes via external import but never opened the Cookbook tab. 244K users in this cohort. Triggered post-rating, post-meal selection, or as a standalone push.</div>
+        <div style="background: var(--hf-cream); border-radius: 10px; padding: 14px;">
+          <div style="font-size: 14px; font-weight: 900; color: var(--hf-dark); margin-bottom: 2px;">You saved it. It's waiting.</div>
+          <div style="font-size: 12px; color: var(--hf-muted);">{{recipe_name}} is ready to cook. Open your Cookbook and see what else is in there.</div>
+        </div>
+        <div style="margin-top: 10px; font-size: 10px; font-weight: 700; color: var(--hf-muted);">PM window &bull; Max 1/week &bull; Suppressed once Cookbook opened &bull; Deep link: saved recipe</div>
+      </div>
+
+      <!-- 12. Post-Import Nudge -->
+      <div style="background: white; border-radius: 16px; padding: 28px; border: 1px solid rgba(0,0,0,0.06); position: relative; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.04);">
+        <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--hf-green);"></div>
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 14px;">
+          <span style="background: rgba(6,122,70,0.08); color: var(--hf-green); padding: 3px 8px; border-radius: 6px; font-size: 10px; font-weight: 800;">12</span>
+          <span style="font-size: 15px; font-weight: 800; color: var(--hf-dark);">Post-Import Nudge</span>
+        </div>
+        <div style="font-size: 11px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">Trigger</div>
+        <div style="font-size: 13px; color: var(--hf-muted); line-height: 1.5; margin-bottom: 14px;">User completes first external recipe import. Personalised nudge within 1 to 24 hours to convert first save into second save intent. Targets the proven retention window.</div>
+        <div style="background: var(--hf-cream); border-radius: 10px; padding: 14px;">
+          <div style="font-size: 14px; font-weight: 900; color: var(--hf-dark); margin-bottom: 2px;">Nice save. Here's what goes with it.</div>
+          <div style="font-size: 12px; color: var(--hf-muted);">You saved {{recipe_name}}. People who loved that also saved {{related_collection}}. Take a look.</div>
+        </div>
+        <div style="margin-top: 10px; font-size: 10px; font-weight: 700; color: var(--hf-muted);">1 to 24h post-import &bull; Single send &bull; Deep link: related collection &bull; Drives 1&rarr;2 retention</div>
       </div>
 
       <!-- PHASE 3: General Cookbook -->
