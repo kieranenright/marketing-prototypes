@@ -830,13 +830,13 @@ section {
           <span style="background: rgba(26,26,26,0.08); color: var(--hf-dark); padding: 3px 8px; border-radius: 6px; font-size: 10px; font-weight: 800;">P0</span>
           <span style="font-size: 15px; font-weight: 800; color: var(--hf-dark);">Box Day Cookbook Activation</span>
         </div>
-        <div style="font-size: 11px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">Trigger</div>
-        <div style="font-size: 13px; color: var(--hf-muted); line-height: 1.5; margin-bottom: 14px;">Weekly box delivery confirmed (same day). Box recipes auto-populate Cookbook carousel.</div>
+        <div style="font-size: 11px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">Trigger Event</div>
+        <div style="font-size: 13px; color: var(--hf-muted); line-height: 1.5; margin-bottom: 14px;"><strong style="color: var(--hf-dark);">Event:</strong> Weekly box delivery confirmed (carrier scan / in-app notification). This week's meal kit recipes auto-populate the Cookbook carousel. User has NOT previously used Cookbook cook mode (this is an onboarding push for first-time activation). <strong style="color: var(--hf-dark);">Timing:</strong> Same day, 6 PM. Catches unpack moment.</div>
         <div style="background: var(--hf-cream); border-radius: 10px; padding: 14px;">
           <div style="font-size: 14px; font-weight: 900; color: var(--hf-dark); margin-bottom: 2px;">Cooked tonight?</div>
           <div style="font-size: 12px; color: var(--hf-muted);">This week's recipes just landed in your Cookbook. Cook them step by step, timers and all.</div>
         </div>
-        <div style="margin-top: 10px; font-size: 10px; font-weight: 700; color: var(--hf-muted);">PM window &bull; Max 1/cycle &bull; Drives first save + cook mark</div>
+        <div style="margin-top: 10px; font-size: 10px; font-weight: 700; color: var(--hf-muted);">Delivery day 6 PM &bull; Max 1/cycle &bull; Drives first save + cook mark</div>
       </div>
 
       <!-- PHASE 1: Plan Your Week -->
@@ -846,13 +846,13 @@ section {
           <span style="background: rgba(6,122,70,0.08); color: var(--hf-green); padding: 3px 8px; border-radius: 6px; font-size: 10px; font-weight: 800;">P1</span>
           <span style="font-size: 15px; font-weight: 800; color: var(--hf-dark);">Plan Your Week</span>
         </div>
-        <div style="font-size: 11px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">Trigger</div>
-        <div style="font-size: 13px; color: var(--hf-muted); line-height: 1.5; margin-bottom: 14px;">Meal selection cutoff passed. Choices locked in, momentum high.</div>
+        <div style="font-size: 11px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">Trigger Event</div>
+        <div style="font-size: 13px; color: var(--hf-muted); line-height: 1.5; margin-bottom: 14px;"><strong style="color: var(--hf-dark);">Event:</strong> User's meal selection cutoff passes (order is confirmed/locked). User has NOT yet assigned meals to planner days. <strong style="color: var(--hf-dark);">Timing:</strong> 2 hours post-cutoff. Planning mindset is still warm; short delay avoids overlap with cutoff confirmation comms.</div>
         <div style="background: var(--hf-cream); border-radius: 10px; padding: 14px;">
           <div style="font-size: 14px; font-weight: 900; color: var(--hf-dark); margin-bottom: 2px;">Your meals. Your nights. Your call.</div>
           <div style="font-size: 12px; color: var(--hf-muted);">Open the planner and assign them however you want.</div>
         </div>
-        <div style="margin-top: 10px; font-size: 10px; font-weight: 700; color: var(--hf-muted);">AM window &bull; 1/cycle &bull; Drives planner adoption</div>
+        <div style="margin-top: 10px; font-size: 10px; font-weight: 700; color: var(--hf-muted);">2h post-cutoff &bull; AM window &bull; 1/cycle &bull; Drives planner adoption</div>
       </div>
 
       <!-- PHASE 1: Cook Tonight -->
@@ -862,13 +862,13 @@ section {
           <span style="background: rgba(6,122,70,0.08); color: var(--hf-green); padding: 3px 8px; border-radius: 6px; font-size: 10px; font-weight: 800;">P1</span>
           <span style="font-size: 15px; font-weight: 800; color: var(--hf-dark);">Cook Tonight</span>
         </div>
-        <div style="font-size: 11px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">Trigger</div>
-        <div style="font-size: 13px; color: var(--hf-muted); line-height: 1.5; margin-bottom: 14px;">Meal kit recipe assigned to today's planner slot. Ingredients in the fridge.</div>
+        <div style="font-size: 11px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">Trigger Event</div>
+        <div style="font-size: 13px; color: var(--hf-muted); line-height: 1.5; margin-bottom: 14px;"><strong style="color: var(--hf-dark);">Event:</strong> A meal kit recipe is assigned to today's planner slot AND the box has been delivered (ingredients confirmed in hand). User has NOT opened that recipe's cook mode today. <strong style="color: var(--hf-dark);">Timing:</strong> 5 PM day-of.</div>
         <div style="background: var(--hf-cream); border-radius: 10px; padding: 14px;">
           <div style="font-size: 14px; font-weight: 900; color: var(--hf-dark); margin-bottom: 2px;">Tonight: {{recipe_name}}</div>
           <div style="font-size: 12px; color: var(--hf-muted);">You planned it. Ingredients are in. Tap to start cooking.</div>
         </div>
-        <div style="margin-top: 10px; font-size: 10px; font-weight: 700; color: var(--hf-muted);">PM window &bull; Max 3/week &bull; Drives recipe cook-through</div>
+        <div style="margin-top: 10px; font-size: 10px; font-weight: 700; color: var(--hf-muted);">5 PM day-of &bull; Max 3/week &bull; Drives recipe cook-through</div>
       </div>
 
       <!-- 1. Removed Meal Reminder -->
@@ -878,13 +878,13 @@ section {
           <span style="background: rgba(6,122,70,0.08); color: var(--hf-green); padding: 3px 8px; border-radius: 6px; font-size: 10px; font-weight: 800;">01</span>
           <span style="font-size: 15px; font-weight: 800; color: var(--hf-dark);">Removed Meal Reminder</span>
         </div>
-        <div style="font-size: 11px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">Trigger</div>
-        <div style="font-size: 13px; color: var(--hf-muted); line-height: 1.5; margin-bottom: 14px;">User removes meal from box &rarr; saves to Cookbook via in-app nudge</div>
+        <div style="font-size: 11px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">Trigger Event</div>
+        <div style="font-size: 13px; color: var(--hf-muted); line-height: 1.5; margin-bottom: 14px;"><strong style="color: var(--hf-dark);">Event:</strong> User removes a recipe from their upcoming box AND accepts the in-app prompt to save it to Cookbook (auto-save confirmation). <strong style="color: var(--hf-dark);">Timing:</strong> Next day, 5 PM. Same day is too aggressive; next evening resurfaces the recipe when dinner planning starts.</div>
         <div style="background: var(--hf-cream); border-radius: 10px; padding: 14px;">
           <div style="font-size: 14px; font-weight: 900; color: var(--hf-dark); margin-bottom: 2px;">That {{recipe_name}} though.</div>
           <div style="font-size: 12px; color: var(--hf-muted);">Already in your Cookbook. All that's missing is the pan.</div>
         </div>
-        <div style="margin-top: 10px; font-size: 10px; font-weight: 700; color: var(--hf-muted);">PM window &bull; Single send per event</div>
+        <div style="margin-top: 10px; font-size: 10px; font-weight: 700; color: var(--hf-muted);">Next day 5 PM &bull; Single send per event</div>
       </div>
 
       <!-- 2. Meal Planner Gap Fill -->
@@ -894,13 +894,13 @@ section {
           <span style="background: rgba(6,122,70,0.08); color: var(--hf-green); padding: 3px 8px; border-radius: 6px; font-size: 10px; font-weight: 800;">02</span>
           <span style="font-size: 15px; font-weight: 800; color: var(--hf-dark);">Meal Planner Gap Fill</span>
         </div>
-        <div style="font-size: 11px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">Trigger</div>
-        <div style="font-size: 13px; color: var(--hf-muted); line-height: 1.5; margin-bottom: 14px;">1+ unassigned days in weekly planner AND 1+ saved Cookbook recipes</div>
+        <div style="font-size: 11px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">Trigger Event</div>
+        <div style="font-size: 13px; color: var(--hf-muted); line-height: 1.5; margin-bottom: 14px;"><strong style="color: var(--hf-dark);">Event:</strong> Today's planner slot is empty (no meal kit or Cookbook recipe assigned) AND user has 1+ saved Cookbook recipes that haven't been cooked yet. <strong style="color: var(--hf-dark);">Timing:</strong> 10 AM day-of. Catches the user before they default to takeout.</div>
         <div style="background: var(--hf-cream); border-radius: 10px; padding: 14px;">
           <div style="font-size: 14px; font-weight: 900; color: var(--hf-dark); margin-bottom: 2px;">Tonight's wide open.</div>
           <div style="font-size: 12px; color: var(--hf-muted);">{{recipe_name}} from your Cookbook. {{cook_time}} mins, your call.</div>
         </div>
-        <div style="margin-top: 10px; font-size: 10px; font-weight: 700; color: var(--hf-muted);">AM window &bull; Max 2 per week</div>
+        <div style="margin-top: 10px; font-size: 10px; font-weight: 700; color: var(--hf-muted);">10 AM day-of &bull; Max 2 per week</div>
       </div>
 
       <!-- 3. Skip Week -->
@@ -910,13 +910,13 @@ section {
           <span style="background: rgba(6,122,70,0.08); color: var(--hf-green); padding: 3px 8px; border-radius: 6px; font-size: 10px; font-weight: 800;">03</span>
           <span style="font-size: 15px; font-weight: 800; color: var(--hf-dark);">Skip Week</span>
         </div>
-        <div style="font-size: 11px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">Trigger</div>
-        <div style="font-size: 13px; color: var(--hf-muted); line-height: 1.5; margin-bottom: 14px;">User skips HelloFresh box; still has saved recipes</div>
+        <div style="font-size: 11px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">Trigger Event</div>
+        <div style="font-size: 13px; color: var(--hf-muted); line-height: 1.5; margin-bottom: 14px;"><strong style="color: var(--hf-dark);">Event:</strong> User actively skips their upcoming HelloFresh delivery (not a pause or cancel, just a single week skip). User has 1+ saved Cookbook recipes. <strong style="color: var(--hf-dark);">Timing:</strong> Morning of the day their box would have arrived. The gap in their routine is most felt here.</div>
         <div style="background: var(--hf-cream); border-radius: 10px; padding: 14px;">
           <div style="font-size: 14px; font-weight: 900; color: var(--hf-dark); margin-bottom: 2px;">No box. No problem.</div>
           <div style="font-size: 12px; color: var(--hf-muted);">Your Cookbook's got you covered. {{saved_count}} recipes ready to go.</div>
         </div>
-        <div style="margin-top: 10px; font-size: 10px; font-weight: 700; color: var(--hf-muted);">AM window &bull; 1 per skip &bull; Max 3 consecutive</div>
+        <div style="margin-top: 10px; font-size: 10px; font-weight: 700; color: var(--hf-muted);">Delivery day AM &bull; 1 per skip &bull; Max 3 consecutive</div>
       </div>
 
       <!-- 4. High-Rated Meal Kit -->
@@ -926,8 +926,8 @@ section {
           <span style="background: rgba(6,122,70,0.08); color: var(--hf-green); padding: 3px 8px; border-radius: 6px; font-size: 10px; font-weight: 800;">04</span>
           <span style="font-size: 15px; font-weight: 800; color: var(--hf-dark);">High-Rated Meal Kit</span>
         </div>
-        <div style="font-size: 11px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">Trigger</div>
-        <div style="font-size: 13px; color: var(--hf-muted); line-height: 1.5; margin-bottom: 14px;">User rates meal 4-5 stars post-cook</div>
+        <div style="font-size: 11px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">Trigger Event</div>
+        <div style="font-size: 13px; color: var(--hf-muted); line-height: 1.5; margin-bottom: 14px;"><strong style="color: var(--hf-dark);">Event:</strong> User submits a 4 or 5 star rating on a meal kit recipe AND that recipe is NOT already saved in their Cookbook. <strong style="color: var(--hf-dark);">Timing:</strong> 2 hours post-rating.</div>
         <div style="background: var(--hf-cream); border-radius: 10px; padding: 14px;">
           <div style="font-size: 14px; font-weight: 900; color: var(--hf-dark); margin-bottom: 2px;">{{recipe_name}} is a keeper.</div>
           <div style="font-size: 12px; color: var(--hf-muted);">Save it. Cook it again. No kit needed.</div>
@@ -942,13 +942,13 @@ section {
           <span style="background: rgba(6,122,70,0.08); color: var(--hf-green); padding: 3px 8px; border-radius: 6px; font-size: 10px; font-weight: 800;">05</span>
           <span style="font-size: 15px; font-weight: 800; color: var(--hf-dark);">Box Delivery Day</span>
         </div>
-        <div style="font-size: 11px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">Trigger</div>
-        <div style="font-size: 13px; color: var(--hf-muted); line-height: 1.5; margin-bottom: 14px;">Weekly box delivery confirmed</div>
+        <div style="font-size: 11px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">Trigger Event</div>
+        <div style="font-size: 13px; color: var(--hf-muted); line-height: 1.5; margin-bottom: 14px;"><strong style="color: var(--hf-dark);">Event:</strong> Box delivery confirmed (carrier scan or in-app delivery notification). User has 1+ saved Cookbook recipes AND their box covers fewer than 7 nights (gap nights exist). <strong style="color: var(--hf-dark);">Timing:</strong> Same evening, 6 PM. Frames Cookbook as the complement while unpack excitement is fresh.</div>
         <div style="background: var(--hf-cream); border-radius: 10px; padding: 14px;">
           <div style="font-size: 14px; font-weight: 900; color: var(--hf-dark); margin-bottom: 2px;">Box is here. What about the rest?</div>
           <div style="font-size: 12px; color: var(--hf-muted);">{{box_meals}} nights sorted. Your Cookbook handles the gaps.</div>
         </div>
-        <div style="margin-top: 10px; font-size: 10px; font-weight: 700; color: var(--hf-muted);">AM window &bull; Max 1/cycle &bull; Requires 1+ saved recipes</div>
+        <div style="margin-top: 10px; font-size: 10px; font-weight: 700; color: var(--hf-muted);">Delivery day 6 PM &bull; Max 1/cycle &bull; Requires 1+ saved recipes</div>
       </div>
 
       <!-- 6. Post-Pause / Cancel -->
@@ -958,13 +958,13 @@ section {
           <span style="background: rgba(6,122,70,0.08); color: var(--hf-green); padding: 3px 8px; border-radius: 6px; font-size: 10px; font-weight: 800;">06</span>
           <span style="font-size: 15px; font-weight: 800; color: var(--hf-dark);">Post-Pause / Cancel</span>
         </div>
-        <div style="font-size: 11px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">Trigger</div>
-        <div style="font-size: 13px; color: var(--hf-muted); line-height: 1.5; margin-bottom: 14px;">User pauses subscription or cancels</div>
+        <div style="font-size: 11px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">Trigger Event</div>
+        <div style="font-size: 13px; color: var(--hf-muted); line-height: 1.5; margin-bottom: 14px;"><strong style="color: var(--hf-dark);">Event:</strong> User completes a subscription pause or full cancellation flow. Must have previously used Cookbook (1+ saves or 1+ recipe views). <strong style="color: var(--hf-dark);">Timing:</strong> 48 hours post-event. Enough distance from the decision to not feel pushy, soon enough to catch them before they uninstall.</div>
         <div style="background: var(--hf-cream); border-radius: 10px; padding: 14px;">
           <div style="font-size: 14px; font-weight: 900; color: var(--hf-dark); margin-bottom: 2px;">Paused the box. Not the cooking.</div>
           <div style="font-size: 12px; color: var(--hf-muted);">Your Cookbook is always free. Save from anywhere, cook on your terms.</div>
         </div>
-        <div style="margin-top: 10px; font-size: 10px; font-weight: 700; color: var(--hf-muted);">AM window &bull; Single send &bull; 48h post-cancellation</div>
+        <div style="margin-top: 10px; font-size: 10px; font-weight: 700; color: var(--hf-muted);">48h post-pause/cancel, 10 AM &bull; Single send</div>
       </div>
 
       <!-- 7. Trending Recipe -->
@@ -974,13 +974,13 @@ section {
           <span style="background: rgba(6,122,70,0.08); color: var(--hf-green); padding: 3px 8px; border-radius: 6px; font-size: 10px; font-weight: 800;">07</span>
           <span style="font-size: 15px; font-weight: 800; color: var(--hf-dark);">Trending Recipe</span>
         </div>
-        <div style="font-size: 11px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">Trigger</div>
-        <div style="font-size: 13px; color: var(--hf-muted); line-height: 1.5; margin-bottom: 14px;">Recipe hits save threshold (e.g. 500+ saves in 24h)</div>
+        <div style="font-size: 11px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">Trigger Event</div>
+        <div style="font-size: 13px; color: var(--hf-muted); line-height: 1.5; margin-bottom: 14px;"><strong style="color: var(--hf-dark);">Event:</strong> A single recipe crosses the trending threshold (500+ saves within 24 hours). User is active (opened app in last 14 days) AND has NOT already saved that recipe. <strong style="color: var(--hf-dark);">Timing:</strong> Same day, 6 PM. "Happening now" urgency.</div>
         <div style="background: var(--hf-cream); border-radius: 10px; padding: 14px;">
           <div style="font-size: 14px; font-weight: 900; color: var(--hf-dark); margin-bottom: 2px;">Everyone's making this right now.</div>
           <div style="font-size: 12px; color: var(--hf-muted);">{{trending_recipe}}. {{save_count}} saves and counting.</div>
         </div>
-        <div style="margin-top: 10px; font-size: 10px; font-weight: 700; color: var(--hf-muted);">PM window &bull; Max 1/month &bull; Active users only (14d)</div>
+        <div style="margin-top: 10px; font-size: 10px; font-weight: 700; color: var(--hf-muted);">Same day 6 PM &bull; Max 1/month &bull; Active users only (14d)</div>
       </div>
 
       <!-- 8. Missing Protein Suggestion -->
@@ -990,13 +990,13 @@ section {
           <span style="background: rgba(6,122,70,0.08); color: var(--hf-green); padding: 3px 8px; border-radius: 6px; font-size: 10px; font-weight: 800;">08</span>
           <span style="font-size: 15px; font-weight: 800; color: var(--hf-dark);">Missing Protein Suggestion</span>
         </div>
-        <div style="font-size: 11px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">Trigger</div>
-        <div style="font-size: 13px; color: var(--hf-muted); line-height: 1.5; margin-bottom: 14px;">Saved recipe uses protein NOT in this week's box</div>
+        <div style="font-size: 11px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">Trigger Event</div>
+        <div style="font-size: 13px; color: var(--hf-muted); line-height: 1.5; margin-bottom: 14px;"><strong style="color: var(--hf-dark);">Event:</strong> Box delivery confirmed AND user has a saved Cookbook recipe whose primary protein (chicken, beef, tofu, etc.) is NOT included in this week's box ingredients. High confidence ingredient match required (no guessing). <strong style="color: var(--hf-dark);">Timing:</strong> Morning after delivery. They know what's in the fridge and can plan a quick shop.</div>
         <div style="background: var(--hf-cream); border-radius: 10px; padding: 14px;">
           <div style="font-size: 14px; font-weight: 900; color: var(--hf-dark); margin-bottom: 2px;">No {{protein}} this week?</div>
           <div style="font-size: 12px; color: var(--hf-muted);">Your {{recipe_name}} needs it. One trip, one dinner sorted.</div>
         </div>
-        <div style="margin-top: 10px; font-size: 10px; font-weight: 700; color: var(--hf-muted);">AM window &bull; Max 1/cycle &bull; High confidence match only</div>
+        <div style="margin-top: 10px; font-size: 10px; font-weight: 700; color: var(--hf-muted);">Day after delivery, 9 AM &bull; Max 1/cycle &bull; High confidence match only</div>
       </div>
 
       <!-- 9. Planned Night Reinforcement -->
@@ -1006,13 +1006,13 @@ section {
           <span style="background: rgba(6,122,70,0.08); color: var(--hf-green); padding: 3px 8px; border-radius: 6px; font-size: 10px; font-weight: 800;">09</span>
           <span style="font-size: 15px; font-weight: 800; color: var(--hf-dark);">Planned Night Reinforcement</span>
         </div>
-        <div style="font-size: 11px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">Trigger</div>
-        <div style="font-size: 13px; color: var(--hf-muted); line-height: 1.5; margin-bottom: 14px;">Cookbook recipe assigned to today's planner slot</div>
+        <div style="font-size: 11px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">Trigger Event</div>
+        <div style="font-size: 13px; color: var(--hf-muted); line-height: 1.5; margin-bottom: 14px;"><strong style="color: var(--hf-dark);">Event:</strong> A Cookbook (non-meal-kit) recipe is assigned to today's planner slot AND user has NOT opened that recipe today. <strong style="color: var(--hf-dark);">Timing:</strong> 4:30 PM day-of. "What's for dinner" decision window.</div>
         <div style="background: var(--hf-cream); border-radius: 10px; padding: 14px;">
           <div style="font-size: 14px; font-weight: 900; color: var(--hf-dark); margin-bottom: 2px;">Tonight's sorted.</div>
           <div style="font-size: 12px; color: var(--hf-muted);">{{recipe_name}} is on your planner. Tap when you're ready to cook.</div>
         </div>
-        <div style="margin-top: 10px; font-size: 10px; font-weight: 700; color: var(--hf-muted);">AM window &bull; Max 3/week &bull; Skip if recipe already opened</div>
+        <div style="margin-top: 10px; font-size: 10px; font-weight: 700; color: var(--hf-muted);">4:30 PM day-of &bull; Max 3/week &bull; Suppressed if recipe already opened</div>
       </div>
 
       <!-- 10. Batch Cooking Detection -->
@@ -1022,13 +1022,13 @@ section {
           <span style="background: rgba(212,165,100,0.12); color: var(--hf-honey); padding: 3px 8px; border-radius: 6px; font-size: 10px; font-weight: 800;">10</span>
           <span style="font-size: 15px; font-weight: 800; color: var(--hf-dark);">Batch Cooking Detection</span>
         </div>
-        <div style="font-size: 11px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">Trigger</div>
-        <div style="font-size: 13px; color: var(--hf-muted); line-height: 1.5; margin-bottom: 14px;">2+ recipes assigned to same day OR recipe with portions &gt;2. Suppression-first use case.</div>
+        <div style="font-size: 11px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">Trigger Event</div>
+        <div style="font-size: 13px; color: var(--hf-muted); line-height: 1.5; margin-bottom: 14px;"><strong style="color: var(--hf-dark);">Event:</strong> User assigns 2+ recipes to the same planner day OR assigns a recipe with servings &gt;2 (signals batch/meal prep intent). <strong style="color: var(--hf-dark);">Timing:</strong> 12 PM that day. Primary function is suppression: silences all gap-fill and reinforcement pushes for the days covered by the batch.</div>
         <div style="background: var(--hf-cream); border-radius: 10px; padding: 14px;">
           <div style="font-size: 14px; font-weight: 900; color: var(--hf-dark); margin-bottom: 2px;">Meal prep mode: on.</div>
           <div style="font-size: 12px; color: var(--hf-muted);">{{x}} dinners handled in one session. We won't bug you till {{next_day}}.</div>
         </div>
-        <div style="margin-top: 10px; font-size: 10px; font-weight: 700; color: var(--hf-muted);">PM window &bull; Suppresses gap-fill pushes for covered days</div>
+        <div style="margin-top: 10px; font-size: 10px; font-weight: 700; color: var(--hf-muted);">12 PM day-of &bull; Suppresses gap-fill pushes for covered days</div>
       </div>
 
       <!-- 11. Cold-Traffic Reactivation -->
@@ -1038,13 +1038,13 @@ section {
           <span style="background: rgba(6,122,70,0.08); color: var(--hf-green); padding: 3px 8px; border-radius: 6px; font-size: 10px; font-weight: 800;">11</span>
           <span style="font-size: 15px; font-weight: 800; color: var(--hf-dark);">Cold-Traffic Reactivation</span>
         </div>
-        <div style="font-size: 11px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">Trigger</div>
-        <div style="font-size: 13px; color: var(--hf-muted); line-height: 1.5; margin-bottom: 14px;">User saved 1+ recipes via external import but never opened the Cookbook tab. 244K users in this cohort. Triggered post-rating, post-meal selection, or as a standalone push.</div>
+        <div style="font-size: 11px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">Trigger Event</div>
+        <div style="font-size: 13px; color: var(--hf-muted); line-height: 1.5; margin-bottom: 14px;"><strong style="color: var(--hf-dark);">Event:</strong> User has saved 1+ recipes via external import (share sheet / URL paste) AND has never opened the Cookbook tab in-app. 244K users currently in this cohort. <strong style="color: var(--hf-dark);">Timing:</strong> 7 days post-save, 5 PM. Breathing room while the save is still memorable.</div>
         <div style="background: var(--hf-cream); border-radius: 10px; padding: 14px;">
           <div style="font-size: 14px; font-weight: 900; color: var(--hf-dark); margin-bottom: 2px;">You saved it. It's waiting.</div>
           <div style="font-size: 12px; color: var(--hf-muted);">{{recipe_name}} is ready to cook. Open your Cookbook and see what else is in there.</div>
         </div>
-        <div style="margin-top: 10px; font-size: 10px; font-weight: 700; color: var(--hf-muted);">PM window &bull; Max 1/week &bull; Suppressed once Cookbook opened &bull; Deep link: saved recipe</div>
+        <div style="margin-top: 10px; font-size: 10px; font-weight: 700; color: var(--hf-muted);">7 days post-save, 5 PM &bull; Max 1/week &bull; Suppressed once Cookbook opened &bull; Deep link: saved recipe</div>
       </div>
 
       <!-- 12. Post-Import Nudge -->
@@ -1054,13 +1054,13 @@ section {
           <span style="background: rgba(6,122,70,0.08); color: var(--hf-green); padding: 3px 8px; border-radius: 6px; font-size: 10px; font-weight: 800;">12</span>
           <span style="font-size: 15px; font-weight: 800; color: var(--hf-dark);">Post-Import Nudge</span>
         </div>
-        <div style="font-size: 11px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">Trigger</div>
-        <div style="font-size: 13px; color: var(--hf-muted); line-height: 1.5; margin-bottom: 14px;">User completes first external recipe import. Personalised nudge within 1 to 24 hours to convert first save into second save intent. Targets the proven retention window.</div>
+        <div style="font-size: 11px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">Trigger Event</div>
+        <div style="font-size: 13px; color: var(--hf-muted); line-height: 1.5; margin-bottom: 14px;"><strong style="color: var(--hf-dark);">Event:</strong> User completes their first-ever external recipe import (share sheet / URL paste successfully processed). This is specifically the 1st save, not subsequent ones. <strong style="color: var(--hf-dark);">Timing:</strong> 4 hours post-import. Fresh in memory but feels like a separate moment. Goal: convert 1st save into 2nd save intent.</div>
         <div style="background: var(--hf-cream); border-radius: 10px; padding: 14px;">
           <div style="font-size: 14px; font-weight: 900; color: var(--hf-dark); margin-bottom: 2px;">Nice save. Here's what goes with it.</div>
           <div style="font-size: 12px; color: var(--hf-muted);">You saved {{recipe_name}}. People who loved that also saved {{related_collection}}. Take a look.</div>
         </div>
-        <div style="margin-top: 10px; font-size: 10px; font-weight: 700; color: var(--hf-muted);">1 to 24h post-import &bull; Single send &bull; Deep link: related collection &bull; Drives 1&rarr;2 retention</div>
+        <div style="margin-top: 10px; font-size: 10px; font-weight: 700; color: var(--hf-muted);">4h post-import &bull; Single send &bull; Deep link: related collection &bull; Drives 1&rarr;2 retention</div>
       </div>
 
       <!-- PHASE 3: General Cookbook -->
@@ -1071,12 +1071,12 @@ section {
           <span style="font-size: 15px; font-weight: 800; color: var(--hf-dark);">General Cookbook Comms</span>
         </div>
         <div style="font-size: 11px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">Send Logic</div>
-        <div style="font-size: 13px; color: var(--hf-muted); line-height: 1.5; margin-bottom: 14px;">Scheduled send. Not event-triggered. Max 1 per 7 days. Suppressed if event-triggered push sent in last 5 days.</div>
+        <div style="font-size: 13px; color: var(--hf-muted); line-height: 1.5; margin-bottom: 14px;"><strong style="color: var(--hf-dark);">Event:</strong> None. This is a scheduled send, not event-triggered. Audience: users with 1+ saved Cookbook recipes who have NOT received any event-triggered push in the last 5 days. <strong style="color: var(--hf-dark);">Timing:</strong> Every Sunday at 5 PM. Weekly meal planning window.</div>
         <div style="background: var(--hf-cream); border-radius: 10px; padding: 14px;">
           <div style="font-size: 14px; font-weight: 900; color: var(--hf-dark); margin-bottom: 2px;">Remember what you saved?</div>
           <div style="font-size: 12px; color: var(--hf-muted);">Your Cookbook is full of ideas. Tonight could be one of them.</div>
         </div>
-        <div style="margin-top: 10px; font-size: 10px; font-weight: 700; color: var(--hf-muted);">PM window &bull; Max 1/7 days &bull; Deep link: Cookbook home</div>
+        <div style="margin-top: 10px; font-size: 10px; font-weight: 700; color: var(--hf-muted);">Sundays 5 PM &bull; Max 1/7 days &bull; Deep link: Cookbook home</div>
       </div>
 
     </div>
