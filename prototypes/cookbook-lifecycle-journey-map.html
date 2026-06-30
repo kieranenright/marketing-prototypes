@@ -337,15 +337,14 @@ body {
 <!-- HERO -->
 <header class="hero">
   <div class="hero-eyebrow">Cookbook / Push Journey Map</div>
-  <h1>Weekly Lifecycle: Push Touchpoints &amp; Cookbook Opportunities</h1>
-  <p class="hero-subtitle">Every push notification and activation opportunity mapped to the HelloFresh weekly cycle. From meal selection through cooking and beyond.</p>
+  <h1>Weekly Lifecycle: Push Touchpoints</h1>
+  <p class="hero-subtitle">Every push notification mapped to the HelloFresh weekly cycle. From meal selection through cooking and beyond.</p>
 
   <div class="legend">
     <div class="legend-item"><div class="legend-dot legend-dot--p0"></div>Phase 0: Onboarding</div>
     <div class="legend-item"><div class="legend-dot legend-dot--p1"></div>Phase 1: Meal Kit Lifecycle</div>
     <div class="legend-item"><div class="legend-dot legend-dot--p2"></div>Phase 2: Cookbook Events</div>
     <div class="legend-item"><div class="legend-dot legend-dot--p3"></div>Phase 3: General</div>
-    <div class="legend-item"><div class="legend-dot legend-dot--opp"></div>New Opportunity</div>
   </div>
 </header>
 
@@ -362,22 +361,6 @@ body {
     <div class="phase-group">
       <span class="phase-header-h phase-header-h--selection">Selection Window</span>
 
-      <!-- Menu Goes Live -->
-      <div class="moment-col">
-        <div class="moment-header">
-          <div class="moment-day">Day 1</div>
-          <div class="moment-title">Menu Goes Live</div>
-        </div>
-        <div class="moment-cards">
-          <div class="card card--opp">
-            <div class="card-phase card-phase--opp">Opportunity</div>
-            <div class="card-name">Cookbook Recipe Pairing</div>
-            <div class="card-desc">Surface saved Cookbook recipes that pair with this week's menu (sides, desserts, breakfast).</div>
-            <div class="card-window">AM</div>
-          </div>
-        </div>
-      </div>
-
       <!-- Adding / Removing -->
       <div class="moment-col">
         <div class="moment-header">
@@ -390,12 +373,6 @@ body {
             <div class="card-name">Removed Meal Reminder</div>
             <div class="card-desc">"That {{recipe_name}} though. Already in your Cookbook."</div>
             <div class="card-window">Same day PM / Next AM</div>
-          </div>
-          <div class="card card--opp">
-            <div class="card-phase card-phase--opp">Opportunity</div>
-            <div class="card-name">Save Before You Lose It</div>
-            <div class="card-desc">Nudge users who remove a meal but don't save it to Cookbook.</div>
-            <div class="card-window">Same day PM</div>
           </div>
         </div>
       </div>
@@ -412,12 +389,6 @@ body {
             <div class="card-name">Plan Your Week</div>
             <div class="card-desc">"Your meals. Your nights. Your call." Drives planner adoption.</div>
             <div class="card-window">Next AM 07:30</div>
-          </div>
-          <div class="card card--opp">
-            <div class="card-phase card-phase--opp">Opportunity</div>
-            <div class="card-name">Fill Your Off Nights</div>
-            <div class="card-desc">"3 nights sorted. What about the other 4? Your Cookbook has ideas."</div>
-            <div class="card-window">Next AM</div>
           </div>
         </div>
       </div>
@@ -453,12 +424,6 @@ body {
             <div class="card-desc">"No {{protein}} this week? One trip, one dinner sorted."</div>
             <div class="card-window">Next AM 07:30</div>
           </div>
-          <div class="card card--opp">
-            <div class="card-phase card-phase--opp">Opportunity</div>
-            <div class="card-name">Unboxing Discovery</div>
-            <div class="card-desc">In-app interstitial: "Browse 30-min Cookbook recipes for your other nights."</div>
-            <div class="card-window">In-app</div>
-          </div>
         </div>
       </div>
 
@@ -481,12 +446,6 @@ body {
             <div class="card-desc">"Tonight: {{recipe_name}}. You planned it. Ingredients are in."</div>
             <div class="card-window">PM 17:00</div>
           </div>
-          <div class="card card--opp">
-            <div class="card-phase card-phase--opp">Opportunity</div>
-            <div class="card-name">Post-Cook Cross-Sell</div>
-            <div class="card-desc">"Liked that? Save a similar one to Cookbook for next time."</div>
-            <div class="card-window">PM 20:00+</div>
-          </div>
         </div>
       </div>
 
@@ -502,12 +461,6 @@ body {
             <div class="card-name">High-Rated Meal Kit</div>
             <div class="card-desc">"{{recipe_name}} is a keeper. Save it. Cook it again. No kit needed."</div>
             <div class="card-window">+2h after rating</div>
-          </div>
-          <div class="card card--opp">
-            <div class="card-phase card-phase--opp">Opportunity</div>
-            <div class="card-name">Creator Recipe Match</div>
-            <div class="card-desc">"Loved this? A creator has a version with a twist."</div>
-            <div class="card-window">Next AM</div>
           </div>
         </div>
       </div>
@@ -531,12 +484,6 @@ body {
             <div class="card-desc">"Tonight's sorted. {{recipe_name}} is on your planner."</div>
             <div class="card-window">AM 07:30</div>
           </div>
-          <div class="card card--opp">
-            <div class="card-phase card-phase--opp">Opportunity</div>
-            <div class="card-name">Creator Spotlight</div>
-            <div class="card-desc">"No box tonight? @{{creator}} just posted a 20-min recipe."</div>
-            <div class="card-window">PM 16:00</div>
-          </div>
         </div>
       </div>
 
@@ -552,12 +499,6 @@ body {
             <div class="card-name">Batch Cooking Detection</div>
             <div class="card-desc">"Meal prep mode: on. We won't bug you till {{next_day}}."</div>
             <div class="card-window">PM 17:00</div>
-          </div>
-          <div class="card card--opp">
-            <div class="card-phase card-phase--opp">Opportunity</div>
-            <div class="card-name">Batch-Friendly Suggestions</div>
-            <div class="card-desc">Surface recipes tagged "meal prep friendly" or "great leftovers."</div>
-            <div class="card-window">AM (batch day)</div>
           </div>
         </div>
       </div>
@@ -581,12 +522,6 @@ body {
             <div class="card-desc">"Everyone's making this right now. {{save_count}} saves and counting."</div>
             <div class="card-window">PM (threshold hit)</div>
           </div>
-          <div class="card card--opp">
-            <div class="card-phase card-phase--opp">Opportunity</div>
-            <div class="card-name">Creator Collection Drop</div>
-            <div class="card-desc">"New this week: 5 summer grilling recipes from @{{creator}}."</div>
-            <div class="card-window">AM (1x/month)</div>
-          </div>
         </div>
       </div>
 
@@ -609,12 +544,6 @@ body {
             <div class="card-desc">"No box. No problem. {{saved_count}} recipes ready to go."</div>
             <div class="card-window">Day 1 AM 07:30</div>
           </div>
-          <div class="card card--opp">
-            <div class="card-phase card-phase--opp">Opportunity</div>
-            <div class="card-name">Skip Week Challenge</div>
-            <div class="card-desc">"No box this week. Try 3 Cookbook recipes instead?"</div>
-            <div class="card-window">Day 1 AM</div>
-          </div>
         </div>
       </div>
 
@@ -630,12 +559,6 @@ body {
             <div class="card-name">Post-Pause / Cancel</div>
             <div class="card-desc">"Paused the box. Not the cooking. Cookbook is always free."</div>
             <div class="card-window">+48h AM</div>
-          </div>
-          <div class="card card--opp">
-            <div class="card-phase card-phase--opp">Opportunity</div>
-            <div class="card-name">Creator Follow Prompt</div>
-            <div class="card-desc">"Still cooking? Follow creators for new recipes every week."</div>
-            <div class="card-window">+7 days</div>
           </div>
         </div>
       </div>
