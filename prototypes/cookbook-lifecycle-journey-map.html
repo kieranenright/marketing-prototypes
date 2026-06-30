@@ -12,7 +12,6 @@
   --brand-green: #067A46;
   --brand-green-dark: #055933;
   --brand-lime: #96DC14;
-  --brand-light-green: #D2F895;
   --bg-cream: #FAF8F3;
   --bg-elevated: #EFE9DE;
   --white: #FFFFFF;
@@ -38,6 +37,7 @@ body {
   color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
+  overflow-x: auto;
 }
 
 /* TOP BAR */
@@ -51,6 +51,7 @@ body {
   justify-content: space-between;
   position: sticky;
   top: 0;
+  left: 0;
   z-index: 100;
   backdrop-filter: blur(20px);
   background: rgba(255, 255, 255, 0.92);
@@ -68,262 +69,230 @@ body {
 
 /* HERO */
 .hero {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 56px 40px 0;
+  padding: 48px 40px 0;
 }
 
 .hero-eyebrow {
   font-size: 12px; font-weight: 600; text-transform: uppercase;
-  letter-spacing: 0.08em; color: var(--brand-green); margin-bottom: 16px;
+  letter-spacing: 0.08em; color: var(--brand-green); margin-bottom: 12px;
 }
 
 .hero h1 {
-  font-size: 32px; font-weight: 800; letter-spacing: -0.02em;
-  line-height: 1.15; color: var(--text-primary); margin-bottom: 14px;
+  font-size: 28px; font-weight: 800; letter-spacing: -0.02em;
+  line-height: 1.15; color: var(--text-primary); margin-bottom: 10px;
 }
 
 .hero-subtitle {
-  font-size: 15px; color: var(--text-secondary); line-height: 1.6;
-  max-width: 700px; margin-bottom: 32px;
+  font-size: 14px; color: var(--text-secondary); line-height: 1.6;
+  max-width: 700px; margin-bottom: 24px;
 }
 
 /* LEGEND */
 .legend {
-  display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 48px;
-  padding: 16px 20px; background: var(--white); border-radius: 10px;
-  border: 1px solid var(--border);
+  display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 40px;
+  padding: 14px 20px; background: var(--white); border-radius: 10px;
+  border: 1px solid var(--border); display: inline-flex;
 }
 
-.legend-item { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; }
-.legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+.legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; color: var(--text-secondary); }
+.legend-dot { width: 10px; height: 10px; border-radius: 3px; }
 .legend-dot--p0 { background: var(--phase-0); }
 .legend-dot--p1 { background: var(--phase-1); }
 .legend-dot--p2 { background: var(--phase-2); }
 .legend-dot--p3 { background: var(--phase-3); }
-.legend-dot--opp { background: var(--opportunity); border: 2px dashed var(--opportunity); background: transparent; }
+.legend-dot--opp { border: 2px dashed var(--opportunity); background: transparent; }
 
-/* JOURNEY CONTAINER */
-.journey {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 40px 60px;
+/* HORIZONTAL JOURNEY */
+.journey-scroll {
+  overflow-x: auto;
+  padding: 0 40px 40px;
+  -webkit-overflow-scrolling: touch;
 }
 
-/* TIMELINE */
-.timeline {
+.journey-track {
+  display: flex;
+  gap: 0;
+  min-width: max-content;
+  padding-top: 20px;
   position: relative;
-  padding-left: 200px;
 }
 
-.timeline::before {
+/* HORIZONTAL AXIS LINE */
+.journey-track::before {
   content: '';
   position: absolute;
-  left: 180px;
-  top: 0;
-  bottom: 0;
-  width: 3px;
-  background: linear-gradient(to bottom, var(--brand-green), var(--phase-2), var(--phase-0));
+  top: 72px;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(to right, var(--brand-green) 0%, var(--phase-1) 30%, var(--phase-2) 60%, var(--phase-0) 100%);
   border-radius: 2px;
+  z-index: 0;
 }
 
-/* MOMENT */
-.moment {
+/* PHASE GROUP */
+.phase-group {
+  display: flex;
+  gap: 0;
   position: relative;
-  margin-bottom: 48px;
 }
 
-.moment:last-child { margin-bottom: 0; }
-
-.moment-time {
+.phase-group::after {
+  content: '';
   position: absolute;
-  left: -200px;
   top: 0;
-  width: 160px;
-  text-align: right;
-  padding-right: 24px;
+  right: 0;
+  width: 1px;
+  height: 100%;
+  background: var(--border);
 }
 
-.moment-day {
-  font-size: 11px; font-weight: 700; text-transform: uppercase;
-  letter-spacing: 0.06em; color: var(--text-tertiary); margin-bottom: 2px;
-}
+.phase-group:last-child::after { display: none; }
 
-.moment-label {
-  font-size: 13px; font-weight: 600; color: var(--text-primary);
-}
-
-.moment-dot {
+/* PHASE HEADER */
+.phase-header-h {
   position: absolute;
-  left: -20px;
-  top: 4px;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: var(--brand-green);
-  border: 3px solid var(--bg-cream);
+  top: -8px;
+  left: 16px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 4px 10px;
+  border-radius: 4px;
+  white-space: nowrap;
   z-index: 2;
 }
 
-.moment-dot--major {
-  width: 18px;
-  height: 18px;
-  left: -22px;
-  top: 2px;
-  border: 3px solid var(--brand-green);
+.phase-header-h--selection { background: rgba(6, 122, 70, 0.1); color: var(--phase-1); }
+.phase-header-h--delivery { background: rgba(21, 101, 192, 0.1); color: var(--phase-2); }
+.phase-header-h--cooking { background: rgba(124, 58, 237, 0.1); color: var(--phase-0); }
+.phase-header-h--edge { background: rgba(230, 81, 0, 0.1); color: var(--phase-3); }
+
+/* MOMENT COLUMN */
+.moment-col {
+  width: 280px;
+  flex-shrink: 0;
+  padding: 0 12px;
+  position: relative;
+}
+
+/* DOT ON AXIS */
+.moment-col::before {
+  content: '';
+  position: absolute;
+  top: 48px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
   background: var(--white);
+  border: 3px solid var(--brand-green);
+  z-index: 2;
 }
 
-.moment-content {
-  padding-left: 20px;
+.moment-col--major::before {
+  width: 20px;
+  height: 20px;
+  top: 46px;
+  background: var(--brand-green);
+  border-color: var(--brand-green);
 }
 
-.moment-description {
-  font-size: 13px; color: var(--text-secondary); line-height: 1.5;
-  margin-bottom: 12px; max-width: 600px;
+/* MOMENT HEADER (above axis) */
+.moment-header {
+  text-align: center;
+  padding-bottom: 32px;
+  height: 52px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
 }
 
-/* PUSH CARDS */
-.push-cards {
+.moment-day {
+  font-size: 10px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.05em; color: var(--text-tertiary);
+}
+
+.moment-title {
+  font-size: 12px; font-weight: 700; color: var(--text-primary);
+  margin-top: 2px;
+}
+
+/* CARDS BELOW AXIS */
+.moment-cards {
+  padding-top: 40px;
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.push-card {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+.card {
   background: var(--white);
   border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 12px 16px;
-  transition: box-shadow 0.15s;
+  border-radius: 8px;
+  padding: 10px 12px;
+  border-left: 3px solid var(--border);
+  transition: box-shadow 0.15s, transform 0.15s;
+  cursor: default;
 }
 
-.push-card:hover {
+.card:hover {
   box-shadow: var(--shadow-card);
+  transform: translateY(-1px);
 }
 
-.push-card--p0 { border-left: 3px solid var(--phase-0); }
-.push-card--p1 { border-left: 3px solid var(--phase-1); }
-.push-card--p2 { border-left: 3px solid var(--phase-2); }
-.push-card--p3 { border-left: 3px solid var(--phase-3); }
-.push-card--opp { border-left: 3px dashed var(--opportunity); background: #FFFBEB; }
+.card--p0 { border-left-color: var(--phase-0); }
+.card--p1 { border-left-color: var(--phase-1); }
+.card--p2 { border-left-color: var(--phase-2); }
+.card--p3 { border-left-color: var(--phase-3); }
+.card--opp { border-left-color: var(--opportunity); border-left-style: dashed; background: #FFFBEB; }
 
-.push-phase {
-  font-size: 10px; font-weight: 700; text-transform: uppercase;
-  letter-spacing: 0.06em; padding: 3px 7px; border-radius: 4px;
-  flex-shrink: 0; white-space: nowrap;
+.card-phase {
+  font-size: 9px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.05em; margin-bottom: 4px;
 }
 
-.push-phase--p0 { background: rgba(124, 58, 237, 0.1); color: var(--phase-0); }
-.push-phase--p1 { background: rgba(6, 122, 70, 0.1); color: var(--phase-1); }
-.push-phase--p2 { background: rgba(21, 101, 192, 0.1); color: var(--phase-2); }
-.push-phase--p3 { background: rgba(230, 81, 0, 0.1); color: var(--phase-3); }
-.push-phase--opp { background: rgba(217, 119, 6, 0.1); color: var(--opportunity); }
+.card-phase--p0 { color: var(--phase-0); }
+.card-phase--p1 { color: var(--phase-1); }
+.card-phase--p2 { color: var(--phase-2); }
+.card-phase--p3 { color: var(--phase-3); }
+.card-phase--opp { color: var(--opportunity); }
 
-.push-info { flex: 1; min-width: 0; }
-
-.push-name {
-  font-size: 13px; font-weight: 600; color: var(--text-primary);
-  margin-bottom: 2px;
+.card-name {
+  font-size: 11px; font-weight: 600; color: var(--text-primary);
+  margin-bottom: 3px; line-height: 1.3;
 }
 
-.push-desc {
-  font-size: 12px; color: var(--text-secondary); line-height: 1.4;
+.card-desc {
+  font-size: 10px; color: var(--text-secondary); line-height: 1.4;
 }
 
-.push-window {
-  font-size: 11px; font-weight: 500; color: var(--text-tertiary);
-  white-space: nowrap; flex-shrink: 0;
+.card-window {
+  font-size: 9px; font-weight: 600; color: var(--text-tertiary);
+  margin-top: 5px; text-transform: uppercase; letter-spacing: 0.04em;
 }
 
-/* SECTION DIVIDERS */
-.section-divider {
-  max-width: 1200px;
-  margin: 0 auto 48px;
-  padding: 0 40px;
-}
-
-.divider-banner {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 24px 28px;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-.divider-icon {
-  width: 48px; height: 48px; border-radius: 12px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 20px; flex-shrink: 0;
-}
-
-.divider-icon--selection { background: rgba(6, 122, 70, 0.1); }
-.divider-icon--delivery { background: rgba(21, 101, 192, 0.1); }
-.divider-icon--cooking { background: rgba(124, 58, 237, 0.1); }
-
-.divider-text h2 {
-  font-size: 16px; font-weight: 700; color: var(--text-primary);
-  margin-bottom: 4px;
-}
-
-.divider-text p {
-  font-size: 13px; color: var(--text-secondary); line-height: 1.5;
-}
-
-/* OPPORTUNITY CALLOUT */
-.opportunity-section {
-  max-width: 1200px;
-  margin: 48px auto;
-  padding: 0 40px;
-}
-
-.opportunity-card {
-  background: var(--white);
-  border: 2px dashed var(--opportunity);
-  border-radius: var(--radius);
-  padding: 28px;
-}
-
-.opportunity-card h2 {
-  font-size: 18px; font-weight: 700; color: var(--opportunity);
-  margin-bottom: 16px;
-}
-
-.opp-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}
-
-.opp-item {
-  background: #FFFBEB;
-  border: 1px solid #FDE68A;
-  border-radius: 10px;
-  padding: 14px 16px;
-}
-
-.opp-item h3 {
-  font-size: 13px; font-weight: 700; color: var(--text-primary);
-  margin-bottom: 4px;
-}
-
-.opp-item p {
-  font-size: 12px; color: var(--text-secondary); line-height: 1.5;
-}
-
-.opp-item .opp-moment {
-  font-size: 11px; font-weight: 600; color: var(--opportunity);
-  text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 6px;
+/* CONNECTOR LINES FROM DOT TO CARDS */
+.moment-col::after {
+  content: '';
+  position: absolute;
+  top: 64px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 24px;
+  background: var(--border);
+  z-index: 1;
 }
 
 /* FOOTER */
 .site-footer {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 32px 40px 64px;
   display: flex;
@@ -336,22 +305,19 @@ body {
 .footer-text { font-size: 12px; color: var(--text-tertiary); }
 .footer-updated { font-size: 12px; color: var(--text-tertiary); font-weight: 500; }
 
-/* RESPONSIVE */
-@media (max-width: 900px) {
-  .timeline { padding-left: 0; }
-  .timeline::before { left: 12px; }
-  .moment-time { position: static; width: auto; text-align: left; padding: 0 0 8px 32px; }
-  .moment-dot { left: 6px; }
-  .moment-content { padding-left: 32px; }
-  .hero { padding: 40px 20px 0; }
-  .journey { padding: 0 20px 60px; }
-  .section-divider { padding: 0 20px; }
-  .opportunity-section { padding: 0 20px; }
-  .opp-grid { grid-template-columns: 1fr; }
-  .legend { padding: 12px 16px; gap: 12px; }
-  .top-bar { padding: 0 20px; }
-  .site-footer { padding: 24px 20px 48px; flex-direction: column; gap: 8px; }
+/* SCROLL HINT */
+.scroll-hint {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--text-tertiary);
+  font-weight: 500;
+  margin-bottom: 16px;
+  padding: 0 40px;
 }
+
+.scroll-hint svg { opacity: 0.5; }
 </style>
 </head>
 <body>
@@ -372,500 +338,310 @@ body {
 <header class="hero">
   <div class="hero-eyebrow">Cookbook / Push Journey Map</div>
   <h1>Weekly Lifecycle: Push Touchpoints &amp; Cookbook Opportunities</h1>
-  <p class="hero-subtitle">Mapping every push notification and activation opportunity across the HelloFresh weekly cycle. From meal selection through cooking and beyond. Where does Cookbook fit, and where are the gaps?</p>
+  <p class="hero-subtitle">Every push notification and activation opportunity mapped to the HelloFresh weekly cycle. From meal selection through cooking and beyond.</p>
 
   <div class="legend">
     <div class="legend-item"><div class="legend-dot legend-dot--p0"></div>Phase 0: Onboarding</div>
     <div class="legend-item"><div class="legend-dot legend-dot--p1"></div>Phase 1: Meal Kit Lifecycle</div>
     <div class="legend-item"><div class="legend-dot legend-dot--p2"></div>Phase 2: Cookbook Events</div>
-    <div class="legend-item"><div class="legend-dot legend-dot--p3"></div>Phase 3: General Cookbook</div>
+    <div class="legend-item"><div class="legend-dot legend-dot--p3"></div>Phase 3: General</div>
     <div class="legend-item"><div class="legend-dot legend-dot--opp"></div>New Opportunity</div>
   </div>
 </header>
 
-<!-- ═══════════════════════════════════════════ -->
-<!-- PHASE A: SELECTION WINDOW -->
-<!-- ═══════════════════════════════════════════ -->
-
-<div class="section-divider">
-  <div class="divider-banner">
-    <div class="divider-icon divider-icon--selection">📋</div>
-    <div class="divider-text">
-      <h2>Selection Window (Menu Live → Cutoff)</h2>
-      <p>The user is browsing the weekly menu, adding and removing meals. Decisions are still in flux. This is the "consideration" phase where intent signals fire.</p>
-    </div>
-  </div>
+<div class="scroll-hint">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+  Scroll horizontally to view the full journey
 </div>
 
-<div class="journey">
-  <div class="timeline">
+<!-- HORIZONTAL JOURNEY -->
+<div class="journey-scroll">
+  <div class="journey-track">
 
-    <!-- MOMENT: Menu goes live -->
-    <div class="moment">
-      <div class="moment-time">
-        <div class="moment-day">Day 1 of Cycle</div>
-        <div class="moment-label">Menu Goes Live</div>
-      </div>
-      <div class="moment-dot moment-dot--major"></div>
-      <div class="moment-content">
-        <div class="moment-description">New weekly menu is available. User can browse, add meals to their box, and explore options. Cookbook recipes are also visible alongside kit meals.</div>
-        <div class="push-cards">
-          <div class="push-card push-card--opp">
-            <span class="push-phase push-phase--opp">Opportunity</span>
-            <div class="push-info">
-              <div class="push-name">Cookbook Recipe Pairing</div>
-              <div class="push-desc">"Picking your box? Your Cookbook has sides and extras that pair with this week's menu." Surface saved recipes that complement what's on the menu this week.</div>
-            </div>
-            <span class="push-window">AM</span>
+    <!-- ═══ SELECTION WINDOW ═══ -->
+    <div class="phase-group">
+      <span class="phase-header-h phase-header-h--selection">Selection Window</span>
+
+      <!-- Menu Goes Live -->
+      <div class="moment-col">
+        <div class="moment-header">
+          <div class="moment-day">Day 1</div>
+          <div class="moment-title">Menu Goes Live</div>
+        </div>
+        <div class="moment-cards">
+          <div class="card card--opp">
+            <div class="card-phase card-phase--opp">Opportunity</div>
+            <div class="card-name">Cookbook Recipe Pairing</div>
+            <div class="card-desc">Surface saved Cookbook recipes that pair with this week's menu (sides, desserts, breakfast).</div>
+            <div class="card-window">AM</div>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- MOMENT: Browsing / Adding / Removing -->
-    <div class="moment">
-      <div class="moment-time">
-        <div class="moment-day">During Selection</div>
-        <div class="moment-label">User Adds &amp; Removes Meals</div>
-      </div>
-      <div class="moment-dot"></div>
-      <div class="moment-content">
-        <div class="moment-description">User interacts with the menu. They add meals to their box, swap them, and remove options they're unsure about. Removing a meal and saving it to Cookbook fires a key event.</div>
-        <div class="push-cards">
-          <div class="push-card push-card--p2">
-            <span class="push-phase push-phase--p2">Phase 2</span>
-            <div class="push-info">
-              <div class="push-name">Removed Meal Reminder</div>
-              <div class="push-desc">User adds meal → removes it → saves to Cookbook. Push fires same day PM or next morning. "That {{recipe_name}} though. Already in your Cookbook."</div>
-            </div>
-            <span class="push-window">PM / Next AM</span>
+      <!-- Adding / Removing -->
+      <div class="moment-col">
+        <div class="moment-header">
+          <div class="moment-day">During Selection</div>
+          <div class="moment-title">Add &amp; Remove Meals</div>
+        </div>
+        <div class="moment-cards">
+          <div class="card card--p2">
+            <div class="card-phase card-phase--p2">Phase 2</div>
+            <div class="card-name">Removed Meal Reminder</div>
+            <div class="card-desc">"That {{recipe_name}} though. Already in your Cookbook."</div>
+            <div class="card-window">Same day PM / Next AM</div>
           </div>
-          <div class="push-card push-card--opp">
-            <span class="push-phase push-phase--opp">Opportunity</span>
-            <div class="push-info">
-              <div class="push-name">Save Before You Lose It</div>
-              <div class="push-desc">If user removes a meal but does NOT save it to Cookbook, nudge them to save it. "Dropped {{recipe_name}}? Save it to Cookbook so it's there when you want it."</div>
-            </div>
-            <span class="push-window">Same day PM</span>
+          <div class="card card--opp">
+            <div class="card-phase card-phase--opp">Opportunity</div>
+            <div class="card-name">Save Before You Lose It</div>
+            <div class="card-desc">Nudge users who remove a meal but don't save it to Cookbook.</div>
+            <div class="card-window">Same day PM</div>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- MOMENT: Selection Cutoff -->
-    <div class="moment">
-      <div class="moment-time">
-        <div class="moment-day">Cutoff (e.g. Sat 8pm)</div>
-        <div class="moment-label">Meals Locked In</div>
-      </div>
-      <div class="moment-dot moment-dot--major"></div>
-      <div class="moment-content">
-        <div class="moment-description">Choices are final. The user knows exactly which 3 or 4 meals are coming. This is the transition from "choosing" to "planning the week." Momentum is high, intent is clear.</div>
-        <div class="push-cards">
-          <div class="push-card push-card--p1">
-            <span class="push-phase push-phase--p1">Phase 1</span>
-            <div class="push-info">
-              <div class="push-name">Plan Your Week</div>
-              <div class="push-desc">Fires morning after cutoff. "Your meals. Your nights. Your call." / "30 seconds now saves decisions all week." Drives planner adoption.</div>
-            </div>
-            <span class="push-window">Next AM 07:30</span>
+      <!-- Cutoff -->
+      <div class="moment-col moment-col--major">
+        <div class="moment-header">
+          <div class="moment-day">Cutoff (e.g. Sat 8pm)</div>
+          <div class="moment-title">Meals Locked In</div>
+        </div>
+        <div class="moment-cards">
+          <div class="card card--p1">
+            <div class="card-phase card-phase--p1">Phase 1</div>
+            <div class="card-name">Plan Your Week</div>
+            <div class="card-desc">"Your meals. Your nights. Your call." Drives planner adoption.</div>
+            <div class="card-window">Next AM 07:30</div>
           </div>
-          <div class="push-card push-card--opp">
-            <span class="push-phase push-phase--opp">Opportunity</span>
-            <div class="push-info">
-              <div class="push-name">Fill Your Off Nights (Pre-delivery)</div>
-              <div class="push-desc">User has 3 meals locked in but 7 nights ahead. Immediately post-cutoff: "3 nights sorted. What about the other 4? Your Cookbook has ideas." Targets the planning mindset while it's active.</div>
-            </div>
-            <span class="push-window">Next AM</span>
+          <div class="card card--opp">
+            <div class="card-phase card-phase--opp">Opportunity</div>
+            <div class="card-name">Fill Your Off Nights</div>
+            <div class="card-desc">"3 nights sorted. What about the other 4? Your Cookbook has ideas."</div>
+            <div class="card-window">Next AM</div>
           </div>
         </div>
       </div>
+
     </div>
 
-  </div>
-</div>
+    <!-- ═══ BOX DELIVERY ═══ -->
+    <div class="phase-group">
+      <span class="phase-header-h phase-header-h--delivery">Box Delivery</span>
 
-<!-- ═══════════════════════════════════════════ -->
-<!-- PHASE B: BOX DELIVERY -->
-<!-- ═══════════════════════════════════════════ -->
-
-<div class="section-divider">
-  <div class="divider-banner">
-    <div class="divider-icon divider-icon--delivery">📦</div>
-    <div class="divider-text">
-      <h2>Box Delivery</h2>
-      <p>The box arrives. Ingredients are in the fridge. The user transitions from planning to execution. This is the highest-engagement moment of the weekly cycle.</p>
-    </div>
-  </div>
-</div>
-
-<div class="journey">
-  <div class="timeline">
-
-    <!-- MOMENT: Delivery Confirmed -->
-    <div class="moment">
-      <div class="moment-time">
-        <div class="moment-day">Delivery Day</div>
-        <div class="moment-label">Box Arrives</div>
-      </div>
-      <div class="moment-dot moment-dot--major"></div>
-      <div class="moment-content">
-        <div class="moment-description">Delivery confirmation triggers. Ingredients are physically in the home. This is the peak activation moment: freshness is high, excitement is real, dinner is imminent.</div>
-        <div class="push-cards">
-          <div class="push-card push-card--p0">
-            <span class="push-phase push-phase--p0">Phase 0</span>
-            <div class="push-info">
-              <div class="push-name">Box Day Cookbook Activation</div>
-              <div class="push-desc">First-time Cookbook users only. "Cooked tonight? It's already in your Cookbook. Save it and mark it cooked to keep it forever." Establishes the save + cook habit.</div>
-            </div>
-            <span class="push-window">PM 17:00</span>
+      <!-- Box Arrives -->
+      <div class="moment-col moment-col--major">
+        <div class="moment-header">
+          <div class="moment-day">Delivery Day</div>
+          <div class="moment-title">Box Arrives</div>
+        </div>
+        <div class="moment-cards">
+          <div class="card card--p0">
+            <div class="card-phase card-phase--p0">Phase 0</div>
+            <div class="card-name">Box Day Cookbook Activation</div>
+            <div class="card-desc">"Cooked tonight? Save it and mark it cooked to keep it forever."</div>
+            <div class="card-window">PM 17:00</div>
           </div>
-          <div class="push-card push-card--p2">
-            <span class="push-phase push-phase--p2">Phase 2</span>
-            <div class="push-info">
-              <div class="push-name">Box Delivery Day (The Other Nights)</div>
-              <div class="push-desc">For active Cookbook users. "Box is here. What about the rest? 3 nights sorted. Your Cookbook handles the gaps." Fires day after delivery.</div>
-            </div>
-            <span class="push-window">Next AM 07:30</span>
+          <div class="card card--p2">
+            <div class="card-phase card-phase--p2">Phase 2</div>
+            <div class="card-name">The Other Nights</div>
+            <div class="card-desc">"Box is here. What about the rest? Your Cookbook handles the gaps."</div>
+            <div class="card-window">Next AM 07:30</div>
           </div>
-          <div class="push-card push-card--p2">
-            <span class="push-phase push-phase--p2">Phase 2</span>
-            <div class="push-info">
-              <div class="push-name">Missing Protein Suggestion</div>
-              <div class="push-desc">"No chicken this week? Your {{recipe_name}} needs it. One trip, one dinner sorted." Surfaces saved recipes that use proteins not in this week's box.</div>
-            </div>
-            <span class="push-window">Next AM 07:30</span>
+          <div class="card card--p2">
+            <div class="card-phase card-phase--p2">Phase 2</div>
+            <div class="card-name">Missing Protein Suggestion</div>
+            <div class="card-desc">"No {{protein}} this week? One trip, one dinner sorted."</div>
+            <div class="card-window">Next AM 07:30</div>
           </div>
-          <div class="push-card push-card--opp">
-            <span class="push-phase push-phase--opp">Opportunity</span>
-            <div class="push-info">
-              <div class="push-name">Cookbook Discovery at Unboxing</div>
-              <div class="push-desc">The moment they open the box, they're already thinking about food. In-app interstitial (not push): "While you unpack: browse 30-min Cookbook recipes for the nights your box doesn't cover."</div>
-            </div>
-            <span class="push-window">In-app</span>
+          <div class="card card--opp">
+            <div class="card-phase card-phase--opp">Opportunity</div>
+            <div class="card-name">Unboxing Discovery</div>
+            <div class="card-desc">In-app interstitial: "Browse 30-min Cookbook recipes for your other nights."</div>
+            <div class="card-window">In-app</div>
           </div>
         </div>
       </div>
+
     </div>
 
-  </div>
-</div>
+    <!-- ═══ COOKING WEEK ═══ -->
+    <div class="phase-group">
+      <span class="phase-header-h phase-header-h--cooking">Cooking Week</span>
 
-<!-- ═══════════════════════════════════════════ -->
-<!-- PHASE C: COOKING WEEK -->
-<!-- ═══════════════════════════════════════════ -->
-
-<div class="section-divider">
-  <div class="divider-banner">
-    <div class="divider-icon divider-icon--cooking">🍳</div>
-    <div class="divider-text">
-      <h2>Cooking Week (Delivery → Next Cutoff)</h2>
-      <p>The user cooks their way through the week. Some nights use the box, some nights are open. This is where the planner, Cookbook, and habit loops all converge.</p>
-    </div>
-  </div>
-</div>
-
-<div class="journey">
-  <div class="timeline">
-
-    <!-- MOMENT: Kit Night (planned) -->
-    <div class="moment">
-      <div class="moment-time">
-        <div class="moment-day">Kit Nights</div>
-        <div class="moment-label">Planned Meal Kit Dinner</div>
-      </div>
-      <div class="moment-dot"></div>
-      <div class="moment-content">
-        <div class="moment-description">User has a meal kit recipe assigned in their planner for tonight. Ingredients are in the fridge. The plan exists, this push reinforces it.</div>
-        <div class="push-cards">
-          <div class="push-card push-card--p1">
-            <span class="push-phase push-phase--p1">Phase 1</span>
-            <div class="push-info">
-              <div class="push-name">Cook Tonight</div>
-              <div class="push-desc">"Tonight: {{recipe_name}}. You planned it. Ingredients are in. Tap to start cooking." / "{{cook_time}} mins. That's it." Reinforces the plan, drives cook-through.</div>
-            </div>
-            <span class="push-window">PM 17:00</span>
+      <!-- Kit Night -->
+      <div class="moment-col">
+        <div class="moment-header">
+          <div class="moment-day">Kit Nights</div>
+          <div class="moment-title">Planned Meal Kit</div>
+        </div>
+        <div class="moment-cards">
+          <div class="card card--p1">
+            <div class="card-phase card-phase--p1">Phase 1</div>
+            <div class="card-name">Cook Tonight</div>
+            <div class="card-desc">"Tonight: {{recipe_name}}. You planned it. Ingredients are in."</div>
+            <div class="card-window">PM 17:00</div>
           </div>
-          <div class="push-card push-card--opp">
-            <span class="push-phase push-phase--opp">Opportunity</span>
-            <div class="push-info">
-              <div class="push-name">Post-Cook Cookbook Cross-Sell</div>
-              <div class="push-desc">After they finish cooking (mark as cooked or 2h after recipe open): "Liked that? Save a similar one to Cookbook for next time you want {{cuisine_type}}." Bridges kit to Cookbook discovery.</div>
-            </div>
-            <span class="push-window">PM 20:00+</span>
+          <div class="card card--opp">
+            <div class="card-phase card-phase--opp">Opportunity</div>
+            <div class="card-name">Post-Cook Cross-Sell</div>
+            <div class="card-desc">"Liked that? Save a similar one to Cookbook for next time."</div>
+            <div class="card-window">PM 20:00+</div>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- MOMENT: Post-cook rating -->
-    <div class="moment">
-      <div class="moment-time">
-        <div class="moment-day">After Cooking</div>
-        <div class="moment-label">User Rates Meal (4-5 stars)</div>
-      </div>
-      <div class="moment-dot"></div>
-      <div class="moment-content">
-        <div class="moment-description">User just cooked and loved it. They rate it highly. The emotional peak: satisfaction, accomplishment, "I want to make this again." Cookbook ownership moment.</div>
-        <div class="push-cards">
-          <div class="push-card push-card--p2">
-            <span class="push-phase push-phase--p2">Phase 2</span>
-            <div class="push-info">
-              <div class="push-name">High-Rated Meal Kit</div>
-              <div class="push-desc">"{{recipe_name}} is a keeper. Save it. Cook it again. No kit needed." Fires 2 hours after a 4 or 5 star rating. Drives recipe ownership in Cookbook.</div>
-            </div>
-            <span class="push-window">+2h after rating</span>
+      <!-- Post-Cook Rating -->
+      <div class="moment-col">
+        <div class="moment-header">
+          <div class="moment-day">After Cooking</div>
+          <div class="moment-title">Rates 4-5 Stars</div>
+        </div>
+        <div class="moment-cards">
+          <div class="card card--p2">
+            <div class="card-phase card-phase--p2">Phase 2</div>
+            <div class="card-name">High-Rated Meal Kit</div>
+            <div class="card-desc">"{{recipe_name}} is a keeper. Save it. Cook it again. No kit needed."</div>
+            <div class="card-window">+2h after rating</div>
           </div>
-          <div class="push-card push-card--opp">
-            <span class="push-phase push-phase--opp">Opportunity</span>
-            <div class="push-info">
-              <div class="push-name">Creator Recipe Match</div>
-              <div class="push-desc">"Loved {{recipe_name}}? A creator in Cookbook has a version with a twist." Connect high-rated meals to similar creator recipes. Drives Cookbook depth and creator platform engagement.</div>
-            </div>
-            <span class="push-window">Next AM</span>
+          <div class="card card--opp">
+            <div class="card-phase card-phase--opp">Opportunity</div>
+            <div class="card-name">Creator Recipe Match</div>
+            <div class="card-desc">"Loved this? A creator has a version with a twist."</div>
+            <div class="card-window">Next AM</div>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- MOMENT: Off-nights (no kit) -->
-    <div class="moment">
-      <div class="moment-time">
-        <div class="moment-day">Off Nights</div>
-        <div class="moment-label">No Kit Meal Assigned</div>
-      </div>
-      <div class="moment-dot"></div>
-      <div class="moment-content">
-        <div class="moment-description">Days with no meal kit in the planner. The "what's for dinner?" moment. This is Cookbook's primary real estate: they're already in planning mode, just without a kit answer.</div>
-        <div class="push-cards">
-          <div class="push-card push-card--p2">
-            <span class="push-phase push-phase--p2">Phase 2</span>
-            <div class="push-info">
-              <div class="push-name">Meal Planner Gap Fill</div>
-              <div class="push-desc">"Tonight's wide open. {{recipe_name}} from your Cookbook. {{cook_time}} mins, your call." / "No kit tonight. No problem. Your Cookbook. Your rules."</div>
-            </div>
-            <span class="push-window">AM 07:30</span>
+      <!-- Off Nights -->
+      <div class="moment-col">
+        <div class="moment-header">
+          <div class="moment-day">Off Nights</div>
+          <div class="moment-title">No Kit Assigned</div>
+        </div>
+        <div class="moment-cards">
+          <div class="card card--p2">
+            <div class="card-phase card-phase--p2">Phase 2</div>
+            <div class="card-name">Meal Planner Gap Fill</div>
+            <div class="card-desc">"Tonight's wide open. {{recipe_name}} from your Cookbook. Your call."</div>
+            <div class="card-window">AM 07:30</div>
           </div>
-          <div class="push-card push-card--p2">
-            <span class="push-phase push-phase--p2">Phase 2</span>
-            <div class="push-info">
-              <div class="push-name">Planned Night Reinforcement</div>
-              <div class="push-desc">If user has assigned a Cookbook recipe to tonight's slot: "Tonight's sorted. {{recipe_name}} is on your planner. Tap when you're ready to cook."</div>
-            </div>
-            <span class="push-window">AM 07:30</span>
+          <div class="card card--p2">
+            <div class="card-phase card-phase--p2">Phase 2</div>
+            <div class="card-name">Planned Night Reinforcement</div>
+            <div class="card-desc">"Tonight's sorted. {{recipe_name}} is on your planner."</div>
+            <div class="card-window">AM 07:30</div>
           </div>
-          <div class="push-card push-card--opp">
-            <span class="push-phase push-phase--opp">Opportunity</span>
-            <div class="push-info">
-              <div class="push-name">Creator Spotlight (Off Night)</div>
-              <div class="push-desc">"No box tonight? @{{creator_handle}} just posted a 20-min recipe. Save it and cook tonight." Use off-nights to introduce creator content when user has no plan yet.</div>
-            </div>
-            <span class="push-window">PM 16:00</span>
+          <div class="card card--opp">
+            <div class="card-phase card-phase--opp">Opportunity</div>
+            <div class="card-name">Creator Spotlight</div>
+            <div class="card-desc">"No box tonight? @{{creator}} just posted a 20-min recipe."</div>
+            <div class="card-window">PM 16:00</div>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- MOMENT: Batch cooking -->
-    <div class="moment">
-      <div class="moment-time">
-        <div class="moment-day">Batch Day (e.g. Sunday)</div>
-        <div class="moment-label">Batch Cook / Meal Prep</div>
-      </div>
-      <div class="moment-dot"></div>
-      <div class="moment-content">
-        <div class="moment-description">User assigns 2+ recipes to one day or a high-portion recipe. They're batch cooking to cover multiple days. The system must recognise this and suppress false gap triggers.</div>
-        <div class="push-cards">
-          <div class="push-card push-card--p2">
-            <span class="push-phase push-phase--p2">Phase 2</span>
-            <div class="push-info">
-              <div class="push-name">Batch Cooking Detection</div>
-              <div class="push-desc">"Meal prep mode: on. {{x}} dinners handled in one session. We won't bug you till {{next_day}}." Acknowledges the batch, suppresses gap triggers for covered days.</div>
-            </div>
-            <span class="push-window">PM 17:00</span>
+      <!-- Batch Cook -->
+      <div class="moment-col">
+        <div class="moment-header">
+          <div class="moment-day">Batch Day</div>
+          <div class="moment-title">Meal Prep Session</div>
+        </div>
+        <div class="moment-cards">
+          <div class="card card--p2">
+            <div class="card-phase card-phase--p2">Phase 2</div>
+            <div class="card-name">Batch Cooking Detection</div>
+            <div class="card-desc">"Meal prep mode: on. We won't bug you till {{next_day}}."</div>
+            <div class="card-window">PM 17:00</div>
           </div>
-          <div class="push-card push-card--opp">
-            <span class="push-phase push-phase--opp">Opportunity</span>
-            <div class="push-info">
-              <div class="push-name">Batch-Friendly Recipe Suggestions</div>
-              <div class="push-desc">Surface Cookbook recipes tagged as "meal prep friendly" or "makes great leftovers" when we detect batch behaviour. Help them fill more of the week in one session.</div>
-            </div>
-            <span class="push-window">AM (batch day)</span>
+          <div class="card card--opp">
+            <div class="card-phase card-phase--opp">Opportunity</div>
+            <div class="card-name">Batch-Friendly Suggestions</div>
+            <div class="card-desc">Surface recipes tagged "meal prep friendly" or "great leftovers."</div>
+            <div class="card-window">AM (batch day)</div>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- MOMENT: General / unscheduled -->
-    <div class="moment">
-      <div class="moment-time">
-        <div class="moment-day">Any Day</div>
-        <div class="moment-label">General Re-engagement</div>
-      </div>
-      <div class="moment-dot"></div>
-      <div class="moment-content">
-        <div class="moment-description">Scheduled sends not tied to a specific event. For users who haven't been activated by an event trigger recently. Low-frequency, broad targeting.</div>
-        <div class="push-cards">
-          <div class="push-card push-card--p3">
-            <span class="push-phase push-phase--p3">Phase 3</span>
-            <div class="push-info">
-              <div class="push-name">General Cookbook (Forgotten Saves / Low Effort / Try New)</div>
-              <div class="push-desc">"Remember what you saved?" / "No plan? No problem. Open your Cookbook." / "Cook something different. Your Cookbook has recipes you haven't tried yet."</div>
-            </div>
-            <span class="push-window">PM 17:00</span>
+      <!-- General -->
+      <div class="moment-col">
+        <div class="moment-header">
+          <div class="moment-day">Any Day</div>
+          <div class="moment-title">General / Trending</div>
+        </div>
+        <div class="moment-cards">
+          <div class="card card--p3">
+            <div class="card-phase card-phase--p3">Phase 3</div>
+            <div class="card-name">General Cookbook</div>
+            <div class="card-desc">"Remember what you saved?" / "No plan? No problem."</div>
+            <div class="card-window">PM 17:00</div>
           </div>
-          <div class="push-card push-card--p2">
-            <span class="push-phase push-phase--p2">Phase 2</span>
-            <div class="push-info">
-              <div class="push-name">Trending Recipe</div>
-              <div class="push-desc">"Everyone's making this right now. {{trending_recipe}}. {{save_count}} saves and counting." Social proof trigger when a recipe hits threshold saves on the platform.</div>
-            </div>
-            <span class="push-window">PM (when threshold hit)</span>
+          <div class="card card--p2">
+            <div class="card-phase card-phase--p2">Phase 2</div>
+            <div class="card-name">Trending Recipe</div>
+            <div class="card-desc">"Everyone's making this right now. {{save_count}} saves and counting."</div>
+            <div class="card-window">PM (threshold hit)</div>
           </div>
-          <div class="push-card push-card--opp">
-            <span class="push-phase push-phase--opp">Opportunity</span>
-            <div class="push-info">
-              <div class="push-name">Seasonal / Creator Collection Drop</div>
-              <div class="push-desc">"New this week: 5 summer grilling recipes from @{{creator}}." Use creator content drops as a push trigger. Low frequency (1x/month max), high novelty.</div>
-            </div>
-            <span class="push-window">AM</span>
+          <div class="card card--opp">
+            <div class="card-phase card-phase--opp">Opportunity</div>
+            <div class="card-name">Creator Collection Drop</div>
+            <div class="card-desc">"New this week: 5 summer grilling recipes from @{{creator}}."</div>
+            <div class="card-window">AM (1x/month)</div>
           </div>
         </div>
       </div>
+
     </div>
 
-  </div>
-</div>
+    <!-- ═══ EDGE CASES ═══ -->
+    <div class="phase-group">
+      <span class="phase-header-h phase-header-h--edge">Edge Cases</span>
 
-<!-- ═══════════════════════════════════════════ -->
-<!-- EDGE CASES -->
-<!-- ═══════════════════════════════════════════ -->
-
-<div class="section-divider">
-  <div class="divider-banner">
-    <div class="divider-icon" style="background: rgba(220, 38, 38, 0.08);">⚡</div>
-    <div class="divider-text">
-      <h2>Edge Cases (Skip / Pause / Cancel)</h2>
-      <p>When the box doesn't arrive. These are retention-critical moments where Cookbook provides continuity and keeps the user in the HelloFresh ecosystem without a subscription.</p>
-    </div>
-  </div>
-</div>
-
-<div class="journey">
-  <div class="timeline">
-
-    <!-- MOMENT: Skip week -->
-    <div class="moment">
-      <div class="moment-time">
-        <div class="moment-day">Skip Week</div>
-        <div class="moment-label">No Box This Week</div>
-      </div>
-      <div class="moment-dot"></div>
-      <div class="moment-content">
-        <div class="moment-description">User skipped their delivery. They still need to eat. The app would normally go silent. Cookbook fills the void with free value and keeps the user active.</div>
-        <div class="push-cards">
-          <div class="push-card push-card--p2">
-            <span class="push-phase push-phase--p2">Phase 2</span>
-            <div class="push-info">
-              <div class="push-name">Skip Week</div>
-              <div class="push-desc">"No box. No problem. Your Cookbook's got you covered. {{saved_count}} recipes ready to go." Fires day 1 of skip week. Continuity, not winback.</div>
-            </div>
-            <span class="push-window">AM 07:30</span>
+      <!-- Skip Week -->
+      <div class="moment-col">
+        <div class="moment-header">
+          <div class="moment-day">Skip Week</div>
+          <div class="moment-title">No Box This Week</div>
+        </div>
+        <div class="moment-cards">
+          <div class="card card--p2">
+            <div class="card-phase card-phase--p2">Phase 2</div>
+            <div class="card-name">Skip Week</div>
+            <div class="card-desc">"No box. No problem. {{saved_count}} recipes ready to go."</div>
+            <div class="card-window">Day 1 AM 07:30</div>
           </div>
-          <div class="push-card push-card--opp">
-            <span class="push-phase push-phase--opp">Opportunity</span>
-            <div class="push-info">
-              <div class="push-name">Skip Week Cookbook Challenge</div>
-              <div class="push-desc">"No box this week. Try 3 Cookbook recipes instead?" Gamify the skip week by framing it as a Cookbook experiment. Mid-week check in: "2 down, 1 to go."</div>
-            </div>
-            <span class="push-window">Day 1 AM</span>
+          <div class="card card--opp">
+            <div class="card-phase card-phase--opp">Opportunity</div>
+            <div class="card-name">Skip Week Challenge</div>
+            <div class="card-desc">"No box this week. Try 3 Cookbook recipes instead?"</div>
+            <div class="card-window">Day 1 AM</div>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- MOMENT: Pause / Cancel -->
-    <div class="moment">
-      <div class="moment-time">
-        <div class="moment-day">Pause / Cancel</div>
-        <div class="moment-label">Subscription Ends</div>
-      </div>
-      <div class="moment-dot"></div>
-      <div class="moment-content">
-        <div class="moment-description">User pauses or cancels. The highest-risk churn moment. Cookbook is free and doesn't require a subscription. Keep the app installed, keep the habit alive.</div>
-        <div class="push-cards">
-          <div class="push-card push-card--p2">
-            <span class="push-phase push-phase--p2">Phase 2</span>
-            <div class="push-info">
-              <div class="push-name">Post-Pause / Cancel</div>
-              <div class="push-desc">"Paused the box. Not the cooking. Your Cookbook is always free. Save from anywhere, cook on your terms." Fires 48h after event. Retention through utility.</div>
-            </div>
-            <span class="push-window">+48h AM</span>
+      <!-- Pause / Cancel -->
+      <div class="moment-col">
+        <div class="moment-header">
+          <div class="moment-day">Pause / Cancel</div>
+          <div class="moment-title">Subscription Ends</div>
+        </div>
+        <div class="moment-cards">
+          <div class="card card--p2">
+            <div class="card-phase card-phase--p2">Phase 2</div>
+            <div class="card-name">Post-Pause / Cancel</div>
+            <div class="card-desc">"Paused the box. Not the cooking. Cookbook is always free."</div>
+            <div class="card-window">+48h AM</div>
           </div>
-          <div class="push-card push-card--opp">
-            <span class="push-phase push-phase--opp">Opportunity</span>
-            <div class="push-info">
-              <div class="push-name">Creator Follow Prompt (Post-Cancel)</div>
-              <div class="push-desc">"Still cooking? Follow creators in Cookbook for new recipes every week." Position creator content as the ongoing value hook that keeps them in the app after cancellation.</div>
-            </div>
-            <span class="push-window">+7d</span>
+          <div class="card card--opp">
+            <div class="card-phase card-phase--opp">Opportunity</div>
+            <div class="card-name">Creator Follow Prompt</div>
+            <div class="card-desc">"Still cooking? Follow creators for new recipes every week."</div>
+            <div class="card-window">+7 days</div>
           </div>
         </div>
       </div>
+
     </div>
 
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- NEW OPPORTUNITIES SUMMARY -->
-<!-- ═══════════════════════════════════════════ -->
-
-<div class="opportunity-section">
-  <div class="opportunity-card">
-    <h2>New Cookbook Activation Opportunities (Not Yet in Push Strategy)</h2>
-    <div class="opp-grid">
-      <div class="opp-item">
-        <div class="opp-moment">Selection Window</div>
-        <h3>Cookbook Recipe Pairing</h3>
-        <p>Surface saved Cookbook recipes that pair with this week's box meals (sides, desserts, breakfast). Positions Cookbook as a meal companion, not a separate feature.</p>
-      </div>
-      <div class="opp-item">
-        <div class="opp-moment">Selection Window</div>
-        <h3>Save Before You Lose It</h3>
-        <p>Nudge users who remove a meal but don't save it to Cookbook. Capture intent before it disappears. "Dropped it? Save it for later."</p>
-      </div>
-      <div class="opp-item">
-        <div class="opp-moment">Post-Cutoff</div>
-        <h3>Fill Your Off Nights (Pre-delivery)</h3>
-        <p>The moment meals lock in, the user knows they have 3 or 4 covered nights. Prompt Cookbook planning for the remaining nights while planning mindset is active.</p>
-      </div>
-      <div class="opp-item">
-        <div class="opp-moment">Delivery Day</div>
-        <h3>Cookbook Discovery at Unboxing</h3>
-        <p>In-app interstitial (not push) during or after unboxing. "While you unpack: browse 30-min Cookbook recipes for your other nights." Catches peak food enthusiasm.</p>
-      </div>
-      <div class="opp-item">
-        <div class="opp-moment">Post-Cook</div>
-        <h3>Creator Recipe Match</h3>
-        <p>After a high rating: connect the loved meal to a similar creator recipe in Cookbook. "Loved this? A creator has a version with a twist." Drives Cookbook depth and creator content.</p>
-      </div>
-      <div class="opp-item">
-        <div class="opp-moment">Off Nights</div>
-        <h3>Creator Spotlight</h3>
-        <p>On unplanned off-nights, surface a trending creator recipe as the answer. "No box tonight? @creator just posted a 20-min recipe." Introduces creator platform value.</p>
-      </div>
-      <div class="opp-item">
-        <div class="opp-moment">Batch Day</div>
-        <h3>Batch-Friendly Suggestions</h3>
-        <p>When batch cooking is detected, suggest Cookbook recipes tagged as meal-prep-friendly or "great leftovers." Help them cover more of the week in one session.</p>
-      </div>
-      <div class="opp-item">
-        <div class="opp-moment">Skip / Post-Cancel</div>
-        <h3>Creator Follow + Collection Drops</h3>
-        <p>Use creator content as the ongoing value hook post-cancellation. "Follow creators for new recipes every week." Monthly collection drops as a push trigger.</p>
-      </div>
-    </div>
   </div>
 </div>
 
