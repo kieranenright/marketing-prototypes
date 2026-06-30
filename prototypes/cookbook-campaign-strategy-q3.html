@@ -2,831 +2,684 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HelloFresh Cookbook — Q3 Marketing Strategy</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cookbook Q3 Marketing Strategy | HelloFresh</title>
+<meta name="description" content="Q3 2026 Marketing Strategy for Cookbook — push notifications, paid social, and influencer marketing.">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: {
+        heading: ['Inter', 'system-ui', 'sans-serif'],
+        body: ['Inter', 'system-ui', 'sans-serif'],
+      }
+    }
+  }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
-
 :root {
-  --hf-green: #1B8A4A;
-  --hf-dark-green: #0B5C30;
-  --hf-lime: #C8F065;
-  --hf-cream: #FAF8F3;
-  --hf-white: #FFFFFF;
-  --hf-dark: #1A1A1A;
-  --hf-muted: #6B6B6B;
-  --hf-border: rgba(0,0,0,0.08);
-  --hf-amber: #D4A564;
+  --bg: #FAF8F3;
+  --bg-surface: #F3F0E8;
+  --bg-card: #FFFFFF;
+  --border: rgba(0,0,0,0.08);
+  --border-strong: rgba(0,0,0,0.15);
+  --fg: #1A1A1A;
+  --fg-muted: #6B6B6B;
+  --color-brand: #1B8A4A;
+  --font-heading: 'Inter', system-ui, sans-serif;
 }
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  background: var(--hf-cream);
-  color: var(--hf-dark);
-  line-height: 1.6;
-}
-
-/* NAV */
-.nav {
-  position: sticky; top: 0; z-index: 100;
-  background: var(--hf-white);
-  border-bottom: 1px solid var(--hf-border);
-  padding: 0 40px;
-  height: 56px;
-  display: flex; align-items: center; justify-content: space-between;
-}
-.nav-left { display: flex; align-items: center; gap: 24px; }
-.nav-logo { height: 20px; }
-.nav-divider { width: 1px; height: 20px; background: var(--hf-border); }
-.nav-context { font-size: 12px; font-weight: 600; color: var(--hf-muted); }
-.nav-links { display: flex; align-items: center; gap: 4px; }
-.nav-links a {
-  text-decoration: none; font-size: 12px; font-weight: 600;
-  color: var(--hf-muted); padding: 6px 14px; border-radius: 6px;
-  transition: all 0.15s;
-}
-.nav-links a:hover { color: var(--hf-dark); background: var(--hf-cream); }
-.nav-links a.active { color: var(--hf-dark); background: var(--hf-cream); }
-.nav-export {
-  background: var(--hf-green); color: white; border: none;
-  padding: 7px 16px; border-radius: 6px; font-size: 12px;
-  font-weight: 700; cursor: pointer; text-decoration: none;
-}
-
-/* LAYOUT */
-.container { max-width: 960px; margin: 0 auto; padding: 0 40px; }
-section { padding: 80px 0; }
-section + section { border-top: 1px solid var(--hf-border); }
-
-/* TYPOGRAPHY */
-.section-tag {
-  font-size: 11px; font-weight: 800; letter-spacing: 2px;
-  text-transform: uppercase; color: var(--hf-muted); margin-bottom: 12px;
-}
-.section-tag span { color: var(--hf-green); }
-h1 {
-  font-size: 48px; font-weight: 900; letter-spacing: -2px;
-  line-height: 1.1; margin-bottom: 16px; color: var(--hf-dark);
-}
-h1 .accent { color: var(--hf-green); font-style: italic; }
-h2 {
-  font-size: 36px; font-weight: 900; letter-spacing: -1.5px;
-  line-height: 1.15; margin-bottom: 12px; color: var(--hf-dark);
-}
-h2 .accent { color: var(--hf-green); font-style: italic; }
-h3 {
-  font-size: 20px; font-weight: 800; letter-spacing: -0.5px;
-  margin-bottom: 8px; color: var(--hf-dark);
-}
-.section-desc {
-  font-size: 15px; color: var(--hf-muted); line-height: 1.7;
-  max-width: 680px; margin-bottom: 32px;
-}
-
-/* STAT CARDS */
-.stats-row { display: flex; gap: 24px; margin: 32px 0; flex-wrap: wrap; }
-.stat-card {
-  background: var(--hf-cream); border: 1px solid var(--hf-border);
-  border-radius: 12px; padding: 20px 28px;
-}
-.stat-value { font-size: 32px; font-weight: 900; color: var(--hf-green); letter-spacing: -1px; }
-.stat-label { font-size: 12px; color: var(--hf-muted); font-weight: 500; margin-top: 2px; }
-
-/* NORTH STAR CARD */
-.northstar-card {
-  background: var(--hf-dark-green); border-radius: 20px; padding: 48px;
-  margin: 48px 0; color: white;
-}
-.northstar-card .section-tag { color: var(--hf-lime); }
-.northstar-card h2 { color: white; font-size: 40px; margin-bottom: 16px; }
-.northstar-card h2 .accent { color: var(--hf-lime); }
-.northstar-card p { color: rgba(255,255,255,0.7); font-size: 14px; line-height: 1.7; max-width: 650px; margin-bottom: 32px; }
-.northstar-metrics { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
-.northstar-metric {
-  border-radius: 12px; padding: 16px 28px;
-}
-.northstar-metric.current { background: rgba(255,255,255,0.1); }
-.northstar-metric.target { background: var(--hf-green); }
-.northstar-metric-label { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 4px; }
-.northstar-metric.current .northstar-metric-label { color: rgba(255,255,255,0.5); }
-.northstar-metric.target .northstar-metric-label { color: var(--hf-lime); }
-.northstar-metric-value { font-size: 40px; font-weight: 900; color: white; letter-spacing: -2px; }
-.northstar-arrow { font-size: 20px; color: rgba(255,255,255,0.3); }
-.northstar-desc { font-size: 13px; color: rgba(255,255,255,0.5); max-width: 200px; line-height: 1.5; }
-
-/* PILLAR CARDS */
-.pillars-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 32px 0; }
-.pillar-card {
-  background: white; border-radius: 12px; padding: 24px;
-  border: 1px solid var(--hf-border);
-}
-.pillar-card-tag {
-  display: inline-block; font-size: 10px; font-weight: 800;
-  text-transform: uppercase; letter-spacing: 1px; padding: 3px 8px;
-  border-radius: 4px; margin-bottom: 10px;
-}
-.pillar-card-tag.push { background: rgba(27,138,74,0.08); color: var(--hf-green); }
-.pillar-card-tag.paid { background: rgba(212,165,100,0.12); color: var(--hf-amber); }
-.pillar-card-tag.creator { background: rgba(27,138,74,0.08); color: var(--hf-dark-green); }
-.pillar-card h4 { font-size: 15px; font-weight: 800; margin-bottom: 4px; }
-.pillar-card p { font-size: 12px; color: var(--hf-muted); line-height: 1.5; }
-
-/* FOUNDATION BAR */
-.foundation-bar {
-  background: white; border-radius: 12px; padding: 16px 24px;
-  border: 1px solid var(--hf-border); border-left: 4px solid var(--hf-amber);
-  margin-top: 12px;
-}
-.foundation-bar p { font-size: 13px; color: var(--hf-muted); }
-.foundation-bar strong { color: var(--hf-dark); }
-
-/* KEY QUESTION */
-.key-question {
-  background: rgba(27,138,74,0.04); border: 1px solid rgba(27,138,74,0.12);
-  border-radius: 10px; padding: 14px 20px; margin-bottom: 24px;
-  display: inline-block;
-}
-.key-question p { font-size: 13px; font-weight: 700; color: var(--hf-green); margin: 0; }
-.key-question .kq-sub { font-weight: 500; color: var(--hf-muted); margin-top: 2px; }
-
-/* DATA TABLE */
-.data-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 13px; }
-.data-table th {
-  text-align: left; font-size: 10px; font-weight: 800;
-  text-transform: uppercase; letter-spacing: 1px; color: var(--hf-muted);
-  padding: 10px 12px; border-bottom: 2px solid var(--hf-border);
-}
-.data-table td { padding: 12px; border-bottom: 1px solid var(--hf-border); vertical-align: top; }
-.data-table tr:last-child td { border-bottom: none; }
-.data-table .row-num {
-  font-size: 12px; font-weight: 800; color: var(--hf-green);
-  width: 32px;
-}
-.data-table .use-case-name { font-weight: 700; color: var(--hf-dark); }
-.data-table .use-case-desc { font-size: 12px; color: var(--hf-muted); margin-top: 2px; }
-.tag-pill {
-  display: inline-block; padding: 2px 8px; border-radius: 4px;
-  font-size: 10px; font-weight: 700; white-space: nowrap;
-}
-.tag-pill.green { background: rgba(27,138,74,0.08); color: var(--hf-green); }
-.tag-pill.amber { background: rgba(212,165,100,0.12); color: var(--hf-amber); }
-.tag-pill.dark { background: rgba(0,0,0,0.06); color: var(--hf-dark); }
-
-/* CALLOUT */
-.callout {
-  background: white; border-radius: 12px; padding: 20px 24px;
-  border: 1px solid var(--hf-border); border-left: 4px solid var(--hf-amber);
-  margin: 24px 0;
-}
-.callout p { font-size: 13px; color: var(--hf-muted); line-height: 1.6; }
-.callout strong { color: var(--hf-dark); }
-
-/* APPROACH CARDS */
-.approach-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0; }
-.approach-card {
-  background: white; border-radius: 12px; padding: 24px;
-  border: 1px solid var(--hf-border);
-}
-.approach-card h4 { font-size: 14px; font-weight: 800; margin-bottom: 6px; }
-.approach-card p { font-size: 13px; color: var(--hf-muted); line-height: 1.6; }
-
-/* SHIFT COMPARISON */
-.shift-grid { display: grid; grid-template-columns: 1fr auto 1fr; gap: 0; align-items: start; margin: 32px 0; }
-.shift-col { background: white; border-radius: 12px; padding: 28px; border: 1px solid var(--hf-border); }
-.shift-col.q3 { background: var(--hf-green); color: white; border-color: var(--hf-green); }
-.shift-col.q3 li { color: rgba(255,255,255,0.9); }
-.shift-col.q3 strong { color: white; }
-.shift-col h4 { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; }
-.shift-col.q3 h4 { color: var(--hf-lime); }
-.shift-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-.shift-col li { font-size: 13px; color: var(--hf-muted); line-height: 1.5; padding-left: 16px; position: relative; }
-.shift-col li::before { content: ''; position: absolute; left: 0; top: 7px; width: 6px; height: 6px; border-radius: 50%; background: var(--hf-border); }
-.shift-col.q3 li::before { background: var(--hf-lime); }
-.shift-arrow { display: flex; align-items: center; justify-content: center; padding: 0 16px; }
-
-/* PUSH COPY PREVIEW */
-.push-preview {
-  background: var(--hf-cream); border-radius: 8px; padding: 12px 16px;
-  border: 1px solid var(--hf-border);
-}
-.push-preview-title { font-size: 13px; font-weight: 800; color: var(--hf-dark); margin-bottom: 2px; }
-.push-preview-body { font-size: 12px; color: var(--hf-muted); }
-
-/* DOCS GRID */
-.docs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 24px 0; }
-.doc-card {
-  background: white; border-radius: 12px; padding: 24px;
-  border: 1px solid var(--hf-border); text-decoration: none;
-  transition: all 0.15s; display: block;
-}
-.doc-card:hover { border-color: var(--hf-green); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
-.doc-card-tag { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: var(--hf-green); margin-bottom: 8px; }
-.doc-card h4 { font-size: 15px; font-weight: 800; color: var(--hf-dark); margin-bottom: 6px; }
-.doc-card p { font-size: 12px; color: var(--hf-muted); line-height: 1.5; }
-
-/* FOOTER */
-.footer { padding: 24px 0; border-top: 1px solid var(--hf-border); }
-.footer-inner { display: flex; justify-content: space-between; font-size: 11px; color: var(--hf-muted); }
-.footer-inner a { color: var(--hf-green); text-decoration: none; font-weight: 600; }
-
-/* RESPONSIVE */
-@media (max-width: 768px) {
-  .container { padding: 0 20px; }
-  h1 { font-size: 36px; }
-  h2 { font-size: 28px; }
-  .pillars-grid { grid-template-columns: 1fr; }
-  .approach-grid { grid-template-columns: 1fr; }
-  .shift-grid { grid-template-columns: 1fr; }
-  .shift-arrow { transform: rotate(90deg); padding: 12px 0; }
-  .docs-grid { grid-template-columns: 1fr; }
-  .northstar-card { padding: 32px 24px; }
-  .nav { padding: 0 20px; }
-  .nav-links { display: none; }
-}
+body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--fg); }
 </style>
 </head>
 <body>
 
 <!-- NAV -->
-<nav class="nav">
-  <div class="nav-left">
-    <img src="https://media.hellofresh.com/w_256,q_100,f_auto,c_limit,fl_lossy/hellofresh_website/logo/Hello_Fresh_Lockup.png" alt="HelloFresh" class="nav-logo">
-    <div class="nav-divider"></div>
-    <span class="nav-context">Cookbook for All</span>
-  </div>
-  <div class="nav-links">
-    <a href="#hero">Home</a>
-    <a href="#pillars">Q3 Pillars</a>
-    <a href="#push">Push Strategy</a>
-    <a href="#paid">Paid Social</a>
-    <a href="#influencer">Influencer</a>
-    <a href="#docs">Docs</a>
-  </div>
-  <a href="https://docs.google.com/document/d/1sKtEl_vFqsdVAB3dGZOncVWvXcRcuMIfdspFbv4YABs/edit?tab=t.0" target="_blank" class="nav-export">Business Case</a>
-</nav>
+<header class="sticky top-0 z-10 border-b border-[var(--border)] bg-[var(--bg)]/90 backdrop-blur-md">
+  <nav class="flex w-full items-center justify-between px-6 py-4">
+    <a class="flex items-center gap-3" href="../index.html">
+      <img alt="HelloFresh" style="height:28px;width:auto" src="https://media.hellofresh.com/w_256,q_100,f_auto,c_limit,fl_lossy/hellofresh_website/logo/Hello_Fresh_Lockup.png">
+      <span class="hidden h-6 w-px bg-[var(--border-strong)] sm:block"></span>
+      <span class="hidden text-sm font-semibold text-[var(--fg)] sm:block">Cookbook for All</span>
+    </a>
+    <div class="flex items-center gap-1 text-sm">
+      <a class="relative rounded-md px-3 py-1.5 transition-colors text-[var(--fg-muted)] hover:text-[var(--fg)]" href="cookbook-campaign-strategy.html">Q2 Strategy</a>
+      <a class="relative rounded-md px-3 py-1.5 transition-colors font-semibold text-[var(--fg)]" href="#">Q3 Strategy<span aria-hidden="true" class="absolute inset-x-3 -bottom-[17px] h-[2px] rounded-full bg-[var(--color-brand)]"></span></a>
+      <a class="relative rounded-md px-3 py-1.5 transition-colors text-[var(--fg-muted)] hover:text-[var(--fg)]" href="cookbook-q2-validation-report.html">Q2 Report</a>
+      <a class="relative rounded-md px-3 py-1.5 transition-colors text-[var(--fg-muted)] hover:text-[var(--fg)]" href="cookbook-push-journey.html">Push Journey</a>
+      <a class="ml-3 inline-flex items-center gap-1.5 rounded-md bg-[var(--color-brand)] px-4 py-2 text-sm font-bold text-white transition hover:opacity-90" href="https://docs.google.com/document/d/1sKtEl_vFqsdVAB3dGZOncVWvXcRcuMIfdspFbv4YABs/edit?tab=t.0" target="_blank">Business Case</a>
+    </div>
+  </nav>
+</header>
 
-<div class="container">
+<main class="min-h-screen bg-[var(--bg)]">
 
 <!-- HERO -->
-<section id="hero" style="border: none;">
-  <div class="section-tag">Q3 2026 &middot; <span>Marketing Strategy</span> &middot; DAU</div>
-  <h1>From passive saves<br>to <span class="accent">active engagement.</span></h1>
-  <p class="section-desc">Hit Q2's 100% of our Q3 target, and learned that volume alone doesn't create a habit. Most users saving do not come back to the cookbook after an initial save. Q3 refocuses: that is to scale quality input to our KPI theme.</p>
+<section class="border-b border-[var(--border)] bg-[var(--bg-surface)] px-6 pt-20 pb-16 md:pt-28 md:pb-24">
+  <div class="mx-auto max-w-5xl">
+    <p class="text-[11px] font-bold uppercase tracking-[0.24em] text-[var(--color-brand)]">Inspire Squad &middot; Cookbook &middot; Q3 2026</p>
+    <h1 class="mt-6 text-5xl font-bold leading-[1] tracking-tight text-[var(--fg)] md:text-[72px]" style="font-family:var(--font-heading)">From passive saves<br>to <span class="bg-[#c7f04a] px-1.5 leading-[0.9]">active engagement</span>.</h1>
+    <p class="mt-8 max-w-2xl text-lg leading-relaxed text-[var(--fg)]">We hit <strong>135% of our Q2 target</strong> and learned that volume alone doesn't make a habit. Most users today do not come back to the cookbook after an initial save. Q3 reframes: lock in quality input to our KPI theme.</p>
 
-  <div class="stats-row">
-    <div class="stat-card">
-      <div class="stat-value">404K+</div>
-      <div class="stat-label">Users with saves<br>Data at date of page</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-value">5.6%</div>
-      <div class="stat-label">Save ext HF recipes (organic)<br>804 users / 14d organic monthly</div>
+    <div class="mt-12 grid grid-cols-1 gap-5 md:grid-cols-3">
+      <div class="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-7">
+        <p class="text-[52px] font-bold leading-none tracking-tight text-[var(--color-brand)]" style="font-family:var(--font-heading)">404K+</p>
+        <p class="mt-4 text-base font-semibold text-[var(--fg)]">Users with saves</p>
+        <p class="mt-1.5 text-sm leading-relaxed text-[var(--fg-muted)]">135% of 300K Q2 target</p>
+      </div>
+      <div class="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-7">
+        <p class="text-[52px] font-bold leading-none tracking-tight text-amber-600" style="font-family:var(--font-heading)">5.6%</p>
+        <p class="mt-4 text-base font-semibold text-[var(--fg)]">Save non-HF recipes (imported)</p>
+        <p class="mt-1.5 text-sm leading-relaxed text-[var(--fg-muted)]">23K users: the engaged minority</p>
+      </div>
+      <div class="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-7">
+        <p class="text-[52px] font-bold leading-none tracking-tight text-[var(--color-brand)]" style="font-family:var(--font-heading)">3&times;</p>
+        <p class="mt-4 text-base font-semibold text-[var(--fg)]">Longer retention</p>
+        <p class="mt-1.5 text-sm leading-relaxed text-[var(--fg-muted)]">External savers vs HF-only savers at W8</p>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- Q2 vs Q3 SHIFT -->
-<section id="shift">
-  <div class="section-tag">The Shift</div>
-  <h2>Q2 proved the concept.<br>Q3 <span class="accent">narrows the focus.</span></h2>
-  <p class="section-desc">Q2 was broad: social content, ASO, paid, CRM, creators, all running in parallel to validate what works. Q3 takes the highest impact levers and goes deep.</p>
+<!-- RETENTION DATA -->
+<section class="px-6 py-20">
+  <div class="mx-auto max-w-5xl">
+    <div class="max-w-3xl">
+      <p class="text-[11px] font-bold uppercase tracking-[0.18em] text-[var(--color-brand)]">The gap we're closing</p>
+      <h2 class="mt-3 text-4xl font-bold leading-tight tracking-tight text-[var(--fg)] md:text-[44px]" style="font-family:var(--font-heading)">What happens when people save recipes from elsewhere</h2>
+      <p class="mt-4 text-base leading-relaxed text-[var(--fg-muted)]">People who only save HelloFresh recipes, compared with people who've also saved at least one recipe from elsewhere. That one outside save changes everything: they stick around about 3&times; longer.</p>
+    </div>
 
-  <div class="shift-grid">
-    <div class="shift-col">
-      <h4>Q2: Broad Validation</h4>
-      <ul>
-        <li>Social first: organic content across TikTok, IG, FB</li>
-        <li>ASO: custom product pages + featuring nominations</li>
-        <li>CRM triggers introduced (post-meal, post-pause, post-download)</li>
-        <li>Creator partnerships: first collabs live</li>
-      </ul>
+    <div class="mt-10 overflow-x-auto rounded-2xl border border-[var(--border)] bg-[var(--bg-card)]">
+      <table class="w-full min-w-[620px] border-collapse text-left">
+        <thead>
+          <tr class="border-b border-[var(--border)] bg-[var(--bg-surface)] text-[10px] font-bold uppercase tracking-[0.16em] text-[var(--fg-muted)]">
+            <th class="px-5 py-3 font-bold">Segment</th>
+            <th class="px-5 py-3 font-bold">Users</th>
+            <th class="px-5 py-3 font-bold">% of total</th>
+            <th class="px-5 py-3 font-bold">Avg saves</th>
+            <th class="px-5 py-3 font-bold">W1 retention</th>
+            <th class="px-5 py-3 font-bold">W8 retention</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-t border-[var(--border)]">
+            <td class="px-5 py-4"><span class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--fg)]"><span class="inline-block h-2.5 w-2.5 rounded-sm bg-slate-400"></span>Only save HelloFresh recipes</span></td>
+            <td class="px-5 py-4 text-sm text-[var(--fg)]">387K</td>
+            <td class="px-5 py-4 text-sm text-[var(--fg)]">94.4%</td>
+            <td class="px-5 py-4 text-sm text-[var(--fg)]">4.4</td>
+            <td class="px-5 py-4 text-sm text-[var(--fg)]">7.8%</td>
+            <td class="px-5 py-4 text-sm text-[var(--fg)]">3.4%</td>
+          </tr>
+          <tr class="border-t border-[var(--border)]">
+            <td class="px-5 py-4"><span class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--fg)]"><span class="inline-block h-2.5 w-2.5 rounded-sm bg-[var(--color-brand)]"></span>Also save recipes from elsewhere</span></td>
+            <td class="px-5 py-4 text-sm font-bold text-[var(--fg)]">23K</td>
+            <td class="px-5 py-4 text-sm font-bold text-[var(--fg)]">5.6%</td>
+            <td class="px-5 py-4 text-sm font-bold text-[var(--fg)]">9.5 <span class="ml-1 text-[var(--color-brand)]">(2.2&times; more)</span></td>
+            <td class="px-5 py-4 text-sm font-bold text-[var(--fg)]">18.2% <span class="ml-1 text-[var(--color-brand)]">(2.3&times;)</span></td>
+            <td class="px-5 py-4 text-sm font-bold text-[var(--fg)]">10.3%</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <div class="shift-arrow">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--hf-green)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-    </div>
-    <div class="shift-col q3">
-      <h4>Q3: Focused Execution</h4>
-      <ul>
-        <li><strong>Push notifications</strong> as the primary adoption and engagement lever</li>
-        <li><strong>Paid social</strong> raising Cookbook awareness among existing and lapsed users</li>
-        <li><strong>Creator recipes</strong> brought directly into the app at scale</li>
-      </ul>
+
+    <div class="mt-6 rounded-2xl border-l-4 border-[var(--color-brand)] bg-[var(--bg-surface)] px-6 py-5">
+      <p class="text-base leading-relaxed text-[var(--fg)]"><strong>Creator traffic:</strong> 0 direct recipe saves or app downloads attributable to creator profile visits to date. The funnel infrastructure is being built now to make this convert.</p>
     </div>
   </div>
 </section>
 
 <!-- NORTH STAR -->
-<section id="northstar" style="border: none; padding: 0;">
-  <div class="northstar-card">
-    <div class="section-tag">Q3 North Star &middot; The Pivot</div>
-    <h2>% of active users saving <span class="accent">external or creator</span> recipes.</h2>
-    <p>We were measuring bookmarks, not behavior. People who also save recipes from elsewhere don't just save more. They stay 3&times; longer. The shift from absolute savers to % saving external/creator targets the engaged core, gives creator content an audience to land in, and ties growth to real activation.</p>
-    <div class="northstar-metrics">
-      <div class="northstar-metric current">
-        <div class="northstar-metric-label">Current</div>
-        <div class="northstar-metric-value">5.6%</div>
+<section class="px-6 py-20">
+  <div class="mx-auto max-w-5xl">
+    <div class="rounded-3xl bg-[#055933] p-10 text-white md:p-14">
+      <p class="text-[11px] font-bold uppercase tracking-[0.24em] text-[#c7f04a]">Q3 north star &middot; The pivot</p>
+      <h2 class="mt-5 max-w-4xl text-4xl font-bold leading-[1.04] tracking-tight md:text-[52px]" style="font-family:var(--font-heading)">% of active users saving <span class="text-[#c7f04a]">external or creator</span> recipes.</h2>
+      <p class="mt-6 max-w-3xl text-base font-normal leading-relaxed text-white/80 md:text-lg">We were measuring bookmarks, not behavior. People who also save recipes from elsewhere don't just save more. They stay 3&times; longer. The shift from absolute savers to % saving external/creator targets the engaged core, gives creator content an audience to land in, and ties growth to real activation.</p>
+      <div class="mt-10 flex flex-wrap items-center gap-5">
+        <div class="rounded-2xl bg-white/10 px-7 py-6">
+          <p class="text-[11px] font-bold uppercase tracking-[0.16em] text-white/60">Current</p>
+          <p class="mt-2 text-5xl font-bold leading-none text-white md:text-6xl" style="font-family:var(--font-heading)">5.6%</p>
+        </div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white/45"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+        <div class="rounded-2xl bg-[#c7f04a]/15 px-7 py-6 ring-1 ring-inset ring-[#c7f04a]/60">
+          <p class="text-[11px] font-bold uppercase tracking-[0.16em] text-[#c7f04a]">Q3 target</p>
+          <p class="mt-2 text-5xl font-bold leading-none text-[#c7f04a] md:text-6xl" style="font-family:var(--font-heading)">10&ndash;12%</p>
+        </div>
+        <p class="max-w-xs text-base leading-relaxed text-white/80">% of Cookbook users saving external / creator recipes.</p>
       </div>
-      <div class="northstar-arrow">&rarr;</div>
-      <div class="northstar-metric target">
-        <div class="northstar-metric-label">Q3 Target</div>
-        <div class="northstar-metric-value">10&ndash;12%</div>
-      </div>
-      <div class="northstar-desc">% of Cookbook users saving external / creator recipes.</div>
     </div>
   </div>
 </section>
 
-<!-- THREE PILLARS -->
-<section id="pillars">
-  <div class="section-tag">The Q3 Framework</div>
-  <h2>Three pillars, one foundation.</h2>
-  <p class="section-desc">Each pillar answers a different question on the path to the north star.</p>
+<!-- FRAMEWORK -->
+<section class="px-6 py-20 md:py-24 bg-[var(--bg-surface)]">
+  <div class="mx-auto max-w-5xl">
+    <p class="text-[11px] font-bold uppercase tracking-[0.24em] text-[var(--color-brand)]">The Q3 framework</p>
+    <h2 class="mt-4 max-w-3xl text-4xl font-bold leading-[1.05] tracking-tight text-[var(--fg)] md:text-[52px]" style="font-family:var(--font-heading)">Three pillars, one foundation.</h2>
+    <p class="mt-6 max-w-3xl text-lg leading-relaxed text-[var(--fg-muted)]">Each pillar answers a different question on the path to the north star.</p>
 
-  <div class="pillars-grid">
-    <div class="pillar-card">
-      <div class="pillar-card-tag push">P1: Push Notifications</div>
-      <h4>Do users engage with Cookbook?</h4>
-      <p>16 use cases, 39 touchpoints across 4 phases. Behavioural triggers that surface Cookbook at pivotal moments.</p>
+    <div class="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <a href="#pillar-push" class="group rounded-2xl border border-[var(--border)] border-t-4 bg-[var(--bg-card)] p-6 transition hover:shadow-md" style="border-top-color:#15803d">
+        <p class="text-xl font-bold leading-tight tracking-tight" style="font-family:var(--font-heading);color:#15803d">01 &middot; Push Notifications</p>
+        <p class="mt-3 text-sm leading-snug text-[var(--fg-muted)]">Do users engage with Cookbook at the right moments?</p>
+      </a>
+      <a href="#pillar-paid" class="group rounded-2xl border border-[var(--border)] border-t-4 bg-[var(--bg-card)] p-6 transition hover:shadow-md" style="border-top-color:#c2570c">
+        <p class="text-xl font-bold leading-tight tracking-tight" style="font-family:var(--font-heading);color:#c2570c">02 &middot; Paid Social</p>
+        <p class="mt-3 text-sm leading-snug text-[var(--fg-muted)]">Do users know Cookbook exists?</p>
+      </a>
+      <a href="#pillar-influencer" class="group rounded-2xl border border-[var(--border)] border-t-4 bg-[var(--bg-card)] p-6 transition hover:shadow-md" style="border-top-color:#7c3aed">
+        <p class="text-xl font-bold leading-tight tracking-tight" style="font-family:var(--font-heading);color:#7c3aed">03 &middot; Influencer Marketing</p>
+        <p class="mt-3 text-sm leading-snug text-[var(--fg-muted)]">Where does the content come from?</p>
+      </a>
     </div>
-    <div class="pillar-card">
-      <div class="pillar-card-tag paid">P2: Paid Social</div>
-      <h4>Do users know Cookbook exists?</h4>
-      <p>Feature awareness for existing app users. HF-produced brand creative on Meta and TikTok.</p>
-    </div>
-    <div class="pillar-card">
-      <div class="pillar-card-tag creator">P3: Influencer Marketing</div>
-      <h4>Is there content worth saving?</h4>
-      <p>Automated creator sourcing + internal team partnerships. Recipes from creators land in the app at scale.</p>
-    </div>
-  </div>
 
-  <div class="foundation-bar">
-    <p><strong>Foundation:</strong> Recipe quality + HelloFresh structured in the URL/share advantage. AI + structured data for all recipes enables scale across all stages.</p>
+    <a href="#foundation" class="mt-4 flex flex-col gap-1 rounded-2xl border border-[var(--border)] border-l-4 bg-[var(--bg-card)] px-6 py-5 transition hover:shadow-md md:flex-row md:items-center md:gap-6" style="border-left-color:#2563eb">
+      <p class="text-lg font-bold tracking-tight" style="font-family:var(--font-heading);color:#2563eb">Foundation</p>
+      <p class="text-sm leading-snug text-[var(--fg-muted)]">Suppression logic, frequency caps, and deep-linking. Every push is personalised, controlled, and tied to the north star metric.</p>
+    </a>
   </div>
 </section>
 
 <!-- PILLAR 1: PUSH NOTIFICATIONS -->
-<section id="push">
-  <div class="section-tag">Pillar 1 &middot; <span>Push Notifications</span></div>
-  <h2>16 use cases.<br>39 touchpoints.</h2>
-  <p class="section-desc">Four phases: Cookbook onboarding (first save + cook habits), meal kit lifecycle triggers (planner adoption, cook-through), Cookbook event triggers (off-night engagement, recipe discovery), and general Cookbook comms (scheduled re-engagement). Every push is personalised, suppression-controlled, and deep-linked.</p>
+<section id="pillar-push" class="scroll-mt-6 px-6 py-20 md:py-24">
+  <div class="mx-auto max-w-5xl">
+    <p class="text-[11px] font-bold uppercase tracking-[0.24em]" style="color:#15803d">Pillar 1 &middot; Push Notifications</p>
+    <h2 class="mt-4 max-w-4xl text-4xl font-bold leading-[1.05] tracking-tight text-[var(--fg)] md:text-[52px]" style="font-family:var(--font-heading)">16 use cases. 39 touchpoints.</h2>
+    <p class="mt-6 max-w-3xl text-lg leading-relaxed text-[var(--fg-muted)]">Four phases: Cookbook onboarding (first save + cook habits), meal kit lifecycle triggers (planner adoption, cook-through), Cookbook event triggers (off-night engagement, recipe discovery), and general Cookbook comms (scheduled re-engagement).</p>
 
-  <div class="stats-row">
-    <div class="stat-card">
-      <div class="stat-value">16</div>
-      <div class="stat-label">Use Cases</div>
+    <div class="mt-6 flex flex-col gap-3 md:flex-row md:gap-4">
+      <div class="flex-1 rounded-xl border border-[var(--border)] border-l-4 bg-[var(--bg-card)] px-5 py-4" style="border-left-color:#15803d">
+        <p class="text-[10px] font-bold uppercase tracking-[0.16em]" style="color:#15803d">&nearr; North star link</p>
+        <p class="mt-2 text-sm leading-relaxed text-[var(--fg-muted)]">Push drives engaged users to discover, save, and cook external/creator recipes at pivotal moments in their journey.</p>
+      </div>
+      <div class="flex-1 rounded-xl border border-[var(--border)] bg-[var(--bg-card)] px-5 py-4">
+        <p class="text-[10px] font-bold uppercase tracking-[0.16em] text-[var(--fg-muted)]">Key question</p>
+        <p class="mt-2 text-sm font-semibold leading-relaxed text-[var(--fg)]">Can behavioural triggers drive Cookbook adoption at scale?</p>
+      </div>
     </div>
-    <div class="stat-card">
-      <div class="stat-value">39</div>
-      <div class="stat-label">Touchpoints</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-value">4</div>
-      <div class="stat-label">Phases</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-value">5 day</div>
-      <div class="stat-label">Frequency Cap</div>
-    </div>
-  </div>
 
-  <!-- Phase Overview -->
-  <div class="pillars-grid" style="grid-template-columns: repeat(4, 1fr); margin-top: 32px;">
-    <div class="pillar-card">
-      <div class="pillar-card-tag dark">Phase 0</div>
-      <h4>Cookbook Onboarding</h4>
-      <p>Drive first saves and cook marks from box day. Establishes the habit loop.</p>
-      <div style="margin-top: 8px; font-size: 11px; color: var(--hf-muted);">1 use case &bull; 4 variants</div>
-    </div>
-    <div class="pillar-card">
-      <div class="pillar-card-tag green">Phase 1</div>
-      <h4>Meal Kit Lifecycle</h4>
-      <p>Planner adoption and recipe cook-through using meal kit data.</p>
-      <div style="margin-top: 8px; font-size: 11px; color: var(--hf-muted);">2 use cases &bull; 7 touchpoints</div>
-    </div>
-    <div class="pillar-card">
-      <div class="pillar-card-tag green">Phase 2</div>
-      <h4>Cookbook Event Triggers</h4>
-      <p>Advanced behavioural pushes with real-time event signals and personalisation.</p>
-      <div style="margin-top: 8px; font-size: 11px; color: var(--hf-muted);">12 use cases &bull; 25 touchpoints</div>
-    </div>
-    <div class="pillar-card">
-      <div class="pillar-card-tag green">Phase 3</div>
-      <h4>General Cookbook Comms</h4>
-      <p>Scheduled pushes for discovery and re-engagement. Not event-triggered.</p>
-      <div style="margin-top: 8px; font-size: 11px; color: var(--hf-muted);">1 use case &bull; 3 variants</div>
-    </div>
-  </div>
+    <!-- Phase 0: Onboarding -->
+    <div class="mt-10 space-y-5">
+      <details open class="group overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--bg-card)]">
+        <summary class="flex cursor-pointer list-none items-center gap-3 px-6 py-4 hover:bg-[var(--bg-surface)]" style="border-left:4px solid #15803d">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 text-[var(--fg-muted)] transition-transform group-open:rotate-90"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+          <span class="text-sm font-bold text-[var(--fg)]">Phase 0 &middot; Cookbook Onboarding</span>
+          <span class="hidden text-sm text-[var(--fg-muted)] md:inline">&mdash; Drive first saves and cook marks from box day. 1 use case, 4 variants.</span>
+        </summary>
+        <div class="border-t border-[var(--border)]">
+          <div class="hidden grid-cols-1 gap-4 border-b border-[var(--border)] bg-[var(--bg-surface)] px-6 py-3 text-[10px] font-bold uppercase tracking-[0.16em] text-[var(--fg-muted)] md:grid md:grid-cols-[40px_minmax(0,1.5fr)_minmax(0,1.5fr)_minmax(0,1fr)_minmax(0,0.8fr)]">
+            <span>#</span><span>Use Case</span><span>Trigger</span><span>Copy Preview</span><span>Timing</span>
+          </div>
+          <ul>
+            <li class="grid grid-cols-1 gap-3 px-6 py-6 md:grid-cols-[40px_minmax(0,1.5fr)_minmax(0,1.5fr)_minmax(0,1fr)_minmax(0,0.8fr)] md:gap-4 md:py-6">
+              <span class="text-2xl font-bold leading-none tracking-tight md:text-base md:leading-tight md:pt-1" style="font-family:var(--font-heading);color:#15803d">P0</span>
+              <div>
+                <p class="text-base font-bold leading-tight text-[var(--fg)] md:text-[15px]">Box Day Cookbook Activation</p>
+                <span class="mt-2 inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ring-1 ring-inset bg-emerald-50 text-emerald-700 ring-emerald-200">Ready</span>
+              </div>
+              <p class="text-sm leading-relaxed text-[var(--fg-muted)] italic">Box delivery confirmed. User has NOT used cook mode before. First-time activation.</p>
+              <div class="rounded-xl bg-[var(--bg-surface)] px-4 py-3">
+                <p class="text-[13px] font-bold text-[var(--fg)]">Cooked tonight?</p>
+                <p class="mt-1 text-[12px] text-[var(--fg-muted)]">This week's recipes just landed in your Cookbook. Cook them step by step, timers and all.</p>
+              </div>
+              <p class="text-sm font-semibold text-[var(--fg)]">Delivery day 6 PM<br><span class="font-normal text-[var(--fg-muted)]">Max 1/cycle</span></p>
+            </li>
+          </ul>
+        </div>
+      </details>
 
-  <!-- Use Cases Table -->
-  <h3 style="margin-top: 48px;">All Use Cases</h3>
-  <table class="data-table">
-    <thead>
-      <tr>
-        <th></th>
-        <th>Use Case</th>
-        <th>Phase</th>
-        <th>Trigger</th>
-        <th>Copy Preview</th>
-        <th>Timing</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td class="row-num">P0</td>
-        <td>
-          <div class="use-case-name">Box Day Cookbook Activation</div>
-          <div class="use-case-desc">First-time activation from box delivery</div>
-        </td>
-        <td><span class="tag-pill dark">Onboarding</span></td>
-        <td style="font-size: 12px; color: var(--hf-muted);">Box delivery confirmed. User has NOT used cook mode before.</td>
-        <td>
-          <div class="push-preview">
-            <div class="push-preview-title">Cooked tonight?</div>
-            <div class="push-preview-body">This week's recipes just landed in your Cookbook. Cook them step by step, timers and all.</div>
+      <!-- Phase 1: Meal Kit Lifecycle -->
+      <details open class="group overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--bg-card)]">
+        <summary class="flex cursor-pointer list-none items-center gap-3 px-6 py-4 hover:bg-[var(--bg-surface)]" style="border-left:4px solid #15803d">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 text-[var(--fg-muted)] transition-transform group-open:rotate-90"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+          <span class="text-sm font-bold text-[var(--fg)]">Phase 1 &middot; Meal Kit Lifecycle</span>
+          <span class="hidden text-sm text-[var(--fg-muted)] md:inline">&mdash; Planner adoption and recipe cook-through. 2 use cases, 7 touchpoints.</span>
+        </summary>
+        <div class="border-t border-[var(--border)]">
+          <div class="hidden grid-cols-1 gap-4 border-b border-[var(--border)] bg-[var(--bg-surface)] px-6 py-3 text-[10px] font-bold uppercase tracking-[0.16em] text-[var(--fg-muted)] md:grid md:grid-cols-[40px_minmax(0,1.5fr)_minmax(0,1.5fr)_minmax(0,1fr)_minmax(0,0.8fr)]">
+            <span>#</span><span>Use Case</span><span>Trigger</span><span>Copy Preview</span><span>Timing</span>
           </div>
-        </td>
-        <td style="font-size: 12px; color: var(--hf-muted);">Delivery day 6 PM<br>Max 1/cycle</td>
-      </tr>
-      <tr>
-        <td class="row-num">P1</td>
-        <td>
-          <div class="use-case-name">Plan Your Week</div>
-          <div class="use-case-desc">Planner adoption nudge</div>
-        </td>
-        <td><span class="tag-pill green">Lifecycle</span></td>
-        <td style="font-size: 12px; color: var(--hf-muted);">Meal selection cutoff passes. User has NOT assigned meals to planner.</td>
-        <td>
-          <div class="push-preview">
-            <div class="push-preview-title">Your meals. Your nights. Your call.</div>
-            <div class="push-preview-body">Open the planner and assign them however you want.</div>
-          </div>
-        </td>
-        <td style="font-size: 12px; color: var(--hf-muted);">2h post-cutoff<br>1/cycle</td>
-      </tr>
-      <tr>
-        <td class="row-num">P1</td>
-        <td>
-          <div class="use-case-name">Cook Tonight</div>
-          <div class="use-case-desc">Recipe cook-through reinforcement</div>
-        </td>
-        <td><span class="tag-pill green">Lifecycle</span></td>
-        <td style="font-size: 12px; color: var(--hf-muted);">Meal assigned to today's slot AND box delivered. User has NOT opened cook mode today.</td>
-        <td>
-          <div class="push-preview">
-            <div class="push-preview-title">Tonight: {{recipe_name}}</div>
-            <div class="push-preview-body">You planned it. Ingredients are in. Tap to start cooking.</div>
-          </div>
-        </td>
-        <td style="font-size: 12px; color: var(--hf-muted);">5 PM day-of<br>Max 3/week</td>
-      </tr>
-      <tr>
-        <td class="row-num">01</td>
-        <td>
-          <div class="use-case-name">Removed Meal Reminder</div>
-          <div class="use-case-desc">Recipe saved after removal from box</div>
-        </td>
-        <td><span class="tag-pill green">Event</span></td>
-        <td style="font-size: 12px; color: var(--hf-muted);">User removes recipe from box AND accepts auto-save prompt.</td>
-        <td>
-          <div class="push-preview">
-            <div class="push-preview-title">That {{recipe_name}} though.</div>
-            <div class="push-preview-body">Already in your Cookbook. All that's missing is the pan.</div>
-          </div>
-        </td>
-        <td style="font-size: 12px; color: var(--hf-muted);">Next day 5 PM<br>Single send</td>
-      </tr>
-      <tr>
-        <td class="row-num">02</td>
-        <td>
-          <div class="use-case-name">Meal Planner Gap Fill</div>
-          <div class="use-case-desc">Empty planner slot with saved recipes</div>
-        </td>
-        <td><span class="tag-pill green">Event</span></td>
-        <td style="font-size: 12px; color: var(--hf-muted);">Today's slot empty AND 1+ uncooked saved recipes.</td>
-        <td>
-          <div class="push-preview">
-            <div class="push-preview-title">Tonight's wide open.</div>
-            <div class="push-preview-body">{{recipe_name}} from your Cookbook. {{cook_time}} mins, your call.</div>
-          </div>
-        </td>
-        <td style="font-size: 12px; color: var(--hf-muted);">10 AM day-of<br>Max 2/week</td>
-      </tr>
-      <tr>
-        <td class="row-num">03</td>
-        <td>
-          <div class="use-case-name">Skip Week</div>
-          <div class="use-case-desc">Cookbook fills the gap when box is skipped</div>
-        </td>
-        <td><span class="tag-pill green">Event</span></td>
-        <td style="font-size: 12px; color: var(--hf-muted);">User skips delivery. Has 1+ saved recipes.</td>
-        <td>
-          <div class="push-preview">
-            <div class="push-preview-title">No box. No problem.</div>
-            <div class="push-preview-body">Your Cookbook's got you covered. {{saved_count}} recipes ready to go.</div>
-          </div>
-        </td>
-        <td style="font-size: 12px; color: var(--hf-muted);">Delivery day AM<br>1 per skip</td>
-      </tr>
-      <tr>
-        <td class="row-num">04</td>
-        <td>
-          <div class="use-case-name">High-Rated Meal Kit</div>
-          <div class="use-case-desc">Convert positive ratings into saves</div>
-        </td>
-        <td><span class="tag-pill green">Event</span></td>
-        <td style="font-size: 12px; color: var(--hf-muted);">User rates meal 4-5 stars AND recipe NOT saved.</td>
-        <td>
-          <div class="push-preview">
-            <div class="push-preview-title">{{recipe_name}} is a keeper.</div>
-            <div class="push-preview-body">Save it. Cook it again. No kit needed.</div>
-          </div>
-        </td>
-        <td style="font-size: 12px; color: var(--hf-muted);">2h post-rating<br>Max 1/week</td>
-      </tr>
-      <tr>
-        <td class="row-num">05</td>
-        <td>
-          <div class="use-case-name">Box Delivery Day</div>
-          <div class="use-case-desc">Cookbook as complement on gap nights</div>
-        </td>
-        <td><span class="tag-pill green">Event</span></td>
-        <td style="font-size: 12px; color: var(--hf-muted);">Box delivered AND box covers &lt;7 nights.</td>
-        <td>
-          <div class="push-preview">
-            <div class="push-preview-title">Box is here. What about the rest?</div>
-            <div class="push-preview-body">{{box_meals}} nights sorted. Your Cookbook handles the gaps.</div>
-          </div>
-        </td>
-        <td style="font-size: 12px; color: var(--hf-muted);">Delivery day 6 PM<br>Max 1/cycle</td>
-      </tr>
-      <tr>
-        <td class="row-num">06</td>
-        <td>
-          <div class="use-case-name">Post-Pause / Cancel</div>
-          <div class="use-case-desc">Retain engagement after subscription change</div>
-        </td>
-        <td><span class="tag-pill green">Event</span></td>
-        <td style="font-size: 12px; color: var(--hf-muted);">Pause/cancel completed. Previously used Cookbook.</td>
-        <td>
-          <div class="push-preview">
-            <div class="push-preview-title">Paused the box. Not the cooking.</div>
-            <div class="push-preview-body">Your Cookbook is always free. Save from anywhere, cook on your terms.</div>
-          </div>
-        </td>
-        <td style="font-size: 12px; color: var(--hf-muted);">48h post-event<br>Single send</td>
-      </tr>
-      <tr>
-        <td class="row-num">07</td>
-        <td>
-          <div class="use-case-name">Trending Recipe</div>
-          <div class="use-case-desc">Social proof for high-momentum recipes</div>
-        </td>
-        <td><span class="tag-pill green">Event</span></td>
-        <td style="font-size: 12px; color: var(--hf-muted);">Recipe crosses 500+ saves in 24h. User active and hasn't saved it.</td>
-        <td>
-          <div class="push-preview">
-            <div class="push-preview-title">Everyone's making this right now.</div>
-            <div class="push-preview-body">{{trending_recipe}}. {{save_count}} saves and counting.</div>
-          </div>
-        </td>
-        <td style="font-size: 12px; color: var(--hf-muted);">Same day 6 PM<br>Max 1/month</td>
-      </tr>
-      <tr>
-        <td class="row-num">08</td>
-        <td>
-          <div class="use-case-name">Missing Protein Suggestion</div>
-          <div class="use-case-desc">Smart grocery nudge from saved recipe</div>
-        </td>
-        <td><span class="tag-pill green">Event</span></td>
-        <td style="font-size: 12px; color: var(--hf-muted);">Box delivered AND saved recipe protein not in box ingredients.</td>
-        <td>
-          <div class="push-preview">
-            <div class="push-preview-title">No {{protein}} this week?</div>
-            <div class="push-preview-body">Your {{recipe_name}} needs it. One trip, one dinner sorted.</div>
-          </div>
-        </td>
-        <td style="font-size: 12px; color: var(--hf-muted);">Day after delivery 9 AM<br>Max 1/cycle</td>
-      </tr>
-      <tr>
-        <td class="row-num">09</td>
-        <td>
-          <div class="use-case-name">Planned Night Reinforcement</div>
-          <div class="use-case-desc">Remind user of planned Cookbook recipe</div>
-        </td>
-        <td><span class="tag-pill green">Event</span></td>
-        <td style="font-size: 12px; color: var(--hf-muted);">Cookbook recipe assigned to today AND not opened today.</td>
-        <td>
-          <div class="push-preview">
-            <div class="push-preview-title">Tonight's sorted.</div>
-            <div class="push-preview-body">{{recipe_name}} is on your planner. Tap when you're ready to cook.</div>
-          </div>
-        </td>
-        <td style="font-size: 12px; color: var(--hf-muted);">4:30 PM day-of<br>Max 3/week</td>
-      </tr>
-      <tr>
-        <td class="row-num">10</td>
-        <td>
-          <div class="use-case-name">Batch Cooking Detection</div>
-          <div class="use-case-desc">Suppression logic for meal prep users</div>
-        </td>
-        <td><span class="tag-pill amber">Suppression</span></td>
-        <td style="font-size: 12px; color: var(--hf-muted);">2+ recipes same day OR servings &gt;2. Silences gap-fill pushes.</td>
-        <td>
-          <div class="push-preview">
-            <div class="push-preview-title">Meal prep mode: on.</div>
-            <div class="push-preview-body">{{x}} dinners handled in one session. We won't bug you till {{next_day}}.</div>
-          </div>
-        </td>
-        <td style="font-size: 12px; color: var(--hf-muted);">12 PM day-of<br>Suppresses others</td>
-      </tr>
-      <tr>
-        <td class="row-num">11</td>
-        <td>
-          <div class="use-case-name">Cold-Traffic Reactivation</div>
-          <div class="use-case-desc">244K users who saved but never opened Cookbook</div>
-        </td>
-        <td><span class="tag-pill green">Event</span></td>
-        <td style="font-size: 12px; color: var(--hf-muted);">1+ external saves AND never opened Cookbook tab.</td>
-        <td>
-          <div class="push-preview">
-            <div class="push-preview-title">You saved it. It's waiting.</div>
-            <div class="push-preview-body">{{recipe_name}} is ready to cook. Open your Cookbook and see what else is in there.</div>
-          </div>
-        </td>
-        <td style="font-size: 12px; color: var(--hf-muted);">7d post-save 5 PM<br>Max 1/week</td>
-      </tr>
-      <tr>
-        <td class="row-num">12</td>
-        <td>
-          <div class="use-case-name">Post-Import Nudge</div>
-          <div class="use-case-desc">Convert 1st save into 2nd save intent</div>
-        </td>
-        <td><span class="tag-pill green">Event</span></td>
-        <td style="font-size: 12px; color: var(--hf-muted);">First-ever external recipe import completed.</td>
-        <td>
-          <div class="push-preview">
-            <div class="push-preview-title">Nice save. Here's what goes with it.</div>
-            <div class="push-preview-body">You saved {{recipe_name}}. People who loved that also saved {{related_collection}}.</div>
-          </div>
-        </td>
-        <td style="font-size: 12px; color: var(--hf-muted);">4h post-import<br>Single send</td>
-      </tr>
-      <tr>
-        <td class="row-num">P3</td>
-        <td>
-          <div class="use-case-name">General Cookbook Comms</div>
-          <div class="use-case-desc">Scheduled weekly re-engagement</div>
-        </td>
-        <td><span class="tag-pill dark">Scheduled</span></td>
-        <td style="font-size: 12px; color: var(--hf-muted);">Not event-triggered. Users with 1+ saves who haven't received push in 5 days.</td>
-        <td>
-          <div class="push-preview">
-            <div class="push-preview-title">Remember what you saved?</div>
-            <div class="push-preview-body">Your Cookbook is full of ideas. Tonight could be one of them.</div>
-          </div>
-        </td>
-        <td style="font-size: 12px; color: var(--hf-muted);">Sundays 5 PM<br>Max 1/7 days</td>
-      </tr>
-    </tbody>
-  </table>
+          <ul>
+            <li class="grid grid-cols-1 gap-3 px-6 py-6 md:grid-cols-[40px_minmax(0,1.5fr)_minmax(0,1.5fr)_minmax(0,1fr)_minmax(0,0.8fr)] md:gap-4 md:py-6">
+              <span class="text-2xl font-bold leading-none tracking-tight md:text-base md:leading-tight md:pt-1" style="font-family:var(--font-heading);color:#15803d">P1</span>
+              <div>
+                <p class="text-base font-bold leading-tight text-[var(--fg)] md:text-[15px]">Plan Your Week</p>
+                <span class="mt-2 inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ring-1 ring-inset bg-emerald-50 text-emerald-700 ring-emerald-200">Ready</span>
+              </div>
+              <p class="text-sm leading-relaxed text-[var(--fg-muted)] italic">Meal selection cutoff passes. User has NOT assigned meals to planner days.</p>
+              <div class="rounded-xl bg-[var(--bg-surface)] px-4 py-3">
+                <p class="text-[13px] font-bold text-[var(--fg)]">Your meals. Your nights. Your call.</p>
+                <p class="mt-1 text-[12px] text-[var(--fg-muted)]">Open the planner and assign them however you want.</p>
+              </div>
+              <p class="text-sm font-semibold text-[var(--fg)]">2h post-cutoff<br><span class="font-normal text-[var(--fg-muted)]">1/cycle</span></p>
+            </li>
+            <li class="grid grid-cols-1 gap-3 border-t border-[var(--border)] px-6 py-6 md:grid-cols-[40px_minmax(0,1.5fr)_minmax(0,1.5fr)_minmax(0,1fr)_minmax(0,0.8fr)] md:gap-4 md:py-6">
+              <span class="text-2xl font-bold leading-none tracking-tight md:text-base md:leading-tight md:pt-1" style="font-family:var(--font-heading);color:#15803d">P1</span>
+              <div>
+                <p class="text-base font-bold leading-tight text-[var(--fg)] md:text-[15px]">Cook Tonight</p>
+                <span class="mt-2 inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ring-1 ring-inset bg-emerald-50 text-emerald-700 ring-emerald-200">Ready</span>
+              </div>
+              <p class="text-sm leading-relaxed text-[var(--fg-muted)] italic">Meal assigned to today's slot AND box delivered. User has NOT opened cook mode today.</p>
+              <div class="rounded-xl bg-[var(--bg-surface)] px-4 py-3">
+                <p class="text-[13px] font-bold text-[var(--fg)]">Tonight: {{recipe_name}}</p>
+                <p class="mt-1 text-[12px] text-[var(--fg-muted)]">You planned it. Ingredients are in. Tap to start cooking.</p>
+              </div>
+              <p class="text-sm font-semibold text-[var(--fg)]">5 PM day-of<br><span class="font-normal text-[var(--fg-muted)]">Max 3/week</span></p>
+            </li>
+          </ul>
+        </div>
+      </details>
 
-  <div class="callout">
-    <p><strong>Suppression logic:</strong> Global 5-day frequency cap across all Cookbook pushes. Batch cooking detection suppresses gap-fill pushes for covered days. General comms only fire when no event-triggered push has been sent in the last 5 days. All pushes are deep-linked to the relevant recipe or Cookbook section.</p>
+      <!-- Phase 2: Cookbook Event Triggers -->
+      <details class="group overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--bg-card)]">
+        <summary class="flex cursor-pointer list-none items-center gap-3 px-6 py-4 hover:bg-[var(--bg-surface)]" style="border-left:4px solid #15803d">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 text-[var(--fg-muted)] transition-transform group-open:rotate-90"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+          <span class="text-sm font-bold text-[var(--fg)]">Phase 2 &middot; Cookbook Event Triggers</span>
+          <span class="hidden text-sm text-[var(--fg-muted)] md:inline">&mdash; Advanced behavioural pushes with real-time signals. 12 use cases, 25 touchpoints.</span>
+        </summary>
+        <div class="border-t border-[var(--border)]">
+          <div class="hidden grid-cols-1 gap-4 border-b border-[var(--border)] bg-[var(--bg-surface)] px-6 py-3 text-[10px] font-bold uppercase tracking-[0.16em] text-[var(--fg-muted)] md:grid md:grid-cols-[40px_minmax(0,1.5fr)_minmax(0,1.5fr)_minmax(0,1fr)_minmax(0,0.8fr)]">
+            <span>#</span><span>Use Case</span><span>Trigger</span><span>Copy Preview</span><span>Timing</span>
+          </div>
+          <ul>
+            <li class="grid grid-cols-1 gap-3 px-6 py-6 md:grid-cols-[40px_minmax(0,1.5fr)_minmax(0,1.5fr)_minmax(0,1fr)_minmax(0,0.8fr)] md:gap-4 md:py-6">
+              <span class="text-2xl font-bold leading-none tracking-tight md:text-base md:leading-tight md:pt-1" style="font-family:var(--font-heading);color:#15803d">01</span>
+              <div>
+                <p class="text-base font-bold leading-tight text-[var(--fg)] md:text-[15px]">Removed Meal Reminder</p>
+                <span class="mt-2 inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ring-1 ring-inset bg-emerald-50 text-emerald-700 ring-emerald-200">Ready</span>
+              </div>
+              <p class="text-sm leading-relaxed text-[var(--fg-muted)] italic">User removes recipe from box AND accepts auto-save prompt.</p>
+              <div class="rounded-xl bg-[var(--bg-surface)] px-4 py-3">
+                <p class="text-[13px] font-bold text-[var(--fg)]">That {{recipe_name}} though.</p>
+                <p class="mt-1 text-[12px] text-[var(--fg-muted)]">Already in your Cookbook. All that's missing is the pan.</p>
+              </div>
+              <p class="text-sm font-semibold text-[var(--fg)]">Next day 5 PM<br><span class="font-normal text-[var(--fg-muted)]">Single send</span></p>
+            </li>
+            <li class="grid grid-cols-1 gap-3 border-t border-[var(--border)] px-6 py-6 md:grid-cols-[40px_minmax(0,1.5fr)_minmax(0,1.5fr)_minmax(0,1fr)_minmax(0,0.8fr)] md:gap-4 md:py-6">
+              <span class="text-2xl font-bold leading-none tracking-tight md:text-base md:leading-tight md:pt-1" style="font-family:var(--font-heading);color:#15803d">02</span>
+              <div>
+                <p class="text-base font-bold leading-tight text-[var(--fg)] md:text-[15px]">Meal Planner Gap Fill</p>
+                <span class="mt-2 inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ring-1 ring-inset bg-emerald-50 text-emerald-700 ring-emerald-200">Ready</span>
+              </div>
+              <p class="text-sm leading-relaxed text-[var(--fg-muted)] italic">Today's slot empty AND 1+ uncooked saved recipes available.</p>
+              <div class="rounded-xl bg-[var(--bg-surface)] px-4 py-3">
+                <p class="text-[13px] font-bold text-[var(--fg)]">Tonight's wide open.</p>
+                <p class="mt-1 text-[12px] text-[var(--fg-muted)]">{{recipe_name}} from your Cookbook. {{cook_time}} mins, your call.</p>
+              </div>
+              <p class="text-sm font-semibold text-[var(--fg)]">10 AM day-of<br><span class="font-normal text-[var(--fg-muted)]">Max 2/week</span></p>
+            </li>
+            <li class="grid grid-cols-1 gap-3 border-t border-[var(--border)] px-6 py-6 md:grid-cols-[40px_minmax(0,1.5fr)_minmax(0,1.5fr)_minmax(0,1fr)_minmax(0,0.8fr)] md:gap-4 md:py-6">
+              <span class="text-2xl font-bold leading-none tracking-tight md:text-base md:leading-tight md:pt-1" style="font-family:var(--font-heading);color:#15803d">03</span>
+              <div>
+                <p class="text-base font-bold leading-tight text-[var(--fg)] md:text-[15px]">Skip Week</p>
+                <span class="mt-2 inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ring-1 ring-inset bg-emerald-50 text-emerald-700 ring-emerald-200">Ready</span>
+              </div>
+              <p class="text-sm leading-relaxed text-[var(--fg-muted)] italic">User skips delivery. Has 1+ saved recipes.</p>
+              <div class="rounded-xl bg-[var(--bg-surface)] px-4 py-3">
+                <p class="text-[13px] font-bold text-[var(--fg)]">No box. No problem.</p>
+                <p class="mt-1 text-[12px] text-[var(--fg-muted)]">Your Cookbook's got you covered. {{saved_count}} recipes ready to go.</p>
+              </div>
+              <p class="text-sm font-semibold text-[var(--fg)]">Delivery day AM<br><span class="font-normal text-[var(--fg-muted)]">1 per skip</span></p>
+            </li>
+            <li class="grid grid-cols-1 gap-3 border-t border-[var(--border)] px-6 py-6 md:grid-cols-[40px_minmax(0,1.5fr)_minmax(0,1.5fr)_minmax(0,1fr)_minmax(0,0.8fr)] md:gap-4 md:py-6">
+              <span class="text-2xl font-bold leading-none tracking-tight md:text-base md:leading-tight md:pt-1" style="font-family:var(--font-heading);color:#15803d">04</span>
+              <div>
+                <p class="text-base font-bold leading-tight text-[var(--fg)] md:text-[15px]">High-Rated Meal Kit</p>
+                <span class="mt-2 inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ring-1 ring-inset bg-emerald-50 text-emerald-700 ring-emerald-200">Ready</span>
+              </div>
+              <p class="text-sm leading-relaxed text-[var(--fg-muted)] italic">User rates meal 4-5 stars AND recipe NOT saved.</p>
+              <div class="rounded-xl bg-[var(--bg-surface)] px-4 py-3">
+                <p class="text-[13px] font-bold text-[var(--fg)]">{{recipe_name}} is a keeper.</p>
+                <p class="mt-1 text-[12px] text-[var(--fg-muted)]">Save it. Cook it again. No kit needed.</p>
+              </div>
+              <p class="text-sm font-semibold text-[var(--fg)]">2h post-rating<br><span class="font-normal text-[var(--fg-muted)]">Max 1/week</span></p>
+            </li>
+            <li class="grid grid-cols-1 gap-3 border-t border-[var(--border)] px-6 py-6 md:grid-cols-[40px_minmax(0,1.5fr)_minmax(0,1.5fr)_minmax(0,1fr)_minmax(0,0.8fr)] md:gap-4 md:py-6">
+              <span class="text-2xl font-bold leading-none tracking-tight md:text-base md:leading-tight md:pt-1" style="font-family:var(--font-heading);color:#15803d">05</span>
+              <div>
+                <p class="text-base font-bold leading-tight text-[var(--fg)] md:text-[15px]">Box Delivery Day</p>
+                <span class="mt-2 inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ring-1 ring-inset bg-emerald-50 text-emerald-700 ring-emerald-200">Ready</span>
+              </div>
+              <p class="text-sm leading-relaxed text-[var(--fg-muted)] italic">Box delivered AND covers fewer than 7 nights (gap nights exist).</p>
+              <div class="rounded-xl bg-[var(--bg-surface)] px-4 py-3">
+                <p class="text-[13px] font-bold text-[var(--fg)]">Box is here. What about the rest?</p>
+                <p class="mt-1 text-[12px] text-[var(--fg-muted)]">{{box_meals}} nights sorted. Your Cookbook handles the gaps.</p>
+              </div>
+              <p class="text-sm font-semibold text-[var(--fg)]">Delivery day 6 PM<br><span class="font-normal text-[var(--fg-muted)]">Max 1/cycle</span></p>
+            </li>
+            <li class="grid grid-cols-1 gap-3 border-t border-[var(--border)] px-6 py-6 md:grid-cols-[40px_minmax(0,1.5fr)_minmax(0,1.5fr)_minmax(0,1fr)_minmax(0,0.8fr)] md:gap-4 md:py-6">
+              <span class="text-2xl font-bold leading-none tracking-tight md:text-base md:leading-tight md:pt-1" style="font-family:var(--font-heading);color:#15803d">06</span>
+              <div>
+                <p class="text-base font-bold leading-tight text-[var(--fg)] md:text-[15px]">Post-Pause / Cancel</p>
+                <span class="mt-2 inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ring-1 ring-inset bg-emerald-50 text-emerald-700 ring-emerald-200">Ready</span>
+              </div>
+              <p class="text-sm leading-relaxed text-[var(--fg-muted)] italic">Pause/cancel completed. Previously used Cookbook (1+ saves).</p>
+              <div class="rounded-xl bg-[var(--bg-surface)] px-4 py-3">
+                <p class="text-[13px] font-bold text-[var(--fg)]">Paused the box. Not the cooking.</p>
+                <p class="mt-1 text-[12px] text-[var(--fg-muted)]">Your Cookbook is always free. Save from anywhere, cook on your terms.</p>
+              </div>
+              <p class="text-sm font-semibold text-[var(--fg)]">48h post-event<br><span class="font-normal text-[var(--fg-muted)]">Single send</span></p>
+            </li>
+            <li class="grid grid-cols-1 gap-3 border-t border-[var(--border)] px-6 py-6 md:grid-cols-[40px_minmax(0,1.5fr)_minmax(0,1.5fr)_minmax(0,1fr)_minmax(0,0.8fr)] md:gap-4 md:py-6">
+              <span class="text-2xl font-bold leading-none tracking-tight md:text-base md:leading-tight md:pt-1" style="font-family:var(--font-heading);color:#15803d">07</span>
+              <div>
+                <p class="text-base font-bold leading-tight text-[var(--fg)] md:text-[15px]">Trending Recipe</p>
+                <span class="mt-2 inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ring-1 ring-inset bg-emerald-50 text-emerald-700 ring-emerald-200">Ready</span>
+              </div>
+              <p class="text-sm leading-relaxed text-[var(--fg-muted)] italic">Recipe crosses 500+ saves in 24h. User active (14d) and hasn't saved it.</p>
+              <div class="rounded-xl bg-[var(--bg-surface)] px-4 py-3">
+                <p class="text-[13px] font-bold text-[var(--fg)]">Everyone's making this right now.</p>
+                <p class="mt-1 text-[12px] text-[var(--fg-muted)]">{{trending_recipe}}. {{save_count}} saves and counting.</p>
+              </div>
+              <p class="text-sm font-semibold text-[var(--fg)]">Same day 6 PM<br><span class="font-normal text-[var(--fg-muted)]">Max 1/month</span></p>
+            </li>
+            <li class="grid grid-cols-1 gap-3 border-t border-[var(--border)] px-6 py-6 md:grid-cols-[40px_minmax(0,1.5fr)_minmax(0,1.5fr)_minmax(0,1fr)_minmax(0,0.8fr)] md:gap-4 md:py-6">
+              <span class="text-2xl font-bold leading-none tracking-tight md:text-base md:leading-tight md:pt-1" style="font-family:var(--font-heading);color:#15803d">08</span>
+              <div>
+                <p class="text-base font-bold leading-tight text-[var(--fg)] md:text-[15px]">Missing Protein Suggestion</p>
+                <span class="mt-2 inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ring-1 ring-inset bg-amber-50 text-amber-700 ring-amber-200">Needs data pipeline</span>
+              </div>
+              <p class="text-sm leading-relaxed text-[var(--fg-muted)] italic">Box delivered AND saved recipe protein not in box ingredients. High confidence match only.</p>
+              <div class="rounded-xl bg-[var(--bg-surface)] px-4 py-3">
+                <p class="text-[13px] font-bold text-[var(--fg)]">No {{protein}} this week?</p>
+                <p class="mt-1 text-[12px] text-[var(--fg-muted)]">Your {{recipe_name}} needs it. One trip, one dinner sorted.</p>
+              </div>
+              <p class="text-sm font-semibold text-[var(--fg)]">Day after delivery 9 AM<br><span class="font-normal text-[var(--fg-muted)]">Max 1/cycle</span></p>
+            </li>
+            <li class="grid grid-cols-1 gap-3 border-t border-[var(--border)] px-6 py-6 md:grid-cols-[40px_minmax(0,1.5fr)_minmax(0,1.5fr)_minmax(0,1fr)_minmax(0,0.8fr)] md:gap-4 md:py-6">
+              <span class="text-2xl font-bold leading-none tracking-tight md:text-base md:leading-tight md:pt-1" style="font-family:var(--font-heading);color:#15803d">09</span>
+              <div>
+                <p class="text-base font-bold leading-tight text-[var(--fg)] md:text-[15px]">Planned Night Reinforcement</p>
+                <span class="mt-2 inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ring-1 ring-inset bg-emerald-50 text-emerald-700 ring-emerald-200">Ready</span>
+              </div>
+              <p class="text-sm leading-relaxed text-[var(--fg-muted)] italic">Cookbook recipe assigned to today AND not opened today.</p>
+              <div class="rounded-xl bg-[var(--bg-surface)] px-4 py-3">
+                <p class="text-[13px] font-bold text-[var(--fg)]">Tonight's sorted.</p>
+                <p class="mt-1 text-[12px] text-[var(--fg-muted)]">{{recipe_name}} is on your planner. Tap when you're ready to cook.</p>
+              </div>
+              <p class="text-sm font-semibold text-[var(--fg)]">4:30 PM day-of<br><span class="font-normal text-[var(--fg-muted)]">Max 3/week</span></p>
+            </li>
+            <li class="grid grid-cols-1 gap-3 border-t border-[var(--border)] px-6 py-6 md:grid-cols-[40px_minmax(0,1.5fr)_minmax(0,1.5fr)_minmax(0,1fr)_minmax(0,0.8fr)] md:gap-4 md:py-6">
+              <span class="text-2xl font-bold leading-none tracking-tight md:text-base md:leading-tight md:pt-1" style="font-family:var(--font-heading);color:#c2570c">10</span>
+              <div>
+                <p class="text-base font-bold leading-tight text-[var(--fg)] md:text-[15px]">Batch Cooking Detection</p>
+                <span class="mt-2 inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ring-1 ring-inset bg-amber-50 text-amber-700 ring-amber-200">Suppression logic</span>
+              </div>
+              <p class="text-sm leading-relaxed text-[var(--fg-muted)] italic">2+ recipes same day OR servings &gt;2. Silences gap-fill pushes for covered days.</p>
+              <div class="rounded-xl bg-[var(--bg-surface)] px-4 py-3">
+                <p class="text-[13px] font-bold text-[var(--fg)]">Meal prep mode: on.</p>
+                <p class="mt-1 text-[12px] text-[var(--fg-muted)]">{{x}} dinners handled in one session. We won't bug you till {{next_day}}.</p>
+              </div>
+              <p class="text-sm font-semibold text-[var(--fg)]">12 PM day-of<br><span class="font-normal text-[var(--fg-muted)]">Suppresses others</span></p>
+            </li>
+            <li class="grid grid-cols-1 gap-3 border-t border-[var(--border)] px-6 py-6 md:grid-cols-[40px_minmax(0,1.5fr)_minmax(0,1.5fr)_minmax(0,1fr)_minmax(0,0.8fr)] md:gap-4 md:py-6">
+              <span class="text-2xl font-bold leading-none tracking-tight md:text-base md:leading-tight md:pt-1" style="font-family:var(--font-heading);color:#15803d">11</span>
+              <div>
+                <p class="text-base font-bold leading-tight text-[var(--fg)] md:text-[15px]">Cold-Traffic Reactivation</p>
+                <span class="mt-2 inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ring-1 ring-inset bg-emerald-50 text-emerald-700 ring-emerald-200">Ready</span>
+                <div class="mt-3 flex flex-wrap gap-1.5">
+                  <span class="inline-flex items-center rounded-md bg-[var(--bg-surface)] px-2 py-1 text-[11px] font-medium text-[var(--fg-muted)] ring-1 ring-inset ring-[var(--border)]">244K TAM</span>
+                </div>
+              </div>
+              <p class="text-sm leading-relaxed text-[var(--fg-muted)] italic">1+ external saves AND never opened Cookbook tab. 244K users in this cohort.</p>
+              <div class="rounded-xl bg-[var(--bg-surface)] px-4 py-3">
+                <p class="text-[13px] font-bold text-[var(--fg)]">You saved it. It's waiting.</p>
+                <p class="mt-1 text-[12px] text-[var(--fg-muted)]">{{recipe_name}} is ready to cook. Open your Cookbook and see what else is in there.</p>
+              </div>
+              <p class="text-sm font-semibold text-[var(--fg)]">7d post-save 5 PM<br><span class="font-normal text-[var(--fg-muted)]">Max 1/week</span></p>
+            </li>
+            <li class="grid grid-cols-1 gap-3 border-t border-[var(--border)] px-6 py-6 md:grid-cols-[40px_minmax(0,1.5fr)_minmax(0,1.5fr)_minmax(0,1fr)_minmax(0,0.8fr)] md:gap-4 md:py-6">
+              <span class="text-2xl font-bold leading-none tracking-tight md:text-base md:leading-tight md:pt-1" style="font-family:var(--font-heading);color:#15803d">12</span>
+              <div>
+                <p class="text-base font-bold leading-tight text-[var(--fg)] md:text-[15px]">Post-Import Nudge</p>
+                <span class="mt-2 inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ring-1 ring-inset bg-emerald-50 text-emerald-700 ring-emerald-200">Ready</span>
+                <div class="mt-3 flex flex-wrap gap-1.5">
+                  <span class="inline-flex items-center rounded-md bg-[var(--bg-surface)] px-2 py-1 text-[11px] font-medium text-[var(--fg-muted)] ring-1 ring-inset ring-[var(--border)]">Drives 1&rarr;2 retention</span>
+                </div>
+              </div>
+              <p class="text-sm leading-relaxed text-[var(--fg-muted)] italic">First-ever external recipe import completed. Convert 1st save into 2nd save intent.</p>
+              <div class="rounded-xl bg-[var(--bg-surface)] px-4 py-3">
+                <p class="text-[13px] font-bold text-[var(--fg)]">Nice save. Here's what goes with it.</p>
+                <p class="mt-1 text-[12px] text-[var(--fg-muted)]">You saved {{recipe_name}}. People who loved that also saved {{related_collection}}.</p>
+              </div>
+              <p class="text-sm font-semibold text-[var(--fg)]">4h post-import<br><span class="font-normal text-[var(--fg-muted)]">Single send</span></p>
+            </li>
+          </ul>
+        </div>
+      </details>
+
+      <!-- Phase 3: General Comms -->
+      <details class="group overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--bg-card)]">
+        <summary class="flex cursor-pointer list-none items-center gap-3 px-6 py-4 hover:bg-[var(--bg-surface)]" style="border-left:4px solid #15803d">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 text-[var(--fg-muted)] transition-transform group-open:rotate-90"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+          <span class="text-sm font-bold text-[var(--fg)]">Phase 3 &middot; General Cookbook Comms</span>
+          <span class="hidden text-sm text-[var(--fg-muted)] md:inline">&mdash; Scheduled pushes for discovery and re-engagement. 1 use case, 3 variants.</span>
+        </summary>
+        <div class="border-t border-[var(--border)]">
+          <div class="hidden grid-cols-1 gap-4 border-b border-[var(--border)] bg-[var(--bg-surface)] px-6 py-3 text-[10px] font-bold uppercase tracking-[0.16em] text-[var(--fg-muted)] md:grid md:grid-cols-[40px_minmax(0,1.5fr)_minmax(0,1.5fr)_minmax(0,1fr)_minmax(0,0.8fr)]">
+            <span>#</span><span>Use Case</span><span>Logic</span><span>Copy Preview</span><span>Timing</span>
+          </div>
+          <ul>
+            <li class="grid grid-cols-1 gap-3 px-6 py-6 md:grid-cols-[40px_minmax(0,1.5fr)_minmax(0,1.5fr)_minmax(0,1fr)_minmax(0,0.8fr)] md:gap-4 md:py-6">
+              <span class="text-2xl font-bold leading-none tracking-tight md:text-base md:leading-tight md:pt-1" style="font-family:var(--font-heading);color:#15803d">P3</span>
+              <div>
+                <p class="text-base font-bold leading-tight text-[var(--fg)] md:text-[15px]">General Cookbook Comms</p>
+                <span class="mt-2 inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ring-1 ring-inset bg-emerald-50 text-emerald-700 ring-emerald-200">Ready</span>
+              </div>
+              <p class="text-sm leading-relaxed text-[var(--fg-muted)] italic">Scheduled (not event-triggered). Users with 1+ saves who haven't received a push in 5 days.</p>
+              <div class="rounded-xl bg-[var(--bg-surface)] px-4 py-3">
+                <p class="text-[13px] font-bold text-[var(--fg)]">Remember what you saved?</p>
+                <p class="mt-1 text-[12px] text-[var(--fg-muted)]">Your Cookbook is full of ideas. Tonight could be one of them.</p>
+              </div>
+              <p class="text-sm font-semibold text-[var(--fg)]">Sundays 5 PM<br><span class="font-normal text-[var(--fg-muted)]">Max 1/7 days</span></p>
+            </li>
+          </ul>
+        </div>
+      </details>
+    </div>
+
+    <div class="mt-6 rounded-2xl border-l-4 border-[var(--color-brand)] bg-[var(--bg-surface)] px-6 py-5">
+      <p class="text-base leading-relaxed text-[var(--fg)]"><strong>Suppression logic:</strong> Global 5-day frequency cap across all Cookbook pushes. Batch cooking detection suppresses gap-fill pushes for covered days. General comms only fire when no event-triggered push has been sent in the last 5 days. All pushes are deep-linked to the relevant recipe or Cookbook section.</p>
+    </div>
   </div>
 </section>
 
 <!-- PILLAR 2: PAID SOCIAL -->
-<section id="paid">
-  <div class="section-tag">Pillar 2 &middot; <span>Paid Social</span></div>
-  <h2>Make them aware<br>Cookbook <span class="accent">exists.</span></h2>
-  <p class="section-desc">Feature awareness, not acquisition. Paid social in Q3 is laser focused on surfacing Cookbook to existing HelloFresh app users and lapsed subscribers who don't know the feature exists. HF-produced brand creative. Aspirational lifestyle positioning.</p>
+<section id="pillar-paid" class="scroll-mt-6 px-6 py-20 md:py-24 bg-[var(--bg-surface)]">
+  <div class="mx-auto max-w-5xl">
+    <p class="text-[11px] font-bold uppercase tracking-[0.24em]" style="color:#c2570c">Pillar 2 &middot; Paid Social</p>
+    <h2 class="mt-4 max-w-4xl text-4xl font-bold leading-[1.05] tracking-tight text-[var(--fg)] md:text-[52px]" style="font-family:var(--font-heading)">Make them aware Cookbook exists.</h2>
+    <p class="mt-6 max-w-3xl text-lg leading-relaxed text-[var(--fg-muted)]">Feature awareness, not acquisition. Paid social in Q3 is laser focused on surfacing Cookbook to existing HelloFresh app users and lapsed subscribers who don't know the feature exists.</p>
 
-  <div class="key-question">
-    <p>How do we surface Cookbook to dormant app users?</p>
-    <p class="kq-sub">Push handles the engaged. Paid reaches the rest.</p>
-  </div>
-
-  <div class="approach-grid">
-    <div class="approach-card">
-      <h4>Why Paid Social in Q3</h4>
-      <p>Q2 proved Cookbook works organically. But discovery remains the bottleneck: most existing app users still haven't opened the Cookbook tab. Push notifications handle engaged users. Paid social reaches people scrolling Instagram and TikTok who already have HelloFresh installed but haven't discovered the feature.</p>
+    <div class="mt-6 flex flex-col gap-3 md:flex-row md:gap-4">
+      <div class="flex-1 rounded-xl border border-[var(--border)] border-l-4 bg-[var(--bg-card)] px-5 py-4" style="border-left-color:#c2570c">
+        <p class="text-[10px] font-bold uppercase tracking-[0.16em]" style="color:#c2570c">&nearr; North star link</p>
+        <p class="mt-2 text-sm leading-relaxed text-[var(--fg-muted)]">Can't save external recipes if you don't know Cookbook exists. Paid social reaches users that push can't: those who haven't engaged yet.</p>
+      </div>
+      <div class="flex-1 rounded-xl border border-[var(--border)] bg-[var(--bg-card)] px-5 py-4">
+        <p class="text-[10px] font-bold uppercase tracking-[0.16em] text-[var(--fg-muted)]">Key question</p>
+        <p class="mt-2 text-sm font-semibold leading-relaxed text-[var(--fg)]">How do we surface Cookbook to dormant app users?</p>
+      </div>
     </div>
-    <div class="approach-card">
-      <h4>How It Connects</h4>
-      <p>Paid social creates awareness. Push notifications convert aware users into active ones. Creator recipes give them content to save once they arrive. The three pillars form a funnel: <strong>See it</strong> (paid) &rarr; <strong>Use it</strong> (push) &rarr; <strong>Love it</strong> (creator content).</p>
+
+    <div class="mt-10 overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--bg-card)]">
+      <div class="hidden grid-cols-1 gap-4 border-b border-[var(--border)] bg-[var(--bg-surface)] px-6 py-3 text-[10px] font-bold uppercase tracking-[0.16em] text-[var(--fg-muted)] md:grid md:grid-cols-[40px_minmax(0,1fr)_minmax(0,1.5fr)_minmax(0,1fr)_minmax(0,0.8fr)]">
+        <span>#</span><span>Platform</span><span>Hypothesis</span><span>Placements</span><span>Creative</span>
+      </div>
+      <ul>
+        <li class="grid grid-cols-1 gap-3 px-6 py-6 md:grid-cols-[40px_minmax(0,1fr)_minmax(0,1.5fr)_minmax(0,1fr)_minmax(0,0.8fr)] md:gap-4 md:py-6">
+          <span class="text-2xl font-bold leading-none tracking-tight md:text-base md:leading-tight md:pt-1" style="font-family:var(--font-heading);color:#c2570c">2.1</span>
+          <div>
+            <p class="text-base font-bold leading-tight text-[var(--fg)] md:text-[15px]">Meta Ads</p>
+            <span class="mt-2 inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ring-1 ring-inset bg-emerald-50 text-emerald-700 ring-emerald-200">Ready</span>
+          </div>
+          <p class="text-sm leading-relaxed text-[var(--fg-muted)] italic">Highest overlap with existing HelloFresh app users. Precise custom audience targeting via app activity signals.</p>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="inline-flex items-center rounded-md bg-[var(--bg-surface)] px-2 py-1 text-[11px] font-medium text-[var(--fg-muted)] ring-1 ring-inset ring-[var(--border)]">IG Feed</span>
+            <span class="inline-flex items-center rounded-md bg-[var(--bg-surface)] px-2 py-1 text-[11px] font-medium text-[var(--fg-muted)] ring-1 ring-inset ring-[var(--border)]">IG Stories</span>
+            <span class="inline-flex items-center rounded-md bg-[var(--bg-surface)] px-2 py-1 text-[11px] font-medium text-[var(--fg-muted)] ring-1 ring-inset ring-[var(--border)]">IG Reels</span>
+            <span class="inline-flex items-center rounded-md bg-[var(--bg-surface)] px-2 py-1 text-[11px] font-medium text-[var(--fg-muted)] ring-1 ring-inset ring-[var(--border)]">FB Feed</span>
+          </div>
+          <p class="text-sm font-semibold text-[var(--fg)]">HF brand creative</p>
+        </li>
+        <li class="grid grid-cols-1 gap-3 border-t border-[var(--border)] px-6 py-6 md:grid-cols-[40px_minmax(0,1fr)_minmax(0,1.5fr)_minmax(0,1fr)_minmax(0,0.8fr)] md:gap-4 md:py-6">
+          <span class="text-2xl font-bold leading-none tracking-tight md:text-base md:leading-tight md:pt-1" style="font-family:var(--font-heading);color:#c2570c">2.2</span>
+          <div>
+            <p class="text-base font-bold leading-tight text-[var(--fg)] md:text-[15px]">TikTok Ads</p>
+            <span class="mt-2 inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ring-1 ring-inset bg-emerald-50 text-emerald-700 ring-emerald-200">Ready</span>
+          </div>
+          <p class="text-sm leading-relaxed text-[var(--fg-muted)] italic">Recipe content native to platform. Vertical video format matches Cookbook's social DNA.</p>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="inline-flex items-center rounded-md bg-[var(--bg-surface)] px-2 py-1 text-[11px] font-medium text-[var(--fg-muted)] ring-1 ring-inset ring-[var(--border)]">In-Feed</span>
+            <span class="inline-flex items-center rounded-md bg-[var(--bg-surface)] px-2 py-1 text-[11px] font-medium text-[var(--fg-muted)] ring-1 ring-inset ring-[var(--border)]">TopView</span>
+            <span class="inline-flex items-center rounded-md bg-[var(--bg-surface)] px-2 py-1 text-[11px] font-medium text-[var(--fg-muted)] ring-1 ring-inset ring-[var(--border)]">Branded Effect</span>
+          </div>
+          <p class="text-sm font-semibold text-[var(--fg)]">HF brand creative</p>
+        </li>
+      </ul>
     </div>
-  </div>
 
-  <h3 style="margin-top: 32px;">Platforms</h3>
-  <table class="data-table">
-    <thead>
-      <tr>
-        <th>Platform</th>
-        <th>Placements</th>
-        <th>Why</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><strong style="color: var(--hf-dark);">Meta Ads</strong></td>
-        <td>
-          <span class="tag-pill green">IG Feed</span>
-          <span class="tag-pill green">IG Stories</span>
-          <span class="tag-pill green">IG Reels</span>
-          <span class="tag-pill green">FB Feed</span>
-        </td>
-        <td style="font-size: 12px; color: var(--hf-muted);">Highest overlap with existing HelloFresh app users. Precise custom audience targeting via app activity signals.</td>
-      </tr>
-      <tr>
-        <td><strong style="color: var(--hf-dark);">TikTok Ads</strong></td>
-        <td>
-          <span class="tag-pill green">In-Feed</span>
-          <span class="tag-pill green">TopView</span>
-          <span class="tag-pill green">Branded Effect</span>
-        </td>
-        <td style="font-size: 12px; color: var(--hf-muted);">Recipe content native to platform. Vertical video format matches Cookbook's social DNA.</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <div class="callout">
-    <p><strong>Creative approach:</strong> HF-produced brand creative, not creator content. Aspirational lifestyle positioning that shows the value of saving and cooking recipes beyond the box. Feature awareness goal, not direct acquisition.</p>
+    <div class="mt-6 rounded-2xl border-l-4 bg-[var(--bg-card)] px-6 py-5 border border-[var(--border)]" style="border-left-color:#c2570c">
+      <p class="text-base leading-relaxed text-[var(--fg)]"><strong>How it connects:</strong> Paid social creates awareness. Push notifications convert aware users into active ones. Creator recipes give them content to save once they arrive. See it (paid) &rarr; Use it (push) &rarr; Love it (creator content).</p>
+    </div>
   </div>
 </section>
 
 <!-- PILLAR 3: INFLUENCER MARKETING -->
-<section id="influencer">
-  <div class="section-tag">Pillar 3 &middot; <span>Influencer Marketing</span></div>
-  <h2>Two approaches.<br>One creator <span class="accent">ecosystem.</span></h2>
-  <p class="section-desc">Q3 builds a scalable influencer engine for Cookbook. From sourcing creators via automation to monetising their recipes inside the app, each approach feeds into the next.</p>
+<section id="pillar-influencer" class="scroll-mt-6 px-6 py-20 md:py-24">
+  <div class="mx-auto max-w-5xl">
+    <p class="text-[11px] font-bold uppercase tracking-[0.24em]" style="color:#7c3aed">Pillar 3 &middot; Influencer Marketing</p>
+    <h2 class="mt-4 max-w-4xl text-4xl font-bold leading-[1.05] tracking-tight text-[var(--fg)] md:text-[52px]" style="font-family:var(--font-heading)">Where does the content come from?</h2>
+    <p class="mt-6 max-w-3xl text-lg leading-relaxed text-[var(--fg-muted)]">Bring supply of external recipes and the creators who make them. Without external content, the KPI theme stalls. Two approaches feed the same pipeline from different directions.</p>
 
-  <div class="key-question">
-    <p>Where does the content come from?</p>
-    <p class="kq-sub">Bring supply of external recipes and the creators who make them. Without external content, the KPI theme stalls.</p>
-  </div>
-
-  <div class="approach-grid">
-    <div class="approach-card">
-      <h4>External Tools: Automated Creator Sourcing</h4>
-      <p>Use external tools to scrape Instagram and automatically identify high-potential food creators for Cookbook partnerships. Replaces manual outreach with a scalable discovery pipeline.</p>
-      <div style="margin-top: 12px; display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--hf-muted);">
-        <span class="tag-pill green">External Tools</span> &rarr; Scrape IG &rarr; Identify &rarr; Qualify &rarr; Outreach
+    <div class="mt-6 flex flex-col gap-3 md:flex-row md:gap-4">
+      <div class="flex-1 rounded-xl border border-[var(--border)] border-l-4 bg-[var(--bg-card)] px-5 py-4" style="border-left-color:#7c3aed">
+        <p class="text-[10px] font-bold uppercase tracking-[0.16em]" style="color:#7c3aed">&nearr; North star link</p>
+        <p class="mt-2 text-sm leading-relaxed text-[var(--fg-muted)]">No external content = nothing to save. Creators bring recipes + their own followers.</p>
+      </div>
+      <div class="flex-1 rounded-xl border border-[var(--border)] bg-[var(--bg-card)] px-5 py-4">
+        <p class="text-[10px] font-bold uppercase tracking-[0.16em] text-[var(--fg-muted)]">Key question</p>
+        <p class="mt-2 text-sm font-semibold leading-relaxed text-[var(--fg)]">Can creators bring us content and users at lower CAC?</p>
       </div>
     </div>
-    <div class="approach-card">
-      <h4>Internal Team Partnerships</h4>
-      <p>Leverage existing influencer relationships across HelloFresh teams to fast-track Cookbook creator onboarding, and turn loyal subscribers into micro-influencers who promote Cookbook to their own audiences.</p>
-      <div style="margin-top: 12px;">
-        <div style="font-size: 12px; color: var(--hf-muted); line-height: 1.6;"><strong style="color: var(--hf-dark);">Influencer Team:</strong> Re-engage for Cookbook-specific briefs</div>
-        <div style="font-size: 12px; color: var(--hf-muted); line-height: 1.6;"><strong style="color: var(--hf-dark);">Loyalty Members:</strong> Equip active members as advocates</div>
+
+    <div class="mt-10 overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--bg-card)]">
+      <div class="hidden grid-cols-1 gap-4 border-b border-[var(--border)] bg-[var(--bg-surface)] px-6 py-3 text-[10px] font-bold uppercase tracking-[0.16em] text-[var(--fg-muted)] md:grid md:grid-cols-[40px_minmax(0,1.5fr)_minmax(0,1.5fr)_minmax(0,1fr)_minmax(0,0.8fr)]">
+        <span>#</span><span>Approach</span><span>Hypothesis</span><span>How it works</span><span>Status</span>
       </div>
+      <ul>
+        <li class="grid grid-cols-1 gap-3 px-6 py-6 md:grid-cols-[40px_minmax(0,1.5fr)_minmax(0,1.5fr)_minmax(0,1fr)_minmax(0,0.8fr)] md:gap-4 md:py-6">
+          <span class="text-2xl font-bold leading-none tracking-tight md:text-base md:leading-tight md:pt-1" style="font-family:var(--font-heading);color:#7c3aed">3.1</span>
+          <div>
+            <p class="text-base font-bold leading-tight text-[var(--fg)] md:text-[15px]">Automated Creator Sourcing</p>
+            <span class="mt-2 inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ring-1 ring-inset bg-emerald-50 text-emerald-700 ring-emerald-200">Ready</span>
+            <div class="mt-3 flex flex-wrap gap-1.5">
+              <span class="inline-flex items-center rounded-md bg-[var(--bg-surface)] px-2 py-1 text-[11px] font-medium text-[var(--fg-muted)] ring-1 ring-inset ring-[var(--border)]">IG Scraping</span>
+              <span class="inline-flex items-center rounded-md bg-[var(--bg-surface)] px-2 py-1 text-[11px] font-medium text-[var(--fg-muted)] ring-1 ring-inset ring-[var(--border)]">Auto-Qualify</span>
+              <span class="inline-flex items-center rounded-md bg-[var(--bg-surface)] px-2 py-1 text-[11px] font-medium text-[var(--fg-muted)] ring-1 ring-inset ring-[var(--border)]">Outreach Pipeline</span>
+            </div>
+          </div>
+          <p class="text-sm leading-relaxed text-[var(--fg-muted)] italic">"Use external tools to scrape Instagram and automatically identify high-potential food creators. Replaces manual outreach with a scalable discovery pipeline."</p>
+          <div>
+            <p class="text-sm text-[var(--fg-muted)]">External Tools &rarr; Scrape IG &rarr; Identify &rarr; Qualify &rarr; Outreach</p>
+          </div>
+          <p class="text-sm font-semibold text-[var(--fg)]">Automated &middot; Scalable</p>
+        </li>
+        <li class="grid grid-cols-1 gap-3 border-t border-[var(--border)] px-6 py-6 md:grid-cols-[40px_minmax(0,1.5fr)_minmax(0,1.5fr)_minmax(0,1fr)_minmax(0,0.8fr)] md:gap-4 md:py-6">
+          <span class="text-2xl font-bold leading-none tracking-tight md:text-base md:leading-tight md:pt-1" style="font-family:var(--font-heading);color:#7c3aed">3.2</span>
+          <div>
+            <p class="text-base font-bold leading-tight text-[var(--fg)] md:text-[15px]">Internal Team Partnerships</p>
+            <span class="mt-2 inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ring-1 ring-inset bg-amber-50 text-amber-700 ring-amber-200">In progress</span>
+            <div class="mt-3 flex flex-wrap gap-1.5">
+              <span class="inline-flex items-center rounded-md bg-[var(--bg-surface)] px-2 py-1 text-[11px] font-medium text-[var(--fg-muted)] ring-1 ring-inset ring-[var(--border)]">Influencer Team</span>
+              <span class="inline-flex items-center rounded-md bg-[var(--bg-surface)] px-2 py-1 text-[11px] font-medium text-[var(--fg-muted)] ring-1 ring-inset ring-[var(--border)]">Loyalty Members</span>
+              <span class="inline-flex items-center rounded-md bg-[var(--bg-surface)] px-2 py-1 text-[11px] font-medium text-[var(--fg-muted)] ring-1 ring-inset ring-[var(--border)]">Cookbook-Specific Briefs</span>
+            </div>
+          </div>
+          <p class="text-sm leading-relaxed text-[var(--fg-muted)] italic">"Leverage existing influencer relationships across HF teams. Turn loyal subscribers into micro-influencers who promote Cookbook to their own audiences."</p>
+          <div>
+            <p class="text-sm text-[var(--fg-muted)]"><strong class="text-[var(--fg)]">Influencer Team:</strong> Re-engage for Cookbook briefs</p>
+            <p class="mt-2 text-sm text-[var(--fg-muted)]"><strong class="text-[var(--fg)]">Loyalty Members:</strong> Equip as advocates</p>
+          </div>
+          <p class="text-sm font-semibold text-[var(--fg)]">Internal leverage &middot; Faster activation</p>
+        </li>
+      </ul>
+    </div>
+
+    <div class="mt-6 rounded-2xl border-l-4 bg-[var(--bg-surface)] px-6 py-5" style="border-left-color:#7c3aed">
+      <p class="text-base leading-relaxed text-[var(--fg)]"><strong>Full pipeline:</strong> Source (External Tools + Internal Teams) &rarr; Partner (Onboard to Cookbook) &rarr; Create (Recipes in the app) &rarr; Scale (Loyalty members amplify).</p>
     </div>
   </div>
+</section>
 
-  <div class="callout">
-    <p><strong>How they connect:</strong> Source (External Tools + Internal Teams) &rarr; Partner (Onboard to Cookbook) &rarr; Create (Recipes in the app) &rarr; Scale (Loyalty members amplify). The two approaches feed the same pipeline from different directions.</p>
+<!-- FOUNDATION -->
+<section id="foundation" class="scroll-mt-6 px-6 py-20 md:py-24 bg-[var(--bg-surface)]">
+  <div class="mx-auto max-w-5xl">
+    <p class="text-[11px] font-bold uppercase tracking-[0.24em]" style="color:#2563eb">Foundation</p>
+    <h2 class="mt-4 max-w-4xl text-4xl font-bold leading-[1.05] tracking-tight text-[var(--fg)] md:text-[52px]" style="font-family:var(--font-heading)">Controls, measurement, and quality.</h2>
+    <p class="mt-6 max-w-3xl text-lg leading-relaxed text-[var(--fg-muted)]">The shared infrastructure that makes the three pillars work together without cannibalising each other.</p>
+
+    <div class="mt-10 grid grid-cols-1 gap-4 md:grid-cols-3">
+      <div class="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-6">
+        <p class="text-[10px] font-bold uppercase tracking-[0.16em]" style="color:#2563eb">Suppression</p>
+        <p class="mt-3 text-sm font-bold text-[var(--fg)]">5-day global frequency cap</p>
+        <p class="mt-2 text-sm text-[var(--fg-muted)]">No user receives more than one Cookbook push in any 5-day window, across all use cases.</p>
+      </div>
+      <div class="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-6">
+        <p class="text-[10px] font-bold uppercase tracking-[0.16em]" style="color:#2563eb">Deep-linking</p>
+        <p class="mt-3 text-sm font-bold text-[var(--fg)]">Every push lands on content</p>
+        <p class="mt-2 text-sm text-[var(--fg-muted)]">All pushes deep-link to the specific recipe, collection, or Cookbook section referenced in the copy.</p>
+      </div>
+      <div class="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-6">
+        <p class="text-[10px] font-bold uppercase tracking-[0.16em]" style="color:#2563eb">Personalisation</p>
+        <p class="mt-3 text-sm font-bold text-[var(--fg)]">Dynamic recipe + timing</p>
+        <p class="mt-2 text-sm text-[var(--fg-muted)]">Recipe names, cook times, saved counts, and protein types are injected per-user from Cookbook data.</p>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- DOCUMENTATION -->
-<section id="docs">
-  <div class="section-tag">Resources</div>
-  <h2>Related documentation.</h2>
-  <p class="section-desc">All documentation for the Cookbook campaign strategy, reports, and planning.</p>
+<section class="px-6 py-20 md:py-24">
+  <div class="mx-auto max-w-5xl">
+    <p class="text-[11px] font-bold uppercase tracking-[0.18em] text-[var(--color-brand)]">Resources</p>
+    <h2 class="mt-3 text-4xl font-bold leading-tight tracking-tight text-[var(--fg)] md:text-[44px]" style="font-family:var(--font-heading)">Related documentation</h2>
 
-  <div class="docs-grid">
-    <a href="cookbook-campaign-strategy.html" class="doc-card">
-      <div class="doc-card-tag">Strategy</div>
-      <h4>Q2 Campaign Strategy</h4>
-      <p>Full campaign strategy for Q2 2026 including channels, CRM lifecycle, organic social, ASO, and creator platform.</p>
-    </a>
-    <a href="cookbook-q2-validation-report.html" class="doc-card">
-      <div class="doc-card-tag">Report</div>
-      <h4>Q2 Validation Report</h4>
-      <p>Tech Feature Marketing Playbook with performance data, format rankings, and the 7 rule master playbook.</p>
-    </a>
-    <a href="cookbook-push-journey.html" class="doc-card">
-      <div class="doc-card-tag">CRM</div>
-      <h4>Push Journey</h4>
-      <p>CRM push notification journey mapping and trigger logic.</p>
-    </a>
+    <div class="mt-10 grid grid-cols-1 gap-4 md:grid-cols-3">
+      <a href="cookbook-campaign-strategy.html" class="group rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-6 transition hover:shadow-md hover:border-[var(--color-brand)]">
+        <p class="text-[10px] font-bold uppercase tracking-[0.16em] text-[var(--color-brand)]">Strategy</p>
+        <p class="mt-3 text-base font-bold text-[var(--fg)]">Q2 Campaign Strategy</p>
+        <p class="mt-2 text-sm text-[var(--fg-muted)]">Full Q2 strategy: channels, CRM lifecycle, organic social, ASO, creator platform.</p>
+      </a>
+      <a href="cookbook-q2-validation-report.html" class="group rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-6 transition hover:shadow-md hover:border-[var(--color-brand)]">
+        <p class="text-[10px] font-bold uppercase tracking-[0.16em] text-[var(--color-brand)]">Report</p>
+        <p class="mt-3 text-base font-bold text-[var(--fg)]">Q2 Validation Report</p>
+        <p class="mt-2 text-sm text-[var(--fg-muted)]">Performance data, format rankings, 7-rule master playbook.</p>
+      </a>
+      <a href="cookbook-push-journey.html" class="group rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-6 transition hover:shadow-md hover:border-[var(--color-brand)]">
+        <p class="text-[10px] font-bold uppercase tracking-[0.16em] text-[var(--color-brand)]">CRM</p>
+        <p class="mt-3 text-base font-bold text-[var(--fg)]">Push Journey</p>
+        <p class="mt-2 text-sm text-[var(--fg-muted)]">CRM push notification journey mapping and trigger logic.</p>
+      </a>
+    </div>
   </div>
 </section>
 
-</div>
+</main>
 
 <!-- FOOTER -->
-<div class="footer">
-  <div class="container">
-    <div class="footer-inner">
-      <span>HelloFresh &middot; Cookbook &middot; Product Marketing &middot; Q3 2026 planning</span>
-      <a href="cookbook-campaign-strategy.html">Back to Q2 strategy &rarr;</a>
-    </div>
+<footer class="border-t border-[var(--border)] bg-[var(--bg)] px-6 py-10">
+  <div class="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-4 text-sm text-[var(--fg-muted)]">
+    <span>HelloFresh &middot; Cookbook &middot; Product Marketing &middot; Q3 2026 planning</span>
+    <a class="inline-flex items-center gap-1.5 font-bold text-[var(--fg)] transition hover:text-[var(--color-brand)]" href="cookbook-campaign-strategy.html">Back to Q2 strategy
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+    </a>
   </div>
-</div>
+</footer>
 
 <script src="../auth.js"></script>
 </body>
