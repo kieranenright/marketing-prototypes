@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Creator Marketplace Discovery Research — Summary for US Creator Platform</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+  --hf-green: #067A46;
+  --hf-green-dark: #045a34;
+  --hf-lime: #96DC14;
+  --hf-cream: #FAF8F3;
+  --hf-white: #FFFFFF;
+  --hf-dark: #1A1A1A;
+  --hf-muted: #6B6B6B;
+  --hf-grey: #F8F9FA;
+  --hf-border: #E8E8E8;
+  --hf-purple: #6C3FA0;
+  --hf-orange: #E65100;
+  --hf-blue: #1565C0;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--hf-cream);
+  color: var(--hf-dark);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.header {
+  background: linear-gradient(135deg, var(--hf-green) 0%, var(--hf-green-dark) 100%);
+  color: white;
+  padding: 4rem 2rem 3rem;
+}
+
+.header-inner {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.header-badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.15);
+  padding: 0.35rem 0.85rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 1.25rem;
+}
+
+.header h1 {
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.5px;
+}
+
+.header p {
+  font-size: 1.1rem;
+  opacity: 0.85;
+  max-width: 640px;
+  line-height: 1.6;
+}
+
+.header-meta {
+  display: flex;
+  gap: 2rem;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255,255,255,0.2);
+  font-size: 0.85rem;
+  opacity: 0.75;
+}
+
+.header-meta span { font-weight: 500; }
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem;
+}
+
+.section {
+  background: var(--hf-white);
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.03);
+  border: 1px solid var(--hf-border);
+}
+
+.section h2 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--hf-green);
+  margin-bottom: 1rem;
+  letter-spacing: -0.3px;
+}
+
+.section h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--hf-dark);
+  margin: 1.5rem 0 0.75rem;
+}
+
+.section p {
+  color: var(--hf-muted);
+  font-size: 0.92rem;
+  line-height: 1.7;
+  margin-bottom: 0.75rem;
+}
+
+.section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.section ul li {
+  padding: 0.6rem 0 0.6rem 1.5rem;
+  position: relative;
+  font-size: 0.92rem;
+  color: #333;
+  line-height: 1.6;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.section ul li:last-child { border-bottom: none; }
+
+.section ul li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 1rem;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--hf-green);
+}
+
+.callout {
+  background: #FFFDE7;
+  border-left: 4px solid #FBC02D;
+  padding: 1.25rem 1.5rem;
+  border-radius: 0 8px 8px 0;
+  margin: 1.25rem 0;
+}
+
+.callout p {
+  color: #5D4E00;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+.callout-red {
+  background: #FFF5F5;
+  border-left-color: #E53E3E;
+}
+
+.callout-red p { color: #742A2A; }
+
+.callout-green {
+  background: #F0FFF4;
+  border-left-color: var(--hf-green);
+}
+
+.callout-green p { color: #22543D; }
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+@media (max-width: 768px) {
+  .grid-2 { grid-template-columns: 1fr; }
+  .header { padding: 3rem 1.5rem 2rem; }
+  .container { padding: 1.5rem 1rem; }
+}
+
+.stat-card {
+  background: var(--hf-grey);
+  border-radius: 10px;
+  padding: 1.25rem;
+  text-align: center;
+  border: 1px solid #eee;
+}
+
+.stat-card .number {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--hf-green);
+  letter-spacing: -0.5px;
+}
+
+.stat-card .label {
+  font-size: 0.8rem;
+  color: var(--hf-muted);
+  margin-top: 0.3rem;
+  font-weight: 500;
+}
+
+.tag {
+  display: inline-block;
+  padding: 0.25rem 0.7rem;
+  border-radius: 16px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  margin: 0.2rem 0.25rem 0.2rem 0;
+}
+
+.tag-blocker { background: #FED7D7; color: #9B2C2C; }
+.tag-opportunity { background: #C6F6D5; color: #276749; }
+.tag-insight { background: #E9D8FD; color: #553C9A; }
+.tag-action { background: #BEE3F8; color: #2A4365; }
+
+.table-wrap {
+  overflow-x: auto;
+  margin: 1rem 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+th, td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+th {
+  background: var(--hf-grey);
+  font-weight: 700;
+  color: var(--hf-muted);
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  letter-spacing: 0.5px;
+}
+
+td { color: #333; }
+
+.footer {
+  text-align: center;
+  padding: 2rem;
+  color: var(--hf-muted);
+  font-size: 0.8rem;
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="header-badge">Research Summary</div>
+    <h1>Creator Marketplace: Discovery Research Findings</h1>
+    <p>Key insights from HelloFresh UX Research's creator marketplace study, reframed for US creator platform acquisition strategy.</p>
+    <div class="header-meta">
+      <span>Source: Confluence (UX Research)</span>
+      <span>Original: Jan 2026, UK</span>
+      <span>Summarised: June 2026</span>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- CONTEXT -->
+  <div class="section">
+    <h2>Research Context</h2>
+    <p>HelloFresh's UX Research team conducted discovery research into a "creator marketplace" concept: influencers upload recipes built around HelloFresh ingredients, customers buy them as single meals, bundles, or meal plans. The research aimed to understand unmet needs, validate demand, identify risks, and define what success requires on both sides of the marketplace.</p>
+    <div class="grid-2">
+      <div class="stat-card">
+        <div class="number">UK</div>
+        <div class="label">Market Studied</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">2 Phases</div>
+        <div class="label">Creator Interviews</div>
+      </div>
+    </div>
+    <p>Methods: unmoderated user test, online recipe interest survey, moderated user interviews, moderated creator interviews (Phase 1 + Phase 2 with concept evaluation).</p>
+  </div>
+
+  <!-- CUSTOMER FINDINGS -->
+  <div class="section">
+    <h2>Customer Findings (What Validates Demand)</h2>
+    <p>Strong demand exists. Customers see this as solving the "inspiration to execution gap": they save recipes from social media but never actually cook them due to ingredient sourcing friction.</p>
+
+    <h3>Key Takeaways</h3>
+    <ul>
+      <li><strong>Convenience over celebrity.</strong> Customers prioritise ingredient convenience and recipe reliability over influencer fame. Mid-tier creators can absolutely compete.</li>
+      <li><strong>Trust requires safety nets.</strong> Customers expect HelloFresh to act as a quality gatekeeper: verified badges, ratings, reviews, and links to original content.</li>
+      <li><strong>Low commitment wins.</strong> One-time purchases and flexible bundles drive adoption far more than subscription-forced models.</li>
+      <li><strong>Discovery by food, not by creator.</strong> Users want to search by cuisine, ingredient, or meal type first. Creator browsing is secondary.</li>
+    </ul>
+
+    <div class="callout callout-green">
+      <p><strong>What this means for your pitch to creators:</strong> You have proven consumer demand to reference. Creators don't need to bring their own audience to succeed on this platform. HelloFresh brings distribution.</p>
+    </div>
+  </div>
+
+  <!-- CREATOR FINDINGS -->
+  <div class="section">
+    <h2>Creator Findings (What You Need to Address)</h2>
+    <p>Creators expressed conditional enthusiasm. They see high potential in resolving the logistical friction their audiences face, but adoption hinges on operational efficiency and financial security.</p>
+
+    <h3>Blockers to Joining</h3>
+    <ul>
+      <li><span class="tag tag-blocker">Blocker</span> <strong>Operational overhead.</strong> Creators will not join if it means duplicating work. They expect automation for recipe uploading, ingredient matching, and nutritional calculation.</li>
+      <li><span class="tag tag-blocker">Blocker</span> <strong>Compensation expectations.</strong> Creators expect a hybrid model (flat fees + commission). A purely free/organic model needs an alternative value proposition that clearly replaces revenue.</li>
+      <li><span class="tag tag-blocker">Blocker</span> <strong>Brand reputation risk.</strong> Creators expect HelloFresh to rigorously vet recipes. They will not associate their name with untested content that could fail for their followers.</li>
+      <li><span class="tag tag-blocker">Blocker</span> <strong>Lack of analytics.</strong> They need revenue attribution, traffic sources, conversion rates, and ROI tracking to justify time investment.</li>
+    </ul>
+
+    <h3>What They Want</h3>
+    <ul>
+      <li><span class="tag tag-opportunity">Opportunity</span> <strong>Distribution access.</strong> Reach HelloFresh's existing customer base without relying solely on their own social algorithms.</li>
+      <li><span class="tag tag-opportunity">Opportunity</span> <strong>Audience engagement tools.</strong> Reviews, Q&A, live events. But only if manageable and not overwhelming.</li>
+      <li><span class="tag tag-opportunity">Opportunity</span> <strong>Credibility signal.</strong> A "HelloFresh Verified" badge that enhances their personal brand.</li>
+      <li><span class="tag tag-opportunity">Opportunity</span> <strong>Workflow that fits.</strong> Must integrate into (or reduce) existing content workflows, not add a new platform to manage.</li>
+    </ul>
+  </div>
+
+  <!-- IMPLICATIONS -->
+  <div class="section">
+    <h2>Implications for US "Free to Join" Pitch</h2>
+
+    <div class="callout callout-red">
+      <p><strong>Key tension:</strong> Creators in this research expected to be paid. To attract them for free, you must replace the monetary value prop with something equally tangible.</p>
+    </div>
+
+    <h3>Reframe: What "Free" Must Include to Work</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Creator Expectation</th>
+            <th>Your Free Model Alternative</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Flat fees + commission</td>
+            <td>Distribution to HF's customer base (audience growth they can't get elsewhere)</td>
+          </tr>
+          <tr>
+            <td>Minimal operational work</td>
+            <td>Automated recipe import, ingredient matching, zero manual data entry</td>
+          </tr>
+          <tr>
+            <td>Brand safety / vetting</td>
+            <td>"HelloFresh Verified" badge that enhances their credibility everywhere</td>
+          </tr>
+          <tr>
+            <td>Revenue + ROI tracking</td>
+            <td>Analytics dashboard showing reach, saves, engagement from HF audience</td>
+          </tr>
+          <tr>
+            <td>Sustainable engagement</td>
+            <td>HF manages community. Creators get signal (top reviews, Q&A highlights) without noise</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Outreach Messaging Principles</h3>
+    <ul>
+      <li><span class="tag tag-action">Action</span> <strong>Lead with their problem.</strong> "Your followers save your recipes but never cook them. We fix that." Frame it around solving their audience's execution gap.</li>
+      <li><span class="tag tag-action">Action</span> <strong>Answer the work question immediately.</strong> Any outreach that doesn't address "how much extra work is this?" upfront will lose them.</li>
+      <li><span class="tag tag-action">Action</span> <strong>Be explicit about the model.</strong> Don't be vague about compensation. If it's free-to-join with distribution value, say so clearly and quantify the audience they'd access.</li>
+      <li><span class="tag tag-action">Action</span> <strong>"We protect your brand" is a hook.</strong> Position HelloFresh as the safety net (recipe vetting, verified badges, quality guarantee).</li>
+      <li><span class="tag tag-action">Action</span> <strong>Distribution over payment.</strong> "We bring you 10M+ customers and make it effortless" is stronger than "We'll pay you $X per recipe" in a free model.</li>
+    </ul>
+  </div>
+
+  <!-- RESEARCH GAPS -->
+  <div class="section">
+    <h2>What This Research Doesn't Answer (Gaps for US)</h2>
+    <ul>
+      <li>US creator expectations may differ from UK (larger creator economy, more established monetisation norms, higher baseline rates).</li>
+      <li>No data on actual outreach response rates or what messaging got creators into the study.</li>
+      <li>No competitive benchmarking against US platforms (Pepper, Whisk, Samsung Food, etc.).</li>
+      <li>No testing of the "free with distribution" value prop specifically. Creators were shown a paid model.</li>
+      <li>No data on creator willingness at different follower tiers (10K vs 50K vs 100K+ may have very different expectations).</li>
+    </ul>
+
+    <div class="callout">
+      <p><strong>Recommendation:</strong> The full research materials (interview recordings, raw data) are linked in Confluence. The Phase 2 concept evaluation likely contains the most actionable reactions to specific platform features. Worth reviewing for exact creator quotes you could use in outreach framing.</p>
+    </div>
+  </div>
+
+  <!-- SOURCE -->
+  <div class="section">
+    <h2>Source</h2>
+    <p><strong>Title:</strong> HelloFresh Creator Marketplace: Discovery Research</p>
+    <p><strong>Researchers:</strong> Katheryn Eckles, Annette Meiser von den Eichen</p>
+    <p><strong>Stakeholders:</strong> Nikita Gontikov, Ian Brooks, Jama Musse, Sameer Doda, Shey Obaidiullah</p>
+    <p><strong>Published:</strong> January 16, 2026</p>
+    <p><strong>Location:</strong> Confluence (Research United > HelloFresh Creator Marketplace)</p>
+  </div>
+
+</div>
+
+<div class="footer">
+  Summarised for US Creator Platform acquisition strategy. June 2026.
+</div>
+
+</body>
+</html>
