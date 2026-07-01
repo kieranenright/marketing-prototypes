@@ -5000,6 +5000,7 @@ function setMode(mode) {
   document.getElementById('quarterView').classList.remove('active');
   document.getElementById('weeklyView').classList.remove('active');
   document.getElementById('monthView').classList.remove('active');
+  document.getElementById('navControls').style.display = '';
 
   if (mode === 'marketing') {
     marketingOnlyEls.forEach(el => { if (el) el.style.display = ''; });
@@ -5044,6 +5045,7 @@ function setMode(mode) {
   } else if (mode === 'team-breakdown') {
     marketingOnlyEls.forEach(el => { if (el) el.style.display = 'none'; });
     navButtons.forEach(b => b.style.display = 'none');
+    document.getElementById('navControls').style.display = 'none';
     document.getElementById('teamBreakdownView').classList.add('active');
     renderTeamBreakdown();
   } else if (mode === 'campaigns') {
