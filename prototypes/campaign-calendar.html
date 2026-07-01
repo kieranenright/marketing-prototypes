@@ -7745,14 +7745,15 @@ function renderTeamBreakdown() {
     html += `<strong>${row.theme}</strong>`;
     if (row.subtitle) html += `<span class="tb-subtitle">${row.subtitle}</span>`;
     html += '</td>';
-    marketKeys.forEach((key, idx) => {
-      const val = row.owners[key] || '';
-      if (idx > 0 && !val && row.allMarkets) {
-        html += `<td><span class="tb-all-markets">see "All Markets"</span></td>`;
-      } else {
+    if (row.allMarkets) {
+      const allVal = row.owners['all'] || '';
+      html += `<td colspan="${marketKeys.length}" style="text-align:center;">${allVal.replace(/\n/g, '<br>')}</td>`;
+    } else {
+      marketKeys.forEach(key => {
+        const val = row.owners[key] || '';
         html += `<td>${val.replace(/\n/g, '<br>')}</td>`;
-      }
-    });
+      });
+    }
     html += '</tr>';
   });
 
