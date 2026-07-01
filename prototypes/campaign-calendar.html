@@ -4285,6 +4285,94 @@ body {
   display: block;
 }
 
+/* TEAM BREAKDOWN VIEW */
+.team-breakdown-view { display: none; padding: 24px; }
+.team-breakdown-view.active { display: block; }
+
+.team-breakdown-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.team-breakdown-card h3 {
+  font-family: var(--font-headline);
+  font-size: 18px;
+  padding: 20px 24px 16px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.team-breakdown-table-wrap {
+  overflow-x: auto;
+}
+
+.team-breakdown-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 900px;
+}
+
+.team-breakdown-table th,
+.team-breakdown-table td {
+  padding: 10px 12px;
+  text-align: center;
+  border: 1px solid var(--border-light);
+  font-size: 12px;
+}
+
+.team-breakdown-table th {
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: var(--bg-cream);
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  white-space: nowrap;
+}
+
+.team-breakdown-table th:first-child {
+  text-align: left;
+  min-width: 220px;
+  padding-left: 16px;
+}
+
+.team-breakdown-table td:first-child {
+  text-align: left;
+  padding-left: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.4;
+}
+
+.team-breakdown-table td:first-child .tb-subtitle {
+  font-weight: 400;
+  font-size: 11px;
+  color: var(--text-secondary);
+  display: block;
+}
+
+.team-breakdown-table td {
+  font-size: 12px;
+  color: var(--text-secondary);
+  vertical-align: middle;
+}
+
+.team-breakdown-table tr:hover td {
+  background: var(--bg-cream);
+}
+
+.team-breakdown-table tr.tb-highlight-row td {
+  background: var(--brand-green-light);
+}
+
+.team-breakdown-table .tb-all-markets {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  font-style: italic;
+}
+
 @media print {
   .sidebar, .top-bar, .controls-bar, .shortcuts-badge, .shortcuts-panel,
   .legend-container, .export-btns { display: none !important; }
@@ -4353,6 +4441,10 @@ body {
       <div class="sidebar-item" data-sidebar="markets" onclick="sidebarNav('markets')">
         <span class="sidebar-icon">&#127760;</span>
         <span class="sidebar-label">Local Markets</span>
+      </div>
+      <div class="sidebar-item" data-sidebar="team-breakdown" onclick="sidebarNav('team-breakdown')">
+        <span class="sidebar-icon">&#128101;</span>
+        <span class="sidebar-label">Global Team</span>
       </div>
       <div class="sidebar-divider"></div>
       <div class="sidebar-section-label">AI Tools</div>
@@ -4499,6 +4591,7 @@ body {
     <div class="ask-ei-view" id="askEIView"></div>
     <div class="best-practices-view" id="bestPracticesView"></div>
     <div class="campaigns-view" id="campaignsView"></div>
+    <div class="team-breakdown-view" id="teamBreakdownView"></div>
   </div>
   </div><!-- /.app-main -->
 </div>
@@ -4847,6 +4940,7 @@ function sidebarNav(mode, view) {
     'crm': 'CRM Heatmap',
     'leadership': 'Leadership Roadmap',
     'markets': 'Local Markets',
+    'team-breakdown': 'Global Team Breakdown',
     'campaigns': 'Campaigns',
     'ask-advisor': 'Ask Advisor',
     'ask-ei': 'Ask the EI',
@@ -4897,6 +4991,7 @@ function setMode(mode) {
   document.getElementById('crmView').classList.remove('active');
   document.getElementById('leadershipView').classList.remove('active');
   document.getElementById('marketsView').classList.remove('active');
+  document.getElementById('teamBreakdownView').classList.remove('active');
   document.getElementById('askAdvisorView').classList.remove('active');
   document.getElementById('askEIView').classList.remove('active');
   document.getElementById('bestPracticesView').classList.remove('active');
@@ -4946,6 +5041,11 @@ function setMode(mode) {
     navButtons.forEach(b => b.style.display = 'none');
     document.getElementById('bestPracticesView').classList.add('active');
     renderBestPractices();
+  } else if (mode === 'team-breakdown') {
+    marketingOnlyEls.forEach(el => { if (el) el.style.display = 'none'; });
+    navButtons.forEach(b => b.style.display = 'none');
+    document.getElementById('teamBreakdownView').classList.add('active');
+    renderTeamBreakdown();
   } else if (mode === 'campaigns') {
     marketingOnlyEls.forEach(el => { if (el) el.style.display = 'none'; });
     navButtons.forEach(b => b.style.display = 'none');
@@ -7604,6 +7704,60 @@ function initDragAndDrop() {
 
     dragData = null;
   });
+}
+
+
+// ─── GLOBAL TEAM BREAKDOWN ──────────────────────────────────────────
+
+function renderTeamBreakdown() {
+  const container = document.getElementById('teamBreakdownView');
+  const markets = ['ALL Markets', 'US', 'CA', 'ANZ', 'GB', 'IE', 'DACH', 'BNL', 'FR', 'NOR'];
+  const data = [
+    { theme: 'High Level Roadmap Prioritization', owners: { all: 'Marina Kramer', us: '', ca: '', anz: '', gb: '', ie: '', dach: '', bnl: '', fr: '', nor: '' }, allMarkets: true },
+    { theme: 'One Calendar', owners: { all: 'Marina Zinakova', us: 'Marina Kramer', ca: 'Marina Kramer', anz: 'Marina Zinakova', gb: 'Marina Zinakova', ie: 'Marina Zinakova', dach: 'Marina Kramer', bnl: 'Marina Kramer', fr: 'Isabela Martin', nor: 'Isabela Martin' } },
+    { theme: 'PMM Monthly Update & PMM Calendar ("Hub")', owners: { all: 'Marina Zinakova\nKieran Enright', us: '', ca: '', anz: '', gb: '', ie: '', dach: '', bnl: '', fr: '', nor: '' }, allMarkets: true },
+    { theme: 'HF Mealkit Roadmap alignment', owners: { all: 'Marina Zinakova', us: '', ca: '', anz: '', gb: '', ie: '', dach: '', bnl: '', fr: '', nor: '' } },
+    { theme: 'Peak Campaigns', owners: { all: 'Domitille Park,\nMarina Kramer', us: '', ca: '', anz: '', gb: '', ie: '', dach: '', bnl: '', fr: '', nor: '' }, allMarkets: true },
+    { theme: 'Customer Engagement:', subtitle: 'Cookbook, Food Companion, Meal Planner', owners: { all: 'Kieran Enright', us: '', ca: '', anz: '', gb: '', ie: '', dach: '', bnl: '', fr: '', nor: '' }, allMarkets: true },
+    { theme: 'Loyalty & Virality:', subtitle: 'Loyalty Program', owners: { all: 'Kieran Enright', us: '', ca: '', anz: '', gb: '', ie: '', dach: '', bnl: '', fr: '', nor: '' }, allMarkets: true },
+    { theme: 'SHOPPING JOURNEY:', subtitle: 'Modularity, Surcharges, Extra Meals, Premium widgets, Add ons, Merchandising and Shopping Guidance', owners: { all: 'Marina Zinakova', us: '', ca: '', anz: '', gb: '', ie: '', dach: '', bnl: '', fr: '', nor: '' }, allMarkets: true },
+    { theme: 'SHOPPING JOURNEY:', subtitle: 'Customer Profile, Menu discovery, Menu Expansion, Personalisation, Search & Filters, Recipe Engagement', owners: { all: 'Isabela Martin', us: '', ca: '', anz: '', gb: '', ie: '', dach: '', bnl: '', fr: '', nor: '' }, allMarkets: true },
+    { theme: 'Frameworks & Playbooks:', subtitle: 'Product Messaging Framework, Proof points, standardised GTM playbooks', owners: { all: 'Isabela Martin', us: '', ca: '', anz: '', gb: '', ie: '', dach: '', bnl: '', fr: '', nor: '' }, allMarkets: true },
+    { theme: 'Conversions:', subtitle: 'Reactivation', owners: { all: 'Isabela Martin', us: '', ca: '', anz: '', gb: '', ie: '', dach: '', bnl: '', fr: '', nor: '' }, allMarkets: true },
+    { theme: 'VoC', owners: { all: 'Isabela Martin', us: '', ca: '', anz: '', gb: '', ie: '', dach: '', bnl: '', fr: '', nor: '' }, allMarkets: true },
+    { theme: 'Ad Hoc Questions', owners: { all: '', us: 'Marina Kramer', ca: 'Marina Kramer', anz: 'Marina Zinakova', gb: 'Marina Zinakova', ie: 'Marina Zinakova', dach: 'Marina Kramer', bnl: 'Marina Kramer', fr: 'Isabela Martin', nor: 'Isabela Martin' }, highlight: true }
+  ];
+
+  const marketKeys = ['all', 'us', 'ca', 'anz', 'gb', 'ie', 'dach', 'bnl', 'fr', 'nor'];
+
+  let html = '<div class="team-breakdown-card">';
+  html += '<h3>Global Team Breakdown</h3>';
+  html += '<div class="team-breakdown-table-wrap">';
+  html += '<table class="team-breakdown-table"><thead><tr>';
+  html += '<th>Theme / Workstream</th>';
+  markets.forEach(m => { html += `<th>${m}</th>`; });
+  html += '</tr></thead><tbody>';
+
+  data.forEach(row => {
+    const rowClass = row.highlight ? ' class="tb-highlight-row"' : '';
+    html += `<tr${rowClass}>`;
+    html += '<td>';
+    html += `<strong>${row.theme}</strong>`;
+    if (row.subtitle) html += `<span class="tb-subtitle">${row.subtitle}</span>`;
+    html += '</td>';
+    marketKeys.forEach((key, idx) => {
+      const val = row.owners[key] || '';
+      if (idx > 0 && !val && row.allMarkets) {
+        html += `<td><span class="tb-all-markets">see "All Markets"</span></td>`;
+      } else {
+        html += `<td>${val.replace(/\n/g, '<br>')}</td>`;
+      }
+    });
+    html += '</tr>';
+  });
+
+  html += '</tbody></table></div></div>';
+  container.innerHTML = html;
 }
 
 
