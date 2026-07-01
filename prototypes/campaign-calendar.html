@@ -4503,7 +4503,7 @@ body {
   </div>
 
   <!-- Controls Bar -->
-  <div class="controls-bar">
+  <div class="controls-bar" id="controlsBar">
     <!-- Row 1: View toggle, navigation, today -->
     <div class="controls-row">
       <div class="controls-left">
@@ -5001,6 +5001,7 @@ function setMode(mode) {
   document.getElementById('weeklyView').classList.remove('active');
   document.getElementById('monthView').classList.remove('active');
   document.getElementById('navControls').style.display = '';
+  document.getElementById('controlsBar').style.display = '';
 
   if (mode === 'marketing') {
     marketingOnlyEls.forEach(el => { if (el) el.style.display = ''; });
@@ -5045,7 +5046,7 @@ function setMode(mode) {
   } else if (mode === 'team-breakdown') {
     marketingOnlyEls.forEach(el => { if (el) el.style.display = 'none'; });
     navButtons.forEach(b => b.style.display = 'none');
-    document.getElementById('navControls').style.display = 'none';
+    document.getElementById('controlsBar').style.display = 'none';
     document.getElementById('teamBreakdownView').classList.add('active');
     renderTeamBreakdown();
   } else if (mode === 'campaigns') {
