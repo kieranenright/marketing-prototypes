@@ -207,6 +207,7 @@ details summary { list-style: none; }
           <span class="text-[11px] font-bold text-white/50">% saving external/creator recipes</span>
         </div>
         <p class="text-[15px] font-bold text-white">Convert non-savers into savers, and savers into repeat savers.</p>
+        <p class="mt-2 text-sm text-white/70">Right moment, right recipe. Compounding effect lifts external/creator save %.</p>
       </div>
       <div class="rounded-2xl bg-[#1a1a2e] p-6 text-white">
         <div class="flex items-center gap-2 mb-3">
@@ -214,6 +215,7 @@ details summary { list-style: none; }
           <span class="text-[11px] font-bold text-white/50">Planning Adoption &amp; Discover Save Rate</span>
         </div>
         <p class="text-[15px] font-bold text-white">Plan Your Week and Gap Fill drive planner usage.</p>
+        <p class="mt-2 text-sm text-white/70">Cook Tonight closes the loop from plan to cook.</p>
       </div>
     </div>
 
@@ -303,7 +305,7 @@ details summary { list-style: none; }
             <span class="text-base font-bold" style="color:#15803d">01</span>
             <div>
               <p class="text-[15px] font-bold text-[var(--fg)]">Plan Your Week</p>
-              <p class="mt-1 text-sm text-[var(--fg-muted)]">Post-cutoff. No meals assigned to planner.</p>
+              <p class="mt-1 text-sm text-[var(--fg-muted)]">Meal selection cutoff passes. User has not assigned meals to planner.</p>
             </div>
             <div class="rounded-xl bg-[var(--bg-surface)] px-4 py-3">
               <p class="text-[13px] font-bold text-[var(--fg)]">Your meals. Your nights. Your call.</p>
@@ -316,7 +318,7 @@ details summary { list-style: none; }
             <span class="text-base font-bold" style="color:#15803d">02</span>
             <div>
               <p class="text-[15px] font-bold text-[var(--fg)]">Cook Tonight</p>
-              <p class="mt-1 text-sm text-[var(--fg-muted)]">Meal planned for today. Cook mode not opened.</p>
+              <p class="mt-1 text-sm text-[var(--fg-muted)]">Meal assigned to today, box delivered. Cook mode not opened.</p>
             </div>
             <div class="rounded-xl bg-[var(--bg-surface)] px-4 py-3">
               <p class="text-[13px] font-bold text-[var(--fg)]">Tonight: {{recipe_name}}</p>
@@ -342,7 +344,7 @@ details summary { list-style: none; }
             <span class="text-base font-bold" style="color:#15803d">04</span>
             <div>
               <p class="text-[15px] font-bold text-[var(--fg)]">Meal Planner Gap Fill</p>
-              <p class="mt-1 text-sm text-[var(--fg-muted)]">Empty planner slot + uncooked saved recipes.</p>
+              <p class="mt-1 text-sm text-[var(--fg-muted)]">Today's planner slot empty. 1+ uncooked saved recipes available.</p>
             </div>
             <div class="rounded-xl bg-[var(--bg-surface)] px-4 py-3">
               <p class="text-[13px] font-bold text-[var(--fg)]">Tonight's wide open.</p>
@@ -368,7 +370,7 @@ details summary { list-style: none; }
             <span class="text-base font-bold" style="color:#15803d">06</span>
             <div>
               <p class="text-[15px] font-bold text-[var(--fg)]">Post-Import Nudge</p>
-              <p class="mt-1 text-sm text-[var(--fg-muted)]">First external import completed.</p>
+              <p class="mt-1 text-sm text-[var(--fg-muted)]">First external recipe import completed. Convert into repeat saver.</p>
             </div>
             <div class="rounded-xl bg-[var(--bg-surface)] px-4 py-3">
               <p class="text-[13px] font-bold text-[var(--fg)]">Nice save. Here's what goes with it.</p>
@@ -507,7 +509,7 @@ details summary { list-style: none; }
 
     <!-- Suppression callout -->
     <div class="mt-6 rounded-2xl border-l-4 border-[var(--color-brand)] bg-[var(--bg-card)] px-6 py-5 border border-[var(--border)]">
-      <p class="text-base leading-relaxed text-[var(--fg)]"><strong>Suppression:</strong> Global 5-day cap. Batch cooking suppresses gap-fill. All pushes deep-linked.</p>
+      <p class="text-base leading-relaxed text-[var(--fg)]"><strong>Suppression:</strong> Global 5-day frequency cap. Batch cooking detection suppresses gap-fill pushes for covered days. All pushes deep-linked to relevant recipe or Cookbook section.</p>
     </div>
   </div>
 </section>
@@ -527,6 +529,7 @@ details summary { list-style: none; }
           <span class="text-[11px] font-bold text-white/50">% saving external/creator recipes</span>
         </div>
         <p class="text-[15px] font-bold text-white">The only channel that unlocks prospects.</p>
+        <p class="mt-2 text-sm text-white/70">Organic = followers. CRM = subscribers. Paid = everyone else.</p>
       </div>
       <div class="rounded-2xl bg-[#1a1a2e] p-6 text-white">
         <div class="flex items-center gap-2 mb-3">
@@ -534,6 +537,7 @@ details summary { list-style: none; }
           <span class="text-[11px] font-bold text-white/50">Planning Adoption &amp; Discover Save Rate</span>
         </div>
         <p class="text-[15px] font-bold text-white">Creative shows the full loop: save, plan, cook.</p>
+        <p class="mt-2 text-sm text-white/70">Deep links land users directly in Cookbook.</p>
       </div>
     </div>
 
@@ -549,15 +553,15 @@ details summary { list-style: none; }
     <!-- The Challenge -->
     <div class="mt-10 rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-8">
       <p class="text-[10px] font-bold uppercase tracking-[0.16em]" style="color:#c2570c">The Challenge</p>
-      <p class="mt-4 text-[22px] font-bold leading-snug text-[var(--fg)]" style="font-family:var(--font-heading)">Awareness is low. External saves are flat.</p>
+      <p class="mt-4 text-[22px] font-bold leading-snug text-[var(--fg)]" style="font-family:var(--font-heading)">Cookbook awareness is critically low. External saves remain flat.</p>
       <div class="mt-5 grid grid-cols-1 gap-4 md:grid-cols-2">
         <div class="rounded-xl bg-[var(--bg-surface)] px-5 py-4">
           <p class="text-[36px] font-bold leading-none tracking-tight" style="color:#c2570c; font-family:var(--font-heading)">64%</p>
-          <p class="mt-2 text-sm text-[var(--fg-muted)]">unaware you can save external recipes</p>
+          <p class="mt-2 text-sm text-[var(--fg-muted)]">of customers unaware you can save external recipes</p>
         </div>
         <div class="rounded-xl bg-[var(--bg-surface)] px-5 py-4">
           <p class="text-[36px] font-bold leading-none tracking-tight" style="color:#c2570c; font-family:var(--font-heading)">5.6%</p>
-          <p class="mt-2 text-sm text-[var(--fg-muted)]">of saves are external. Flat.</p>
+          <p class="mt-2 text-sm text-[var(--fg-muted)]">of all recipe saves are external. Metric is flat.</p>
         </div>
       </div>
     </div>
@@ -595,7 +599,7 @@ details summary { list-style: none; }
             <span class="inline-flex items-center rounded-md bg-[var(--bg-surface)] px-2 py-1 text-[11px] font-medium text-[var(--fg-muted)] ring-1 ring-inset ring-[var(--border)]">FB Feed</span>
           </div>
         </div>
-        <p class="text-sm leading-relaxed text-[var(--fg-muted)]">Highest overlap with existing app users. Custom audience via app signals.</p>
+        <p class="text-sm leading-relaxed text-[var(--fg-muted)]">Highest overlap with existing HelloFresh app users. Custom audience targeting via app activity signals.</p>
         <p class="text-sm font-semibold text-[var(--fg)]">Feature awareness goal</p>
       </div>
       <div class="grid grid-cols-1 gap-3 px-6 py-6 md:grid-cols-[40px_1fr_1.5fr_1fr] md:gap-4">
@@ -608,7 +612,7 @@ details summary { list-style: none; }
             <span class="inline-flex items-center rounded-md bg-[var(--bg-surface)] px-2 py-1 text-[11px] font-medium text-[var(--fg-muted)] ring-1 ring-inset ring-[var(--border)]">Branded Effect</span>
           </div>
         </div>
-        <p class="text-sm leading-relaxed text-[var(--fg-muted)]">Recipe content native to platform. Vertical video format.</p>
+        <p class="text-sm leading-relaxed text-[var(--fg-muted)]">Recipe content native to platform. Vertical video matches Cookbook's social DNA.</p>
         <p class="text-sm font-semibold text-[var(--fg)]">Feature awareness goal</p>
       </div>
     </div>
@@ -630,6 +634,7 @@ details summary { list-style: none; }
           <span class="text-[11px] font-bold text-white/50">% saving external/creator recipes</span>
         </div>
         <p class="text-[15px] font-bold text-white">Creator recipes ARE the metric.</p>
+        <p class="mt-2 text-sm text-white/70">Every creator recipe saved counts directly toward the North Star.</p>
       </div>
       <div class="rounded-2xl bg-[#1a1a2e] p-6 text-white">
         <div class="flex items-center gap-2 mb-3">
@@ -637,6 +642,7 @@ details summary { list-style: none; }
           <span class="text-[11px] font-bold text-white/50">Planning Adoption &amp; Discover Save Rate</span>
         </div>
         <p class="text-[15px] font-bold text-white">Creator content fills Discover with save-worthy recipes.</p>
+        <p class="mt-2 text-sm text-white/70">Users who save creator recipes are more likely to use the planner.</p>
       </div>
     </div>
 
