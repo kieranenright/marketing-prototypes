@@ -606,16 +606,36 @@ body {
       </div>
 
       <!-- Push Notifications -->
-      <div class="section-card">
+      <div class="section-card" style="background: rgba(27, 138, 74, 0.06); border: 2px solid rgba(27, 138, 74, 0.2);">
         <div class="section-header">
-          <div class="section-title">Push Notifications</div>
-          <div class="section-period">Update</div>
+          <div class="section-title engage" style="display: flex; align-items: center; gap: 8px;">
+            Push Notifications
+          </div>
+          <div style="font-size: 9px; font-weight: 800; padding: 3px 8px; border-radius: 4px; background: #DC2626; color: white; text-transform: uppercase; letter-spacing: 0.5px;">Cancelled</div>
         </div>
+
+        <!-- Live copy (cancelled) -->
+        <div style="font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--hf-muted); margin-bottom: 6px;">Original Notification</div>
+        <div style="padding: 12px 16px; background: white; border-radius: 8px; border: 1px solid rgba(0,0,0,0.06); margin-bottom: 12px; opacity: 0.6;">
+          <div style="font-size: 13px; font-weight: 800; color: var(--hf-dark); margin-bottom: 4px;">Cooking tonight?</div>
+          <div style="font-size: 12px; font-weight: 500; color: var(--hf-muted);">Your weekly meals are all in Cookbook. Save your pick, tick it off.</div>
+        </div>
+
+        <div style="display: flex; gap: 10px; margin-bottom: 12px;">
+          <div style="flex: 1; text-align: center; padding: 12px 8px; background: white; border-radius: 8px; border: 1px solid rgba(220, 38, 38, 0.15);">
+            <div style="font-size: 22px; font-weight: 900; color: #DC2626;">1%</div>
+            <div style="font-size: 9px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase;">Open Rate</div>
+          </div>
+          <div style="flex: 1; text-align: center; padding: 12px 8px; background: white; border-radius: 8px; border: 1px solid rgba(220, 38, 38, 0.15);">
+            <div style="font-size: 22px; font-weight: 900; color: #DC2626;">Cancelled</div>
+            <div style="font-size: 9px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase;">Status</div>
+          </div>
+        </div>
+
+        <!-- Next: event-based notifications -->
+        <div style="font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--col-engage); margin-bottom: 6px;">Next: Event-Based Notifications</div>
         <div style="font-size: 11px; font-weight: 600; color: var(--hf-dark); line-height: 1.6; margin-bottom: 10px;">
-          The <strong>"Cooking tonight?"</strong> push notification launched with a <strong style="color: #DC2626;">1% open rate</strong>. Decision made to cancel this notification moving forward.
-        </div>
-        <div style="font-size: 11px; font-weight: 600; color: var(--hf-dark); line-height: 1.6; margin-bottom: 8px;">
-          Now working with the team on a new set of event-based notifications. Data points requested:
+          Working with the team on a new set of notifications triggered by user behaviour. Data points requested:
         </div>
         <div style="display: flex; flex-wrap: wrap; gap: 4px;">
           <span class="creator-pill">First recipe saved</span>
@@ -626,6 +646,10 @@ body {
           <span class="creator-pill">External recipe count</span>
           <span class="creator-pill">Total planned count</span>
           <span class="creator-pill">+ more</span>
+        </div>
+
+        <div class="rec-box" style="margin-top: 10px; padding: 8px 12px; font-size: 11px; line-height: 1.5; background: rgba(27, 138, 74, 0.06); border-color: rgba(27, 138, 74, 0.15);">
+          <strong>Goal:</strong> Replace generic time-based push with contextual, behaviour-triggered notifications that drive meaningful Cookbook engagement.
         </div>
       </div>
 
