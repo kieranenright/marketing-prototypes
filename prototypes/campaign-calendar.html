@@ -4715,6 +4715,71 @@ body {
   </div>
 </div>
 
+<!-- One Pager Edit Modal -->
+<div class="modal-overlay form-modal" id="onePagerFormModal">
+  <div class="modal" style="max-width:680px;">
+    <div class="modal-header">
+      <h2 id="onePagerFormTitle">Edit One Pager</h2>
+      <button class="modal-close" onclick="closeModal('onePagerFormModal')">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Marketing Goal</label>
+          <input type="text" id="opFormGoal" placeholder="e.g. Transform the App into a Daily Food Companion">
+        </div>
+        <div class="form-group">
+          <label>Owner (POC)</label>
+          <input type="text" id="opFormPoc" placeholder="e.g. Kieran">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Objective</label>
+        <input type="text" id="opFormObjective" placeholder="Campaign objective">
+      </div>
+      <div class="form-group">
+        <label>Insight / Pain Point</label>
+        <textarea id="opFormInsight" placeholder="What problem does this solve?"></textarea>
+      </div>
+      <div class="form-group">
+        <label>Use Cases (one per line)</label>
+        <textarea id="opFormUseCases" placeholder="One use case per line"></textarea>
+      </div>
+      <div class="form-group">
+        <label>Positioning</label>
+        <textarea id="opFormPositioning" placeholder="How is this positioned for different audiences?"></textarea>
+      </div>
+      <div class="form-group">
+        <label>Core Value Propositions (one per line)</label>
+        <textarea id="opFormValueProps" placeholder="One value prop per line"></textarea>
+      </div>
+      <div class="form-group">
+        <label>GTM &amp; Channel Strategy</label>
+        <textarea id="opFormGtm" placeholder="Go-to-market approach"></textarea>
+      </div>
+      <div class="form-group">
+        <label>Channels (one per line)</label>
+        <textarea id="opFormChannels" placeholder="One channel per line" style="min-height:60px;"></textarea>
+      </div>
+      <div class="form-group">
+        <label>Key Success Metrics (one per line)</label>
+        <textarea id="opFormMetrics" placeholder="One metric per line"></textarea>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Markets (comma separated)</label>
+          <input type="text" id="opFormMarkets" placeholder="US, UK, DE...">
+        </div>
+      </div>
+      <div class="form-actions">
+        <div style="flex:1;"></div>
+        <button class="form-btn form-btn-cancel" onclick="closeModal('onePagerFormModal')">Cancel</button>
+        <button class="form-btn form-btn-primary" onclick="saveOnePager()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- Initiative Legend -->
 <div class="legend-container" id="legendContainer" style="display:none;">
   <div class="legend-panel" id="legendPanel">
@@ -7122,6 +7187,58 @@ function openNewEntryFormForInit(initId) {
   document.getElementById('formInitiative').value = initId;
 }
 
+let editingOnePagerInitId = null;
+
+function openOnePagerForm(initId) {
+  if (!isEditor) return;
+  const init = calendarData.initiatives.find(i => i.id === initId);
+  if (!init) return;
+  editingOnePagerInitId = initId;
+  const op = init.onePager || {};
+
+  document.getElementById('onePagerFormTitle').textContent = 'Edit One Pager: ' + init.name;
+  document.getElementById('opFormGoal').value = init.marketingGoal || '';
+  document.getElementById('opFormPoc').value = init.poc || '';
+  document.getElementById('opFormObjective').value = init.objective || '';
+  document.getElementById('opFormInsight').value = op.insight || '';
+  document.getElementById('opFormUseCases').value = (op.useCases || []).join('\n');
+  document.getElementById('opFormPositioning').value = op.positioning || '';
+  document.getElementById('opFormValueProps').value = (op.valueProps || []).join('\n');
+  document.getElementById('opFormGtm').value = op.gtmStrategy || '';
+  document.getElementById('opFormChannels').value = (op.channels || []).join('\n');
+  document.getElementById('opFormMetrics').value = (op.successMetrics || []).join('\n');
+  document.getElementById('opFormMarkets').value = (init.markets || []).join(', ');
+
+  document.getElementById('onePagerFormModal').classList.add('active');
+}
+
+function saveOnePager() {
+  if (!isEditor || !editingOnePagerInitId) return;
+  const init = calendarData.initiatives.find(i => i.id === editingOnePagerInitId);
+  if (!init) return;
+
+  init.marketingGoal = document.getElementById('opFormGoal').value.trim();
+  init.poc = document.getElementById('opFormPoc').value.trim();
+  init.objective = document.getElementById('opFormObjective').value.trim();
+
+  const markets = document.getElementById('opFormMarkets').value.split(',').map(m => m.trim()).filter(Boolean);
+  if (markets.length > 0) init.markets = markets;
+
+  if (!init.onePager) init.onePager = {};
+  init.onePager.insight = document.getElementById('opFormInsight').value.trim();
+  init.onePager.useCases = document.getElementById('opFormUseCases').value.split('\n').map(l => l.trim()).filter(Boolean);
+  init.onePager.positioning = document.getElementById('opFormPositioning').value.trim();
+  init.onePager.valueProps = document.getElementById('opFormValueProps').value.split('\n').map(l => l.trim()).filter(Boolean);
+  init.onePager.gtmStrategy = document.getElementById('opFormGtm').value.trim();
+  init.onePager.channels = document.getElementById('opFormChannels').value.split('\n').map(l => l.trim()).filter(Boolean);
+  init.onePager.successMetrics = document.getElementById('opFormMetrics').value.split('\n').map(l => l.trim()).filter(Boolean);
+
+  localStorage.setItem('calendarDataOverride', JSON.stringify(calendarData));
+  closeModal('onePagerFormModal');
+  render();
+  if (currentMode === 'campaigns') renderCampaigns();
+}
+
 function openEditEntryForm(entryId, initId) {
   const init = calendarData.initiatives.find(i => i.id === initId);
   if (!init) return;
@@ -7898,7 +8015,7 @@ function renderCampaignPage(init) {
   const heroImage = allGalleryImages.length > 0 ? allGalleryImages[0] : null;
 
   html += `<div class="one-pager">`;
-  html += `<div class="one-pager-title">${init.marketingGoal ? init.marketingGoal + ': ' : ''}${init.name}</div>`;
+  html += `<div class="one-pager-title" style="display:flex;align-items:center;justify-content:space-between;gap:16px;">${init.marketingGoal ? init.marketingGoal + ': ' : ''}${init.name}${isEditor ? `<button class="form-btn form-btn-primary" style="font-size:12px;padding:6px 14px;white-space:nowrap;" onclick="openOnePagerForm('${init.id}')">Edit</button>` : ''}</div>`;
   html += `<div class="one-pager-body">`;
 
   // Left: Image
