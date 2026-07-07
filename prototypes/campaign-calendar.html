@@ -8543,6 +8543,23 @@ async function sendAdvisorMessage() {
   input.focus();
 }
 
+function safeParseJSON(raw) {
+  let cleaned = raw.trim();
+  // Strip markdown code fences if Gemini wrapped the response
+  cleaned = cleaned.replace(/^```(?:json)?\s*\n?/i, '').replace(/\n?```\s*$/, '');
+  cleaned = cleaned.trim();
+  try {
+    return JSON.parse(cleaned);
+  } catch (e) {
+    // Try to extract the first valid JSON object from the response
+    const match = cleaned.match(/\{[\s\S]*\}/);
+    if (match) {
+      return JSON.parse(match[0]);
+    }
+    throw new Error('Could not parse AI response as JSON. Please try again.');
+  }
+}
+
 async function callAdvisor(question) {
   const bp = getBestPractices();
   const calendarContext = getCalendarContext();
@@ -8592,7 +8609,7 @@ Respond in this exact JSON format:
 }`;
 
   const response = await callClaude(systemPrompt, question);
-  const parsed = JSON.parse(response);
+  const parsed = safeParseJSON(response);
 
   let html = '';
   if (parsed.verdict) {
@@ -9030,7 +9047,7 @@ Respond in this exact JSON format:
 }`;
 
   const response = await callClaude(systemPrompt, question);
-  const parsed = JSON.parse(response);
+  const parsed = safeParseJSON(response);
 
   let html = '';
   if (parsed.verdict) {
