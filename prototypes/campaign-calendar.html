@@ -4386,9 +4386,23 @@ body {
 </head>
 <body>
 
+<!-- AUTH SCREEN -->
+<div class="auth-screen" id="authScreen">
+  <div class="auth-card">
+    <h1>Product Marketing Hub</h1>
+    <p>Sign in with your HelloFresh email to access the campaign calendar.</p>
+    <input type="email" id="authEmail" placeholder="you@hellofresh.com" onkeydown="if(event.key==='Enter')handleAuth()">
+    <button class="auth-btn" onclick="handleAuth()">Sign In</button>
+    <div class="auth-error" id="authError">Please use a valid @hellofresh.com email address.</div>
+    <div class="auth-editors-info">
+      <strong>Editor access</strong>
+      Editors can add and modify calendar entries. All other users have view access.
+    </div>
+  </div>
+</div>
 
 <!-- MAIN APP -->
-<div class="app active" id="app">
+<div class="app" id="app">
   <!-- Sidebar -->
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-header">
@@ -4770,14 +4784,15 @@ function formatChannel(ch) { return CHANNEL_LABELS[ch] || ch.charAt(0).toUpperCa
 // AUTH
 function handleAuth() {
   const email = document.getElementById('authEmail').value.trim().toLowerCase();
-  if (!email.includes('@hellofresh') && !email.includes('@hellofresh.com') && !email.includes('@')) {
+  if (!email.endsWith('@hellofresh.com')) {
     document.getElementById('authError').style.display = 'block';
     return;
   }
-  const name = email.split('@')[0].replace('.', ' ').replace(/\b\w/g, c => c.toUpperCase());
+  document.getElementById('authError').style.display = 'none';
+  const name = email.split('@')[0].replace(/\./g, ' ').replace(/\b\w/g, c => c.toUpperCase());
   const firstName = name.split(' ')[0];
   currentUser = { email, name, firstName };
-  isEditor = EDITORS.some(e => email.toLowerCase().includes(e.replace(' ', '.')));
+  isEditor = EDITORS.some(e => email.includes(e.replace(' ', '.')));
   localStorage.setItem('calendarUser', JSON.stringify({ email, name, firstName, isEditor }));
   showApp();
 }
@@ -4813,6 +4828,7 @@ function showApp() {
   document.getElementById('sidebarUserRole').textContent = isEditor ? 'Editor' : 'Viewer';
   if (isEditor) document.getElementById('importBtn').style.display = '';
   loadData();
+  initDragAndDrop();
 }
 
 // DATA
@@ -7609,16 +7625,9 @@ document.addEventListener('click', (e) => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-  currentUser = { email: 'kieran.enright@hellofresh.com', name: 'Kieran Enright', firstName: 'Kieran' };
-  isEditor = true;
-  document.getElementById('userName').textContent = currentUser.firstName;
-  document.getElementById('userAvatar').textContent = currentUser.firstName[0];
-  document.getElementById('sidebarAvatar').textContent = currentUser.firstName[0];
-  document.getElementById('sidebarUserName').textContent = currentUser.name;
-  document.getElementById('sidebarUserRole').textContent = 'Editor';
-  document.getElementById('importBtn').style.display = '';
-  loadData();
-  initDragAndDrop();
+  if (!checkAuth()) {
+    document.getElementById('authScreen').style.display = 'flex';
+  }
 });
 
 // ─── CAMPAIGNS ENGINE ───────────────────────────────────────────────
