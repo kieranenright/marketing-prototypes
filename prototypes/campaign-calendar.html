@@ -4041,6 +4041,10 @@ body {
   font-size: 11px;
   font-weight: 600;
 }
+.campaign-timeline-entry[style*="cursor:pointer"]:hover {
+  background: var(--bg-secondary);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
 
 /* Gallery lightbox */
 .gallery-lightbox {
@@ -7113,6 +7117,11 @@ function openNewEntryForm(date) {
   document.getElementById('entryFormModal').classList.add('active');
 }
 
+function openNewEntryFormForInit(initId) {
+  openNewEntryForm();
+  document.getElementById('formInitiative').value = initId;
+}
+
 function openEditEntryForm(entryId, initId) {
   const init = calendarData.initiatives.find(i => i.id === initId);
   if (!init) return;
@@ -7202,6 +7211,7 @@ function saveEntry() {
   closeModal('entryFormModal');
   buildOwnerFilter();
   render();
+  if (currentMode === 'campaigns') renderCampaigns();
 }
 
 function deleteEntry() {
@@ -7215,6 +7225,7 @@ function deleteEntry() {
   }
   closeModal('entryFormModal');
   render();
+  if (currentMode === 'campaigns') renderCampaigns();
 }
 
 function createJiraTicket() {
@@ -8041,7 +8052,7 @@ function renderCampaignPage(init) {
   sortedEntries.slice(0, 20).forEach(e => {
     const chColor = CHANNEL_COLORS[e.channel] || { color: '#64748B', bg: '#F1F5F9' };
     const statusStyle = STATUS_STYLES[e.status] || { color: '#94A3B8', bg: '#F1F5F9' };
-    html += `<div class="campaign-timeline-entry">
+    html += `<div class="campaign-timeline-entry" ${isEditor ? `onclick="openEditEntryForm('${e.id}','${init.id}')" style="cursor:pointer;"` : ''}>
       <span class="timeline-date">${formatDateShort(e.date)}</span>
       <span class="timeline-channel" style="background:${chColor.bg};color:${chColor.color};">${e.channel}</span>
       <span class="timeline-text">${escapeHTML(e.text)}</span>
@@ -8050,6 +8061,9 @@ function renderCampaignPage(init) {
   });
   if (entries.length === 0) {
     html += `<p style="color:var(--text-tertiary);font-size:13px;text-align:center;padding:20px;">No entries yet.</p>`;
+  }
+  if (isEditor) {
+    html += `<div style="text-align:center;margin-top:12px;"><button class="form-btn form-btn-primary" onclick="openNewEntryFormForInit('${init.id}')">+ New Entry</button></div>`;
   }
   html += `</div></div>`;
 
