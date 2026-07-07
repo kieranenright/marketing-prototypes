@@ -6567,6 +6567,25 @@ function renderMarkets() {
     return true;
   }
 
+  // Market POC mapping
+  const MARKET_POCS = {
+    'US': 'Marina Kramer',
+    'UK': 'Kieran Enright',
+    'DE': 'Marina Kramer',
+    'AU': 'Marina Zinakova',
+    'CA': 'Marina Kramer',
+    'NL': 'Smriti Srivastava',
+    'SE': 'Marina Zinakova',
+    'DK': 'Marina Zinakova',
+    'NO': 'Marina Zinakova',
+    'BE': 'Smriti Srivastava',
+    'AT': 'Marina Kramer',
+    'CH': 'Marina Kramer',
+    'FR': 'Isabela Martin',
+    'IE': 'Kieran Enright',
+    'NZ': 'Marina Zinakova'
+  };
+
   // Section A: Single Market Timeline
   let html = '<div class="markets-view-selector">';
   html += '<label>Select Market:</label>';
@@ -6575,6 +6594,15 @@ function renderMarkets() {
     html += `<option value="${m}" ${m === selectedMarketView ? 'selected' : ''}>${m}</option>`;
   });
   html += '</select></div>';
+
+  // POC badge for selected market
+  const pocName = MARKET_POCS[selectedMarketView] || '';
+  if (pocName) {
+    html += `<div style="margin:12px 0 16px;padding:10px 16px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;display:inline-flex;align-items:center;gap:8px;font-size:13px;">
+      <span style="font-weight:600;color:#166534;">POC:</span>
+      <span style="color:#15803d;">${pocName}</span>
+    </div>`;
+  }
 
   // Get releases relevant to the selected market
   const marketReleases = calendarData.releases.filter(r => {
@@ -7727,9 +7755,9 @@ function renderTeamBreakdown() {
   const markets = ['ALL Markets', 'US', 'CA', 'ANZ', 'GB', 'IE', 'DACH', 'BNL', 'FR', 'NOR'];
   const data = [
     { theme: 'High Level Roadmap Prioritization', owners: { all: 'Marina Kramer', us: '', ca: '', anz: '', gb: '', ie: '', dach: '', bnl: '', fr: '', nor: '' }, allMarkets: true },
-    { theme: 'One Calendar', owners: { all: 'Marina Zinakova', us: 'Marina Kramer', ca: 'Marina Kramer', anz: 'Marina Zinakova', gb: 'Marina Zinakova', ie: 'Marina Zinakova', dach: 'Marina Kramer', bnl: 'Marina Kramer', fr: 'Isabela Martin', nor: 'Isabela Martin' } },
-    { theme: 'PMM Monthly Update', owners: { all: 'Marina Zinakova', us: '', ca: '', anz: '', gb: '', ie: '', dach: '', bnl: '', fr: '', nor: '' }, allMarkets: true },
-    { theme: 'PMM Calendar ("Hub")', owners: { all: 'Kieran Enright', us: '', ca: '', anz: '', gb: '', ie: '', dach: '', bnl: '', fr: '', nor: '' }, allMarkets: true },
+    { theme: 'One Calendar', owners: { all: 'Marina Zinakova', us: 'Marina Kramer', ca: 'Marina Kramer', anz: 'Marina Zinakova', gb: 'Kieran Enright', ie: 'Kieran Enright', dach: 'Marina Kramer', bnl: 'Smriti Srivastava', fr: 'Isabela Martin', nor: 'Marina Zinakova' } },
+    { theme: 'PMM Monthly Update Calls', owners: { all: 'Marina Zinakova', us: '', ca: '', anz: '', gb: '', ie: '', dach: '', bnl: '', fr: '', nor: '' }, allMarkets: true },
+    { theme: 'Global PMM Hub', owners: { all: 'Kieran Enright', us: '', ca: '', anz: '', gb: '', ie: '', dach: '', bnl: '', fr: '', nor: '' }, allMarkets: true },
     { theme: 'HF Mealkit Roadmap alignment', owners: { all: 'Marina Zinakova', us: '', ca: '', anz: '', gb: '', ie: '', dach: '', bnl: '', fr: '', nor: '' }, allMarkets: true },
     { theme: 'Peak Campaigns', owners: { all: 'Domitille Park,\nMarina Kramer', us: '', ca: '', anz: '', gb: '', ie: '', dach: '', bnl: '', fr: '', nor: '' }, allMarkets: true },
     { theme: 'Customer Engagement:', subtitle: 'Cookbook, Food Companion, Meal Planner', owners: { all: 'Kieran Enright', us: '', ca: '', anz: '', gb: '', ie: '', dach: '', bnl: '', fr: '', nor: '' }, allMarkets: true },
@@ -7739,7 +7767,7 @@ function renderTeamBreakdown() {
     { theme: 'Frameworks & Playbooks:', subtitle: 'Product Messaging Framework, Proof points, standardised GTM playbooks', owners: { all: 'Isabela Martin', us: '', ca: '', anz: '', gb: '', ie: '', dach: '', bnl: '', fr: '', nor: '' }, allMarkets: true },
     { theme: 'Conversions:', subtitle: 'Reactivation', owners: { all: 'Isabela Martin', us: '', ca: '', anz: '', gb: '', ie: '', dach: '', bnl: '', fr: '', nor: '' }, allMarkets: true },
     { theme: 'VoC', owners: { all: 'Isabela Martin', us: '', ca: '', anz: '', gb: '', ie: '', dach: '', bnl: '', fr: '', nor: '' }, allMarkets: true },
-    { theme: 'Ad Hoc Questions', owners: { all: '', us: 'Marina Kramer', ca: 'Marina Kramer', anz: 'Marina Zinakova', gb: 'Marina Zinakova', ie: 'Marina Zinakova', dach: 'Marina Kramer', bnl: 'Marina Kramer', fr: 'Isabela Martin', nor: 'Isabela Martin' }, highlight: true }
+    { theme: 'Key Market POC: Ad Hoc Questions & Support', owners: { all: '', us: 'Marina Kramer', ca: 'Marina Kramer', anz: 'Marina Zinakova', gb: 'Kieran Enright', ie: 'Kieran Enright', dach: 'Marina Kramer', bnl: 'Smriti Srivastava', fr: 'Isabela Martin', nor: 'Marina Zinakova' }, highlight: true }
   ];
 
   const marketKeys = ['all', 'us', 'ca', 'anz', 'gb', 'ie', 'dach', 'bnl', 'fr', 'nor'];
