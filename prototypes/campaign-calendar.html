@@ -4436,6 +4436,10 @@ body {
             <span class="sidebar-icon">&#128200;</span>
             <span class="sidebar-label">Year View</span>
           </div>
+          <div class="sidebar-item" data-sidebar="marketing-airtable" onclick="sidebarNav('marketing','airtable')">
+            <span class="sidebar-icon">&#128279;</span>
+            <span class="sidebar-label">Airtable View</span>
+          </div>
         </div>
       </div>
       <div class="sidebar-item" data-sidebar="campaigns" onclick="sidebarNav('campaigns')">
@@ -4608,6 +4612,7 @@ body {
     <div class="best-practices-view" id="bestPracticesView"></div>
     <div class="campaigns-view" id="campaignsView"></div>
     <div class="team-breakdown-view" id="teamBreakdownView"></div>
+    <div class="airtable-view" id="airtableView" style="display:none;width:100%;height:calc(100vh - 120px);"><iframe src="https://airtable.com/embed/appCRWMQmUyqzb6bP/shrtNkBiWQdKdX1W3" frameborder="0" style="width:100%;height:100%;border-radius:8px;"></iframe></div>
   </div>
   </div><!-- /.app-main -->
 </div>
@@ -5016,7 +5021,7 @@ function sidebarNav(mode, view) {
   if (activeItem) activeItem.classList.add('active');
 
   // Update page title
-  const viewTitles = { month: 'Month View', weekly: 'Weekly View', quarter: 'Quarterly View', year: 'Year View' };
+  const viewTitles = { month: 'Month View', weekly: 'Weekly View', quarter: 'Quarterly View', year: 'Year View', airtable: 'Airtable View' };
   const titles = {
     'marketing': viewTitles[view] || 'Product Marketing',
     'product': 'Product Releases',
@@ -5079,6 +5084,7 @@ function setMode(mode) {
   document.getElementById('askEIView').classList.remove('active');
   document.getElementById('bestPracticesView').classList.remove('active');
   document.getElementById('campaignsView').classList.remove('active');
+  document.getElementById('airtableView').style.display = 'none';
   document.getElementById('yearView').classList.remove('active');
   document.getElementById('quarterView').classList.remove('active');
   document.getElementById('weeklyView').classList.remove('active');
@@ -5087,14 +5093,21 @@ function setMode(mode) {
   document.getElementById('controlsBar').style.display = '';
 
   if (mode === 'marketing') {
-    marketingOnlyEls.forEach(el => { if (el) el.style.display = ''; });
-    navButtons.forEach(b => b.style.display = '');
-    // Restore the current marketing view
-    document.getElementById('yearView').classList.toggle('active', currentView === 'year');
-    document.getElementById('quarterView').classList.toggle('active', currentView === 'quarter');
-    document.getElementById('weeklyView').classList.toggle('active', currentView === 'weekly');
-    document.getElementById('monthView').classList.toggle('active', currentView === 'month');
-    document.getElementById('weeklyModeToggle').classList.toggle('visible', currentView === 'weekly');
+    if (currentView === 'airtable') {
+      marketingOnlyEls.forEach(el => { if (el) el.style.display = 'none'; });
+      navButtons.forEach(b => b.style.display = 'none');
+      document.getElementById('controlsBar').style.display = 'none';
+      document.getElementById('airtableView').style.display = 'block';
+    } else {
+      marketingOnlyEls.forEach(el => { if (el) el.style.display = ''; });
+      navButtons.forEach(b => b.style.display = '');
+      // Restore the current marketing view
+      document.getElementById('yearView').classList.toggle('active', currentView === 'year');
+      document.getElementById('quarterView').classList.toggle('active', currentView === 'quarter');
+      document.getElementById('weeklyView').classList.toggle('active', currentView === 'weekly');
+      document.getElementById('monthView').classList.toggle('active', currentView === 'month');
+      document.getElementById('weeklyModeToggle').classList.toggle('visible', currentView === 'weekly');
+    }
   } else if (mode === 'product') {
     marketingOnlyEls.forEach(el => { if (el) el.style.display = 'none'; });
     navButtons.forEach(b => b.style.display = 'none');
