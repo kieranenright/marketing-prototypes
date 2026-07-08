@@ -8319,15 +8319,26 @@ function renderCampaignPage(init) {
       { label: 'Missions Naming Decision', href: 'missions-naming-decision.html', tag: 'Product' }
     ]
   };
-  const docs = CAMPAIGN_DOCS[init.id];
-  if (docs && docs.length > 0) {
-    html += `<div class="campaign-section"><h3>Documentation</h3><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;">`;
-    docs.forEach(doc => {
-      html += `<a href="${doc.href}" target="_blank" style="display:block;padding:14px 16px;background:var(--bg-secondary);border:1px solid var(--border-color);border-radius:10px;text-decoration:none;transition:all 0.2s;">
-        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--brand-green);margin-bottom:6px;">${doc.tag}</div>
-        <div style="font-size:13px;font-weight:600;color:var(--text-primary);">${doc.label}</div>
+  const baselineDocs = CAMPAIGN_DOCS[init.id] || [];
+  const userDocs = campaignLinks[init.id] || [];
+  const allDocs = [...baselineDocs, ...userDocs];
+  if (allDocs.length > 0 || isEditor) {
+    html += `<div class="campaign-section"><h3>Links & Documentation</h3><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;">`;
+    allDocs.forEach((doc, idx) => {
+      const isUserLink = idx >= baselineDocs.length;
+      html += `<div style="position:relative;">`;
+      html += `<a href="${escapeHTML(doc.href)}" target="_blank" style="display:block;padding:14px 16px;background:var(--bg-secondary);border:1px solid var(--border-color);border-radius:10px;text-decoration:none;transition:all 0.2s;">
+        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--brand-green);margin-bottom:6px;">${escapeHTML(doc.tag)}</div>
+        <div style="font-size:13px;font-weight:600;color:var(--text-primary);">${escapeHTML(doc.label)}</div>
       </a>`;
+      if (isEditor && isUserLink) {
+        html += `<button onclick="event.preventDefault();removeCampaignLink('${init.id}',${idx - baselineDocs.length})" style="position:absolute;top:6px;right:6px;background:rgba(220,38,38,0.9);color:white;border:none;border-radius:50%;width:20px;height:20px;font-size:12px;cursor:pointer;line-height:1;">&times;</button>`;
+      }
+      html += `</div>`;
     });
+    if (isEditor) {
+      html += `<div onclick="addCampaignLink('${init.id}')" style="display:flex;align-items:center;justify-content:center;padding:14px 16px;border:2px dashed var(--border);border-radius:10px;cursor:pointer;color:var(--text-tertiary);font-size:13px;font-weight:500;transition:all 0.2s;">+ Add Link</div>`;
+    }
     html += `</div></div>`;
   }
 
@@ -8363,6 +8374,31 @@ function formatDateShort(dateStr) {
   if (!dateStr) return '';
   const d = new Date(dateStr + 'T00:00:00');
   return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+}
+
+let campaignLinks = JSON.parse(localStorage.getItem('campaignLinks') || '{}');
+
+function saveCampaignLinks() {
+  localStorage.setItem('campaignLinks', JSON.stringify(campaignLinks));
+}
+
+function addCampaignLink(initId) {
+  const label = prompt('Link title:');
+  if (!label) return;
+  const href = prompt('URL:');
+  if (!href) return;
+  const tag = prompt('Tag (e.g. Strategy, CRM, Report):', 'Link');
+  if (!campaignLinks[initId]) campaignLinks[initId] = [];
+  campaignLinks[initId].push({ label, href, tag: tag || 'Link' });
+  saveCampaignLinks();
+  renderCampaigns();
+}
+
+function removeCampaignLink(initId, idx) {
+  if (!campaignLinks[initId]) return;
+  campaignLinks[initId].splice(idx, 1);
+  saveCampaignLinks();
+  renderCampaigns();
 }
 
 let onePagerHeroImages = JSON.parse(localStorage.getItem('onePagerHeroImages') || '{}');
