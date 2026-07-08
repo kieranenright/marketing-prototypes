@@ -8308,26 +8308,18 @@ function renderCampaignPage(init) {
   </div>`;
 
   // Gallery section
-  const hiddenIdxs = hiddenGalleryImages[init.id] || [];
-  const rawBaseline = BASELINE_GALLERIES[init.id] || [];
+  const baselineGallery = BASELINE_GALLERIES[init.id] || [];
   const userGallery = campaignGalleries[init.id] || [];
-  const galleryItems = [];
-  rawBaseline.forEach((img, origIdx) => {
-    if (!hiddenIdxs.includes(origIdx)) {
-      galleryItems.push({ img, type: 'baseline', origIdx });
-    }
-  });
-  userGallery.forEach((img, origIdx) => {
-    galleryItems.push({ img, type: 'user', origIdx });
-  });
+  const gallery = [...baselineGallery, ...userGallery];
   html += `<div class="campaign-section">
     <h3>Creative Gallery</h3>
     <div class="campaign-gallery">`;
-  galleryItems.forEach((item, displayIdx) => {
-    html += `<div class="campaign-gallery-item" style="position:relative;" onclick="openGalleryLightbox('${init.id}', ${displayIdx})">
-      <img src="${item.img.src}" alt="${escapeHTML(item.img.label || '')}">
-      ${item.img.label ? `<div class="gallery-label">${escapeHTML(item.img.label)}</div>` : ''}
-      ${isEditor ? `<button onclick="event.stopPropagation();removeGalleryItem('${init.id}',${item.origIdx},'${item.type}')" style="position:absolute;top:6px;right:6px;background:rgba(220,38,38,0.9);color:white;border:none;border-radius:50%;width:22px;height:22px;font-size:13px;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center;">&times;</button>` : ''}
+  gallery.forEach((img, idx) => {
+    const isUserImage = idx >= baselineGallery.length;
+    html += `<div class="campaign-gallery-item" style="position:relative;" onclick="openGalleryLightbox('${init.id}', ${idx})">
+      <img src="${img.src}" alt="${escapeHTML(img.label || '')}">
+      ${img.label ? `<div class="gallery-label">${escapeHTML(img.label)}</div>` : ''}
+      ${isEditor && isUserImage ? `<button onclick="event.stopPropagation();deleteGalleryImage('${init.id}',${idx - baselineGallery.length})" style="position:absolute;top:6px;right:6px;background:rgba(220,38,38,0.9);color:white;border:none;border-radius:50%;width:22px;height:22px;font-size:13px;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center;">&times;</button>` : ''}
     </div>`;
   });
   if (isEditor) {
@@ -8491,10 +8483,9 @@ function handleGalleryUpload(event, initId) {
 }
 
 function openGalleryLightbox(initId, idx) {
-  const hiddenIdxs = hiddenGalleryImages[initId] || [];
-  const rawBaseline = BASELINE_GALLERIES[initId] || [];
+  const baselineGallery = BASELINE_GALLERIES[initId] || [];
   const userGallery = campaignGalleries[initId] || [];
-  const gallery = [...rawBaseline.filter((_, i) => !hiddenIdxs.includes(i)), ...userGallery];
+  const gallery = [...baselineGallery, ...userGallery];
   const img = gallery[idx];
   if (!img) return;
   let lb = document.getElementById('galleryLightbox');
@@ -8532,22 +8523,6 @@ function deleteGalleryImage(initId, idx) {
   if (!campaignGalleries[initId]) return;
   campaignGalleries[initId].splice(idx, 1);
   saveCampaignGalleries();
-  renderCampaigns();
-}
-
-let hiddenGalleryImages = JSON.parse(localStorage.getItem('hiddenGalleryImages') || '{}');
-
-function removeGalleryItem(initId, origIdx, type) {
-  if (type === 'user') {
-    if (campaignGalleries[initId]) {
-      campaignGalleries[initId].splice(origIdx, 1);
-      saveCampaignGalleries();
-    }
-  } else {
-    if (!hiddenGalleryImages[initId]) hiddenGalleryImages[initId] = [];
-    hiddenGalleryImages[initId].push(origIdx);
-    localStorage.setItem('hiddenGalleryImages', JSON.stringify(hiddenGalleryImages));
-  }
   renderCampaigns();
 }
 
