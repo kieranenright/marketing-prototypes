@@ -4728,6 +4728,10 @@ body {
       <button class="modal-close" onclick="closeModal('onePagerFormModal')">&times;</button>
     </div>
     <div class="modal-body">
+      <div class="form-group">
+        <label>Campaign Name</label>
+        <input type="text" id="opFormName" placeholder="e.g. Cookbook">
+      </div>
       <div class="form-row">
         <div class="form-group">
           <label>Marketing Goal</label>
@@ -4738,38 +4742,8 @@ body {
           <input type="text" id="opFormPoc" placeholder="e.g. Kieran">
         </div>
       </div>
-      <div class="form-group">
-        <label>Objective</label>
-        <input type="text" id="opFormObjective" placeholder="Campaign objective">
-      </div>
-      <div class="form-group">
-        <label>Insight / Pain Point</label>
-        <textarea id="opFormInsight" placeholder="What problem does this solve?"></textarea>
-      </div>
-      <div class="form-group">
-        <label>Use Cases (one per line)</label>
-        <textarea id="opFormUseCases" placeholder="One use case per line"></textarea>
-      </div>
-      <div class="form-group">
-        <label>Positioning</label>
-        <textarea id="opFormPositioning" placeholder="How is this positioned for different audiences?"></textarea>
-      </div>
-      <div class="form-group">
-        <label>Core Value Propositions (one per line)</label>
-        <textarea id="opFormValueProps" placeholder="One value prop per line"></textarea>
-      </div>
-      <div class="form-group">
-        <label>GTM &amp; Channel Strategy</label>
-        <textarea id="opFormGtm" placeholder="Go-to-market approach"></textarea>
-      </div>
-      <div class="form-group">
-        <label>Channels (one per line)</label>
-        <textarea id="opFormChannels" placeholder="One channel per line" style="min-height:60px;"></textarea>
-      </div>
-      <div class="form-group">
-        <label>Key Success Metrics (one per line)</label>
-        <textarea id="opFormMetrics" placeholder="One metric per line"></textarea>
-      </div>
+      <div id="opDynamicFields"></div>
+      <button type="button" class="form-btn" style="margin-bottom:16px;font-size:12px;padding:6px 12px;border:1px dashed var(--border);background:white;color:var(--text-secondary);cursor:pointer;" onclick="addOnePagerField()">+ Add Field</button>
       <div class="form-row">
         <div class="form-group">
           <label>Markets (comma separated)</label>
@@ -4777,6 +4751,7 @@ body {
         </div>
       </div>
       <div class="form-actions">
+        <button class="form-btn" id="opFormDeleteBtn" style="background:#FEF2F2;color:#DC2626;border:1px solid #FECACA;display:none;" onclick="deleteOnePagerInit()">Delete Campaign</button>
         <div style="flex:1;"></div>
         <button class="form-btn form-btn-cancel" onclick="closeModal('onePagerFormModal')">Cancel</button>
         <button class="form-btn form-btn-primary" onclick="saveOnePager()">Save</button>
@@ -7201,53 +7176,175 @@ function openNewEntryFormForInit(initId) {
 }
 
 let editingOnePagerInitId = null;
+let opDynamicFieldsList = [];
+
+const DEFAULT_OP_FIELDS = [
+  { key: 'objective', label: 'Objective', type: 'single' },
+  { key: 'insight', label: 'Insight / Pain Point', type: 'single' },
+  { key: 'useCases', label: 'Use Cases', type: 'list' },
+  { key: 'positioning', label: 'Positioning', type: 'single' },
+  { key: 'valueProps', label: 'Core Value Propositions', type: 'list' },
+  { key: 'gtmStrategy', label: 'GTM & Channel Strategy', type: 'single' },
+  { key: 'channels', label: 'Channels', type: 'list' },
+  { key: 'successMetrics', label: 'Key Success Metrics', type: 'list' }
+];
+
+function getOnePagerFields(init) {
+  const op = init.onePager || {};
+  if (op.customFields) return op.customFields;
+  const fields = [];
+  DEFAULT_OP_FIELDS.forEach(def => {
+    let value = def.key === 'objective' ? (init.objective || '') : (op[def.key] || '');
+    if (Array.isArray(value)) value = value.join('\n');
+    if (value) fields.push({ label: def.label, value, type: def.type });
+  });
+  if (fields.length === 0) {
+    fields.push({ label: 'Objective', value: '', type: 'single' });
+  }
+  return fields;
+}
+
+function renderOpDynamicFields() {
+  const container = document.getElementById('opDynamicFields');
+  let html = '';
+  opDynamicFieldsList.forEach((field, idx) => {
+    html += `<div class="form-group" style="position:relative;border:1px solid var(--border-light);border-radius:var(--radius-sm);padding:12px;margin-bottom:12px;">`;
+    html += `<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">`;
+    html += `<input type="text" value="${escapeHTML(field.label)}" onchange="opDynamicFieldsList[${idx}].label=this.value" style="flex:1;font-size:12px;font-weight:600;padding:4px 8px;border:1px solid var(--border);border-radius:4px;" placeholder="Field title">`;
+    html += `<select onchange="opDynamicFieldsList[${idx}].type=this.value" style="font-size:11px;padding:4px 6px;border:1px solid var(--border);border-radius:4px;">`;
+    html += `<option value="single"${field.type === 'single' ? ' selected' : ''}>Text</option>`;
+    html += `<option value="list"${field.type === 'list' ? ' selected' : ''}>List (one per line)</option>`;
+    html += `</select>`;
+    html += `<button type="button" onclick="removeOnePagerField(${idx})" style="background:none;border:none;color:#DC2626;cursor:pointer;font-size:16px;padding:2px 6px;" title="Remove field">&times;</button>`;
+    html += `</div>`;
+    html += `<textarea id="opField_${idx}" style="min-height:${field.type === 'list' ? '80px' : '50px'};" placeholder="${field.type === 'list' ? 'One item per line' : 'Enter value'}">${escapeHTML(field.value)}</textarea>`;
+    html += `</div>`;
+  });
+  container.innerHTML = html;
+}
+
+function addOnePagerField() {
+  opDynamicFieldsList.push({ label: '', value: '', type: 'single' });
+  renderOpDynamicFields();
+}
+
+function removeOnePagerField(idx) {
+  opDynamicFieldsList.splice(idx, 1);
+  renderOpDynamicFields();
+}
+
+function syncOpFieldValues() {
+  opDynamicFieldsList.forEach((field, idx) => {
+    const textarea = document.getElementById('opField_' + idx);
+    if (textarea) field.value = textarea.value;
+  });
+}
 
 function openOnePagerForm(initId) {
   if (!isEditor) return;
   const init = calendarData.initiatives.find(i => i.id === initId);
   if (!init) return;
   editingOnePagerInitId = initId;
-  const op = init.onePager || {};
 
   document.getElementById('onePagerFormTitle').textContent = 'Edit One Pager: ' + init.name;
+  document.getElementById('opFormName').value = init.name || '';
   document.getElementById('opFormGoal').value = init.marketingGoal || '';
   document.getElementById('opFormPoc').value = init.poc || '';
-  document.getElementById('opFormObjective').value = init.objective || '';
-  document.getElementById('opFormInsight').value = op.insight || '';
-  document.getElementById('opFormUseCases').value = (op.useCases || []).join('\n');
-  document.getElementById('opFormPositioning').value = op.positioning || '';
-  document.getElementById('opFormValueProps').value = (op.valueProps || []).join('\n');
-  document.getElementById('opFormGtm').value = op.gtmStrategy || '';
-  document.getElementById('opFormChannels').value = (op.channels || []).join('\n');
-  document.getElementById('opFormMetrics').value = (op.successMetrics || []).join('\n');
   document.getElementById('opFormMarkets').value = (init.markets || []).join(', ');
+  document.getElementById('opFormDeleteBtn').style.display = 'inline-block';
+
+  opDynamicFieldsList = JSON.parse(JSON.stringify(getOnePagerFields(init)));
+  renderOpDynamicFields();
 
   document.getElementById('onePagerFormModal').classList.add('active');
 }
 
-function saveOnePager() {
-  if (!isEditor || !editingOnePagerInitId) return;
+function addNewCampaign() {
+  if (!isEditor) return;
+  editingOnePagerInitId = '__new__';
+
+  document.getElementById('onePagerFormTitle').textContent = 'New Campaign One Pager';
+  document.getElementById('opFormName').value = '';
+  document.getElementById('opFormGoal').value = '';
+  document.getElementById('opFormPoc').value = '';
+  document.getElementById('opFormMarkets').value = '';
+  document.getElementById('opFormDeleteBtn').style.display = 'none';
+
+  opDynamicFieldsList = [{ label: 'Objective', value: '', type: 'single' }];
+  renderOpDynamicFields();
+
+  document.getElementById('onePagerFormModal').classList.add('active');
+}
+
+function deleteOnePagerInit() {
+  if (!isEditor || !editingOnePagerInitId || editingOnePagerInitId === '__new__') return;
   const init = calendarData.initiatives.find(i => i.id === editingOnePagerInitId);
   if (!init) return;
+  if (!confirm('Delete "' + init.name + '" and all its entries? This cannot be undone.')) return;
 
+  calendarData.initiatives = calendarData.initiatives.filter(i => i.id !== editingOnePagerInitId);
+  localStorage.setItem('calendarDataOverride', JSON.stringify(calendarData));
+  closeModal('onePagerFormModal');
+  activeCampaignPage = calendarData.initiatives.length > 0 ? calendarData.initiatives[0].id : null;
+  buildInitTabs();
+  buildLegend();
+  buildOwnerFilter();
+  render();
+  if (currentMode === 'campaigns') renderCampaigns();
+}
+
+function saveOnePager() {
+  if (!isEditor) return;
+  syncOpFieldValues();
+
+  const newName = document.getElementById('opFormName').value.trim();
+  if (!newName) { alert('Please enter a campaign name.'); return; }
+
+  let init;
+  if (editingOnePagerInitId === '__new__') {
+    const INIT_COLORS_PICK = ['#0D9488','#7C3AED','#2563EB','#16A34A','#D97706','#EA580C','#6366F1','#DC2626'];
+    init = {
+      id: 'init-' + newName.toLowerCase().replace(/[^a-z0-9]/g, '').slice(0, 12) + Date.now().toString(36).slice(-4),
+      name: newName,
+      poc: document.getElementById('opFormPoc').value.trim(),
+      marketingGoal: document.getElementById('opFormGoal').value.trim(),
+      objective: '',
+      markets: [],
+      color: INIT_COLORS_PICK[calendarData.initiatives.length % INIT_COLORS_PICK.length],
+      onePager: {},
+      entries: []
+    };
+    calendarData.initiatives.push(init);
+    activeCampaignPage = init.id;
+  } else {
+    init = calendarData.initiatives.find(i => i.id === editingOnePagerInitId);
+    if (!init) return;
+  }
+
+  init.name = newName;
   init.marketingGoal = document.getElementById('opFormGoal').value.trim();
   init.poc = document.getElementById('opFormPoc').value.trim();
-  init.objective = document.getElementById('opFormObjective').value.trim();
 
   const markets = document.getElementById('opFormMarkets').value.split(',').map(m => m.trim()).filter(Boolean);
   if (markets.length > 0) init.markets = markets;
 
+  const fields = opDynamicFieldsList.filter(f => f.label.trim());
   if (!init.onePager) init.onePager = {};
-  init.onePager.insight = document.getElementById('opFormInsight').value.trim();
-  init.onePager.useCases = document.getElementById('opFormUseCases').value.split('\n').map(l => l.trim()).filter(Boolean);
-  init.onePager.positioning = document.getElementById('opFormPositioning').value.trim();
-  init.onePager.valueProps = document.getElementById('opFormValueProps').value.split('\n').map(l => l.trim()).filter(Boolean);
-  init.onePager.gtmStrategy = document.getElementById('opFormGtm').value.trim();
-  init.onePager.channels = document.getElementById('opFormChannels').value.split('\n').map(l => l.trim()).filter(Boolean);
-  init.onePager.successMetrics = document.getElementById('opFormMetrics').value.split('\n').map(l => l.trim()).filter(Boolean);
+
+  const objField = fields.find(f => f.label.toLowerCase() === 'objective');
+  init.objective = objField ? objField.value.trim() : '';
+
+  init.onePager.customFields = fields.map(f => ({
+    label: f.label.trim(),
+    value: f.type === 'list' ? f.value : f.value.trim(),
+    type: f.type
+  }));
 
   localStorage.setItem('calendarDataOverride', JSON.stringify(calendarData));
   closeModal('onePagerFormModal');
+  buildInitTabs();
+  buildLegend();
+  buildOwnerFilter();
   render();
   if (currentMode === 'campaigns') renderCampaigns();
 }
@@ -7992,6 +8089,9 @@ function renderCampaigns() {
   inits.forEach(init => {
     html += `<button class="campaigns-nav-btn${activeCampaignPage === init.id ? ' active' : ''}" onclick="setCampaignPage('${init.id}')"><span class="nav-dot" style="background:${init.color}"></span>${init.name}</button>`;
   });
+  if (isEditor) {
+    html += `<button class="campaigns-nav-btn" style="border-style:dashed;color:var(--text-tertiary);" onclick="addNewCampaign()">+ New</button>`;
+  }
   html += '</div>';
 
   const init = inits.find(i => i.id === activeCampaignPage);
@@ -8040,20 +8140,35 @@ function renderCampaignPage(init) {
   }
   html += `</div>`;
 
-  // Right: Fields
+  // Right: Fields (dynamic)
   html += `<div class="one-pager-fields">`;
-  html += `<div class="one-pager-field"><div class="one-pager-field-label">Objective</div><div class="one-pager-field-value">${init.objective || ''}</div></div>`;
-  if (op.insight) html += `<div class="one-pager-field"><div class="one-pager-field-label">Insight / Pain Point</div><div class="one-pager-field-value">${op.insight}</div></div>`;
-  if (op.useCases && op.useCases.length > 0) {
-    html += `<div class="one-pager-field"><div class="one-pager-field-label">Use Cases</div><div class="one-pager-field-value"><ul>${op.useCases.map(u => `<li>${u}</li>`).join('')}</ul></div></div>`;
-  }
-  if (op.positioning) html += `<div class="one-pager-field"><div class="one-pager-field-label">Positioning</div><div class="one-pager-field-value">${op.positioning}</div></div>`;
-  if (op.valueProps && op.valueProps.length > 0) {
-    html += `<div class="one-pager-field"><div class="one-pager-field-label">Core Value Propositions</div><div class="one-pager-field-value"><ul>${op.valueProps.map(v => `<li>${v}</li>`).join('')}</ul></div></div>`;
-  }
-  if (op.gtmStrategy) html += `<div class="one-pager-field"><div class="one-pager-field-label">GTM & Channel Strategy</div><div class="one-pager-field-value">${op.gtmStrategy}</div></div>`;
-  if (op.successMetrics && op.successMetrics.length > 0) {
-    html += `<div class="one-pager-field"><div class="one-pager-field-label">Key Success Metrics</div><div class="one-pager-field-value"><ul>${op.successMetrics.map(m => `<li>${m}</li>`).join('')}</ul></div></div>`;
+  if (op.customFields) {
+    op.customFields.forEach(field => {
+      if (!field.value) return;
+      let valHtml = '';
+      if (field.type === 'list') {
+        const items = field.value.split('\n').map(l => l.trim()).filter(Boolean);
+        if (items.length === 0) return;
+        valHtml = '<ul>' + items.map(i => `<li>${i}</li>`).join('') + '</ul>';
+      } else {
+        valHtml = field.value;
+      }
+      html += `<div class="one-pager-field"><div class="one-pager-field-label">${escapeHTML(field.label)}</div><div class="one-pager-field-value">${valHtml}</div></div>`;
+    });
+  } else {
+    if (init.objective) html += `<div class="one-pager-field"><div class="one-pager-field-label">Objective</div><div class="one-pager-field-value">${init.objective}</div></div>`;
+    if (op.insight) html += `<div class="one-pager-field"><div class="one-pager-field-label">Insight / Pain Point</div><div class="one-pager-field-value">${op.insight}</div></div>`;
+    if (op.useCases && op.useCases.length > 0) {
+      html += `<div class="one-pager-field"><div class="one-pager-field-label">Use Cases</div><div class="one-pager-field-value"><ul>${op.useCases.map(u => `<li>${u}</li>`).join('')}</ul></div></div>`;
+    }
+    if (op.positioning) html += `<div class="one-pager-field"><div class="one-pager-field-label">Positioning</div><div class="one-pager-field-value">${op.positioning}</div></div>`;
+    if (op.valueProps && op.valueProps.length > 0) {
+      html += `<div class="one-pager-field"><div class="one-pager-field-label">Core Value Propositions</div><div class="one-pager-field-value"><ul>${op.valueProps.map(v => `<li>${v}</li>`).join('')}</ul></div></div>`;
+    }
+    if (op.gtmStrategy) html += `<div class="one-pager-field"><div class="one-pager-field-label">GTM & Channel Strategy</div><div class="one-pager-field-value">${op.gtmStrategy}</div></div>`;
+    if (op.successMetrics && op.successMetrics.length > 0) {
+      html += `<div class="one-pager-field"><div class="one-pager-field-label">Key Success Metrics</div><div class="one-pager-field-value"><ul>${op.successMetrics.map(m => `<li>${m}</li>`).join('')}</ul></div></div>`;
+    }
   }
   html += `</div>`;
   html += `</div>`;
