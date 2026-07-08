@@ -3837,7 +3837,7 @@ body {
   background: var(--brand-lime-light);
   border-radius: 16px;
   border: 1px solid var(--border-light);
-  aspect-ratio: 9/16;
+  min-height: 200px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -3852,9 +3852,39 @@ body {
 
 .one-pager-image img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
+  object-fit: contain;
   border-radius: 16px;
+}
+
+.one-pager-image-controls {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  display: flex;
+  gap: 6px;
+}
+
+.one-pager-image-controls button {
+  padding: 5px 10px;
+  border-radius: 6px;
+  border: none;
+  font-size: 11px;
+  font-weight: 600;
+  font-family: var(--font-body);
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+}
+
+.one-pager-image-controls .img-remove-btn {
+  background: rgba(220, 38, 38, 0.9);
+  color: white;
+}
+
+.one-pager-image-controls .img-change-btn {
+  background: rgba(255,255,255,0.92);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
 }
 
 .one-pager-image .placeholder-text {
@@ -8122,10 +8152,11 @@ function renderCampaignPage(init) {
   // One Pager section
   const release = calendarData.releases.find(r => r.id === init.releaseId);
   const goLiveDate = release ? new Date(release.date + 'T00:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : 'TBD';
+  const customHero = onePagerHeroImages[init.id];
   const baselineGalleryForImage = BASELINE_GALLERIES[init.id] || [];
   const userGalleryForImage = campaignGalleries[init.id] || [];
   const allGalleryImages = [...baselineGalleryForImage, ...userGalleryForImage];
-  const heroImage = allGalleryImages.length > 0 ? allGalleryImages[0] : null;
+  const heroImage = customHero || (allGalleryImages.length > 0 ? allGalleryImages[0] : null);
 
   html += `<div class="one-pager">`;
   html += `<div class="one-pager-title" style="display:flex;align-items:center;justify-content:space-between;gap:16px;">${init.marketingGoal ? init.marketingGoal + ': ' : ''}${init.name}${isEditor ? `<button class="form-btn form-btn-primary" style="font-size:12px;padding:6px 14px;white-space:nowrap;" onclick="openOnePagerForm('${init.id}')">Edit</button>` : ''}</div>`;
@@ -8135,9 +8166,20 @@ function renderCampaignPage(init) {
   html += `<div class="one-pager-image">`;
   if (heroImage) {
     html += `<img src="${heroImage.src}" alt="${escapeHTML(heroImage.label || init.name)}">`;
+    if (isEditor) {
+      html += `<div class="one-pager-image-controls">`;
+      html += `<button class="img-change-btn" onclick="document.getElementById('opHeroUpload-${init.id}').click()">Change</button>`;
+      html += `<button class="img-remove-btn" onclick="removeOnePagerHeroImage('${init.id}')">Remove</button>`;
+      html += `</div>`;
+    }
   } else {
-    html += `<div class="placeholder-text">Image<span>(UX, Assets)</span></div>`;
+    if (isEditor) {
+      html += `<div class="placeholder-text" style="cursor:pointer;" onclick="document.getElementById('opHeroUpload-${init.id}').click()">+ Add Image<span>Click to upload</span></div>`;
+    } else {
+      html += `<div class="placeholder-text">Image<span>(UX, Assets)</span></div>`;
+    }
   }
+  html += `<input type="file" id="opHeroUpload-${init.id}" accept="image/*" style="display:none;" onchange="handleOnePagerHeroUpload(event, '${init.id}')">`;
   html += `</div>`;
 
   // Right: Fields (dynamic)
@@ -8321,6 +8363,31 @@ function formatDateShort(dateStr) {
   if (!dateStr) return '';
   const d = new Date(dateStr + 'T00:00:00');
   return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+}
+
+let onePagerHeroImages = JSON.parse(localStorage.getItem('onePagerHeroImages') || '{}');
+
+function saveOnePagerHeroImages() {
+  localStorage.setItem('onePagerHeroImages', JSON.stringify(onePagerHeroImages));
+}
+
+function handleOnePagerHeroUpload(event, initId) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    onePagerHeroImages[initId] = { src: e.target.result, label: file.name.replace(/\.[^/.]+$/, '') };
+    saveOnePagerHeroImages();
+    renderCampaigns();
+  };
+  reader.readAsDataURL(file);
+  event.target.value = '';
+}
+
+function removeOnePagerHeroImage(initId) {
+  delete onePagerHeroImages[initId];
+  saveOnePagerHeroImages();
+  renderCampaigns();
 }
 
 function handleGalleryUpload(event, initId) {
