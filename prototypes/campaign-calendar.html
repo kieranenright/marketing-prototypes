@@ -4905,18 +4905,28 @@ function showApp() {
 
 // DATA
 async function loadData() {
-  localStorage.removeItem('calendarDataOverride');
-  try {
-    const resp = await fetch('calendar-data.json');
-    if (!resp.ok) throw new Error('HTTP ' + resp.status);
-    calendarData = await resp.json();
-  } catch (e) {
-    if (typeof INLINE_CALENDAR_DATA !== 'undefined') {
-      calendarData = INLINE_CALENDAR_DATA;
-    } else {
-      console.error('Failed to load calendar data:', e);
-      document.getElementById('monthView').innerHTML = '<div style="text-align:center;padding:60px;color:#9A9A9A;">Failed to load data. If viewing locally, please use a local server.</div>';
-      return;
+  const override = localStorage.getItem('calendarDataOverride');
+  if (override) {
+    try {
+      calendarData = JSON.parse(override);
+    } catch (e) {
+      localStorage.removeItem('calendarDataOverride');
+      calendarData = null;
+    }
+  }
+  if (!calendarData) {
+    try {
+      const resp = await fetch('calendar-data.json');
+      if (!resp.ok) throw new Error('HTTP ' + resp.status);
+      calendarData = await resp.json();
+    } catch (e) {
+      if (typeof INLINE_CALENDAR_DATA !== 'undefined') {
+        calendarData = JSON.parse(JSON.stringify(INLINE_CALENDAR_DATA));
+      } else {
+        console.error('Failed to load calendar data:', e);
+        document.getElementById('monthView').innerHTML = '<div style="text-align:center;padding:60px;color:#9A9A9A;">Failed to load data. If viewing locally, please use a local server.</div>';
+        return;
+      }
     }
   }
   // Initialize markets
