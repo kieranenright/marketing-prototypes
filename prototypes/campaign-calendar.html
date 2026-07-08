@@ -7181,6 +7181,9 @@ function openProductEntryModal(entryId, initId) {
 // ENTRY CRUD
 function openNewEntryForm(date) {
   editingEntry = null;
+  const formModal = document.getElementById('entryFormModal');
+  delete formModal.dataset.editInitId;
+  delete formModal.dataset.editEntryId;
   document.getElementById('entryFormTitle').textContent = 'New Entry';
   document.getElementById('formDeleteBtn').style.display = 'none';
 
@@ -7393,7 +7396,6 @@ function openEditEntryForm(entryId, initId) {
   const entry = init.entries.find(e => e.id === entryId);
   if (!entry) return;
 
-  editingEntry = { initId, entryId };
   document.getElementById('entryFormTitle').textContent = 'Edit Entry';
   document.getElementById('formDeleteBtn').style.display = 'inline-block';
 
@@ -7417,12 +7419,29 @@ function openEditEntryForm(entryId, initId) {
   document.getElementById('formAirtableLink').value = entry.airtableRecord || '';
   document.getElementById('formNotes').value = entry.notes || '';
 
-  closeModal('dayModal');
-  document.getElementById('entryFormModal').classList.add('active');
+  // Close dayModal without touching editingEntry
+  document.getElementById('dayModal').classList.remove('active');
+  // Set editingEntry AFTER closing dayModal to prevent any interference
+  editingEntry = { initId, entryId };
+  // Also store on the form as data attributes for robustness
+  const formModal = document.getElementById('entryFormModal');
+  formModal.dataset.editInitId = initId;
+  formModal.dataset.editEntryId = entryId;
+  formModal.classList.add('active');
 }
 
 function saveEntry() {
   if (!isEditor) return;
+
+  // Recover editingEntry from data attributes if variable was lost
+  if (!editingEntry) {
+    const formModal = document.getElementById('entryFormModal');
+    const backupInitId = formModal.dataset.editInitId;
+    const backupEntryId = formModal.dataset.editEntryId;
+    if (backupInitId && backupEntryId) {
+      editingEntry = { initId: backupInitId, entryId: backupEntryId };
+    }
+  }
 
   const initId = document.getElementById('formInitiative').value;
   const init = calendarData.initiatives.find(i => i.id === initId);
