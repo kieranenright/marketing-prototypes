@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Campaign Calendar (Airtable) | Product Marketing</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --brand-green: #067A46;
+  --bg-cream: #FAF8F3;
+  --white: #FFFFFF;
+  --text-primary: #1D1D1D;
+  --text-secondary: #6B6B6B;
+  --text-tertiary: #9A9A9A;
+  --border: #E0D9CE;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg-cream);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.top-bar {
+  background: rgba(255, 255, 255, 0.92);
+  border-bottom: 1px solid var(--border);
+  padding: 0 40px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  backdrop-filter: blur(20px);
+}
+
+.top-bar-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.top-bar-logo {
+  height: 24px;
+}
+
+.top-bar-divider {
+  width: 1px;
+  height: 20px;
+  background: var(--border);
+}
+
+.top-bar-team {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.back-link {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.15s;
+}
+
+.back-link:hover { color: var(--brand-green); }
+
+.header {
+  padding: 32px 40px 24px;
+  max-width: 100%;
+}
+
+.header h1 {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 6px;
+}
+
+.header p {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.calendar-frame {
+  flex: 1;
+  padding: 0 40px 40px;
+}
+
+.calendar-frame iframe {
+  width: 100%;
+  height: calc(100vh - 180px);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--white);
+}
+
+@media (max-width: 640px) {
+  .top-bar { padding: 0 20px; }
+  .header { padding: 24px 20px 16px; }
+  .calendar-frame { padding: 0 20px 20px; }
+}
+</style>
+</head>
+<body>
+
+<nav class="top-bar">
+  <div class="top-bar-left">
+    <img src="https://media.hellofresh.com/w_256,q_100,f_auto,c_limit,fl_lossy/hellofresh_website/logo/Hello_Fresh_Lockup.png" alt="HelloFresh" class="top-bar-logo">
+    <div class="top-bar-divider"></div>
+    <span class="top-bar-team">Product Marketing</span>
+  </div>
+  <a href="../index.html" class="back-link">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    Back to Index
+  </a>
+</nav>
+
+<div class="header">
+  <h1>Campaign Calendar</h1>
+  <p>Live Airtable view of all scheduled campaigns across channels and markets</p>
+</div>
+
+<div class="calendar-frame">
+  <iframe src="https://airtable.com/embed/appCRWMQmUyqzb6bP/shrtNkBiWQdKdX1W3" frameborder="0" allowfullscreen></iframe>
+</div>
+
+<script src="../auth.js"></script>
+</body>
+</html>
