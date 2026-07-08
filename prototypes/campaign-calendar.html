@@ -6951,7 +6951,7 @@ function openDayModal(dateStr) {
 
 function closeModal(id) {
   document.getElementById(id).classList.remove('active');
-  editingEntry = null;
+  if (id === 'entryFormModal') editingEntry = null;
 }
 
 function openWeekDetailModal(initId, mondayStr) {
