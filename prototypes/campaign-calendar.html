@@ -4820,8 +4820,8 @@ const INLINE_CALENDAR_DATA = {"markets":["US","UK","DE","AU","CA","NL","SE","DK"
 <script>
 // STATE
 let calendarData = null;
-let currentView = 'weekly';
-let currentMode = 'marketing'; // marketing | product | crm | leadership
+let currentView = sessionStorage.getItem('pmmHubView') || 'weekly';
+let currentMode = sessionStorage.getItem('pmmHubMode') || 'marketing';
 let currentYear = 2026;
 let currentMonth = 5; // 0-indexed, June = 5
 let weeklyStart = null; // Date object for the first Monday of the 12-week window
@@ -4945,13 +4945,15 @@ async function loadData() {
   const mondayOfCurrentWeek = getMondayOfWeek(today);
   weeklyStart = new Date(mondayOfCurrentWeek);
   weeklyStart.setDate(weeklyStart.getDate() - 14);
-  // Apply initial view state
-  document.getElementById('yearView').classList.toggle('active', currentView === 'year');
-  document.getElementById('quarterView').classList.toggle('active', currentView === 'quarter');
-  document.getElementById('weeklyView').classList.toggle('active', currentView === 'weekly');
-  document.getElementById('monthView').classList.toggle('active', currentView === 'month');
-  document.getElementById('weeklyModeToggle').classList.toggle('visible', currentView === 'weekly');
-  render();
+  // Restore saved view state
+  document.querySelectorAll('.view-toggle button').forEach(b => {
+    b.classList.toggle('active', b.dataset.view === currentView);
+  });
+  if (currentMode === 'marketing') {
+    sidebarNav('marketing', currentView);
+  } else {
+    sidebarNav(currentMode);
+  }
 }
 
 function buildOwnerFilter() {
@@ -5071,6 +5073,7 @@ function toggleSidebarGroup(headerEl) {
 // NAVIGATION
 function setMode(mode) {
   currentMode = mode;
+  sessionStorage.setItem('pmmHubMode', mode);
   document.querySelectorAll('#modeToggle button').forEach(b => {
     b.classList.toggle('active', b.dataset.mode === mode);
   });
@@ -5211,6 +5214,7 @@ function toggleMarketsRelease(releaseId) {
 
 function setView(view) {
   currentView = view;
+  sessionStorage.setItem('pmmHubView', view);
   document.querySelectorAll('.view-toggle button').forEach(b => {
     b.classList.toggle('active', b.dataset.view === view);
   });
@@ -7929,7 +7933,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // ─── CAMPAIGNS ENGINE ───────────────────────────────────────────────
 
-let activeCampaignPage = null;
+let activeCampaignPage = sessionStorage.getItem('pmmHubCampaignPage') || null;
 const BASELINE_GALLERIES = {
   'init-creator-platform': [
     { src: 'images/creator-platform/creator-profile-emily-eggers.png', label: 'Creator Profile: Emily Eggers' },
@@ -8136,6 +8140,7 @@ function renderCampaigns() {
 
 function setCampaignPage(page) {
   activeCampaignPage = page;
+  sessionStorage.setItem('pmmHubCampaignPage', page);
   renderCampaigns();
 }
 
