@@ -4904,19 +4904,35 @@ function showApp() {
 }
 
 // DATA
+const DATA_VERSION = '2026-07-08a';
+
 async function loadData() {
-  localStorage.removeItem('calendarDataOverride');
-  if (typeof INLINE_CALENDAR_DATA !== 'undefined') {
-    calendarData = JSON.parse(JSON.stringify(INLINE_CALENDAR_DATA));
-  } else {
+  const storedVersion = localStorage.getItem('calendarDataVersion');
+  const override = localStorage.getItem('calendarDataOverride');
+  if (override && storedVersion === DATA_VERSION) {
     try {
-      const resp = await fetch('calendar-data.json');
-      if (!resp.ok) throw new Error('HTTP ' + resp.status);
-      calendarData = await resp.json();
+      calendarData = JSON.parse(override);
     } catch (e) {
-      console.error('Failed to load calendar data:', e);
-      document.getElementById('monthView').innerHTML = '<div style="text-align:center;padding:60px;color:#9A9A9A;">Failed to load data. If viewing locally, please use a local server.</div>';
-      return;
+      localStorage.removeItem('calendarDataOverride');
+      calendarData = null;
+    }
+  } else {
+    localStorage.removeItem('calendarDataOverride');
+    localStorage.setItem('calendarDataVersion', DATA_VERSION);
+  }
+  if (!calendarData) {
+    if (typeof INLINE_CALENDAR_DATA !== 'undefined') {
+      calendarData = JSON.parse(JSON.stringify(INLINE_CALENDAR_DATA));
+    } else {
+      try {
+        const resp = await fetch('calendar-data.json');
+        if (!resp.ok) throw new Error('HTTP ' + resp.status);
+        calendarData = await resp.json();
+      } catch (e) {
+        console.error('Failed to load calendar data:', e);
+        document.getElementById('monthView').innerHTML = '<div style="text-align:center;padding:60px;color:#9A9A9A;">Failed to load data. If viewing locally, please use a local server.</div>';
+        return;
+      }
     }
   }
   // Initialize markets
@@ -4944,6 +4960,11 @@ async function loadData() {
   } else {
     sidebarNav(currentMode);
   }
+}
+
+function persistData() {
+  localStorage.setItem('calendarDataOverride', JSON.stringify(calendarData));
+  localStorage.setItem('calendarDataVersion', DATA_VERSION);
 }
 
 function buildOwnerFilter() {
@@ -7316,6 +7337,7 @@ function deleteOnePagerInit() {
   if (!confirm('Delete "' + init.name + '" and all its entries? This cannot be undone.')) return;
 
   calendarData.initiatives = calendarData.initiatives.filter(i => i.id !== editingOnePagerInitId);
+  persistData();
   closeModal('onePagerFormModal');
   activeCampaignPage = calendarData.initiatives.length > 0 ? calendarData.initiatives[0].id : null;
   buildInitTabs();
@@ -7372,6 +7394,7 @@ function saveOnePager() {
     type: f.type
   }));
 
+  persistData();
   closeModal('onePagerFormModal');
   buildInitTabs();
   buildLegend();
@@ -7480,7 +7503,7 @@ function saveEntry() {
     init.entries.push(entryData);
   }
 
-  // Save to localStorage override
+  persistData();
   closeModal('entryFormModal');
   buildOwnerFilter();
   render();
@@ -7494,7 +7517,8 @@ function deleteEntry() {
   const init = calendarData.initiatives.find(i => i.id === editingEntry.initId);
   if (init) {
     init.entries = init.entries.filter(e => e.id !== editingEntry.entryId);
-    }
+  }
+  persistData();
   closeModal('entryFormModal');
   render();
   if (currentMode === 'campaigns') renderCampaigns();
@@ -7732,7 +7756,8 @@ function handleCSVImport(event) {
     });
 
     // Save and refresh
-      buildOwnerFilter();
+    persistData();
+    buildOwnerFilter();
     buildInitTabs();
     buildMarketPills();
     buildLegend();
