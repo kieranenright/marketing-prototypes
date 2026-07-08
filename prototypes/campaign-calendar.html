@@ -8315,9 +8315,11 @@ function renderCampaignPage(init) {
     <h3>Creative Gallery</h3>
     <div class="campaign-gallery">`;
   gallery.forEach((img, idx) => {
-    html += `<div class="campaign-gallery-item" onclick="openGalleryLightbox('${init.id}', ${idx})">
+    const isUserImage = idx >= baselineGallery.length;
+    html += `<div class="campaign-gallery-item" style="position:relative;" onclick="openGalleryLightbox('${init.id}', ${idx})">
       <img src="${img.src}" alt="${escapeHTML(img.label || '')}">
       ${img.label ? `<div class="gallery-label">${escapeHTML(img.label)}</div>` : ''}
+      ${isEditor && isUserImage ? `<button onclick="event.stopPropagation();deleteGalleryImage('${init.id}',${idx - baselineGallery.length})" style="position:absolute;top:6px;right:6px;background:rgba(220,38,38,0.9);color:white;border:none;border-radius:50%;width:22px;height:22px;font-size:13px;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center;">&times;</button>` : ''}
     </div>`;
   });
   if (isEditor) {
