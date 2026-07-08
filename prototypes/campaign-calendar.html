@@ -4905,28 +4905,18 @@ function showApp() {
 
 // DATA
 async function loadData() {
-  const override = localStorage.getItem('calendarDataOverride');
-  if (override) {
-    try {
-      calendarData = JSON.parse(override);
-    } catch (e) {
-      localStorage.removeItem('calendarDataOverride');
-      calendarData = null;
-    }
-  }
-  if (!calendarData) {
+  localStorage.removeItem('calendarDataOverride');
+  if (typeof INLINE_CALENDAR_DATA !== 'undefined') {
+    calendarData = JSON.parse(JSON.stringify(INLINE_CALENDAR_DATA));
+  } else {
     try {
       const resp = await fetch('calendar-data.json');
       if (!resp.ok) throw new Error('HTTP ' + resp.status);
       calendarData = await resp.json();
     } catch (e) {
-      if (typeof INLINE_CALENDAR_DATA !== 'undefined') {
-        calendarData = JSON.parse(JSON.stringify(INLINE_CALENDAR_DATA));
-      } else {
-        console.error('Failed to load calendar data:', e);
-        document.getElementById('monthView').innerHTML = '<div style="text-align:center;padding:60px;color:#9A9A9A;">Failed to load data. If viewing locally, please use a local server.</div>';
-        return;
-      }
+      console.error('Failed to load calendar data:', e);
+      document.getElementById('monthView').innerHTML = '<div style="text-align:center;padding:60px;color:#9A9A9A;">Failed to load data. If viewing locally, please use a local server.</div>';
+      return;
     }
   }
   // Initialize markets
@@ -7326,7 +7316,6 @@ function deleteOnePagerInit() {
   if (!confirm('Delete "' + init.name + '" and all its entries? This cannot be undone.')) return;
 
   calendarData.initiatives = calendarData.initiatives.filter(i => i.id !== editingOnePagerInitId);
-  localStorage.setItem('calendarDataOverride', JSON.stringify(calendarData));
   closeModal('onePagerFormModal');
   activeCampaignPage = calendarData.initiatives.length > 0 ? calendarData.initiatives[0].id : null;
   buildInitTabs();
@@ -7383,7 +7372,6 @@ function saveOnePager() {
     type: f.type
   }));
 
-  localStorage.setItem('calendarDataOverride', JSON.stringify(calendarData));
   closeModal('onePagerFormModal');
   buildInitTabs();
   buildLegend();
@@ -7493,7 +7481,6 @@ function saveEntry() {
   }
 
   // Save to localStorage override
-  localStorage.setItem('calendarDataOverride', JSON.stringify(calendarData));
   closeModal('entryFormModal');
   buildOwnerFilter();
   render();
@@ -7507,8 +7494,7 @@ function deleteEntry() {
   const init = calendarData.initiatives.find(i => i.id === editingEntry.initId);
   if (init) {
     init.entries = init.entries.filter(e => e.id !== editingEntry.entryId);
-    localStorage.setItem('calendarDataOverride', JSON.stringify(calendarData));
-  }
+    }
   closeModal('entryFormModal');
   render();
   if (currentMode === 'campaigns') renderCampaigns();
@@ -7746,8 +7732,7 @@ function handleCSVImport(event) {
     });
 
     // Save and refresh
-    localStorage.setItem('calendarDataOverride', JSON.stringify(calendarData));
-    buildOwnerFilter();
+      buildOwnerFilter();
     buildInitTabs();
     buildMarketPills();
     buildLegend();
@@ -8069,8 +8054,7 @@ function initDragAndDrop() {
     }
 
     entry.date = newDate;
-    localStorage.setItem('calendarDataOverride', JSON.stringify(calendarData));
-    render();
+      render();
 
     dragData = null;
   });
