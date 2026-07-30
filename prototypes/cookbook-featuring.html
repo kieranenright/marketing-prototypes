@@ -186,6 +186,94 @@ body {
 
 
 /* ==========================================
+   SLIDE 1.5: WHAT'S NEW
+   ========================================== */
+.slide-new { background: white; }
+
+.sn-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 80px 40px 30px;
+}
+
+.sn-intro {
+  margin-bottom: 20px;
+}
+.sn-label {
+  font-size: 9px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  color: var(--hf-green);
+  margin-bottom: 6px;
+}
+.sn-desc {
+  font-size: 11px;
+  color: var(--hf-muted);
+  line-height: 1.5;
+  max-width: 700px;
+  margin-top: 8px;
+}
+.sn-title {
+  font-size: 32px;
+  font-weight: 900;
+  letter-spacing: -1.5px;
+  line-height: 1.1;
+  color: var(--hf-dark);
+}
+.sn-title em {
+  font-style: normal;
+  color: var(--hf-green);
+}
+
+.sn-features {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  flex: 1;
+}
+
+.sn-feature {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.sn-phone {
+  width: 100%;
+  max-width: 150px;
+  border-radius: 16px;
+  background: #000;
+  padding: 2px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.14);
+}
+.sn-phone img {
+  width: 100%;
+  display: block;
+  border-radius: 14px;
+}
+
+.sn-feature-text {
+  text-align: center;
+  max-width: 180px;
+}
+.sn-feature-title {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--hf-dark);
+  margin-bottom: 2px;
+}
+.sn-feature-desc {
+  font-size: 9px;
+  font-weight: 500;
+  color: var(--hf-muted);
+  line-height: 1.4;
+}
+
+
+/* ==========================================
    SLIDE 2: THE PROOF
    ========================================== */
 .slide-2 { background: var(--hf-dark); }
@@ -460,13 +548,13 @@ body {
       <div class="slide-header-sep"></div>
       <div class="slide-header-feature">New In-App Feature: Cookbook</div>
     </div>
-    <div class="slide-header-right">Nomination Request &middot; US &middot; April 2026</div>
+    <div class="slide-header-right">Nomination Request &middot; US, UK, DE, FR, AU &middot; July 2026</div>
   </div>
 
   <div class="s1-content">
     <div class="s1-setup">You watched it. You saved it. You imagined it.</div>
     <div class="s1-hook">Now cook it.</div>
-    <div class="s1-sub">Millions of people discover recipes on social media every day, but cooking from a video means rewinding, pausing, and replaying with messy hands. The Cookbook allows users to import recipe videos directly from platforms like TikTok and Instagram. The app automatically transforms these videos into clear, step-by-step cooking instructions, complete with a detailed ingredient list and a grocery list you can take shopping.<br><br>Available for free to all HelloFresh app users, even without a meal kit subscription.</div>
+    <div class="s1-sub">The Cookbook uses on-device AI to turn any recipe video from TikTok, Instagram, YouTube, or Facebook into clear step-by-step instructions, a full ingredient list, and a ready-to-shop grocery list. It solves a real, everyday frustration for millions of home cooks.<br><br>Available for free to all HelloFresh app users, no subscription required. A utility-first feature designed to bring new users into the app and give existing users a reason to open it every day.</div>
 
     <div class="s1-flow">
       <div class="s1-step">
@@ -535,7 +623,74 @@ body {
     </div>
   </div>
 
-  <div class="page-num">1 / 2</div>
+  <div class="page-num">1 / 3</div>
+</div>
+
+
+<!-- ==========================================
+     SLIDE 1.5: WHAT'S NEW
+     ========================================== -->
+<div class="slide slide-new">
+  <div class="slide-header">
+    <div class="slide-header-left">
+      <img src="https://media.hellofresh.com/w_256,q_100,f_auto,c_limit,fl_lossy/hellofresh_website/logo/Hello_Fresh_Lockup.png" alt="HelloFresh">
+      <div class="slide-header-sep"></div>
+      <div class="slide-header-feature">New In-App Feature: Cookbook</div>
+    </div>
+    <div class="slide-header-right">New Feature Improvements</div>
+  </div>
+
+  <div class="sn-content">
+    <div class="sn-intro">
+      <div class="sn-label">What's new</div>
+      <div class="sn-title">More than saving.<br><em>A community.</em></div>
+      <div class="sn-desc">Since launch, we have significantly improved the core import experience with support for more platforms and higher accuracy AI extraction. Beyond saving, the Cookbook is now a social experience: users can create public profiles, follow creators they love, build shareable collections, and discover community favourites. The app feels richer and more personal with every update.</div>
+    </div>
+
+    <div class="sn-features">
+      <div class="sn-feature">
+        <div class="sn-phone">
+          <img src="images/cookbook-import.png" alt="Import recipes">
+        </div>
+        <div class="sn-feature-text">
+          <div class="sn-feature-title">Magic import, improved</div>
+          <div class="sn-feature-desc">Save recipes from Instagram, TikTok, YouTube, and Facebook in 4 easy steps.</div>
+        </div>
+      </div>
+
+      <div class="sn-feature">
+        <div class="sn-phone">
+          <img src="images/cookbook-profile.png" alt="Public profiles">
+        </div>
+        <div class="sn-feature-text">
+          <div class="sn-feature-title">Public profiles</div>
+          <div class="sn-feature-desc">Create a profile and build collections that anyone can browse.</div>
+        </div>
+      </div>
+
+      <div class="sn-feature">
+        <div class="sn-phone">
+          <img src="images/cookbook-creators.png" alt="Follow creators">
+        </div>
+        <div class="sn-feature-text">
+          <div class="sn-feature-title">Follow creators</div>
+          <div class="sn-feature-desc">Follow creators and real people who love cooking, and browse their saved recipes.</div>
+        </div>
+      </div>
+
+      <div class="sn-feature">
+        <div class="sn-phone">
+          <img src="images/cookbook-community.png" alt="Community favorites">
+        </div>
+        <div class="sn-feature-text">
+          <div class="sn-feature-title">Community favorites</div>
+          <div class="sn-feature-desc">Discover what the community is saving and the highest rated recipes.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-num">2 / 3</div>
 </div>
 
 
@@ -549,46 +704,44 @@ body {
       <div class="slide-header-sep"></div>
       <div class="slide-header-feature">New In-App Feature: Cookbook</div>
     </div>
-    <div class="slide-header-right">How It's Helping Users</div>
+    <div class="slide-header-right">Why Feature This</div>
   </div>
 
   <div class="s2-content">
     <div class="s2-left">
-      <div class="s2-section-label">What featuring would help us achieve</div>
+      <div class="s2-section-label">Why this feature deserves featuring</div>
       <div class="s2-goals">
         <div class="s2-goal">
-          <div class="s2-goal-title">Reach new audiences</div>
-          <div class="s2-goal-desc">The Cookbook is free for all users, even without a subscription. Featuring would introduce it to millions of people who have never used HelloFresh before.</div>
+          <div class="s2-goal-title">Genuine user value</div>
+          <div class="s2-goal-desc">Solves a universal pain point: turning scattered social media videos into structured, cookable recipes. Users go from inspiration to action in seconds, not minutes of rewinding and pausing.</div>
         </div>
         <div class="s2-goal">
-          <div class="s2-goal-title">Drive organic engagement</div>
-          <div class="s2-goal-desc">Deepen engagement with existing customers and re-engage former customers with a genuinely useful, free tool.</div>
+          <div class="s2-goal-title">Broad audience, zero barrier</div>
+          <div class="s2-goal-desc">Completely free, no subscription required. This opens HelloFresh to a much wider audience: anyone who watches cooking content on social media and wants to actually cook it.</div>
         </div>
         <div class="s2-goal">
-          <div class="s2-goal-title">Establish a daily food companion</div>
-          <div class="s2-goal-desc">Featuring supports our ambition to make the HelloFresh app a daily destination for food inspiration and planning, beyond the weekly meal kit.</div>
+          <div class="s2-goal-title">Strong retention signal</div>
+          <div class="s2-goal-desc">The feature creates a personal, growing recipe library. Every saved recipe is a reason to come back. Users build habits around saving, browsing, and cooking from their collection.</div>
         </div>
       </div>
     </div>
 
     <div class="s2-right">
-      <div class="s2-why-title">The problem<br>we're <em>solving.</em></div>
+      <div class="s2-why-title">Built for<br><em>everyday use.</em></div>
       <div class="s2-why-text">
-        <strong>Cooking from a video is frustrating.</strong> Meal inspiration is scattered across different social platforms, saved in endless folders, or forgotten altogether. Great ideas rarely make it to the kitchen. People are rewinding, pausing, and replaying with messy hands, scrubbing back to catch an ingredient.
+        <strong>It meets users where they already are.</strong> Millions of people save recipe videos every day across TikTok, Instagram, YouTube, and Facebook. The Cookbook connects directly to that behaviour through the native share sheet, creating a seamless bridge between discovery and cooking.
         <br><br>
-        <strong>The Cookbook bridges that gap.</strong> It allows users to import recipe videos directly from social media platforms such as Instagram and TikTok. The app automatically transforms these videos into clear, step-by-step cooking instructions, complete with a detailed ingredient list and a grocery list they can take shopping. It works through the native share sheet, so there's zero friction.
-        <br><br>
-        <strong>This is part of a bigger shift.</strong> HelloFresh is evolving from a meal-kit service into a daily food companion. Your partner for dinner, whether you're cooking a HelloFresh recipe or something you found on TikTok. The Cookbook is available for free to all HelloFresh app users, even without a subscription.
+        <strong>It grows with the user.</strong> Every recipe saved makes the app more personal and more valuable. The new community features (profiles, following, collections) mean users come back not just to cook, but to discover what others are making. This is the kind of engagement loop that drives long-term retention.
       </div>
 
       <div class="s2-a11y">
         <div class="s2-a11y-label">Accessibility</div>
-        <div class="s2-a11y-text">We're committed to making HelloFresh's Cookbook work for every home cook, which is why we have improvements on our roadmap to ensure the feature is inclusive and accessible to all.</div>
+        <div class="s2-a11y-text">We are committed to making the Cookbook inclusive and accessible to all users. Improvements are on our roadmap to ensure the feature works for every home cook regardless of ability.</div>
       </div>
     </div>
   </div>
 
-  <div class="page-num light">2 / 2</div>
+  <div class="page-num light">3 / 3</div>
 </div>
 
 
