@@ -8343,7 +8343,9 @@ function renderCampaignPage(init) {
   </div>`;
 
   // Gallery section
-  const baselineGallery = BASELINE_GALLERIES[init.id] || [];
+  const allBaselineGallery = BASELINE_GALLERIES[init.id] || [];
+  const hiddenGallery = hiddenBaselineGalleryImages[init.id] || [];
+  const baselineGallery = allBaselineGallery.filter((_, idx) => !hiddenGallery.includes(idx));
   const userGallery = campaignGalleries[init.id] || [];
   const gallery = [...baselineGallery, ...userGallery];
   html += `<div class="campaign-section">
@@ -8351,10 +8353,12 @@ function renderCampaignPage(init) {
     <div class="campaign-gallery">`;
   gallery.forEach((img, idx) => {
     const isUserImage = idx >= baselineGallery.length;
+    const originalBaselineIdx = !isUserImage ? allBaselineGallery.indexOf(img) : -1;
     html += `<div class="campaign-gallery-item" style="position:relative;" onclick="openGalleryLightbox('${init.id}', ${idx})">
       <img src="${img.src}" alt="${escapeHTML(img.label || '')}">
       ${img.label ? `<div class="gallery-label">${escapeHTML(img.label)}</div>` : ''}
       ${isEditor && isUserImage ? `<button onclick="event.stopPropagation();deleteGalleryImage('${init.id}',${idx - baselineGallery.length})" style="position:absolute;top:6px;right:6px;background:rgba(220,38,38,0.9);color:white;border:none;border-radius:50%;width:22px;height:22px;font-size:13px;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center;">&times;</button>` : ''}
+      ${isEditor && !isUserImage ? `<button onclick="event.stopPropagation();hideBaselineGalleryImage('${init.id}',${originalBaselineIdx})" style="position:absolute;top:6px;right:6px;background:rgba(220,38,38,0.9);color:white;border:none;border-radius:50%;width:22px;height:22px;font-size:13px;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center;">&times;</button>` : ''}
     </div>`;
   });
   if (isEditor) {
@@ -8623,6 +8627,17 @@ function deleteGalleryImage(initId, idx) {
   if (!campaignGalleries[initId]) return;
   campaignGalleries[initId].splice(idx, 1);
   saveCampaignGalleries();
+  renderCampaigns();
+}
+
+let hiddenBaselineGalleryImages = JSON.parse(localStorage.getItem('hiddenBaselineGalleryImages') || '{}');
+
+function hideBaselineGalleryImage(initId, idx) {
+  if (!hiddenBaselineGalleryImages[initId]) hiddenBaselineGalleryImages[initId] = [];
+  if (!hiddenBaselineGalleryImages[initId].includes(idx)) {
+    hiddenBaselineGalleryImages[initId].push(idx);
+  }
+  localStorage.setItem('hiddenBaselineGalleryImages', JSON.stringify(hiddenBaselineGalleryImages));
   renderCampaigns();
 }
 
