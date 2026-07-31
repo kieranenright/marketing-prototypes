@@ -8184,6 +8184,10 @@ function renderCampaigns() {
 function setCampaignPage(page) {
   activeCampaignPage = page;
   sessionStorage.setItem('pmmHubCampaignPage', page);
+  const url = new URL(window.location);
+  url.searchParams.set('mode', 'campaigns');
+  url.searchParams.set('init', page);
+  history.replaceState(null, '', url);
   renderCampaigns();
 }
 
