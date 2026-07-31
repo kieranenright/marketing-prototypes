@@ -4468,10 +4468,6 @@ body {
             <span class="sidebar-icon">&#128279;</span>
             <span class="sidebar-label">CRM • Actives • Airtable</span>
           </div>
-          <div class="sidebar-item" data-sidebar="marketing-airtable-brand" onclick="sidebarNav('marketing','airtable-brand')">
-            <span class="sidebar-icon">&#128279;</span>
-            <span class="sidebar-label">Brand • Airtable</span>
-          </div>
         </div>
       </div>
       <div class="sidebar-item" data-sidebar="campaigns" onclick="sidebarNav('campaigns')">
@@ -4644,7 +4640,6 @@ body {
     <div class="campaigns-view" id="campaignsView"></div>
     <div class="team-breakdown-view" id="teamBreakdownView"></div>
     <div class="airtable-view" id="airtableView" style="display:none;width:100%;height:calc(100vh - 120px);"><iframe src="https://airtable.com/embed/appCRWMQmUyqzb6bP/shrtNkBiWQdKdX1W3" frameborder="0" style="width:100%;height:100%;border-radius:8px;"></iframe></div>
-    <div class="airtable-view" id="airtableBrandView" style="display:none;width:100%;height:calc(100vh - 120px);"><iframe src="https://airtable.com/embed/appOeHHElcSBIGGqb/pagMJXy3TcvVn9Yey" frameborder="0" style="width:100%;height:100%;border-radius:8px;"></iframe></div>
   </div>
   </div><!-- /.app-main -->
 </div>
@@ -5064,7 +5059,7 @@ function sidebarNav(mode, view) {
   if (activeItem) activeItem.classList.add('active');
 
   // Update page title
-  const viewTitles = { month: 'Month View', weekly: 'Weekly View', quarter: 'Quarterly View', year: 'Year View', airtable: 'CRM • Actives • Airtable', 'airtable-brand': 'Brand • Airtable' };
+  const viewTitles = { month: 'Month View', weekly: 'Weekly View', quarter: 'Quarterly View', year: 'Year View', airtable: 'CRM • Actives • Airtable' };
   const titles = {
     'marketing': viewTitles[view] || 'Product Marketing',
     'product': 'Product Releases',
@@ -5129,7 +5124,6 @@ function setMode(mode) {
   document.getElementById('bestPracticesView').classList.remove('active');
   document.getElementById('campaignsView').classList.remove('active');
   document.getElementById('airtableView').style.display = 'none';
-  document.getElementById('airtableBrandView').style.display = 'none';
   document.getElementById('yearView').classList.remove('active');
   document.getElementById('quarterView').classList.remove('active');
   document.getElementById('weeklyView').classList.remove('active');
@@ -5143,11 +5137,6 @@ function setMode(mode) {
       navButtons.forEach(b => b.style.display = 'none');
       document.getElementById('controlsBar').style.display = 'none';
       document.getElementById('airtableView').style.display = 'block';
-    } else if (currentView === 'airtable-brand') {
-      marketingOnlyEls.forEach(el => { if (el) el.style.display = 'none'; });
-      navButtons.forEach(b => b.style.display = 'none');
-      document.getElementById('controlsBar').style.display = 'none';
-      document.getElementById('airtableBrandView').style.display = 'block';
     } else {
       marketingOnlyEls.forEach(el => { if (el) el.style.display = ''; });
       navButtons.forEach(b => b.style.display = '');
