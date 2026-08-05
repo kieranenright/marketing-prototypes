@@ -684,14 +684,32 @@ body {
         <!-- Event-based notifications -->
         <div style="font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--col-engage); margin-bottom: 6px;">Event-Based Notifications</div>
         <div style="font-size: 11px; font-weight: 600; color: var(--hf-dark); line-height: 1.6; margin-bottom: 10px;">
-          [TBD — progress update on behaviour-triggered notifications]
+          10 Cookbook use cases defined. 1 live (Post-Pause), 9 proposed and prioritised for development.
         </div>
 
+        <table class="data-table" style="margin-bottom: 10px;">
+          <thead>
+            <tr><th>Priority</th><th>Use Case</th><th>Theme</th><th>Trigger</th><th>Status</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="val-green">Live</td><td>Post-Pause</td><td>Import</td><td>1 day after cutoff if paused, max 1/mo</td><td class="val-green">Live</td></tr>
+            <tr><td>#1</td><td>Pre-Import / Empty State Nudge</td><td>Import</td><td>Viewed Cookbook but never imported</td><td>Proposed</td></tr>
+            <tr><td>#2</td><td>Post-First-Import Nudge</td><td>Import</td><td>1–24h after first import, single send</td><td>Proposed</td></tr>
+            <tr><td>#3</td><td>Discover Save-Rate Drop-off</td><td>Save</td><td>Opened a Discover recipe but did not save (1–24h)</td><td>Proposed</td></tr>
+            <tr><td>#4</td><td>Plan Your Week (Planner)</td><td>Plan</td><td>Picked meals; help pencil in the rest of the week</td><td>Proposed</td></tr>
+            <tr><td>#5</td><td>Cooking-Reminder + Cooking Mode Re-engagement</td><td>Cook</td><td>Has a box this week + has not opened cooking mode</td><td>Proposed</td></tr>
+            <tr><td>#6</td><td>Post-View Import Nudge</td><td>Import</td><td>Viewed the Cookbook tab but took no action</td><td>Proposed</td></tr>
+            <tr><td>#7</td><td>High-Rated Meal Kit</td><td>Save</td><td>Propose to save recipe 2h after a 4–5★ rating</td><td>Proposed</td></tr>
+            <tr><td>#8</td><td>Cold-Traffic Reactivation</td><td>View Cookbook</td><td>1–24h after cart-save prompt if no further saves</td><td>Proposed</td></tr>
+            <tr><td>#9</td><td>Cancelled Users</td><td>View Cookbook</td><td>Fires at cancellation event</td><td>Proposed</td></tr>
+          </tbody>
+        </table>
+
         <div class="rec-box" style="margin-top: 10px; padding: 8px 12px; font-size: 11px; line-height: 1.5; background: rgba(27, 138, 74, 0.06); border-color: rgba(27, 138, 74, 0.15);">
-          <strong>Status:</strong> [TBD]
+          <strong>Status:</strong> Post-Pause is live. Remaining 9 use cases are proposed and ranked by priority, pending engineering capacity.
         </div>
         <div style="margin-top: 10px; font-size: 11px; font-weight: 600;">
-          <a href="https://docs.google.com/document/d/1jrwwedi0b1oD8OEnLjHcFTSrrZtEE2TQnDGKJInCS-g/edit?tab=t.0" target="_blank" style="color: var(--col-engage); text-decoration: none; border-bottom: 1px solid rgba(27, 138, 74, 0.3);">View ranked use cases →</a>
+          <a href="https://docs.google.com/spreadsheets/d/1dtIKN4Mo_CvGNPMOwZ3DO8BmAaVgEcwnjk_6L2YJsUw/edit?gid=1732405207#gid=1732405207" target="_blank" style="color: var(--col-engage); text-decoration: none; border-bottom: 1px solid rgba(27, 138, 74, 0.3);">View ranked use cases →</a>
         </div>
       </div>
 
