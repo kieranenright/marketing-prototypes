@@ -20,8 +20,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Remove video files to fit Pages size limit
-        run: find . -type f \( -name "*.mp4" -o -name "*.mov" \) -delete
+      - name: Remove large video files to fit Pages size limit
+        run: |
+          find ./prototypes/assets -type f \( -name "*.mp4" -o -name "*.mov" \) -delete
+          find . -path ./prototypes/videos -prune -o -path ./prototypes/assets -prune -o -type f \( -name "*.mp4" -o -name "*.mov" \) -print -exec rm {} \;
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
