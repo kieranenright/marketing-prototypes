@@ -1029,6 +1029,7 @@ body {
   color: var(--text-secondary);
   text-align: center;
   border-right: 1px solid var(--border-light);
+  min-width: 0;
 }
 
 .weekly-header-cell.current-week {
@@ -1088,6 +1089,8 @@ body {
   display: flex;
   flex-direction: column;
   gap: 2px;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .weekly-cell.current-week {
@@ -5598,7 +5601,7 @@ function renderWeekly() {
   }
 
   const colCount = 12;
-  const gridCols = `200px repeat(${colCount}, 1fr)`;
+  const gridCols = `200px repeat(${colCount}, minmax(0, 1fr))`;
 
   // Header
   let html = `<div class="weekly-grid"><div class="weekly-header" style="grid-template-columns:${gridCols};">`;
