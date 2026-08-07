@@ -826,7 +826,7 @@ body {
 
 .year-header {
   display: grid;
-  grid-template-columns: 180px repeat(52, 1fr);
+  grid-template-columns: 180px repeat(52, minmax(0, 1fr));
   border-bottom: 1px solid var(--border);
   background: white;
   z-index: 5;
@@ -856,7 +856,7 @@ body {
 
 .year-row {
   display: grid;
-  grid-template-columns: 180px repeat(52, 1fr);
+  grid-template-columns: 180px repeat(52, minmax(0, 1fr));
   border-bottom: 1px solid var(--border-light);
   min-height: 36px;
   align-items: center;
@@ -5486,7 +5486,7 @@ function renderYear() {
   }
 
   // Header with months row
-  let html = `<div class="year-grid"><div class="year-months" style="display:grid;grid-template-columns:180px repeat(52, 1fr);border-bottom:1px solid var(--border);position:sticky;top:0;background:white;z-index:6;">`;
+  let html = `<div class="year-grid"><div class="year-months" style="display:grid;grid-template-columns:180px repeat(52, minmax(0, 1fr));border-bottom:1px solid var(--border);position:sticky;top:0;background:white;z-index:6;">`;
   html += `<div style="padding:6px 14px;font-size:11px;font-weight:600;color:var(--text-secondary);"></div>`;
   monthSpans.forEach(ms => {
     const isCurrentMonth = isCurrentYear && new Date().getMonth() === ms.month;
