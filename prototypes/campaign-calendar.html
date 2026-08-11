@@ -8135,11 +8135,6 @@ const INITIATIVE_SLIDES = {
           <li>Creator profiles featuring local, market-relevant content</li>
         </ul>
       `
-    },
-    {
-      title: 'Turn your partnerships into always-on app content',
-      statusBadge: 'live',
-      video: { src: 'images/creator-platform/creator-platform-demo.mp4', alt: 'Creator Platform Demo' }
     }
   ]
 };
@@ -8171,7 +8166,8 @@ function goToSlide(initId, idx) {
 const BASELINE_GALLERIES = {
   'init-creator-platform': [
     { src: 'images/creator-platform/creator-profile-emily-eggers.png', label: 'Creator Profile: Emily Eggers' },
-    { src: 'images/creator-platform/discover-page.png', label: 'Discover Page: Creator Recipes' }
+    { src: 'images/creator-platform/discover-page.png', label: 'Discover Page: Creator Recipes' },
+    { src: 'images/creator-platform/creator-platform-demo.mp4', label: 'Turn your partnerships into always-on app content', type: 'video' }
   ],
   'init-double-protein': [
     { src: 'images/double-protein/homepage-banner-double-protein.png', label: 'Homepage Banner: Give dinner a boost' }
@@ -8594,8 +8590,9 @@ function renderCampaignPage(init) {
   gallery.forEach((img, idx) => {
     const isUserImage = idx >= baselineGallery.length;
     const originalBaselineIdx = !isUserImage ? allBaselineGallery.indexOf(img) : -1;
-    html += `<div class="campaign-gallery-item" style="position:relative;" onclick="openGalleryLightbox('${init.id}', ${idx})">
-      <img src="${img.src}" alt="${escapeHTML(img.label || '')}">
+    const isVideo = img.type === 'video' || (img.src && img.src.match(/\.(mp4|mov|webm)$/i));
+    html += `<div class="campaign-gallery-item" style="position:relative;" onclick="${isVideo ? '' : `openGalleryLightbox('${init.id}', ${idx})`}">
+      ${isVideo ? `<video src="${img.src}" controls playsinline muted preload="metadata" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;"><source src="${img.src}" type="video/mp4"></video>` : `<img src="${img.src}" alt="${escapeHTML(img.label || '')}">`}
       ${img.label ? `<div class="gallery-label">${escapeHTML(img.label)}</div>` : ''}
       ${isEditor && isUserImage ? `<button onclick="event.stopPropagation();deleteGalleryImage('${init.id}',${idx - baselineGallery.length})" style="position:absolute;top:6px;right:6px;background:rgba(220,38,38,0.9);color:white;border:none;border-radius:50%;width:22px;height:22px;font-size:13px;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center;">&times;</button>` : ''}
       ${isEditor && !isUserImage ? `<button onclick="event.stopPropagation();hideBaselineGalleryImage('${init.id}',${originalBaselineIdx})" style="position:absolute;top:6px;right:6px;background:rgba(220,38,38,0.9);color:white;border:none;border-radius:50%;width:22px;height:22px;font-size:13px;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center;">&times;</button>` : ''}
