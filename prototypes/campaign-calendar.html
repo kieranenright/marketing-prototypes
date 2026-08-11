@@ -8142,6 +8142,11 @@ const INITIATIVE_SLIDES = {
           <li>Creator profiles featuring local, market-relevant content</li>
         </ul>
       `
+    },
+    {
+      title: 'Turn your partnerships into always-on app content',
+      statusBadge: 'live',
+      video: { src: 'images/creator-platform/creator-platform-demo.mp4', alt: 'Creator Platform Demo' }
     }
   ]
 };
@@ -8533,16 +8538,22 @@ function renderCampaignPage(init) {
     html += `<div class="slideshow-slide">`;
     const statusColor = slide.statusBadge === 'live' ? '#10B981' : (slide.statusBadge === 'planned' ? '#94A3B8' : '#6366F1');
     html += `<div class="one-pager-title" style="display:flex;align-items:center;gap:16px;">${escapeHTML(slide.title)} <span style="font-size:14px;font-weight:600;padding:4px 12px;border-radius:6px;background:${statusColor}20;color:${statusColor};">${slide.statusBadge || ''}</span></div>`;
-    html += `<div class="custom-slide-board">`;
-    if (slide.images && slide.images.length > 0) {
-      html += `<div class="slide-images">`;
-      slide.images.forEach(img => {
-        html += `<img src="${img.src}" alt="${escapeHTML(img.alt || '')}">`;
-      });
+    if (slide.video) {
+      html += `<div style="display:flex;justify-content:center;margin-top:16px;">`;
+      html += `<video src="${slide.video.src}" controls playsinline style="max-width:100%;max-height:560px;border-radius:12px;border:1px solid var(--border-light);box-shadow:0 2px 8px rgba(0,0,0,0.08);"></video>`;
+      html += `</div>`;
+    } else {
+      html += `<div class="custom-slide-board">`;
+      if (slide.images && slide.images.length > 0) {
+        html += `<div class="slide-images">`;
+        slide.images.forEach(img => {
+          html += `<img src="${img.src}" alt="${escapeHTML(img.alt || '')}">`;
+        });
+        html += `</div>`;
+      }
+      if (slide.content) html += `<div class="slide-content">${slide.content}</div>`;
       html += `</div>`;
     }
-    html += `<div class="slide-content">${slide.content}</div>`;
-    html += `</div>`;
     html += `</div>`;
   });
 
