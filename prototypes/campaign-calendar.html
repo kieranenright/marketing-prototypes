@@ -3817,6 +3817,135 @@ body {
   border: 1px solid var(--border);
   padding: 40px;
   margin-bottom: 24px;
+  position: relative;
+}
+
+.slideshow-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.slideshow-slide {
+  display: none;
+  animation: slideIn 0.3s ease;
+}
+
+.slideshow-slide.active {
+  display: block;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(10px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.slideshow-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-light);
+}
+
+.slideshow-dots {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.slideshow-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--border);
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  padding: 0;
+}
+
+.slideshow-dot.active {
+  background: var(--brand-green);
+  transform: scale(1.2);
+}
+
+.slideshow-dot:hover {
+  background: var(--brand-green-dark);
+}
+
+.slideshow-arrow {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--text-secondary);
+  transition: all 0.2s;
+}
+
+.slideshow-arrow:hover {
+  background: var(--brand-green);
+  color: white;
+  border-color: var(--brand-green);
+}
+
+.custom-slide-board {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 36px;
+  align-items: start;
+}
+
+.custom-slide-board .slide-images {
+  display: flex;
+  gap: 16px;
+  align-items: start;
+}
+
+.custom-slide-board .slide-images img {
+  max-height: 480px;
+  width: auto;
+  border-radius: 12px;
+  border: 1px solid var(--border-light);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.custom-slide-board .slide-content h4 {
+  font-family: var(--font-headline);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--brand-green-dark);
+  margin: 20px 0 8px 0;
+}
+
+.custom-slide-board .slide-content h4:first-child {
+  margin-top: 0;
+}
+
+.custom-slide-board .slide-content p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-primary);
+  margin: 0 0 12px 0;
+}
+
+.custom-slide-board .slide-content ul {
+  padding-left: 20px;
+  margin: 0 0 16px 0;
+}
+
+.custom-slide-board .slide-content ul li {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text-primary);
+  margin-bottom: 4px;
 }
 
 .one-pager-title {
@@ -7983,6 +8112,64 @@ document.addEventListener('DOMContentLoaded', () => {
 // ─── CAMPAIGNS ENGINE ───────────────────────────────────────────────
 
 let activeCampaignPage = sessionStorage.getItem('pmmHubCampaignPage') || null;
+
+const INITIATIVE_SLIDES = {
+  'init-creator-platform': [
+    {
+      title: 'Transform the App into a Daily Food Companion: Creators',
+      statusBadge: 'live',
+      images: [
+        { src: 'images/creator-platform/discover-page.png', alt: 'Discover Page' },
+        { src: 'images/creator-platform/creator-profile-emily-eggers.png', alt: 'Emily Eggers Creator Profile' }
+      ],
+      content: `
+        <p><strong>Opportunity:</strong> Local markets already invest in influencer relationships for campaigns. Those partnerships end when the campaign ends. The Creator Platform makes them permanent.</p>
+        <h4>The Back to School synergy</h4>
+        <ul>
+          <li>You're already briefing influencers for Back to School</li>
+          <li>One additional line in the brief: "Upload your recipes to HelloFresh Cookbook"</li>
+          <li>Their content lives in the app beyond the campaign flight</li>
+        </ul>
+        <h4>The Ask:</h4>
+        <ul>
+          <li><strong>Now</strong>: Share your Back to School influencer list so we can onboard them to the platform</li>
+          <li><strong>Ongoing</strong>: When you brief any food creator, include Creator Platform onboarding as part of the partnership</li>
+        </ul>
+        <h4>What they get back</h4>
+        <ul>
+          <li>Cookbook engagement in their market (metric they can claim)</li>
+          <li>Their influencer content driving DAU beyond the campaign window</li>
+          <li>Creator profiles featuring local, market-relevant content</li>
+        </ul>
+      `
+    }
+  ]
+};
+
+let currentSlideIndex = {};
+
+function changeSlide(initId, direction) {
+  const slides = document.querySelectorAll(`#slideshow-${initId} .slideshow-slide`);
+  const total = slides.length;
+  if (total <= 1) return;
+  const current = currentSlideIndex[initId] || 0;
+  let next = current + direction;
+  if (next < 0) next = total - 1;
+  if (next >= total) next = 0;
+  currentSlideIndex[initId] = next;
+  slides.forEach((s, i) => s.classList.toggle('active', i === next));
+  const dots = document.querySelectorAll(`#slideshow-${initId} .slideshow-dot`);
+  dots.forEach((d, i) => d.classList.toggle('active', i === next));
+}
+
+function goToSlide(initId, idx) {
+  const slides = document.querySelectorAll(`#slideshow-${initId} .slideshow-slide`);
+  currentSlideIndex[initId] = idx;
+  slides.forEach((s, i) => s.classList.toggle('active', i === idx));
+  const dots = document.querySelectorAll(`#slideshow-${initId} .slideshow-dot`);
+  dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+}
+
 const BASELINE_GALLERIES = {
   'init-creator-platform': [
     { src: 'images/creator-platform/creator-profile-emily-eggers.png', label: 'Creator Profile: Emily Eggers' },
@@ -8231,6 +8418,14 @@ function renderCampaignPage(init) {
 
   html += `<div class="one-pager">`;
   const initDirectLink = window.location.origin + window.location.pathname + '?mode=campaigns&init=' + init.id;
+  const initSlides = INITIATIVE_SLIDES[init.id] || [];
+  const totalSlides = 1 + initSlides.length;
+  currentSlideIndex[init.id] = 0;
+
+  html += `<div class="slideshow-container" id="slideshow-${init.id}">`;
+
+  // Slide 1: Original one-pager
+  html += `<div class="slideshow-slide active">`;
   html += `<div class="one-pager-title" style="display:flex;align-items:center;justify-content:space-between;gap:16px;">${init.marketingGoal ? init.marketingGoal + ': ' : ''}${init.name}<span style="display:flex;align-items:center;gap:8px;margin-left:auto;">${isEditor ? `<button class="form-btn form-btn-primary" style="font-size:12px;padding:6px 14px;white-space:nowrap;" onclick="openOnePagerForm('${init.id}')">Edit</button>` : ''}<button onclick="copyInitLink('${init.id}')" title="Copy direct link" style="background:none;border:1px solid var(--border);border-radius:6px;padding:5px 8px;cursor:pointer;font-size:13px;color:var(--text-secondary);transition:all 0.15s;">&#128279;</button></span></div>`;
   html += `<div class="one-pager-body">`;
 
@@ -8331,7 +8526,41 @@ function renderCampaignPage(init) {
     html += `</div>`;
   }
 
-  html += `</div>`;
+  html += `</div>`; // end slide 1
+
+  // Custom slides from INITIATIVE_SLIDES
+  initSlides.forEach((slide, slideIdx) => {
+    html += `<div class="slideshow-slide">`;
+    const statusColor = slide.statusBadge === 'live' ? '#10B981' : (slide.statusBadge === 'planned' ? '#94A3B8' : '#6366F1');
+    html += `<div class="one-pager-title" style="display:flex;align-items:center;gap:16px;">${escapeHTML(slide.title)} <span style="font-size:14px;font-weight:600;padding:4px 12px;border-radius:6px;background:${statusColor}20;color:${statusColor};">${slide.statusBadge || ''}</span></div>`;
+    html += `<div class="custom-slide-board">`;
+    if (slide.images && slide.images.length > 0) {
+      html += `<div class="slide-images">`;
+      slide.images.forEach(img => {
+        html += `<img src="${img.src}" alt="${escapeHTML(img.alt || '')}">`;
+      });
+      html += `</div>`;
+    }
+    html += `<div class="slide-content">${slide.content}</div>`;
+    html += `</div>`;
+    html += `</div>`;
+  });
+
+  // Slideshow navigation (only if multiple slides)
+  if (totalSlides > 1) {
+    html += `<div class="slideshow-nav">`;
+    html += `<button class="slideshow-arrow" onclick="changeSlide('${init.id}', -1)">&#8249;</button>`;
+    html += `<div class="slideshow-dots">`;
+    for (let i = 0; i < totalSlides; i++) {
+      html += `<button class="slideshow-dot${i === 0 ? ' active' : ''}" onclick="goToSlide('${init.id}', ${i})"></button>`;
+    }
+    html += `</div>`;
+    html += `<button class="slideshow-arrow" onclick="changeSlide('${init.id}', 1)">&#8250;</button>`;
+    html += `</div>`;
+  }
+
+  html += `</div>`; // end slideshow-container
+  html += `</div>`; // end one-pager
 
   // Progress stats bar
   html += `<div class="campaign-hero">
