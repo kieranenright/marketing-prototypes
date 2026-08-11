@@ -4032,47 +4032,40 @@ body {
 .one-pager-fields {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 20px;
 }
 
 .one-pager-field {}
 
 .one-pager-field-label {
-  font-size: 12px;
+  font-family: var(--font-headline);
+  font-size: 15px;
   font-weight: 700;
   color: var(--brand-green-dark);
-  margin-bottom: 4px;
-  text-transform: uppercase;
-  letter-spacing: 0.3px;
+  margin-bottom: 8px;
 }
 
 .one-pager-field-value {
   font-size: 14px;
   color: var(--text-primary);
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 .one-pager-field-value ul {
-  list-style: none;
-  padding: 0;
+  padding-left: 20px;
   margin: 0;
+  list-style: disc;
 }
 
 .one-pager-field-value ul li {
   position: relative;
-  padding-left: 14px;
-  margin-bottom: 3px;
+  padding-left: 0;
+  margin-bottom: 4px;
+  line-height: 1.7;
 }
 
 .one-pager-field-value ul li::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 8px;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--brand-lime);
+  display: none;
 }
 
 .one-pager-footer {
@@ -4090,17 +4083,17 @@ body {
 }
 
 .one-pager-footer-label {
-  font-size: 11px;
+  font-family: var(--font-headline);
+  font-size: 13px;
   font-weight: 700;
   color: var(--brand-green-dark);
-  text-transform: uppercase;
-  letter-spacing: 0.3px;
 }
 
 .one-pager-footer-value {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--text-primary);
   font-weight: 500;
+  line-height: 1.6;
 }
 
 @media (max-width: 768px) {
