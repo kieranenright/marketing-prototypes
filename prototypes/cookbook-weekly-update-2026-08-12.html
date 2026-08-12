@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cookbook — Weekly Marketing Update W33</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+  --hf-green: #1B8A4A;
+  --hf-lime: #C8F065;
+  --hf-dark: #1A1A1A;
+  --hf-muted: #888;
+  --hf-light: #F6F6F6;
+  --col-acquire: #2D6BE0;
+  --col-engage: #1B8A4A;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  background: #e0e0e0;
+  color: var(--hf-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 24px;
+}
+
+.slide {
+  width: 1600px;
+  min-height: 900px;
+  background: white;
+  border-radius: 6px;
+  box-shadow: 0 8px 60px rgba(0,0,0,0.15);
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  padding: 28px 40px;
+  gap: 18px;
+}
+
+/* === HEADER === */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.header-left img { height: 26px; }
+.header-sep { width: 1px; height: 20px; background: rgba(0,0,0,0.12); }
+.header-feature { font-size: 17px; font-weight: 800; color: var(--hf-green); }
+.header-right { font-size: 12px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase; letter-spacing: 1.5px; }
+
+/* === MAIN COLUMNS === */
+.main-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  min-height: 0;
+}
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 0;
+}
+.col-header {
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid;
+}
+.col-header.acquire { color: var(--col-acquire); border-color: var(--col-acquire); }
+.col-header.engage { color: var(--col-engage); border-color: var(--col-engage); }
+
+/* Section cards */
+.section-card {
+  border-radius: 10px;
+  background: var(--hf-light);
+  border: 1px solid rgba(0,0,0,0.03);
+  padding: 12px 16px;
+}
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.section-title {
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--hf-dark);
+}
+.section-period {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--hf-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Data tables */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.data-table th {
+  font-size: 9px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--hf-muted);
+  text-align: left;
+  padding: 3px 6px;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+.data-table th:not(:first-child) { text-align: center; }
+.data-table td {
+  padding: 5px 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--hf-dark);
+  border-bottom: 1px solid rgba(0,0,0,0.03);
+}
+.data-table td:not(:first-child) { text-align: center; }
+.data-table tr:last-child td { border-bottom: none; }
+.val-green { color: var(--hf-green); font-weight: 800; }
+.val-blue { color: var(--col-acquire); font-weight: 800; }
+.val-neutral { font-weight: 700; }
+.val-red { color: #D64545; font-weight: 800; }
+
+/* Rec box */
+.rec-box {
+  margin-top: 8px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  background: rgba(27, 138, 74, 0.04);
+  border: 1px solid rgba(27, 138, 74, 0.1);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--hf-dark);
+  line-height: 1.5;
+}
+.rec-box strong { color: var(--hf-green); }
+
+/* Totals bar */
+.totals-bar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.total-chip {
+  flex: 1;
+  text-align: center;
+  padding: 6px;
+  background: white;
+  border-radius: 6px;
+  border: 1px solid rgba(0,0,0,0.04);
+}
+.total-value {
+  font-size: 16px;
+  font-weight: 900;
+  color: var(--hf-dark);
+}
+.total-value.highlight { color: var(--col-acquire); }
+.total-label {
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--hf-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Event card mockups */
+.event-card {
+  background: #FFFFFF;
+  border-radius: 12px;
+  padding: 14px;
+  color: var(--hf-dark);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,0.08);
+}
+.event-card-tag {
+  font-size: 9px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #4A9EFF;
+  margin-bottom: 8px;
+}
+.event-card-image {
+  width: 100%;
+  height: 120px;
+  border-radius: 8px;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+.event-card-label {
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--hf-muted);
+  margin-bottom: 3px;
+}
+.event-card-title {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--hf-dark);
+  margin-bottom: 3px;
+}
+.event-card-desc {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--hf-muted);
+  line-height: 1.4;
+}
+
+/* Asset grid */
+.asset-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  margin: 10px 0;
+}
+.asset-grid img {
+  width: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+  cursor: pointer;
+  border: 1px solid rgba(0,0,0,0.06);
+}
+
+/* Lightbox */
+.lightbox-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.85);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.lightbox-overlay.active { display: flex; }
+.lightbox-overlay img {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 8px;
+  box-shadow: 0 4px 40px rgba(0,0,0,0.5);
+}
+
+.post-thumb {
+  cursor: pointer;
+}
+
+</style>
+</head>
+<body>
+
+<div class="slide">
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-left">
+      <img src="https://media.hellofresh.com/w_256,q_100,f_auto,c_limit,fl_lossy/hellofresh_website/logo/Hello_Fresh_Lockup.png" alt="HelloFresh">
+      <div class="header-sep"></div>
+      <div class="header-feature">Cookbook Marketing Update</div>
+    </div>
+    <div class="header-right">W33 — 11 Aug – 17 Aug 2026</div>
+  </div>
+
+  <!-- SUMMARY HERO -->
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+    <div style="padding: 16px 20px; border-radius: 12px; background: rgba(45, 107, 224, 0.04); border: 1px solid rgba(45, 107, 224, 0.1);">
+      <div style="font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--col-acquire); margin-bottom: 6px;">Awareness & Acquisition</div>
+      <div style="font-size: 14px; font-weight: 700; color: var(--hf-dark); line-height: 1.4; margin-bottom: 10px;">Competitor analysis complete: Osta identified as primary App Store threat. In-app events strategy launched to boost organic visibility.</div>
+      <div style="display: flex; gap: 16px;">
+        <div style="text-align: center;">
+          <div style="font-size: 24px; font-weight: 900; color: var(--col-acquire);">3</div>
+          <div style="font-size: 10px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase;">Events (WIP)</div>
+        </div>
+        <div style="text-align: center;">
+          <div style="font-size: 24px; font-weight: 900; color: var(--col-acquire);">2</div>
+          <div style="font-size: 10px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase;">Competitors</div>
+        </div>
+        <div style="text-align: center;">
+          <div style="font-size: 24px; font-weight: 900; color: var(--col-acquire);">Q3</div>
+          <div style="font-size: 10px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase;">Coverage</div>
+        </div>
+      </div>
+    </div>
+    <div style="padding: 16px 20px; border-radius: 12px; background: rgba(27, 138, 74, 0.04); border: 1px solid rgba(27, 138, 74, 0.1);">
+      <div style="font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--col-engage); margin-bottom: 6px;">Strategy & Positioning</div>
+      <div style="font-size: 14px; font-weight: 700; color: var(--hf-dark); line-height: 1.4; margin-bottom: 10px;">AppTweak confirmed: more in-app events = stronger organic signal to Apple. Seasonal event cards in progress for Aug, Sep, Oct.</div>
+      <div style="display: flex; gap: 16px;">
+        <div style="text-align: center;">
+          <div style="font-size: 24px; font-weight: 900; color: var(--col-engage);">Aug</div>
+          <div style="font-size: 10px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase;">Summer</div>
+        </div>
+        <div style="text-align: center;">
+          <div style="font-size: 24px; font-weight: 900; color: var(--col-engage);">Sep</div>
+          <div style="font-size: 10px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase;">Autumn</div>
+        </div>
+        <div style="text-align: center;">
+          <div style="font-size: 24px; font-weight: 900; color: var(--col-engage);">Oct</div>
+          <div style="font-size: 10px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase;">Cozy</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN COLUMNS -->
+  <div class="main-row">
+    <!-- LEFT: Awareness & Acquisition -->
+    <div class="column">
+      <div class="col-header acquire">Awareness & Acquisition</div>
+
+      <!-- Competitor Analysis -->
+      <div class="section-card" style="background: rgba(45, 107, 224, 0.06); border: 2px solid rgba(45, 107, 224, 0.2);">
+        <div class="section-header">
+          <div class="section-title" style="color: var(--col-acquire); display: flex; align-items: center; gap: 8px;">
+            App Store Competitor Analysis
+          </div>
+          <div class="section-period">AppTweak Report</div>
+        </div>
+        <div style="font-size: 11px; font-weight: 600; color: var(--hf-dark); line-height: 1.6; margin-bottom: 12px;">
+          AppTweak analysis identified <strong>Osta</strong> as our primary App Store competitor for the recipe-saving category, not Recime as previously assumed. Completed a full competitor analysis comparing Cookbook vs Osta vs Recime across feature set, positioning, and store presence.
+        </div>
+
+        <table class="data-table" style="margin-bottom: 12px;">
+          <thead>
+            <tr><th>App</th><th>Position</th><th>Strength</th><th>Threat Level</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Osta</strong></td><td>Primary competitor</td><td class="val-blue">Emerging, fast growth</td><td class="val-red">High</td></tr>
+            <tr><td><strong>Recime</strong></td><td>Known competitor</td><td class="val-neutral">Established</td><td class="val-neutral">Medium</td></tr>
+            <tr><td><strong>Cookbook</strong></td><td>Our position</td><td class="val-green">HF ecosystem advantage</td><td>—</td></tr>
+          </tbody>
+        </table>
+
+        <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px;">
+          <span style="font-size: 9px; font-weight: 800; padding: 3px 8px; border-radius: 4px; background: rgba(45, 107, 224, 0.1); color: var(--col-acquire); text-transform: uppercase; letter-spacing: 0.5px;">AppTweak</span>
+          <span style="font-size: 9px; font-weight: 800; padding: 3px 8px; border-radius: 4px; background: rgba(45, 107, 224, 0.1); color: var(--col-acquire); text-transform: uppercase; letter-spacing: 0.5px;">ASO Intel</span>
+          <span style="font-size: 9px; font-weight: 800; padding: 3px 8px; border-radius: 4px; background: rgba(214, 69, 69, 0.1); color: #D64545; text-transform: uppercase; letter-spacing: 0.5px;">Competitive</span>
+        </div>
+
+        <div class="rec-box" style="margin-top: 0; padding: 8px 12px; font-size: 11px; line-height: 1.5; background: rgba(45, 107, 224, 0.04); border-color: rgba(45, 107, 224, 0.15);">
+          <strong style="color: var(--col-acquire);">Key takeaway:</strong> Osta is growing quickly in the same "save recipes from social video" space. Our advantage is the HelloFresh ecosystem (meal kits, existing subscriber base, cross-feature synergies). The in-app events strategy is a direct response: increasing our organic App Store visibility to stay ahead of emerging competitors.
+        </div>
+
+        <div style="margin-top: 10px; font-size: 11px; font-weight: 600;">
+          <a href="https://docs.google.com/document/d/1Z6yHBgkMHypJezHvht7vpORyxWzCSuPS0TvQ-20_3NM/edit?tab=t.0" target="_blank" style="color: var(--col-acquire); text-decoration: none; border-bottom: 1px solid rgba(45, 107, 224, 0.3);">View full competitor analysis →</a>
+        </div>
+      </div>
+
+      <!-- LLM & ASO Insight -->
+      <div class="section-card" style="background: rgba(45, 107, 224, 0.06); border: 2px solid rgba(45, 107, 224, 0.2);">
+        <div class="section-header">
+          <div class="section-title" style="color: var(--col-acquire); display: flex; align-items: center; gap: 8px;">
+            LLMs &amp; App Store Discovery
+          </div>
+          <div class="section-period">AppTweak Insight</div>
+        </div>
+        <div style="font-size: 11px; font-weight: 600; color: var(--hf-dark); line-height: 1.6; margin-bottom: 12px;">
+          LLMs are becoming increasingly relevant for app downloads. AppTweak reports that 40% of searches now scan app store pages, meaning our store descriptions must include intent-based language (e.g. "Save Time") to match how users search. This is already taken care of for the US market. Work will begin with the ASO team to update other languages.
+        </div>
+
+        <div style="display: flex; gap: 16px; margin-bottom: 12px;">
+          <div style="text-align: center; padding: 8px 16px; background: white; border-radius: 6px; border: 1px solid rgba(0,0,0,0.04);">
+            <div style="font-size: 22px; font-weight: 900; color: var(--col-acquire);">40%</div>
+            <div style="font-size: 9px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase;">Searches Scan Pages</div>
+          </div>
+          <div style="text-align: center; padding: 8px 16px; background: white; border-radius: 6px; border: 1px solid rgba(0,0,0,0.04);">
+            <div style="font-size: 22px; font-weight: 900; color: var(--col-acquire);">US</div>
+            <div style="font-size: 9px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase;">Done</div>
+          </div>
+          <div style="text-align: center; padding: 8px 16px; background: white; border-radius: 6px; border: 1px solid rgba(0,0,0,0.04);">
+            <div style="font-size: 22px; font-weight: 900; color: #D48806;">Global</div>
+            <div style="font-size: 9px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase;">Next</div>
+          </div>
+        </div>
+
+        <div class="rec-box" style="margin-top: 0; padding: 8px 12px; font-size: 11px; line-height: 1.5; background: rgba(45, 107, 224, 0.04); border-color: rgba(45, 107, 224, 0.15);">
+          <strong style="color: var(--col-acquire);">Action:</strong> Coordinate with ASO team to update global store descriptions with intent-based keywords that are receptive to LLM scanning.
+        </div>
+      </div>
+
+      <!-- In-App Events Strategy -->
+      <div class="section-card" style="background: rgba(45, 107, 224, 0.06); border: 2px solid rgba(45, 107, 224, 0.2);">
+        <div class="section-header">
+          <div class="section-title" style="color: var(--col-acquire); display: flex; align-items: center; gap: 8px;">
+            In-App Events — App Store Strategy
+          </div>
+          <div class="section-period">Aug / Sep / Oct</div>
+        </div>
+        <div style="font-size: 11px; font-weight: 600; color: var(--hf-dark); line-height: 1.6; margin-bottom: 12px;">
+          Launching a series of seasonal in-app events on the App Store to boost Cookbook's organic visibility. AppTweak confirmed that consistent in-app event activity signals to Apple that the app is actively maintained and engaging, which improves organic ranking and discoverability.
+        </div>
+
+        <div style="font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--col-acquire); margin-bottom: 8px;">Seasonal Themes</div>
+        <table class="data-table" style="margin-bottom: 12px;">
+          <thead>
+            <tr><th>Month</th><th>Theme</th><th>Mood</th><th>Status</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>August</strong></td><td>Summer grilling &amp; BBQ</td><td>Outdoor, bright, social</td><td class="val-blue">WIP</td></tr>
+            <tr><td><strong>September</strong></td><td>Autumn comfort cooking</td><td>Warm, cozy kitchen, harvest</td><td class="val-blue">WIP</td></tr>
+            <tr><td><strong>October</strong></td><td>Cozy seasonal meals</td><td>Hearty, warm lighting, gathering</td><td class="val-blue">WIP</td></tr>
+          </tbody>
+        </table>
+
+        <div style="font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--hf-muted); margin-bottom: 8px;">WIP Visual Assets</div>
+        <div class="asset-grid">
+          <img class="post-thumb" src="assets/event-august.jpg" alt="August: Summer BBQ">
+          <img class="post-thumb" src="assets/event-september.png" alt="September: Autumn Comfort">
+          <img class="post-thumb" src="assets/event-october.jpg" alt="October: Cozy Meals">
+        </div>
+        <div style="display: flex; gap: 6px; margin-top: 6px;">
+          <span style="font-size: 9px; font-weight: 600; color: var(--hf-muted);">August</span>
+          <span style="flex: 1;"></span>
+          <span style="font-size: 9px; font-weight: 600; color: var(--hf-muted);">September</span>
+          <span style="flex: 1;"></span>
+          <span style="font-size: 9px; font-weight: 600; color: var(--hf-muted);">October</span>
+        </div>
+
+        <div class="rec-box" style="margin-top: 12px; padding: 8px 12px; font-size: 11px; line-height: 1.5; background: rgba(45, 107, 224, 0.04); border-color: rgba(45, 107, 224, 0.15);">
+          <strong style="color: var(--col-acquire);">Why this matters:</strong> The majority of our users come through the App Store. Each in-app event signals activity to Apple's algorithm, improving our organic ranking. This is a low-cost, high-signal tactic that directly counters emerging competitors like Osta gaining visibility in the same category.
+        </div>
+      </div>
+
+      <!-- Recime Competitive Intel -->
+      <div class="section-card" style="background: rgba(214, 69, 69, 0.04); border: 2px solid rgba(214, 69, 69, 0.2);">
+        <div class="section-header">
+          <div class="section-title" style="color: #D64545; display: flex; align-items: center; gap: 8px;">
+            Recime — Competitive Intel
+          </div>
+          <div class="section-period">Creator Outreach</div>
+        </div>
+        <div style="font-size: 11px; font-weight: 600; color: var(--hf-dark); line-height: 1.6; margin-bottom: 12px;">
+          Recime launched their own Discover hub and Creator Platform this week. In response, outreach was sent to Recime creators to understand their partnership terms and explore recruitment opportunities.
+        </div>
+
+        <div style="font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: #D64545; margin-bottom: 6px;">Outreach Results — 3 Responses</div>
+        <table class="data-table" style="margin-bottom: 12px;">
+          <thead>
+            <tr><th>Creator</th><th>Interest</th><th>Exclusivity</th><th>Key Intel</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Cal</strong></td>
+              <td class="val-green">High</td>
+              <td style="font-size: 10px;">Appears non-exclusive</td>
+              <td style="font-size: 10px;">Retains full content ownership on Recime. Positive experience. Wants HF scope/comp details.</td>
+            </tr>
+            <tr>
+              <td><strong>Revi</strong></td>
+              <td class="val-blue">Warm</td>
+              <td style="font-size: 10px;">Unknown</td>
+              <td style="font-size: 10px;">Via talent manager. Wants HF to share structure first. Pitched wider creator roster.</td>
+            </tr>
+            <tr>
+              <td><strong>Whitney</strong></td>
+              <td class="val-red">Blocked</td>
+              <td style="font-size: 10px;">Confirmed exclusive with Recime</td>
+              <td style="font-size: 10px;">Cannot join Cookbook. Interested in traditional HF delivery box partnership instead.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div style="font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--hf-muted); margin-bottom: 6px;">Key Findings</div>
+        <table class="data-table" style="margin-bottom: 12px;">
+          <thead>
+            <tr><th>Theme</th><th>Finding</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Compensation</strong></td><td style="font-size: 10px;">No one shared Recime's comp structure. Treated as confidential across the board.</td></tr>
+            <tr><td><strong>Exclusivity</strong></td><td style="font-size: 10px;">Mixed. Some creators are locked in, others appear free to work with multiple platforms.</td></tr>
+            <tr><td><strong>Ownership</strong></td><td style="font-size: 10px;">Creators retain full ownership of content on Recime.</td></tr>
+            <tr><td><strong>Pattern</strong></td><td style="font-size: 10px;">All three flipped the conversation: they want to know what HelloFresh is offering before sharing more.</td></tr>
+          </tbody>
+        </table>
+
+        <div class="rec-box" style="margin-top: 0; padding: 8px 12px; font-size: 11px; line-height: 1.5; background: rgba(214, 69, 69, 0.04); border-color: rgba(214, 69, 69, 0.15);">
+          <strong style="color: #D64545;">Action needed:</strong> A one-pager outlining HelloFresh Cookbook's partnership structure (scope, rights, compensation, exclusivity terms) is required to move any of these conversations forward. Creators will not share more until they see what we are offering.
+        </div>
+
+        <div style="margin-top: 10px; font-size: 11px; font-weight: 600;">
+          <a href="https://docs.google.com/document/d/19ldmcs2WEZfGrZ5r4kWXc1_eKEu_Sm88xJlWjE98B4I/edit?tab=t.0" target="_blank" style="color: #D64545; text-decoration: none; border-bottom: 1px solid rgba(214, 69, 69, 0.3);">View full outreach summary →</a>
+        </div>
+      </div>
+
+      <!-- CookUnity Chef Outreach -->
+      <div class="section-card" style="background: rgba(45, 107, 224, 0.06); border: 2px solid rgba(45, 107, 224, 0.2);">
+        <div class="section-header">
+          <div class="section-title" style="color: var(--col-acquire); display: flex; align-items: center; gap: 8px;">
+            CookUnity Chef Outreach
+          </div>
+          <div class="section-period">US Market</div>
+        </div>
+        <div style="font-size: 11px; font-weight: 600; color: var(--hf-dark); line-height: 1.6; margin-bottom: 12px;">
+          Contacted 24 CookUnity chefs in the US for a potential Cookbook creator partnership. These chefs do not appear to have exclusivity with CookUnity, and already have established personal brands, making them strong candidates for our Creator Platform.
+        </div>
+
+        <div style="display: flex; gap: 16px; margin-bottom: 12px;">
+          <div style="text-align: center; padding: 8px 16px; background: white; border-radius: 6px; border: 1px solid rgba(0,0,0,0.04);">
+            <div style="font-size: 22px; font-weight: 900; color: var(--col-acquire);">24</div>
+            <div style="font-size: 9px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase;">Chefs Contacted</div>
+          </div>
+          <div style="text-align: center; padding: 8px 16px; background: white; border-radius: 6px; border: 1px solid rgba(0,0,0,0.04);">
+            <div style="font-size: 22px; font-weight: 900; color: var(--col-acquire);">US</div>
+            <div style="font-size: 9px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase;">Market</div>
+          </div>
+          <div style="text-align: center; padding: 8px 16px; background: white; border-radius: 6px; border: 1px solid rgba(0,0,0,0.04);">
+            <div style="font-size: 22px; font-weight: 900; color: var(--col-acquire);">No</div>
+            <div style="font-size: 9px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase;">Exclusivity</div>
+          </div>
+        </div>
+
+        <div class="rec-box" style="margin-top: 0; padding: 8px 12px; font-size: 11px; line-height: 1.5; background: rgba(45, 107, 224, 0.04); border-color: rgba(45, 107, 224, 0.15);">
+          <strong style="color: var(--col-acquire);">Rationale:</strong> CookUnity chefs already have a following and recipe content ready to go. No apparent platform exclusivity means they can dual-list on Cookbook. Awaiting responses.
+        </div>
+
+        <div style="margin-top: 10px; font-size: 11px; font-weight: 600;">
+          <a href="https://docs.google.com/spreadsheets/d/1kqnlOgLPX1N_IJCTi1Ok7w-WxaYfO6aGEjHwwXPIMPA/edit?gid=1034141082#gid=1034141082" target="_blank" style="color: var(--col-acquire); text-decoration: none; border-bottom: 1px solid rgba(45, 107, 224, 0.3);">View outreach tracker →</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT: Activation & Engagement -->
+    <div class="column">
+      <div class="col-header engage">Activation & Engagement</div>
+
+      <!-- In-App Event Mockups -->
+      <div class="section-card" style="background: rgba(27, 138, 74, 0.06); border: 2px solid rgba(27, 138, 74, 0.2);">
+        <div class="section-header">
+          <div class="section-title" style="color: var(--col-engage); display: flex; align-items: center; gap: 8px;">
+            In-App Event Cards — Preview
+          </div>
+          <div class="section-period">App Store Format</div>
+        </div>
+        <div style="font-size: 11px; font-weight: 600; color: var(--hf-dark); line-height: 1.6; margin-bottom: 12px;">
+          Below is how the in-app events will appear to users browsing the App Store. Each event contextualises the season with Cookbook, giving users a reason to engage with the feature.
+        </div>
+
+        <!-- August Event Card -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px;">
+          <div class="event-card">
+            <div class="event-card-tag">Now Available</div>
+            <img class="event-card-image post-thumb" src="assets/event-august.jpg" alt="August Event">
+            <div class="event-card-label">Major Update</div>
+            <div class="event-card-title">Summer Cooking: Stop The Scroll</div>
+            <div class="event-card-desc">Turn TikTok clips into easy-to-follow recipes</div>
+          </div>
+
+          <!-- September Event Card -->
+          <div class="event-card">
+            <div class="event-card-tag">Coming Soon</div>
+            <img class="event-card-image post-thumb" src="assets/event-september.png" alt="September Event">
+            <div class="event-card-label">Seasonal Event</div>
+            <div class="event-card-title">Perfect Autumn Recipes</div>
+            <div class="event-card-desc">From your social feed to fork. Explore recipes.</div>
+          </div>
+
+          <!-- October Event Card -->
+          <div class="event-card">
+            <div class="event-card-tag">Coming Soon</div>
+            <img class="event-card-image post-thumb" src="assets/event-october.jpg" alt="October Event">
+            <div class="event-card-label">Seasonal Event</div>
+            <div class="event-card-title">October Cookbook Takeover</div>
+            <div class="event-card-desc">No delivery apps needed! Import social recipes for free</div>
+          </div>
+        </div>
+
+        <div class="rec-box" style="margin-top: 12px; padding: 8px 12px; font-size: 11px; line-height: 1.5; background: rgba(27, 138, 74, 0.06); border-color: rgba(27, 138, 74, 0.15);">
+          <strong>Format:</strong> Each event appears as a dark card in the App Store with the seasonal image, event title, and short description. Users tap to open the app directly into Cookbook.
+        </div>
+      </div>
+
+      <!-- Strategic Rationale -->
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-title">ASO Strategy — Rationale</div>
+          <div class="section-period">AppTweak Insight</div>
+        </div>
+        <div style="font-size: 11px; font-weight: 600; color: var(--hf-dark); line-height: 1.6; margin-bottom: 10px;">
+          In-app events serve a dual purpose: they drive user engagement with timely, seasonal content while also signalling to Apple that our app is actively maintained and investing in user experience. This directly improves organic discoverability in App Store search and browse.
+        </div>
+
+        <div style="font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--hf-muted); margin-bottom: 8px;">How It Works</div>
+        <table class="data-table" style="margin-bottom: 0;">
+          <thead>
+            <tr><th>Signal</th><th>Effect</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Regular event publishing</td><td>Apple sees active app maintenance</td></tr>
+            <tr><td>Seasonal relevance</td><td>Higher tap-through from browse</td></tr>
+            <tr><td>Feature-specific deeplinks</td><td>Users land directly in Cookbook</td></tr>
+            <tr><td>Consistent cadence</td><td>Sustained visibility vs competitors</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Push Notifications — P0 Use Cases -->
+      <div class="section-card" style="background: rgba(27, 138, 74, 0.06); border: 2px solid rgba(27, 138, 74, 0.2);">
+        <div class="section-header">
+          <div class="section-title" style="color: var(--col-engage);">Push Notifications — P0 Use Cases</div>
+          <div class="section-period">W33–W34 Engineering Sprint</div>
+        </div>
+        <div style="font-size: 11px; font-weight: 600; color: var(--hf-dark); line-height: 1.6; margin-bottom: 12px;">
+          5 P0 use cases now in engineering pipeline. Copy is drafted and with CRM for review. All are triggered notifications designed to drive import and save actions.
+        </div>
+
+        <div style="font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--col-engage); margin-bottom: 6px;">Inspire — Import/Create</div>
+        <table class="data-table" style="margin-bottom: 12px;">
+          <thead>
+            <tr><th>Use Case</th><th>Trigger</th><th>Title</th><th>Body</th><th>Week</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Pre-Import Nudge (Viewed)</td>
+              <td style="font-size: 10px;">Viewed Cookbook but never imported</td>
+              <td class="val-green" style="font-size: 10px;">Let's take the first step 👋</td>
+              <td style="font-size: 10px;">Import a recipe from social media or create one from your photos. It only takes seconds.</td>
+              <td class="val-neutral">W33</td>
+            </tr>
+            <tr>
+              <td>Pre-Import Nudge (Never Viewed)</td>
+              <td style="font-size: 10px;">Did not View Cookbook but never imported; 7+ days since signup</td>
+              <td class="val-green" style="font-size: 10px;">Make any recipe your own 🔥</td>
+              <td style="font-size: 10px;">Import a social media recipe, or snap a photo of a recipe card. Your Cookbook stores them all.</td>
+              <td class="val-neutral">W33</td>
+            </tr>
+            <tr>
+              <td>Import Tutorial Drop-off</td>
+              <td style="font-size: 10px;">Started Tutorial but did not complete (no import recorded)</td>
+              <td class="val-green" style="font-size: 10px;">Forget something? 🤔</td>
+              <td style="font-size: 10px;">Finish the import tutorial to start building your cookbook. Your recipe is waiting.</td>
+              <td class="val-neutral">W33</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div style="font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--col-engage); margin-bottom: 6px;">Act — Save (HF)</div>
+        <table class="data-table" style="margin-bottom: 12px;">
+          <thead>
+            <tr><th>Use Case</th><th>Trigger</th><th>Title</th><th>Body</th><th>Week</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Discover Save-Rate Drop-off (Page)</td>
+              <td style="font-size: 10px;">Opened Discover page but did not save (1–2h)</td>
+              <td class="val-green" style="font-size: 10px;">1000s of recipes are waiting</td>
+              <td style="font-size: 10px;">Save your favorites to your Cookbook before they slip away. Cook them anytime.</td>
+              <td class="val-neutral">W34</td>
+            </tr>
+            <tr>
+              <td>Discover Save-Rate Drop-off (Recipe)</td>
+              <td style="font-size: 10px;">Opened a Discover recipe but did not save (1–4h)</td>
+              <td class="val-green" style="font-size: 10px;">Don't lose this recipe! 🧑‍🍳</td>
+              <td style="font-size: 10px;">Tap here to save [recipe_title] to your Cookbook to cook later</td>
+              <td class="val-neutral">W34</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="rec-box" style="margin-top: 0; padding: 8px 12px; font-size: 11px; line-height: 1.5; background: rgba(27, 138, 74, 0.06); border-color: rgba(27, 138, 74, 0.15);">
+          <strong>Status:</strong> All 5 P0 use cases proposed. Copy drafted by Kieran Enright/Ren. Currently with CRM team for review. Engineering targeting W33 (Inspire) and W34 (Act) for implementation.
+        </div>
+
+        <div style="margin-top: 10px; font-size: 11px; font-weight: 600;">
+          <a href="https://docs.google.com/spreadsheets/d/1dtIKN4Mo_CvGNPMOwZ3DO8BmAaVgEc%20njk_6L2YJsUw/edit?gid=1732405207#gid=1732405207" target="_blank" style="color: var(--col-engage); text-decoration: none; border-bottom: 1px solid rgba(27, 138, 74, 0.3);">View full push rebuild roadmap →</a>
+        </div>
+      </div>
+
+      <!-- Next Steps -->
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-title">Next Steps</div>
+          <div class="section-period">W33–W35</div>
+        </div>
+        <div style="padding: 0;">
+          <!-- Done -->
+          <div style="display: flex; align-items: flex-start; gap: 8px; padding: 6px 0; border-bottom: 1px solid rgba(0,0,0,0.04);">
+            <span style="font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 3px; background: rgba(27, 138, 74, 0.1); color: var(--col-engage); white-space: nowrap;">Done</span>
+            <span style="font-size: 11px; font-weight: 600;">In-app event copy finalised for August, September, October</span>
+          </div>
+          <div style="display: flex; align-items: flex-start; gap: 8px; padding: 6px 0; border-bottom: 1px solid rgba(0,0,0,0.04);">
+            <span style="font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 3px; background: rgba(27, 138, 74, 0.1); color: var(--col-engage); white-space: nowrap;">Done</span>
+            <span style="font-size: 11px; font-weight: 600;">Competitor analysis: Cookbook vs Osta vs Recime</span>
+          </div>
+          <!-- In Progress -->
+          <div style="display: flex; align-items: flex-start; gap: 8px; padding: 6px 0; border-bottom: 1px solid rgba(0,0,0,0.04);">
+            <span style="font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 3px; background: rgba(255, 165, 0, 0.12); color: #D48806; white-space: nowrap;">In Progress</span>
+            <span style="font-size: 11px; font-weight: 600;">In-app event visual assets for Aug, Sep, Oct</span>
+          </div>
+          <div style="display: flex; align-items: flex-start; gap: 8px; padding: 6px 0; border-bottom: 1px solid rgba(0,0,0,0.04);">
+            <span style="font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 3px; background: rgba(255, 165, 0, 0.12); color: #D48806; white-space: nowrap;">In Progress</span>
+            <span style="font-size: 11px; font-weight: 600;">CookUnity Creator Outreach</span>
+          </div>
+          <div style="display: flex; align-items: flex-start; gap: 8px; padding: 6px 0; border-bottom: 1px solid rgba(0,0,0,0.04);">
+            <span style="font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 3px; background: rgba(255, 165, 0, 0.12); color: #D48806; white-space: nowrap;">In Progress</span>
+            <span style="font-size: 11px; font-weight: 600;">Recime Creator Outreach</span>
+          </div>
+          <div style="display: flex; align-items: flex-start; gap: 8px; padding: 6px 0; border-bottom: 1px solid rgba(0,0,0,0.04);">
+            <span style="font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 3px; background: rgba(255, 165, 0, 0.12); color: #D48806; white-space: nowrap;">In Progress</span>
+            <span style="font-size: 11px; font-weight: 600;">P0 Push Notification Use Cases</span>
+          </div>
+          <div style="display: flex; align-items: flex-start; gap: 8px; padding: 6px 0; border-bottom: 1px solid rgba(0,0,0,0.04);">
+            <span style="font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 3px; background: rgba(255, 165, 0, 0.12); color: #D48806; white-space: nowrap;">In Progress</span>
+            <span style="font-size: 11px; font-weight: 600;">Q3 Cookbook Email to US Actives</span>
+          </div>
+          <!-- To Do -->
+          <div style="display: flex; align-items: flex-start; gap: 8px; padding: 6px 0; border-bottom: 1px solid rgba(0,0,0,0.04);">
+            <span style="font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 3px; background: rgba(45, 107, 224, 0.1); color: var(--col-acquire); white-space: nowrap;">To Do</span>
+            <span style="font-size: 11px; font-weight: 600;">Q3 Cookbook Email to Global Actives <span style="font-size: 9px; font-weight: 800; padding: 1px 5px; border-radius: 3px; background: rgba(214, 69, 69, 0.1); color: #D64545; margin-left: 4px;">CAPACITY BLOCKER</span></span>
+          </div>
+          <div style="display: flex; align-items: flex-start; gap: 8px; padding: 6px 0; border-bottom: 1px solid rgba(0,0,0,0.04);">
+            <span style="font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 3px; background: rgba(45, 107, 224, 0.1); color: var(--col-acquire); white-space: nowrap;">To Do</span>
+            <span style="font-size: 11px; font-weight: 600;">P1 Push Notification Use Cases</span>
+          </div>
+          <div style="display: flex; align-items: flex-start; gap: 8px; padding: 6px 0;">
+            <span style="font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 3px; background: rgba(45, 107, 224, 0.1); color: var(--col-acquire); white-space: nowrap;">To Do</span>
+            <span style="font-size: 11px; font-weight: 600;">Update Global Store Descriptions to be more LLM receptive</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox-overlay" id="lightbox"></div>
+
+<script>
+const lightbox = document.getElementById('lightbox');
+document.querySelectorAll('.post-thumb').forEach(el => {
+  el.addEventListener('click', () => {
+    const clone = document.createElement('img');
+    clone.src = el.src;
+    lightbox.innerHTML = '';
+    lightbox.appendChild(clone);
+    lightbox.classList.add('active');
+  });
+});
+lightbox.addEventListener('click', () => {
+  lightbox.classList.remove('active');
+  lightbox.innerHTML = '';
+});
+</script>
+
+</body>
+</html>
