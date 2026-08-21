@@ -8109,31 +8109,194 @@ let activeCampaignPage = sessionStorage.getItem('pmmHubCampaignPage') || null;
 const INITIATIVE_SLIDES = {
   'init-creator-platform': [
     {
-      title: 'Transform the App into a Daily Food Companion: Creators',
+      title: 'Stop feeding the algorithm. Start feeding people.',
+      statusBadge: 'live',
+      content: `
+        <p style="font-size:15px;font-weight:600;margin-bottom:16px;">Your scroll-stopping recipes are worth saving AND savoring. Our new in-app proposition makes it happen, providing creators a place to store all your amazing recipes, and your audience a place to find them!</p>
+        <h4 style="color:#067A46;margin-top:20px;">YOUR PLATFORM</h4>
+        <ul>
+          <li>HelloFresh now offers a permanent home for your recipes right in the HelloFresh app, discoverable by millions of home cooks, <strong>not buried in a feed that disappears in 48 hours.</strong></li>
+          <li>Featured across HelloFresh social channels</li>
+        </ul>
+        <h4 style="color:#067A46;margin-top:20px;">YOUR NEW AUDIENCE</h4>
+        <ul>
+          <li>Millions of active home cooks already on the HelloFresh platform.</li>
+          <li>88% of HelloFresh users actively seek new cooking inspiration.</li>
+          <li>Users who find you here save, cook, and come back to your recipes.</li>
+        </ul>
+      `
+    },
+    {
+      title: 'How Creator Recipes and Profiles are surfaced',
       statusBadge: 'live',
       images: [
         { src: 'images/creator-platform/discover-page.png', alt: 'Discover Page' },
-        { src: 'images/creator-platform/creator-profile-emily-eggers.png', alt: 'Emily Eggers Creator Profile' }
+        { src: 'images/creator-platform/creator-profile-emily-eggers.png', alt: 'Creator Profile' }
       ],
       content: `
-        <p><strong>Opportunity:</strong> Local markets already invest in influencer relationships for campaigns. Those partnerships end when the campaign ends. The Creator Platform makes them permanent.</p>
-        <h4>The Back to School synergy</h4>
-        <ul>
-          <li>You're already briefing influencers for Back to School</li>
-          <li>One additional line in the brief: "Upload your recipes to HelloFresh Cookbook"</li>
-          <li>Their content lives in the app beyond the campaign flight</li>
-        </ul>
-        <h4>The Ask:</h4>
-        <ul>
-          <li><strong>Now</strong>: Share your Back to School influencer list so we can onboard them to the platform</li>
-          <li><strong>Ongoing</strong>: When you brief any food creator, include Creator Platform onboarding as part of the partnership</li>
-        </ul>
-        <h4>What they get back</h4>
-        <ul>
-          <li>Cookbook engagement in their market (metric they can claim)</li>
-          <li>Their influencer content driving DAU beyond the campaign window</li>
-          <li>Creator profiles featuring local, market-relevant content</li>
-        </ul>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:8px;">
+          <div style="background:#067A46;color:white;padding:14px;border-radius:8px;font-size:13px;">
+            <strong>Discover Tab</strong><br>Your recipes appear organically in our Discover tab, reaching millions of HelloFresh users browsing for their next meal. You'll also be featured in the "Creators to follow" section, making it easy for new fans to find you.
+          </div>
+          <div style="background:#067A46;color:white;padding:14px;border-radius:8px;font-size:13px;">
+            <strong>Creator Profile</strong><br>You get a dedicated creator profile showcasing your bio, your Partner Creator badge, and your full recipe collection in one place. Users can follow you directly and browse everything you've contributed.
+          </div>
+          <div style="background:#067A46;color:white;padding:14px;border-radius:8px;font-size:13px;">
+            <strong>Recipe Attribution</strong><br>Every recipe you create is clearly credited to you with your name, photo, and Partner Creator badge displayed prominently. Users always know who's behind the dish.
+          </div>
+        </div>
+      `
+    },
+    {
+      title: 'The Opportunity',
+      statusBadge: 'live',
+      content: `
+        <div style="background:#D2F895;border-radius:10px;padding:24px;margin-bottom:24px;">
+          <p style="font-weight:700;font-size:15px;margin-bottom:10px;">Every chef partnership we run produces recipe content that lives on social platforms that we don't own. One additional deliverable puts that same content in front of millions of HelloFresh app users, at zero incremental cost.</p>
+          <p style="font-size:14px;opacity:0.85;">The ask: add "Create a HelloFresh Creator Profile + upload recipes" to partnership briefs</p>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+          <div style="background:#1a3a2a;color:white;padding:24px;border-radius:10px;text-align:center;">
+            <div style="font-size:36px;font-weight:800;">16+</div>
+            <div style="font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-top:4px;">COUNTRIES WITH APP USERS</div>
+          </div>
+          <div style="background:#1a3a2a;color:white;padding:24px;border-radius:10px;text-align:center;">
+            <div style="font-size:36px;font-weight:800;">100</div>
+            <div style="font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-top:4px;">FOUNDING CREATOR SPOTS</div>
+          </div>
+        </div>
+      `
+    },
+    {
+      title: 'What is the Creator Platform?',
+      statusBadge: 'live',
+      content: `
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:24px;">
+          <div style="background:#1a3a2a;color:white;padding:20px;border-radius:10px;text-align:center;">
+            <div style="color:#96DC14;font-size:11px;font-weight:700;letter-spacing:1px;margin-bottom:8px;">STEP 1</div>
+            <div style="font-size:14px;font-weight:600;">Creator links their existing recipes (TikTok, IG, YouTube)</div>
+          </div>
+          <div style="background:#1a3a2a;color:white;padding:20px;border-radius:10px;text-align:center;">
+            <div style="color:#96DC14;font-size:11px;font-weight:700;letter-spacing:1px;margin-bottom:8px;">STEP 2</div>
+            <div style="font-size:14px;font-weight:600;">HelloFresh converts them into structured recipe cards (ingredients, steps, photos)</div>
+          </div>
+          <div style="background:#1a3a2a;color:white;padding:20px;border-radius:10px;text-align:center;">
+            <div style="color:#96DC14;font-size:11px;font-weight:700;letter-spacing:1px;margin-bottom:8px;">STEP 3</div>
+            <div style="font-size:14px;font-weight:600;">Recipes go live in the app. Users browse, save, and cook them</div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="background:#067A46;color:white;padding:16px 20px;border-radius:8px;">
+            <strong style="color:#D2F895;">HELLOFRESH DOES THE WORK</strong><br>
+            <span style="font-size:13px;">We handle the conversion from video to recipe card. Creators don't write out recipes manually. Just link the video and we do the rest.</span>
+          </div>
+          <div style="background:#067A46;color:white;padding:16px 20px;border-radius:8px;">
+            <strong style="color:#D2F895;">GLOBAL DISTRIBUTION</strong><br>
+            <span style="font-size:13px;">Recipes surface to users across 16+ countries. A single video upload reaches audiences a creator would never reach organically on social alone.</span>
+          </div>
+          <div style="background:#067A46;color:white;padding:16px 20px;border-radius:8px;">
+            <strong style="color:#D2F895;">FOUNDING CREATOR STATUS</strong><br>
+            <span style="font-size:13px;">First 100 creators get permanent founding status: priority features, product roadmap input, and early access. This status is never offered again.</span>
+          </div>
+        </div>
+      `
+    },
+    {
+      title: 'We already pay for the content. Let\\'s use it everywhere.',
+      statusBadge: 'live',
+      content: `
+        <div style="background:#067A46;color:white;padding:40px;border-radius:12px;">
+          <div style="font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;opacity:0.8;margin-bottom:12px;">THE ARGUMENT</div>
+          <p style="font-size:16px;line-height:1.6;">Every partnership brief already requires recipe video content. Adding a Creator Platform deliverable means we extract additional value from content we've already commissioned and paid for. No new production. No new budget line. Just one more place that content lives.</p>
+        </div>
+      `
+    },
+    {
+      title: 'The Value Exchange',
+      statusBadge: 'live',
+      content: `
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;">
+          <div style="background:#067A46;color:white;padding:20px;border-radius:10px;">
+            <div style="font-size:12px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:#D2F895;margin-bottom:12px;">FOR HELLOFRESH</div>
+            <ul style="font-size:13px;padding-left:16px;">
+              <li>High quality recipe content in the app from creators we already work with</li>
+              <li>Drives engagement, session time, and recipe saves</li>
+              <li>Strengthens the app as a cooking destination beyond meal kits</li>
+            </ul>
+          </div>
+          <div style="background:#067A46;color:white;padding:20px;border-radius:10px;">
+            <div style="font-size:12px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:#D2F895;margin-bottom:12px;">FOR CREATORS</div>
+            <ul style="font-size:13px;padding-left:16px;">
+              <li>Access to millions of users they'd never reach on social</li>
+              <li>Founding creator status and permanent platform recognition</li>
+              <li>A new distribution channel that requires almost no extra effort</li>
+            </ul>
+          </div>
+          <div style="background:#067A46;color:white;padding:20px;border-radius:10px;">
+            <div style="font-size:12px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:#D2F895;margin-bottom:12px;">FOR PARTNERSHIP TEAMS</div>
+            <ul style="font-size:13px;padding-left:16px;">
+              <li>Stronger pitch to creators (you're offering them something)</li>
+              <li>Differentiates HF partnerships from competitors</li>
+              <li>Easy deliverable that adds value to the overall package without adding scope</li>
+            </ul>
+          </div>
+        </div>
+      `
+    },
+    {
+      title: 'What Changes in the Brief',
+      statusBadge: 'live',
+      content: `
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+          <div>
+            <div style="background:#D2F895;padding:12px 16px;border-radius:8px 8px 0 0;font-weight:700;font-size:14px;">Current Brief</div>
+            <div style="background:#067A46;color:white;padding:20px;border-radius:0 0 8px 8px;">
+              <ul style="font-size:13px;padding-left:16px;line-height:2;">
+                <li>X recipe video(s) on TikTok/IG/YouTube</li>
+                <li>Story coverage of cooking process</li>
+                <li>Tag @hellofresh + campaign hashtag</li>
+                <li>Link in bio / swipe up CTA</li>
+                <li>Usage rights for paid amplification</li>
+              </ul>
+            </div>
+          </div>
+          <div>
+            <div style="background:#D2F895;padding:12px 16px;border-radius:8px 8px 0 0;font-weight:700;font-size:14px;">Updated Brief</div>
+            <div style="background:#067A46;color:white;padding:20px;border-radius:0 0 8px 8px;">
+              <ul style="font-size:13px;padding-left:16px;line-height:2;">
+                <li>X recipe video(s) on TikTok/IG/YouTube</li>
+                <li>Story coverage of cooking process</li>
+                <li>Tag @hellofresh + campaign hashtag</li>
+                <li>Link in bio / swipe up CTA</li>
+                <li>Usage rights for paid amplification</li>
+                <li><strong>Create HelloFresh Creator Profile + link recipe videos to the app</strong></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      `
+    },
+    {
+      title: 'Let\\'s Get This Into Briefs',
+      statusBadge: 'live',
+      content: `
+        <div style="background:#067A46;color:white;padding:32px;border-radius:12px;">
+          <p style="font-size:15px;margin-bottom:24px;">We have 150 founding creator spots. Every partnership we run without this line item is a missed opportunity to fill those spots with creators we already work with and trust.</p>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;">
+            <div style="background:#1a3a2a;padding:20px;border-radius:8px;text-align:center;">
+              <div style="color:#96DC14;font-size:11px;font-weight:700;letter-spacing:1px;margin-bottom:8px;">STEP 1</div>
+              <div style="font-size:13px;font-weight:600;">Add the Creator Platform deliverable to all new chef/food partnership briefs going forward</div>
+            </div>
+            <div style="background:#1a3a2a;padding:20px;border-radius:8px;text-align:center;">
+              <div style="color:#96DC14;font-size:11px;font-weight:700;letter-spacing:1px;margin-bottom:8px;">STEP 2</div>
+              <div style="font-size:13px;font-weight:600;">Reach out to existing active partners who haven't yet created a profile</div>
+            </div>
+            <div style="background:#1a3a2a;padding:20px;border-radius:8px;text-align:center;">
+              <div style="color:#96DC14;font-size:11px;font-weight:700;letter-spacing:1px;margin-bottom:8px;">STEP 3</div>
+              <div style="font-size:13px;font-weight:600;">Track Creator Platform sign-ups as a partnership KPI alongside standard deliverables</div>
+            </div>
+          </div>
+        </div>
       `
     }
   ]
