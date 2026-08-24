@@ -5081,26 +5081,85 @@ async function loadData() {
   document.querySelectorAll('.view-toggle button').forEach(b => {
     b.classList.toggle('active', b.dataset.view === currentView);
   });
-  // Check URL params for deep linking
+
+  // Deep linking: hash takes priority, then query params, then sessionStorage
+  const hash = window.location.hash.replace('#', '');
   const urlParams = new URLSearchParams(window.location.search);
   const paramMode = urlParams.get('mode');
   const paramInit = urlParams.get('init');
-  if (paramMode) {
+
+  if (hash) {
+    const parsed = parseDeepLinkHash(hash);
+    currentMode = parsed.mode;
+    if (parsed.view) currentView = parsed.view;
+    if (parsed.init) {
+      activeInitiative = parsed.init;
+      activeCampaignPage = parsed.init;
+    }
+    sessionStorage.setItem('pmmHubMode', currentMode);
+    if (parsed.view) sessionStorage.setItem('pmmHubView', parsed.view);
+  } else if (paramMode) {
     currentMode = paramMode;
     sessionStorage.setItem('pmmHubMode', paramMode);
-  }
-  if (paramInit && currentMode === 'campaigns') {
-    activeInitiative = paramInit;
-    activeCampaignPage = paramInit;
-    sessionStorage.setItem('pmmHubCampaignPage', paramInit);
+    if (paramInit && currentMode === 'campaigns') {
+      activeInitiative = paramInit;
+      activeCampaignPage = paramInit;
+      sessionStorage.setItem('pmmHubCampaignPage', paramInit);
+    }
+    updateHash(currentMode, currentMode === 'marketing' ? currentView : null, paramInit || null, true);
   }
 
   if (currentMode === 'marketing') {
-    sidebarNav('marketing', currentView);
+    sidebarNav('marketing', currentView, true);
   } else {
-    sidebarNav(currentMode);
+    sidebarNav(currentMode, null, true);
   }
 }
+
+function parseDeepLinkHash(hash) {
+  const parts = hash.split('/').filter(Boolean);
+  const result = { mode: parts[0] || 'marketing', view: null, init: null };
+  if (result.mode === 'marketing' && parts[1]) {
+    result.view = parts[1];
+  } else if (result.mode === 'campaigns' && parts[1]) {
+    result.init = parts[1];
+  }
+  return result;
+}
+
+function buildHash(mode, view, init) {
+  let hash = mode;
+  if (mode === 'marketing' && view) hash += '/' + view;
+  else if (mode === 'campaigns' && init) hash += '/' + init;
+  return hash;
+}
+
+function updateHash(mode, view, init, replace) {
+  const hash = '#' + buildHash(mode, view, init);
+  if (window.location.hash === hash) return;
+  if (replace) {
+    history.replaceState(null, '', hash);
+  } else {
+    history.pushState(null, '', hash);
+  }
+}
+
+window.addEventListener('hashchange', function() {
+  const hash = window.location.hash.replace('#', '');
+  if (!hash) return;
+  const parsed = parseDeepLinkHash(hash);
+  currentMode = parsed.mode;
+  if (parsed.view) currentView = parsed.view;
+  if (parsed.init) {
+    activeInitiative = parsed.init;
+    activeCampaignPage = parsed.init;
+  }
+  if (currentMode === 'marketing') {
+    sidebarNav('marketing', currentView, true);
+  } else {
+    sidebarNav(currentMode, null, true);
+  }
+});
 
 function persistData() {
   localStorage.setItem('calendarDataOverride', JSON.stringify(calendarData));
@@ -5171,7 +5230,7 @@ function updateMarketLabel() {
 }
 
 // SIDEBAR NAVIGATION
-function sidebarNav(mode, view) {
+function sidebarNav(mode, view, skipHash) {
   // Update sidebar active state
   document.querySelectorAll('.sidebar-item').forEach(item => item.classList.remove('active'));
   let selector;
@@ -5206,6 +5265,13 @@ function sidebarNav(mode, view) {
       b.classList.toggle('active', b.dataset.view === view);
     });
   }
+
+  // Update URL hash for deep linking
+  if (!skipHash) {
+    const init = (mode === 'campaigns') ? activeCampaignPage : null;
+    updateHash(mode, view, init);
+  }
+
   setMode(mode);
 }
 
@@ -8349,15 +8415,12 @@ function renderCampaigns() {
 function setCampaignPage(page) {
   activeCampaignPage = page;
   sessionStorage.setItem('pmmHubCampaignPage', page);
-  const url = new URL(window.location);
-  url.searchParams.set('mode', 'campaigns');
-  url.searchParams.set('init', page);
-  history.replaceState(null, '', url);
+  updateHash('campaigns', null, page);
   renderCampaigns();
 }
 
 function copyInitLink(initId) {
-  const url = window.location.origin + window.location.pathname + '?mode=campaigns&init=' + initId;
+  const url = window.location.origin + window.location.pathname + '#campaigns/' + initId;
   navigator.clipboard.writeText(url).then(() => {
     const btn = event.currentTarget;
     const orig = btn.innerHTML;
@@ -8392,7 +8455,7 @@ function renderCampaignPage(init) {
   const heroImage = customHero || (allGalleryImages.length > 0 ? allGalleryImages[0] : null);
 
   html += `<div class="one-pager">`;
-  const initDirectLink = window.location.origin + window.location.pathname + '?mode=campaigns&init=' + init.id;
+  const initDirectLink = window.location.origin + window.location.pathname + '#campaigns/' + init.id;
   const initSlides = INITIATIVE_SLIDES[init.id] || [];
   const totalSlides = 1 + initSlides.length;
   currentSlideIndex[init.id] = 0;
