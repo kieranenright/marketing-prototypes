@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creator Platform Partnership Pitch</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f5;
+        }
+
+        .slide {
+            width: 1280px;
+            height: 720px;
+            margin: 20px auto;
+            background: white;
+            position: relative;
+            overflow: hidden;
+            page-break-after: always;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+        }
+
+        .slide:last-child {
+            page-break-after: avoid;
+        }
+
+        /* Title Slide */
+        .slide-title {
+            background: linear-gradient(135deg, #067A46 0%, #04522F 100%);
+            color: white;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 80px;
+        }
+
+        .slide-title h1 {
+            font-size: 46px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+            line-height: 1.15;
+        }
+
+        .slide-title h2 {
+            font-size: 22px;
+            font-weight: 400;
+            opacity: 0.85;
+            margin-bottom: 40px;
+        }
+
+        .slide-title .meta {
+            font-size: 16px;
+            opacity: 0.6;
+        }
+
+        /* Section Divider */
+        .slide-divider {
+            background: #1a1a1a;
+            color: white;
+            justify-content: center;
+            padding: 80px 100px;
+        }
+
+        .slide-divider .section-number {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            opacity: 0.5;
+            margin-bottom: 20px;
+        }
+
+        .slide-divider h2 {
+            font-size: 44px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .slide-divider p {
+            font-size: 20px;
+            opacity: 0.7;
+            margin-top: 20px;
+            max-width: 700px;
+        }
+
+        /* Content Slides */
+        .slide-content {
+            padding: 60px 80px;
+        }
+
+        .slide-content .slide-header {
+            margin-bottom: 36px;
+            padding-bottom: 18px;
+            border-bottom: 3px solid #067A46;
+        }
+
+        .slide-content .slide-header h3 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+
+        .slide-content .slide-header .subtitle {
+            font-size: 16px;
+            color: #666;
+            margin-top: 6px;
+        }
+
+        /* Grid layouts */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            flex: 1;
+        }
+
+        .content-grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            flex: 1;
+        }
+
+        .content-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 24px;
+            border-left: 4px solid #067A46;
+        }
+
+        .content-card h4 {
+            font-size: 15px;
+            font-weight: 700;
+            color: #067A46;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .content-card p {
+            font-size: 15px;
+            line-height: 1.5;
+            color: #333;
+        }
+
+        .content-card .tag {
+            display: inline-block;
+            background: #067A46;
+            color: white;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 3px 10px;
+            border-radius: 20px;
+            margin-top: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Single Column Content */
+        .content-single {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .content-row {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        .content-row .icon {
+            width: 48px;
+            height: 48px;
+            min-width: 48px;
+            background: #E8F5EE;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+        }
+
+        .content-row .text h4 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 4px;
+        }
+
+        .content-row .text p {
+            font-size: 14px;
+            line-height: 1.5;
+            color: #555;
+        }
+
+        /* Big number stat */
+        .stat-row {
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-item .number {
+            font-size: 52px;
+            font-weight: 800;
+            color: #067A46;
+            line-height: 1;
+        }
+
+        .stat-item .label {
+            font-size: 14px;
+            color: #666;
+            margin-top: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Flow diagram */
+        .flow-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .flow-step {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 18px 20px;
+            text-align: center;
+            flex: 1;
+        }
+
+        .flow-step .step-number {
+            font-size: 11px;
+            font-weight: 700;
+            color: #067A46;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+
+        .flow-step .step-text {
+            font-size: 13px;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        .flow-arrow {
+            font-size: 20px;
+            color: #067A46;
+            font-weight: 700;
+        }
+
+        /* Insight box */
+        .insight-box {
+            background: #E8F5EE;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+            border: 1px solid #c3e6d4;
+        }
+
+        .insight-box h4 {
+            font-size: 14px;
+            font-weight: 700;
+            color: #067A46;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .insight-box p {
+            font-size: 15px;
+            line-height: 1.5;
+            color: #1a1a1a;
+        }
+
+        /* Callout */
+        .callout {
+            background: #FFF3CD;
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin-top: 20px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .callout .callout-icon {
+            font-size: 20px;
+            min-width: 24px;
+        }
+
+        .callout p {
+            font-size: 14px;
+            line-height: 1.5;
+            color: #664D03;
+        }
+
+        .callout-green {
+            background: #E8F5EE;
+            border: 1px solid #c3e6d4;
+        }
+
+        .callout-green p {
+            color: #1a5c34;
+        }
+
+        /* Objection handling */
+        .objection-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 24px;
+            border-left: 4px solid #dc3545;
+            margin-bottom: 16px;
+        }
+
+        .objection-card.resolved {
+            border-left-color: #067A46;
+        }
+
+        .objection-card .objection-label {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #dc3545;
+            margin-bottom: 6px;
+        }
+
+        .objection-card.resolved .objection-label {
+            color: #067A46;
+        }
+
+        .objection-card h4 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+
+        .objection-card p {
+            font-size: 14px;
+            line-height: 1.5;
+            color: #555;
+        }
+
+        /* Before/After comparison */
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            flex: 1;
+        }
+
+        .comparison-side {
+            border-radius: 12px;
+            padding: 28px;
+        }
+
+        .comparison-side.before {
+            background: #f8f9fa;
+            border: 2px solid #e0e0e0;
+        }
+
+        .comparison-side.after {
+            background: #E8F5EE;
+            border: 2px solid #067A46;
+        }
+
+        .comparison-side .comp-label {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 16px;
+        }
+
+        .comparison-side.before .comp-label {
+            color: #999;
+        }
+
+        .comparison-side.after .comp-label {
+            color: #067A46;
+        }
+
+        .comparison-side ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .comparison-side ul li {
+            font-size: 14px;
+            line-height: 2;
+            color: #333;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .comparison-side.before ul li:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 11px;
+            width: 8px;
+            height: 8px;
+            background: #ccc;
+            border-radius: 50%;
+        }
+
+        .comparison-side.after ul li:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 11px;
+            width: 8px;
+            height: 8px;
+            background: #067A46;
+            border-radius: 50%;
+        }
+
+        .comparison-side .new-item {
+            font-weight: 600;
+            color: #067A46;
+        }
+
+        /* CTA Slide */
+        .slide-cta {
+            background: linear-gradient(135deg, #004D30 0%, #002A1A 100%);
+            color: white;
+            padding: 80px;
+            justify-content: center;
+        }
+
+        .slide-cta h2 {
+            font-size: 40px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .slide-cta p {
+            font-size: 18px;
+            opacity: 0.85;
+            line-height: 1.6;
+            max-width: 700px;
+            margin-bottom: 40px;
+        }
+
+        .cta-actions {
+            display: flex;
+            gap: 20px;
+        }
+
+        .cta-action {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 12px;
+            padding: 20px 28px;
+            flex: 1;
+            max-width: 300px;
+        }
+
+        .cta-action h4 {
+            font-size: 14px;
+            font-weight: 700;
+            color: #96DC14;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .cta-action p {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-bottom: 0;
+        }
+
+        /* Quote highlight */
+        .quote-box {
+            background: linear-gradient(135deg, #067A46 0%, #04522F 100%);
+            border-radius: 16px;
+            padding: 36px 40px;
+            color: white;
+            margin: 20px 0;
+        }
+
+        .quote-box .quote-text {
+            font-size: 22px;
+            font-weight: 600;
+            line-height: 1.4;
+            margin-bottom: 12px;
+        }
+
+        .quote-box .quote-source {
+            font-size: 14px;
+            opacity: 0.7;
+        }
+
+        /* Footer */
+        .slide-footer {
+            position: absolute;
+            bottom: 20px;
+            left: 80px;
+            right: 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: #999;
+        }
+
+        .slide-footer .logo {
+            font-weight: 700;
+            color: #067A46;
+        }
+
+        /* Brief template */
+        .brief-template {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 28px 32px;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 13px;
+            line-height: 1.8;
+            color: #e0e0e0;
+        }
+
+        .brief-template .comment {
+            color: #6a9955;
+        }
+
+        .brief-template .highlight {
+            color: #96DC14;
+            font-weight: 600;
+        }
+
+        .brief-template .existing {
+            opacity: 0.5;
+        }
+
+        @media print {
+            .slide {
+                margin: 0;
+                box-shadow: none;
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Slide 1: Title -->
+<div class="slide slide-title">
+    <h1>One Line in the Brief,<br>Millions of New Eyeballs</h1>
+    <h2>Adding Creator Platform profiles to influencer partnerships</h2>
+    <p class="meta">HelloFresh Marketing | August 2026</p>
+</div>
+
+<!-- Slide 2: The Opportunity -->
+<div class="slide slide-content">
+    <div class="slide-header">
+        <h3>The Opportunity</h3>
+        <p class="subtitle">We already pay for content. We're leaving value on the table.</p>
+    </div>
+    <div class="quote-box">
+        <p class="quote-text">Every chef partnership we run produces recipe content that lives on social platforms we don't own. One additional deliverable puts that same content in front of millions of HelloFresh app users, at zero incremental cost.</p>
+        <p class="quote-source">The ask: add "Create a HelloFresh Creator Profile + upload recipes" to partnership briefs</p>
+    </div>
+    <div class="stat-row">
+        <div class="stat-item">
+            <div class="number">16+</div>
+            <div class="label">Countries with app users</div>
+        </div>
+        <div class="stat-item">
+            <div class="number">$0</div>
+            <div class="label">Incremental cost</div>
+        </div>
+        <div class="stat-item">
+            <div class="number">150</div>
+            <div class="label">Founding creator spots</div>
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span class="logo">HelloFresh</span>
+        <span>2 / 10</span>
+    </div>
+</div>
+
+<!-- Slide 3: What is the Creator Platform -->
+<div class="slide slide-content">
+    <div class="slide-header">
+        <h3>What is the Creator Platform?</h3>
+        <p class="subtitle">How recipe videos become in-app content</p>
+    </div>
+    <div class="content-single">
+        <div class="flow-container">
+            <div class="flow-step">
+                <p class="step-number">Step 1</p>
+                <p class="step-text">Creator links their existing recipe videos (TikTok, IG, YouTube)</p>
+            </div>
+            <span class="flow-arrow">&#8594;</span>
+            <div class="flow-step">
+                <p class="step-number">Step 2</p>
+                <p class="step-text">HelloFresh converts them into structured recipe cards (ingredients, steps, photos)</p>
+            </div>
+            <span class="flow-arrow">&#8594;</span>
+            <div class="flow-step">
+                <p class="step-number">Step 3</p>
+                <p class="step-text">Recipes go live in the app. Users browse, save, and cook them.</p>
+            </div>
+        </div>
+        <div style="margin-top: 30px;">
+            <div class="content-grid">
+                <div class="content-card">
+                    <h4>Creator Keeps Everything</h4>
+                    <p>Full ownership of recipes, audience, and brand. Non-exclusive licensing only. They can still post and monetize their content anywhere else.</p>
+                </div>
+                <div class="content-card">
+                    <h4>HelloFresh Does the Work</h4>
+                    <p>We handle the conversion from video to recipe card. Creators don't write out recipes manually. Just link the video and we do the rest.</p>
+                </div>
+                <div class="content-card">
+                    <h4>Global Distribution</h4>
+                    <p>Recipes surface to users across 16+ countries. A single video upload reaches audiences a creator would never reach organically on social alone.</p>
+                </div>
+                <div class="content-card">
+                    <h4>Founding Creator Status</h4>
+                    <p>First 150 creators get permanent founding status: priority features, product roadmap input, and early access. This status is never offered again.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span class="logo">HelloFresh</span>
+        <span>3 / 10</span>
+    </div>
+</div>
+
+<!-- Slide 4: Why This Matters -->
+<div class="slide slide-divider">
+    <p class="section-number">The Argument</p>
+    <h2>We Already Pay for the Content.<br>Let's Use It Everywhere.</h2>
+    <p>Every partnership brief already requires recipe video content. Adding a Creator Platform deliverable means we extract additional value from content we've already commissioned and paid for. No new production. No new budget line. Just one more place that content lives.</p>
+</div>
+
+<!-- Slide 5: Value Exchange -->
+<div class="slide slide-content">
+    <div class="slide-header">
+        <h3>The Value Exchange</h3>
+        <p class="subtitle">What each stakeholder gains from this addition</p>
+    </div>
+    <div class="content-grid-3">
+        <div class="content-card">
+            <h4>For HelloFresh</h4>
+            <p>High quality recipe content in the app from creators we already work with. Drives engagement, session time, and recipe saves. Strengthens the app as a cooking destination beyond meal kits.</p>
+            <span class="tag">Business Value</span>
+        </div>
+        <div class="content-card">
+            <h4>For Creators</h4>
+            <p>Access to millions of users they'd never reach on social. Founding creator status and permanent platform recognition. A new distribution channel that requires almost no extra effort.</p>
+            <span class="tag">Creator Value</span>
+        </div>
+        <div class="content-card">
+            <h4>For Partnership Teams</h4>
+            <p>Stronger pitch to creators (you're offering them something). Differentiates HF partnerships from competitors. Easy deliverable that adds value to the overall package without adding scope.</p>
+            <span class="tag">Team Value</span>
+        </div>
+    </div>
+    <div class="callout-green callout" style="margin-top: 24px;">
+        <span class="callout-icon">&#9989;</span>
+        <p><strong>Net result:</strong> A creator who already filmed 3 recipe videos for a partnership now also has those recipes surfaced to millions of in-app users across 16 countries. Same content, massively expanded reach.</p>
+    </div>
+    <div class="slide-footer">
+        <span class="logo">HelloFresh</span>
+        <span>5 / 10</span>
+    </div>
+</div>
+
+<!-- Slide 6: Where This Goes Next -->
+<div class="slide slide-content" style="background: #FAF8F3; padding: 50px 80px;">
+    <div class="slide-header" style="border-bottom: none; margin-bottom: 24px; padding-bottom: 0;">
+        <h3 style="font-size: 32px; font-style: italic; font-weight: 800;">Where this goes next</h3>
+    </div>
+    <div style="background: #067A46; border-radius: 6px; padding: 10px 0; text-align: center; margin-bottom: 16px;">
+        <span style="color: white; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px;">The Vision</span>
+    </div>
+    <p style="font-size: 14px; line-height: 1.6; color: #333; text-align: center; margin-bottom: 28px; max-width: 820px; margin-left: auto; margin-right: auto;">Today, the Creator Platform gives our app <strong><em>fresh recipe content</em></strong> at zero incremental cost. Tomorrow, it becomes <strong><em>a demand signal, a menu testing pipeline,</em></strong> and <strong><em>an acquisition channel</em></strong> that turns creator audiences into HelloFresh customers.</p>
+    <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+        <thead>
+            <tr style="background: #1a3a2a;">
+                <th style="padding: 14px 20px; text-align: left; color: white; font-weight: 700; font-size: 15px; width: 200px; border-radius: 6px 0 0 0;">Aspect</th>
+                <th style="padding: 14px 20px; text-align: left; color: white; font-weight: 700; font-size: 15px; border-radius: 0 6px 0 0;">Proof</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="border-bottom: 1px solid #e0e0e0;">
+                <td style="padding: 14px 20px; font-weight: 700; color: #1a1a1a;">Menu Integration</td>
+                <td style="padding: 14px 20px; color: #333;">Creator recipes surface directly in the menu selection screen alongside HelloFresh originals</td>
+            </tr>
+            <tr style="background: #f0f0ec; border-bottom: 1px solid #e0e0e0;">
+                <td style="padding: 14px 20px; font-weight: 700; color: #1a1a1a;">Trend Detection</td>
+                <td style="padding: 14px 20px; color: #333;">Save and engagement data becomes an early signal for emerging food trends and audience preferences</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #e0e0e0;">
+                <td style="padding: 14px 20px; font-weight: 700; color: #1a1a1a;">Recipe Testing Ground</td>
+                <td style="padding: 14px 20px; color: #333;">Chefs release recipes as saveable content first. We track demand, then promote winners to the full menu</td>
+            </tr>
+            <tr style="background: #f0f0ec; border-bottom: 1px solid #e0e0e0;">
+                <td style="padding: 14px 20px; font-weight: 700; color: #1a1a1a;">Acquisition Funnel</td>
+                <td style="padding: 14px 20px; color: #333;">Creators drive their social audiences into the app for free. We convert them into subscribers over time</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #e0e0e0;">
+                <td style="padding: 14px 20px; font-weight: 700; color: #1a1a1a;">Taste Personalisation</td>
+                <td style="padding: 14px 20px; color: #333;">Creator recipe engagement enriches user profiles, making meal kit recommendations smarter</td>
+            </tr>
+            <tr style="background: #f0f0ec;">
+                <td style="padding: 14px 20px; font-weight: 700; color: #1a1a1a;">Regional Intelligence</td>
+                <td style="padding: 14px 20px; color: #333;">Geographic save data tells local menu teams what their market actually wants, before committing to production</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="slide-footer">
+        <span class="logo">HelloFresh</span>
+        <span>6 / 10</span>
+    </div>
+</div>
+
+<!-- Slide 7: Objection Handling -->
+<div class="slide slide-content">
+    <div class="slide-header">
+        <h3>Addressing Concerns</h3>
+        <p class="subtitle">Pre-empting the two most common questions</p>
+    </div>
+    <div class="content-single">
+        <div class="objection-card resolved">
+            <p class="objection-label">Concern</p>
+            <h4>"It adds complexity to the brief"</h4>
+            <p>It's one additional line item. The creator links their videos (which they're already producing for the partnership). HelloFresh handles the entire conversion to recipe cards. There's no additional creative direction, no review rounds, no assets to collect. The brief addition is literally: "Create a HelloFresh Creator Profile and link your partnership recipe videos."</p>
+        </div>
+        <div class="objection-card resolved">
+            <p class="objection-label">Concern</p>
+            <h4>"Creators won't want to do it"</h4>
+            <p>This isn't extra unpaid work. It's an additional benefit we're offering them. They get: global distribution to millions of users, founding creator status (first 150 only, never offered again), product roadmap influence, and a permanent profile on a platform used in 16+ countries. Most creators would pay for this kind of reach. We're giving it to them as part of the partnership.</p>
+        </div>
+        <div class="callout">
+            <span class="callout-icon">&#128161;</span>
+            <p><strong>Reframe:</strong> This isn't something we're asking creators to do for us. It's something we're offering them. The pitch is: "As part of this partnership, we'll also set you up with a Creator Profile on our app so your recipes reach millions of additional users across 16 countries."</p>
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span class="logo">HelloFresh</span>
+        <span>7 / 10</span>
+    </div>
+</div>
+
+<!-- Slide 8: What Changes in the Brief -->
+<div class="slide slide-content">
+    <div class="slide-header">
+        <h3>What Changes in the Brief</h3>
+        <p class="subtitle">Before and after: one line item, zero extra production</p>
+    </div>
+    <div class="comparison">
+        <div class="comparison-side before">
+            <p class="comp-label">Current Brief</p>
+            <ul>
+                <li>X recipe video(s) on TikTok/IG/YouTube</li>
+                <li>Story coverage of cooking process</li>
+                <li>Tag @hellofresh + campaign hashtag</li>
+                <li>Link in bio / swipe up CTA</li>
+                <li>Usage rights for paid amplification</li>
+            </ul>
+        </div>
+        <div class="comparison-side after">
+            <p class="comp-label">Updated Brief</p>
+            <ul>
+                <li>X recipe video(s) on TikTok/IG/YouTube</li>
+                <li>Story coverage of cooking process</li>
+                <li>Tag @hellofresh + campaign hashtag</li>
+                <li>Link in bio / swipe up CTA</li>
+                <li>Usage rights for paid amplification</li>
+                <li class="new-item">Create HelloFresh Creator Profile + link recipe videos to the app</li>
+            </ul>
+        </div>
+    </div>
+    <div class="brief-template" style="margin-top: 24px;">
+        <p class="comment">// Suggested brief language (copy/paste ready):</p>
+        <p>&nbsp;</p>
+        <p class="highlight">DELIVERABLE: HelloFresh Creator Platform Profile</p>
+        <p>Create a profile on the HelloFresh Creator Platform</p>
+        <p>(hellofresh.com/creators/join) and link the recipe videos</p>
+        <p>produced for this partnership. HelloFresh will convert</p>
+        <p>them into recipe cards for global app distribution.</p>
+        <p>This gives you founding creator status and access to</p>
+        <p>millions of additional users across 16+ countries.</p>
+    </div>
+    <div class="slide-footer">
+        <span class="logo">HelloFresh</span>
+        <span>8 / 10</span>
+    </div>
+</div>
+
+<!-- Slide 9: The Vision (card layout) -->
+<div class="slide slide-content" style="background: #FAF8F3;">
+    <div class="slide-header">
+        <h3>Where This Goes Next</h3>
+        <p class="subtitle">The Creator Platform starts as a content play. It becomes an intelligence and growth engine.</p>
+    </div>
+    <div class="insight-box" style="background: linear-gradient(135deg, #067A46 0%, #04522F 100%); border: none; margin-bottom: 28px;">
+        <h4 style="color: #96DC14; margin-bottom: 10px;">The Vision</h4>
+        <p style="color: white; font-size: 16px; line-height: 1.6;">Today, the Creator Platform gives our app fresh recipe content at zero incremental cost. Tomorrow, it becomes a demand signal, a menu testing pipeline, and an acquisition channel that turns creator audiences into HelloFresh customers.</p>
+    </div>
+    <div class="content-grid" style="gap: 16px;">
+        <div class="content-card" style="padding: 20px;">
+            <h4>Menu Integration</h4>
+            <p>Creator recipes surface directly in the menu selection screen alongside HelloFresh originals, giving users more choice and variety at no production cost.</p>
+        </div>
+        <div class="content-card" style="padding: 20px;">
+            <h4>Trend Detection</h4>
+            <p>Save and engagement data becomes an early signal for emerging food trends and audience preferences, telling us what people want before we commit production resources.</p>
+        </div>
+        <div class="content-card" style="padding: 20px;">
+            <h4>Recipe Testing Ground</h4>
+            <p>Chefs release recipes as saveable content first. We track demand, then promote winners to the full menu. The platform validates before we produce.</p>
+        </div>
+        <div class="content-card" style="padding: 20px;">
+            <h4>Acquisition Funnel</h4>
+            <p>Creators drive their social audiences into the app for free recipes. Once inside, users are exposed to meal kit offerings. Zero cost top of funnel.</p>
+        </div>
+        <div class="content-card" style="padding: 20px;">
+            <h4>Taste Personalisation</h4>
+            <p>Creator recipe engagement enriches user taste profiles, making meal kit recommendations smarter and more relevant over time.</p>
+        </div>
+        <div class="content-card" style="padding: 20px;">
+            <h4>Regional Intelligence</h4>
+            <p>Geographic save data tells local menu teams what their market actually wants. If AU users save Thai creator recipes heavily, that's a clear signal for the AU menu.</p>
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span class="logo">HelloFresh</span>
+        <span>9 / 10</span>
+    </div>
+</div>
+
+<!-- Slide 10: Next Steps -->
+<div class="slide slide-cta">
+    <h2>Let's Get This Into Briefs</h2>
+    <p>We have 150 founding creator spots. Every partnership we run without this line item is a missed opportunity to fill those spots with creators we already work with and trust.</p>
+    <div class="cta-actions">
+        <div class="cta-action">
+            <h4>Step 1</h4>
+            <p>Add the Creator Platform deliverable to all new chef/food partnership briefs going forward</p>
+        </div>
+        <div class="cta-action">
+            <h4>Step 2</h4>
+            <p>Reach out to existing active partners who haven't yet created a profile</p>
+        </div>
+        <div class="cta-action">
+            <h4>Step 3</h4>
+            <p>Track Creator Platform sign-ups as a partnership KPI alongside standard deliverables</p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
