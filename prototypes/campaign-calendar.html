@@ -4911,6 +4911,44 @@ body {
   </div>
 </div>
 
+<!-- Add Link Modal -->
+<div class="modal-overlay form-modal" id="addLinkModal">
+  <div class="modal" style="max-width:440px;">
+    <div class="modal-header">
+      <h2>Add Link</h2>
+      <button class="modal-close" onclick="closeModal('addLinkModal')">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label>Title</label>
+        <input type="text" id="addLinkTitle" placeholder="e.g. Campaign Strategy Doc">
+      </div>
+      <div class="form-group">
+        <label>URL</label>
+        <input type="url" id="addLinkHref" placeholder="https://...">
+      </div>
+      <div class="form-group">
+        <label>Tag</label>
+        <select id="addLinkTag">
+          <option value="Link">Link</option>
+          <option value="Strategy">Strategy</option>
+          <option value="CRM">CRM</option>
+          <option value="Report">Report</option>
+          <option value="ASO">ASO</option>
+          <option value="Paid">Paid</option>
+          <option value="Creative">Creative</option>
+          <option value="Product">Product</option>
+        </select>
+      </div>
+      <div class="form-actions">
+        <div style="flex:1;"></div>
+        <button class="form-btn form-btn-cancel" onclick="closeModal('addLinkModal')">Cancel</button>
+        <button class="form-btn form-btn-primary" onclick="saveNewCampaignLink()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- Initiative Legend -->
 <div class="legend-container" id="legendContainer" style="display:none;">
   <div class="legend-panel" id="legendPanel">
@@ -8775,15 +8813,27 @@ function saveHiddenBaselineLinks() {
   localStorage.setItem('hiddenBaselineLinks', JSON.stringify(hiddenBaselineLinks));
 }
 
+let addLinkTargetInitId = null;
+
 function addCampaignLink(initId) {
-  const label = prompt('Link title:');
-  if (!label) return;
-  const href = prompt('URL:');
-  if (!href) return;
-  const tag = prompt('Tag (e.g. Strategy, CRM, Report):', 'Link');
-  if (!campaignLinks[initId]) campaignLinks[initId] = [];
-  campaignLinks[initId].push({ label, href, tag: tag || 'Link' });
+  addLinkTargetInitId = initId;
+  document.getElementById('addLinkTitle').value = '';
+  document.getElementById('addLinkHref').value = '';
+  document.getElementById('addLinkTag').value = 'Link';
+  document.getElementById('addLinkModal').classList.add('active');
+  document.getElementById('addLinkTitle').focus();
+}
+
+function saveNewCampaignLink() {
+  const label = document.getElementById('addLinkTitle').value.trim();
+  const href = document.getElementById('addLinkHref').value.trim();
+  const tag = document.getElementById('addLinkTag').value;
+  if (!label) { document.getElementById('addLinkTitle').focus(); return; }
+  if (!href) { document.getElementById('addLinkHref').focus(); return; }
+  if (!campaignLinks[addLinkTargetInitId]) campaignLinks[addLinkTargetInitId] = [];
+  campaignLinks[addLinkTargetInitId].push({ label, href, tag });
   saveCampaignLinks();
+  closeModal('addLinkModal');
   renderCampaigns();
 }
 
