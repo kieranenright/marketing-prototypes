@@ -8387,7 +8387,7 @@ function renderTeamBreakdown() {
     { theme: 'PMM Monthly Update Calls', owners: { all: 'Marina Zinakova', us: '', ca: '', anz: '', gb: '', ie: '', dach: '', bnl: '', fr: '', nor: '' }, allMarkets: true },
     { theme: 'Global PMM Hub', owners: { all: 'Kieran Enright', us: '', ca: '', anz: '', gb: '', ie: '', dach: '', bnl: '', fr: '', nor: '' }, allMarkets: true },
     { theme: 'HF Mealkit Roadmap alignment', owners: { all: 'Marina Zinakova', us: '', ca: '', anz: '', gb: '', ie: '', dach: '', bnl: '', fr: '', nor: '' }, allMarkets: true },
-    { theme: 'Peak Campaigns', owners: { all: 'Domitille Park,\nMarina Kramer', us: '', ca: '', anz: '', gb: '', ie: '', dach: '', bnl: '', fr: '', nor: '' }, allMarkets: true },
+    { theme: 'Peak Campaigns', owners: { all: 'Marina Kramer', us: '', ca: '', anz: '', gb: '', ie: '', dach: '', bnl: '', fr: '', nor: '' }, allMarkets: true },
     { theme: 'Customer Engagement:', subtitle: 'Cookbook, Food Companion, Meal Planner', owners: { all: 'Kieran Enright', us: '', ca: '', anz: '', gb: '', ie: '', dach: '', bnl: '', fr: '', nor: '' }, allMarkets: true },
     { theme: 'Loyalty & Virality:', subtitle: 'Loyalty Program', owners: { all: 'Kieran Enright', us: '', ca: '', anz: '', gb: '', ie: '', dach: '', bnl: '', fr: '', nor: '' }, allMarkets: true },
     { theme: 'SHOPPING JOURNEY:', subtitle: 'Modularity, Surcharges, Extra Meals, Premium widgets, Add ons, Merchandising and Shopping Guidance', owners: { all: 'Marina Zinakova', us: '', ca: '', anz: '', gb: '', ie: '', dach: '', bnl: '', fr: '', nor: '' }, allMarkets: true },
@@ -9403,10 +9403,6 @@ function renderAdvisorMessage(msg) {
     return `<div class="advisor-msg user">${escapeHTML(msg.text)}</div>`;
   } else if (msg.role === 'ai') {
     let html = `<div class="advisor-msg ai">`;
-    if (msg.verdict) {
-      const verdictClass = msg.verdict === 'GO' ? 'go' : msg.verdict === 'CAUTION' ? 'caution' : 'stop';
-      html += `<span class="advisor-verdict ${verdictClass}">${msg.verdict}</span>`;
-    }
     html += `<div>${msg.html || escapeHTML(msg.text)}</div>`;
     html += `</div>`;
     return html;
@@ -9505,7 +9501,6 @@ INSTRUCTIONS:
 - Answer the user's question directly and conversationally.
 - Ground your answer in the specific best practices above. Cite which best practice supports your point.
 - If the question is about a specific channel, focus on best practices for that channel.
-- Give a clear verdict: will this work, will it need adjustment, or should they avoid it?
 - Be concise but specific. Mention timing conflicts, frequency issues, or opportunities from the calendar.
 - If the best practices don't cover the topic, say so honestly and give your best general advice.
 
@@ -9514,7 +9509,6 @@ ${conversationHistory}
 
 Respond in this exact JSON format:
 {
-  "verdict": "GO|CAUTION|STOP",
   "answer": "Your main answer (2-4 sentences, conversational)",
   "reasoning": "Brief explanation of which best practices support this (1-2 sentences)",
   "suggestion": "Optional: what they should do instead or additionally (1 sentence, or null if not needed)"
@@ -9524,10 +9518,6 @@ Respond in this exact JSON format:
   const parsed = safeParseJSON(response);
 
   let html = '';
-  if (parsed.verdict) {
-    const verdictClass = parsed.verdict === 'GO' ? 'go' : parsed.verdict === 'CAUTION' ? 'caution' : 'stop';
-    html += `<span class="advisor-verdict ${verdictClass}">${parsed.verdict}</span><br>`;
-  }
   html += `<div style="margin-bottom:6px;">${escapeHTML(parsed.answer)}</div>`;
   if (parsed.reasoning) {
     html += `<div class="advisor-section"><div class="advisor-section-title">Based on</div><div class="advisor-ref">${escapeHTML(parsed.reasoning)}</div></div>`;
@@ -9536,7 +9526,7 @@ Respond in this exact JSON format:
     html += `<div class="advisor-section"><div class="advisor-section-title">Suggestion</div><div style="font-size:12px;color:var(--text-secondary);">${escapeHTML(parsed.suggestion)}</div></div>`;
   }
 
-  return { verdict: parsed.verdict, text: parsed.answer, html };
+  return { text: parsed.answer, html };
 }
 
 // Helper: build calendar context string for AI prompts
@@ -9874,10 +9864,6 @@ function renderEIMessage(msg) {
     return `<div class="advisor-msg user">${escapeHTML(msg.text)}</div>`;
   } else if (msg.role === 'ai') {
     let html = `<div class="advisor-msg ai">`;
-    if (msg.verdict) {
-      const verdictClass = msg.verdict === 'STRONG FIT' ? 'go' : msg.verdict === 'PARTIAL FIT' ? 'caution' : 'stop';
-      html += `<span class="advisor-verdict ${verdictClass}">${msg.verdict}</span>`;
-    }
     html += `<div>${msg.html || escapeHTML(msg.text)}</div>`;
     html += `</div>`;
     return html;
@@ -9952,7 +9938,6 @@ ${conversationHistory}
 
 Respond in this exact JSON format:
 {
-  "verdict": "STRONG FIT|PARTIAL FIT|WEAK FIT",
   "answer": "Your main answer (2-4 sentences, conversational, cite data)",
   "evidence": "Key data points from the research that support this (2-3 bullet points)",
   "recommendation": "What to do or adjust to better reach the EI (1-2 sentences, or null if not needed)"
@@ -9962,10 +9947,6 @@ Respond in this exact JSON format:
   const parsed = safeParseJSON(response);
 
   let html = '';
-  if (parsed.verdict) {
-    const verdictClass = parsed.verdict === 'STRONG FIT' ? 'go' : parsed.verdict === 'PARTIAL FIT' ? 'caution' : 'stop';
-    html += `<span class="advisor-verdict ${verdictClass}">${parsed.verdict}</span><br>`;
-  }
   html += `<div style="margin-bottom:6px;">${escapeHTML(parsed.answer)}</div>`;
   if (parsed.evidence) {
     html += `<div class="advisor-section"><div class="advisor-section-title">Evidence</div><div class="advisor-ref">${escapeHTML(parsed.evidence)}</div></div>`;
@@ -9974,7 +9955,7 @@ Respond in this exact JSON format:
     html += `<div class="advisor-section"><div class="advisor-section-title">Recommendation</div><div style="font-size:12px;color:var(--text-secondary);">${escapeHTML(parsed.recommendation)}</div></div>`;
   }
 
-  return { verdict: parsed.verdict, text: parsed.answer, html };
+  return { text: parsed.answer, html };
 }
 </script>
 
