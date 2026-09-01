@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cookbook — Weekly Marketing Update W36</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+  --hf-green: #1B8A4A;
+  --hf-lime: #C8F065;
+  --hf-dark: #1A1A1A;
+  --hf-muted: #888;
+  --hf-light: #F6F6F6;
+  --col-acquire: #2D6BE0;
+  --col-engage: #1B8A4A;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  background: #e0e0e0;
+  color: var(--hf-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 24px;
+}
+
+.slide {
+  width: 1600px;
+  min-height: 900px;
+  background: white;
+  border-radius: 6px;
+  box-shadow: 0 8px 60px rgba(0,0,0,0.15);
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  padding: 28px 40px;
+  gap: 18px;
+}
+
+/* === HEADER === */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.header-left img { height: 26px; }
+.header-sep { width: 1px; height: 20px; background: rgba(0,0,0,0.12); }
+.header-feature { font-size: 17px; font-weight: 800; color: var(--hf-green); }
+.header-right { font-size: 12px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase; letter-spacing: 1.5px; }
+
+/* === MAIN COLUMNS === */
+.main-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  min-height: 0;
+}
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 0;
+}
+.col-header {
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid;
+}
+.col-header.acquire { color: var(--col-acquire); border-color: var(--col-acquire); }
+.col-header.engage { color: var(--col-engage); border-color: var(--col-engage); }
+
+/* Section cards */
+.section-card {
+  border-radius: 10px;
+  background: var(--hf-light);
+  border: 1px solid rgba(0,0,0,0.03);
+  padding: 12px 16px;
+}
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.section-title {
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--hf-dark);
+}
+.section-period {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--hf-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Data tables */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.data-table th {
+  font-size: 9px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--hf-muted);
+  text-align: left;
+  padding: 3px 6px;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+.data-table th:not(:first-child) { text-align: center; }
+.data-table td {
+  padding: 5px 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--hf-dark);
+  border-bottom: 1px solid rgba(0,0,0,0.03);
+}
+.data-table td:not(:first-child) { text-align: center; }
+.data-table tr:last-child td { border-bottom: none; }
+.val-green { color: var(--hf-green); font-weight: 800; }
+.val-blue { color: var(--col-acquire); font-weight: 800; }
+.val-neutral { font-weight: 700; }
+.val-red { color: #D64545; font-weight: 800; }
+
+/* Rec box */
+.rec-box {
+  margin-top: 8px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  background: rgba(27, 138, 74, 0.04);
+  border: 1px solid rgba(27, 138, 74, 0.1);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--hf-dark);
+  line-height: 1.5;
+}
+.rec-box strong { color: var(--hf-green); }
+
+/* Totals bar */
+.totals-bar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.total-chip {
+  flex: 1;
+  text-align: center;
+  padding: 6px;
+  background: white;
+  border-radius: 6px;
+  border: 1px solid rgba(0,0,0,0.04);
+}
+.total-value {
+  font-size: 16px;
+  font-weight: 900;
+  color: var(--hf-dark);
+}
+.total-value.highlight { color: var(--col-acquire); }
+.total-label {
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--hf-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Lightbox */
+.lightbox-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.85);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.lightbox-overlay.active { display: flex; }
+.lightbox-overlay img {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 8px;
+  box-shadow: 0 4px 40px rgba(0,0,0,0.5);
+}
+
+.post-thumb {
+  cursor: pointer;
+}
+
+</style>
+</head>
+<body>
+
+<div class="slide">
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-left">
+      <img src="https://media.hellofresh.com/w_256,q_100,f_auto,c_limit,fl_lossy/hellofresh_website/logo/Hello_Fresh_Lockup.png" alt="HelloFresh">
+      <div class="header-sep"></div>
+      <div class="header-feature">Cookbook Marketing Update</div>
+    </div>
+    <div class="header-right">W36 — 25 Aug – 1 Sep 2026</div>
+  </div>
+
+  <!-- DISCLAIMER -->
+  <div style="padding: 10px 16px; border-radius: 8px; background: rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.06); font-size: 11px; font-weight: 600; color: var(--hf-muted); text-align: center;">
+    For more updates and ongoing discussion, see <strong style="color: var(--hf-dark);">#cookbook-marketing-task-force</strong> on Slack.
+  </div>
+
+  <!-- SUMMARY HERO -->
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+    <div style="padding: 16px 20px; border-radius: 12px; background: rgba(45, 107, 224, 0.04); border: 1px solid rgba(45, 107, 224, 0.1);">
+      <div style="font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--col-acquire); margin-bottom: 6px;">Awareness & Acquisition</div>
+      <div style="font-size: 14px; font-weight: 700; color: var(--hf-dark); line-height: 1.4; margin-bottom: 10px;">Carrying forward: Creator Platform deck being shared with local markets, Partnership T&Cs with Legal, competitor value prop analysis feeding into workshop.</div>
+      <div style="display: flex; gap: 16px;">
+        <div style="text-align: center;">
+          <div style="font-size: 24px; font-weight: 900; color: var(--col-acquire);">Legal</div>
+          <div style="font-size: 10px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase;">T&Cs In Progress</div>
+        </div>
+        <div style="text-align: center;">
+          <div style="font-size: 24px; font-weight: 900; color: var(--col-acquire);">Local</div>
+          <div style="font-size: 10px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase;">Markets Outreach</div>
+        </div>
+      </div>
+    </div>
+    <div style="padding: 16px 20px; border-radius: 12px; background: rgba(27, 138, 74, 0.04); border: 1px solid rgba(27, 138, 74, 0.1);">
+      <div style="font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--col-engage); margin-bottom: 6px;">Activation & Engagement</div>
+      <div style="font-size: 14px; font-weight: 700; color: var(--hf-dark); line-height: 1.4; margin-bottom: 10px;">P0 push notifications are live. 58K+ notifications sent with a 7% open rate, well above the 2.9% August benchmark. First major CRM activation channel for Cookbook.</div>
+      <div style="display: flex; gap: 16px;">
+        <div style="text-align: center;">
+          <div style="font-size: 24px; font-weight: 900; color: var(--col-engage);">58.1K</div>
+          <div style="font-size: 10px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase;">Pushes Sent</div>
+        </div>
+        <div style="text-align: center;">
+          <div style="font-size: 24px; font-weight: 900; color: var(--col-engage);">7.0%</div>
+          <div style="font-size: 10px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase;">Open Rate</div>
+        </div>
+        <div style="text-align: center;">
+          <div style="font-size: 24px; font-weight: 900; color: var(--col-engage);">2.4x</div>
+          <div style="font-size: 10px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase;">vs Benchmark</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN COLUMNS -->
+  <div class="main-row">
+    <!-- LEFT: Awareness & Acquisition -->
+    <div class="column">
+      <div class="col-header acquire">Awareness & Acquisition</div>
+
+      <!-- Creator Platform — Local Markets (carried forward) -->
+      <div class="section-card" style="background: rgba(45, 107, 224, 0.03); border: 1px solid rgba(45, 107, 224, 0.12);">
+        <div class="section-header">
+          <div class="section-title" style="color: var(--col-acquire);">Creator Platform — Local Markets</div>
+          <div class="section-period">Carried Forward</div>
+        </div>
+        <div style="font-size: 11px; font-weight: 600; color: var(--hf-dark); line-height: 1.6; margin-bottom: 8px;">
+          Pitch deck is finalised and being shared with local market teams. Goal: fold Cookbook into existing paid partnership structures using established local creator relationships.
+        </div>
+        <div class="rec-box" style="margin-top: 0; background: rgba(45, 107, 224, 0.04); border-color: rgba(45, 107, 224, 0.15);">
+          <strong style="color: var(--col-acquire);">Status:</strong> Conversations ongoing with local market teams.
+        </div>
+      </div>
+
+      <!-- Competitor Value Prop (carried forward) -->
+      <div class="section-card" style="background: rgba(45, 107, 224, 0.03); border: 1px solid rgba(45, 107, 224, 0.12);">
+        <div class="section-header">
+          <div class="section-title" style="color: var(--col-acquire);">Value Proposition Workshop</div>
+          <div class="section-period">Carried Forward</div>
+        </div>
+        <div style="font-size: 11px; font-weight: 600; color: var(--hf-dark); line-height: 1.6;">
+          Competitor value proposition analysis completed last week as preparation. Workshop to define Cookbook's differentiated positioning is the next milestone.
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT: Activation & Engagement -->
+    <div class="column">
+      <div class="col-header engage">Activation & Engagement</div>
+
+      <!-- P0 Push Notifications — HEADLINE -->
+      <div class="section-card" style="background: rgba(27, 138, 74, 0.06); border: 2px solid rgba(27, 138, 74, 0.2);">
+        <div class="section-header">
+          <div class="section-title" style="color: var(--col-engage); display: flex; align-items: center; gap: 8px;">
+            P0 Push Notifications — Live
+            <span style="font-size: 9px; font-weight: 800; padding: 2px 6px; border-radius: 3px; background: rgba(27, 138, 74, 0.15); color: var(--col-engage); text-transform: uppercase; letter-spacing: 0.5px;">Milestone</span>
+          </div>
+          <div class="section-period">First Results</div>
+        </div>
+        <div style="font-size: 11px; font-weight: 600; color: var(--hf-dark); line-height: 1.6; margin-bottom: 12px;">
+          The P0 push notification use cases are now live. This is the first dedicated CRM activation channel for Cookbook, delivering behavioural triggers across win-back, onboarding, feature education, and post-import review flows.
+        </div>
+
+        <!-- Key metrics -->
+        <div style="display: flex; gap: 10px; margin-bottom: 12px;">
+          <div style="flex: 1; text-align: center; padding: 10px; background: white; border-radius: 8px; border: 1px solid rgba(0,0,0,0.04);">
+            <div style="font-size: 26px; font-weight: 900; color: var(--col-engage); letter-spacing: -0.5px;">58,111</div>
+            <div style="font-size: 9px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px;">Total Sent</div>
+          </div>
+          <div style="flex: 1; text-align: center; padding: 10px; background: white; border-radius: 8px; border: 1px solid rgba(0,0,0,0.04);">
+            <div style="font-size: 26px; font-weight: 900; color: var(--col-engage); letter-spacing: -0.5px;">7.0%</div>
+            <div style="font-size: 9px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px;">Open Rate</div>
+          </div>
+          <div style="flex: 1; text-align: center; padding: 10px; background: white; border-radius: 8px; border: 1px solid rgba(0,0,0,0.04);">
+            <div style="font-size: 26px; font-weight: 900; color: var(--col-engage); letter-spacing: -0.5px;">2.9%</div>
+            <div style="font-size: 9px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px;">Aug Benchmark</div>
+          </div>
+          <div style="flex: 1; text-align: center; padding: 10px; background: rgba(27, 138, 74, 0.06); border-radius: 8px; border: 1px solid rgba(27, 138, 74, 0.15);">
+            <div style="font-size: 26px; font-weight: 900; color: var(--col-engage); letter-spacing: -0.5px;">+141%</div>
+            <div style="font-size: 9px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px;">vs Benchmark</div>
+          </div>
+        </div>
+
+        <!-- P0 Use Cases -->
+        <div style="font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--col-engage); margin-bottom: 8px;">P0 Use Cases (Live — W35)</div>
+        <table class="data-table" style="margin-bottom: 12px;">
+          <thead>
+            <tr><th>Use Case</th><th>Trigger</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Post-Pause Cookbook Nudge</td>
+              <td style="font-size: 10px;">1 day after cutoff if paused, max 1/mo (excl. first 2 wks)</td>
+            </tr>
+            <tr>
+              <td>Pre-Import / Empty State Nudge (Never Viewed)</td>
+              <td style="font-size: 10px;">Did not view Cookbook, never imported; 7+ days since signup</td>
+            </tr>
+            <tr>
+              <td>Discover Save-Rate Drop-off (Page)</td>
+              <td style="font-size: 10px;">Opened Discover page but did not save (1–2h)</td>
+            </tr>
+            <tr>
+              <td>Import Tutorial Drop-off</td>
+              <td style="font-size: 10px;">Started tutorial but did not complete (no import recorded)</td>
+            </tr>
+            <tr>
+              <td>Import Success — Review Prompt</td>
+              <td style="font-size: 10px;">Imported a recipe but user has not reviewed it</td>
+            </tr>
+            <tr>
+              <td>Discover Save-Rate Drop-off (Recipe)</td>
+              <td style="font-size: 10px;">Opened a Discover recipe but did not save (1–4h)</td>
+            </tr>
+            <tr>
+              <td>Pre-Import / Empty State Nudge (Viewed)</td>
+              <td style="font-size: 10px;">Viewed Cookbook but never imported</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="rec-box" style="margin-top: 0; background: rgba(27, 138, 74, 0.06); border-color: rgba(27, 138, 74, 0.15);">
+          <strong>Signal:</strong> 7% open rate vs 2.9% benchmark suggests strong user receptivity to Cookbook push content. This validates the behavioural trigger approach and supports moving to P1 use cases.
+        </div>
+      </div>
+
+      <!-- In-App Events — Live Globally -->
+      <div class="section-card" style="background: rgba(27, 138, 74, 0.06); border: 2px solid rgba(27, 138, 74, 0.2);">
+        <div class="section-header">
+          <div class="section-title" style="color: var(--col-engage); display: flex; align-items: center; gap: 8px;">
+            In-App Events — Live Globally
+            <span style="font-size: 9px; font-weight: 800; padding: 2px 6px; border-radius: 3px; background: rgba(27, 138, 74, 0.15); color: var(--col-engage); text-transform: uppercase; letter-spacing: 0.5px;">Live</span>
+          </div>
+          <div class="section-period">App Store</div>
+        </div>
+        <div style="font-size: 11px; font-weight: 600; color: var(--hf-dark); line-height: 1.6; margin-bottom: 12px;">
+          "Perfect Autumn Recipes" in-app event is now live globally on the App Store. Surfaces under the Events section with a "Happening Now" label. Free, high-visibility real estate on the store listing that signals activity to Apple's algorithm.
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+          <div style="text-align: center;">
+            <img class="post-thumb" src="assets/appstore-event-listing-live.jpg" alt="App Store listing showing live in-app event" style="width: 100%; border-radius: 12px; border: 1px solid rgba(0,0,0,0.08);">
+            <div style="font-size: 9px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 6px;">Store listing view</div>
+          </div>
+          <div style="text-align: center;">
+            <img class="post-thumb" src="assets/appstore-event-expanded-live.png" alt="App Store event card expanded" style="width: 100%; border-radius: 12px; border: 1px solid rgba(0,0,0,0.08);">
+            <div style="font-size: 9px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 6px;">Expanded event card</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cookbook Email — US Actives -->
+      <div class="section-card" style="background: rgba(27, 138, 74, 0.06); border: 2px solid rgba(27, 138, 74, 0.2);">
+        <div class="section-header">
+          <div class="section-title" style="color: var(--col-engage); display: flex; align-items: center; gap: 8px;">
+            Cookbook Email — US Actives
+            <span style="font-size: 9px; font-weight: 800; padding: 2px 6px; border-radius: 3px; background: rgba(255, 165, 0, 0.12); color: #D48806; text-transform: uppercase; letter-spacing: 0.5px;">Live This Week</span>
+          </div>
+          <div class="section-period">W36</div>
+        </div>
+        <div style="font-size: 11px; font-weight: 600; color: var(--hf-dark); line-height: 1.6; margin-bottom: 8px;">
+          Feature awareness email promoting Cookbook to US active subscribers. Positions Cookbook as a way to turn TikTok and Instagram saves into easy-to-follow recipes. Going live this week.
+        </div>
+        <div class="rec-box" style="margin-top: 0; background: rgba(27, 138, 74, 0.06); border-color: rgba(27, 138, 74, 0.15);">
+          <strong>Target:</strong> US active subscribers. Goal is feature awareness and driving first Cookbook interactions from the existing base.
+        </div>
+      </div>
+
+      <!-- Next Steps -->
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-title">Next Steps</div>
+          <div class="section-period">W36 Onwards</div>
+        </div>
+        <div style="padding: 0;">
+          <!-- Done -->
+          <div style="display: flex; align-items: flex-start; gap: 8px; padding: 6px 0; border-bottom: 1px solid rgba(0,0,0,0.04);">
+            <span style="font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 3px; background: rgba(27, 138, 74, 0.1); color: var(--col-engage); white-space: nowrap;">Done</span>
+            <span style="font-size: 11px; font-weight: 600;">P0 Push Notification use cases live (7% open rate)</span>
+          </div>
+          <div style="display: flex; align-items: flex-start; gap: 8px; padding: 6px 0; border-bottom: 1px solid rgba(0,0,0,0.04);">
+            <span style="font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 3px; background: rgba(27, 138, 74, 0.1); color: var(--col-engage); white-space: nowrap;">Done</span>
+            <span style="font-size: 11px; font-weight: 600;">Creator Platform pitch deck finalised</span>
+          </div>
+          <div style="display: flex; align-items: flex-start; gap: 8px; padding: 6px 0; border-bottom: 1px solid rgba(0,0,0,0.04);">
+            <span style="font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 3px; background: rgba(27, 138, 74, 0.1); color: var(--col-engage); white-space: nowrap;">Done</span>
+            <span style="font-size: 11px; font-weight: 600;">In-app events live globally (Perfect Autumn Recipes)</span>
+          </div>
+          <div style="display: flex; align-items: flex-start; gap: 8px; padding: 6px 0; border-bottom: 1px solid rgba(0,0,0,0.04);">
+            <span style="font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 3px; background: rgba(27, 138, 74, 0.1); color: var(--col-engage); white-space: nowrap;">Done</span>
+            <span style="font-size: 11px; font-weight: 600;">Competitor value proposition analysis</span>
+          </div>
+          <!-- In Progress -->
+          <div style="display: flex; align-items: flex-start; gap: 8px; padding: 6px 0; border-bottom: 1px solid rgba(0,0,0,0.04);">
+            <span style="font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 3px; background: rgba(255, 165, 0, 0.12); color: #D48806; white-space: nowrap;">In Progress</span>
+            <span style="font-size: 11px; font-weight: 600;">Creator Platform deck sharing with local markets</span>
+          </div>
+          <div style="display: flex; align-items: flex-start; gap: 8px; padding: 6px 0; border-bottom: 1px solid rgba(0,0,0,0.04);">
+            <span style="font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 3px; background: rgba(255, 165, 0, 0.12); color: #D48806; white-space: nowrap;">In Progress</span>
+            <span style="font-size: 11px; font-weight: 600;">Q3 Cookbook Email to US Actives (live this week)</span>
+          </div>
+          <!-- To Do -->
+          <div style="display: flex; align-items: flex-start; gap: 8px; padding: 6px 0; border-bottom: 1px solid rgba(0,0,0,0.04);">
+            <span style="font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 3px; background: rgba(255, 165, 0, 0.12); color: #D48806; white-space: nowrap;">In Progress</span>
+            <span style="font-size: 11px; font-weight: 600;">P1 Push Notification use cases</span>
+          </div>
+          <div style="display: flex; align-items: flex-start; gap: 8px; padding: 6px 0; border-bottom: 1px solid rgba(0,0,0,0.04);">
+            <span style="font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 3px; background: rgba(45, 107, 224, 0.1); color: var(--col-acquire); white-space: nowrap;">To Do</span>
+            <span style="font-size: 11px; font-weight: 600;">Q3 Cookbook Email to Global Actives <span style="font-size: 9px; font-weight: 800; padding: 1px 5px; border-radius: 3px; background: rgba(214, 69, 69, 0.1); color: #D64545; margin-left: 4px;">CAPACITY BLOCKER</span></span>
+          </div>
+          <div style="display: flex; align-items: flex-start; gap: 8px; padding: 6px 0;">
+            <span style="font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 3px; background: rgba(45, 107, 224, 0.1); color: var(--col-acquire); white-space: nowrap;">To Do</span>
+            <span style="font-size: 11px; font-weight: 600;">Update Global Store Descriptions to be more LLM receptive</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox-overlay" id="lightbox"></div>
+
+<script>
+const lightbox = document.getElementById('lightbox');
+document.querySelectorAll('.post-thumb').forEach(el => {
+  el.addEventListener('click', () => {
+    const clone = document.createElement('img');
+    clone.src = el.src;
+    lightbox.innerHTML = '';
+    lightbox.appendChild(clone);
+    lightbox.classList.add('active');
+  });
+});
+lightbox.addEventListener('click', () => {
+  lightbox.classList.remove('active');
+  lightbox.innerHTML = '';
+});
+</script>
+
+</body>
+</html>
