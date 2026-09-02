@@ -229,7 +229,7 @@ body {
   <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
     <div style="padding: 16px 20px; border-radius: 12px; background: rgba(45, 107, 224, 0.04); border: 1px solid rgba(45, 107, 224, 0.1);">
       <div style="font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--col-acquire); margin-bottom: 6px;">Awareness & Acquisition</div>
-      <div style="font-size: 14px; font-weight: 700; color: var(--hf-dark); line-height: 1.4; margin-bottom: 10px;">Carrying forward: Creator Platform deck being shared with local markets, Partnership T&Cs with Legal, competitor value prop analysis feeding into workshop.</div>
+      <div style="font-size: 14px; font-weight: 700; color: var(--hf-dark); line-height: 1.4; margin-bottom: 10px;">Carrying forward: Creator Platform deck sharing with local markets, Partnership T&Cs with Legal. Cookbook flagged as a positive growth lever in external press coverage during the Q2 financials cycle.</div>
       <div style="display: flex; gap: 16px;">
         <div style="text-align: center;">
           <div style="font-size: 24px; font-weight: 900; color: var(--col-acquire);">Legal</div>
@@ -239,11 +239,15 @@ body {
           <div style="font-size: 24px; font-weight: 900; color: var(--col-acquire);">Local</div>
           <div style="font-size: 10px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase;">Markets Outreach</div>
         </div>
+        <div style="text-align: center;">
+          <div style="font-size: 24px; font-weight: 900; color: var(--col-acquire);">Press</div>
+          <div style="font-size: 10px; font-weight: 700; color: var(--hf-muted); text-transform: uppercase;">External Pickup</div>
+        </div>
       </div>
     </div>
     <div style="padding: 16px 20px; border-radius: 12px; background: rgba(27, 138, 74, 0.04); border: 1px solid rgba(27, 138, 74, 0.1);">
       <div style="font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--col-engage); margin-bottom: 6px;">Activation & Engagement</div>
-      <div style="font-size: 14px; font-weight: 700; color: var(--hf-dark); line-height: 1.4; margin-bottom: 10px;">P0 push notifications are live. 58K+ notifications sent with a 7% open rate, well above the 2.9% August benchmark. First major CRM activation channel for Cookbook.</div>
+      <div style="font-size: 14px; font-weight: 700; color: var(--hf-dark); line-height: 1.4; margin-bottom: 10px;">P0 push notifications are live. 58K+ sent with a 7% open rate (2.4x the August benchmark). Q3 Cookbook Email launch is blocked by a soft login/deep link bug; engineering is investigating.</div>
       <div style="display: flex; gap: 16px;">
         <div style="text-align: center;">
           <div style="font-size: 24px; font-weight: 900; color: var(--col-engage);">58.1K</div>
@@ -289,6 +293,42 @@ body {
         </div>
         <div style="font-size: 11px; font-weight: 600; color: var(--hf-dark); line-height: 1.6;">
           Competitor value proposition analysis completed last week as preparation. Workshop to define Cookbook's differentiated positioning is the next milestone.
+        </div>
+      </div>
+
+      <!-- External Press Coverage -->
+      <div class="section-card" style="background: rgba(45, 107, 224, 0.03); border: 1px solid rgba(45, 107, 224, 0.12);">
+        <div class="section-header">
+          <div class="section-title" style="color: var(--col-acquire);">External Press Coverage</div>
+          <div class="section-period">Aug 27</div>
+        </div>
+        <div style="font-size: 11px; font-weight: 600; color: var(--hf-dark); line-height: 1.6; margin-bottom: 8px;">
+          Cookbook and Discover flagged as a positive operational note in external financial press. Cited as a "watch list" growth lever: "HelloFresh launched free 'Cookbook' and 'Discover' features globally, allowing non-subscribers to use the HelloFresh app for meal planning and recipe organization."
+        </div>
+        <div class="rec-box" style="margin-top: 0; background: rgba(45, 107, 224, 0.04); border-color: rgba(45, 107, 224, 0.15);">
+          <strong style="color: var(--col-acquire);">Sources:</strong> Yahoo Finance, Investing.com, Ad-Hoc News, Simply Wall St, MealFan. The only positive operational callout in an otherwise negative Q2 financial news cycle.
+        </div>
+      </div>
+
+      <!-- Product & Engineering -->
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-title">Product & Engineering</div>
+          <div class="section-period">Background</div>
+        </div>
+        <div style="padding: 0;">
+          <div style="display: flex; align-items: flex-start; gap: 8px; padding: 6px 0; border-bottom: 1px solid rgba(0,0,0,0.04);">
+            <span style="font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 3px; background: rgba(255, 165, 0, 0.12); color: #D48806; white-space: nowrap;">In Progress</span>
+            <span style="font-size: 11px; font-weight: 600;">Cart "Save to Cookbook" tracking events being finalized (new event schemas, renamed icon click events)</span>
+          </div>
+          <div style="display: flex; align-items: flex-start; gap: 8px; padding: 6px 0; border-bottom: 1px solid rgba(0,0,0,0.04);">
+            <span style="font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 3px; background: rgba(214, 69, 69, 0.1); color: #D64545; white-space: nowrap;">Bug</span>
+            <span style="font-size: 11px; font-weight: 600;">iOS Share Extension shows failure on import but backend completes successfully (30s timeout). Bug ticket to be filed.</span>
+          </div>
+          <div style="display: flex; align-items: flex-start; gap: 8px; padding: 6px 0;">
+            <span style="font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 3px; background: rgba(27, 138, 74, 0.1); color: var(--col-engage); white-space: nowrap;">Staging</span>
+            <span style="font-size: 11px; font-weight: 600;">Utensils support for imported/external recipes (backend + shared mobile modules merged to staging)</span>
+          </div>
         </div>
       </div>
 
@@ -400,19 +440,19 @@ body {
       </div>
 
       <!-- Cookbook Email — US Actives -->
-      <div class="section-card" style="background: rgba(27, 138, 74, 0.06); border: 2px solid rgba(27, 138, 74, 0.2);">
+      <div class="section-card" style="background: rgba(214, 69, 69, 0.04); border: 2px solid rgba(214, 69, 69, 0.2);">
         <div class="section-header">
           <div class="section-title" style="color: var(--col-engage); display: flex; align-items: center; gap: 8px;">
             Cookbook Email — US Actives
-            <span style="font-size: 9px; font-weight: 800; padding: 2px 6px; border-radius: 3px; background: rgba(255, 165, 0, 0.12); color: #D48806; text-transform: uppercase; letter-spacing: 0.5px;">Live This Week</span>
+            <span style="font-size: 9px; font-weight: 800; padding: 2px 6px; border-radius: 3px; background: rgba(214, 69, 69, 0.1); color: #D64545; text-transform: uppercase; letter-spacing: 0.5px;">Blocked</span>
           </div>
           <div class="section-period">W36</div>
         </div>
         <div style="font-size: 11px; font-weight: 600; color: var(--hf-dark); line-height: 1.6; margin-bottom: 8px;">
-          Feature awareness email promoting Cookbook to US active subscribers. Positions Cookbook as a way to turn TikTok and Instagram saves into easy-to-follow recipes. Going live this week.
+          Feature awareness email promoting Cookbook to US active subscribers. Positions Cookbook as a way to turn social media saves into easy-to-follow recipes. <strong style="color: #D64545;">Launch blocked:</strong> the Cookbook deep link does not work when soft login is enabled. Engineering is investigating a root cause in the Knak/SFMC email builder (AMPscript error). Awaiting confirmation before setting a revised launch date.
         </div>
-        <div class="rec-box" style="margin-top: 0; background: rgba(27, 138, 74, 0.06); border-color: rgba(27, 138, 74, 0.15);">
-          <strong>Target:</strong> US active subscribers. Goal is feature awareness and driving first Cookbook interactions from the existing base.
+        <div class="rec-box" style="margin-top: 0; background: rgba(214, 69, 69, 0.04); border-color: rgba(214, 69, 69, 0.15);">
+          <strong style="color: #D64545;">Blocker:</strong> Cookbook deep link fails when soft login is active. Engineering is working on a fix. Revised launch date to be confirmed once resolved.
         </div>
       </div>
 
@@ -446,8 +486,8 @@ body {
             <span style="font-size: 11px; font-weight: 600;">Creator Platform deck sharing with local markets</span>
           </div>
           <div style="display: flex; align-items: flex-start; gap: 8px; padding: 6px 0; border-bottom: 1px solid rgba(0,0,0,0.04);">
-            <span style="font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 3px; background: rgba(255, 165, 0, 0.12); color: #D48806; white-space: nowrap;">In Progress</span>
-            <span style="font-size: 11px; font-weight: 600;">Q3 Cookbook Email to US Actives (live this week)</span>
+            <span style="font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 3px; background: rgba(214, 69, 69, 0.1); color: #D64545; white-space: nowrap;">Blocked</span>
+            <span style="font-size: 11px; font-weight: 600;">Q3 Cookbook Email to US Actives <span style="font-size: 9px; font-weight: 800; padding: 1px 5px; border-radius: 3px; background: rgba(214, 69, 69, 0.1); color: #D64545; margin-left: 4px;">SOFT LOGIN BUG</span></span>
           </div>
           <!-- To Do -->
           <div style="display: flex; align-items: flex-start; gap: 8px; padding: 6px 0; border-bottom: 1px solid rgba(0,0,0,0.04);">
